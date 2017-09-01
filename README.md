@@ -1,4 +1,4 @@
-# Classficação de risco na pediatria
+# Classificação de risco na pediatria
 
 O projeto busca melhorar a eficiência da atual classificação de risco do Hospital Materno-Infantil de Brasília, por meio de sua automatização.
 
