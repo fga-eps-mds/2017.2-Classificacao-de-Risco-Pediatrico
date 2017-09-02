@@ -1,0 +1,8 @@
+<!-- Arquivo: templates/users/login.html -->
+<h1>Login</h1>
+
+<form role="form" class="form" method="POST" action="{{ request.path }}{% if next %}?next={{ next }}{% endif %}">
+{% csrf_token %}
+{{ form.as_p }}
+<button type="submit" class="btn btn-warning"><i class="fa fa-plus" aria-hidden="true"></i> Login</button>
+</form>
