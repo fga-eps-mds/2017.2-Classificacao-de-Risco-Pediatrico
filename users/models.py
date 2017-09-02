@@ -26,3 +26,24 @@ class EmailUserManager(BaseUserManager):
         user.is_superuser = True
         user.save(using=self._db)
         return user
+
+class MyUser(PermissionsMixin, AbstractBaseUser):
+    email = models.EmailField(
+        verbose_name=_('Email address'),
+        unique=True,
+    )
+    first_name = models.CharField(
+        verbose_name=_('Nome'),
+        max_length=50,
+        blank=False,
+        help_text=_('Inform your name'),
+    )
+    last_name = models.CharField(
+        verbose_name=_('Sobrenome'),
+        max_length=50,
+        blank=False,
+        help_text=_('Inform your last name'),
+    )
+    USERNAME_FIELD = 'email'
+    objects = EmailUserManager()
+
