@@ -5,6 +5,7 @@ from django.utils.translation import ugettext as _
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
 
+"""
 class EmailAttendantManager(BaseUserManager):
     def create_attendant(self, *args, **kwargs):
         email = kwargs["email"]
@@ -20,13 +21,13 @@ class EmailAttendantManager(BaseUserManager):
         attendant.save(using=self._db)
         return attendant
 
-    """
+
     def create_superuser(self, *args, **kwargs):
         user = self.create_user(**kwargs)
         user.is_superuser = True
         user.save(using=self._db)
         return user
-    """
+"""
 
 class EmailUserManager(BaseUserManager):
     def create_user(self, *args, **kwargs):
@@ -49,26 +50,6 @@ class EmailUserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-class MyAttendant(PermissionsMixin, AbstractBaseUser):
-    email = models.EmailField(
-        verbose_name=_('Email address'),
-        unique=True,
-    )
-    first_name = models.CharField(
-        verbose_name=_('Nome'),
-        max_length=50,
-        blank=False,
-        help_text=_('Inform your name'),
-    )
-    last_name = models.CharField(
-        verbose_name=_('Sobrenome'),
-        max_length=50,
-        blank=False,
-        help_text=_('Inform your last name'),
-    )
-    USERNAME_FIELD = 'email'
-    objects = EmailAttendantManager()
-
 
 class MyUser(PermissionsMixin, AbstractBaseUser):
     email = models.EmailField(
@@ -90,3 +71,19 @@ class MyUser(PermissionsMixin, AbstractBaseUser):
     USERNAME_FIELD = 'email'
     objects = EmailUserManager()
 
+
+class MyAttendant(MyUser):
+    abc =  models.CharField(
+        verbose_name=_('ultimo nome'),
+        max_length=50,
+        blank=False,
+        help_text=_('Inform your last name'),
+    )
+
+class Mypaciente(MyUser):
+    fgh =  models.CharField(
+        verbose_name=_('ultimo nome'),
+        max_length=50,
+        blank=False,
+        help_text=_('Inform your last name'),
+    )
