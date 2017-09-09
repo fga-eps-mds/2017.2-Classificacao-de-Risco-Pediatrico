@@ -2,88 +2,53 @@ from django.db import models
 
 # Create your models here.
 from django.utils.translation import ugettext as _
-from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
-from django.contrib.auth.models import PermissionsMixin
-
-"""
-class EmailAttendantManager(BaseUserManager):
-    def create_attendant(self, *args, **kwargs):
-        email = kwargs["email"]
-        email = self.normalize_email(email)
-        password = kwargs["password"]
-        kwargs.pop("password")
-
-        if not email:
-            raise ValueError(_('Users must have an email address'))
-
-        attendant = self.model(**kwargs)
-        attendant.set_password(password)
-        attendant.save(using=self._db)
-        return attendant
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 
-    def create_superuser(self, *args, **kwargs):
-        user = self.create_user(**kwargs)
-        user.is_superuser = True
-        user.save(using=self._db)
-        return user
-"""
+class Profile(models.Model):
 
-class EmailUserManager(BaseUserManager):
-    def create_user(self, *args, **kwargs):
-        email = kwargs["email"]
-        email = self.normalize_email(email)
-        password = kwargs["password"]
-        kwargs.pop("password")
-
-        if not email:
-            raise ValueError(_('Users must have an email address'))
-
-        user = self.model(**kwargs)
-        user.set_password(password)
-        user.save(using=self._db)
-        return user
-
-    def create_superuser(self, *args, **kwargs):
-        user = self.create_user(**kwargs)
-        user.is_superuser = True
-        user.save(using=self._db)
-        return user
-
-
-class MyUser(PermissionsMixin, AbstractBaseUser):
-    email = models.EmailField(
-        verbose_name=_('Email address'),
-        unique=True,
+    user = models.OneToOneField(
+        User, on_delete=models.CASCADE,
     )
+
+    guardian =  models.CharField(
+        verbose_name=_('Nome do Responsável'),
+        max_length=50,
+        blank=False,
+        help_text=_('Informe o nome do responsável'),
+    )
+    birth_date = models.DateField(
+        verbose_name=_('Data de Nascimento'),
+        blank=False,
+        help_text=_('Informe a data de Nascimento'),
+    )
+
     first_name = models.CharField(
         verbose_name=_('Nome'),
         max_length=50,
         blank=False,
-        help_text=_('Inform your name'),
+        help_text=_('Informe o primeiro nome'),
     )
-    last_name = models.CharField(
-        verbose_name=_('Sobrenome'),
+    address = models.CharField(
+        verbose_name=('Endereço'),
         max_length=50,
         blank=False,
-        help_text=_('Inform your last name'),
+        help_text=_('Informe o endereço'),
     )
-    USERNAME_FIELD = 'email'
-    objects = EmailUserManager()
-
-
-class MyAttendant(MyUser):
-    abc =  models.CharField(
-        verbose_name=_('ultimo nome'),
-        max_length=50,
+    cpf = models.CharField(
+        verbose_name=('CPF'),
+        max_length=11,
         blank=False,
-        help_text=_('Inform your last name'),
+        help_text=_('Informe o CPF'),
     )
 
-class Mypaciente(MyUser):
-    fgh =  models.CharField(
-        verbose_name=_('ultimo nome'),
-        max_length=50,
-        blank=False,
-        help_text=_('Inform your last name'),
-    )
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.profile.save()

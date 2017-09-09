@@ -15,25 +15,25 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='MyAttendant',
+            name='Staff',
             fields=[
-                ('myuser_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to=settings.AUTH_USER_MODEL)),
+                ('Person_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to=settings.AUTH_USER_MODEL)),
                 ('abc', models.CharField(help_text='Inform your last name', max_length=50, verbose_name='ultimo nome')),
             ],
             options={
                 'abstract': False,
             },
-            bases=('users.myuser',),
+            bases=('users.Person',),
         ),
         migrations.CreateModel(
-            name='Mypaciente',
+            name='Pacient',
             fields=[
-                ('myuser_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to=settings.AUTH_USER_MODEL)),
+                ('Person_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to=settings.AUTH_USER_MODEL)),
                 ('fgh', models.CharField(help_text='Inform your last name', max_length=50, verbose_name='ultimo nome')),
             ],
             options={
                 'abstract': False,
             },
-            bases=('users.myuser',),
+            bases=('users.Person',),
         ),
     ]

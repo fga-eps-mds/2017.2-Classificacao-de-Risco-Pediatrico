@@ -1,10 +1,16 @@
 # Arquivo: apps/users/forms.py
-from django.contrib.auth.forms import UserCreationForm
+from django.forms import ModelForm
 
-from .models import Mypaciente
+from .models import Profile
+from django.contrib.auth.models import User
 
 
-class CustomUserCreationForm(UserCreationForm):
+class UserForm(ModelForm):
     class Meta:
-        model = Mypaciente
-        fields = ['first_name', 'email']
+        model = User
+        fields = ('first_name', 'last_name', 'email')
+
+class ProfileForm(ModelForm):
+    class Meta:
+        model = Profile
+        fields = ('birth_date', 'first_name', 'cpf')
