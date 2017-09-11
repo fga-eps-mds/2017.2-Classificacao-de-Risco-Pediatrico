@@ -1,16 +1,15 @@
 # Arquivo: apps/users/forms.py
-from django.forms import ModelForm
-
-from .models import Profile
-from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
+from .models import Admin, Attendant
 
 
-class UserForm(ModelForm):
+class RegistrationAdminForm(UserCreationForm):
     class Meta:
-        model = User
-        fields = ('first_name', 'last_name', 'email')
+        model = Admin
+        fields = ['username', 'name', 'birth_date', 'cpf', 'address', 'email']
 
-class ProfileForm(ModelForm):
+
+class RegistrationAttendantForm(UserCreationForm):
     class Meta:
-        model = Profile
-        fields = ('birth_date', 'first_name', 'cpf')
+        model = Attendant
+        fields = ['username', 'name', 'birth_date', 'cpf', 'address', 'email']

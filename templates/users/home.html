@@ -4,6 +4,6 @@
 {% if user.is_authenticated %}
 <p><a href="{% url 'users:logout' %}">Logout</a>.</p>
 {% else %}
-<p><a href="{% url 'users:register' %}">Registre-se</a>.</p>
+<p><a href="{% url 'users:register_admin' %}">Registre-se</a>.</p>
 <p><a href="{% url 'users:login' %}">Login</a>.</p>
 {% endif %}
