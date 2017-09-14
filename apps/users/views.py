@@ -1,4 +1,3 @@
-
 # Arquivo: /apps/users/views.py
 from django.shortcuts import render
 from django.views.generic import CreateView
@@ -7,7 +6,8 @@ from django.contrib.auth.views import login
 from django.contrib.auth.views import logout
 from django.core.urlresolvers import reverse_lazy, reverse
 
-from .forms import CustomUserCreationForm
+from .forms import RegistrationAdminForm
+from .forms import RegistrationAttendantForm
 
 
 def home(request):
@@ -28,7 +28,13 @@ def logout_view(request, *args, **kwargs):
     return logout(request, *args, **kwargs)
 
 
-class RegistrationView(CreateView):
-    form_class = CustomUserCreationForm
+class RegistrationAdminView(CreateView):
+    form_class = RegistrationAdminForm
+    template_name = "users/registerStaff.html"
     success_url = reverse_lazy('users:login')
-    template_name = "users/register.html"
+
+
+class RegistrationAttendantView(CreateView):
+    form_class = RegistrationAttendantForm
+    template_name = "users/registerStaff.html"
+    success_url = reverse_lazy('users:login')

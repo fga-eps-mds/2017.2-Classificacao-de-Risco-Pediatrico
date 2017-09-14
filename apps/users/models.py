@@ -1,12 +1,9 @@
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.db import models
-
-# Create your models here.
 from django.utils.translation import ugettext as _
-from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
-from django.contrib.auth.models import PermissionsMixin
 
 
-class EmailUserManager(BaseUserManager):
+class UserManager(BaseUserManager):
     def create_user(self, *args, **kwargs):
         email = kwargs["email"]
         email = self.normalize_email(email)
@@ -14,7 +11,7 @@ class EmailUserManager(BaseUserManager):
         kwargs.pop("password")
 
         if not email:
-            raise ValueError(_('Users must have an email address'))
+            raise ValueError(_('O endereço de email não pode ser nulo'))
 
         user = self.model(**kwargs)
         user.set_password(password)
@@ -27,23 +24,133 @@ class EmailUserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-class MyUser(PermissionsMixin, AbstractBaseUser):
-    email = models.EmailField(
-        verbose_name=_('Email address'),
-        unique=True,
-    )
-    first_name = models.CharField(
-        verbose_name=_('Nome'),
-        max_length=50,
-        blank=False,
-        help_text=_('Inform your name'),
-    )
-    last_name = models.CharField(
-        verbose_name=_('Sobrenome'),
-        max_length=50,
-        blank=False,
-        help_text=_('Inform your last name'),
-    )
-    USERNAME_FIELD = 'email'
-    objects = EmailUserManager()
+'''
+class Adress(models.Model):
+    uf = models.CharField(max_length=50)
+    city = models.CharField(max_length=50)
+    neighborhood = models.CharField(max_length=100)
+    street = models.CharField(max_length=100)
+    block = models.CharField(max_length=50)
+    number = models.CharField(max_length=10)
+'''
 
+class Person(models.Model):
+    class Meta:
+        abstract = True
+
+    #address = models.ForeignKey(Adress)
+
+    name = models.CharField(
+        verbose_name=_('Nome'),
+        max_length=150,
+        blank=False,
+    )
+
+    uf = models.CharField(
+        verbose_name=_('UF'),
+        max_length=50,
+        blank=False,
+    )
+
+    city = models.CharField(
+        verbose_name=_('Cidade'),
+        max_length=50,
+        blank=False,
+    )
+
+    neighborhood = models.CharField(
+        verbose_name=_('Bairro'),
+        max_length=100,
+        blank=False,
+    )
+
+    street = models.CharField(
+        verbose_name=_('Rua'),
+        max_length=100,
+        blank=False,
+    )
+
+    block = models.CharField(
+        verbose_name=_('Quadra'),
+        max_length=50,
+        blank=False,
+    )
+
+    number = models.CharField(
+        verbose_name=_('Número'),
+        max_length=10,
+        blank=False,
+    )
+
+class Staff(AbstractBaseUser):
+    username = models.CharField(
+        verbose_name=_('Nome de usuário'),
+        max_length=150,
+        blank=False,
+        help_text=_('Informe seu nome de usuário'),
+        unique=True
+    )
+
+    id_user = models.CharField(
+        verbose_name=_('ID de usuário'),
+        max_length=150,
+        blank=False,
+        help_text=_('Informe seu ID de usuário'),
+        unique=True
+    )
+
+    email = models.EmailField(
+        verbose_name=_('Email do usuário'),
+        unique=True,
+        default=''
+    )
+
+    is_superuser = False
+    USERNAME_FIELD = 'email'
+
+    def get_short_name(self):
+        pass
+
+    def get_full_name(self):
+        pass
+
+
+class Admin(Staff, Person):
+    objects = UserManager()
+
+
+class Attendant(Staff, Person):
+    objects = UserManager()
+
+'''
+class Patient(Person):
+    guardian = models.CharField(
+        verbose_name=_('Nome do Responsável'),
+        max_length=50,
+        blank=False,
+        help_text=_('Informe o nome do responsável'),
+    )
+
+    birth_date = models.DateTimeField(
+        verbose_name=_('Data de Nascimento'),
+        blank=False,
+        help_text=_('Informe a data de Nascimento'),
+    )
+
+    cpf = models.CharField(
+        verbose_name=_('CPF'),
+        max_length=11,
+        default="",
+        blank=False,
+        help_text=_('Informe o CPF'),
+        unique=True
+    )
+
+    parents_name = models.CharField(
+        verbose_name=_('Nome dos pais'),
+        max_length=150,
+        blank=False,
+        help_text=_('Informe o nome dos pais'),
+        unique=True
+    )
+'''

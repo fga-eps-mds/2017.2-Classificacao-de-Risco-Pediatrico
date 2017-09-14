@@ -1,10 +1,15 @@
 # Arquivo: apps/users/forms.py
 from django.contrib.auth.forms import UserCreationForm
+from .models import Admin, Attendant
 
-from .models import MyUser
 
-
-class CustomUserCreationForm(UserCreationForm):
+class RegistrationAdminForm(UserCreationForm):
     class Meta:
-        model = MyUser
-        fields = ['first_name', 'email']
+        model = Admin
+        fields = ['username', 'name', 'email', 'uf', 'city', 'neighborhood', 'street', 'block', 'number']
+
+
+class RegistrationAttendantForm(UserCreationForm):
+    class Meta:
+        model = Attendant
+        fields = ['username', 'name', 'email', 'uf', 'city', 'neighborhood', 'street', 'block', 'number']

@@ -133,4 +133,4 @@ STATICFILES_DIRS = [
 # https://warehouse.python.org/project/whitenoise/
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-AUTH_USER_MODEL = "users.MyUser"
+AUTH_USER_MODEL = 'users.Admin'
