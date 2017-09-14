@@ -11,7 +11,7 @@ class UserManager(BaseUserManager):
         kwargs.pop("password")
 
         if not email:
-            raise ValueError(_('Users must have an email address'))
+            raise ValueError(_('O endereço de email não pode ser nulo'))
 
         user = self.model(**kwargs)
         user.set_password(password)
@@ -24,6 +24,7 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
+'''
 class Adress(models.Model):
     uf = models.CharField(max_length=50)
     city = models.CharField(max_length=50)
@@ -31,20 +32,55 @@ class Adress(models.Model):
     street = models.CharField(max_length=100)
     block = models.CharField(max_length=50)
     number = models.CharField(max_length=10)
+'''
 
 class Person(models.Model):
     class Meta:
         abstract = True
 
-    address = models.ForeignKey(Adress)
+    #address = models.ForeignKey(Adress)
 
     name = models.CharField(
         verbose_name=_('Nome'),
         max_length=150,
         blank=False,
-        help_text=_('Informe seu nome'),
     )
 
+    uf = models.CharField(
+        verbose_name=_('UF'),
+        max_length=50,
+        blank=False,
+    )
+
+    city = models.CharField(
+        verbose_name=_('Cidade'),
+        max_length=50,
+        blank=False,
+    )
+
+    neighborhood = models.CharField(
+        verbose_name=_('Bairro'),
+        max_length=100,
+        blank=False,
+    )
+
+    street = models.CharField(
+        verbose_name=_('Rua'),
+        max_length=100,
+        blank=False,
+    )
+
+    block = models.CharField(
+        verbose_name=_('Quadra'),
+        max_length=50,
+        blank=False,
+    )
+
+    number = models.CharField(
+        verbose_name=_('Número'),
+        max_length=10,
+        blank=False,
+    )
 
 class Staff(AbstractBaseUser):
     username = models.CharField(
@@ -95,7 +131,7 @@ class Patient(Person):
         help_text=_('Informe o nome do responsável'),
     )
 
-    birth_date = models.DateField(
+    birth_date = models.DateTimeField(
         verbose_name=_('Data de Nascimento'),
         blank=False,
         help_text=_('Informe a data de Nascimento'),

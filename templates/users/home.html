@@ -1,9 +1,9 @@
 <!-- Arquivo: templates/users/home.html -->
-<p>Seja bem vindo {% if user.is_authenticated %}{{ user.first_name }}{% else %}usuário anônimo{% endif %}</p>
+<p>Seja bem vindo {% if user.is_authenticated %}{{ user.first_name }}{% endif %}!</p>
 
 {% if user.is_authenticated %}
 <p><a href="{% url 'users:logout' %}">Logout</a>.</p>
 {% else %}
-<p><a href="{% url 'users:register_admin' %}">Registre-se</a>.</p>
+<p><a href="{% url 'users:register_admin' %}">Cadastre-se</a>.</p>
 <p><a href="{% url 'users:login' %}">Login</a>.</p>
 {% endif %}
