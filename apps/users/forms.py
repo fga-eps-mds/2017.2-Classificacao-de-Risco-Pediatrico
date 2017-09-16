@@ -2,6 +2,8 @@
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
 
+from .models import Admin, Attendant, Pacient
+
 
 class AddressForm(forms.ModelForm):
     class Meta:
@@ -21,3 +23,10 @@ class RegistrationAttendantForm(UserCreationForm):
 class RegistrationAdminForm(UserCreationForm):
     class Meta:
         fields = ['name', 'email', 'id_user']
+        model = Admin
+
+
+class RegistrationPacientForm(forms.ModelForm):
+    class Meta:
+        model = Pacient
+        fields = ['name', 'cpf', 'guardian', 'birth_date', 'parents_name', 'uf', 'city', 'neighborhood', 'street', 'block', 'number' ]
