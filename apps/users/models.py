@@ -94,7 +94,7 @@ class Recepcionist(Staff, Person):
     objects = UserManager()
 
 
-class Patient(Person):
+class Pacient(Person):
     guardian = models.CharField(
         verbose_name=_('Nome do Responsável'),
         max_length=50,
