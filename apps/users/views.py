@@ -9,7 +9,9 @@ from multi_form_view import MultiModelFormView
 
 from .forms import RegistrationAdminForm
 from .forms import RegistrationAttendantForm
+
 from .forms import RegistrationRecepcionistForm
+from .forms import RegistrationPacientForm
 from .forms import AddressForm
 
 from .models import Admin
@@ -31,6 +33,10 @@ def login_view(request, *args, **kwargs):
 def logout_view(request, *args, **kwargs):
     kwargs['next_page'] = reverse('users:home')
     return logout(request, *args, **kwargs)
+
+
+def register_pacient(request):
+    return render(request, 'user/login', {})
 
 
 class RegistrationAdminView(MultiModelFormView):
@@ -120,3 +126,9 @@ class RegistrationRecepcionistView(CreateView):
     form_class = RegistrationRecepcionistForm
     template_name = "users/registerRecepcionist.html"
     success_url = reverse_lazy('users:login')
+
+
+class RegistrationPacientView(CreateView):
+    form_class = RegistrationPacientForm
+    template_name = "users/registerPacient.html"
+    success_url = reverse_lazy('user:home')
