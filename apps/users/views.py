@@ -8,6 +8,7 @@ from django.core.urlresolvers import reverse_lazy, reverse
 
 from .forms import RegistrationAdminForm
 from .forms import RegistrationAttendantForm
+from .forms import RegistrationPacientForm
 
 
 def home(request):
@@ -27,6 +28,8 @@ def logout_view(request, *args, **kwargs):
     kwargs['next_page'] = reverse('users:home')
     return logout(request, *args, **kwargs)
 
+def register_pacient(request):
+    return render(request, 'user/login', {})
 
 class RegistrationAdminView(CreateView):
     form_class = RegistrationAdminForm
@@ -38,3 +41,9 @@ class RegistrationAttendantView(CreateView):
     form_class = RegistrationAttendantForm
     template_name = "users/registerStaff.html"
     success_url = reverse_lazy('users:login')
+
+
+class RegistrationPacientView(CreateView):
+    form_class = RegistrationPacientForm
+    template_name = "users/registerPacient.html"
+    success_url = reverse_lazy('user:home')
