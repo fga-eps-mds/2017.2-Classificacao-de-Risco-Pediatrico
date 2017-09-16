@@ -9,5 +9,6 @@ urlpatterns = [
     url(r'^login/$', views.login_view, name="login"),
     url(r'^logout/$', views.logout_view, name="logout"),
     url(r'^register/attendant/$', views.RegistrationAttendantView.as_view(), name="register_attendant"),
-    url(r'^register/admin/$', views.RegistrationAdminView.as_view(success_url='logged_admin'), name="register_admin")
+    url(r'^register/admin/$', views.RegistrationAdminView.as_view(success_url='logged_admin'), name="register_admin"),
+    url(r'^register/pacient/$', views.RegistrationPacientView.as_view(success_url='home'), name="register_pacient")
 ]
