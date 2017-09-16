@@ -122,7 +122,7 @@ class Admin(Staff, Person):
 class Attendant(Staff, Person):
     objects = UserManager()
 
-'''
+
 class Patient(Person):
     guardian = models.CharField(
         verbose_name=_('Nome do Responsável'),
@@ -153,4 +153,3 @@ class Patient(Person):
         help_text=_('Informe o nome dos pais'),
         unique=True
     )
-'''
