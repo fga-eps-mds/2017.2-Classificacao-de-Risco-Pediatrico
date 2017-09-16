@@ -14,6 +14,8 @@ from .forms import RegistrationPacientForm
 def home(request):
     return render(request, 'users/home.html')
 
+def teste(request):
+    return render(request, 'users/teste.html')
 
 def login_view(request, *args, **kwargs):
     if request.user.is_authenticated():
@@ -46,4 +48,4 @@ class RegistrationAttendantView(CreateView):
 class RegistrationPacientView(CreateView):
     form_class = RegistrationPacientForm
     template_name = "users/registerPacient.html"
-    success_url = reverse_lazy('user:home')
+    success_url = reverse_lazy('users:teste')
