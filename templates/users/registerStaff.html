@@ -1,8 +1,10 @@
 <!-- Arquivo: templates/users/register.html -->
 <h1>Cadastro</h1>
 
-<form role="form" class="form" method="POST">
-{% csrf_token %}
-{{ form.as_p }}
-<button type="submit" class="btn btn-warning">Cadastrar</button>
+
+<form class="address" method="POST">
+    {% csrf_token %}
+    {{ forms.registration_admin_form.as_p }}
+    {{ forms.address_form.as_p }}
+    <button name='action' value='admin' type="submit">Sign up</button>
 </form>
