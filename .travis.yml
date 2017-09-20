@@ -1,11 +1,12 @@
+sudo: required
 language: python
 python:
-- '3.6'
-sudo: false
-before_install:
-- docker pull postgres
-- docker pull python
-- docker build .
+  - '3.6'
+services:
+  - docker
+before_script:
+  - docker-compose up --build -d
 script:
-- docker-compose up -d
-- docker exec -it 20172classificacaoderiscopediatrico_web_1 python manage.py test
+  - docker-compose run web python manage.py test
+after_script:
+  - docker-compose down
