@@ -9,4 +9,4 @@ before_install:
 script:
 - docker-compose up -d
 - docker exec -it 20172classificacaoderiscopediatrico_web_1 python manage.py test
-- docker exec -it 20172classificacaoderiscopediatrico_web_1 flake8 --exclude polls/migrations/,manage.py  .
+#- docker exec -it 20172classificacaoderiscopediatrico_web_1 flake8 --exclude polls/migrations/,manage.py  .
