@@ -1,0 +1,79 @@
+/*!
+ * Bootstrap v3.3.7 (http://getbootstrap.com)
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ */
+/*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
+html {
+  font-family: sans-serif;
+  -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+}
+body {
+  margin: 0;
+}
+
+p {
+  color: black;
+}
+
+.cadastro {
+  margin: 20px;
+  padding: 10px;
+  border-color: black;
+  width: 90%;
+  height: 90%;
+}
+.cadastro h1 {
+  text-align: center;
+  color: blue;
+}
+
+.cadastro2 {
+  background-color: yellow;
+  padding: 30px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+
+.login {
+  text-align: right;
+  margin-right: 50px;
+  margin: 10px;
+  float: right;
+}
+
+.imageLogo {
+  background-image: url("/static/img/logo.png");
+  width: 200px;
+  height: 70px;
+  float: left;
+  margin-top: 10px;
+  margin-left: 20px;
+}
+
+.conteiner {
+  width: 100%;
+  height: 680px;
+  background-color: blue;
+  display: inline-block;
+
+}
+.registerStaff {
+  width: 700px;
+  height: 600px;
+  text-align: right;
+  margin-right: 50px;
+  margin-top: 20px;
+  background-color: red;
+  border-radius: 50px;
+  float: right;
+}
+
+.form-horizontal {
+  display: flex;
+  float: right;
+  flex-direction: row;
+  margin: 15px;
+}

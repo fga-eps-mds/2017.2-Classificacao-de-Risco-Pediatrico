@@ -1,8 +1,30 @@
 <!-- Arquivo: templates/users/register.html -->
-<h1>Cadastro</h1>
-
-<form role="form" class="form" method="POST">
-{% csrf_token %}
-{{ form.as_p }}
-<button type="submit" class="btn btn-warning">Cadastrar</button>
-</form>
+<!-- Arquivo: templates/users/login.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title> CRP </title>
+    <!-- Bootstrap Icone da pagina -->
+    {% load staticfiles %}
+    <link href="{% static "css/bootstrap.css" %}" rel="stylesheet">
+    <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
+    <link rel="shortcut icon" href="">
+  </head>
+  <body>
+    <div class="cadastro">
+      <h1>Cadastro</h1>
+      <div class="cadastro2">
+      <form role="form" class="form" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-warning">Cadastrar</button>
+      </form>
+    </div>
+    </div>
+  </body>
+</html>

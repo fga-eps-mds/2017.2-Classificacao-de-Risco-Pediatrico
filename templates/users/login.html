@@ -1,8 +1,48 @@
 <!-- Arquivo: templates/users/login.html -->
-<h1>Login</h1>
 
-<form role="form" class="form" method="POST" action="{{ request.path }}{% if next %}?next={{ next }}{% endif %}">
-{% csrf_token %}
-{{ form.as_p }}
-<button type="submit" class="btn btn-warning"><i class="fa fa-plus" aria-hidden="true"></i> Login</button>
-</form>
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title> CRP </title>
+    <!-- Bootstrap Icone da pagina -->
+    {% load staticfiles %}
+    <link href="{% static "css/bootstrap.css" %}" rel="stylesheet">
+    <link href="{% static "css/bootstrap-theme.css" %}" rel="stylesheet">
+    <link rel='stylesheet' type='text/css' href='{{ STATIC_URL }}bootstrap_form_horizontal/vendor/bootstrap/css/bootstrap.css' />
+    <script type='text/javascript' src='{{ STATIC_URL }}bootstrap_form_horizontal/vendor/bootstrap/js/bootstrap.min.js'></script>
+    <link rel="shortcut icon" href="">
+  </head>
+  <body>
+    <nav class="navbar navbar-default">
+  <div class="container-fluid">
+      <div class="imageLogo">
+        <!--<a class="navbar-brand" href="#">
+        {% load static %}
+        <img src="{% static "crp/static/img/logo.png" %}" width="200px" height="70px" />-->
+      </div>
+      </a>
+      <div class="nav navbar-nav navbar-right">
+        <div class="login">
+          <form role="form" class="form-horizontal" method="POST" action="{{ request.path }}{% if next %}?next={{ next }}{% endif %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-warning"><i class="fa fa-plus" aria-hidden="true"></i> Login</button>
+          </form>
+        </div>
+      </div>
+
+  </div>
+</nav>
+
+    <div class="conteiner">
+      <div class="registerStaff">
+
+      </div>
+    </div>
+  </body>
+</html>
