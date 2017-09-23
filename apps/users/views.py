@@ -134,7 +134,7 @@ class RegistrationPatientView(CreateView):
 
 
 def showPacient_view(request, cpf):
-    pacient = Pacient.objects.filter(cpf=cpf)[0]
+    pacient = Patient.objects.filter(cpf=cpf)[0]
     return render(request, 'users/showPacient.html', {'pacient': pacient})
 
 
