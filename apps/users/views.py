@@ -9,6 +9,7 @@ from django.core.urlresolvers import reverse_lazy, reverse
 from .forms import RegistrationAdminForm
 from .forms import RegistrationAttendantForm
 from .forms import RegistrationPacientForm
+from .models import Pacient
 
 
 def home(request):
@@ -48,4 +49,11 @@ class RegistrationAttendantView(CreateView):
 class RegistrationPacientView(CreateView):
     form_class = RegistrationPacientForm
     template_name = "users/registerPacient.html"
-    success_url = reverse_lazy('users:teste')
+    success_url = reverse_lazy('users:show_pacient')
+
+def showPacient_view(request, cpf):
+    pacient = Pacient.objects.filter(cpf=cpf)[0]
+    return render(request, 'users/showPacient.html', {'pacient': pacient})
+
+def homeRecepcionist_view(request):
+    return render(request, 'users/homeRecepcionist.html')
