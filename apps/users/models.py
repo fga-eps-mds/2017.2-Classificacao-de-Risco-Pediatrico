@@ -97,6 +97,7 @@ class Admin(Staff, Person):
 class Attendant(Staff, Person):
     objects = UserManager()
 
+
 '''
 class Patient(Person):
     guardian = models.CharField(

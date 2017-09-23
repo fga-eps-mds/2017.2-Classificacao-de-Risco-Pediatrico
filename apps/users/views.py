@@ -5,16 +5,13 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.views import login
 from django.contrib.auth.views import logout
 from django.core.urlresolvers import reverse_lazy, reverse
-from django.forms.formsets import BaseFormSet
-from django.forms.formsets import formset_factory
-from apps.users.multiform import MultiFormsView
 from multi_form_view import MultiModelFormView
 
 from .forms import RegistrationAdminForm
 from .forms import RegistrationAttendantForm
 from .forms import AddressForm
 
-from .models import Admin, Address
+from .models import Admin
 
 
 def home(request):
@@ -37,8 +34,8 @@ def logout_view(request, *args, **kwargs):
 
 class RegistrationAdminView(MultiModelFormView):
     form_classes = {
-        'registration_admin_form' : RegistrationAdminForm,
-        'address_form' : AddressForm,
+        'registration_admin_form': RegistrationAdminForm,
+        'address_form': AddressForm,
     }
     record_id = None
     template_name = 'users/registerStaff.html'
@@ -98,6 +95,7 @@ class RegistrationAdminView(MultiModelFormView):
         user = form.save(self.request)
         return form.admin(self.request, user, self.get_success_url())
     '''
+
 
 class RegistrationAttendantView(CreateView):
     form_class = RegistrationAttendantForm
