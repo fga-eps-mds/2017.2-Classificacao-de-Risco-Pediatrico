@@ -24,21 +24,31 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-'''
-class Adress(models.Model):
-    uf = models.CharField(max_length=50)
-    city = models.CharField(max_length=50)
-    neighborhood = models.CharField(max_length=100)
-    street = models.CharField(max_length=100)
-    block = models.CharField(max_length=50)
-    number = models.CharField(max_length=10)
-'''
+
+class Address(models.Model):
+    uf = models.CharField(verbose_name='UF',
+                          max_length=50,
+                          blank=False)
+    city = models.CharField(verbose_name='Cidade',
+                            max_length=50,
+                            blank=False)
+    neighborhood = models.CharField(verbose_name='Bairro',
+                                    max_length=100,
+                                    blank=False)
+    street = models.CharField(verbose_name='Rua',
+                              max_length=50,
+                              blank=False)
+    block = models.CharField(verbose_name='Conjunto',
+                             max_length=50,
+                             blank=False)
+    number = models.CharField(verbose_name='Numero',
+                              max_length=10,
+                              blank=False)
+
 
 class Person(models.Model):
     class Meta:
         abstract = True
-
-    #address = models.ForeignKey(Adress)
 
     name = models.CharField(
         verbose_name=_('Nome'),
@@ -46,41 +56,6 @@ class Person(models.Model):
         blank=False,
     )
 
-    uf = models.CharField(
-        verbose_name=_('UF'),
-        max_length=50,
-        blank=False,
-    )
-
-    city = models.CharField(
-        verbose_name=_('Cidade'),
-        max_length=50,
-        blank=False,
-    )
-
-    neighborhood = models.CharField(
-        verbose_name=_('Bairro'),
-        max_length=100,
-        blank=False,
-    )
-
-    street = models.CharField(
-        verbose_name=_('Rua'),
-        max_length=100,
-        blank=False,
-    )
-
-    block = models.CharField(
-        verbose_name=_('Quadra'),
-        max_length=50,
-        blank=False,
-    )
-
-    number = models.CharField(
-        verbose_name=_('Número'),
-        max_length=10,
-        blank=False,
-    )
 
 class Staff(AbstractBaseUser):
     username = models.CharField(
@@ -121,6 +96,7 @@ class Admin(Staff, Person):
 
 class Attendant(Staff, Person):
     objects = UserManager()
+
 
 '''
 class Patient(Person):
