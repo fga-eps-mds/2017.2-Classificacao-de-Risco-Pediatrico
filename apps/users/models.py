@@ -58,19 +58,11 @@ class Person(models.Model):
 
 
 class Staff(AbstractBaseUser):
-    username = models.CharField(
-        verbose_name=_('Nome de usuário'),
-        max_length=150,
-        blank=False,
-        help_text=_('Informe seu nome de usuário'),
-        unique=True
-    )
 
     id_user = models.CharField(
         verbose_name=_('ID de usuário'),
         max_length=150,
         blank=False,
-        help_text=_('Informe seu ID de usuário'),
         unique=True
     )
 
@@ -98,35 +90,5 @@ class Attendant(Staff, Person):
     objects = UserManager()
 
 
-'''
-class Patient(Person):
-    guardian = models.CharField(
-        verbose_name=_('Nome do Responsável'),
-        max_length=50,
-        blank=False,
-        help_text=_('Informe o nome do responsável'),
-    )
-
-    birth_date = models.DateTimeField(
-        verbose_name=_('Data de Nascimento'),
-        blank=False,
-        help_text=_('Informe a data de Nascimento'),
-    )
-
-    cpf = models.CharField(
-        verbose_name=_('CPF'),
-        max_length=11,
-        default="",
-        blank=False,
-        help_text=_('Informe o CPF'),
-        unique=True
-    )
-
-    parents_name = models.CharField(
-        verbose_name=_('Nome dos pais'),
-        max_length=150,
-        blank=False,
-        help_text=_('Informe o nome dos pais'),
-        unique=True
-    )
-'''
+class Recepcionist(Staff, Person):
+    objects = UserManager()

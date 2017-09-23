@@ -1,0 +1,187 @@
+<!-- Arquivo: templates/users/register.html -->
+
+<!doctype html>
+
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=devise-width, initial-scale=1.0">
+    <title>CRP</title>
+    <!--<link rel="stylesheet" href="css/bootstrap.css" >-->
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static "css/bootstrap.css" %}" >
+    <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}" >
+    <link rel="stylesheet" href="{% static "css/maincss.css" %}" >
+
+  </head>
+
+  <body>
+  <div id="header">
+
+
+    <nav class="navbar navbar-default navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+       <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Brand</a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+          <li><a href="#">Link</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="#">Separated link</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="#">One more separated link</a></li>
+            </ul>
+          </li>
+        </ul>
+        <div class="nav navbar-nav navbar-right">
+          <form class="navbar-form navbar-left" float>
+            <div class="form-group">
+                <label for="{{ field.name.email }}">{{ field.name.email }}</label>
+                <input type="{{field.name.email }}" class="form-control" id="exampleInput{{field.name.email}}" placeholder="{{field.name}}">
+                <label for="{{ field.name.password1 }}">{{ field.name.password1 }}</label>
+                <input type="{{ field.password1 }}" class="form-control" id="exampleInput{{field.name.password1}}" placeholder="{{field.name.password1}}">
+            {{ field.errors }}<br />
+            </div>
+            <button type="submit" class="btn btn-default">Login</button>
+          </form>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#">Link</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="#">Separated link</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div> <!--/.navbar-collapse-->
+    </div> <!--/.container-fluid-->
+  </nav>
+
+    <!--{% block body_block %}
+    <div class="hero-unit">
+        <div class="container">
+          <br /><br />
+          <h1>Registre-se</h1>
+            {% if registered %}
+            <p>Thank you for registering.</p>
+            {% else %}
+            <form class="form-signin span8" id="user_form" method="post", action="">
+                {% csrf_token %}
+                 Display each form here
+                {% for field in forms.registration_staff_form.visible_fields %}
+                <div class="form-group">
+                    <label for="{{ field.name }}">{{ field.name }}</label>
+                    <input type="{{field.name}}" class="form-control" id="exampleInput{{field.name}}" placeholder="{{field.name}}">
+                {{ field.errors }}<br />
+                </div>
+                {% endfor %}
+
+
+                {% for field in forms.address_form.visible_fields %}
+                <div class="form-group">
+                    <label for="{{ field.name }}">{{ field.name }}</label>
+                    <input type="{{field.name}}" class="form-control" id="exampleInput{{field.name}}" placeholder="{{field.name}}">
+                {{ field.errors }}
+                {{ field.help_text }}<br />
+                {% endfor %}
+                <br />
+                Provide a button to click to submit the form.
+                <input class="btn btn-primary" type="submit" name="submit" value="Register"/>
+            </form>
+            {% endif %}
+        </div>
+    </div>
+    {% endblock %}-->
+
+  <!--<body>
+    <div class="cadastro">
+      <h1>Cadastro</h1>
+      <div class="cadastro2">
+      <form role="form" class="form" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-warning">Cadastrar</button>
+      </form>
+    </div>
+    </div>
+  </body>-->
+
+  <!--<div class="registerStaff">
+
+  </div>-->
+
+  <div class="boxregistrationtest">
+      <!-- <div class="container"> -->
+          <form class="form-horizontal" method="POST">
+              <br /><br /><br />
+            <div class="staffForm">
+              {% csrf_token %}
+              {% for field in forms.registration_admin_form %}
+              <!-- <div class="form-group">
+                  {{ field.label_tag }}
+                  {% if field.name == "password1" or field.name == "password2" %}
+                    <input type="password" class="form-control" id="{{ field.id_for_label }}" >
+                  {% elif field.name == "email" %}
+                    <input type="email" class="form-control" id="{{ field.id_for_label }}" >
+                  {% else %}
+                  <input type="text" class="form-control" id="{{ field.id_for_label }}" >
+                  {% endif %}
+              {{ field.errors }}<br />
+            </div> -->
+              {{ field.label_tag }}
+              {{ field }}
+              {{ field.errors }}
+              {% endfor %}
+            </div>
+
+            <div class="adressForm">
+                {% for field in forms.address_form %}
+                {{ field.label_tag }}
+                {{ field }}
+                {{ field.errors }}
+                {% endfor %}
+                <div class="buttonregistration">
+                  <button class="btn btn-primary"name='action' value='address' type="submit">Cadastrar</button>
+                </div>
+              </div>
+
+              <!--{{ forms.registration_staff_form.as_p }}
+              {{ forms.address_form.as_p }} -->
+            <!-- </div> -->
+          </form>
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+
+  <!-- </div> -->
+  </body>
+</html>
