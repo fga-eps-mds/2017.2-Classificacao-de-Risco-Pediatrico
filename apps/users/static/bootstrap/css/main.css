@@ -1,0 +1,90 @@
+.labelTextLogin input {
+  border-radius: 20px;
+}
+
+.labelTextLogin label {
+  color: white;
+  float: left;
+}
+
+.signup {
+  display: flex;
+  float: right;
+  margin-top: -40px;
+  margin-right: 40px;
+}
+.menubar {
+  background-color: rgb(237, 237, 237);
+  position: relative;
+  min-height: 75px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+}
+
+.logoIcon {
+  background-image: url("/static/bootstrap/images/CRPFINAL.png");
+  width: 90px;
+  height: 41px;
+  margin-top: 15px;
+  margin-left: 20px;
+  background-repeat: no-repeat;
+  display: block;
+
+}
+
+#textLogin {
+  font-size: 12px;
+  font-family: "Verdana", sans-serif;
+  text-align: center;
+  margin-bottom: 30px;
+  color: white ;
+}
+
+.boxlogin p {
+  color: black;
+  font-family: "Open Sans";
+}
+
+
+.boxlogin {
+  width: 550px;
+  height: 300px;
+  background-color: rgba(0,0,0,0.5);
+  border-radius: 50px;
+  margin-top: 150px; 
+  padding: 20px;
+  padding-right: 40px;
+  padding-top: 10px;
+  text-align: right;  
+  position: absolute;
+  right: 7%;
+}
+
+.boxLogo {
+  background-image: url('../images/LogoFinalGrande.png');
+  width: 700px;
+  height: 350px;
+  background-size: contain;
+  display: flex;
+  float: left;
+  background-repeat: no-repeat;
+  margin-top: 150px;
+  margin-left: 230px;
+}
+
+
+.jumbotron {
+  background-image: url('../images/Modificado_5.jpg');
+  background-size: cover;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  margin-bottom: 30px;
+  margin-top: 24px;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 50px;
+  left: 0;
+  padding-right: 0;
+  text-align: right;
+}
