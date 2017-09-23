@@ -34,6 +34,7 @@ class Adress(models.Model):
     number = models.CharField(max_length=10)
 '''
 
+
 class Person(models.Model):
     class Meta:
         abstract = True
@@ -81,6 +82,7 @@ class Person(models.Model):
         max_length=10,
         blank=False,
     )
+
 
 class Staff(AbstractBaseUser):
     username = models.CharField(

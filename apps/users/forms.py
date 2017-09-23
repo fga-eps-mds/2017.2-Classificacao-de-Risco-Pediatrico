@@ -19,4 +19,5 @@ class RegistrationAttendantForm(UserCreationForm):
 class RegistrationPatientForm(forms.ModelForm):
     class Meta:
         model = Patient
-        fields = ['name', 'cpf', 'guardian', 'birth_date', 'parents_name', 'uf', 'city', 'neighborhood', 'street', 'block', 'number' ]
+        fields = ['name', 'cpf', 'guardian', 'birth_date', 'parents_name', 'uf', 'city', 'neighborhood', 'street',
+                  'block', 'number']
