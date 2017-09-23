@@ -2,6 +2,7 @@ from django.views.generic.base import ContextMixin, TemplateResponseMixin
 from django.views.generic.edit import ProcessFormView
 from django.http.response import HttpResponseRedirect, HttpResponseForbidden
 
+
 class MultiFormMixin(ContextMixin):
 
     form_classes = {}
@@ -17,13 +18,14 @@ class MultiFormMixin(ContextMixin):
         return self.form_classes
 
     def get_forms(self, form_classes, form_names=None, bind_all=False):
-        return dict([(key, self._create_form(key, klass, (form_names and key in form_names) or bind_all)) \
-            for key, klass in form_classes.items()])
+        return dict([(key, self._create_form(key, klass,
+                    (form_names and key in form_names) or bind_all))
+                    for key, klass in form_classes.items()])
 
     def get_form_kwargs(self, form_name, bind_form=False):
         kwargs = {}
-        kwargs.update({'initial':self.get_initial(form_name)})
-        kwargs.update({'prefix':self.get_prefix(form_name)})
+        kwargs.update({'initial': self.get_initial(form_name)})
+        kwargs.update({'prefix': self.get_prefix(form_name)})
 
         if bind_form:
             kwargs.update(self._bind_form_data())
@@ -65,7 +67,7 @@ class MultiFormMixin(ContextMixin):
     def _bind_form_data(self):
         if self.request.method in ('POST', 'PUT'):
             return{'data': self.request.POST,
-                   'files': self.request.FILES,}
+                   'files': self.request.FILES, }
         return {}
 
 
@@ -105,8 +107,9 @@ class ProcessMultipleFormsView(ProcessFormView):
     def _process_grouped_forms(self, group_name, form_classes):
         form_names = self.grouped_forms[group_name]
         forms = self.get_forms(form_classes, form_names)
-        if all([forms.get(form_name).is_valid() for form_name in form_names.values()]):
-            return self.forms_valid(forms)
+        if all([forms.get(form_name).is_valid()
+                for form_name in form_names.values()]):
+                    return self.forms_valid(forms)
         else:
             return self.forms_invalid(forms)
 
@@ -122,6 +125,7 @@ class BaseMultipleFormsView(MultiFormMixin, ProcessMultipleFormsView):
     """
     A base view for displaying several forms.
     """
+
 
 class MultiFormsView(TemplateResponseMixin, BaseMultipleFormsView):
     """
