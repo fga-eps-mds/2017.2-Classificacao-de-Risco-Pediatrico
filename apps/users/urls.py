@@ -15,5 +15,5 @@ urlpatterns = [
         views.RegistrationAdminView.as_view(success_url='logged_admin'),
         name="register_admin"),
     url(r'^register/recepcionist/$', views.RegistrationRecepcionistView
-        .as_view(), name="register_recepcionist")    
+        .as_view(), name="register_recepcionist")
 ]

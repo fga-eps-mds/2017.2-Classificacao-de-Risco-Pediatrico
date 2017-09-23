@@ -89,5 +89,6 @@ class Admin(Staff, Person):
 class Attendant(Staff, Person):
     objects = UserManager()
 
+
 class Recepcionist(Staff, Person):
     objects = UserManager()

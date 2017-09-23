@@ -12,7 +12,7 @@ from .forms import RegistrationAttendantForm
 from .forms import RegistrationRecepcionistForm
 from .forms import AddressForm
 
-from .models import Admin, Address, Staff, Attendant, Recepcionist
+from .models import Admin
 
 
 def home(request):
@@ -43,23 +43,23 @@ class RegistrationAdminView(MultiModelFormView):
 
     def get_form_kwargs(self):
         kwargs = super(RegistrationAdminView, self).get_form_kwargs()
-        #kwargs = super(RegistrationAttendantView, self).get_form_kwargs()
+        # kwargs = super(RegistrationAttendantView, self).get_form_kwargs()
         kwargs['address_form']['prefix'] = 'address'
         return kwargs
 
     def get_objects(self):
         self.admin_id = self.kwargs.get('admin_id', None)
-        #self.attendant_id = self.kwargs.get('attendant_id', None)
+        # self.attendant_id = self.kwargs.get('attendant_id', None)
         try:
             admin = Admin.objects.get(id=self.admin_id)
-            #attendant = Attendant.objects.get(id=self.attendant_id)
+            # attendant = Attendant.objects.get(id=self.attendant_id)
         except Admin.DoesNotExist:
             admin = None
         return {
             'registration_admin_form': admin,
-            #'registration_attendant_form': staff,
+            # 'registration_attendant_form': staff,
             'address_form': admin.address if admin else None,
-            #'address_form': attendant.address if attendant else None,
+            # 'address_form': attendant.address if attendant else None,
         }
 
     def get_success_url(self):
@@ -67,43 +67,12 @@ class RegistrationAdminView(MultiModelFormView):
 
     def forms_valid(self, forms):
         admin = forms['registration_admin_form'].save(commit=False)
-        #attendant = forms['registration_attendant_form'].save(commit=False)
+        # attendant = forms['registration_attendant_form'].save(commit=False)
         admin.address = forms['address_form'].save()
-        #attendant.address = forms['address_form'].save()
+        # attendant.address = forms['address_form'].save()
         admin.save()
-        #attendant.save()
+        # attendant.save()
         return super(RegistrationAdminView, self).forms_valid(forms)
-    '''
-    form_class = RegistrationStaffForm
-    template_name = "users/registerStaff.html"
-    success_url = reverse_lazy('users:login')
-
-    form_classes = {'address': AddressForm,
-                    'admin': RegistrationStaffForm}
-
-    def get_address_initial(self):
-        return {'email':''}
-
-    def get_admin_initial(self):
-        return {'email':''}
-
-    def get_context_data(self, **kwargs):
-        context = super(RegistrationAdminView, self).get_context_data(**kwargs)
-        context.update({"teste": 'teste',
-                        "teste": 'teste'})
-        return context
-
-    def address_form_valid(self, form):
-        print (form)
-        user = form.save(self.request)
-        return form.address(self.request, redirect_url=self.get_success_url())
-
-    def admin_form_valid(self, form):
-        print (form)
-        print ("\\\\\\")
-        user = form.save(self.request)
-        return form.admin(self.request, user, self.get_success_url())
-    '''
 
 
 class RegistrationAttendantView(CreateView):
@@ -146,8 +115,8 @@ class RegistrationAttendantView(CreateView):
         return super(RegistrationAttendantView, self).forms_valid(forms)
     '''
 
-class RegistrationRecepcionistView(CreateView):
 
+class RegistrationRecepcionistView(CreateView):
     form_class = RegistrationRecepcionistForm
     template_name = "users/registerRecepcionist.html"
     success_url = reverse_lazy('users:login')
