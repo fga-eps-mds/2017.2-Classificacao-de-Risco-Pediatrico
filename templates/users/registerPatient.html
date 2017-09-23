@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="{% static "css/creatPatient.css" %}" >
 
 </head>
-<body class="bg ">
+<body class=bg>
 
 
 <nav class="navbar navbar-default">
@@ -25,74 +25,84 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Brand</a>
+      <a class="navbar-brand" href="#">CRP</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-        <li><a href="#">Link</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">One more separated link</a></li>
-          </ul>
-        </li>
-      </ul>
-      <form class="navbar-form navbar-left">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Link</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-          </ul>
-        </li>
-      </ul>
+
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
 
 
-<h1>Cadastro Paciente</h1>
 
-<div class="content" id="content-user-form">
-    <div class="row text-center" id="user-row">
+<div class="row">
+<div class="col-md-8 col-md-offset-2">
+<div class="content" id="content-patient-form">
+    <h1 class="crp-title"> Cadastro de Paciente </h1>
+    <div class="row text-center" id="patient-row">
         <form role="form" class="form" method="POST">
             {% csrf_token %}
-                <div class="row" >
-                    <div class="col-sm-6" id="user-label-form">
-                        <label for="{{ form.name.id_for_label }}">{{ form.name.label_tag }}</label>
+                    <div class="col-sm-6" id="patient-label-form">
+                        <div>
+                            <label for="{{ form.name.id_for_label }}">{{ form.name.label_tag }}</label>
+                            <label>{{ form.name }}</label>
+                        </div>
+                        <div>
+                        <label for="{{ form.cpf.id_for_label }}">{{ form.cpf.label_tag }}</label>
+                            <label>{{ form.cpf }}</label>
+                        </div>
+                        <div>
+                            <label for="{{ form.guardian.id_for_label }}">{{ form.guardian.label_tag }}</label>
+                            <label>{{ form.guardian }}</label>
+                        </div>
+                        <div>
+                            <label for="{{ form.parents_name.id_for_label }}">{{ form.parents_name.label_tag }}</label>
+                            <label>{{ form.parents_name }}</label>
+                        </div>
+                        <div>
+                            <label for="{{ form.birth_date.id_for_label }}">{{ form.birth_date.label_tag }}</label>
+                            <label>{{ form.birth_date }}</label>
+                        </div>
                     </div>
+                        <div class="col-sm-6" id="patient-label-right">
+                        <div>
+                            <label for="{{ form.uf.id_for_label }}">{{ form.uf.label_tag }}</label>
+                            <label>{{ form.uf }}</label>
+                        </div>
+                        <div>
+                            <label for="{{ form.city.id_for_label }}">{{ form.city.label_tag }}</label>
+                            <label>{{ form.city }}</label>
+                        </div>
+                        <div>
+                            <label for="{{ form.neighborhood.id_for_label }}">{{ form.neighborhood.label_tag }}</label>
+                            <label>{{ form.neighborhood }}</label>
+                        </div>
+                        <div>
+                            <label for="{{ form.street.id_for_label }}">{{ form.street.label_tag }}</label>
+                            <label>{{ form.street }}</label>
+                        </div>
+                        <div>
+                            <label for="{{ form.block.id_for_label }}">{{ form.block.label_tag }}</label>
+                            <label>{{ form.block }}</label>
+                        </div>
+                        <div id="patient-row">
+                            <label  for="{{ form.number.id_for_label }}">{{ form.number.label_tag }}</label>
+                            <label id="patient-row">{{ form.number }}</label>
+                        </div>
+                        <div >
+                            <button id="button" type="submit" class="btn btn-warning">Cadastrar</button>
+                        </div>
+                        </div>
 
-                    <div class="col-sm-6 user-form-input" id="user-input-form">
-                        {{ form.name }}
-                    </div>
-                </div>
-                <div class="row text-center">
-                    <button type="submit" class="btn btn-warning">Cadastrar_Paciente</button>
-                </div>
         </form>
     </div>
 </div>
+</div>
+</div>
 
-
+</div>
 </body>
 
 </html>
