@@ -4,11 +4,13 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
+
 html {
   font-family: sans-serif;
   -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
 }
+
 body {
   margin: 0;
 }
@@ -24,6 +26,7 @@ p {
   width: 90%;
   height: 90%;
 }
+
 .cadastro h1 {
   text-align: center;
   color: blue;
@@ -60,6 +63,7 @@ p {
   display: inline-block;
 
 }
+
 .registerStaff {
   width: 700px;
   height: 600px;
