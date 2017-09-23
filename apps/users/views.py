@@ -130,7 +130,7 @@ class RegistrationRecepcionistView(CreateView):
 class RegistrationPatientView(CreateView):
     form_class = RegistrationPatientForm
     template_name = "users/registerPatient.html"
-    success_url = reverse_lazy('users:teste')
+    success_url = reverse_lazy('users:home_receptionist')
 
 
 def showPacient_view(request, cpf):

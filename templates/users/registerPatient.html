@@ -1,108 +1,106 @@
-
 <!doctype html>
-
 <html>
-<head>
-    <meta charset="utf-8">
-
-<title>Cadastro do Paciente</title>
-
-   {% load staticfiles %}
-    <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}" >
-    <link rel="stylesheet" href="{% static "css/creatPatient.css" %}" >
-
-</head>
-<body class=bg>
-
-
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">CRP</a>
-    </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
-
-
-
-<div class="row">
-<div class="col-md-8 col-md-offset-2">
-<div class="content" id="content-patient-form">
-    <h1 class="crp-title"> Cadastro de Paciente </h1>
-    <div class="row text-center" id="patient-row">
-        <form role="form" class="form" method="POST">
-            {% csrf_token %}
-                    <div class="col-sm-6" id="patient-label-form">
+   <head>
+      <meta charset="utf-8">
+      <title>Cadastro do Paciente</title>
+      {% load staticfiles %}
+      <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}" >
+      <link rel="stylesheet" href="{% static "css/creatPatient.css" %}" >
+   </head>
+   <body class=bg>
+      <nav class="navbar navbar-default">
+         <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+               <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+               <span class="sr-only">Toggle navigation</span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               </button>
+               <a class="navbar-brand" href="#">CRP</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            </div>
+            <!-- /.navbar-collapse -->
+         </div>
+         <!-- /.container-fluid -->
+      </nav>
+      <div class="row">
+         <div class="col-md-8 col-md-offset-2">
+            <div class="content" id="content-patient-form">
+               <h1 class="crp-title"> Cadastro de Paciente </h1>
+               <div class="row text-center" id="patient-row">
+                  <form role="form" class="form-horizontal" method="POST" action="{{ request.path }}{% if next %}?next={{ next }}{% endif %}">
+                     {% csrf_token %}
+                     <div class="col-sm-6" id="patient-label-form">
                         <div>
-                            <label for="{{ form.name.id_for_label }}">{{ form.name.label_tag }}</label>
-                            <label>{{ form.name }}</label>
+                           <label for="{{ form.name.id_for_label }}">{{ form.name.label_tag }}</label>
+                           <label>{{ form.name }}</label>
+                            {{ form.name.erros }}
                         </div>
                         <div>
-                        <label for="{{ form.cpf.id_for_label }}">{{ form.cpf.label_tag }}</label>
-                            <label>{{ form.cpf }}</label>
+                           <label for="{{ form.cpf.id_for_label }}">{{ form.cpf.label_tag }}</label>
+                           <label>{{ form.cpf }}</label>
+                            {{ form.cpf.erros }}
                         </div>
                         <div>
-                            <label for="{{ form.guardian.id_for_label }}">{{ form.guardian.label_tag }}</label>
-                            <label>{{ form.guardian }}</label>
+                           <label for="{{ form.guardian.id_for_label }}">{{ form.guardian.label_tag }}</label>
+                           <label>{{ form.guardian }}</label>
+                            {{ form.guardian.erros }}
                         </div>
                         <div>
-                            <label for="{{ form.parents_name.id_for_label }}">{{ form.parents_name.label_tag }}</label>
-                            <label>{{ form.parents_name }}</label>
+                           <label for="{{ form.parents_name.id_for_label }}">{{ form.parents_name.label_tag }}</label>
+                           <label>{{ form.parents_name }}</label>
+                            {{ form.parents_name.erros }}
                         </div>
                         <div>
-                            <label for="{{ form.birth_date.id_for_label }}">{{ form.birth_date.label_tag }}</label>
-                            <label>{{ form.birth_date }}</label>
+                           <label for="{{ form.birth_date.id_for_label }}">{{ form.birth_date.label_tag }}</label>
+                           <label>{{ form.birth_date }}</label>
+                            {{ form.birth_date.erros }}
                         </div>
-                    </div>
-                        <div class="col-sm-6" id="patient-label-right">
+                     </div>
+                     <div class="col-sm-6" id="patient-label-right">
                         <div>
-                            <label for="{{ form.uf.id_for_label }}">{{ form.uf.label_tag }}</label>
-                            <label>{{ form.uf }}</label>
-                        </div>
-                        <div>
-                            <label for="{{ form.city.id_for_label }}">{{ form.city.label_tag }}</label>
-                            <label>{{ form.city }}</label>
+                           <label for="{{ form.uf.id_for_label }}">{{ form.uf.label_tag }}</label>
+                           <label>{{ form.uf }}</label>
+                            {{ form.uf.erros }}
                         </div>
                         <div>
-                            <label for="{{ form.neighborhood.id_for_label }}">{{ form.neighborhood.label_tag }}</label>
-                            <label>{{ form.neighborhood }}</label>
+                           <label for="{{ form.city.id_for_label }}">{{ form.city.label_tag }}</label>
+                           <label>{{ form.city }}</label>
+                            {{ form.city.erros }}
                         </div>
                         <div>
-                            <label for="{{ form.street.id_for_label }}">{{ form.street.label_tag }}</label>
-                            <label>{{ form.street }}</label>
+                           <label for="{{ form.neighborhood.id_for_label }}">{{ form.neighborhood.label_tag }}</label>
+                           <label>{{ form.neighborhood }}</label>
+                            {{ form.neighborhood.erros }}
                         </div>
                         <div>
-                            <label for="{{ form.block.id_for_label }}">{{ form.block.label_tag }}</label>
-                            <label>{{ form.block }}</label>
+                           <label for="{{ form.street.id_for_label }}">{{ form.street.label_tag }}</label>
+                           <label>{{ form.street }}</label>
+                            {{ form.street.erros }}
+                        </div>
+                        <div>
+                           <label for="{{ form.block.id_for_label }}">{{ form.block.label_tag }}</label>
+                           <label>{{ form.block }}</label>
+                            {{ form.block.erros }}
                         </div>
                         <div id="patient-row">
-                            <label  for="{{ form.number.id_for_label }}">{{ form.number.label_tag }}</label>
-                            <label id="patient-row">{{ form.number }}</label>
+                           <label  for="{{ form.number.id_for_label }}">{{ form.number.label_tag }}</label>
+                           <label id="patient-row">{{ form.number }}</label>
+                            {{ form.number.erros }}
                         </div>
                         <div >
-                            <button id="button" type="submit" class="btn btn-warning">Cadastrar</button>
+                           <button id="button" type="submit" class="btn btn-warning">Cadastrar</button>
                         </div>
-                        </div>
-
-        </form>
-    </div>
-</div>
-</div>
-</div>
-
-</div>
-</body>
-
+                     </div>
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div>
+      </div>
+   </body>
 </html>
