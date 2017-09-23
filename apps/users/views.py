@@ -8,15 +8,14 @@ from django.core.urlresolvers import reverse_lazy, reverse
 
 from .forms import RegistrationAdminForm
 from .forms import RegistrationAttendantForm
+
 from .forms import RegistrationPatientForm
+
+from .models import Patient
 
 
 def home(request):
     return render(request, 'users/home.html')
-
-
-def teste(request):
-    return render(request, 'users/teste.html')
 
 
 def login_view(request, *args, **kwargs):
@@ -31,10 +30,6 @@ def login_view(request, *args, **kwargs):
 def logout_view(request, *args, **kwargs):
     kwargs['next_page'] = reverse('users:home')
     return logout(request, *args, **kwargs)
-
-
-def register_patient(request):
-    return render(request, 'user/login', {})
 
 
 class RegistrationAdminView(CreateView):
@@ -52,4 +47,15 @@ class RegistrationAttendantView(CreateView):
 class RegistrationPatientView(CreateView):
     form_class = RegistrationPatientForm
     template_name = "users/registerPatient.html"
-    success_url = reverse_lazy('users:teste')
+
+    def get_success_url(self):
+        return reverse('users:home_receptionist_view')
+
+
+def show_patient_view(request, cpf):
+    patient = Patient.objects.filter(cpf=cpf)[0]
+    return render(request, 'users/showPatient.html', {'patient': patient})
+
+
+def home_receptionist_view(request):
+    return render(request, 'users/homeReceptionist.html')
