@@ -1,32 +1,35 @@
 # Arquivo: apps/users/forms.py
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
-
-from .models import Admin, Attendant, Pacient
+from .models import Admin, Attendant, Patient, Address, Receptionist
 
 
 class AddressForm(forms.ModelForm):
     class Meta:
+        model = Address
         fields = ['uf', 'city', 'neighborhood', 'street', 'block', 'number']
 
 
-class RegistrationRecepcionistForm(UserCreationForm):
+class RegistrationReceptionistForm(UserCreationForm):
     class Meta:
+        model = Receptionist
         fields = ['email', 'id_user']
 
 
 class RegistrationAttendantForm(UserCreationForm):
     class Meta:
+        model = Attendant
         fields = ['name', 'email', 'id_user']
 
 
 class RegistrationAdminForm(UserCreationForm):
     class Meta:
-        fields = ['name', 'email', 'id_user']
         model = Admin
+        fields = ['name', 'email', 'id_user']
 
 
-class RegistrationPacientForm(forms.ModelForm):
+class RegistrationPatientForm(forms.ModelForm):
     class Meta:
-        model = Pacient
+        model = Patient
         fields = ['name', 'cpf', 'guardian', 'birth_date', 'parents_name', 'uf', 'city', 'neighborhood', 'street', 'block', 'number' ]
+

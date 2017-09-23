@@ -90,11 +90,11 @@ class Attendant(Staff, Person):
     objects = UserManager()
 
 
-class Recepcionist(Staff, Person):
+class Receptionist(Staff, Person):
     objects = UserManager()
 
 
-class Pacient(Person):
+class Patient(Person):
     guardian = models.CharField(
         verbose_name=_('Nome do Responsável'),
         max_length=50,

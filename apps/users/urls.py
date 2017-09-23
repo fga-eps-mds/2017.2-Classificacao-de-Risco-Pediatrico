@@ -16,6 +16,6 @@ urlpatterns = [
         name="register_admin"),
     url(r'^register/recepcionist/$', views.RegistrationRecepcionistView
         .as_view(), name="register_recepcionist"),
-    url(r'^register/pacient/$', views.RegistrationPacientView
-        .as_view(success_url='home'), name="register_pacient")
+    url(r'^register/patient/$', views.RegistrationPatientView.as_view(),
+        name="register_patient")
 ]
