@@ -9,12 +9,11 @@ from multi_form_view import MultiModelFormView
 
 from .forms import RegistrationAdminForm
 from .forms import RegistrationAttendantForm
-
-from .forms import RegistrationRecepcionistForm
+from .forms import RegistrationReceptionistForm
 from .forms import RegistrationPatientForm
 from .forms import AddressForm
 
-from .models import Admin
+from .models import Admin, Patient
 
 
 def home(request):
@@ -123,7 +122,7 @@ class RegistrationAttendantView(CreateView):
 
 
 class RegistrationRecepcionistView(CreateView):
-    form_class = RegistrationRecepcionistForm
+    form_class = RegistrationReceptionistForm
     template_name = "users/registerRecepcionist.html"
     success_url = reverse_lazy('users:login')
 
@@ -132,3 +131,12 @@ class RegistrationPatientView(CreateView):
     form_class = RegistrationPatientForm
     template_name = "users/registerPatient.html"
     success_url = reverse_lazy('users:teste')
+
+
+def showPacient_view(request, cpf):
+    pacient = Pacient.objects.filter(cpf=cpf)[0]
+    return render(request, 'users/showPacient.html', {'pacient': pacient})
+
+
+def homeRecepcionist_view(request):
+    return render(request, 'users/homeRecepcionist.html')
