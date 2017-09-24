@@ -91,5 +91,13 @@
   top: 50px;
   left: 0;
   padding-right: 0;
-  text-align: right;
+  text-align: center;
+}
+
+.check-options {
+  font-size:30px;
+  line-height: 2.0;
+  padding: 20px;
+  color: white;
+  text-align: justify;
 }
