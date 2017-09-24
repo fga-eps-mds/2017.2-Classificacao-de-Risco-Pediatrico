@@ -6,3 +6,9 @@ whitenoise==3.2
 flake8==3.4.1
 django-multi-form-view==2.0
 six==1.10.0
+pytest==3.2.2
+pytest-django==3.1.2
+pytest-cov==2.5.1
+radon==2.1.1
+coverage==4.4.1
+pylint==1.7.2
