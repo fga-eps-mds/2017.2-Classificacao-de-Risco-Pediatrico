@@ -1,4 +1,4 @@
-<!-- Arquivo: templates/users/showPacient.html -->
+<!-- Arquivo: templates/users/homeReceptionist.html -->
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -10,18 +10,15 @@
   <body>
   <center>
     <div class="boxInfos">
-      <div class="infosPacient">
+      <div class="infosPatient">
         <h1>Paciente</h1>
         <!-- Imagem do Paciente -->
-        <h4>Nome: {{ pacient.name }}</h4>
-        <h4>Nascimento: {{ pacient.birth_date }} CPF: {{ pacient.cpf }}</h4>
-        <h4>Endereço: {{ pacient.uf }}, {{ pacient.city }}, {{ pacient.neighborhood }}, {{ pacient.street }}, {{ pacient.block }} e {{ pacient.number }}</h4>
+        <h4>cpf<textarea></textarea></h4>
         <div class="pull-right">
           <button type="button" class="btn-primary">Editar Perfil</button>
         </div>
       </div>
     </div>
-    <h><a href="{% url 'users:register_pacient' %}">Voltar</a></h>
   </center>  
   </body>
 </html>

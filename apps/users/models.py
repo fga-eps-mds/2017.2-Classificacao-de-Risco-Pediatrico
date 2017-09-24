@@ -46,7 +46,6 @@ class Address(models.Model):
                               blank=False)
 
 
-
 class Person(models.Model):
     class Meta:
         abstract = True
@@ -56,7 +55,6 @@ class Person(models.Model):
         max_length=150,
         blank=False,
     )
-
 
 
 class Staff(AbstractBaseUser):

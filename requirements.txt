@@ -4,6 +4,10 @@ gunicorn==19.6.0
 psycopg2==2.7.3.1
 whitenoise==3.2
 flake8==3.4.1
+<<<<<<< HEAD
 django-multi-form-view==2.0
 six==1.10.0
 django-bootstrap-form-horizontal==0.0.4
+=======
+django-bootstrap-form-horizontal==0.0.4
+>>>>>>> 9927b4772742d4c28c722c5c6a8a140fcf636114

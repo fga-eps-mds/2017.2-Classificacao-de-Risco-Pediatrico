@@ -1,6 +1,7 @@
 # Arquivo: apps/users/forms.py
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
+
 from .models import Admin, Attendant, Patient, Address, Receptionist
 
 

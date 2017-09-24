@@ -1,0 +1,27 @@
+<!-- Arquivo: templates/users/showpatient.html -->
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <title> Informações do patiente </title>
+  <!-- Bootstrap Icone da pagina -->
+  {% load staticfiles %}
+  <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
+  <link href="{% static "css/bootstrap-theme.min.css" %}" rel="stylesheet">
+  <body>
+  <center>
+    <div class="boxInfos">
+      <div class="infosPatient">
+        <h1>patiente</h1>
+        <!-- Imagem do patiente -->
+        <h4>Nome: {{ patient.name }}</h4>
+        <h4>Nascimento: {{ patient.birth_date }} CPF: {{ patient.cpf }}</h4>
+        <h4>Endereço: {{ patient.uf }}, {{ patient.city }}, {{ patient.neighborhood }}, {{ patient.street }}, {{ patient.block }} e {{ patient.number }}</h4>
+        <div class="pull-right">
+          <button type="button" class="btn-primary">Editar Perfil</button>
+        </div>
+      </div>
+    </div>
+    <h><a href="{% url 'users:register_patient' %}">Voltar</a></h>
+  </center>  
+  </body>
+</html>
