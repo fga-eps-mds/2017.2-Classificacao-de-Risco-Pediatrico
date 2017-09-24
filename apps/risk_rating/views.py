@@ -1,3 +1,5 @@
 from django.shortcuts import render
 
-# Create your views here.
+
+def risk_rating_view(request):
+    return render(request, 'risk_rating/risk_rating.html')

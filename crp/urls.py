@@ -16,8 +16,11 @@ Including another URLconf
 # Arquivo: MeuProjeto/urls.py
 from django.conf.urls import include, url
 from django.contrib import admin
+from apps.risk_rating import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^user/', include('apps.users.urls', namespace="users")),
+    # url(r'^risk_rating/', include('apps.risk_rating.urls', namespace="risk_rating")),
+    url(r'^risk_rating/', views.risk_rating_view),
 ]
