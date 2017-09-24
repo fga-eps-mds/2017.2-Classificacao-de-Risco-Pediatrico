@@ -36,6 +36,20 @@
   right: 6%;
 }
 
+.boxclassificacao {
+  width: 42%;
+  height: 90%;
+  background-color: rgba(0,0,0,0.7);
+  border-radius: 50px;
+  margin: auto;
+  padding: 20px;
+  padding-right: 40px;
+  padding-top: 10px;
+  text-align: center;
+  /*position: absolute;*/
+  /*right: 6%;*/
+}
+
 .boxLogo {
   background-image: url('../images/LogoFinalGrande.png');
   background-size: contain;
@@ -52,6 +66,21 @@
 
 .jumbotron {
   background-image: url('../images/Modificado_5.jpg');
+  background-size: cover;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  margin-bottom: 30px;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 50px;
+  left: 0;
+  padding-right: 0;
+  text-align: right;
+}
+
+.classificacaoback {
+  background-image: url('../images/Modificado6.jpg');
   background-size: cover;
   padding-top: 30px;
   padding-bottom: 30px;
