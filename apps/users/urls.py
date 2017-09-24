@@ -17,6 +17,8 @@ urlpatterns = [
         .as_view(), name="register_recepcionist"),
     url(r'^register/patient/$', views.RegistrationPatientView.as_view(),
         name="register_patient"),
-    url(r'^show/patient/(?P<cpf>\d+)/$', views.show_pacient_view, name="show_pacient"),
-    url(r'^home/recepcionist/$', views.home_receptionist_view, name="home_recepcionist")
+    url(r'^show/patient/(?P<cpf>\d+)/$', views.show_pacient_view,
+        name="show_pacient"),
+    url(r'^home/recepcionist/$', views.home_receptionist_view,
+        name="home_recepcionist")
 ]
