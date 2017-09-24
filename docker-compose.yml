@@ -3,9 +3,11 @@ version: '3'
 services:
   db:
     image: postgres
+    ports:
+      - "5433:5432"
   web:
     build: .
-    command: python3 manage.py runserver 0.0.0.0:8000
+    command: /bin/bash -l -c "python manage.py migrate && python3 manage.py runserver 0.0.0.0:8000"
     volumes:
       - .:/code
     ports:

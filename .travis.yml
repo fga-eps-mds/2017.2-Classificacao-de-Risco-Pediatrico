@@ -1,0 +1,13 @@
+sudo: required
+language: python
+python:
+  - '3.6'
+services:
+  - docker
+before_install:
+  - docker-compose up --build -d
+script:
+  - docker-compose run web python manage.py test
+  - docker-compose run web flake8 --exclude */migrations/,manage.py  .
+after_script:
+  - docker-compose down

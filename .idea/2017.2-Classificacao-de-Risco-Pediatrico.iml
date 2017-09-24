@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="PYTHON_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="django" name="Django">
+      <configuration>
+        <option name="rootFolder" value="$MODULE_DIR$" />
+        <option name="settingsModule" value="crp/settings.py" />
+        <option name="manageScript" value="manage.py" />
+        <option name="environment" value="&lt;map/&gt;" />
+      </configuration>
+    </facet>
+  </component>
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/.tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/temp" />
+      <excludeFolder url="file://$MODULE_DIR$/tmp" />
+    </content>
+    <orderEntry type="jdk" jdkName="Python 3.6.0 (/Library/Frameworks/Python.framework/Versions/3.6/bin/python3.6)" jdkType="Python SDK" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="bootstrap" level="application" />
+    <orderEntry type="library" name="jquery-3.2.1.slim" level="application" />
+    <orderEntry type="library" name="popper" level="application" />
+  </component>
+  <component name="TemplatesService">
+    <option name="TEMPLATE_CONFIGURATION" value="Django" />
+  </component>
+</module>
