@@ -13,7 +13,7 @@ from .forms import RegistrationReceptionistForm
 from .forms import AddressForm
 from .forms import RegistrationPatientForm
 
-from .models import Admin, Patient
+from .models import Admin, Attendant, Receptionist, Patient, Staff
 
 
 def home(request):
@@ -27,6 +27,24 @@ def login_view(request, *args, **kwargs):
     kwargs['extra_context'] = {'next': reverse('users:home')}
     kwargs['template_name'] = 'users/login.html'
     return login(request, *args, **kwargs)
+
+
+def find_user_type(email):
+    staff = Staff.objects.filter(email=email)[0]
+
+    ad = Admin.objects.filter(staff_ptr_id=staff.id)
+    attendant = Attendant.objects.filter(staff_ptr_id=staff.id)
+    receptionist = Receptionist.objects.filter(staff_ptr_id=staff.id)
+
+    tp = ''
+    if ad.exists():
+        tp = 'admin'
+    elif attendant.exists():
+        tp = 'attendant'
+    elif receptionist.exists():
+        tp = 'receptionist'
+
+    return tp
 
 
 def logout_view(request, *args, **kwargs):
