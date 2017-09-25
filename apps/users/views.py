@@ -1,10 +1,9 @@
 # Arquivo: /apps/users/views.py
 from django.shortcuts import render
-from django.views.generic import CreateView
 from django.http import HttpResponseRedirect
 from django.contrib.auth.views import login
 from django.contrib.auth.views import logout
-from django.core.urlresolvers import reverse_lazy, reverse
+from django.core.urlresolvers import reverse
 from multi_form_view import MultiModelFormView
 
 from .forms import RegistrationAdminForm
@@ -98,22 +97,122 @@ def register_patient(request):
     return render(request, 'user/login', {})
 
 
-class RegistrationAttendantView(CreateView):
+class RegistrationAttendantView(MultiModelFormView):
+    '''
     form_class = RegistrationAttendantForm
     template_name = "users/registerAttendant.html"
     success_url = reverse_lazy('users:login')
+    '''
+    form_classes = {
+        'registration_attendant_form': RegistrationAttendantForm,
+        'address_form': AddressForm,
+    }
+    record_id = None
+    template_name = 'users/registerAttendant.html'
+
+    def get_form_kwargs(self):
+        kwargs = super(RegistrationAttendantView, self).get_form_kwargs()
+        kwargs['address_form']['prefix'] = 'address'
+        return kwargs
+
+    def get_objects(self):
+        self.attendant_id = self.kwargs.get('attendant_id', None)
+        try:
+            attendant = Attendant.objects.get(id=self.attendant_id)
+        except Attendant.DoesNotExist:
+            attendant = None
+        return {
+            'registration_attendant_form': attendant,
+            'address_form': attendant.address if attendant else None,
+        }
+
+    def get_success_url(self):
+        return reverse('users:login')
+
+    def forms_valid(self, forms):
+        attendant = forms['registration_attendant_form'].save(commit=False)
+        attendant.address = forms['address_form'].save()
+        attendant.save()
+        return super(RegistrationAttendantView, self).forms_valid(forms)
 
 
-class RegistrationReceptionistView(CreateView):
+class RegistrationReceptionistView(MultiModelFormView):
+    '''
     form_class = RegistrationReceptionistForm
     template_name = "users/registerReceptionist.html"
     success_url = reverse_lazy('users:login')
+    '''
+    form_classes = {
+        'registration_receptionist_form': RegistrationReceptionistForm,
+        'address_form': AddressForm,
+    }
+    record_id = None
+    template_name = 'users/registerReceptionist.html'
+
+    def get_form_kwargs(self):
+        kwargs = super(RegistrationReceptionistView, self).get_form_kwargs()
+        kwargs['address_form']['prefix'] = 'address'
+        return kwargs
+
+    def get_objects(self):
+        self.receptionist_id = self.kwargs.get('receptionist_id', None)
+        try:
+            receptionist = Receptionist.objects.get(id=self.receptionist_id)
+        except Receptionist.DoesNotExist:
+            receptionist = None
+        return {
+            'registration_receptionist_form': receptionist,
+            'address_form': receptionist.address if receptionist else None,
+        }
+
+    def get_success_url(self):
+        return reverse('users:login')
+
+    def forms_valid(self, forms):
+        receptionist = forms['registration_receptionist_form']\
+                        .save(commit=False)
+        receptionist.address = forms['address_form'].save()
+        receptionist.save()
+        return super(RegistrationReceptionistView, self).forms_valid(forms)
 
 
-class RegistrationPatientView(CreateView):
+class RegistrationPatientView(MultiModelFormView):
+    '''
     form_class = RegistrationPatientForm
     template_name = "users/registerPatient.html"
     success_url = reverse_lazy('users:home_receptionist')
+    '''
+    form_classes = {
+        'registration_patient_form': RegistrationPatientForm,
+        'address_form': AddressForm,
+    }
+    record_id = None
+    template_name = 'users/registerPatient.html'
+
+    def get_form_kwargs(self):
+        kwargs = super(RegistrationPatientView, self).get_form_kwargs()
+        kwargs['address_form']['prefix'] = 'address'
+        return kwargs
+
+    def get_objects(self):
+        self.patient_id = self.kwargs.get('patient_id', None)
+        try:
+            patient = Patient.objects.get(id=self.patient_id)
+        except Patient.DoesNotExist:
+            patient = None
+        return {
+            'registration_patient_form': patient,
+            'address_form': patient.address if patient else None
+        }
+
+    def get_success_url(self):
+        return reverse('users:login')
+
+    def forms_valid(self, forms):
+        patient = forms['registration_patient_form'].save(commit=False)
+        patient.address = forms['address_form'].save()
+        patient.save()
+        return super(RegistrationPatientView, self).forms_valid(forms)
 
 
 def show_pacient_view(request, cpf):
