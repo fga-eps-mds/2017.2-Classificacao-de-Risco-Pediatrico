@@ -1,0 +1,75 @@
+.login-page {
+    background: url('/static/img/bg_home.jpg') no-repeat;
+    bottom: 0;
+    left: 0;
+    overflow: auto;
+    padding: 3em;
+    position: absolute;
+    right: 0;
+    top: 75px;
+    background-size: cover;
+    z-index: -1;
+}
+
+.register-page {
+  background: url('/static/img/bg_register.jpg') no-repeat;
+  bottom: 0;
+  left: 0;
+  overflow: auto;
+  padding: 3em;
+  position: absolute;
+  right: 0;
+  top: 75px;
+  background-size: cover;
+  z-index: -1;
+}
+
+.home-recepcionist {
+  background: url('/static/img/bg_createPatient.jpg') no-repeat;
+  bottom: 0;
+  left: 0;
+  overflow: auto;
+  padding: 3em;
+  position: absolute;
+  right: 0;
+  top: 75px;
+  background-size: cover;
+  z-index: -1;
+}
+
+.box {
+    background-color: rgba(0,0,0,0.7);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    color: white;
+    margin-top: 5%;
+    margin-right: 3%;
+    margin-left: 3%;
+    padding: 20px;
+    max-height: 37em;
+}
+
+.box a {
+    color: white;
+}
+
+.box a:hover {
+    color: white;
+    background-color: dimgrey;
+}
+
+.box input {
+    float: right;
+}
+
+
+#login-form-group {
+    margin-top: 20px;
+}
+
+.box button {
+    display: block;
+}
+
+.box form .d-inline-block:first-child {
+    margin-right: 20px;
+}

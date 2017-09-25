@@ -1,0 +1,44 @@
+.btn btn-warning {
+  font-size: 16px;
+  padding: 12px 28px;
+}
+
+
+.boxInfos{
+  width: 30%;
+  text-align: center;
+  margin-top: 20px;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 50px;
+  color: white;
+  float: center;
+  display: flex;
+  padding: 2%;
+  margin-top: 10%;
+}
+
+.infosPatient {
+  float: center;
+  text-align: center;
+  display: block;
+}
+
+.searchPatient {
+  float: center;
+  text-align: center;
+  display: block;
+}
+
+body {
+  background-image: url("/static/img/Fundo2.jpg");
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  text-align: center;
+}
+
+html {
+	height: 100%;
+}
+
