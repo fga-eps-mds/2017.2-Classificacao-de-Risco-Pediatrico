@@ -1,5 +1,5 @@
 .login-page {
-    background: url('/static/img/Modificado5.jpg') no-repeat;
+    background: url('/static/img/bg_home.jpg') no-repeat;
     bottom: 0;
     left: 0;
     overflow: auto;
@@ -9,6 +9,32 @@
     top: 75px;
     background-size: cover;
     z-index: -1;
+}
+
+.register-page {
+  background: url('/static/img/bg_register.jpg') no-repeat;
+  bottom: 0;
+  left: 0;
+  overflow: auto;
+  padding: 3em;
+  position: absolute;
+  right: 0;
+  top: 75px;
+  background-size: cover;
+  z-index: -1;
+}
+
+.home-recepcionist {
+  background: url('/static/img/bg_createPatient.jpg') no-repeat;
+  bottom: 0;
+  left: 0;
+  overflow: auto;
+  padding: 3em;
+  position: absolute;
+  right: 0;
+  top: 75px;
+  background-size: cover;
+  z-index: -1;
 }
 
 .box {
