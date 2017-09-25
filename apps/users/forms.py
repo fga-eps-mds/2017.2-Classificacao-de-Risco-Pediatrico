@@ -14,7 +14,7 @@ class AddressForm(forms.ModelForm):
 class RegistrationReceptionistForm(UserCreationForm):
     class Meta:
         model = Receptionist
-        fields = ['email', 'id_user']
+        fields = ['name', 'email', 'id_user']
 
 
 class RegistrationAttendantForm(UserCreationForm):
