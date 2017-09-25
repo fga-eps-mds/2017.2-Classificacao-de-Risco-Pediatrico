@@ -1,6 +1,10 @@
 {% extends 'layout/layout.html' %}
 {% load staticfiles %}
 
+{% block background %}
+<div class="register-page"></div>
+{% endblock %}
+
 {% block head %}
     <link rel="stylesheet" href="{% static "css/main.css" %}">
     <link rel="stylesheet" href="{% static "css/register.css" %}">
@@ -10,7 +14,8 @@
     <div class="box rounded float-right">
        <h1>Administrador Cadastro</h1>
        <form role="form" class="form" method="POST">
-
+              {% csrf_token %}
+              {{ form.non_field_errors }}                       
               <div class="d-inline-block">
                   {% for field in forms.registration_admin_form %}
                      <div class="form-group">
