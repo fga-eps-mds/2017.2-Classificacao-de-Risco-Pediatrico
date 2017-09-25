@@ -7,17 +7,16 @@
 
 {% block head %}
     <link rel="stylesheet" href="{% static "css/main.css" %}">
-    <link rel="stylesheet" href="{% static "css/register.css" %}">
 {% endblock %}
 
 {% block content %}
     <div class="box rounded float-right">
-       <h1>Administrador Cadastro</h1>
+       <h1>Paciente Cadastro</h1>
        <form role="form" class="form" method="POST">
               {% csrf_token %}
-              {{ form.non_field_errors }}                       
+              {{ form.non_field_errors }}
               <div class="d-inline-block">
-                  {% for field in forms.registration_admin_form %}
+                  {% for field in forms.registration_patient_form %}
                      <div class="form-group">
 
                          {% if field.name != 'password1' and field.name != 'password2' %}
@@ -51,5 +50,21 @@
               </div>
           <button class="btn btn-outline-secondary" name='action' value='address' type="submit">Cadastrar</button>
        </form>
+       <!-- <form class="form-group" method="POST">
+          {% csrf_token %}
+          {{ form.non_field_errors }}
+          {% for field in form %}
+          <div id="login-form-group">
+             <div class="form-group">
+                {{ field.label_tag }}
+
+                <input  type="text" name="{{ field.name }}" class="rounded" id="{{ field.id_for_label }}" >
+
+                {{ field.errors }}
+             </div>
+          </div>
+          {% endfor %}
+          <button class="btn btn-outline-secondary float-right"name='action' value='address' type="submit">Cadastrar</button>
+       </form> -->
     </div>
 {% endblock %}

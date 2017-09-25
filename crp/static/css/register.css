@@ -1,0 +1,15 @@
+@media (max-width: 685px) {
+    .box input {
+        max-width: 80px;
+    }
+
+    .box label {
+        font-size: 80%;
+    }
+}
+
+@media (max-width: 430px) {
+    .box .d-inline-block:nth-of-type(2) input {
+        max-width: 60px;
+    }
+}
