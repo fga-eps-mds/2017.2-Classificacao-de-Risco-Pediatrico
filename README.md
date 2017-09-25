@@ -9,7 +9,7 @@ O software terá como função classificar os pacientes em estados imediato,  ho
 **CRP** foi desenvolvido inicialmente por estudantes das disciplinas Métodos de Desenvolvimento de Software e Gestão de Portifólio e Projeto de Software, do curso de engenharia de software da Universidade de Brasília Faculdade do Gama.
 
 
-**Se você deseja contribuir com CRP, leia a nossa [licença](https://github.com/fga-gpp-mds/2017.2-Classificacao-de-Risco-Pediatrico/blob/master/LICENSE). Esse projeto está sob a [licença MIT](https://mit-license.org/). Ao contribuir com esse projeto, você estará de acordo com essa liceça.**
+**Se você deseja contribuir com CRP, leia a nossa [licença](https://github.com/fga-gpp-mds/2017.2-Classificacao-de-Risco-Pediatrico/blob/master/LICENSE). Esse projeto está sob a [licença MIT](https://mit-license.org/). Ao contribuir com esse projeto, você estará de acordo com essa licença.**
 
 
 ## Instalação
