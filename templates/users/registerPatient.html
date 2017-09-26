@@ -18,9 +18,11 @@
               <div class="d-inline-block">
                   {% for field in forms.registration_patient_form %}
                      <div class="form-group">
-                          {{ field.label_tag }}
-                          <input  type="text" name="{{ field.name }}" class="rounded" id="{{ field.id_for_label }}" >
-                        {{ field.errors }}
+
+                       {{ field.label_tag }}
+                       <input  type="text" name="{{ field.name }}" class="rounded" id="{{ field.id_for_label }}" >
+                       {{ field.errors }}
+
                      </div>
                   {% endfor %}
               </div>
