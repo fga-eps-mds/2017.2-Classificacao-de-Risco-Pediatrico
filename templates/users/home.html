@@ -1,13 +1,14 @@
 {% extends 'layout/layout.html' %}
 
-{% block content %}
-
-    <p>Seja bem vindo {% if user.is_authenticated %}{{ user.get_username }}{% endif %}!</p>
-
+    {% block login-button %}
     {% if user.is_authenticated %}
-        <p><a href="{% url 'users:logout' %}">Logout</a>.</p>
-        {% else %}
-        <p><a href="{% url 'users:register_admin' %}">Cadastre-se</a>.</p>
-        <p><a href="{% url 'users:login' %}">Login</a>.</p>
+        <div class="welcome">
+          <p>Seja bem-vindo(a),
+            {{ user.name }}
+          </p>
+        <div class="logout">
+          <p><a href="{% url 'users:logout' %}">Logout</a></p>
+        </div>
+      </div>
     {% endif %}
-{% endblock %}
+    {% endblock %}
