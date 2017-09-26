@@ -2,6 +2,7 @@
     background: url('/static/img/bg_home.jpg') no-repeat;
     bottom: 0;
     left: 0;
+    opacity: 0.7;
     overflow: auto;
     padding: 3em;
     position: absolute;
@@ -37,12 +38,31 @@
   z-index: -1;
 }
 
+.display-4,
+.display-6 {
+    text-align: center;
+}
+
+
+
+.mainLogo {
+  margin-left: 37%;
+  margin-top: 2%;
+  margin-right: 3%;
+}
+
+.errortext {
+    display: block;
+    width: 330px;
+    height: auto;
+}
+
 .box {
     background-color: rgba(0,0,0,0.7);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     color: white;
-    margin-top: 5%;
-    margin-right: 3%;
+    margin-top: 3%;
+    margin-right: 36%;
     margin-left: 3%;
     padding: 20px;
     max-height: 37em;

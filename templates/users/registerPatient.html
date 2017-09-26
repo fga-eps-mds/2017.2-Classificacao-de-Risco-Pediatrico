@@ -11,16 +11,18 @@
 
 {% block content %}
     <div class="box rounded float-right">
-       <h1>Paciente Cadastro</h1>
+       <h1 class="display-6">Cadastro de Paciente</h1>
        <form role="form" class="form" method="POST">
               {% csrf_token %}
               {{ form.non_field_errors }}
               <div class="d-inline-block">
                   {% for field in forms.registration_patient_form %}
                      <div class="form-group">
+
                        {{ field.label_tag }}
                        <input  type="text" name="{{ field.name }}" class="rounded" id="{{ field.id_for_label }}" >
                        {{ field.errors }}
+
                      </div>
                   {% endfor %}
               </div>
