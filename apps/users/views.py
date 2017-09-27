@@ -74,7 +74,7 @@ def logout_view(request, *args, **kwargs):
     """
     Define the logout page
     """
-    kwargs['next_page'] = reverse('users:home')
+    kwargs['next_page'] = reverse('users:login')
     return logout(request, *args, **kwargs)
 
 
