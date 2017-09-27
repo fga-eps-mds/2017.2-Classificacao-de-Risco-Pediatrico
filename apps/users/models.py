@@ -1,3 +1,4 @@
+# Arquivo: apps/users/models.py
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.db import models
 from django.utils.translation import ugettext as _
@@ -5,6 +6,9 @@ from django.utils.translation import ugettext as _
 
 class UserManager(BaseUserManager):
     def create_user(self, *args, **kwargs):
+        """
+        Create a basic user
+        """
         email = kwargs["email"]
         email = self.normalize_email(email)
         password = kwargs["password"]
@@ -19,6 +23,9 @@ class UserManager(BaseUserManager):
         return user
 
     def create_superuser(self, *args, **kwargs):
+        """
+        Create a superuser
+        """
         user = self.create_user(**kwargs)
         user.is_superuser = True
         user.save(using=self._db)
@@ -76,9 +83,15 @@ class Staff(AbstractBaseUser):
     USERNAME_FIELD = 'email'
 
     def get_short_name(self):
+        """
+        Get the first name of an object
+        """
         pass
 
     def get_full_name(self):
+        """
+        Get full name of an object
+        """
         pass
 
 

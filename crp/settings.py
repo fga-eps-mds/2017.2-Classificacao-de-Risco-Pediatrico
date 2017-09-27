@@ -138,6 +138,8 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "crp/static"),
 ]
 
+LOGIN_REDIRECT_URL = ('..')
+
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
 
