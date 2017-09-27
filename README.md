@@ -35,11 +35,11 @@ Para contribuir com o projeto você deve possuir o docker, docker-compose e uma 
 
   - Faça as migrações pelo comando
 
-  `sudo docker-compose run web python makemigrations`
+  `sudo docker-compose run web python manage.py makemigrations`
 
   - Aplique as migrações pelo comando
 
-  `sudo docker-compose run web python migrate`
+  `sudo docker-compose run web python manage.py migrate`
 
   ## Rodando Aplicação
 
