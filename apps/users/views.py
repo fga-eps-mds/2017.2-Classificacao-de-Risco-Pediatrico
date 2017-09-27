@@ -292,5 +292,8 @@ def admin_view(request):
     return render(request, 'users/admin.html')
 
 
-
-
+def home_attendant_view(request):
+    """
+    return rendered text from homeAttendant
+    """
+    return render(request, 'users/homeAttendant.html')
