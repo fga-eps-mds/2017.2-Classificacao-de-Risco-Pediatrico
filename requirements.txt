@@ -7,3 +7,4 @@ flake8==3.4.1
 django-multi-form-view==2.0
 six==1.10.0
 django-bootstrap-form-horizontal==0.0.4
+Unipath==1.1
