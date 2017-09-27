@@ -1,0 +1,49 @@
+.admin-page {
+    background: url('/static/img/mesaTrabalho.jpg') no-repeat;
+    bottom: 0;
+    left: 0;
+     opacity: 0.99;
+    overflow: auto;
+    padding: 3em;
+    position: absolute;
+    right: 0;
+    top: 75px;
+    background-size: cover;
+    z-index: -1;
+}
+
+.col-md-4{
+    padding: 10px;
+}
+
+.container{
+    padding-top: 2% ;
+}
+
+.block{
+    background-color: rgba(255, 255 , 255, 0.80);
+    height: 200px;
+    width: 100%;
+    border-radius: 50px;
+
+}
+
+.block-title{
+    height: 30%;
+    width: 100%;
+    text-align: center;
+}
+
+.block-body{
+    height: 70%;
+    width: 100%;
+    text-align: center;
+}
+
+.bg_admin{
+    background: url(/static/img/mesaTrabalho.jpg) no-repeat;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+}
+

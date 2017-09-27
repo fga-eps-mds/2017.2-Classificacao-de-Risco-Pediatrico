@@ -34,7 +34,7 @@ def login_view(request, *args, **kwargs):
 
         if 'Recepcionista' == user_type:
             login(request, user)
-            return redirect("/user/login/receptionist")
+            return redirect("/user/home/receptionist/")
 
         if 'Admin' == user_type:
             login(request, user)
