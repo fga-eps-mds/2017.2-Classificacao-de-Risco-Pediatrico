@@ -19,7 +19,7 @@ O software terá como função classificar os pacientes em estados imediato,  ho
 Para contribuir com o projeto você deve possuir o docker, docker-compose e uma conta no github, após isso clone o projeto.
   - [Download docker](https://docs.docker.com/engine/installation/)
   - [Download docker-compose](https://docs.docker.com/compose/install/)
-  - Para instalar o git nos sistemas linux que utilizam o apt-get, utilize o comando
+  - Para instalar o git nos sistemas linux que utilizam o apt-get, utilize o comando:
 
   ``` sudo apt-get install git ```
 
@@ -37,11 +37,11 @@ Para contribuir com o projeto você deve possuir o docker, docker-compose e uma 
 
   - Faça as migrações pelo comando
 
-  `sudo docker-compose run web python makemigrations`
+  `sudo docker-compose run web python manage.py makemigrations`
 
   - Aplique as migrações pelo comando
 
-  `sudo docker-compose run web python migrate`
+  `sudo docker-compose run web python manage.py migrate`
 
   ## Rodando Aplicação
 
