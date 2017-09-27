@@ -290,3 +290,7 @@ def admin_view(request):
     return rendered text from homeReceptionist
     """
     return render(request, 'users/admin.html')
+
+
+
+

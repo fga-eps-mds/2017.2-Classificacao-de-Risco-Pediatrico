@@ -2,7 +2,6 @@
     background: url('/static/img/mesaTrabalho.jpg') no-repeat;
     bottom: 0;
     left: 0;
-     opacity: 0.99;
     overflow: auto;
     padding: 3em;
     position: absolute;
@@ -21,10 +20,12 @@
 }
 
 .block{
-    background-color: rgba(255, 255 , 255, 0.80);
+    background-color: rgba(255, 255 , 255, 0.75);
     height: 200px;
     width: 100%;
     border-radius: 50px;
+    border: 1px solid;
+    border-color: black;
 
 }
 
