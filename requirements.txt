@@ -13,5 +13,5 @@ radon==2.1.1
 coverage==4.4.1
 pylint==1.7.2
 coveralls==1.2.0
-pyalm==3.12
+pyyaml==3.12
 django-bootstrap-form-horizontal==0.0.4
