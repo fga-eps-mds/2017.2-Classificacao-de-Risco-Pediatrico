@@ -8,7 +8,8 @@ before_install:
   - docker-compose up --build -d
 script:
   - docker-compose run web python manage.py collectstatic
-  - docker-compose run web pytest
+  - docker-compose run web py.test --cov-report= --cov=apps
   - docker-compose run web flake8 --exclude test_settings.py,*/migrations/,manage.py .
 after_script:
+  - docker-compose run web coveralls
   - docker-compose down
