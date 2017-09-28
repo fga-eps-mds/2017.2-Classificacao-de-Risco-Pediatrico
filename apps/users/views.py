@@ -1,10 +1,12 @@
 # Arquivo: /apps/users/views.py
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from django.contrib.auth.views import login
 from django.contrib.auth.views import logout
 from django.core.urlresolvers import reverse
 from multi_form_view import MultiModelFormView
+
+from django.contrib.auth import authenticate
 
 from .forms import RegistrationAdminForm
 from .forms import RegistrationAttendantForm
@@ -20,9 +22,27 @@ def home(request):
 
 
 def login_view(request, *args, **kwargs):
-
     if request.user.is_authenticated():
         return HttpResponseRedirect(reverse('users:home'))
+
+    if request.method == "POST":
+        user_type = request.POST['user_type']
+        username = request.POST['username']
+        password = request.POST['password']
+
+        user = authenticate(request, username=username, password=password)
+
+        if 'Recepcionista' == user_type:
+            login(request, user)
+            return redirect("/user/home/receptionist/")
+
+        if 'Admin' == user_type:
+            login(request, user)
+            return redirect("/user/login/admin")
+
+        if 'Atendente' == user_type:
+            login(request, user)
+            return redirect("/user/login/attendant")
 
     kwargs['extra_context'] = {'next': reverse('users:home')}
     kwargs['template_name'] = 'users/login.html'
@@ -263,3 +283,17 @@ def home_receptionist_view(request):
     return rendered text from homeReceptionist
     """
     return render(request, 'users/homeReceptionist.html')
+
+
+def admin_view(request):
+    """
+    return rendered text from homeReceptionist
+    """
+    return render(request, 'users/admin.html')
+
+
+def home_attendant_view(request):
+    """
+    return rendered text from homeAttendant
+    """
+    return render(request, 'users/homeAttendant.html')

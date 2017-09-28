@@ -1,0 +1,346 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-09-27 00:21+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: apps/users/models.py:18
+msgid "O endereço de email não pode ser nulo"
+msgstr ""
+
+#: apps/users/models.py:61
+msgid "Nome"
+msgstr ""
+
+#: apps/users/models.py:70
+msgid "ID de usuário"
+msgstr ""
+
+#: apps/users/models.py:77
+msgid "Email do usuário"
+msgstr ""
+
+#: apps/users/models.py:112
+msgid "Nome do Responsável"
+msgstr ""
+
+#: apps/users/models.py:115
+msgid "Informe o nome do responsável"
+msgstr ""
+
+#: apps/users/models.py:119
+msgid "Data de Nascimento"
+msgstr ""
+
+#: apps/users/models.py:121
+msgid "Informe a data de Nascimento"
+msgstr ""
+
+#: apps/users/models.py:125
+msgid "CPF"
+msgstr ""
+
+#: apps/users/models.py:129
+msgid "Informe o CPF"
+msgstr ""
+
+#: apps/users/models.py:134
+msgid "Nome dos pais"
+msgstr ""
+
+#: apps/users/models.py:137
+msgid "Informe o nome dos pais"
+msgstr ""
+
+
+#, python-format
+msgid "%(name)s object with primary key %(key)r does not exist."
+msgstr "Não existe um objeto %(name)s com uma chave primaria %(key)r."
+
+msgid "Password changed successfully."
+msgstr "Senha alterada com sucesso."
+
+#, python-format
+msgid "Change password: %s"
+msgstr "Trocar senha: %s"
+
+msgid "Authentication and Authorization"
+msgstr "Autenticação e Autorização"
+
+msgid "password"
+msgstr "senha"
+
+msgid "last login"
+msgstr "última sessão"
+
+msgid "No password set."
+msgstr "Senha não definida."
+
+msgid "Invalid password format or unknown hashing algorithm."
+msgstr "Formato de senha inválido ou algorítmo de hash desconhecido."
+
+msgid "The two password fields didn't match."
+msgstr "Os campos de senha não são iguais."
+
+msgid "Password"
+msgstr "Senha"
+
+msgid "Password confirmation"
+msgstr "Confirmação de senha"
+
+msgid "Enter the same password as before, for verification."
+msgstr "Para verificação, digite a mesma senha que a digitada anteriormente."
+
+#, python-format
+msgid ""
+"Please enter a correct %(username)s and password. Note that both fields may "
+"be case-sensitive."
+msgstr ""
+"Por favor introduza %(username)s e senha corretos. Note que ambos campos "
+"diferenciam letras maiúsculas e minúsculas. "
+
+
+msgid "This account is inactive."
+msgstr "Esta conta está inativa."
+
+msgid "Email"
+msgstr "Email"
+
+msgid "New password"
+msgstr "Nova senha"
+
+msgid "New password confirmation"
+msgstr "Confirmação de nova senha"
+
+msgid "Your old password was entered incorrectly. Please enter it again."
+msgstr ""
+"Sua senha antiga está incorreta. Por favor, digite novamente "
+
+msgid "Old password"
+msgstr "Senha antiga"
+
+msgid "Password (again)"
+msgstr "Senha (de novo)"
+
+msgid "algorithm"
+msgstr "algorítmo"
+
+msgid "iterations"
+msgstr "iterações"
+
+msgid "salt"
+msgstr "salt"
+
+msgid "hash"
+msgstr "hash"
+
+msgid "variety"
+msgstr "variedade"
+
+msgid "version"
+msgstr "versão"
+
+msgid "memory cost"
+msgstr "custo de memoria"
+
+msgid "time cost"
+msgstr "custo de tempo"
+
+msgid "parallelism"
+msgstr "Paralelismo"
+
+msgid "work factor"
+msgstr "fator trabalho"
+
+msgid "checksum"
+msgstr "checksum"
+
+msgid "name"
+msgstr "nome"
+
+msgid "content type"
+msgstr "tipo de conteúdo"
+
+msgid "codename"
+msgstr "codenome"
+
+msgid "permission"
+msgstr "permissão"
+
+msgid "permissions"
+msgstr "permissões"
+
+msgid "group"
+msgstr "grupo"
+
+msgid "groups"
+msgstr "grupos"
+
+msgid "superuser status"
+msgstr "status de superusuário"
+
+msgid ""
+"Designates that this user has all permissions without explicitly assigning "
+"them."
+msgstr ""
+"Indica que este usuário possui todas permissões sem que seja necessário"
+"atribuí-las explicitamente."
+
+msgid ""
+"The groups this user belongs to. A user will get all permissions granted to "
+"each of their groups."
+msgstr ""
+"Os grupos a que pertencem este usuário. Um usuário obterá todas permissões "
+"concedidas para cada um de seu grupo."
+
+msgid "user permissions"
+msgstr "permissões de usuário"
+
+msgid "Specific permissions for this user."
+msgstr "permissões específicas para este usuário"
+
+msgid "username"
+msgstr "nome de usuário"
+
+msgid "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only."
+msgstr ""
+"Obligatorio. Longitud máxima 150 caracteres alfanuméricos. Letras, dígitos y "
+"@/./+/-/_ únicamente."
+
+msgid "A user with that username already exists."
+msgstr "Já existe um usuário com esse nome."
+
+msgid "first name"
+msgstr "nome"
+
+msgid "last name"
+msgstr "sobrenome"
+
+msgid "email address"
+msgstr "endereço de email"
+
+msgid "staff status"
+msgstr "é staff"
+
+msgid "Designates whether the user can log into this admin site."
+msgstr "Indica se o usuário pode entrar nesse site de administracão."
+
+msgid "active"
+msgstr "ativo"
+
+msgid ""
+"Designates whether this user should be treated as active. Unselect this "
+"instead of deleting accounts."
+msgstr ""
+"Indica se o usuário deve ser tratado como um usuário ativo. Desmarque este "
+"campo em lugar de eliminar usuários."
+
+msgid "date joined"
+msgstr "data de criação"
+
+msgid "user"
+msgstr "usuário"
+
+msgid "users"
+msgstr "usuários"
+
+#, python-format
+msgid ""
+"This password is too short. It must contain at least %(min_length)d "
+"character."
+msgid_plural ""
+"This password is too short. It must contain at least %(min_length)d "
+"characters."
+msgstr[0] ""
+"Senha muito curta. Deve conter ao menos %(min_length)d caractere."
+msgstr[1] ""
+"Senha muito curta. Deve conter ao menos %(min_length)d caracteres."
+
+#, python-format
+msgid "Your password must contain at least %(min_length)d character."
+msgid_plural "Your password must contain at least %(min_length)d characters."
+msgstr[0] ""
+"Sua senha é muito curta. Deve conter ao menos %(min_length)d caracter."
+msgstr[1] ""
+"Sua senha é muito curta. Deve conter ao menos %(min_length)d caracteres."
+
+#, python-format
+msgid "The password is too similar to the %(verbose_name)s."
+msgstr "A senha é muito parecida com o  %(verbose_name)s."
+
+msgid "Your password can't be too similar to your other personal information."
+msgstr "Sua senha não pude ser similar a outra informação pessoal."
+
+msgid "This password is too common."
+msgstr "Esta senha é muito comum."
+
+msgid "Your password can't be a commonly used password."
+msgstr "Sua senha não pode ser uma senha comum."
+
+msgid "This password is entirely numeric."
+msgstr "Esta senha é totalmente numérica."
+
+msgid "Your password can't be entirely numeric."
+msgstr "Sua senha não puede ser inteiramente numérica."
+
+#, python-format
+msgid "Password reset on %(site_name)s"
+msgstr "Reestablecimiento de senha em %(site_name)s "
+
+msgid ""
+"Enter a valid username. This value may contain only English letters, "
+"numbers, and @/./+/-/_ characters."
+msgstr ""
+"Digite um nome de usuário válido. Pode conter somente letras em "
+"inglés, números e caracteres @ /. / + / - / _."
+
+msgid ""
+"Enter a valid username. This value may contain only letters, numbers, and "
+"@/./+/-/_ characters."
+msgstr ""
+"Digite um nome de usuário válido. Pode conter somente letras, "
+"números e caracteres @ /. / + / - / _."
+
+msgid "Logged out"
+msgstr "sessão finalizada"
+
+msgid "Password reset"
+msgstr "Trocar senha"
+
+msgid "Password reset sent"
+msgstr "Troca de senha enviada"
+
+msgid "Enter new password"
+msgstr "Introduza a nova senha"
+
+msgid "Password reset unsuccessful"
+msgstr "Falha na troca de senha "
+
+msgid "Password reset complete"
+msgstr "Troca de senha completa"
+
+msgid "Password change"
+msgstr "Alterar de senha"
+
+msgid "Password change successful"
+msgstr "Troca de senha completada"
+
+msgid "This field is required"
+msgstr "Esse campo é obrigatório"
+
+msgid "Please enter an email address"
+msgstr "Por favor digite um endereço de email"
