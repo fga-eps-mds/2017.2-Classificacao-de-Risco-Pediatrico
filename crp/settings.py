@@ -26,6 +26,7 @@ SECRET_KEY = "qsp5!^&_uvj2&^4d_1z+=*ws!ylz1krq)z!u_&c0x_uvuwv^90"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -40,6 +41,7 @@ INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'apps.users'
+
 ]
 
 MIDDLEWARE = [
@@ -125,10 +127,10 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # Allow all host headers
 ALLOWED_HOSTS = ['*']
 
-# Static files (CSS, JavaScript, Images)
+# Static files (CSS, Java, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
-STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
+STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'staticfiles')
 STATIC_URL = '/static/'
 
 # Extra places for collectstatic to find static files.
@@ -138,6 +140,5 @@ STATICFILES_DIRS = [
 
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 AUTH_USER_MODEL = 'users.Admin'
