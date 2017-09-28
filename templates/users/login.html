@@ -19,18 +19,23 @@
 <div class="boxLogin">
   <div class="box rounded float-right">
    <h1 class="display-4">Login</h1><br />
-   <form role="form" class="form" method="POST" action="{{ request.path }}{% if next %}?next={{ next }}{% endif %}">
+   <form role="form" class="form" method="POST" >
       {% csrf_token %}
-        {{ form.non_field_errors }}
+
+       <input type="hidden" name="user_type" id="user_type" value="Admin">
+       <div class="errortext">
+         {{ form.non_field_errors }}
+       </div>
+
       <ul class="nav nav-tabs" id="crp-tab" role="tablist">
          <li class="nav-item">
-            <a class="nav-link active" data-toggle="tab" href="#home" >Admin</a>
+            <a id='tab1' class="nav-link active" data-toggle="tab" href="#home">Admin</a>
          </li>
          <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#profile" role="tab">Atendente</a>
+            <a id='tab2' class="nav-link" data-toggle="tab" href="#profile" role="tab">Atendente</a>
          </li>
          <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#messages" role="tab">Recepcionista</a>
+            <a id='tab3' class="nav-link" data-toggle="tab" href="#messages" role="tab">Recepcionista</a>
          </li>
       </ul>
       <div class="tab-content">
@@ -45,12 +50,12 @@
       <div id="login-form-group">
          <div class="form-group">
             {{ form.username.label_tag }}
-            <input  type="email" name="{{ form.username.name }}" class="rounded" id="{{ form.username.id_for_label }}"  placeholder="exemplo@exemplo.com">
+            <input  type="email" name="{{ form.username.name }}" class="rounded" id="{{ form.username.id_for_label }}"  placeholder="exemplo@exemplo.com" required>
             {{ field.errors }}
          </div>
          <div class="form-group">
             {{ form.password.label_tag }}
-            <input  type="password" name="{{ form.password.name }}" class="rounded" id="{{ form.password.id_for_label }}"  placeholder="*******">
+            <input  type="password" name="{{ form.password.name }}" class="rounded" id="{{ form.password.id_for_label }}"  placeholder="*******" required>
             {{ field.errors }}
          </div>
       </div>
@@ -58,4 +63,20 @@
    </form>
  </div>
 </div>
+
+    <script>
+        (function() {
+            var user_type = document.querySelector('#user_type');
+            var admin = document.querySelector('#tab1');
+            var aten = document.querySelector('#tab2');
+            var recep = document.querySelector('#tab3');
+
+            admin.addEventListener('click', () => user_type.value = "Admin");
+            aten.addEventListener('click', () => user_type.value = "Atendente");
+            recep.addEventListener('click', () => user_type.value = "Recepcionista");
+        }) ();
+
+
+    </script>
+
 {% endblock %}
