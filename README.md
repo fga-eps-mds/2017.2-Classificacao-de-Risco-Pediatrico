@@ -1,5 +1,6 @@
 # Classificação de risco na pediatria
-
+  [![Issue Count](https://codeclimate.com/github/fga-gpp-mds/2017.2-Classificacao-de-Risco-Pediatrico/badges/issue_count.svg)](https://codeclimate.com/github/fga-gpp-mds/2017.2-Classificacao-de-Risco-Pediatrico)
+  [![Code Climate](https://codeclimate.com/github/fga-gpp-mds/2017.2-Classificacao-de-Risco-Pediatrico/badges/gpa.svg)](https://codeclimate.com/github/fga-gpp-mds/2017.2-Classificacao-de-Risco-Pediatrico)
   [![Coverage Status](https://coveralls.io/repos/github/fga-gpp-mds/2017.2-Classificacao-de-Risco-Pediatrico/badge.svg?branch=devel)](https://coveralls.io/github/fga-gpp-mds/2017.2-Classificacao-de-Risco-Pediatrico?branch=devel)
   [![Build Status](https://travis-ci.org/fga-gpp-mds/2017.2-Classificacao-de-Risco-Pediatrico.svg?branch=devel)](https://travis-ci.org/fga-gpp-mds/2017.2-Classificacao-de-Risco-Pediatrico)
   [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
