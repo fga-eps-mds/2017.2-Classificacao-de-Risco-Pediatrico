@@ -9,7 +9,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
-from unipath import Path
 import os
 import dj_database_url
 
@@ -84,9 +83,10 @@ WSGI_APPLICATION = 'crp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'HOST': 'db',
+        'NAME': 'df7v3hg7nkfjj',
+        'USER': 'tenkhaldbstfro',
+        'PASSWORD': '36dc1227fb0f75ce1cbc37258cf3b62cb7231442f22437d1df3a9b5dd88ecce9',
+        'HOST': 'ec2-184-73-189-190.compute-1.amazonaws.com',
         'PORT': '5432',
     }
 }
@@ -113,19 +113,11 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
-LANGUAGE_CODE = 'pt-br'
+LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
-
-PROJECT_DIR = Path(__file__).parent
-
-LANGUAGES = (
-    ('en', u'English'),
-    ('pt-br', u'Português'),
-)
-LOCALE_PATHS = (PROJECT_DIR.child('locale'),)
 
 # Change 'default' database configuration with $DATABASE_URL.
 DATABASES['default'].update(dj_database_url.config(conn_max_age=500))
@@ -147,7 +139,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "crp/static"),
 ]
 
-LOGIN_REDIRECT_URL = ('..')
+LOGIN_REDIRECT_URL = '..'
 
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/

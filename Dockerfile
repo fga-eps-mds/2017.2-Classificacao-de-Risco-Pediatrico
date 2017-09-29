@@ -6,6 +6,13 @@ WORKDIR /code
 
 COPY requirements.txt /code/
 RUN pip install -r requirements.txt
-RUN apt-get update && apt-get install -y gettext libgettextpo-dev
 
 COPY . /code/
+
+RUN useradd -m myuser
+USER myuser
+
+RUN python manage.py makemigrations && python manage.py migrate
+EXPOSE 8000
+
+CMD python manage.py runserver 0.0.0.0:$PORT
