@@ -23,6 +23,8 @@ def risk_rating_view(request):
             'brincando': brincando
         }
 
+        print(patient)
+
     return render(request, 'risk_rating/risk_rating.html')
 
 
