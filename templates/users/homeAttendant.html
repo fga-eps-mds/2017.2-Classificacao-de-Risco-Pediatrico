@@ -7,6 +7,10 @@
 {% block dropdown-button %}
 {% endblock %}
 
+{% block background %}
+<div class="register-page"></div>
+{% endblock %}
+
 {% block brand %}
   {% if user.is_authenticated %}
     <a class="navbar-brand" href="{% url 'users:home' %}">
@@ -22,16 +26,13 @@
 
 {% block head %}
     <link rel="stylesheet" href="{% static "css/main.css" %}">
+    <link rel="stylesheet" href="{% static "css/mainAttendant.css" %}">
 {% endblock %}
 
 {% block content %}
-    <div class="box rounded float-right">
-        <h1>Paciente</h1>
-        <p>Nome: {{ patient.name }}</p>
-        <p>Nascimento: {{ patient.birth_date }}</p>
-        <p>CPF: {{ patient.cpf }}</p>
-        <p>Endereço: {{ patient.uf }}, {{ patient.city }}, {{ patient.neighborhood }}, {{ patient.street }}, {{ patient.block }} e {{ patient.number }}</p>
+    <div class="register_attendant_box col-md-6">
+        <div>
 
-        <button class="btn btn-outline-secondary float-right"name='action' value='address' type="submit">Editar Perfil</button>
+        </div>
     </div>
 {% endblock %}
