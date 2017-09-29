@@ -1,0 +1,10 @@
+ID,Gravidade,Idade,Prostrado,Dispneico,Hist Febre,Irritado,Inconsciente,Pálido,Disúria,Convulsão,Cefaleia,Brincando
+1,Ambulatorial,8,Não,Não,Sim,Não,Não,Não,Não,Não,Não,Sim
+2,Grave,1,Não,Não,Sim,Não,Sim,Não,Não,Não,Não,Não
+3,Grave,10,Sim,Sim,Sim,Sim,Não,Sim,Não,Não,Não,Não
+4,Ambulatorial,20,Sim,Não,Sim,Não,Não,Não,Não,Não,Não,Não
+5,Ambulatorial,60,Não,Não,Não,Não,Não,Não,Não,Não,Sim,Sim
+6,Grave,2,Sim,Não,Não,Sim,Não,Sim,Sim,Não,Não,Não
+7,Grave,70,Sim,Sim,Sim,Sim,Não,Não,Não,Sim,Sim,Não
+8,Grave,24,Sim,Sim,Sim,Não,Não,Sim,Não,Não,Não,Não
+9,Grave,70,Sim,Sim,Sim,Sim,Não,Sim,Não,Não,Sim,Não

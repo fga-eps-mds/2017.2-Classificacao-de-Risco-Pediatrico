@@ -12,52 +12,53 @@
 {% block content %}
 <div class="box rounded float-right">
    <h1>Sintomas do paciente:</h1>
-   <form>
+   <form method="POST">
+    {% csrf_token %}
       <div class="form-check">
          <label class="form-check-label">
-         <input class="form-check-input" type="checkbox" value="">
+         <input class="form-check-input" type="checkbox" name="prostrado">
          Prostrado
          </label>
       </div>
       <div class="form-check">
          <label class="form-check-label">
-         <input class="form-check-input" type="checkbox" value="">
+         <input class="form-check-input" type="checkbox" name="respiracao">
          Má respiração
          </label>
       </div>
       <div class="form-check">
          <label class="form-check-label">
-         <input class="form-check-input" type="checkbox" value="">
+         <input class="form-check-input" type="checkbox" name="febre">
          Frebre
          </label>
       </div>
       <div class="form-check">
          <label class="form-check-label">
-         <input class="form-check-input" type="checkbox" value="">
+         <input class="form-check-input" type="checkbox" name="irritado">
          Irritado
          </label>
       </div>
       <div class="form-check">
          <label class="form-check-label">
-         <input class="form-check-input" type="checkbox" value="">
+         <input class="form-check-input" type="checkbox" name="convulsao">
          Convulsão recente
          </label>
       </div>
       <div class="form-check">
          <label class="form-check-label">
-         <input class="form-check-input" type="checkbox" value="">
+         <input class="form-check-input" type="checkbox" name="palido">
          Pálido
          </label>
       </div>
       <div class="form-check">
          <label class="form-check-label">
-         <input class="form-check-input" type="checkbox" value="">
+         <input class="form-check-input" type="checkbox" name="cabeca">
          Dor de cabeça
          </label>
       </div>
       <div class="form-check">
          <label class="form-check-label">
-         <input class="form-check-input" type="checkbox" value="">
+         <input class="form-check-input" type="checkbox" name="brincando">
          Brincando
          </label>
       </div>
