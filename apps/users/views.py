@@ -297,3 +297,8 @@ def home_attendant_view(request):
     return rendered text from homeAttendant
     """
     return render(request, 'users/homeAttendant.html')
+
+def manage_accounts_view(request):
+    receptionists = Receptionist.objects.all()
+    attendants = Attendant.objects.all()
+    return render(request, 'users/manageAccounts.html', {'receptionists':receptionists, 'attendants':attendants})

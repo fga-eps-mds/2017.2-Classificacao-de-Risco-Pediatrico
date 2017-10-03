@@ -23,5 +23,7 @@ urlpatterns = [
     url(r'^home/receptionist/$', views.home_receptionist_view,
         name="home_receptionist"),
     url(r'^home/attendant/$', views.home_attendant_view,
-        name="home_receptionist")
+        name="home_receptionist"),
+    url(r'^manage/accounts/$', views.manage_accounts_view,
+        name="manage_accounts")
 ]
