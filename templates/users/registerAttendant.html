@@ -9,30 +9,6 @@
     <link rel="stylesheet" href="{% static "css/main.css" %}">
 {% endblock %}
 
-{% block brand %}
-  {% if user.is_authenticated %}
-    <a class="navbar-brand" href="{% url 'users:home' %}">
-      <img src="/static/img/LogoCRP.png" width="100" height="50" alt="">
-    </a>
-    {% else %}
-    <a class="navbar-brand" href="{% url 'users:login' %}">
-      <img src="/static/img/LogoCRP.png" width="100" height="50" alt="">
-    </a>
-  {% endif %}
-{% endblock %}
-
-{% block login-button %}
-{% if user.is_authenticated %}
-    <div class="welcome">
-      <p>Seja bem-vindo(a),
-        {{ user.name }}
-      </p>
-    <div class="logout">
-      <p><a href="{% url 'users:logout' %}">Logout</a></p>
-    </div>
-  </div>
-{% endif %}
-{% endblock %}
 
 {% block content %}
     <div class="box rounded float-right">
@@ -75,34 +51,6 @@
                   {% endfor %}
               </div>
           <button class="btn btn-outline-secondary" name='action' value='address' type="submit">Cadastrar</button>
-       </form>
-       <!-- <form class="form-group" method="POST">
-          {% csrf_token %}
-          {{ form.non_field_errors }}
-          {% for field in form %}
-          <div id="login-form-group">
-             <div class="form-group">
-                {% if field.name != 'password1' and field.name != 'password2' %}
-                    {{ field.label_tag }}
-                {% elif field.name != 'password2' %}
-                    <label for="{{ field.id_for_label }}">Senha:</label>
-                {% else %}
-                    <label for="{{ field.id_for_label }}">Confirmar Senha:</label>
-                {% endif %}
-
-                {% if field.name != 'password1' and field.name != 'password2' and field.name != 'email' %}
-                    <input  type="text" name="{{ field.name }}" class="rounded" id="{{ field.id_for_label }}" >
-                {% elif field.name != 'email' %}
-                    <input  type="password" name="{{ field.name }}" class="rounded" id="{{ field.id_for_label }}" >
-                {% else %}
-                    <input  type="email" name="{{ field.name }}" class="rounded" id="{{ field.id_for_label }}" >
-                {% endif %}
-
-                {{ field.errors }}
-             </div>
-          </div>
-          {% endfor %}
-          <button class="btn btn-outline-secondary float-right"name='action' value='address' type="submit">Cadastrar</button>
-       </form> -->
+       </form>       
     </div>
 {% endblock %}
