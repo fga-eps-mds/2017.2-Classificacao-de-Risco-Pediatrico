@@ -302,3 +302,8 @@ def manage_accounts_view(request):
     receptionists = Receptionist.objects.all()
     attendants = Attendant.objects.all()
     return render(request, 'users/manageAccounts.html', {'receptionists':receptionists, 'attendants':attendants})
+
+def manage_patients_view(request):
+    patients = Patient.objects.all()
+    return render(request, 'users/managePatients.html', {'patients': patients})
+
