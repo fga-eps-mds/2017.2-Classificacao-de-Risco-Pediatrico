@@ -79,6 +79,17 @@ class Staff(AbstractBaseUser):
         default=''
     )
 
+    PROFILE_TYPES = (
+        (1, 'Recepcionista'),
+        (2, 'Atendente'),
+    )
+
+    profile = models.IntegerField(
+        verbose_name=_('Perfil'),
+        choices=PROFILE_TYPES,
+        default=0
+    )
+
     is_superuser = False
     USERNAME_FIELD = 'email'
 
@@ -101,7 +112,6 @@ class Admin(Staff, Person):
 
 class Attendant(Staff, Person):
     objects = UserManager()
-
 
 class Receptionist(Staff, Person):
     objects = UserManager()

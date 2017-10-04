@@ -14,19 +14,19 @@ class AddressForm(forms.ModelForm):
 class RegistrationReceptionistForm(UserCreationForm):
     class Meta:
         model = Receptionist
-        fields = ['name', 'email', 'id_user']
+        fields = ['name', 'email', 'id_user', 'profile']
 
 
 class RegistrationAttendantForm(UserCreationForm):
     class Meta:
         model = Attendant
-        fields = ['name', 'email', 'id_user']
+        fields = ['name', 'email', 'id_user', 'profile']
 
 
 class RegistrationAdminForm(UserCreationForm):
     class Meta:
         model = Admin
-        fields = ['name', 'email', 'id_user']
+        fields = ['name', 'email', 'id_user', 'profile']
 
 
 class RegistrationPatientForm(forms.ModelForm):

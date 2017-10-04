@@ -26,23 +26,29 @@ def login_view(request, *args, **kwargs):
         return HttpResponseRedirect(reverse('users:home'))
 
     if request.method == "POST":
-        user_type = request.POST['user_type']
         username = request.POST['username']
         password = request.POST['password']
 
-        user = authenticate(request, username=username, password=password)
+        user = authenticate(username=username, password=password)
 
-        if 'Recepcionista' == user_type:
-            login(request, user)
-            return redirect("/user/home/receptionist/")
+        print( username + " " + password)
 
-        if 'Admin' == user_type:
-            login(request, user)
-            return redirect("/user/login/admin")
+        if user is not None:
+            if user.is_superuser:
+                login(request, user)
+                return redirect("/user/login/admin")
 
-        if 'Atendente' == user_type:
-            login(request, user)
-            return redirect("/user/login/attendant")
+            if user.profile == 1:
+                login(request, user)
+                return redirect("/user/home/receptionist/")
+
+            if user.profile == 2:
+                login(request, user)
+                return redirect("/user/login/attendant")
+        else:
+            kwargs['extra_context'] = {'next': reverse('users:home'), 'errors':'Usuário e/ou senha inválido.'}
+            kwargs['template_name'] = 'users/login.html'
+            return login(request, *args, **kwargs)
 
     kwargs['extra_context'] = {'next': reverse('users:home')}
     kwargs['template_name'] = 'users/login.html'
@@ -84,7 +90,7 @@ class RegistrationAdminView(MultiModelFormView):
         'address_form': AddressForm,
     }
     record_id = None
-    template_name = 'users/registerAdmin.html'
+    template_name = 'users/registerProfile.html'
 
     def get_form_kwargs(self):
         """
