@@ -31,7 +31,7 @@ def login_view(request, *args, **kwargs):
 
         user = authenticate(username=username, password=password)
 
-        print( username + " " + password)
+        print(username + " " + password)
 
         if user is not None:
             if user.is_superuser:
@@ -44,7 +44,7 @@ def login_view(request, *args, **kwargs):
 
             if user.profile == 2:
                 login(request, user)
-                return redirect("/user/login/attendant")
+                return redirect("/user/login/admin")
         else:
             kwargs['extra_context'] = {'next': reverse('users:home'), 'errors':'Usuário e/ou senha inválido.'}
             kwargs['template_name'] = 'users/login.html'

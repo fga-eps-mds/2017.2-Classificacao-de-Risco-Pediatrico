@@ -66,6 +66,8 @@ class Person(models.Model):
 
 class Staff(AbstractBaseUser):
 
+    objects = UserManager();
+
     id_user = models.CharField(
         verbose_name=_('ID de usuário'),
         max_length=150,
@@ -112,6 +114,7 @@ class Admin(Staff, Person):
 
 class Attendant(Staff, Person):
     objects = UserManager()
+
 
 class Receptionist(Staff, Person):
     objects = UserManager()

@@ -23,5 +23,5 @@ urlpatterns = [
     url(r'^home/receptionist/$', views.home_receptionist_view,
         name="home_receptionist"),
     url(r'^home/attendant/$', views.home_attendant_view,
-        name="home_receptionist")
+        name="home_attendant")
 ]
