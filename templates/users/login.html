@@ -20,7 +20,7 @@
    <form role="form" class="form" method="POST" >
       {% csrf_token %}
 
-       <input type="hidden" name="user_type" id="user_type" value="Admin">
+       <input type="hidden" name="user_type" id="user_type" value="Staff">
        {% if errors %}
            <div class="errortext">
              {{ errors }}
@@ -43,7 +43,5 @@
    </form>
  </div>
 </div>
-
-    </script>
 
 {% endblock %}

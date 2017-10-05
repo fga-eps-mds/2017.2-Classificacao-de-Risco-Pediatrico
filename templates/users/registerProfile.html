@@ -11,13 +11,13 @@
 
 {% block content %}
     <div class="box rounded float-right">
-       <h1 class="display-6">Cadastro de Atendente</h1>
-       <p class="description"> Informe os dados do novo atendente </p>
+       <h1 class="display-6">Cadastro de Funcionario</h1>
+       <p class="description"> Informe os dados do novo funcionario </p>
        <form role="form" class="form" method="POST">
              {% csrf_token %}
              {{ form.non_field_errors }}
               <div class="d-inline-block">
-                  {% for field in forms.registration_attendant_form %}
+                  {% for field in forms.registration_staff_form %}
                      <div class="form-group">
 
 

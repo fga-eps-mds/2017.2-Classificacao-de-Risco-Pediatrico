@@ -53,20 +53,17 @@ class Address(models.Model):
                               blank=False)
 
 
-class Person(models.Model):
-    class Meta:
-        abstract = True
+# Classe dos usuarios possui atendente e recepcionista
+
+class Staff(AbstractBaseUser):
+
+    objects = UserManager();
 
     name = models.CharField(
         verbose_name=_('Nome'),
         max_length=150,
         blank=False,
     )
-
-
-class Staff(AbstractBaseUser):
-
-    objects = UserManager();
 
     id_user = models.CharField(
         verbose_name=_('ID de usuário'),
@@ -108,19 +105,14 @@ class Staff(AbstractBaseUser):
         pass
 
 
-class Admin(Staff, Person):
-    objects = UserManager()
+class Patient(models.Model):
 
+    name = models.CharField(
+        verbose_name=_('Nome'),
+        max_length=150,
+        blank=False,
+    )
 
-class Attendant(Staff, Person):
-    objects = UserManager()
-
-
-class Receptionist(Staff, Person):
-    objects = UserManager()
-
-
-class Patient(Person):
     guardian = models.CharField(
         verbose_name=_('Nome do Responsável'),
         max_length=50,
