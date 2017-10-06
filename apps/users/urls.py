@@ -22,5 +22,9 @@ urlpatterns = [
     url(r'^home/attendant/$', views.home_attendant_view,
         name="home_attendant"),
     url(r'^accounts/$', views.manage_accounts_view,
-        name="manage_accounts")
+        name="manage_accounts"),
+    url(r'^accounts/edit/(?P<id_user>\d+)/$', views.edit_accounts_view,
+        name="edit_acconts")
+    #url(r'^staff/remove/(?P<id_user>\d+)/$', views.staff_remove,
+    #    name="staff_remove")
 ]

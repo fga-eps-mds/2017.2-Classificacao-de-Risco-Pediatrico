@@ -190,3 +190,14 @@ def home_attendant_view(request):
 def manage_accounts_view(request):
     staffs = Staff.objects.all()
     return render(request, 'users/manageAccounts.html', { 'staffs':staffs })
+
+
+def edit_accounts_view(request, id_user):
+    staff = Staff.objects.filter(id_user=id_user)[0]
+    return render(request, 'users/editAccounts.html', { 'staffs':staffs })
+"""
+def staff_remove(request, id_user):
+    staff = Staff.objects.filter(id_user=id_user)[0]
+    staff.delete()
+    return HttpResponseRedirect(reverse("{% url 'users:manage_accounts' %}"))
+"""
