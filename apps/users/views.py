@@ -195,9 +195,8 @@ def manage_accounts_view(request):
 def edit_accounts_view(request, id_user):
     staff = Staff.objects.filter(id_user=id_user)[0]
     return render(request, 'users/editAccounts.html', { 'staffs':staffs })
-"""
+
 def staff_remove(request, id_user):
-    staff = Staff.objects.filter(id_user=id_user)[0]
+    staff = Staff.objects.filter(id_user=id_user)
     staff.delete()
-    return HttpResponseRedirect(reverse("{% url 'users:manage_accounts' %}"))
-"""
+    return HttpResponseRedirect(reverse('users:manage_accounts'))

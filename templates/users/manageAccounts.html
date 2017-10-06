@@ -31,13 +31,15 @@
           <td>{{ staff.name }}</td>
           <td>
             {% if staff.profile == 1 %}
-              Recepcionista 
+              Recepcionista
             {% else %}
-              Atendente 
+              Atendente
             {% endif %}
           </td>
           <td><a href="edit/{{ staff.id_user }}"><button type="button" class="editButton"></button></a></td>
-          <td><a href="#"--><button type="button" class="deleteButton" ></a></button></td>
+          <td><a class="deleteButton" button type="button"
+                  onclick="return confirm('Voce tem certeza que deseja deletar este usuário?"
+                  href="{% url 'users:staff_remove' staff.id_user %}"></a></button></td>
         </tr>
       {% endfor %}
     </table>
