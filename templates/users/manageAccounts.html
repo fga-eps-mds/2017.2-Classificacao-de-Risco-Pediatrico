@@ -23,20 +23,11 @@
       <th>Editar</th>
       <th>Deletar</th>
     </tr>
-      {% for receptionist in receptionists %}
+      {% for staff in staffs %}
         <tr>
-          <td>{{ receptionist.id_user}}</td>
-          <td>{{ receptionist.name }}</td>
-          <td>Recepcionista</td>
-          <td><a href="#"><button type="button" class="editButton"></button></a></td>
-          <td><button type="button" class="deleteButton"></button></td>
-        </tr>
-      {% endfor %}
-      {% for attendant in attendants %}
-        <tr>
-          <td>{{ attendant.id_user}}</td>
-          <td>{{ attendant.name }}</td>
-          <td>Atendente</td>
+          <td>{{ staff.id_user}}</td>
+          <td>{{ staff.name }}</td>
+          <td>Funcion</td>
           <td><a href="#"><button type="button" class="editButton"></button></a></td>
           <td><button type="button" class="deleteButton"></button></td>
         </tr>
