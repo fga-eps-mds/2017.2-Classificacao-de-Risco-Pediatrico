@@ -28,23 +28,11 @@
       {% endif %}
 
       <ul class="navbar-nav ml-auto">
-         <li>
            {% if not user.is_authenticated %}
-            <div class="nav-item dropdown">
-               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-               Cadastro
-               </a>
-               <for class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="/user/register/admin">Administrador</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="/user/register/attendant">Atendente</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="/user/register/receptionist">Recepcionista</a>
-               </for>
-            </div>
-         </li>
-         {% else %}
-         {% endif %}
+               <li>
+                   <a href="/user/register/profile">Cadastre-se</a>
+               </li>
+           {% endif %}
       </ul>
    </div>
 </nav>

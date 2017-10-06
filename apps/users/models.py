@@ -53,18 +53,17 @@ class Address(models.Model):
                               blank=False)
 
 
-class Person(models.Model):
-    class Meta:
-        abstract = True
+# Classe dos usuarios possui atendente e recepcionista
+
+class Staff(AbstractBaseUser):
+
+    objects = UserManager();
 
     name = models.CharField(
         verbose_name=_('Nome'),
         max_length=150,
         blank=False,
     )
-
-
-class Staff(AbstractBaseUser):
 
     id_user = models.CharField(
         verbose_name=_('ID de usuário'),
@@ -77,6 +76,17 @@ class Staff(AbstractBaseUser):
         verbose_name=_('Email do usuário'),
         unique=True,
         default=''
+    )
+
+    PROFILE_TYPES = (
+        (1, 'Recepcionista'),
+        (2, 'Atendente'),
+    )
+
+    profile = models.IntegerField(
+        verbose_name=_('Perfil'),
+        choices=PROFILE_TYPES,
+        default=0
     )
 
     is_superuser = False
@@ -95,19 +105,14 @@ class Staff(AbstractBaseUser):
         pass
 
 
-class Admin(Staff, Person):
-    objects = UserManager()
+class Patient(models.Model):
 
+    name = models.CharField(
+        verbose_name=_('Nome'),
+        max_length=150,
+        blank=False,
+    )
 
-class Attendant(Staff, Person):
-    objects = UserManager()
-
-
-class Receptionist(Staff, Person):
-    objects = UserManager()
-
-
-class Patient(Person):
     guardian = models.CharField(
         verbose_name=_('Nome do Responsável'),
         max_length=50,
