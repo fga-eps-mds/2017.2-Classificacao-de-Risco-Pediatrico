@@ -14,36 +14,44 @@
 {% endblock %}
 
 
+{% block js %}
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+    <script src="{% static "js/manageAccounts.js" %}"></script>
+{% endblock %}
+
 {% block content %}
   <div class="box rounded float-right">
     <h1>Listagem das contas</h1>
-    <input type="text" name="search">
-    <a href="{{ search }}"><input type="submit" name="submit" value="Pesquisa"></a>
-    <table class="manageAccounts table table-striped table-bordered">
-    <tr>
-      <th>ID</th>
-      <th>Nome</th>
-      <th>Função</th>
-      <th>Editar</th>
-      <th>Deletar</th>
-    </tr>
-      {% for staff in staffs %}
-        <tr>
-          <td>{{ staff.id_user}}</td>
-          <td>{{ staff.name }}</td>
-          <td>
-            {% if staff.profile == 1 %}
-              Recepcionista
-            {% else %}
-              Atendente
-            {% endif %}
-          </td>
-          <td><a href="edit/{{ staff.id_user }}"><button type="button" class="editButton"></button></a></td>
-          <td><a class="deleteButton" button type="button"
-                  onclick="return confirm('Voce tem certeza que deseja deletar este usuário?"
-                  href="{% url 'users:staff_remove' staff.id_user %}"></a></td>
-        </tr>
-      {% endfor %}
+
+    <table id="example" class="display" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nome</th>
+              <th>Função</th>
+              <th>Editar</th>
+              <th>Deletar</th>
+            </tr>
+        </thead>
+        <tbody>
+          {% for staff in staffs %}
+              <tr>
+                  <td>{{ staff.id_user}}</td>
+                  <td>{{ staff.name }}</td>
+                  <td>
+                    {% if staff.profile == 1 %}
+                      Recepcionista
+                    {% else %}
+                      Atendente
+                    {% endif %}
+                  </td>
+                  <td><a href="edit/{{ staff.id_user }}"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
+                  <td><a href="{% url 'users:staff_remove' staff.id_user %}"><i class="fa fa-ban" aria-hidden="true"></i>
+</a></td>
+              </tr>
+          {% endfor %}
+        </tbody>
     </table>
   </div>
 {% endblock %}
