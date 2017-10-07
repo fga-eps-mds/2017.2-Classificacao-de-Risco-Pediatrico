@@ -23,10 +23,10 @@ urlpatterns = [
         name="home_attendant"),
     url(r'^accounts/$', views.manage_accounts_view,
         name="manage_accounts"),
+    url(r'^accounts/(?P<id_user>\w+)/$', views.manage_accounts_search_view,
+        name="manage_accounts_search"),
     url(r'^accounts/edit/(?P<id_user>\w+)/$', views.edit_accounts_view,
         name="edit_acconts"),
     url(r'^accounts/remove/(?P<id_user>\w+)/$', views.staff_remove,
-        name="staff_remove"),
-    #url(r'^staff/remove/(?P<id_user>\d+)/$', views.staff_remove,
-    #   name="staff_remove")
+        name="staff_remove")
 ]

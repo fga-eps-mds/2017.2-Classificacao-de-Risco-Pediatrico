@@ -37,7 +37,7 @@
                      </div>
                   {% endfor %}
               </div>
-          <button class="btn btn-outline-secondary" name='action' value='address' type="submit">Cadastrar</button>
+            <a href="{% url 'users:show_patient' field.cpf %}" button class="btn btn-outline-secondary" name='action' value='address' type="submit">Cadastrar</a>>
        </form>       
     </div>
 {% endblock %}

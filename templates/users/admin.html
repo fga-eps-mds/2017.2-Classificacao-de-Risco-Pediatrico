@@ -8,10 +8,9 @@
      <ul class="navbar-nav ml-auto">
            <li>
               <div >
-                 <a >
-                 {% if user.is_authenticated %}{{ user.get_username }}{% endif %}
-                 </a>
-
+                <a >
+                  {% if user.is_authenticated %}{{ user.get_username }}{% endif %}
+                </a>
               </div>
            </li>
         </ul>

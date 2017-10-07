@@ -1,3 +1,3 @@
-function deleteStaff(staff){
-    deleteStaff = staff.delete(staff);
-}
+$(document).ready(function() {
+    $('.manageAccounts').DataTable();
+} );
