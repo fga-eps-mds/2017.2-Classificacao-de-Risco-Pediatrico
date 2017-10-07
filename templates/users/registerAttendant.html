@@ -7,6 +7,7 @@
 
 {% block head %}
     <link rel="stylesheet" href="{% static "css/main.css" %}">
+    <link rel="stylesheet" href="{% static "css/register.css" %}">
 {% endblock %}
 
 
@@ -50,7 +51,10 @@
                      </div>
                   {% endfor %}
               </div>
-          <button class="btn btn-outline-secondary" name='action' value='address' type="submit">Cadastrar</button>
-       </form>       
+              <div id="botoes_cadastro">
+                  <a href="/user/login"><button class="btn btn-outline-secondary" type="button">Cancelar</button></a>
+                  <button class="btn btn-primary" name='action' value='address' type="submit">Cadastrar</button>
+              </div>
+       </form>
     </div>
 {% endblock %}
