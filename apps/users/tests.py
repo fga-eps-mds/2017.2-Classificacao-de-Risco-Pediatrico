@@ -6,7 +6,7 @@ import pytest
 # from factories import PatientFactory
 # Create your tests here.
 
-from .models import Staff
+from apps.users.models import Staff
 
 
 @pytest.mark.django_db
