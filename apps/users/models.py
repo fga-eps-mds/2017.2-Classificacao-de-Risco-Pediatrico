@@ -27,7 +27,7 @@ class UserManager(BaseUserManager):
         Create a superuser
         """
         user = self.create_user(**kwargs)
-        user.is_superuser = True
+        user.is_admin = True
         user.save(using=self._db)
         return user
 
