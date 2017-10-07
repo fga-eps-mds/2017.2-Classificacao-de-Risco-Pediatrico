@@ -42,24 +42,9 @@ class TestUsers:
         return data
 
     def test_create_user(self):
-        args = self.default_user_data()
-
-        test_user = Admin.objects.create_user(
-            password=args['password'],
-            name=args['name'],
-            email=args['email'],
-            id_user=args['id_user']
-        )
+        test_user = Admin.objects.create_user(**self.default_user_data())
         assert isinstance(test_user, Admin)
 
     def test_create_super_user(self):
-        args = self.default_user_data()
-
-        test_user = Admin.objects.create_superuser(
-            password=args['password'],
-            name=args['name'],
-            email=args['email'],
-            id_user=args['id_user']
-        )
-
+        test_user = Admin.objects.create_superuser(**self.default_user_data())
         assert test_user.is_superuser
