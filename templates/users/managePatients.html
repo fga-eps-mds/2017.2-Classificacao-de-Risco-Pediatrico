@@ -19,19 +19,11 @@
     <tr>
       <th>CPF</th>
       <th>Nome</th>
-      <th>Data de Nascimento</th>
-      <th>Nome do Responsável</th>
-      <th>Nome dos pais</th>
     </tr>
       {% for patient in patients %}
           <tr onclick="window.document.location='{% url 'users:show_patient' cpf=patient.cpf %}';">
               <td>{{ patient.cpf}}</td>
               <td>{{ patient.name }}</td>
-              <td>{{ patient.birth_date }}</td>
-              <td>{{ patient.guardian }}</td>
-              <td>{{ patient.parents_name }}</td>
-{#          <td><a href="#"><button type="button" class="editButton"></button></a></td>#}
-{#          <td><button type="button" class="deleteButton"></button></td>#}
             </tr>
       {% endfor %}
     </table>
