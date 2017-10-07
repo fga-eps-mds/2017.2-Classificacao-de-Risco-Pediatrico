@@ -42,7 +42,9 @@ def login_view(request, *args, **kwargs):
                 login(request, user)
                 return redirect("/user/home/attendant")
         else:
-            kwargs['extra_context'] = {'next': reverse('users:home'), 'errors':'Usuário e/ou senha inválido.'}
+            kwargs['extra_context'] = \
+                {'next': reverse('users:home'),
+                 'errors': 'Usuário e/ou senha inválido.'}
             kwargs['template_name'] = 'users/login.html'
             return login(request, *args, **kwargs)
 
@@ -185,4 +187,3 @@ def home_attendant_view(request):
     return rendered text from homeAttendant
     """
     return render(request, 'users/homeAttendant.html')
-

@@ -66,4 +66,3 @@ class TestUsers:
     def test__str__(self):
         user_email = Staff(email='bruno@gmail.com')
         assert str(user_email) == 'bruno@gmail.com'
-

@@ -57,7 +57,7 @@ class Address(models.Model):
 
 class Staff(AbstractBaseUser):
 
-    objects = UserManager();
+    objects = UserManager()
 
     name = models.CharField(
         verbose_name=_('Nome'),
