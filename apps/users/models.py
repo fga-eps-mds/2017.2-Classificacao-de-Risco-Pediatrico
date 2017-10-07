@@ -96,11 +96,11 @@ class Staff(AbstractBaseUser):
 
     def get_full_name(self):
         # The user is identified by their email address
-        return self.email
+        return self.name
 
     def get_short_name(self):
         # The user is identified by their email address
-        return self.email
+        return self.name
 
     def __str__(self):              # __unicode__ on Python 2
         return self.email
