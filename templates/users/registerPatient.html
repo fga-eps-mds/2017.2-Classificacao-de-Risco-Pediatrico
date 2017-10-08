@@ -18,26 +18,23 @@
               {% csrf_token %}
               {{ form.non_field_errors }}
               <div class="d-inline-block">
-                  {% for field in forms.registration_patient_form %}
+                  {% for field in form %}
                      <div class="form-group">
 
                        {{ field.label_tag }}
-                       <input  type="text" name="{{ field.name }}" class="rounded" id="{{ field.id_for_label }}" >
-                       {{ field.errors }}
+                       {% if field.name == password %}
+                       { field.label_tag = Senha }
+                       {% elif field.name == password1 %}
+                       { field.label_tag = Confirmação de Senha }
+                       {% endif %}
+                       {{ field }}
 
                      </div>
                   {% endfor %}
               </div>
-              <div class="d-inline-block">
-                  {% for field in forms.address_form %}
-                     <div class="form-group">
-                        {{ field.label_tag }}
-                        <input  type="text" name="address-{{ field.name }}" class="rounded" id="{{ field.id_for_label }}" >
-                        {{ field.errors }}
-                     </div>
-                  {% endfor %}
-              </div>
-            <a href="{% url 'users:show_patient' field.cpf %}" button class="btn btn-outline-secondary" name='action' value='address' type="submit">Cadastrar</a>>
-       </form>       
+            <a href="{#}" button class="btn btn-outline-secondary" name='action' value='address' type="submit">Cadastrar</a>>
+
+            <!-- <a href="{% url 'users:show_patient' field.cpf %}" button class="btn btn-outline-secondary" name='action' value='address' type="submit">Cadastrar</a>> -->
+       </form>
     </div>
 {% endblock %}

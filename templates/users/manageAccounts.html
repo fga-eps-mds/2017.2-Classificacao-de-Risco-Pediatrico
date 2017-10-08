@@ -1,4 +1,4 @@
-{% extends 'layout/layout.html' %}
+  {% extends 'layout/layout.html' %}
 {% load staticfiles %}
 
 {% block background %}
@@ -48,7 +48,7 @@
                   </td>
                   <td><a href="edit/{{ staff.id_user }}"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
                   <td><a href="{% url 'users:staff_remove' staff.id_user %}"><i class="fa fa-ban" aria-hidden="true"></i>
-</a></td>
+                  </a></td>
               </tr>
           {% endfor %}
         </tbody>

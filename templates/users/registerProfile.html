@@ -17,11 +17,16 @@
              {% csrf_token %}
              {{ form.non_field_errors }}
               <div class="d-inline-block">
-                  {% for field in forms.registration_staff_form %}
+                  {% for field in form %}
                      <div class="form-group">
 
 
                             {{ field.label_tag }}
+                            {% if field.name == password %}
+                            { field.label_tag = Senha }
+                            {% elif field.name == password1 %}
+                            { field.label_tag = Confirmação de Senha }
+                            {% endif %}
                             {{ field }}
 
 
@@ -29,7 +34,7 @@
                      </div>
                   {% endfor %}
               </div>
-              <div class="d-inline-block">
+              <!-- <div class="d-inline-block">
                   {% for field in forms.address_form %}
                      <div class="form-group">
                         {{ field.label_tag }}
@@ -37,7 +42,7 @@
                         {{ field.errors }}
                      </div>
                   {% endfor %}
-              </div>
+              </div> -->
           <button class="btn btn-outline-secondary" name='action' value='address' type="submit">Cadastrar</button>
        </form>
     </div>
