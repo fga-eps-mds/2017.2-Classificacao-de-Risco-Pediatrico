@@ -4,8 +4,6 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.views import login
 from django.contrib.auth.views import logout
 from django.core.urlresolvers import reverse
-from django.contrib.auth.forms import UserCreationForm
-#from multi_form_view import MultiModelFormView
 
 from django.contrib.auth import authenticate
 
@@ -42,7 +40,8 @@ def login_view(request, *args, **kwargs):
                 login(request, user)
                 return redirect("/user/login/admin")
         else:
-            kwargs['extra_context'] = {'next': reverse('users:home'), 'errors':'Usuário e/ou senha inválido.'}
+            kwargs['extra_context'] = {'next': reverse('users:home'), 'errors':
+                                       'Usuário e/ou senha inválido.'}
             kwargs['template_name'] = 'users/login.html'
             return login(request, *args, **kwargs)
 
@@ -66,7 +65,7 @@ def sign_up_profile(request):
             form.save()
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
-            staff = authenticate(username=username, password=raw_password)
+            username = authenticate(username=username, password=raw_password)
             login(request, 'users:login')
             return redirect('users:login')
     else:
@@ -81,13 +80,12 @@ def sign_up_patient(request):
             form.save()
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
-            patient = authenticate(username=username, password=raw_password)
-            login(request, 'users:home')
-            return redirect('users:home')
+            username = authenticate(username=username, password=raw_password)
+            login(request, 'users:login')
+            return redirect('users:login')
     else:
         form = RegistrationPatientForm()
     return render(request, 'users/registerPatient.html', {'form': form})
-
 
 
 def register_patient(request):
@@ -128,12 +126,12 @@ def home_attendant_view(request):
 
 def manage_accounts_view(request):
     staffs = Staff.objects.all()
-    return render(request, 'users/manageAccounts.html', { 'staffs':staffs })
+    return render(request, 'users/manageAccounts.html', {'staffs': staffs})
 
 
 def edit_accounts_view(request, id_user):
-    staff = Staff.objects.filter(id_user=id_user)[0]
-    return render(request, 'users/editAccounts.html', { 'staffs':staffs })
+    staffs = Staff.objects.filter(id_user=id_user)[0]
+    return render(request, 'users/editAccounts.html', {'staffs': staffs})
 
 
 def staff_remove(request, id_user):
