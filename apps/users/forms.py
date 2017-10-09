@@ -8,12 +8,12 @@ from .models import Patient, Staff
 class RegistrationStaffForm(UserCreationForm):
     class Meta:
         model = Staff
-        fields = ['name', 'email', 'id_user', 'profile', 'uf', 'city', 
-                'neighborhood', 'street', 'block', 'number']
+        fields = ['name', 'email', 'id_user', 'profile', 'uf', 'city',
+                  'neighborhood', 'street', 'block', 'number']
 
 
 class RegistrationPatientForm(forms.ModelForm):
     class Meta:
         model = Patient
-        fields = ['name', 'cpf', 'guardian', 'birth_date', 'parents_name', 'uf',
-                'city','neighborhood', 'street', 'block', 'number']
+        fields = ['name', 'cpf', 'guardian', 'birth_date', 'parents_name',
+                  'uf', 'city', 'neighborhood', 'street', 'block', 'number']
