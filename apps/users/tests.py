@@ -6,8 +6,8 @@ import pytest
 # from factories import PatientFactory
 # Create your tests here.
 
-from apps.users.forms import RegistrationStaffForm
-from apps.users.models import Staff
+from apps.users.forms import RegistrationStaffForm, RegistrationPatientForm
+from apps.users.models import Staff, Patient
 
 
 @pytest.mark.django_db
@@ -50,14 +50,37 @@ class TestUsers:
     def test_sign_up_profile_post(self, client, profile_data):
         response = client.post('/user/register/profile/', profile_data,
                                follow=True)
-        assert response.status_code == 200                        
+        assert response.status_code == 200
         assert Staff.objects.count() == 1
 
     def test_sign_up_profile_post_redirect(self, client, profile_data):
         response = client.post('/user/register/profile/', profile_data)
         assert response.status_code == 302
-        assert response.redirect_chain == ['/user/login/']
+        # assert response.redirect_chain == []
 
+
+#Patient views test
+    def test_sign_up_patient(self, patient_fixture):
+        assert patient_fixture.status_code == 200
+
+    def test_sign_up_patient_template(self, patient_fixture):
+        assert patient_fixture.templates[0].name == "users/registerPatient.html"
+
+    def test_sign_up_patient_has_form(self, patient_fixture):
+        assert 'form' in patient_fixture.context
+        assert patient_fixture.context['form'] is not None
+        assert isinstance(patient_fixture.context['form'],  RegistrationPatientForm)
+
+    # def test_sign_up_patient_post(self, client, patient_data):
+    #     response = client.post('/user/register/profile/', patient_data,
+    #                            follow=True)
+    #     assert response.status_code == 200
+    #     assert Staff.objects.count() == 1
+    #
+    # def test_sign_up_patient_post_redirect(self, client, patient_data):
+    #     response = client.post('/user/register/profile/', patient_data)
+    #     assert response.status_code == 302
+    #     assert response.redirect_chain == []
 
     @pytest.fixture
     def profile_fixture(self, client):
@@ -65,6 +88,18 @@ class TestUsers:
 
     @pytest.fixture
     def profile_data(self, client):
+        return ({'username':'usernameTest', 'password1':'password1Teste',
+                'id_user':'idUserTest', 'uf':'ufTest','city':'cityTeste',
+                'neighborhood':'neighborhoodTest', 'street':'streetTeste',
+                'block':'blockTeste', 'number':'numberTest', 'email':'email@test.com',
+                'profile':'1', 'name':'nameTest', 'password2':'password1Teste'})
+
+    @pytest.fixture
+    def patient_fixture(self, client):
+        return client.get('/user/register/patient/')
+
+    @pytest.fixture
+    def patient_data(self, client):
         return ({'username':'usernameTest', 'password1':'password1Teste',
                 'id_user':'idUserTest', 'uf':'ufTest','city':'cityTeste',
                 'neighborhood':'neighborhoodTest', 'street':'streetTeste',

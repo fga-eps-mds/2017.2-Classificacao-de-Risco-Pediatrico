@@ -83,6 +83,10 @@ def sign_up_profile(request):
 def sign_up_patient(request):
     if request.method == 'POST':
         form = RegistrationPatientForm(request.POST)
+        form.is_valid()
+        form.non_field_errors()
+        [print(field.label, field.name, field.errors) for field in form]
+
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
