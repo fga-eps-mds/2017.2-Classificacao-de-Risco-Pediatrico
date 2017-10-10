@@ -6,6 +6,9 @@ import pytest
 # from factories import PatientFactory
 # Create your tests here.
 
+from apps.users.forms import RegistrationStaffForm
+from apps.users.models import Staff
+
 
 @pytest.mark.django_db
 class TestUsers:
@@ -32,3 +35,38 @@ class TestUsers:
     def test_home_receptionist_view(self, client):
         response = client.get('/user/home/receptionist/')
         assert response.status_code == 200
+
+    def test_sign_up_profile(self, profile_fixture):
+        assert profile_fixture.status_code == 200
+
+    def test_sign_up_profile_template(self, profile_fixture):
+        assert profile_fixture.templates[0].name == "users/registerProfile.html"
+
+    def test_sign_up_profile_has_form(self, profile_fixture):
+        assert 'form' in profile_fixture.context
+        assert profile_fixture.context['form'] is not None
+        assert isinstance(profile_fixture.context['form'], RegistrationStaffForm)
+
+    def test_sign_up_profile_post(self, client, profile_data):
+        response = client.post('/user/register/profile/', profile_data,
+                               follow=True)
+        assert response.status_code == 200                        
+        assert Staff.objects.count() == 1
+
+    def test_sign_up_profile_post_redirect(self, client, profile_data):
+        response = client.post('/user/register/profile/', profile_data)
+        assert response.status_code == 302
+        assert response.redirect_chain == ['/user/login/']
+
+
+    @pytest.fixture
+    def profile_fixture(self, client):
+        return client.get('/user/register/profile/')
+
+    @pytest.fixture
+    def profile_data(self, client):
+        return ({'username':'usernameTest', 'password1':'password1Teste',
+                'id_user':'idUserTest', 'uf':'ufTest','city':'cityTeste',
+                'neighborhood':'neighborhoodTest', 'street':'streetTeste',
+                'block':'blockTeste', 'number':'numberTest', 'email':'email@test.com',
+                'profile':'1', 'name':'nameTest', 'password2':'password1Teste'})
