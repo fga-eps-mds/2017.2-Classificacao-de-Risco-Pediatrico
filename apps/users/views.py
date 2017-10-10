@@ -61,6 +61,9 @@ def logout_view(request, *args, **kwargs):
 def sign_up_profile(request):
     if request.method == 'POST':
         form = RegistrationStaffForm(request.POST)
+        form.is_valid()
+        form.non_field_errors()
+        # [print(field.label, field.name, field.errors) for field in form]
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
@@ -68,9 +71,13 @@ def sign_up_profile(request):
             username = authenticate(username=username, password=raw_password)
             login(request, 'users:login')
             return redirect('users:login')
+        else:
+            status = 400
     else:
         form = RegistrationStaffForm()
-    return render(request, 'users/registerProfile.html', {'form': form})
+        status = 200
+    return render(request, 'users/registerProfile.html', {'form': form},
+                  status=status)
 
 
 def sign_up_patient(request):
@@ -83,9 +90,13 @@ def sign_up_patient(request):
             username = authenticate(username=username, password=raw_password)
             login(request, 'users:login')
             return redirect('users:login')
+        else:
+            status = 400
     else:
         form = RegistrationPatientForm()
-    return render(request, 'users/registerPatient.html', {'form': form})
+        status = 200
+    return render(request, 'users/registerPatient.html', {'form': form},
+                  status=status)
 
 
 def register_patient(request):
