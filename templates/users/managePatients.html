@@ -31,7 +31,8 @@
             <td>{{ patient.guardian }}</td>
             <td>{{ patient.parents_name }}</td>
           <td>Paciente</td>
-          <td><a href="#"><button type="button" class="editButton"></button></a></td>
+          <td><a href="{% url 'users:edit_patient' patient.cpf %}"><i class="fa fa-pencil" aria-hidden="true"></i>
+          </a></td>
           <td><button type="button" class="deleteButton"></button></td>
         </tr>
       {% endfor %}

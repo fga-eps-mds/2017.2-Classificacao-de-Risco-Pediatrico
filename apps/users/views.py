@@ -154,6 +154,12 @@ def staff_remove(request, id_user):
     staff.delete()
     return HttpResponseRedirect(reverse('users:manage_accounts'))
 
+def edit_patient(request, cpf):
+    patient = Patient.objects.filter(cpf=cpf)[0]
+    return render(request, 'users/editPatient.html', {'patient':patient})
+
+def edit_patient_view():
+    pass
 
 '''
 class RegistrationStaffView(MultiModelFormView):
