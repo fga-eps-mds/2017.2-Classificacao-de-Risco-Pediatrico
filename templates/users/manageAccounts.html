@@ -1,4 +1,4 @@
-{% extends 'layout/layout.html' %}
+  {% extends 'layout/layout.html' %}
 {% load staticfiles %}
 
 {% block background %}
@@ -10,37 +10,48 @@
   <link rel="stylesheet" href="{% static "css/main.css" %}">
   <link rel="stylesheet" href="{% static "css/mainAdmin.css" %}">
   <link rel="stylesheet" href="{% static "css/managePage.css" %}">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css">
+{% endblock %}
+
+
+{% block js %}
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+    <script src="{% static "js/manageAccounts.js" %}"></script>
 {% endblock %}
 
 {% block content %}
   <div class="box rounded float-right">
     <h1>Listagem das contas</h1>
-    <table class="table">
-    <tr>
-      <th>ID</th>
-      <th>Nome</th>
-      <th>Função</th>
-      <th>Editar</th>
-      <th>Deletar</th>
-    </tr>
-      {% for receptionist in receptionists %}
-        <tr>
-          <td>{{ receptionist.id_user}}</td>
-          <td>{{ receptionist.name }}</td>
-          <td>Recepcionista</td>
-          <td><a href="#"><button type="button" class="editButton"></button></a></td>
-          <td><button type="button" class="deleteButton"></button></td>
-        </tr>
-      {% endfor %}
-      {% for attendant in attendants %}
-        <tr>
-          <td>{{ attendant.id_user}}</td>
-          <td>{{ attendant.name }}</td>
-          <td>Atendente</td>
-          <td><a href="#"><button type="button" class="editButton"></button></a></td>
-          <td><button type="button" class="deleteButton"></button></td>
-        </tr>
-      {% endfor %}
+
+    <table id="example" class="display" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nome</th>
+              <th>Função</th>
+              <th>Editar</th>
+              <th>Deletar</th>
+            </tr>
+        </thead>
+        <tbody>
+          {% for staff in staffs %}
+              <tr>
+                  <td>{{ staff.id_user}}</td>
+                  <td>{{ staff.name }}</td>
+                  <td>
+                    {% if staff.profile == 1 %}
+                      Recepcionista
+                    {% else %}
+                      Atendente
+                    {% endif %}
+                  </td>
+                  <td><a href="edit/{{ staff.id_user }}"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
+                  <td><a href="{% url 'users:staff_remove' staff.id_user %}"><i class="fa fa-ban" aria-hidden="true"></i>
+                  </a></td>
+              </tr>
+          {% endfor %}
+        </tbody>
     </table>
   </div>
 {% endblock %}
