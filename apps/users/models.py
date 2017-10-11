@@ -118,7 +118,7 @@ class Patient(models.Model):
         help_text=_('Informe o nome do responsável'),
     )
 
-    birth_date = models.DateTimeField(
+    birth_date = models.DateField(
         verbose_name=_('Data de Nascimento'),
         blank=False,
         help_text=_('Informe a data de Nascimento'),
