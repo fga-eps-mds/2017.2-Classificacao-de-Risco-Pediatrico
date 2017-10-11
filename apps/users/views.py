@@ -138,6 +138,10 @@ def home_attendant_view(request):
     """
     return render(request, 'users/homeAttendant.html')
 
+def registered_patient_view(request):
+    patients = Patient.objects.all()
+    return render(request, 'users/registeredPatient.html', {'patients': patients})
+
 
 def manage_accounts_view(request):
     staffs = Staff.objects.all()
@@ -201,7 +205,6 @@ class RegistrationStaffView(MultiModelFormView):
         staff.save()
         return super(RegistrationStaffView, self).forms_valid(forms)
 '''
-
 '''
 class RegistrationPatientView(MultiModelFormView):
     form_classes = {
@@ -248,3 +251,4 @@ class RegistrationPatientView(MultiModelFormView):
         patient.save()
         return super(RegistrationPatientView, self).forms_valid(forms)
 '''
+

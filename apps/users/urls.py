@@ -24,5 +24,7 @@ urlpatterns = [
     url(r'^accounts/edit/(?P<id_user>\w+)/$', views.edit_accounts_view,
         name="edit_acconts"),
     url(r'^accounts/remove/(?P<id_user>\w+)/$', views.staff_remove,
-        name="staff_remove")
+        name="staff_remove"),
+    url(r'^registered/patient/$', views.registered_patient_view,
+        name="registered_patient")
 ]
