@@ -142,22 +142,22 @@ def registered_patient_view(request):
     patients = Patient.objects.all()
     return render(request, 'users/registeredPatient.html', {'patients': patients})
 
+def queue_patient(request, cpf_patient):
+    patient = Patient.objects.filter(cpf=cpf_patient)
+    return HttpResponseRedirect(reverse('users:registered_patient'))
 
 def manage_accounts_view(request):
     staffs = Staff.objects.all()
-    return render(request, 'users/manageAccounts.html', {'staffs': staffs})
-
+    return render(request, 'users/manage_accounts.html', {'staffs': staffs})
 
 def edit_accounts_view(request, id_user):
     staffs = Staff.objects.filter(id_user=id_user)[0]
     return render(request, 'users/editAccounts.html', {'staffs': staffs})
 
-
 def staff_remove(request, id_user):
     staff = Staff.objects.filter(id_user=id_user)
     staff.delete()
     return HttpResponseRedirect(reverse('users:manage_accounts'))
-
 
 '''
 class RegistrationStaffView(MultiModelFormView):

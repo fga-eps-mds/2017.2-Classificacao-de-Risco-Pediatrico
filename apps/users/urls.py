@@ -26,5 +26,7 @@ urlpatterns = [
     url(r'^accounts/remove/(?P<id_user>\w+)/$', views.staff_remove,
         name="staff_remove"),
     url(r'^registered/patient/$', views.registered_patient_view,
-        name="registered_patient")
+        name="registered_patient"),
+    url(r'^registered/patient/(?P<cpf_patient>\w+)/$', views.queue_patient,
+        name="queue_patient")
 ]
