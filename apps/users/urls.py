@@ -28,5 +28,7 @@ urlpatterns = [
     url(r'^registered/patient/$', views.registered_patient_view,
         name="registered_patient"),
     url(r'^registered/patient/(?P<cpf_patient>\w+)/$', views.queue_patient,
+        name="queue_patient"),
+    url(r'^queue/patient/$', views.queue_patient_view,
         name="queue_patient")
 ]
