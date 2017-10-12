@@ -19,25 +19,105 @@
               <div class="d-inline-block">
                   {% for field in form %}
                      <div class="form-group">
+                     <!-- {% if field.name == 'name'%}
+                     <div class="form-row">
+                         <div class="form-group col-md-4">
+                           <label for="inputName4" class="col-form-label">{{field.label_tag}}</label>
+                           <input type="text" class="form-control" id="inputEmail4" placeholder="{{field.label}}">
+                           {{ field.errors }}
+                         </div>
+                         {% endif %}
+                         {%if field.name == 'cpf'%}
+                         <div class="form-group col-md-4">
+                           <label for="inputZip" class="col-form-label">{{field.label_tag}}</label>
+                           <input type="text" class="form-control" id="inputEmail4" placeholder="{{field.label}}">
+                           {{ field.errors }}
+                         </div>
+                         {% endif %}
+                         {%if field.name == 'guardian'%}
+                         <div class="form-group col-md-4">
+                           <label for="inputName4" class="col-form-label">{{field.label_tag}}</label>
+                           <input type="text" class="form-control" id="inputPassword4" placeholder="{{field.label}}">
+                           {{ field.errors }}
+                         </div>
+                       </div>
+                       {% endif%}
+
+                       {%if field.name == 'birth_date'%}
+                       <div class="form-row">
+                           <div class="form-group col-md-3">
+                             <label for="inputName4" class="col-form-label">{{field.label_tag}}</label>
+                             <input type="text" class="form-control" id="inputEmail4" placeholder="{{field.label}}">
+                             {{ field.errors }}
+                           </div>
+                           {% endif %}
+                           {%if field.name == 'parents_name'%}
+                           <div class="form-group col-md-4">
+                             <label for="inputPassword4" class="col-form-label">{{field.label_tag}}</label>
+                             <input type="text" class="form-control" id="inputPassword4" placeholder="{{field.label}}">
+                             {{ field.errors }}
+                           </div>
+                         </div>
+                         {% endif%}
+
+
+                         {%if field.name == 'uf'%}
+                         <div class="form-row">
+                             <div class="form-group col-md-2">
+                               <label for="inputState" class="col-form-label">{{field.label_tag}}</label>
+                               <input type="text" class="form-control" id="inputEmail4" placeholder="{{field.label}}">
+                               {{ field.errors }}
+                             </div>
+                             {% endif %}
+                             {%if field.name == 'city'%}
+                             <div class="form-group col-md-4">
+                               <label for="inputCity" class="col-form-label">{{field.label_tag}}</label>
+                               <input type="text" class="form-control" id="inputPassword4" placeholder="{{field.label}}">
+                               {{ field.errors }}
+                             </div>
+                             {% endif%}
+                             {%if field.name == 'neighborhood'%}
+                             <div class="form-group col-md-4">
+                               <label for="inputNamel4" class="col-form-label">{{field.label_tag}}</label>
+                               <input type="text" class="form-control" id="inputEmail4" placeholder="{{field.label}}">
+                               {{ field.errors }}
+                             </div>
+                           </div>
+                           {% endif%}
+
+
+                           {%if field.name == 'street'%}
+                           <div class="form-row">
+                             <div class="form-group col-md-3">
+                               <label for="inputName4" class="col-form-label">{{field.label_tag}}</label>
+                               <input type="text" class="form-control" id="inputPassword4" placeholder="{{field.label}}">
+                               {{ field.errors }}
+                             </div>
+                               {% endif %}
+                               {%if field.name == 'number'%}
+                               <div class="form-group col-md-2">
+                                 <label for="inputName4" class="col-form-label">{{field.label_tag}}</label>
+                                 <input type="text" class="form-control" id="inputPassword4" placeholder="{{field.label}}">
+                                 {{ field.errors }}
+                               </div>
+                             </div>
+                             {% endif%} -->
+
+                       <!-- name cpf guardian birth_date parents_name uf city neighborhood street block number -->
 
 
                             {{ field.label_tag }}
                             {{ field }}
 
 
+
                         {{ field.errors }}
                      </div>
+
+
                   {% endfor %}
               </div>
-              <!-- <div class="d-inline-block">
-                  {% for field in forms.address_form %}
-                     <div class="form-group">
-                        {{ field.label_tag }}
-                        <input  type="text" name="address-{{ field.name }}" class="rounded" id="{{ field.id_for_label }}" >
-                        {{ field.errors }}
-                     </div>
-                  {% endfor %}
-              </div> -->
+
           <button class="btn btn-outline-secondary" name='action' value='address' type="submit">Cadastrar</button>
        </form>
     </div>
