@@ -159,6 +159,10 @@ def staff_remove(request, id_user):
     staff.delete()
     return HttpResponseRedirect(reverse('users:manage_accounts'))
 
+def queue_patient_view(request):
+
+    return render(request, 'users/queuePatient.html')
+
 '''
 class RegistrationStaffView(MultiModelFormView):
     form_classes = {
