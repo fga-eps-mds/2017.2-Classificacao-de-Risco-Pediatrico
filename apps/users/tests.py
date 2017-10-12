@@ -48,15 +48,15 @@ class TestUsers:
         assert isinstance(profile_fixture.context['form'], RegistrationStaffForm)
 
     def test_sign_up_profile_post(self, client, profile_data):
-        response = client.post('/user/register/profile/', profile_data,
-                               follow=True)
-        assert response.status_code == 200
+        response = client.post('/user/register/profile/', profile_data)
+        assert response.status_code == 302
         assert Staff.objects.count() == 1
 
     def test_sign_up_profile_post_redirect(self, client, profile_data):
-        response = client.post('/user/register/profile/', profile_data)
-        assert response.status_code == 302
-        # assert response.redirect_chain == []
+        response = client.post('/user/register/profile/', profile_data,
+                               follow=True)
+        assert response.status_code == 200
+        assert response.redirect_chain == [('/user/login/', 302)]
 
 
 #Patient views test
@@ -71,16 +71,16 @@ class TestUsers:
         assert patient_fixture.context['form'] is not None
         assert isinstance(patient_fixture.context['form'],  RegistrationPatientForm)
 
-    # def test_sign_up_patient_post(self, client, patient_data):
-    #     response = client.post('/user/register/profile/', patient_data,
-    #                            follow=True)
-    #     assert response.status_code == 200
-    #     assert Staff.objects.count() == 1
-    #
-    # def test_sign_up_patient_post_redirect(self, client, patient_data):
-    #     response = client.post('/user/register/profile/', patient_data)
-    #     assert response.status_code == 302
-    #     assert response.redirect_chain == []
+    def test_sign_up_patient_post(self, client, patient_data):
+        response = client.post('/user/register/profile/', patient_data)
+        assert response.status_code == 302
+        assert Staff.objects.count() == 1
+
+    def test_sign_up_patient_post_redirect(self, client, patient_data):
+        response = client.post('/user/register/profile/', patient_data,
+                                follow=True)
+        assert response.status_code == 200
+        assert response.redirect_chain == [('/user/login/', 302)]
 
     @pytest.fixture
     def profile_fixture(self, client):
