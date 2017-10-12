@@ -143,8 +143,8 @@ def registered_patient_view(request):
     return render(request, 'users/registeredPatient.html', {'patients': patients})
 
 def queue_patient(request, cpf_patient):
-    patient = Patient.objects.filter(cpf=cpf_patient)
-    return HttpResponseRedirect(reverse('users:registered_patient'))
+    patients = Patient.objects.filter(cpf=cpf_patient)
+    return render(request, 'users/queuePatient.html', {'patients': patients})
 
 def manage_accounts_view(request):
     staffs = Staff.objects.all()
