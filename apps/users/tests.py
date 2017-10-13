@@ -47,13 +47,13 @@ class TestUsers:
         'profile':'1', 'name':'nameTest', 'password2':'password1Teste'})
 
     patient_data = ({
-        'name':'nameTest', 'guardian':'guardianTeste',
+        'name':'nameTest', 'guardian':'guardianTeste', 'birth_date':'12/2/12',
         'cpf':'156498', 'parents_name':'parents_nameTest','uf':'ufTest',
         'city':'cityTeste', 'neighborhood':'neighborhoodTest', 'street':'streetTeste',
         'block':'blockTeste', 'number':'numberTest'})
 
     @pytest.mark.parametrize(' url, model, data', [
-        ('/user/register/profile/',Staff, patient_data),
+        ('/user/register/patient/',Patient, patient_data),
         ('/user/register/profile/', Staff,profile_data)])
 
     def test_sign_up_post(self, client, url, model, data):
@@ -74,7 +74,7 @@ class TestUsers:
     @pytest.mark.parametrize('url, model, data',[
         ('/user/register/profile/', Staff, profile_data)
         ,
-        # ('/user/register/profile/', Patient, patient_data)
+        ('/user/register/patient/', Patient, patient_data)
         ])
 
     def test_sign_up_post(self, client, url, model, data):
@@ -84,7 +84,7 @@ class TestUsers:
 
     @pytest.mark.parametrize('url, data, urlredirect',[
         ('/user/register/profile/', profile_data, '/user/login/'),
-        ('/user/register/profile/', patient_data, '/user/login/')])
+        ('/user/register/patient/', patient_data, '/user/login/')])
 
     def test_sign_up_post_redirect(self, client, url, data, urlredirect):
         response = client.get(url, data, follow=True)
