@@ -171,3 +171,14 @@ class Patient(models.Model):
         max_length=10,
         blank=False
     )
+
+
+class QueuePatient(models.Model):
+
+    queue = models.BooleanFild(
+        defaut=False
+    )
+
+    position = models.IntegerField(
+        default=1
+    )

@@ -2,7 +2,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
 
-from .models import Patient, Staff
+from .models import Patient, Staff, QueuePatient
 
 
 class RegistrationStaffForm(UserCreationForm):
@@ -17,3 +17,9 @@ class RegistrationPatientForm(forms.ModelForm):
         model = Patient
         fields = ['name', 'cpf', 'guardian', 'birth_date', 'parents_name',
                   'uf', 'city', 'neighborhood', 'street', 'block', 'number']
+
+
+class SaveQueueForm(forms.ModelForm):
+    class Meta:
+        model = QueuePatient
+        fields = ['queue', 'position']
