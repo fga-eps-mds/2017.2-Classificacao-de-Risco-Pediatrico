@@ -144,7 +144,7 @@ def registered_patient_view(request):
 
 def queue_patient(request, cpf_patient):
     patients = Patient.objects.filter(cpf=cpf_patient)
-    return render(request, 'users/queuePatient.html', {'patients':patients})
+    return render(request, 'users/queuePatient.html', {'patients': patients})
 
 def manage_accounts_view(request):
     staffs = Staff.objects.all()
