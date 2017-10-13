@@ -73,7 +73,7 @@ class TestUsers:
 
     @pytest.mark.parametrize('url, model, data',[
         ('/user/register/profile/', Staff, profile_data)
-        # ,
+        ,
         # ('/user/register/profile/', Patient, patient_data)
         ])
 
@@ -82,11 +82,11 @@ class TestUsers:
         assert response.status_code == 302
         assert model.objects.count() == 1
 
-    # @pytest.mark.parametrize('url, data, urlredirect',[
-    #     ('/user/register/profile/', profile_data, '/user/login/'),
-    #     ('/user/register/profile/', patient_data, '/user/login/')])
+    @pytest.mark.parametrize('url, data, urlredirect',[
+        ('/user/register/profile/', profile_data, '/user/login/'),
+        ('/user/register/profile/', patient_data, '/user/login/')])
 
-    # def test_sign_up_post_redirect(self, client, url, data, urlredirect):
-    #     response = client.get(url, data, follow=True)
-    #     assert response.status_code == 200
-    #     assert response.redirect_chain == []
+    def test_sign_up_post_redirect(self, client, url, data, urlredirect):
+        response = client.get(url, data, follow=True)
+        assert response.status_code == 200
+        assert response.redirect_chain == []
