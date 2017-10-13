@@ -175,8 +175,8 @@ class Patient(models.Model):
 
 class QueuePatient(models.Model):
 
-    queue = models.BooleanFild(
-        defaut=False
+    queue = models.BooleanField(
+        default=False
     )
 
     position = models.IntegerField(
