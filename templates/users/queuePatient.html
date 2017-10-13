@@ -22,7 +22,7 @@
 
 {% block content %}
   <div class="box rounded float-right">
-    <h1>Listagem das Pacientes</h1>
+    <h1>Fila de Pacientes</h1>
 
     <table id="example" class="display" cellspacing="0" width="100%">
         <thead>
@@ -30,6 +30,8 @@
               <th>CPF</th>
               <th>Nome</th>
               <th>Responsável</th>
+              <th>Posição na fila</th>
+              <th>Está na fila</th>
             </tr>
         </thead>
         <tbody>
@@ -38,6 +40,8 @@
                   <td>{{ patient.cpf}}</td>
                   <td>{{ patient.name }}</td>
                   <td>{{ patient.guardian }}</td>
+                  <td>{{ patient.queuePosition }}</td>
+                  <td>{{ patient.isInQueue }}</td>
               </tr>
           {% endfor %}
         </tbody>

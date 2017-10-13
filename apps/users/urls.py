@@ -11,7 +11,7 @@ urlpatterns = [
     url(r'^login/admin$', views.admin_view, name="admin"),
     url(r'^register/profile/$', views.sign_up_profile,
         name="register_profile"),
-    url(r'^register/patient/(?P<cpf_patient>\w+)$', views.sign_up_patient,
+    url(r'^register/patient/$', views.sign_up_patient,
         name="register_patient"),
     url(r'^show/patient/$', views.show_pacient_view,
         name="show_patient"),
