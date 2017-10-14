@@ -87,6 +87,6 @@ class TestUsers:
         ('/user/register/patient/', patient_data, '/user/login/')])
 
     def test_sign_up_post_redirect(self, client, url, data, urlredirect):
-        response = client.get(url, data, follow=True)
+        response = client.post(url, data, follow=True)
         assert response.status_code == 200
-        assert response.redirect_chain == []
+        assert response.redirect_chain == [(urlredirect, 302)]
