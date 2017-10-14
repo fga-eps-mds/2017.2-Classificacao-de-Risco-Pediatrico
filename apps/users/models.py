@@ -27,7 +27,7 @@ class UserManager(BaseUserManager):
         Create a superuser
         """
         user = self.create_user(**kwargs)
-        user.is_superuser = True
+        user.is_admin = True
         user.save(using=self._db)
         return user
 
@@ -53,18 +53,17 @@ class Address(models.Model):
                               blank=False)
 
 
-class Person(models.Model):
-    class Meta:
-        abstract = True
+# Classe dos usuarios possui atendente e recepcionista
+
+class Staff(AbstractBaseUser):
+
+    objects = UserManager()
 
     name = models.CharField(
         verbose_name=_('Nome'),
         max_length=150,
         blank=False,
     )
-
-
-class Staff(AbstractBaseUser):
 
     id_user = models.CharField(
         verbose_name=_('ID de usuário'),
@@ -79,35 +78,52 @@ class Staff(AbstractBaseUser):
         default=''
     )
 
-    is_superuser = False
+    PROFILE_TYPES = (
+        (1, 'Recepcionista'),
+        (2, 'Atendente'),
+    )
+
+    profile = models.IntegerField(
+        verbose_name=_('Perfil'),
+        choices=PROFILE_TYPES,
+        default=0
+    )
+
     USERNAME_FIELD = 'email'
 
-    def get_short_name(self):
-        """
-        Get the first name of an object
-        """
-        pass
+    is_active = models.BooleanField(default=True)
+    is_admin = models.BooleanField(default=False)
 
     def get_full_name(self):
-        """
-        Get full name of an object
-        """
-        pass
+        # The user is identified by their email address
+        return self.name
+
+    def get_short_name(self):
+        # The user is identified by their email address
+        return self.name
+
+    def __str__(self):              # __unicode__ on Python 2
+        return self.email
+
+    def has_perm(self, perm, obj=None):
+        return True
+
+    def has_module_perms(self, app_label):
+        return True
+
+    @property
+    def is_staff(self):
+        return self.is_admin
 
 
-class Admin(Staff, Person):
-    objects = UserManager()
+class Patient(models.Model):
 
+    name = models.CharField(
+        verbose_name=_('Nome'),
+        max_length=150,
+        blank=False,
+    )
 
-class Attendant(Staff, Person):
-    objects = UserManager()
-
-
-class Receptionist(Staff, Person):
-    objects = UserManager()
-
-
-class Patient(Person):
     guardian = models.CharField(
         verbose_name=_('Nome do Responsável'),
         max_length=50,

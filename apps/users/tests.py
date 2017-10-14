@@ -1,24 +1,58 @@
 import pytest
-from apps.users.models import Admin
 # import apps.users.views
 # from apps.users.views import RegistrationAdminView
 # from factories import PatientFactory
 # Create your tests here.
+
+from apps.users.models import Staff
 
 
 @pytest.mark.django_db
 class TestUsers:
 
     def test_home(self, client):
-        response = client.get('/user/')
+        response = client.get('/')
         assert response.status_code == 200
 
     def test_login_view(self, client):
 
         # if this simple test is failing,
         # try running 'python manage.py collectstatic'
-        response = client.get('/user/login/')
+        response = client.get('/')
         assert response.status_code == 200
+
+    def test_login_view_for_admin(self, client):
+
+        Staff.objects.create_superuser(**self.default_user_data())
+        response = client.post('/', {'username': 'email@gmail.com',
+                                     'password': "1234asdf"})
+
+        assert response.url == '/home/login/admin'
+
+    def test_login_view_for_receptionist(self, client):
+
+        Staff.objects.create_user(**self.default_user_data())
+        response = client.post('/', {'username': 'email@gmail.com',
+                                     'password': "1234asdf"})
+
+        assert response.url == '/home/receptionist/'
+
+    def test_login_view_for_attendant(self, client):
+
+        user_data = self.default_user_data()
+        user_data['profile'] = '2'
+
+        Staff.objects.create_user(**user_data)
+        response = client.post('/', {'username': 'email@gmail.com',
+                                     'password': "1234asdf"})
+
+        assert response.url == '/risk_rating'
+
+    def test_login_view_user_do_not_exists(self, client):
+        response = client.post('/', {'username': 'email@gmail.com',
+                                     'password': "1234asdf"})
+
+        assert response.template_name[0] == 'users/login.html'
 
     def test_logout_view(self, client):
         # TODO: review this test:
@@ -29,7 +63,7 @@ class TestUsers:
         assert is_logged is False
 
     def test_home_receptionist_view(self, client):
-        response = client.get('/user/home/receptionist/')
+        response = client.get('/home/receptionist/')
         assert response.status_code == 200
 
     def default_user_data(self):
@@ -37,14 +71,47 @@ class TestUsers:
             'password': "1234asdf",
             'name': "testuser",
             'email': "email@gmail.com",
-            'id_user': "1234"
+            'id_user': "1234",
+            'profile': "1"
         }
         return data
 
     def test_create_user(self):
-        test_user = Admin.objects.create_user(**self.default_user_data())
-        assert isinstance(test_user, Admin)
+        test_user = Staff.objects.create_user(**self.default_user_data())
+        assert isinstance(test_user, Staff)
 
     def test_create_super_user(self):
-        test_user = Admin.objects.create_superuser(**self.default_user_data())
-        assert test_user.is_superuser
+        test_user = Staff.objects.create_superuser(**self.default_user_data())
+        assert test_user.is_admin
+
+    def test_user_get_full_name(self):
+        name = "Carlinhos Cabral"
+        user = Staff(name=name)
+        assert user.get_full_name() == name
+
+    def test_get_short_name(self):
+        name = "Carlinhos"
+        user = Staff(name=name)
+        assert user.get_short_name() == name
+
+    def test_has_perm(self):
+        perm = None
+        user = Staff()
+        assert user.has_perm(perm) is True
+
+    def test_has_module_perms(self):
+        app_name = None
+        user = Staff()
+        assert user.has_module_perms(app_name) is True
+
+    def test_is_admin(self):
+        user_name = Staff(name='Bruno', is_admin=True)
+        assert user_name.is_admin is True
+
+    def test_is_not_admin(self):
+        user_name = Staff(name='Bruno')
+        assert user_name.is_admin is False
+
+    def test__str__(self):
+        user_email = Staff(email='bruno@gmail.com')
+        assert str(user_email) == 'bruno@gmail.com'

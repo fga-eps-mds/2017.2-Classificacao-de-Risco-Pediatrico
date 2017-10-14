@@ -2,7 +2,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
 
-from .models import Admin, Attendant, Patient, Address, Receptionist
+from .models import Patient, Address, Staff
 
 
 class AddressForm(forms.ModelForm):
@@ -11,22 +11,10 @@ class AddressForm(forms.ModelForm):
         fields = ['uf', 'city', 'neighborhood', 'street', 'block', 'number']
 
 
-class RegistrationReceptionistForm(UserCreationForm):
+class RegistrationStaffForm(UserCreationForm):
     class Meta:
-        model = Receptionist
-        fields = ['name', 'email', 'id_user']
-
-
-class RegistrationAttendantForm(UserCreationForm):
-    class Meta:
-        model = Attendant
-        fields = ['name', 'email', 'id_user']
-
-
-class RegistrationAdminForm(UserCreationForm):
-    class Meta:
-        model = Admin
-        fields = ['name', 'email', 'id_user']
+        model = Staff
+        fields = ['name', 'email', 'id_user', 'profile']
 
 
 class RegistrationPatientForm(forms.ModelForm):
