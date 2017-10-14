@@ -85,7 +85,7 @@ def sign_up_patient(request):
         form = RegistrationPatientForm(request.POST)
         form.is_valid()
         form.non_field_errors()
-        [print(field.label, field.name, field.errors) for field in form]
+        # [print(field.label, field.name, field.errors) for field in form]
 
         if form.is_valid():
             form.save()
