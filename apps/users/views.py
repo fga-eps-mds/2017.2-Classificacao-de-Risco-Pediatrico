@@ -1,6 +1,5 @@
 # Arquivo: /apps/users/views.py
 from django.shortcuts import render, redirect
-from django.http import HttpResponseRedirect
 from django.contrib.auth.views import login
 from django.contrib.auth.views import logout
 from django.core.urlresolvers import reverse
@@ -17,34 +16,27 @@ from .forms import RegistrationPatientForm
 from .models import Admin, Attendant, Receptionist, Patient, Staff
 
 
-def home(request):
-    return render(request, 'users/home.html')
-
-
 def login_view(request, *args, **kwargs):
-    if request.user.is_authenticated():
-        return HttpResponseRedirect(reverse('users:home'))
-
     if request.method == "POST":
         user_type = request.POST['user_type']
         username = request.POST['username']
         password = request.POST['password']
 
         user = authenticate(request, username=username, password=password)
+        if user is not None and user.is_active:
+            if 'Recepcionista' == user_type:
+                login(request, user)
+                return redirect("/home/receptionist/")
 
-        if 'Recepcionista' == user_type:
-            login(request, user)
-            return redirect("/user/home/receptionist/")
+            if 'Admin' == user_type:
+                login(request, user)
+                return redirect("/home/admin")
 
-        if 'Admin' == user_type:
-            login(request, user)
-            return redirect("/user/login/admin")
+            if 'Atendente' == user_type:
+                login(request, user)
+                return redirect("/risk_rating")
 
-        if 'Atendente' == user_type:
-            login(request, user)
-            return redirect("/user/login/attendant")
-
-    kwargs['extra_context'] = {'next': reverse('users:home')}
+    kwargs['extra_context'] = {'next': reverse('users:login')}
     kwargs['template_name'] = 'users/login.html'
     return login(request, *args, **kwargs)
 

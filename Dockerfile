@@ -6,6 +6,21 @@ WORKDIR /code
 
 COPY requirements.txt /code/
 RUN pip install -r requirements.txt
-RUN apt-get update && apt-get install -y gettext libgettextpo-dev
 
 COPY . /code/
+
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    gfortran \
+    libblas-dev \
+    liblapack-dev \
+    libxft-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN useradd -m myuser
+USER myuser
+
+RUN python manage.py makemigrations && python manage.py migrate
+EXPOSE 8000
+
+CMD python manage.py runserver 0.0.0.0:$PORT
