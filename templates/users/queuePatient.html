@@ -27,21 +27,21 @@
     <table id="example" class="display" cellspacing="0" width="100%">
         <thead>
             <tr>
+              <th>Posição na fila</th>
               <th>CPF</th>
               <th>Nome</th>
               <th>Responsável</th>
-              <th>Posição na fila</th>
               <th>Está na fila</th>
             </tr>
         </thead>
         <tbody>
-          {% for patient in patients %}
+          {% for queuedPatients in queuedPatients %}
               <tr>
-                  <td>{{ patient.cpf}}</td>
-                  <td>{{ patient.name }}</td>
-                  <td>{{ patient.guardian }}</td>
-                  <td>{{ patient.queuePosition }}</td>
-                  <td>{{ patient.isInQueue }}</td>
+                  <td>{{ queuedPatients.queuePosition }}</td>
+                  <td>{{ queuedPatients.cpf}}</td>
+                  <td>{{ queuedPatients.name }}</td>
+                  <td>{{ queuedPatients.guardian }}</td>
+                  <td>{{ queuedPatients.isInQueue }}</td>
               </tr>
           {% endfor %}
         </tbody>

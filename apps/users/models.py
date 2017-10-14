@@ -177,5 +177,5 @@ class Patient(models.Model):
     )
 
     queuePosition = models.IntegerField(
-        default=1
+        default=0
     )

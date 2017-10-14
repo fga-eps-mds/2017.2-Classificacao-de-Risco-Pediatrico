@@ -89,6 +89,7 @@ def sign_up_patient(request):
 
         if form.is_valid():
             form.save()
+            cpf_patient = form.cleaned_data.get('cpf')
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             username = authenticate(username=username, password=raw_password)
@@ -144,7 +145,25 @@ def registered_patient_view(request):
 
 def queue_patient(request, cpf_patient):
     patients = Patient.objects.filter(cpf=cpf_patient)
+    allPatients = Patient.objects.all()
+    patient = Patient.objects.get(cpf=cpf_patient)
+    if patient.isInQueue == True:
+        return HttpResponseRedirect(reverse('users:registered_patient'))
+    else:
+        patient.isInQueue = True
+        patient.queuePosition = checkQueueLastPosition(allPatients)
+        patient.save()
+        return render(request, 'users/queuePatient.html', {'patients': patients})
     return render(request, 'users/queuePatient.html', {'patients': patients})
+
+def checkQueueLastPosition(patients):
+    lastPosition = 0
+    for patients in patients:
+        if patients.isInQueue == True:
+            if lastPosition < patients.queuePosition:
+                lastPosition = patients.queuePosition
+    lastPosition = lastPosition + 1
+    return lastPosition
 
 def manage_accounts_view(request):
     staffs = Staff.objects.all()
@@ -160,8 +179,8 @@ def staff_remove(request, id_user):
     return HttpResponseRedirect(reverse('users:manage_accounts'))
 
 def queue_patient_view(request):
-
-    return render(request, 'users/queuePatient.html')
+    queuedPatients = Patient.objects.filter(isInQueue = True)
+    return render(request, 'users/queuePatient.html', {'queuedPatients': queuedPatients})
 
 '''
 class RegistrationStaffView(MultiModelFormView):
