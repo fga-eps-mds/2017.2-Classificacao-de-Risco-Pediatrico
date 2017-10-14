@@ -5,6 +5,7 @@ import pytest
 # Create your tests here.
 
 from apps.users.models import Staff
+from apps.users.views import login_view
 
 
 @pytest.mark.django_db
@@ -20,6 +21,35 @@ class TestUsers:
         # try running 'python manage.py collectstatic'
         response = client.get('/')
         assert response.status_code == 200
+
+    def test_login_view_for_admin(self, client):
+
+        Staff.objects.create_superuser(**self.default_user_data())
+        response = client.post('/', {'username': 'email@gmail.com', 'password': "1234asdf"})
+
+        assert response.url == '/home/login/admin'
+
+    def test_login_view_for_receptionist(self, client):
+
+        Staff.objects.create_user(**self.default_user_data())
+        response = client.post('/', {'username': 'email@gmail.com', 'password': "1234asdf"})
+
+        assert response.url == '/home/receptionist/'
+
+    def test_login_view_for_attendant(self, client):
+
+        user_data = self.default_user_data()
+        user_data['profile'] = '2'
+
+        Staff.objects.create_user(**user_data)
+        response = client.post('/', {'username': 'email@gmail.com', 'password': "1234asdf"})
+
+        assert response.url == '/risk_rating'
+
+    def test_login_view_user_do_not_exists(self, client):
+        response = client.post('/', {'username': 'email@gmail.com', 'password': "1234asdf"})
+
+        assert response.template_name[0] == 'users/login.html'
 
     def test_logout_view(self, client):
         # TODO: review this test:
@@ -38,7 +68,8 @@ class TestUsers:
             'password': "1234asdf",
             'name': "testuser",
             'email': "email@gmail.com",
-            'id_user': "1234"
+            'id_user': "1234",
+            'profile': "1"
         }
         return data
 
