@@ -156,6 +156,13 @@ def staff_remove(request, id_user):
     staff.delete()
     return HttpResponseRedirect(reverse('users:manage_accounts'))
 
+
+def patient_remove(request, cpf):
+    patient = Patient.objects.filter(cpf=cpf)
+    patient.delete()
+    return HttpResponseRedirect(reverse('users:manage_patients'))
+
+
 def edit_patient(request, cpf):
 
     patient = Patient.objects.filter(cpf=cpf)[0]
@@ -178,12 +185,10 @@ def edit_patient(request, cpf):
         else:
             print('cc')
             status = 400
-
     else:
         return render(request, 'users/editPatient.html', {'patient':patient, 'form':form})
 
-    return render(request, 'users/editPatient.html',{'patient':patient, 'form':form},
-                  status=status)
+    return render(request, 'users/editPatient.html',{'patient':patient, 'form':form}, status=status)
 
 
 def edit_patient_view():
@@ -312,9 +317,8 @@ def home_attendant_view(request):
     return render(request, 'users/homeAttendant.html')
 
 def manage_accounts_view(request):
-    receptionists = Receptionist.objects.all()
-    attendants = Attendant.objects.all()
-    return render(request, 'users/manageAccounts.html', {'receptionists':receptionists, 'attendants':attendants})
+    staffs = Staff.objects.all()
+    return render(request, 'users/manageAccounts.html', {'staffs':staffs})
 
 def manage_patients_view(request):
     patients = Patient.objects.all()
