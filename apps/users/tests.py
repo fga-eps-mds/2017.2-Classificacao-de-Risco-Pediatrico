@@ -1,5 +1,4 @@
 import pytest
-from apps.users.models import Admin
 # import apps.users.views
 # from apps.users.views import RegistrationAdminView
 # from factories import PatientFactory
@@ -12,14 +11,14 @@ from apps.users.models import Staff
 class TestUsers:
 
     def test_home(self, client):
-        response = client.get('/user/')
+        response = client.get('/')
         assert response.status_code == 200
 
     def test_login_view(self, client):
 
         # if this simple test is failing,
         # try running 'python manage.py collectstatic'
-        response = client.get('/user/login/')
+        response = client.get('/')
         assert response.status_code == 200
 
     def test_logout_view(self, client):
@@ -31,7 +30,7 @@ class TestUsers:
         assert is_logged is False
 
     def test_home_receptionist_view(self, client):
-        response = client.get('/user/home/receptionist/')
+        response = client.get('/home/receptionist/')
         assert response.status_code == 200
 
     def default_user_data(self):
@@ -44,12 +43,12 @@ class TestUsers:
         return data
 
     def test_create_user(self):
-        test_user = Admin.objects.create_user(**self.default_user_data())
-        assert isinstance(test_user, Admin)
+        test_user = Staff.objects.create_user(**self.default_user_data())
+        assert isinstance(test_user, Staff)
 
     def test_create_super_user(self):
-        test_user = Admin.objects.create_superuser(**self.default_user_data())
-        assert test_user.is_superuser
+        test_user = Staff.objects.create_superuser(**self.default_user_data())
+        assert test_user.is_admin
 
     def test_user_get_full_name(self):
         name = "Carlinhos Cabral"
