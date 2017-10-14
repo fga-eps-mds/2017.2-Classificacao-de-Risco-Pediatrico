@@ -4,7 +4,8 @@ import numpy as np
 
 
 def classify_csv():
-    df = pd.read_csv('apps/risk_rating/classificacao.csv', usecols=range(1, 13), true_values=["Sim"],
+    df = pd.read_csv('apps/risk_rating/classificacao.csv',
+                     usecols=range(1, 13), true_values=["Sim"],
                      false_values=["Não"])
 
     df.loc[:, 'Idade'] /= 100
@@ -28,7 +29,8 @@ def classify_csv():
     preds = df['Gravidade'].unique()[clf.predict(test[features])]
 
     print('\n' * 3)
-    print(pd.crosstab(test['Gravidade'], preds, rownames=['Actual'], colnames=['Predicted']))
+    print(pd.crosstab(test['Gravidade'], preds,
+                      rownames=['Actual'], colnames=['Predicted']))
     print('\n' * 3)
 
     print(list(zip(train[features], clf.feature_importances_)))
