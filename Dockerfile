@@ -9,6 +9,14 @@ RUN pip install -r requirements.txt
 
 COPY . /code/
 
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    gfortran \
+    libblas-dev \
+    liblapack-dev \
+    libxft-dev \
+    && rm -rf /var/lib/apt/lists/*
+
 RUN useradd -m myuser
 USER myuser
 
