@@ -9,6 +9,7 @@ from django.contrib.auth import authenticate
 
 from .forms import RegistrationStaffForm
 from .forms import RegistrationPatientForm
+from .forms import EditPatientForm
 
 from .models import Patient, Staff
 
@@ -155,8 +156,34 @@ def staff_remove(request, id_user):
     return HttpResponseRedirect(reverse('users:manage_accounts'))
 
 def edit_patient(request, cpf):
+
     patient = Patient.objects.filter(cpf=cpf)[0]
-    return render(request, 'users/editPatient.html', {'patient':patient})
+    form = EditPatientForm()
+
+    if request.method == 'POST':
+        print('bb')
+        form = EditPatientForm(request.POST, instance=patient)
+        form.is_valid()
+        form.non_field_errors()
+        [print(field.label, field.name, field.errors) for field in form]
+
+        if form.is_valid():
+            patient.delete()
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            username = authenticate(username=username, password=raw_password)
+            return redirect('users:manage_patients')
+        else:
+            print('cc')
+            status = 400
+
+    else:
+        return render(request, 'users/editPatient.html', {'patient':patient, 'form':form})
+
+    return render(request, 'users/editPatient.html',{'patient':patient, 'form':form},
+                  status=status)
+
 
 def edit_patient_view():
     pass
