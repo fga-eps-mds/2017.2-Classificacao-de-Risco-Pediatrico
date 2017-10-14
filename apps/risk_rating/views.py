@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from apps.risk_rating import ml_classification
 
 
 def risk_rating_view(request):
@@ -24,6 +25,7 @@ def risk_rating_view(request):
         }
 
         print(patient)
+        print(ml_classification.classify_csv())
 
     return render(request, 'risk_rating/risk_rating.html')
 
