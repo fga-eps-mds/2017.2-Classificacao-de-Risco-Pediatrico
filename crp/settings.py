@@ -83,11 +83,9 @@ WSGI_APPLICATION = 'crp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'df7v3hg7nkfjj',
-        'USER': 'tenkhaldbstfro',
-        'PASSWORD': '36dc1227fb0f75ce1cbc37258cf3b' +
-                    '62cb7231442f22437d1df3a9b5dd88ecce9',
-        'HOST': 'ec2-184-73-189-190.compute-1.amazonaws.com',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'HOST': 'db',
         'PORT': '5432',
     }
 }
@@ -145,4 +143,4 @@ LOGIN_REDIRECT_URL = '..'
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
 
-AUTH_USER_MODEL = 'users.Admin'
+AUTH_USER_MODEL = 'users.Staff'

@@ -13,7 +13,7 @@ def classify_csv():
     # target_names = np.array(['Ambulatorial', 'Grave'], dtype='<U12')
     df['is_train'] = np.random.uniform(0, 1, len(df)) <= .75
 
-    train, test = df[df['is_train'] is True], df[df['is_train'] is False]
+    train, test = df[df['is_train'] == True], df[df['is_train'] == False]
 
     print('Number of observations in the training data:', len(train))
     print('Number of observations in the test data:', len(test))
@@ -29,8 +29,7 @@ def classify_csv():
     preds = df['Gravidade'].unique()[clf.predict(test[features])]
 
     print('\n' * 3)
-    print(pd.crosstab(test['Gravidade'], preds,
-                      rownames=['Actual'], colnames=['Predicted']))
+    print(pd.crosstab(test['Gravidade'], preds, rownames=['Actual'], colnames=['Predicted']))
     print('\n' * 3)
 
     print(list(zip(train[features], clf.feature_importances_)))
