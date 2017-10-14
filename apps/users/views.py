@@ -35,7 +35,7 @@ def login_view(request, *args, **kwargs):
                 return redirect("/risk_rating")
         else:
             kwargs['extra_context'] = \
-                {'next': reverse('users:home'),
+                {'next': reverse('users:login'),
                  'errors': 'Usuário e/ou senha inválido.'}
             kwargs['template_name'] = 'users/login.html'
             return login(request, *args, **kwargs)
