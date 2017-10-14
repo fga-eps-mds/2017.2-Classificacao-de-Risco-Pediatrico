@@ -1,7 +1,13 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-   <a class="navbar-brand" href="#">
+  {%if user.is_authenticated %}
+   <a class="navbar-brand" href="{% url 'users:home' %}">
    <img src="/static/img/LogoCRP.png" width="100" height="50" alt="">
    </a>
+   {% else %}
+   <a class="navbar-brand" href="{% url 'users:login' %}">
+   <img src="/static/img/LogoCRP.png" width="100" height="50" alt="">
+   </a>
+   {% endif %}
    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
    <span class="navbar-toggler-icon"></span>
    </button>
@@ -16,10 +22,14 @@
           <p>Seja bem-vindo(a),
           {{ user.name }}
           </p>
+          <div class="logout">
+            <p><a href="{% url 'users:logout' %}">Logout</a></p>
+          </div>
       {% endif %}
 
       <ul class="navbar-nav ml-auto">
          <li>
+           {% if not user.is_authenticated %}
             <div class="nav-item dropdown">
                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                Cadastro
@@ -29,10 +39,12 @@
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="/register/attendant">Atendente</a>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="/register/recepcionist">Recepcionista</a>
+                  <a class="dropdown-item" href="/user/register/receptionist">Recepcionista</a>
                </for>
             </div>
          </li>
+         {% else %}
+         {% endif %}
       </ul>
    </div>
 </nav>

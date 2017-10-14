@@ -10,13 +10,6 @@
     <link rel="stylesheet" href="{% static "css/register.css" %}">
 {% endblock %}
 
-{% block js %}
-    <script src="{% static "js/tab.js" %}"></script>
-{% endblock %}
-
-{% block login-button %}
-{% endblock %}
-
 {% block content %}
     <div class="box rounded float-right ">
        <h1 class="display-6">Cadastro de Administrador</h1>
@@ -57,7 +50,10 @@
                      </div>
                   {% endfor %}
               </div>
-          <button class="btn btn-outline-secondary" name='action' value='address' type="submit">Cadastrar</button>
+              <div id="botoes_cadastro">
+                  <a href="/user/login"><button class="btn btn-outline-secondary" type="button">Cancelar</button></a>
+                  <button class="btn btn-primary" name='action' value='address' type="submit">Cadastrar</button>
+              </div>
        </form>
     </div>
 {% endblock %}

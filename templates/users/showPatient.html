@@ -1,19 +1,6 @@
 {% extends 'layout/layout.html' %}
 {% load staticfiles %}
 
-{% block login-button %}
-{% endblock %}
-
-{% block dropdown-button %}
-     <ul class="navbar-nav ml-auto">
-           <li>
-              <div>
-                <a href={% url 'users:logout' %}> Logout </a>
-              </div>
-           </li>
-        </ul>
-{% endblock %}
-
 {% block head %}
     <link rel="stylesheet" href="{% static "css/main.css" %}">
 {% endblock %}
