@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.views import login
 from django.contrib.auth.views import logout
 from django.core.urlresolvers import reverse
+from django.db.models import Q
 
 from django.contrib.auth import authenticate
 
@@ -317,4 +318,10 @@ def manage_accounts_view(request):
 
 def manage_patients_view(request):
     patients = Patient.objects.all()
+    search = request.GET.get('q')
+    if search:
+        patients = patients.filter(
+            Q(name__icontains=search) |
+            Q(cpf__icontains=search)
+            )
     return render(request, 'users/managePatients.html', {'patients': patients})

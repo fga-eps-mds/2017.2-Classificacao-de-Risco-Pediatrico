@@ -15,6 +15,10 @@
 {% block content %}
   <div class="box rounded float-right">
     <h1>Pacientes</h1>
+    <form method="get" action="">
+      <input type="submit" value="Pesquisar"/>
+      <input type="text" name="q" placeholder="Busca por Nome/CPF"/>
+    </form>
     <table class="table">
     <tr>
       <th>CPF</th>
@@ -25,7 +29,7 @@
     </tr>
       {% for patient in patients %}
         <tr>
-          <td>{{ patient.cpf}}</td>
+          <td>{{ patient.cpf }}</td>
           <td>{{ patient.name }}</td>
             <td>{{ patient.birth_date }}</td>
             <td>{{ patient.guardian }}</td>
