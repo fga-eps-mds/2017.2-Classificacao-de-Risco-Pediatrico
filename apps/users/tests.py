@@ -5,7 +5,7 @@ import pytest
 # Create your tests here.
 
 from apps.users.forms import RegistrationStaffForm, RegistrationPatientForm
-from apps.users.models import Staff
+from apps.users.models import Staff, Patient
 
 
 @pytest.mark.django_db
@@ -95,6 +95,9 @@ class TestUsers:
         'street': 'streetTeste', 'block': 'blockTeste',
         'number': 'numberTest'})
 
+    @pytest.mark.parametrize('url, model, data', [
+        ('/register/patient/', Patient, patient_data),
+        ('/register/profile/', Staff, profile_data)])
     def test_sign_up_post(self, client, url, model, data):
         response = client.post(url, data)
         assert response.status_code == 302
