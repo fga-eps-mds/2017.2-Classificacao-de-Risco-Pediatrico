@@ -27,7 +27,7 @@ class UserManager(BaseUserManager):
         Create a superuser
         """
         user = self.create_user(**kwargs)
-        user.is_superuser = True
+        user.is_admin = True
         user.save(using=self._db)
         return user
 
@@ -88,19 +88,32 @@ class Staff(AbstractBaseUser):
                               blank=False)
 
     is_superuser = False
+
     USERNAME_FIELD = 'email'
 
-    def get_short_name(self):
-        """
-        Get the first name of an object
-        """
-        pass
+    is_active = models.BooleanField(default=True)
+    is_admin = models.BooleanField(default=False)
 
     def get_full_name(self):
-        """
-        Get full name of an object
-        """
-        pass
+        # The user is identified by their email address
+        return self.name
+
+    def get_short_name(self):
+        # The user is identified by their email address
+        return self.name
+
+    def __str__(self):              # __unicode__ on Python 2
+        return self.email
+
+    def has_perm(self, perm, obj=None):
+        return True
+
+    def has_module_perms(self, app_label):
+        return True
+
+    @property
+    def is_staff(self):
+        return self.is_admin
 
 
 class Patient(models.Model):

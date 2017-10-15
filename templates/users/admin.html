@@ -1,19 +1,8 @@
 {% extends 'layout/layout.html' %}
 {% load staticfiles %}
 
-{% block login-button%}
-{% endblock %}
 
-{% block dropdown-button %}
-     <ul class="navbar-nav ml-auto">
-           <li>
-              <div >
-                <a >
-                  {% if user.is_authenticated %}{{ user.get_username }}{% endif %}
-                </a>
-              </div>
-           </li>
-        </ul>
+{% block login-button %}
 {% endblock %}
 
 {% block background %}
@@ -30,9 +19,8 @@
 
 <div class="container">
 
-
-       <h1 class="display-6">Seja bem vindo {{ user.get_username }}!</h1>
-       <h2 class="description display-6" style="padding-bottom: 1.5%"> Selecione uma das opções a seguir:</h2>
+   <h1 class="display-6">Seja bem-vindo, {{ username }}!</h1>
+   <h2 class="description display-6" style="padding-bottom: 30px"> Selecione uma das opções a seguir:</h2>
 
     <div class="row">
         <div class="col-md-4">
@@ -43,6 +31,7 @@
                 <div class ="block-body">
                     <h4><u> - Visualizar histórico pessoal.</u></h4>
                     <h4><u> - Visualizar histórico geral.</u></h4>
+
                 </div>
             </div>
         </div>
@@ -53,7 +42,9 @@
                     <h2> Estatísticas </h2>
                 </div>
                 <div class ="block-body">
+
                     <h4><u> - Visualizar estatística geral.</u></h4>
+
                 </div>
             </div>
         </div>
@@ -64,7 +55,9 @@
                     <h2> Contas </h2>
                 </div>
                 <div class ="block-body">
+
                      <h4><a href="{% url 'users:manage_accounts' %}"><u> - Visualizar contas.</u></a></h4>
+
                 </div>
             </div>
         </div>
@@ -80,7 +73,7 @@
                     <h2> Pacientes </h2>
                 </div>
                 <div class ="block-body">
-                    <h4><u> - Gerenciar pacientes.</u></h4>
+                    <h4><a href={% url 'users:register_patient' %}>Gerenciar pacientes</a></h4>
                 </div>
             </div>
         </div>
@@ -88,10 +81,10 @@
         <div class="col-md-4 ">
             <div class="block">
                 <div class="block-title">
-                    <h2> Classificação </h2>
+                    <h2>Classificação</h2>
                 </div>
                 <div class ="block-body">
-                    <h4><u> - Gerar classificação de risco.</u></h4>
+                    <h4><a href={% url 'risk_rating:risk_rating' %}>Gerar classificação de risco</a></h4>
                 </div>
             </div>
         </div>
@@ -102,7 +95,7 @@
                      <h2> Filas </h2>
                 </div>
                 <div class ="block-body">
-                    <h4><u> - Gerar filas.</u></h4>
+                    <h4><u>Gerar filas</u></h4>
                 </div>
             </div>
         </div>
