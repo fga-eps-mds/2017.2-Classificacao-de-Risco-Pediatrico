@@ -7,31 +7,7 @@
 
 {% block head %}
     <link rel="stylesheet" href="{% static "css/main.css" %}">
-{% endblock %}
-
-{% block brand %}
-  {% if user.is_authenticated %}
-    <a class="navbar-brand" href="{% url 'users:home' %}">
-      <img src="/static/img/LogoCRP.png" width="100" height="50" alt="">
-    </a>
-    {% else %}
-    <a class="navbar-brand" href="{% url 'users:login' %}">
-      <img src="/static/img/LogoCRP.png" width="100" height="50" alt="">
-    </a>
-  {% endif %}
-{% endblock %}
-
-{% block login-button %}
-{% if user.is_authenticated %}
-    <div class="welcome">
-      <p>Seja bem-vindo(a),
-        {{ user.name }}
-      </p>
-    <div class="logout">
-      <p><a href="{% url 'users:logout' %}">Logout</a></p>
-    </div>
-  </div>
-{% endif %}
+    <link rel="stylesheet" href="{% static "css/register.css" %}">
 {% endblock %}
 
 {% block content %}
@@ -39,45 +15,91 @@
        <h1 class="display-6">Cadastro de Paciente</h1>
        <p class="description"> Informe os dados do novo paciente </p>
        <form role="form" class="form" method="POST">
-              {% csrf_token %}
-              {{ form.non_field_errors }}
+             {% csrf_token %}
+             {{ form.non_field_errors }}
               <div class="d-inline-block">
-                  {% for field in forms.registration_patient_form %}
-                     <div class="form-group">
 
-                       {{ field.label_tag }}
-                       <input  type="text" name="{{ field.name }}" class="rounded" id="{{ field.id_for_label }}" >
-                       {{ field.errors }}
+                     <div class="form-row">
+                         <div class="fieldWrapper">
+                           {{ form.name.errors }}
+                           <label for="{{ form.name.id_for_label }}" class="col-form-label">Nome:</label>
+                           {{ form.name }}
+                       </div>
+                       <div class="fieldWrapper">
+                         {{ form.cpf.errors }}
+                         <label for="{{ form.cpf.id_for_label }}" class="col-form-label">CPF:</label>
+                         {{ form.cpf }}
+                       </div>
+                     </div>
 
+                     <div class="form-row">
+                         <div class="fieldWrapper">
+                           {{ form.guardian.errors }}
+                           <label for="{{ form.guardian.id_for_label }}" class="col-form-label">Resp:</label>
+                           {{ form.guardian }}
+                       </div>
+                       <div class="fieldWrapper">
+                         {{ form.parents_name.errors }}
+                         <label for="{{ form.parents_name.id_for_label }}" class="col-form-label">Pais:</label>
+                         {{ form.parents_name }}
+                       </div>
                      </div>
-                  {% endfor %}
-              </div>
-              <div class="d-inline-block">
-                  {% for field in forms.address_form %}
-                     <div class="form-group">
-                        {{ field.label_tag }}
-                        <input  type="text" name="address-{{ field.name }}" class="rounded" id="{{ field.id_for_label }}" >
-                        {{ field.errors }}
+
+                     <div class="form-row">
+                         <div class="fieldWrapper">
+                           {{ form.birth_date.errors }}
+                           <label for="{{ form.birth_date.id_for_label }}" class="col-form-label">Nasc:</label>
+                           {{ form.birth_date }}
+                       </div>
+                       <div class="fieldWrapper">
+                         {{ form.uf.errors }}
+                         <label for="{{ form.uf.id_for_label }}" class="col-form-label">UF:</label>
+                         {{ form.uf }}
+                       </div>
                      </div>
-                  {% endfor %}
+
+                     <div class="form-row">
+                         <div class="fieldWrapper">
+                           {{ form.city.errors }}
+                           <label for="{{ form.uf.id_for_label }}" class="col-form-label">City:</label>
+                           {{ form.city }}
+                       </div>
+                        <div class="fieldWrapper">
+                           {{ form.neighborhood.errors }}
+                           <label for="{{ form.neighborhood.id_for_label }}" class="col-form-label">Bairro:</label>
+                           {{ form.neighborhood }}
+                       </div>
+                     </div>
+
+                     <div class="form-row">
+                         <div class="fieldWrapper">
+                           {{ form.street.errors }}
+                           <label for="{{ form.street.id_for_label }}" class="col-form-label">Rua:</label>
+                           {{ form.street }}
+                        </div>
+                        <div class="fieldWrapper">
+                          {{ form.block.errors }}
+                          <label for="{{ form.block.id_for_label }}" class="col-form-label">Conj:</label>
+                          {{ form.block }}
+                        </div>
+                     </div>
+
+                     <div class="form-row">
+                         <div class="fieldWrapper">
+                           {{ form.number.errors }}
+                           <label for="{{ form.number.id_for_label }}" class="col-form-label">Num:</label>
+                           {{ form.number }}
+                        </div>
+                     </div>
               </div>
-          <button class="btn btn-outline-secondary" name='action' value='address' type="submit">Cadastrar</button>
+
+          <!-- <button class="btn btn-outline-secondary" name='action' value='address' type="submit">Cadastrar</button> -->
+
+              <div id="botoes_cadastro">
+                  <a href="/user/home_receptionist"><button class="btn btn-outline-secondary" type="button">Cancelar</button></a>
+                  <button class="btn btn-primary" name='action' value='address' type="submit">Cadastrar</button>
+              </div>
+
        </form>
-       <!-- <form class="form-group" method="POST">
-          {% csrf_token %}
-          {{ form.non_field_errors }}
-          {% for field in form %}
-          <div id="login-form-group">
-             <div class="form-group">
-                {{ field.label_tag }}
-
-                <input  type="text" name="{{ field.name }}" class="rounded" id="{{ field.id_for_label }}" >
-
-                {{ field.errors }}
-             </div>
-          </div>
-          {% endfor %}
-          <button class="btn btn-outline-secondary float-right"name='action' value='address' type="submit">Cadastrar</button>
-       </form> -->
     </div>
 {% endblock %}
