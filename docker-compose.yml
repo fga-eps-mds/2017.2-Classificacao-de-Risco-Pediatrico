@@ -7,12 +7,10 @@ services:
       - "5433:5432"
   web:
     build: .
-    command: /bin/bash -l -c "python manage.py makemigrations && python manage.py migrate && python3 manage.py runserver 0.0.0.0:8000"
+    command: /bin/bash -l -c "python manage.py migrate && python3 manage.py runserver 0.0.0.0:8000"
     volumes:
       - .:/code
     ports:
       - "8000:8000"
     depends_on:
-      - db
-    links:
       - db

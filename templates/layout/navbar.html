@@ -1,13 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  {%if user.is_authenticated %}
-   <a class="navbar-brand" href="{% url 'users:logout' %}">
+   <a class="navbar-brand" href="#">
    <img src="/static/img/LogoCRP.png" width="100" height="50" alt="">
    </a>
-   {% else %}
-   <a class="navbar-brand" href="{% url 'users:login' %}">
-   <img src="/static/img/LogoCRP.png" width="100" height="50" alt="">
-   </a>
-   {% endif %}
    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
    <span class="navbar-toggler-icon"></span>
    </button>
@@ -15,24 +9,30 @@
       {% if not user.is_authenticated %}
          <ul class="navbar-nav">
              <li class="nav-item active">
-                <a class="nav-link" href="/login">Login <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/user/login">Login <span class="sr-only">(current)</span></a>
              </li>
          </ul>
       {% else %}
           <p>Seja bem-vindo(a),
           {{ user.name }}
           </p>
-          <div class="logout">
-            <p><a href="{% url 'users:logout' %}">Logout</a></p>
-          </div>
       {% endif %}
 
       <ul class="navbar-nav ml-auto">
-           {% if not user.is_authenticated %}
-               <li>
-                   <a href="/register/profile">Cadastre-se</a>
-               </li>
-           {% endif %}
+         <li>
+            <div class="nav-item dropdown">
+               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               Cadastro
+               </a>
+               <for class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" href="/user/register/admin">Administrador</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="/user/register/attendant">Atendente</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="/user/register/recepcionist">Recepcionista</a>
+               </for>
+            </div>
+         </li>
       </ul>
    </div>
 </nav>
