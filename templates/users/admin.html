@@ -1,6 +1,7 @@
 {% extends 'layout/layout.html' %}
 {% load staticfiles %}
 
+
 {% block login-button %}
 {% endblock %}
 
@@ -28,8 +29,9 @@
                     <h2> Histórico </h2>
                 </div>
                 <div class ="block-body">
-                    <h4><u>Visulizar histórico pessoal</u></h4>
-                    <h4><u>Visulizar histórico geral</u></h4>
+                    <h4><u> - Visualizar histórico pessoal.</u></h4>
+                    <h4><u> - Visualizar histórico geral.</u></h4>
+
                 </div>
             </div>
         </div>
@@ -40,7 +42,9 @@
                     <h2> Estatísticas </h2>
                 </div>
                 <div class ="block-body">
-                    <h4><u>Visulizar estatística geral</u></h4>
+
+                    <h4><u> - Visualizar estatística geral.</u></h4>
+
                 </div>
             </div>
         </div>
@@ -51,7 +55,9 @@
                     <h2> Contas </h2>
                 </div>
                 <div class ="block-body">
-                    <h4><u>Visulizar contas</u></h4>
+
+                     <h4><a href="{% url 'users:manage_accounts' %}"><u> - Visualizar contas.</u></a></h4>
+
                 </div>
             </div>
         </div>

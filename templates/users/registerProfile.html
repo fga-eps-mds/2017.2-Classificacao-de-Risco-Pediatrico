@@ -17,26 +17,88 @@
              {% csrf_token %}
              {{ form.non_field_errors }}
               <div class="d-inline-block">
-                  {% for field in forms.registration_staff_form %}
-                     <div class="form-group">
 
+                <div class="form-row">
+                    <div class="fieldWrapper">
+                      {{ form.name.errors }}
+                      <label for="{{ form.name.id_for_label }}" class="col-form-label">Nome:</label>
+                      {{ form.name }}
+                  </div>
+                  <div class="fieldWrapper">
+                    {{ form.id_user.errors }}
+                    <label for="{{ form.id_user.id_for_label }}" class="col-form-label">ID:</label>
+                    {{ form.id_user }}
+                  </div>
+                </div>
 
-                            {{ field.label_tag }}
-                            {{ field }}
+                <div class="form-row">
+                    <div class="fieldWrapper">
+                      {{ form.email.errors }}
+                      <label for="{{ form.email.id_for_label }}" class="col-form-label">email:</label>
+                      {{ form.email }}
+                  </div>
+                  <div class="fieldWrapper">
+                    {{ form.password1.errors }}
+                    <label for="{{ form.password1.id_for_label }}" class="col-form-label">senha:</label>
+                    {{ form.password1 }}
+                  </div>
+                </div>
 
+                <div class="form-row">
+                    <div class="fieldWrapper">
+                      {{ form.password2.errors }}
+                      <label for="{{ form.password2.id_for_label }}" class="col-form-label">confirmação:</label>
+                      {{ form.password2 }}
+                  </div>
+                </div>
 
-                        {{ field.errors }}
-                     </div>
-                  {% endfor %}
-              </div>
-              <div class="d-inline-block">
-                  {% for field in forms.address_form %}
-                     <div class="form-group">
-                        {{ field.label_tag }}
-                        <input  type="text" name="address-{{ field.name }}" class="rounded" id="{{ field.id_for_label }}" >
-                        {{ field.errors }}
-                     </div>
-                  {% endfor %}
+                <div class="form-row">
+                  <div class="fieldWrapper">
+                    {{ form.profile.errors }}
+                    <label for="{{ form.profile.id_for_label }}" class="col-form-label">Perfil:</label>
+                    {{ form.profile }}
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="fieldWrapper">
+                    {{ form.uf.errors }}
+                    <label for="{{ form.uf.id_for_label }}" class="col-form-label">UF:</label>
+                    {{ form.uf }}
+                  </div>
+                  <div class="fieldWrapper">
+                    {{ form.city.errors }}
+                    <label for="{{ form.uf.id_for_label }}" class="col-form-label">City:</label>
+                    {{ form.city }}
+                </div>
+                </div>
+
+                <div class="form-row">
+                   <div class="fieldWrapper">
+                      {{ form.neighborhood.errors }}
+                      <label for="{{ form.neighborhood.id_for_label }}" class="col-form-label">Bairro:</label>
+                      {{ form.neighborhood }}
+                  </div>
+                  <div class="fieldWrapper">
+                    {{ form.street.errors }}
+                    <label for="{{ form.street.id_for_label }}" class="col-form-label">Rua:</label>
+                    {{ form.street }}
+                 </div>
+                </div>
+
+                <div class="form-row">
+                   <div class="fieldWrapper">
+                     {{ form.block.errors }}
+                     <label for="{{ form.block.id_for_label }}" class="col-form-label">Conj:</label>
+                     {{ form.block }}
+                   </div>
+                   <div class="fieldWrapper">
+                     {{ form.number.errors }}
+                     <label for="{{ form.number.id_for_label }}" class="col-form-label">Num:</label>
+                     {{ form.number }}
+                  </div>
+                </div>
+
               </div>
           <button class="btn btn-outline-secondary" name='action' value='address' type="submit">Cadastrar</button>
        </form>

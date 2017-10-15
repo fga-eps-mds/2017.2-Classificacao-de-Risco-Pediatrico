@@ -32,27 +32,6 @@ class UserManager(BaseUserManager):
         return user
 
 
-class Address(models.Model):
-    uf = models.CharField(verbose_name='UF',
-                          max_length=50,
-                          blank=False)
-    city = models.CharField(verbose_name='Cidade',
-                            max_length=50,
-                            blank=False)
-    neighborhood = models.CharField(verbose_name='Bairro',
-                                    max_length=100,
-                                    blank=False)
-    street = models.CharField(verbose_name='Rua',
-                              max_length=50,
-                              blank=False)
-    block = models.CharField(verbose_name='Conjunto',
-                             max_length=50,
-                             blank=False)
-    number = models.CharField(verbose_name='Numero',
-                              max_length=10,
-                              blank=False)
-
-
 # Classe dos usuarios possui atendente e recepcionista
 
 class Staff(AbstractBaseUser):
@@ -88,6 +67,27 @@ class Staff(AbstractBaseUser):
         choices=PROFILE_TYPES,
         default=0
     )
+
+    uf = models.CharField(verbose_name='UF',
+                          max_length=50,
+                          blank=False)
+    city = models.CharField(verbose_name='Cidade',
+                            max_length=50,
+                            blank=False)
+    neighborhood = models.CharField(verbose_name='Bairro',
+                                    max_length=100,
+                                    blank=False)
+    street = models.CharField(verbose_name='Rua',
+                              max_length=50,
+                              blank=False)
+    block = models.CharField(verbose_name='Conjunto',
+                             max_length=50,
+                             blank=False)
+    number = models.CharField(verbose_name='Numero',
+                              max_length=10,
+                              blank=False)
+
+    is_superuser = False
 
     USERNAME_FIELD = 'email'
 
@@ -152,4 +152,35 @@ class Patient(models.Model):
         blank=False,
         help_text=_('Informe o nome dos pais'),
         unique=True
+    )
+
+    uf = models.CharField(
+        verbose_name='UF',
+        max_length=50,
+        blank=False
+    )
+    city = models.CharField(
+        verbose_name='Cidade',
+        max_length=50,
+        blank=False
+    )
+    neighborhood = models.CharField(
+        verbose_name='Bairro',
+        max_length=100,
+        blank=False
+    )
+    street = models.CharField(
+        verbose_name='Rua',
+        max_length=50,
+        blank=False
+    )
+    block = models.CharField(
+        verbose_name='Conjunto',
+        max_length=50,
+        blank=False
+    )
+    number = models.CharField(
+        verbose_name='Numero',
+        max_length=10,
+        blank=False
     )

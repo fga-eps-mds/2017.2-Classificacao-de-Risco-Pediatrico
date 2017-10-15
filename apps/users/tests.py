@@ -4,7 +4,8 @@ import pytest
 # from factories import PatientFactory
 # Create your tests here.
 
-from apps.users.models import Staff
+from apps.users.forms import RegistrationStaffForm, RegistrationPatientForm
+from apps.users.models import Staff, Patient
 
 
 @pytest.mark.django_db
@@ -27,7 +28,7 @@ class TestUsers:
         response = client.post('/', {'username': 'email@gmail.com',
                                      'password': "1234asdf"})
 
-        assert response.url == '/home/login/admin'
+        assert response.url == '/login/admin'
 
     def test_login_view_for_receptionist(self, client):
 
@@ -61,6 +62,63 @@ class TestUsers:
             username=kwargs["email"],
             password=kwargs["password"])
         assert is_logged is False
+
+    @pytest.mark.parametrize(
+                            'url',
+                            ['/register/profile/',
+                                '/register/patient/',
+                                '/home/receptionist/', '/'])
+    def test_get_route(self, client, url):
+        response = client.get(url)
+        assert response.status_code == 200
+
+    @pytest.mark.parametrize('url, template', [
+        ('/register/profile/', 'users/registerProfile.html'),
+        ('/register/patient/', 'users/registerPatient.html')])
+    def test_sign_up_template(self, client, url, template):
+        response = client.get(url)
+        assert response.templates[0].name == template
+
+    profile_data = ({
+        'username': 'usernameTest', 'password1': 'password1Teste',
+        'id_user': 'idUserTest', 'uf': 'ufTest', 'city': 'cityTeste',
+        'neighborhood': 'neighborhoodTest', 'street': 'streetTeste',
+        'block': 'blockTeste', 'number': 'numberTest',
+        'email': 'email@test.com', 'profile': '1', 'name': 'nameTest',
+        'password2': 'password1Teste'})
+
+    patient_data = ({
+        'name': 'nameTest', 'guardian': 'guardianTeste',
+        'birth_date': '12/2/12', 'cpf': '156498',
+        'parents_name': 'parents_nameTest', 'uf': 'ufTest',
+        'city': 'cityTeste', 'neighborhood': 'neighborhoodTest',
+        'street': 'streetTeste', 'block': 'blockTeste',
+        'number': 'numberTest'})
+
+    @pytest.mark.parametrize('url, model, data', [
+        ('/register/patient/', Patient, patient_data),
+        ('/register/profile/', Staff, profile_data)])
+    def test_sign_up_post(self, client, url, model, data):
+        response = client.post(url, data)
+        assert response.status_code == 302
+        assert model.objects.count() == 1
+
+    @pytest.mark.parametrize('url, form', [
+        ('/register/profile/', RegistrationStaffForm),
+        ('/register/patient/', RegistrationPatientForm)])
+    def test_sign_up_has_form(self, client, url, form):
+        response = client.get(url)
+        assert 'form' in response.context
+        assert response.context['form'] is not None
+        assert isinstance(response.context['form'], form)
+
+    @pytest.mark.parametrize('url, data, urlredirect', [
+        ('/register/profile/', profile_data, '/'),
+        ('/register/patient/', patient_data, '/')])
+    def test_sign_up_post_redirect(self, client, url, data, urlredirect):
+        response = client.post(url, data, follow=True)
+        assert response.status_code == 200
+        assert response.redirect_chain == [(urlredirect, 302)]
 
     def test_home_receptionist_view(self, client):
         response = client.get('/home/receptionist/')
