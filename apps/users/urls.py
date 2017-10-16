@@ -14,7 +14,7 @@ urlpatterns = [
         name="register_patient"),
     url(r'^show/patient/$', views.show_pacient_view,
         name="show_patient"),
-    url(r'^home/receptionist/$', views.home_receptionist_view,
+    url(r'^home/receptionist/$',  views.registered_patient_view,
         name="home_receptionist"),
     url(r'^home/attendant/$', views.home_attendant_view,
         name="home_attendant"),
