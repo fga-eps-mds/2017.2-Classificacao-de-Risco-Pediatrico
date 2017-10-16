@@ -152,4 +152,4 @@ LOGIN_REDIRECT_URL = ('..')
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
 
-AUTH_USER_MODEL = 'users.Admin'
+AUTH_USER_MODEL = 'users.Staff'

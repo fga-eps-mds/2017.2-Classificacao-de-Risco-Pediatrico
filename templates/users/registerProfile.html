@@ -11,8 +11,8 @@
 
 {% block content %}
     <div class="box rounded float-right">
-       <h1 class="display-6">Cadastro de Paciente</h1>
-       <p class="description"> Informe os dados do novo paciente </p>
+       <h1 class="display-6">Cadastro de Funcionario</h1>
+       <p class="description"> Informe os dados do novo funcionario </p>
        <form role="form" class="form" method="POST">
              {% csrf_token %}
              {{ form.non_field_errors }}
@@ -22,6 +22,11 @@
 
 
                             {{ field.label_tag }}
+                            {% if field.name == password %}
+                            { field.label_tag = Senha }
+                            {% elif field.name == password1 %}
+                            { field.label_tag = Confirmação de Senha }
+                            {% endif %}
                             {{ field }}
 
 

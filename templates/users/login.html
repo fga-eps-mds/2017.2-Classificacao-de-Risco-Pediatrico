@@ -20,31 +20,13 @@
    <form role="form" class="form" method="POST" >
       {% csrf_token %}
 
-       <input type="hidden" name="user_type" id="user_type" value="Admin">
-       <div class="errortext">
-         {{ form.non_field_errors }}
-       </div>
+       <input type="hidden" name="user_type" id="user_type" value="Staff">
+       {% if errors %}
+           <div class="errortext">
+             {{ errors }}
+           </div>
+       {% endif %}
 
-      <ul class="nav nav-tabs" id="crp-tab" role="tablist">
-         <li class="nav-item">
-            <a id='tab1' class="nav-link active" data-toggle="tab" href="#home">Admin</a>
-         </li>
-         <li class="nav-item">
-            <a id='tab2' class="nav-link" data-toggle="tab" href="#profile" role="tab">Atendente</a>
-         </li>
-         <li class="nav-item">
-            <a id='tab3' class="nav-link" data-toggle="tab" href="#messages" role="tab">Recepcionista</a>
-         </li>
-      </ul>
-      <div class="tab-content">
-         <div class="tab-pane active" id="home" role="tabpanel">
-         </div>
-         <div class="tab-pane" id="profile" role="tabpanel">
-         </div>
-         <div class="tab-pane" id="messages" role="tabpanel">
-            <input type="hidden" name="class_type" value="admin">
-         </div>
-      </div>
       <div id="login-form-group">
          <div class="form-group">
             {{ form.username.label_tag }}
@@ -61,20 +43,5 @@
    </form>
  </div>
 </div>
-
-    <script>
-        (function() {
-            var user_type = document.querySelector('#user_type');
-            var admin = document.querySelector('#tab1');
-            var aten = document.querySelector('#tab2');
-            var recep = document.querySelector('#tab3');
-
-            admin.addEventListener('click', () => user_type.value = "Admin");
-            aten.addEventListener('click', () => user_type.value = "Atendente");
-            recep.addEventListener('click', () => user_type.value = "Recepcionista");
-        }) ();
-
-
-    </script>
 
 {% endblock %}

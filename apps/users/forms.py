@@ -2,34 +2,24 @@
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
 
-from .models import Admin, Attendant, Patient, Address, Receptionist
+from .models import Patient, Staff
 
 
-class AddressForm(forms.ModelForm):
+class RegistrationStaffForm(UserCreationForm):
     class Meta:
-        model = Address
-        fields = ['uf', 'city', 'neighborhood', 'street', 'block', 'number']
-
-
-class RegistrationReceptionistForm(UserCreationForm):
-    class Meta:
-        model = Receptionist
-        fields = ['name', 'email', 'id_user']
-
-
-class RegistrationAttendantForm(UserCreationForm):
-    class Meta:
-        model = Attendant
-        fields = ['name', 'email', 'id_user']
-
-
-class RegistrationAdminForm(UserCreationForm):
-    class Meta:
-        model = Admin
-        fields = ['name', 'email', 'id_user']
+        model = Staff
+        fields = ['name', 'email', 'id_user', 'profile', 'uf', 'city',
+                  'neighborhood', 'street', 'block', 'number']
 
 
 class RegistrationPatientForm(forms.ModelForm):
     class Meta:
         model = Patient
-        fields = ['name', 'cpf', 'guardian', 'birth_date', 'parents_name']
+        fields = ['name', 'cpf', 'guardian', 'birth_date', 'parents_name',
+                  'uf', 'city', 'neighborhood', 'street', 'block', 'number']
+
+class EditPatientForm(forms.ModelForm):
+    class Meta:
+        model = Patient
+        fields = ['name', 'cpf', 'guardian', 'birth_date', 'parents_name',
+                  'uf', 'city', 'neighborhood', 'street', 'block', 'number']
