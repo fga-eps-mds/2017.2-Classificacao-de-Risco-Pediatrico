@@ -12,7 +12,7 @@ urlpatterns = [
         name="register_profile"),
     url(r'^register/patient/$', views.sign_up_patient,
         name="register_patient"),
-    url(r'^show/patient/(?P<cpf>\d+)/$', views.show_pacient_view,
+    url(r'^show/patient/$', views.show_pacient_view,
         name="show_patient"),
     url(r'^home/receptionist/$', views.home_receptionist_view,
         name="home_receptionist"),
@@ -23,5 +23,15 @@ urlpatterns = [
     url(r'^accounts/edit/(?P<id_user>\w+)/$', views.edit_accounts_view,
         name="edit_acconts"),
     url(r'^accounts/remove/(?P<id_user>\w+)/$', views.staff_remove,
-        name="staff_remove")
+        name="staff_remove"),
+    url(r'^registered/patient/$', views.registered_patient_view,
+        name="registered_patient"),
+    url(r'^registered/patient/(?P<cpf_patient>\w+)/$', views.queue_patient,
+        name="queue_patient"),
+    url(r'^queue/patient/$', views.queue_patient_view,
+        name="queue_patient"),
+    url(r'^queue/patient/(?P<cpf_patient>\w+)/$', views.classification,
+        name="classification"),
+    url(r'^classification/$', views.classification_view,
+        name="classification")
 ]
