@@ -13,3 +13,5 @@ script:
 after_script:
   - docker-compose run web coveralls
   - docker-compose down
+after_success:
+  - coveralls

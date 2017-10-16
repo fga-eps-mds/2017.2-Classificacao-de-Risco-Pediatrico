@@ -5,10 +5,9 @@ from . import views
 
 app_name = 'users'
 urlpatterns = [
-    url(r'^$', views.home, name="home"),
-    url(r'^login/$', views.login_view, name="login"),
+    url(r'^$', views.login_view, name="login"),
     url(r'^logout/$', views.logout_view, name="logout"),
-    url(r'^login/admin$', views.admin_view, name="admin"),
+    url(r'^home/admin$', views.admin_view, name="admin"),
     url(r'^register/profile/$', views.sign_up_profile,
         name="register_profile"),
     url(r'^register/patient/$', views.sign_up_patient,

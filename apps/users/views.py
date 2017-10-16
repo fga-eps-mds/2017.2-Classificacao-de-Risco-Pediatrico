@@ -1,10 +1,10 @@
 # Arquivo: /apps/users/views.py
 from django.shortcuts import render, redirect
-from django.http import HttpResponseRedirect
 from django.contrib.auth.views import login
 from django.contrib.auth.views import logout
 from django.core.urlresolvers import reverse
 from django.db.models import Q
+from django.http import HttpResponseRedirect
 
 from django.contrib.auth import authenticate
 
@@ -15,14 +15,7 @@ from .forms import EditPatientForm
 from .models import Patient, Staff
 
 
-def home(request):
-    return render(request, 'users/home.html')
-
-
 def login_view(request, *args, **kwargs):
-    if request.user.is_authenticated():
-        return HttpResponseRedirect(reverse('users:home'))
-
     if request.method == "POST":
         username = request.POST['username']
         password = request.POST['password']
@@ -30,24 +23,27 @@ def login_view(request, *args, **kwargs):
         user = authenticate(username=username, password=password)
 
         if user is not None:
-            if user.is_superuser:
+            if user.is_admin:
                 login(request, user)
-                return redirect("/user/login/admin")
+                return redirect("/home/admin")
 
             if user.profile == 1:
                 login(request, user)
-                return redirect("/user/home/receptionist/")
+                return redirect("/home/receptionist/")
 
             if user.profile == 2:
                 login(request, user)
-                return redirect("/user/login/admin")
+                return redirect("/risk_rating")
         else:
-            kwargs['extra_context'] = {'next': reverse('users:home'), 'errors':
-                                       'Usuário e/ou senha inválido.'}
+
+            kwargs['extra_context'] = {'next': reverse('users:login'),
+                                       'errors': 'Usuário e/ou senha inválido.'
+                                       }
+
             kwargs['template_name'] = 'users/login.html'
             return login(request, *args, **kwargs)
 
-    kwargs['extra_context'] = {'next': reverse('users:home')}
+    kwargs['extra_context'] = {'next': reverse('users:login')}
     kwargs['template_name'] = 'users/login.html'
     return login(request, *args, **kwargs)
 
@@ -87,7 +83,7 @@ def sign_up_patient(request):
         form = RegistrationPatientForm(request.POST)
         form.is_valid()
         form.non_field_errors()
-        [print(field.label, field.name, field.errors) for field in form]
+        # [print(field.label, field.name, field.errors) for field in form]
 
         if form.is_valid():
             form.save()
@@ -110,14 +106,6 @@ def register_patient(request):
     Register a patient
     """
     return render(request, 'user/login', {})
-
-
-def show_pacient_view(request, cpf):
-    """
-    return rendered text from showPatient
-    """
-    patient = Patient.objects.filter(cpf=cpf)[0]
-    return render(request, 'users/showPatient.html', {'patient': patient})
 
 
 def home_receptionist_view(request):
