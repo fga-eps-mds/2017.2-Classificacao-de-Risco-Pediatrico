@@ -28,7 +28,7 @@ class TestUsers:
         response = client.post('/', {'username': 'email@gmail.com',
                                      'password': "1234asdf"})
 
-        assert response.url == '/login/admin'
+        assert response.url == '/home/admin'
 
     def test_login_view_for_receptionist(self, client):
 

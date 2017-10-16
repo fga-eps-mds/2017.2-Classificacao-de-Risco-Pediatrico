@@ -23,7 +23,7 @@ def login_view(request, *args, **kwargs):
         if user is not None:
             if user.is_admin:
                 login(request, user)
-                return redirect("/login/admin")
+                return redirect("/home/admin")
 
             if user.profile == 1:
                 login(request, user)
