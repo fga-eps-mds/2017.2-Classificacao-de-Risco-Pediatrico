@@ -135,27 +135,29 @@ def home_attendant_view(request):
 
 def registered_patient_view(request):
     patients = Patient.objects.all()
-    return render(request, 'users/registeredPatient.html', {'patients': patients})
+    return render(request, 'users/registeredPatient.html',
+                           {'patients': patients})
 
 
 def queue_patient(request, cpf_patient):
     patients = Patient.objects.filter(cpf=cpf_patient)
     allPatients = Patient.objects.all()
     patient = Patient.objects.get(cpf=cpf_patient)
-    if patient.isInQueue == True:
+    if patient.isInQueue:
         return HttpResponseRedirect(reverse('users:registered_patient'))
     else:
         patient.isInQueue = True
         patient.queuePosition = checkQueueLastPosition(allPatients)
         patient.save()
-        return render(request, 'users/queuePatient.html', {'patients': patients})
+        return render(request, 'users/queuePatient.html',
+                               {'patients': patients})
     return render(request, 'users/queuePatient.html', {'patients': patients})
 
 
 def checkQueueLastPosition(patients):
     lastPosition = 0
     for patients in patients:
-        if patients.isInQueue == True:
+        if patients.isInQueue:
             if lastPosition < patients.queuePosition:
                 lastPosition = patients.queuePosition
     lastPosition = lastPosition + 1
@@ -179,8 +181,9 @@ def staff_remove(request, id_user):
 
 
 def queue_patient_view(request):
-    queuedPatients = Patient.objects.filter(isInQueue = True)
-    return render(request, 'users/queuePatient.html', {'queuedPatients': queuedPatients})
+    queuedPatients = Patient.objects.filter(isInQueue=True)
+    return render(request, 'users/queuePatient.html',
+                           {'queuedPatients': queuedPatients})
 
 
 def classification_view(request):
@@ -198,4 +201,3 @@ def show_pacient_view(request, cpf):
     """
     patient = Patient.objects.filter(cpf=cpf)[0]
     return render(request, 'users/showPatient.html', {'patient': patient})
-
