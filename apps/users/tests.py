@@ -93,7 +93,8 @@ class TestUsers:
         'parents_name': 'parents_nameTest', 'uf': 'ufTest',
         'city': 'cityTeste', 'neighborhood': 'neighborhoodTest',
         'street': 'streetTeste', 'block': 'blockTeste',
-        'number': 'numberTest'})
+        'number': 'numberTest', 'isInQueue': 'True',
+        'queuePosition': '5'})
 
     @pytest.mark.parametrize('url, model, data', [
         ('/register/patient/', Patient, patient_data),
@@ -114,7 +115,7 @@ class TestUsers:
 
     @pytest.mark.parametrize('url, data, urlredirect', [
         ('/register/profile/', profile_data, '/'),
-        ('/register/patient/', patient_data, '/')])
+        ('/register/patient/', patient_data, '/queue/patient/')])
     def test_sign_up_post_redirect(self, client, url, data, urlredirect):
         response = client.post(url, data, follow=True)
         assert response.status_code == 200
@@ -123,7 +124,6 @@ class TestUsers:
     def test_home_receptionist_view(self, client):
         response = client.get('/home/receptionist/')
         assert response.status_code == 200
-
 
     def default_user_data(self):
         data = {
@@ -174,76 +174,3 @@ class TestUsers:
     def test__str__(self):
         user_email = Staff(email='bruno@gmail.com')
         assert str(user_email) == 'bruno@gmail.com'
-        test_user = Admin.objects.create_superuser(**self.default_user_data())
-        assert test_user.is_superuser
-
-    def test_sign_up_profile(self, profile_fixture):
-        assert profile_fixture.status_code == 200
-
-    def test_sign_up_profile_template(self, profile_fixture):
-        assert profile_fixture.templates[0].name == "users/registerProfile.html"
-
-    def test_sign_up_profile_has_form(self, profile_fixture):
-        assert 'form' in profile_fixture.context
-        assert profile_fixture.context['form'] is not None
-        assert isinstance(profile_fixture.context['form'], RegistrationStaffForm)
-
-    def test_sign_up_profile_post(self, client, profile_data):
-        response = client.post('/user/register/profile/', profile_data,
-                               follow=True)
-        assert response.status_code == 200
-        assert Staff.objects.count() == 1
-
-    def test_sign_up_profile_post_redirect(self, client, profile_data):
-        response = client.post('/user/register/profile/', profile_data)
-        assert response.status_code == 302
-        # assert response.redirect_chain == []
-
-
-#Patient views test
-    def test_sign_up_patient(self, patient_fixture):
-        assert patient_fixture.status_code == 200
-
-    def test_sign_up_patient_template(self, patient_fixture):
-        assert patient_fixture.templates[0].name == "users/registerPatient.html"
-
-    def test_sign_up_patient_has_form(self, patient_fixture):
-        assert 'form' in patient_fixture.context
-        assert patient_fixture.context['form'] is not None
-        assert isinstance(patient_fixture.context['form'],  RegistrationPatientForm)
-
-    # def test_sign_up_patient_post(self, client, patient_data):
-    #     response = client.post('/user/register/profile/', patient_data,
-    #                            follow=True)
-    #     assert response.status_code == 200
-    #     assert Staff.objects.count() == 1
-    #
-    # def test_sign_up_patient_post_redirect(self, client, patient_data):
-    #     response = client.post('/user/register/profile/', patient_data)
-    #     assert response.status_code == 302
-    #     assert response.redirect_chain == []
-
-    @pytest.fixture
-    def profile_fixture(self, client):
-        return client.get('/user/register/profile/')
-
-    @pytest.fixture
-    def profile_data(self, client):
-        return ({'username':'usernameTest', 'password1':'password1Teste',
-                'id_user':'idUserTest', 'uf':'ufTest','city':'cityTeste',
-                'neighborhood':'neighborhoodTest', 'street':'streetTeste',
-                'block':'blockTeste', 'number':'numberTest', 'email':'email@test.com',
-                'profile':'1', 'name':'nameTest', 'password2':'password1Teste'})
-
-    @pytest.fixture
-    def patient_fixture(self, client):
-        return client.get('/user/register/patient/')
-
-    @pytest.fixture
-    def patient_data(self, client):
-        return ({'username':'usernameTest', 'password1':'password1Teste',
-                'id_user':'idUserTest', 'uf':'ufTest','city':'cityTeste',
-                'neighborhood':'neighborhoodTest', 'street':'streetTeste',
-                'block':'blockTeste', 'number':'numberTest', 'email':'email@test.com',
-                'profile':'1', 'name':'nameTest', 'password2':'password1Teste'})
-
