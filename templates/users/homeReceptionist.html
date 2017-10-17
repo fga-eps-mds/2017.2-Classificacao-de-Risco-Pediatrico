@@ -2,21 +2,45 @@
 {% load staticfiles %}
 
 {% block background %}
-<div class="home-recepcionist"></div>
+<div class="receptionist-page"></div>
 {% endblock %}
 
 {% block head %}
     <link rel="stylesheet" href="{% static "css/main.css" %}">
+    <link rel="stylesheet" href="{% static "css/mainReceptionist.css" %}">
 {% endblock %}
 
 {% block content %}
-    <div class="box">
-        <form>
-          <div class="form-group">
-            <label for="exampleFormControlInput1">CPF</label>
-            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="00000000000">
+
+<div class="container">
+
+   <h1 class="display-6">Seja bem-vindo, {{ user.name }}!</h1>
+   <h2 class="description display-6" style="padding-bottom: 30px"> Selecione uma das opções a seguir:</h2>
+
+    <div class="row">
+          <div class="col-md-4">
+            <div class="block">
+              <div class="block-title">
+                <h2> Pacientes </h2>
+              </div>
+              <div class ="block-body">
+                <h4><a href={% url 'users:register_patient' %}>Gerenciar pacientes</a></h4>
+              </div>
+            </div>
           </div>
-          <button type="submit" class="btn btn-outline-secondary">Submit</button>
-        </form>
+
+        <div class="col-md-4">
+            <div class="block">
+                <div class="block-title">
+                     <h2> Filas </h2>
+                </div>
+                <div class ="block-body">
+                    <h4><u>Gerar filas</u></h4>
+                </div>
+            </div>
+        </div>
     </div>
+
+</div>
+
 {% endblock %}
