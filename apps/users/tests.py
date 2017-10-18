@@ -138,6 +138,12 @@ class TestUsers:
         test_user = Staff.objects.create_user(**self.default_user_data())
         assert isinstance(test_user, Staff)
 
+    @pytest.mark.parametrize('url, model, data', [
+        ('/accounts/remove/', Staff, profile_data.id_user, '/')])
+    def test_delete_user(self, client, url, model, data):
+        response = client.post(url, data)
+        assert model.objects.count() == 0
+
     def test_create_super_user(self):
         test_user = Staff.objects.create_superuser(**self.default_user_data())
         assert test_user.is_admin
