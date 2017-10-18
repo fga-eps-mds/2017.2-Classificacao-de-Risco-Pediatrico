@@ -6,7 +6,7 @@ import pytest
 
 from apps.users.forms import RegistrationStaffForm, RegistrationPatientForm
 from apps.users.models import Staff, Patient
-from django.test import Client
+# from django.test import Client
 from apps.users.factories import PatientFactory
 
 
@@ -190,4 +190,4 @@ class TestUsers:
         patient = PatientFactory.create_batch(10)
         response = client.get('/registered/patient/')
         assert response.status_code == 200
-        assert list(response.context['patients'])==patient
+        assert list(response.context['patients']) == patient
