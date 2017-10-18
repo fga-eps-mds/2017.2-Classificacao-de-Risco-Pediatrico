@@ -20,3 +20,4 @@ scipy
 scikit-learn
 matplotlib
 pandas
+factory-boy
