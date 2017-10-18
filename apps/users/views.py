@@ -105,20 +105,6 @@ def sign_up_patient(request):
                   status=status)
 
 
-def register_patient(request):
-    """
-    Register a patient
-    """
-    return render(request, 'user/login', {})
-
-
-def home_receptionist_view(request):
-    """
-    return rendered text from homeReceptionist
-    """
-    return render(request, 'users/homeReceptionist.html')
-
-
 def admin_view(request):
     """
     return rendered text from homeReceptionist
@@ -199,5 +185,8 @@ def show_pacient_view(request, cpf):
     """
     return rendered text from showPatient
     """
-    patient = Patient.objects.filter(cpf=cpf)[0]
-    return render(request, 'users/showPatient.html', {'patient': patient})
+
+    patient = Patient.objects.filter(cpf=cpf)
+    if len(patient) == 1:
+        return render(request, 'users/showPatient.html', {'patient': patient})
+    return render(request, 'users/showPatient.html', status=404)

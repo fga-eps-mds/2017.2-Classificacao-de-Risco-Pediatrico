@@ -6,6 +6,8 @@ import pytest
 
 from apps.users.forms import RegistrationStaffForm, RegistrationPatientForm
 from apps.users.models import Staff, Patient
+from django.test import Client
+from apps.users.factories import PatientFactory
 
 
 @pytest.mark.django_db
@@ -67,7 +69,9 @@ class TestUsers:
                             'url',
                             ['/register/profile/',
                                 '/register/patient/',
-                                '/home/receptionist/', '/'])
+                                '/home/receptionist/',
+                                '/registered/patient/',
+                             '/'])
     def test_get_route(self, client, url):
         response = client.get(url)
         assert response.status_code == 200
@@ -174,3 +178,16 @@ class TestUsers:
     def test__str__(self):
         user_email = Staff(email='bruno@gmail.com')
         assert str(user_email) == 'bruno@gmail.com'
+
+    def test_show_patient_view(self, client):
+        Patient()
+        name = Patient(cpf='001002012', birth_date='2017-02-01')
+        name.save()
+        response = client.get('/show/patient/001002012/')
+        assert response.status_code == 200
+
+    def test_registered_patient_view(self, client):
+        patient = PatientFactory.create_batch(10)
+        response = client.get('/registered/patient/')
+        assert response.status_code == 200
+        assert list(response.context['patients'])==patient
