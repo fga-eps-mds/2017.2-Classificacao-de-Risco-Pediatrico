@@ -156,9 +156,9 @@ def manage_accounts_view(request):
 
 
 def edit_accounts_view(request, id_user):
-    staffs = Staff.objects.filter(id_user=id_user)
-    if len(staffs) == 1:
-        return render(request, 'users/editAccounts.html', {'staffs': staffs})
+    staff = Staff.objects.filter(id_user=id_user)
+    if len(staff) == 1:
+        return render(request, 'users/editAccounts.html', {'staff': staff[0]})
     return render(request, 'users/editAccounts.html', status=404)
 
 
