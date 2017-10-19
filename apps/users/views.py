@@ -152,12 +152,14 @@ def checkQueueLastPosition(patients):
 
 def manage_accounts_view(request):
     staffs = Staff.objects.all()
-    return render(request, 'users/manage_accounts.html', {'staffs': staffs})
+    return render(request, 'users/manageAccounts.html', {'staffs': staffs})
 
 
 def edit_accounts_view(request, id_user):
-    staffs = Staff.objects.filter(id_user=id_user)[0]
-    return render(request, 'users/editAccounts.html', {'staffs': staffs})
+    staffs = Staff.objects.filter(id_user=id_user)
+    if len(staffs) == 1:
+        return render(request, 'users/editAccounts.html', {'staffs': staffs})
+    return render(request, 'users/editAccounts.html', status=404)
 
 
 def staff_remove(request, id_user):
@@ -185,7 +187,6 @@ def show_pacient_view(request, cpf):
     """
     return rendered text from showPatient
     """
-
     patient = Patient.objects.filter(cpf=cpf)
     if len(patient) == 1:
         return render(request, 'users/showPatient.html', {'patient': patient})
