@@ -2,7 +2,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
 
-from .models import Patient, Staff
+from apps.users.models import Patient, Staff
 
 
 class RegistrationStaffForm(UserCreationForm):

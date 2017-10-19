@@ -7,10 +7,10 @@ from django.http import HttpResponseRedirect
 
 from django.contrib.auth import authenticate
 
-from .forms import RegistrationStaffForm
-from .forms import RegistrationPatientForm
+from apps.users.forms import RegistrationStaffForm
+from apps.users.forms import RegistrationPatientForm
 
-from .models import Patient, Staff
+from apps.users.models import Patient, Staff
 
 
 def login_view(request, *args, **kwargs):
