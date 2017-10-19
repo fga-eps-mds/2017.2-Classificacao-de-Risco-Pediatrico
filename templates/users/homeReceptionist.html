@@ -10,13 +10,7 @@
 {% endblock %}
 
 {% block content %}
-    <div class="box">
-        <form>
-          <div class="form-group">
-            <label for="exampleFormControlInput1">CPF</label>
-            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="00000000000">
-          </div>
-          <button type="submit" class="btn btn-outline-secondary">Submit</button>
-        </form>
-    </div>
+
+    {% include 'users/registeredPatient' %}
+
 {% endblock %}

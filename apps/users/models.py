@@ -183,3 +183,11 @@ class Patient(models.Model):
         max_length=10,
         blank=False
     )
+
+    isInQueue = models.BooleanField(
+        default=False
+    )
+
+    queuePosition = models.IntegerField(
+        default=0
+    )

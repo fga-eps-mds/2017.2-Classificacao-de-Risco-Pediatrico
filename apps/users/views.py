@@ -87,11 +87,17 @@ def sign_up_patient(request):
 
         if form.is_valid():
             form.save()
+            cpf_patient = form.cleaned_data.get('cpf')
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             username = authenticate(username=username, password=raw_password)
             login(request, 'users:login')
-            return redirect('users:login')
+            allPatients = Patient.objects.all()
+            patient = Patient.objects.get(cpf=cpf_patient)
+            patient.isInQueue = True
+            patient.queuePosition = checkQueueLastPosition(allPatients)
+            patient.save()
+            return redirect('users:queue_patient')
         else:
             status = 400
     else:
@@ -99,20 +105,6 @@ def sign_up_patient(request):
         status = 200
     return render(request, 'users/registerPatient.html', {'form': form},
                   status=status)
-
-
-def register_patient(request):
-    """
-    Register a patient
-    """
-    return render(request, 'user/login', {})
-
-
-def home_receptionist_view(request):
-    """
-    return rendered text from homeReceptionist
-    """
-    return render(request, 'users/homeReceptionist.html')
 
 
 def admin_view(request):
@@ -129,14 +121,47 @@ def home_attendant_view(request):
     return render(request, 'users/homeAttendant.html')
 
 
+def registered_patient_view(request):
+    patients = Patient.objects.all()
+    return render(request, 'users/registeredPatient.html',
+                           {'patients': patients})
+
+
+def queue_patient(request, cpf_patient):
+    patients = Patient.objects.filter(cpf=cpf_patient)
+    allPatients = Patient.objects.all()
+    patient = Patient.objects.get(cpf=cpf_patient)
+    if patient.isInQueue:
+        return HttpResponseRedirect(reverse('users:registered_patient'))
+    else:
+        patient.isInQueue = True
+        patient.queuePosition = checkQueueLastPosition(allPatients)
+        patient.save()
+        return render(request, 'users/queuePatient.html',
+                               {'patients': patients})
+    return render(request, 'users/queuePatient.html', {'patients': patients})
+
+
+def checkQueueLastPosition(patients):
+    lastPosition = 0
+    for patients in patients:
+        if patients.isInQueue:
+            if lastPosition < patients.queuePosition:
+                lastPosition = patients.queuePosition
+    lastPosition = lastPosition + 1
+    return lastPosition
+
+
 def manage_accounts_view(request):
     staffs = Staff.objects.all()
     return render(request, 'users/manageAccounts.html', {'staffs': staffs})
 
 
 def edit_accounts_view(request, id_user):
-    staffs = Staff.objects.filter(id_user=id_user)[0]
-    return render(request, 'users/editAccounts.html', {'staffs': staffs})
+    staff = Staff.objects.filter(id_user=id_user)
+    if len(staff) == 1:
+        return render(request, 'users/editAccounts.html', {'staff': staff[0]})
+    return render(request, 'users/editAccounts.html', status=404)
 
 
 def staff_remove(request, id_user):
@@ -182,106 +207,30 @@ def edit_patient(request, cpf):
 def edit_patient_view():
     pass
 
-'''
-class RegistrationStaffView(MultiModelFormView):
-    form_classes = {
-        'registration_staff_form': RegistrationStaffForm,
-        'address_form': AddressForm,
-    }
-    record_id = None
-    template_name = 'users/registerProfile.html'
 
-    def get_form_kwargs(self):
-        """
-        Get staff form
-        """
-        kwargs = super(RegistrationStaffView, self).get_form_kwargs()
-        kwargs['address_form']['prefix'] = 'address'
-        return kwargs
+def queue_patient_view(request):
+    queuedPatients = Patient.objects.filter(isInQueue=True)
+    return render(request, 'users/queuePatient.html',
+                           {'queuedPatients': queuedPatients})
 
-    def get_objects(self):
-        """
-        Get objects from staff form
-        """
-        self.staff_id = self.kwargs.get('staff_id', None)
-        try:
-            staff = Staff.objects.get(id=self.staff_id)
-        except Staff.DoesNotExist:
-            staff = None
-        return {
-            'registration_staff_form': staff,
-            'address_form': staff.address if staff else None,
-        }
 
-    def get_success_url(self):
-        """
-        Get succesurl of staff class
-        """
-        return reverse('users:login')
+def classification_view(request):
+    return render(request, 'users/classification.html')
 
-    def forms_valid(self, forms):
-        """
-        Return staff form with fields from address form
-        """
-        staff = forms['registration_staff_form'].save(commit=False)
-        staff.address = forms['address_form'].save()
-        staff.save()
-        return super(RegistrationStaffView, self).forms_valid(forms)
-'''
 
-'''
-class RegistrationPatientView(MultiModelFormView):
-    form_classes = {
-        'registration_profile_form': RegistrationPatientForm,
-        'address_form': AddressForm,
-    }
-    record_id = None
-    template_name = 'users/registerPatient.html'
+def classification(request, cpf_patient):
+    patients = Patient.objects.filter(cpf=cpf_patient)
+    return render(request, 'users/classification.html', {'patients': patients})
 
-    def get_form_kwargs(self):
-        """
-        Get patient form
-        """
-        kwargs = super(RegistrationPatientView, self).get_form_kwargs()
-        kwargs['address_form']['prefix'] = 'address'
-        return kwargs
-
-    def get_objects(self):
-        """
-        Get objects from patient form
-        """
-        self.patient_id = self.kwargs.get('patient_id', None)
-        try:
-            patient = Patient.objects.get(id=self.patient_id)
-        except Patient.DoesNotExist:
-            patient = None
-        return {
-            'registration_patient_form': patient,
-            'address_form': patient.address if patient else None
-        }
-
-    def get_success_url(self):
-        """
-        Get succesurl of patient class
-        """
-        return reverse('users:login')
-
-    def forms_valid(self, forms):
-        """
-        Return patient form with fields from address form
-        """
-        patient = forms['registration_patient_form'].save(commit=False)
-        patient.address = forms['address_form'].save()
-        patient.save()
-        return super(RegistrationPatientView, self).forms_valid(forms)
-    '''
 
 def show_pacient_view(request, cpf):
     """
     return rendered text from showPatient
     """
-    patient = Patient.objects.filter(cpf=cpf)[0]
-    return render(request, 'users/showPatient.html', {'patient': patient})
+    patient = Patient.objects.filter(cpf=cpf)
+    if len(patient) == 1:
+        return render(request, 'users/showPatient.html', {'patient': patient})
+    return render(request, 'users/showPatient.html', status=404)
 
 
 def home_receptionist_view(request):
@@ -317,3 +266,4 @@ def manage_patients_view(request):
             Q(cpf__icontains=search)
             )
     return render(request, 'users/managePatients.html', {'patients': patients})
+

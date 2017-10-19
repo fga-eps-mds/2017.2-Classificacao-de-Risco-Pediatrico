@@ -6,6 +6,8 @@ import pytest
 
 from apps.users.forms import RegistrationStaffForm, RegistrationPatientForm
 from apps.users.models import Staff, Patient
+# from django.test import Client
+from apps.users.factories import PatientFactory, StaffFactory
 
 
 @pytest.mark.django_db
@@ -67,7 +69,9 @@ class TestUsers:
                             'url',
                             ['/register/profile/',
                                 '/register/patient/',
-                                '/home/receptionist/', '/'])
+                                '/home/receptionist/',
+                                '/registered/patient/',
+                                '/'])
     def test_get_route(self, client, url):
         response = client.get(url)
         assert response.status_code == 200
@@ -93,7 +97,8 @@ class TestUsers:
         'parents_name': 'parents_nameTest', 'uf': 'ufTest',
         'city': 'cityTeste', 'neighborhood': 'neighborhoodTest',
         'street': 'streetTeste', 'block': 'blockTeste',
-        'number': 'numberTest'})
+        'number': 'numberTest', 'isInQueue': 'True',
+        'queuePosition': '5'})
 
     @pytest.mark.parametrize('url, model, data', [
         ('/register/patient/', Patient, patient_data),
@@ -114,7 +119,7 @@ class TestUsers:
 
     @pytest.mark.parametrize('url, data, urlredirect', [
         ('/register/profile/', profile_data, '/'),
-        ('/register/patient/', patient_data, '/')])
+        ('/register/patient/', patient_data, '/queue/patient/')])
     def test_sign_up_post_redirect(self, client, url, data, urlredirect):
         response = client.post(url, data, follow=True)
         assert response.status_code == 200
@@ -173,3 +178,37 @@ class TestUsers:
     def test__str__(self):
         user_email = Staff(email='bruno@gmail.com')
         assert str(user_email) == 'bruno@gmail.com'
+
+    def test_show_patient_view(self, client):
+        Patient()
+        name = Patient(cpf='001002012', birth_date='2017-02-01')
+        name.save()
+        response = client.get('/show/patient/001002012/')
+        assert response.status_code == 200
+
+    def test_registered_patient_view(self, client):
+        patient = PatientFactory.create_batch(3)
+        response = client.get('/registered/patient/')
+        assert response.status_code == 200
+        assert list(response.context['patients']) == patient
+
+    def test_edit_accounts_view(self, client):
+        Staff()
+        name = Staff(id_user='456')
+        name.save()
+        response = client.get('/accounts/edit/456/')
+        assert response.status_code == 200
+
+    def test_manage_accounts_view(self, client):
+        staff = StaffFactory.create_batch(3)
+        response = client.get('/accounts/')
+        assert response.status_code == 200
+        assert list(response.context['staffs']) == staff
+
+    def test_staff_remove(self, client):
+        Staff()
+        name = Staff(id_user='456')
+        name.save()
+        response = client.delete('/accounts/remove/456/', follow=True)
+        assert response.redirect_chain == [('/accounts/', 302)]
+        assert Staff.objects.count() == 0
