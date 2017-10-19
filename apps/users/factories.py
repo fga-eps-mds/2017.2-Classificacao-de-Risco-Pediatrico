@@ -1,6 +1,7 @@
 import factory
-from apps.users.models import Patient
+from apps.users.models import Patient, Staff
 from faker import Faker
+from factory.fuzzy import FuzzyInteger
 
 faker = Faker()
 
@@ -25,24 +26,19 @@ class PatientFactory(factory.DjangoModelFactory):
     queuePosition = factory.Sequence(lambda n: n)
 
 
-# class PlatformFactory(factory.DjangoModelFactory):
-#
-#     class Meta:
-#
-#         model = Platform
-#
-#     name = factory.faker.Faker("word")
-#     extensions = factory.LazyAttribute(lambda x: "deb")
-#     kernel = factory.LazyAttribute(lambda x: "Linux")
-#
-#
-# class PackageFactory(factory.DjangoModelFactory):
-#
-#     class Meta:
-#         model = Package
-#
-#     package = factory.django.FileField(data=b'1' * 10,
-#               filename='package.deb')
-#     game = factory.SubFactory(GameFactory)
-#     downloads = factory.faker.Faker('pyint')
-#     architecture = factory.LazyAttribute(lambda x: "AMD64/64-bit")
+class StaffFactory(factory.DjangoModelFactory):
+
+    class Meta:
+        model = Staff
+
+    name = factory.faker.Faker("word")
+    id_user = factory.faker.Faker("pyint")
+    email = factory.faker.Faker("date")
+    profile = FuzzyInteger(0, 2)
+    password = factory.faker.Faker("word")
+    uf = factory.faker.Faker("word")
+    city = factory.faker.Faker("word")
+    neighborhood = factory.faker.Faker("word")
+    street = factory.faker.Faker("word")
+    block = factory.faker.Faker("word")
+    number = factory.faker.Faker("pyint")
