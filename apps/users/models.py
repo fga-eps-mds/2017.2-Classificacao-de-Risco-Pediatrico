@@ -150,8 +150,7 @@ class Patient(models.Model):
         verbose_name=_('Nome dos pais'),
         max_length=150,
         blank=False,
-        help_text=_('Informe o nome dos pais'),
-        unique=True
+        help_text=_('Informe o nome dos pais')
     )
 
     uf = models.CharField(

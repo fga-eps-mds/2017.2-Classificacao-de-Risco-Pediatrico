@@ -7,7 +7,7 @@ import pytest
 from apps.users.forms import RegistrationStaffForm, RegistrationPatientForm
 from apps.users.models import Staff, Patient
 # from django.test import Client
-from apps.users.factories import PatientFactory
+from apps.users.factories import PatientFactory, StaffFactory
 
 
 @pytest.mark.django_db
@@ -71,7 +71,7 @@ class TestUsers:
                                 '/register/patient/',
                                 '/home/receptionist/',
                                 '/registered/patient/',
-                             '/'])
+                                '/'])
     def test_get_route(self, client, url):
         response = client.get(url)
         assert response.status_code == 200
@@ -187,7 +187,28 @@ class TestUsers:
         assert response.status_code == 200
 
     def test_registered_patient_view(self, client):
-        patient = PatientFactory.create_batch(10)
+        patient = PatientFactory.create_batch(3)
         response = client.get('/registered/patient/')
         assert response.status_code == 200
         assert list(response.context['patients']) == patient
+
+    def test_edit_accounts_view(self, client):
+        Staff()
+        name = Staff(id_user='456')
+        name.save()
+        response = client.get('/accounts/edit/456/')
+        assert response.status_code == 200
+
+    def test_manage_accounts_view(self, client):
+        staff = StaffFactory.create_batch(3)
+        response = client.get('/accounts/')
+        assert response.status_code == 200
+        assert list(response.context['staffs']) == staff
+
+    def test_staff_remove(self, client):
+        Staff()
+        name = Staff(id_user='456')
+        name.save()
+        response = client.delete('/accounts/remove/456/', follow=True)
+        assert response.redirect_chain == [('/accounts/', 302)]
+        assert Staff.objects.count() == 0
