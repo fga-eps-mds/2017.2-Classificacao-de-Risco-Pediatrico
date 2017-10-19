@@ -1,0 +1,14 @@
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+.background-img {
+  background: url(/static/img/background_image.jpeg) no-repeat fixed center;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  background-size: cover;
+  z-index: -1;
+}
