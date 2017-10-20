@@ -237,6 +237,16 @@ class TestUsers:
         response = client.post('/patients/edit/156498/', invalid_patient_data)
         assert response.status_code == 400
 
+    def test_edit_patient_is_update_data(self, client):
+        """
+        Test if edit patient post method is actualy updating
+        """
+        Patient()
+        name = Patient(cpf='156498', birth_date='2017-02-01', name='Victor')
+        name.save()
+        client.post('/patients/edit/156498/', self.patient_data)
+        assert Patient.objects.filter(cpf='156498')[0].name == 'nameTest'
+
     def test_edit_accounts_view(self, client):
         Staff()
         name = Staff(id_user='456')
