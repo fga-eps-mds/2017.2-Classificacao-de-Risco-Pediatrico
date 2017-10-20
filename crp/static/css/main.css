@@ -6,8 +6,8 @@ body {
   background: url(/static/img/background_image.jpeg) no-repeat fixed center;
   position: absolute;
   bottom: -80px;
-  left: -20px;
-  right: -20px;
+  left: 0;
+  right: 0;
   top: 77px;
   background-size: cover;
   z-index: -1;
