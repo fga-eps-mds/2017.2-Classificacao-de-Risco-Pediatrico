@@ -182,26 +182,23 @@ def edit_patient(request, cpf):
     form = EditPatientForm()
 
     if request.method == 'POST':
-        print('bb')
         form = EditPatientForm(request.POST, instance=patient)
         form.is_valid()
         form.non_field_errors()
-        [print(field.label, field.name, field.errors) for field in form]
 
         if form.is_valid():
-            patient.delete()
             form.save()
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             username = authenticate(username=username, password=raw_password)
             return redirect('users:manage_patients')
         else:
-            print('cc')
             status = 400
+            return render(request, 'users/editPatient.html', {'patient': patient, 'form': form}, status=status)
     else:
         return render(request, 'users/editPatient.html', {'patient':patient, 'form':form})
 
-    return render(request, 'users/editPatient.html',{'patient':patient, 'form':form}, status=status)
+
 
 
 def edit_patient_view():
