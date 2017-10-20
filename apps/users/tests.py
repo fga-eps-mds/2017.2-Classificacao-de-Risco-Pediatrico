@@ -4,7 +4,7 @@ import pytest
 # from factories import PatientFactory
 # Create your tests here.
 
-from apps.users.forms import RegistrationStaffForm, RegistrationPatientForm
+from apps.users.forms import RegistrationStaffForm, RegistrationPatientForm, EditPatientForm
 from apps.users.models import Staff, Patient
 # from django.test import Client
 from apps.users.factories import PatientFactory, StaffFactory
@@ -191,6 +191,27 @@ class TestUsers:
         response = client.get('/registered/patient/')
         assert response.status_code == 200
         assert list(response.context['patients']) == patient
+
+    # teste da história
+    def test_edit_patient(self, client):
+        Patient()
+        name = Patient(cpf='001002012', birth_date='2017-02-01')
+        name.save()
+        response = client.get('/patients/edit/001002012/')
+        assert 'form' in response.context
+        assert 'patient' in response.context
+        assert response.context['form'] is not None
+        assert isinstance(response.context['form'], EditPatientForm)
+
+        # get valido ok
+        # get inválido (cpf)
+        # post inválido campo qualquer inválido
+            # response = client.get('/patients/edit/001002012/' , DADOS)
+        # rediretionado corretamente linha 227
+        # se os dados estao diferentes antes de depois do post
+            # recuperar no bando ou no request e comparar 
+
+
 
     def test_edit_accounts_view(self, client):
         Staff()
