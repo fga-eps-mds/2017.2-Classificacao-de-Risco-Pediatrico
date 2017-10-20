@@ -33,21 +33,19 @@
                         </thead>
                         <tbody>
                             {% for staff in staffs %}
-                            <tr>
-                                <td>{{ staff.id_user}}</td>
-                                <td>{{ staff.name }}</td>
-                                <td>
-                                    {% if staff.profile == 1 %}
-                                    Recepcionista
-                                    {% else %}
-                                    Atendente
-                                    {% endif %}
-                                </td>
-                                <td><a href="edit/{{ staff.id_user }}"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
-                                <td><a href="{% url 'users:staff_remove' staff.id_user %}"><i class="fa fa-ban" aria-hidden="true"></i>
-                                    </a>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td>{{ staff.id_user }}</td>
+                                    <td>{{ staff.name }}</td>
+                                    <td>
+                                        {% if staff.profile == 1 %}
+                                        Recepcionista
+                                        {% else %}
+                                        Atendente
+                                        {% endif %}
+                                    </td>
+                                    <td><a href="edit/{{ staff.id_user }}"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
+                                    <td><a href="#" data-toggle="modal" data-target="#{{ staff.id_user }}"><i class="fa fa-ban" aria-hidden="true"></i></a></td>
+                                </tr>
                             {% endfor %}
                         </tbody>
                     </table>
@@ -57,4 +55,26 @@
             </div>
         </div>
     </div>
+
+    {% for staff in staffs %}
+        <div class="modal fade" id="{{ staff.id_user }}" tabindex="-1" role="dialog" aria-labelledby="Deletar Usuário" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Deletar Funcionário</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Tem certeza que deseja deletar a conta do {{ staff.name }}?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                        <a href="{% url 'users:staff_remove' staff.id_user %}" class="btn btn-danger">Deletar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
 {% endblock %}
