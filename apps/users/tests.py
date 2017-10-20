@@ -4,7 +4,8 @@ import pytest
 # from factories import PatientFactory
 # Create your tests here.
 
-from apps.users.forms import RegistrationStaffForm, RegistrationPatientForm, EditPatientForm
+from apps.users.forms import RegistrationStaffForm, RegistrationPatientForm, \
+    EditPatientForm
 from apps.users.models import Staff, Patient
 # from django.test import Client
 from apps.users.factories import PatientFactory, StaffFactory
@@ -211,7 +212,6 @@ class TestUsers:
         """
         with pytest.raises(IndexError):
             client.get('/patients/edit/007/')
-
 
     def test_edit_patient_post_valid_data(self, client):
         """
