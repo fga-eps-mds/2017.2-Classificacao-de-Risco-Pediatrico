@@ -52,7 +52,13 @@
                                     <option value="1">Recepcionista</option>
                                     <option value="2">Atendente</option>
                                 </select>
-                                {{ form.profile.errors }}
+                                {% if form.profile.errors %}
+                                    <div class="error-holder">
+                                        <div class="alert alert-warning" role="alert">
+                                            {{ form.profile.errors }}
+                                        </div>
+                                    </div>
+                                {% endif %}
                             </div>
                         </div>
 
@@ -72,7 +78,13 @@
                                     <span class="input-group-addon" id="basic-addon1"><i class="fa fa-key" aria-hidden="true"></i></span>
                                     <input type="password" name="{{ form.password1.name }}" id="{{ form.password1.id_for_label }}" class="form-control"  placeholder="Senha" aria-label="Senha" aria-describedby="basic-addon4" required>
                                 </div>
-                                {{ form.password1.errors }}
+                                {% if form.password1.errors %}
+                                    <div class="error-holder">
+                                        <div class="alert alert-warning" role="alert">
+                                            {{ form.password1.errors }}
+                                        </div>
+                                    </div>
+                                {% endif %}
                             </div>
                         </div>
 
@@ -82,7 +94,13 @@
                                     <span class="input-group-addon" id="basic-addon1"><i class="fa fa-check-circle-o" aria-hidden="true"></i></span>
                                     <input type="password" name="{{ form.password2.name }}" id="{{ form.password2.id_for_label }}" class="form-control"  placeholder="Confirmar Senha" aria-label="ConfirmarmSenha" aria-describedby="basic-addon5" required>
                                 </div>
-                                {{ form.password2.errors }}
+                                {% if form.password2.errors %}
+                                    <div class="error-holder">
+                                        <div class="alert alert-warning" role="alert">
+                                            {{ form.password2.errors }}
+                                        </div>
+                                    </div>
+                                {% endif %}
                             </div>
                         </div>
                     </div>

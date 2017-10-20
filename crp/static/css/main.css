@@ -5,10 +5,10 @@ body {
 .background-img {
   background: url(/static/img/background_image.jpeg) no-repeat fixed center;
   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  top: 0;
+  bottom: -80px;
+  left: -20px;
+  right: -20px;
+  top: 77px;
   background-size: cover;
   z-index: -1;
 }
