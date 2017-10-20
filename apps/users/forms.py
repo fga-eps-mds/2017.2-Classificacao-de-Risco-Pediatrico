@@ -19,6 +19,7 @@ class RegistrationPatientForm(forms.ModelForm):
                   'uf', 'city', 'neighborhood', 'street', 'block', 'number',
                   'isInQueue', 'queuePosition']
 
+
 class EditPatientForm(forms.ModelForm):
     class Meta:
         model = Patient
