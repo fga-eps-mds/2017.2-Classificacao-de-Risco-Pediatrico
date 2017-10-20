@@ -192,8 +192,10 @@ class TestUsers:
         assert response.status_code == 200
         assert list(response.context['patients']) == patient
 
-    # get valido ok
     def test_edit_patient_form(self, client):
+        """
+        Test edit patient form with a valid cpf
+        """
         Patient()
         name = Patient(cpf='001002012', birth_date='2017-02-01')
         name.save()
@@ -203,18 +205,24 @@ class TestUsers:
         assert response.context['form'] is not None
         assert isinstance(response.context['form'], EditPatientForm)
 
-    # get inválido (cpf)
     def test_edit_patient_invalid_cpf(self, client):
+        """
+        Test edit patient form with a invalid cpf
+        """
         with pytest.raises(IndexError):
-            response = client.get('/patients/edit/007/')
+            client.get('/patients/edit/007/')
 
 
-    # post inválido campo qualquer inválido
-        # response = client.get('/patients/edit/001002012/' , DADOS)
-    # rediretionado corretamente linha 227
-    # response = client.delete('/accounts/remove/456/', follow=True)
-    # se os dados estao diferentes antes de depois do post
-        # recuperar no banco ou no request e comparar
+    def test_edit_patient_post_valid_data(self, client):
+        """
+        Test edit patient post mehtod with valid data
+        """
+        Patient()
+        name = Patient(cpf='156498', birth_date='2017-02-01')
+        name.save()
+        response = client.post('/patients/edit/156498/', self.patient_data)
+        assert response.status_code == 302
+        assert Patient.objects.count() == 1
 
     def test_edit_accounts_view(self, client):
         Staff()
