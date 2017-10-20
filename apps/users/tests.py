@@ -224,6 +224,19 @@ class TestUsers:
         assert response.status_code == 302
         assert Patient.objects.count() == 1
 
+    def test_edit_patient_post_invalid_data(self, client):
+        """
+        Test edit patient post mehtod with invalid data
+        """
+        invalid_patient_data = ({
+            'name': 'nameTest', 'guardian': 'guardianTeste',
+            'birth_date': '12/2/12', 'cpf': '156498'})
+        Patient()
+        name = Patient(cpf='156498', birth_date='2017-02-01')
+        name.save()
+        response = client.post('/patients/edit/156498/', invalid_patient_data)
+        assert response.status_code == 400
+
     def test_edit_accounts_view(self, client):
         Staff()
         name = Staff(id_user='456')
