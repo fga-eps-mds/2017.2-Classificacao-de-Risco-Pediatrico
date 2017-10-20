@@ -177,7 +177,9 @@ def patient_remove(request, cpf):
 
 
 def edit_patient(request, cpf):
-
+    """
+    edit an existing patient with post method
+    """
     patient = Patient.objects.filter(cpf=cpf)[0]
     form = EditPatientForm()
 
@@ -194,15 +196,11 @@ def edit_patient(request, cpf):
             return redirect('users:manage_patients')
         else:
             status = 400
-            return render(request, 'users/editPatient.html', {'patient': patient, 'form': form}, status=status)
+            return render(request, 'users/editPatient.html',
+                          {'patient': patient, 'form': form}, status=status)
     else:
-        return render(request, 'users/editPatient.html', {'patient':patient, 'form':form})
-
-
-
-
-def edit_patient_view():
-    pass
+        return render(request, 'users/editPatient.html',
+                      {'patient': patient, 'form': form})
 
 
 def queue_patient_view(request):
@@ -237,23 +235,6 @@ def home_receptionist_view(request):
     return render(request, 'users/homeReceptionist.html')
 
 
-def admin_view(request):
-    """
-    return rendered text from homeReceptionist
-    """
-    return render(request, 'users/admin.html')
-
-
-def home_attendant_view(request):
-    """
-    return rendered text from homeAttendant
-    """
-    return render(request, 'users/homeAttendant.html')
-
-def manage_accounts_view(request):
-    staffs = Staff.objects.all()
-    return render(request, 'users/manageAccounts.html', {'staffs':staffs})
-
 def manage_patients_view(request):
     patients = Patient.objects.all()
     search = request.GET.get('q')
@@ -263,4 +244,3 @@ def manage_patients_view(request):
             Q(cpf__icontains=search)
             )
     return render(request, 'users/managePatients.html', {'patients': patients})
-
