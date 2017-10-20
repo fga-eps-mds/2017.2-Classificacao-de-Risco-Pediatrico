@@ -1,106 +1,161 @@
 {% extends 'layout/layout.html' %}
 {% load staticfiles %}
 
-{% block background %}
-<div class="register-page"></div>
-{% endblock %}
-
 {% block head %}
-    <link rel="stylesheet" href="{% static "css/main.css" %}">
+    <link rel="stylesheet" href="{% static "css/register.css" %}">
+    <link rel="stylesheet" href="{% static "css/box-animation.css" %}">
 {% endblock %}
 
 {% block content %}
-    <div class="box rounded float-right">
-       <h1 class="display-6">Cadastro de Funcionario</h1>
-       <p class="description"> Informe os dados do novo funcionario </p>
-       <form role="form" class="form" method="POST">
-             {% csrf_token %}
-             {{ form.non_field_errors }}
-              <div class="d-inline-block">
+<div class="container-fluid">
+    <div class="row mt-5">
+        <div class="col-lg-7 col-md-10 mx-auto my-auto text-center">
+            <div id="login" class="card bg-light border-secondary mb-4 z-depth-2 slide-in-blurred-top">
+                <form role="form" class="form" method="POST" >
+                    <div class="card-header">
+                        Classificação de Risco Pediátrico
+                    </div>
 
-                <div class="form-row">
-                    <div class="fieldWrapper">
-                      {{ form.name.errors }}
-                      <label for="{{ form.name.id_for_label }}" class="col-form-label">Nome:</label>
-                      {{ form.name }}
-                  </div>
-                  <div class="fieldWrapper">
-                    {{ form.id_user.errors }}
-                    <label for="{{ form.id_user.id_for_label }}" class="col-form-label">ID:</label>
-                    {{ form.id_user }}
-                  </div>
-                </div>
+                    {% csrf_token %}
 
-                <div class="form-row">
-                    <div class="fieldWrapper">
-                      {{ form.email.errors }}
-                      <label for="{{ form.email.id_for_label }}" class="col-form-label">email:</label>
-                      {{ form.email }}
-                  </div>
-                  <div class="fieldWrapper">
-                    {{ form.password1.errors }}
-                    <label for="{{ form.password1.id_for_label }}" class="col-form-label">senha:</label>
-                    {{ form.password1 }}
-                  </div>
-                </div>
+                    {% if errors %}
+                        <div class="alert alert-warning" role="alert">
+                            {{ errors }}
+                        </div>
+                    {% endif %}
 
-                <div class="form-row">
-                    <div class="fieldWrapper">
-                      {{ form.password2.errors }}
-                      <label for="{{ form.password2.id_for_label }}" class="col-form-label">confirmação:</label>
-                      {{ form.password2 }}
-                  </div>
-                </div>
+                    <div class="d-inline-block">
+                        <div class="form-group px-3 mt-3">
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon" id="basic-addon1"><i class="fa fa-user" aria-hidden="true"></i></span>
+                                    <input type="text" name="{{ form.name.name }}" maxlength="150" id="{{ form.name.id_for_label }}" class="form-control"  placeholder="Nome" aria-label="Nome" aria-describedby="basic-addon1" autofocus required>
+                                </div>
+                                {{ form.name.errors }}
+                            </div>
+                        </div>
 
-                <div class="form-row">
-                  <div class="fieldWrapper">
-                    {{ form.profile.errors }}
-                    <label for="{{ form.profile.id_for_label }}" class="col-form-label">Perfil:</label>
-                    {{ form.profile }}
-                  </div>
-                </div>
+                        <div class="form-group px-3">
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon" id="basic-addon1">@</span>
+                                    <input type="email" name="{{ form.email.name }}" id="{{ form.email.id_for_label }}" class="form-control"  placeholder="E-mail" aria-label="Email" aria-describedby="basic-addon3" required>
+                                </div>
+                                {{ form.email.errors }}
+                            </div>
+                        </div>
 
-                <div class="form-row">
-                  <div class="fieldWrapper">
-                    {{ form.uf.errors }}
-                    <label for="{{ form.uf.id_for_label }}" class="col-form-label">UF:</label>
-                    {{ form.uf }}
-                  </div>
-                  <div class="fieldWrapper">
-                    {{ form.city.errors }}
-                    <label for="{{ form.uf.id_for_label }}" class="col-form-label">City:</label>
-                    {{ form.city }}
-                </div>
-                </div>
+                        <div class="form-group px-3 mt-3">
+                            <div class="cols-sm-10">
+                                <select name="{{ form.profile.name }}" class="form-control">
+                                    <option value="" selected disabled>Escolha um perfil</option>
+                                    <option value="1">Recepcionista</option>
+                                    <option value="2">Atendente</option>
+                                </select>
+                                {{ form.profile.errors }}
+                            </div>
+                        </div>
 
-                <div class="form-row">
-                   <div class="fieldWrapper">
-                      {{ form.neighborhood.errors }}
-                      <label for="{{ form.neighborhood.id_for_label }}" class="col-form-label">Bairro:</label>
-                      {{ form.neighborhood }}
-                  </div>
-                  <div class="fieldWrapper">
-                    {{ form.street.errors }}
-                    <label for="{{ form.street.id_for_label }}" class="col-form-label">Rua:</label>
-                    {{ form.street }}
-                 </div>
-                </div>
+                        <div class="form-group px-3">
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon" id="basic-addon1"><i class="fa fa-id-badge" aria-hidden="true"></i></span>
+                                    <input type="text" name="{{ form.id_user.name }}" id="{{ form.id_user.id_for_label }}" class="form-control"  placeholder="ID" aria-label="ID" aria-describedby="basic-addon2" required>
+                                </div>
+                                {{ form.id_user.errors }}
+                            </div>
+                        </div>
 
-                <div class="form-row">
-                   <div class="fieldWrapper">
-                     {{ form.block.errors }}
-                     <label for="{{ form.block.id_for_label }}" class="col-form-label">Conj:</label>
-                     {{ form.block }}
-                   </div>
-                   <div class="fieldWrapper">
-                     {{ form.number.errors }}
-                     <label for="{{ form.number.id_for_label }}" class="col-form-label">Num:</label>
-                     {{ form.number }}
-                  </div>
-                </div>
+                        <div class="form-group px-3">
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon" id="basic-addon1"><i class="fa fa-key" aria-hidden="true"></i></span>
+                                    <input type="password" name="{{ form.password1.name }}" id="{{ form.password1.id_for_label }}" class="form-control"  placeholder="Senha" aria-label="Senha" aria-describedby="basic-addon4" required>
+                                </div>
+                                {{ form.password1.errors }}
+                            </div>
+                        </div>
 
-              </div>
-          <button class="btn btn-outline-secondary" name='action' value='address' type="submit">Cadastrar</button>
-       </form>
+                        <div class="form-group px-3">
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon" id="basic-addon1"><i class="fa fa-check-circle-o" aria-hidden="true"></i></span>
+                                    <input type="password" name="{{ form.password2.name }}" id="{{ form.password2.id_for_label }}" class="form-control"  placeholder="Confirmar Senha" aria-label="ConfirmarmSenha" aria-describedby="basic-addon5" required>
+                                </div>
+                                {{ form.password2.errors }}
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="d-inline-block">
+                        <div class="form-group px-3">
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon" id="basic-addon1"><i class="fa fa-globe" aria-hidden="true"></i></span>
+                                    <input type="text" name="{{ form.uf.name }}" id="{{ form.uf.id_for_label }}" class="form-control"  placeholder="UF" aria-label="UF" aria-describedby="basic-addon6" required>
+                                </div>
+                                {{ form.uf.errors }}
+                            </div>
+                        </div>
+
+                        <div class="form-group px-3">
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon" id="basic-addon1"><i class="fa fa-map-o" aria-hidden="true"></i></span>
+                                    <input type="text" name="{{ form.city.name }}" id="{{ form.city.id_for_label }}" class="form-control"  placeholder="Cidade" aria-label="Cidade" aria-describedby="basic-addon7" required>
+                                </div>
+                                {{ form.city.errors }}
+                            </div>
+                        </div>
+
+                        <div class="form-group px-3">
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon" id="basic-addon1"><i class="fa fa-road" aria-hidden="true"></i></span>
+                                    <input type="text" name="{{ form.street.name }}" id="{{ form.street.id_for_label }}" class="form-control"  placeholder="Rua" aria-label="Rua" aria-describedby="basic-addon7" required>
+                                </div>
+                                {{ form.street.errors }}
+                            </div>
+                        </div>
+
+                        <div class="form-group px-3">
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon" id="basic-addon1"><i class="fa fa-users" aria-hidden="true"></i></span>
+                                    <input type="text" name="{{ form.neighborhood.name }}" id="{{ form.neighborhood.id_for_label }}" class="form-control"  placeholder="Bairro" aria-label="Bairro" aria-describedby="basic-addon8" required>
+                                </div>
+                                {{ form.neighborhood.errors }}
+                            </div>
+                        </div>
+
+                        <div class="form-group px-3">
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon" id="basic-addon1"><i class="fa fa-th-large" aria-hidden="true"></i></span>
+                                    <input type="text" name="{{ form.block.name }}" id="{{ form.block.id_for_label }}" class="form-control"  placeholder="Conjunto" aria-label="Conjunto" aria-describedby="basic-addon9" required>
+                                </div>
+                                {{ form.block.errors }}
+                            </div>
+                        </div>
+
+                        <div class="form-group px-3">
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon" id="basic-addon1">00</span>
+                                    <input type="text" name="{{ form.number.name }}" id="{{ form.number.id_for_label }}" class="form-control"  placeholder="Número" aria-label="Número" aria-describedby="basic-addon10" required>
+                                </div>
+                                {{ form.number.errors }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-footer text-right">
+                        <button type="submit" class="btn btn-outline-secondary btn-lg">Cadastrar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
+</div>
 {% endblock %}

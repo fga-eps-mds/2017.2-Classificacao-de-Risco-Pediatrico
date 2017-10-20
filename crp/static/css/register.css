@@ -1,0 +1,9 @@
+.input-group-addon {
+    width: 40px;
+}
+
+@media (max-width: 576px) {
+    .form-group {
+        max-width: 11em;
+    }
+}
