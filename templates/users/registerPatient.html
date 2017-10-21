@@ -107,13 +107,14 @@
                          </div>
               </div>
 
-          <!-- <button class="btn btn-outline-secondary" name='action' value='address' type="submit">Cadastrar</button> -->
-
-              <!--<div id="botoes_cadastro">
-                  <a href="/user/home_receptionist"><button class="btn btn-outline-secondary" type="button">Cancelar</button></a>
-                  <button class="btn btn-primary" name='action' value='address' type="submit">Cadastrar</button>
-              </div>-->
-                <button class="btn btn-outline-secondary" name='action' value='address' type="submit">Cadastrar</button>
+              <div id="botoes_cadastro">
+                {% if user.profile == 1 %}
+                <a href="/home/receptionist"><button class="btn btn btn-outline-secondary float-right" type="button">Cancelar</button></a>
+              {% else %}
+                <a href="/home/attendant"><button class="btn btn btn-outline-secondary float-right" type="button">Cancelar</button></a>
+              {% endif %}
+            <button class="btn btn-primary" name='action' value='address' type="submit">Cadastrar</button>
+              </div>
 
        </form>
     </div>

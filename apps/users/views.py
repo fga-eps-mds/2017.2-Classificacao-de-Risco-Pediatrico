@@ -33,7 +33,7 @@ def login_view(request, *args, **kwargs):
 
             if user.profile == 2:
                 login(request, user)
-                return redirect("/risk_rating")
+                return redirect("/home/attendant/")
         else:
 
             kwargs['extra_context'] = {'next': reverse('users:login'),
