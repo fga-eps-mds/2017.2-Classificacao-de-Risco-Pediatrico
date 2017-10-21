@@ -12,35 +12,8 @@
 
 {% block content %}
 
-<div class="container">
 
-   <h1 class="display-6">Seja bem-vindo, {{ user.name }}!</h1>
-   <h2 class="description display-6" style="padding-bottom: 30px"> Selecione uma das opções a seguir:</h2>
+{% include 'users/registeredPatient' %}
 
-    <div class="row">
-          <div class="col-md-4">
-            <div class="block">
-              <div class="block-title">
-                <h2> Pacientes </h2>
-              </div>
-              <div class ="block-body">
-                <h4><a href={% url 'users:register_patient' %}>Gerenciar pacientes</a></h4>
-              </div>
-            </div>
-          </div>
-
-        <div class="col-md-4">
-            <div class="block">
-                <div class="block-title">
-                     <h2> Filas </h2>
-                </div>
-                <div class ="block-body">
-                    <h4><u>Gerar filas</u></h4>
-                </div>
-            </div>
-        </div>
-    </div>
-
-</div>
 
 {% endblock %}
