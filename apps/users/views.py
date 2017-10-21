@@ -12,7 +12,7 @@ from .forms import RegistrationStaffForm
 from .forms import RegistrationPatientForm
 from .forms import EditPatientForm
 
-from .models import Patient, Staff
+from .models import Patient, Staff, QueuedPatient
 
 
 def login_view(request, *args, **kwargs):
@@ -92,12 +92,7 @@ def sign_up_patient(request):
             raw_password = form.cleaned_data.get('password1')
             username = authenticate(username=username, password=raw_password)
             login(request, 'users:login')
-            allPatients = Patient.objects.all()
-            patient = Patient.objects.get(cpf=cpf_patient)
-            patient.isInQueue = True
-            patient.queuePosition = checkQueueLastPosition(allPatients)
-            patient.save()
-            return redirect('users:queue_patient')
+            return redirect('users:registered_patient')
         else:
             status = 400
     else:
@@ -131,25 +126,20 @@ def queue_patient(request, cpf_patient):
     patients = Patient.objects.filter(cpf=cpf_patient)
     allPatients = Patient.objects.all()
     patient = Patient.objects.get(cpf=cpf_patient)
-    if patient.isInQueue:
-        return HttpResponseRedirect(reverse('users:registered_patient'))
-    else:
-        patient.isInQueue = True
-        patient.queuePosition = checkQueueLastPosition(allPatients)
-        patient.save()
+    patientsInQueue = QueuedPatient.objects.all()
+    patientList = list()
+    for patient0 in patientsInQueue:
+        patientList.append(patient0.patient)
+    if patient in patientList:
         return render(request, 'users/queuePatient.html',
-                               {'patients': patients})
-    return render(request, 'users/queuePatient.html', {'patients': patients})
-
-
-def checkQueueLastPosition(patients):
-    lastPosition = 0
-    for patients in patients:
-        if patients.isInQueue:
-            if lastPosition < patients.queuePosition:
-                lastPosition = patients.queuePosition
-    lastPosition = lastPosition + 1
-    return lastPosition
+                               {'patientList': patientList})
+    else:
+        queuedPatient = QueuedPatient.objects.create(patient = patient)
+        queuedPatient.save()
+        patientList.append(patient)
+        return render(request, 'users/queuePatient.html',
+                               {'patientList': patientList})
+    return render(request, 'users/queuePatient.html', {'patientList': patientList})
 
 
 def manage_accounts_view(request):
@@ -204,9 +194,12 @@ def edit_patient(request, cpf):
 
 
 def queue_patient_view(request):
-    queuedPatients = Patient.objects.filter(isInQueue=True)
+    patientsInQueue = QueuedPatient.objects.all()
+    patientList = list()
+    for onePatient in patientsInQueue:
+        patientList.append(onePatient.patient)
     return render(request, 'users/queuePatient.html',
-                           {'queuedPatients': queuedPatients})
+                           {'patientList': patientList})
 
 
 def classification_view(request):
@@ -214,8 +207,10 @@ def classification_view(request):
 
 
 def classification(request, cpf_patient):
-    patients = Patient.objects.filter(cpf=cpf_patient)
-    return render(request, 'users/classification.html', {'patients': patients})
+    patient = Patient.objects.filter(cpf=cpf_patient)
+    chosenPatient = QueuedPatient.objects.filter(patient = patient)
+    chosenPatient.delete()
+    return render(request, 'users/classification.html', {'patient': patient})
 
 
 def show_pacient_view(request, cpf):

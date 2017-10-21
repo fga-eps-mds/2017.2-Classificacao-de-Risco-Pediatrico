@@ -33,8 +33,6 @@
               <th>Editar</th>
               <th>Deletar</th>
               <th>Enviar para fila</th>
-              <th>Posição na fila</th>
-              <th>Está na fila</th>
             </tr>
         </thead>
         <tbody>
@@ -48,8 +46,6 @@
                   </a></td>
                   <td><a href="{% url 'users:queue_patient' patient.cpf %}"><i class="fa fa-arrow-right" aria-hidden="true"></i>
                   </a></td>
-                  <td>{{ patient.queuePosition }}</td>
-                  <td>{{ patient.isInQueue }}</td>
               </tr>
           {% endfor %}
         </tbody>

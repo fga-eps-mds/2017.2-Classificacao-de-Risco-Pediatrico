@@ -184,10 +184,9 @@ class Patient(models.Model):
         blank=False
     )
 
-    isInQueue = models.BooleanField(
-        default=False
-    )
+class QueuedPatient(models.Model):
 
-    queuePosition = models.IntegerField(
-        default=0
-    )
+    queuePosition = models.AutoField(primary_key=True)
+
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
+

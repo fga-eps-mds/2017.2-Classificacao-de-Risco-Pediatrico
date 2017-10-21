@@ -27,7 +27,6 @@
     <table id="example" class="display" cellspacing="0" width="100%">
         <thead>
             <tr>
-              <th>Posição na fila</th>
               <th>CPF</th>
               <th>Nome</th>
               <th>Responsável</th>
@@ -35,13 +34,12 @@
             </tr>
         </thead>
         <tbody>
-          {% for queuedPatients in queuedPatients %}
+          {% for patient in patientList %}
               <tr>
-                  <td>{{ queuedPatients.queuePosition }}</td>
-                  <td>{{ queuedPatients.cpf}}</td>
-                  <td>{{ queuedPatients.name }}</td>
-                  <td>{{ queuedPatients.guardian }}</td>
-                  <td><a href="{% url 'users:classification' queuedPatients.cpf %}"><i class="fa fa-user-md" aria-hidden="true"></i>
+                  <td>{{ patient.cpf}}</td>
+                  <td>{{ patient.name }}</td>
+                  <td>{{ patient.guardian }}</td>
+                  <td><a href="{% url 'users:classification' patient.cpf %}"><i class="fa fa-user-md" aria-hidden="true"></i>
                   </a></td>
               </tr>
           {% endfor %}
