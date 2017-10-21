@@ -1,0 +1,53 @@
+{% extends 'layout/layout.html' %}
+{% load staticfiles %}
+
+{% block background %}
+  <div class="admin-page"></div>
+{% endblock %}
+
+{% block head %}
+  <link rel="stylesheet" href="{% static "css/main.css" %}">
+  <link rel="stylesheet" href="{% static "css/mainAdmin.css" %}">
+  <link rel="stylesheet" href="{% static "css/managePage.css" %}">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css">
+{% endblock %}
+
+{% block js %}
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+    <script src="{% static "js/managePatients.js" %}"></script>
+{% endblock %}
+
+{% block content %}
+  <div class="box rounded float-right">
+    <h1>Pacientes</h1>
+    <table id="example" class="display" cellspacing="20" width="100%">
+      <thead>
+          <tr>
+            <th>CPF</th>
+            <th>Nome</th>
+            <th>Data de Nascimento</th>
+            <th>Nome do Responsável</th>
+            <th>Nome dos pais</th>
+            <th>Editar</th>
+            <th>Deletar</th>
+          </tr>
+      </thead>
+      <tbody>
+        {% for patient in patients %}
+          <tr>
+            <td>{{ patient.cpf }}</td>
+            <td>{{ patient.name }}</td>
+            <td>{{ patient.birth_date }}</td>
+            <td>{{ patient.guardian }}</td>
+            <td>{{ patient.parents_name }}</td>
+            <td><a href="{% url 'users:edit_patient' patient.cpf %}"><i class="fa fa-pencil" aria-hidden="true"></i>
+              </a></td>
+            <td><a href="{% url 'users:patient_remove' patient.cpf %}"><i class="fa fa-ban" aria-hidden="true"></i>
+              </a></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

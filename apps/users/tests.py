@@ -4,7 +4,8 @@ import pytest
 # from factories import PatientFactory
 # Create your tests here.
 
-from apps.users.forms import RegistrationStaffForm, RegistrationPatientForm
+from apps.users.forms import RegistrationStaffForm, RegistrationPatientForm, \
+    EditPatientForm
 from apps.users.models import Staff, Patient
 # from django.test import Client
 from apps.users.factories import PatientFactory, StaffFactory
@@ -191,6 +192,60 @@ class TestUsers:
         response = client.get('/registered/patient/')
         assert response.status_code == 200
         assert list(response.context['patients']) == patient
+
+    def test_edit_patient_form(self, client):
+        """
+        Test edit patient form with a valid cpf
+        """
+        Patient()
+        name = Patient(cpf='001002012', birth_date='2017-02-01')
+        name.save()
+        response = client.get('/patients/edit/001002012/')
+        assert 'form' in response.context
+        assert 'patient' in response.context
+        assert response.context['form'] is not None
+        assert isinstance(response.context['form'], EditPatientForm)
+
+    def test_edit_patient_invalid_cpf(self, client):
+        """
+        Test edit patient form with a invalid cpf
+        """
+        with pytest.raises(IndexError):
+            client.get('/patients/edit/007/')
+
+    def test_edit_patient_post_valid_data(self, client):
+        """
+        Test edit patient post mehtod with valid data
+        """
+        Patient()
+        name = Patient(cpf='156498', birth_date='2017-02-01')
+        name.save()
+        response = client.post('/patients/edit/156498/', self.patient_data)
+        assert response.status_code == 302
+        assert Patient.objects.count() == 1
+
+    def test_edit_patient_post_invalid_data(self, client):
+        """
+        Test edit patient post mehtod with invalid data
+        """
+        invalid_patient_data = ({
+            'name': 'nameTest', 'guardian': 'guardianTeste',
+            'birth_date': '12/2/12', 'cpf': '156498'})
+        Patient()
+        name = Patient(cpf='156498', birth_date='2017-02-01')
+        name.save()
+        response = client.post('/patients/edit/156498/', invalid_patient_data)
+        assert response.status_code == 400
+
+    def test_edit_patient_is_update_data(self, client):
+        """
+        Test if edit patient post method is actualy updating
+        """
+        Patient()
+        name = Patient(cpf='156498', birth_date='2017-02-01', name='Victor')
+        name.save()
+        client.post('/patients/edit/156498/', self.patient_data)
+        assert Patient.objects.filter(cpf='156498')[0].name == 'nameTest'
 
     def test_edit_accounts_view(self, client):
         Staff()

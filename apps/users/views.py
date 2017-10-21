@@ -3,12 +3,14 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.views import login
 from django.contrib.auth.views import logout
 from django.core.urlresolvers import reverse
+from django.db.models import Q
 from django.http import HttpResponseRedirect
 
 from django.contrib.auth import authenticate
 
 from .forms import RegistrationStaffForm
 from .forms import RegistrationPatientForm
+from .forms import EditPatientForm
 
 from .models import Patient, Staff
 
@@ -168,6 +170,39 @@ def staff_remove(request, id_user):
     return HttpResponseRedirect(reverse('users:manage_accounts'))
 
 
+def patient_remove(request, cpf):
+    patient = Patient.objects.filter(cpf=cpf)
+    patient.delete()
+    return HttpResponseRedirect(reverse('users:manage_patients'))
+
+
+def edit_patient(request, cpf):
+    """
+    edit an existing patient with post method
+    """
+    patient = Patient.objects.filter(cpf=cpf)[0]
+    form = EditPatientForm()
+
+    if request.method == 'POST':
+        form = EditPatientForm(request.POST, instance=patient)
+        form.is_valid()
+        form.non_field_errors()
+
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            username = authenticate(username=username, password=raw_password)
+            return redirect('users:manage_patients')
+        else:
+            status = 400
+            return render(request, 'users/editPatient.html',
+                          {'patient': patient, 'form': form}, status=status)
+    else:
+        return render(request, 'users/editPatient.html',
+                      {'patient': patient, 'form': form})
+
+
 def queue_patient_view(request):
     queuedPatients = Patient.objects.filter(isInQueue=True)
     return render(request, 'users/queuePatient.html',
@@ -191,3 +226,21 @@ def show_pacient_view(request, cpf):
     if len(patient) == 1:
         return render(request, 'users/showPatient.html', {'patient': patient})
     return render(request, 'users/showPatient.html', status=404)
+
+
+def home_receptionist_view(request):
+    """
+    return rendered text from homeReceptionist
+    """
+    return render(request, 'users/homeReceptionist.html')
+
+
+def manage_patients_view(request):
+    patients = Patient.objects.all()
+    search = request.GET.get('q')
+    if search:
+        patients = patients.filter(
+            Q(name__icontains=search) |
+            Q(cpf__icontains=search)
+            )
+    return render(request, 'users/managePatients.html', {'patients': patients})
