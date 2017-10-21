@@ -12,7 +12,7 @@ urlpatterns = [
         name="register_profile"),
     url(r'^register/patient/$', views.sign_up_patient,
         name="register_patient"),
-    url(r'^show/patient/(?P<cpf>\w+)/$', views.show_pacient_view,
+    url(r'^show/patient/(?P<cpf>\w+)/$', views.show_pacient_view,# falta
         name="show_patient"),
     url(r'^home/receptionist/$',  views.registered_patient_view,
         name="home_receptionist"),
@@ -22,22 +22,22 @@ urlpatterns = [
         name="manage_accounts"),
     url(r'^patients/$', views.manage_patients_view,
         name="manage_patients"),
-    url(r'^accounts/edit/(?P<id_user>\w+)/$', views.edit_accounts_view,
+    url(r'^accounts/edit/(?P<id_user>\w+)/$', views.edit_accounts_view,# falta
         name="edit_accounts"),
     url(r'^accounts/remove/(?P<id_user>\w+)/$', views.staff_remove,
         name="staff_remove"),
-    url(r'^patients/remove/(?P<cpf>\w+)/$', views.patient_remove,
+    url(r'^patients/remove/(?P<cpf>\w+)/$', views.patient_remove,# falta
         name="patient_remove"),
     url(r'^patients/edit/(?P<cpf>\d+)/$', views.edit_patient,
         name="edit_patient"),
-    url(r'^registered/patient/$', views.registered_patient_view,
+    url(r'^registered/patient/$', views.registered_patient_view, # falta
         name="registered_patient"),
-    url(r'^registered/patient/(?P<cpf_patient>\w+)/$', views.queue_patient,
+    url(r'^registered/patient/(?P<cpf_patient>\w+)/$', views.queue_patient,# falta
         name="queue_patient"),
     url(r'^queue/patient/$', views.queue_patient_view,
         name="queue_patient"),
-    url(r'^queue/patient/(?P<cpf_patient>\w+)/$', views.classification,
+    url(r'^queue/patient/(?P<cpf_patient>\w+)/$', views.classification,# falta
         name="classification"),
-    url(r'^classification/$', views.classification_view,
+    url(r'^classification/$', views.classification_view,# falta
         name="classification")
 ]

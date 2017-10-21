@@ -1,104 +1,252 @@
 {% extends 'layout/layout.html' %}
 {% load staticfiles %}
 
+{% block head %}
+    <link rel="stylesheet" href="{% static "css/box-animation.css" %}">
+{% endblock %}
+
 {% block content %}
-    <div class="box rounded float-right">
-       <h1 class="display-6">Cadastro de Paciente</h1>
-       <p class="description"> Informe os dados do novo paciente </p>
-       <form role="form" class="form" method="POST">
-          {% csrf_token %}
-          {{ form.non_field_errors }}
-          <div class="d-inline-block">
-             <div class="form-row">
-                <div class="fieldWrapper">
-                   {{ form.name.errors }}
-                   <label for="{{ form.name.id_for_label }}" class="col-form-label">Nome:</label>
-                   {{ form.name }}
+    <div class="container-fluid">
+        <div class="row mt-5">
+            <div class="col-lg-7 col-md-10 mx-auto my-auto text-center">
+                <div class="card bg-light border-secondary mb-4 z-depth-2 slide-in-blurred-top">
+                    <form role="form" class="form" method="POST" >
+                        <div class="card-header">
+                            Classificação de Risco Pediátrico
+                        </div>
+
+                        {% csrf_token %}
+
+                        {% if errors %}
+                            <div class="alert alert-warning" role="alert">
+                                {{ errors }}
+                            </div>
+                        {% endif %}
+
+                        <div class="row mt-3">
+                            <div class="col">
+                                <div class="form-group px-3">
+                                    <div class="cols-sm-10">
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="basic-addon1"><i class="fa fa-user" aria-hidden="true"></i></span>
+                                            <input type="text" name="{{ form.name.name }}" maxlength="150" id="{{ form.name.id_for_label }}" class="form-control"  placeholder="Nome" aria-label="Nome" aria-describedby="basic-addon1" autofocus required>
+                                        </div>
+                                        {% if form.name.errors %}
+                                            <div class="error-holder">
+                                                <div class="alert alert-warning" role="alert">
+                                                    {{ form.name.errors }}
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                                <div class="form-group px-3">
+                                    <div class="cols-sm-10">
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="basic-addon1"><i class="fa fa-user-plus" aria-hidden="true"></i></span>
+                                            <input type="text" name="{{ form.guardian.name }}" id="{{ form.guardian.id_for_label }}" class="form-control"  placeholder="Responsável" aria-label="Responsável" aria-describedby="basic-addon3" required>
+                                        </div>
+                                        {% if form.guardian.errors %}
+                                            <div class="error-holder">
+                                                <div class="alert alert-warning" role="alert">
+                                                    {{ form.guardian.errors }}
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                                <div class="form-group px-3">
+                                    <div class="cols-sm-10">
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="basic-addon1"><i class="fa fa-calendar-o" aria-hidden="true"></i></span>
+                                            <input type="text" name="{{ form.birth_date.name }}" id="{{ form.birth_date.id_for_label }}" class="form-control"  placeholder="Data de nascimento" aria-label="Data de nascimento" aria-describedby="basic-addon3" required>
+                                        </div>
+                                        {% if form.birth_date.errors %}
+                                            <div class="error-holder">
+                                                <div class="alert alert-warning" role="alert">
+                                                    {{ form.birth_date.errors }}
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                                <div class="form-group px-3">
+                                    <div class="cols-sm-10">
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="basic-addon1"><i class="fa fa-id-badge" aria-hidden="true"></i></span>
+                                            <input type="text" name="{{ form.cpf.name }}" id="{{ form.cpf.id_for_label }}" class="form-control"  placeholder="CPF" aria-label="CPF" aria-describedby="basic-addon2" required>
+                                        </div>
+                                        {% if form.cpf.errors %}
+                                            <div class="error-holder">
+                                                <div class="alert alert-warning" role="alert">
+                                                    {{ form.cpf.errors }}
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                                <div class="form-group px-3">
+                                    <div class="cols-sm-10">
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="basic-addon1"><i class="fa fa-users" aria-hidden="true"></i></span>
+                                            <input type="text" name="{{ form.parents_name.name }}" id="{{ form.parents_name.id_for_label }}" class="form-control"  placeholder="Nome dos pais" aria-label="Nome dos pais" aria-describedby="basic-addon4" required>
+                                        </div>
+                                        {% if form.parents_name.errors %}
+                                            <div class="error-holder">
+                                                <div class="alert alert-warning" role="alert">
+                                                    {{ form.parents_name.errors }}
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                                <div class="form-group px-3">
+                                    <div class="cols-sm-10">
+                                        <div class="input-group">
+                                            <div>
+                                              Está na fila: <input type="checkbox" name="{{ form.isInQueue.name }}" id="{{ form.isInQueue.id_for_label }}" class="form-check-input ml-1" placeholder="Está na fila" aria-label="Está na fila" aria-describedby="basic-addon4" required /></span>
+                                            </div>
+                                        </div>
+                                        {% if form.isInQueue.errors %}
+                                            <div class="error-holder">
+                                                <div class="alert alert-warning" role="alert">
+                                                    {{ form.isInQueue.errors }}
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                                <div class="form-group px-3">
+                                    <div class="cols-sm-10">
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="basic-addon1"><i class="fa fa-list-ol" aria-hidden="true"></i></span>
+                                            <input type="text" name="{{ form.queuePosition.name }}" id="{{ form.queuePosition.id_for_label }}" class="form-control"  placeholder="Posição na fila" aria-label="Posição na fila" aria-describedby="basic-addon4" required>
+                                        </div>
+                                        {% if form.queuePosition.errors %}
+                                            <div class="error-holder">
+                                                <div class="alert alert-warning" role="alert">
+                                                    {{ form.queuePosition.errors }}
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col">
+                                <div class="form-group px-3">
+                                    <div class="cols-sm-10">
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="basic-addon1"><i class="fa fa-globe" aria-hidden="true"></i></span>
+                                            <input type="text" name="{{ form.uf.name }}" id="{{ form.uf.id_for_label }}" class="form-control"  placeholder="UF" aria-label="UF" aria-describedby="basic-addon6" required>
+                                        </div>
+                                        {% if form.uf.errors %}
+                                            <div class="error-holder">
+                                                <div class="alert alert-warning" role="alert">
+                                                    {{ form.uf.errors }}
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                                <div class="form-group px-3">
+                                    <div class="cols-sm-10">
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="basic-addon1"><i class="fa fa-map-o" aria-hidden="true"></i></span>
+                                            <input type="text" name="{{ form.city.name }}" id="{{ form.city.id_for_label }}" class="form-control"  placeholder="Cidade" aria-label="Cidade" aria-describedby="basic-addon7" required>
+                                        </div>
+                                        {% if form.city.errors %}
+                                            <div class="error-holder">
+                                                <div class="alert alert-warning" role="alert">
+                                                    {{ form.city.errors }}
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                                <div class="form-group px-3">
+                                    <div class="cols-sm-10">
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="basic-addon1"><i class="fa fa-road" aria-hidden="true"></i></span>
+                                            <input type="text" name="{{ form.street.name }}" id="{{ form.street.id_for_label }}" class="form-control"  placeholder="Rua" aria-label="Rua" aria-describedby="basic-addon7" required>
+                                        </div>
+                                        {% if form.street.errors %}
+                                            <div class="error-holder">
+                                                <div class="alert alert-warning" role="alert">
+                                                    {{ form.street.errors }}
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                                <div class="form-group px-3">
+                                    <div class="cols-sm-10">
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="basic-addon1"><i class="fa fa-home" aria-hidden="true"></i></span>
+                                            <input type="text" name="{{ form.neighborhood.name }}" id="{{ form.neighborhood.id_for_label }}" class="form-control"  placeholder="Bairro" aria-label="Bairro" aria-describedby="basic-addon8" required>
+                                        </div>
+                                        {% if form.neighborhood.errors %}
+                                            <div class="error-holder">
+                                                <div class="alert alert-warning" role="alert">
+                                                    {{ form.neighborhood.errors }}
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                                <div class="form-group px-3">
+                                    <div class="cols-sm-10">
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="basic-addon1"><i class="fa fa-th-large" aria-hidden="true"></i></span>
+                                            <input type="text" name="{{ form.block.name }}" id="{{ form.block.id_for_label }}" class="form-control"  placeholder="Conjunto" aria-label="Conjunto" aria-describedby="basic-addon9" required>
+                                        </div>
+                                        {% if form.block.errors %}
+                                            <div class="error-holder">
+                                                <div class="alert alert-warning" role="alert">
+                                                    {{ form.block.errors }}
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                                <div class="form-group px-3">
+                                    <div class="cols-sm-10">
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="basic-addon1">00</span>
+                                            <input type="text" name="{{ form.number.name }}" id="{{ form.number.id_for_label }}" class="form-control"  placeholder="Número" aria-label="Número" aria-describedby="basic-addon10" required>
+                                        </div>
+                                        {% if form.number.errors %}
+                                            <div class="error-holder">
+                                                <div class="alert alert-warning" role="alert">
+                                                    {{ form.number.errors }}
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-footer text-right">
+                            <a href="{% url 'users:login' %}" class="btn btn btn-outline-secondary btn-lg" >Cancelar</a>
+                            <button type="submit" class="btn btn-outline-secondary btn-lg">Cadastrar</button>
+                        </div>
+                    </form>
                 </div>
-                <div class="fieldWrapper">
-                   {{ form.cpf.errors }}
-                   <label for="{{ form.cpf.id_for_label }}" class="col-form-label">CPF:</label>
-                   {{ form.cpf }}
-                </div>
-             </div>
-             <div class="form-row">
-                <div class="fieldWrapper">
-                   {{ form.guardian.errors }}
-                   <label for="{{ form.guardian.id_for_label }}" class="col-form-label">Resp:</label>
-                   {{ form.guardian }}
-                </div>
-                <div class="fieldWrapper">
-                   {{ form.parents_name.errors }}
-                   <label for="{{ form.parents_name.id_for_label }}" class="col-form-label">Pais:</label>
-                   {{ form.parents_name }}
-                </div>
-             </div>
-             <div class="form-row">
-                <div class="fieldWrapper">
-                   {{ form.birth_date.errors }}
-                   <label for="{{ form.birth_date.id_for_label }}" class="col-form-label">Nasc:</label>
-                   {{ form.birth_date }}
-                </div>
-                <div class="fieldWrapper">
-                   {{ form.uf.errors }}
-                   <label for="{{ form.uf.id_for_label }}" class="col-form-label">UF:</label>
-                   {{ form.uf }}
-                </div>
-             </div>
-             <div class="form-row">
-                <div class="fieldWrapper">
-                   {{ form.city.errors }}
-                   <label for="{{ form.uf.id_for_label }}" class="col-form-label">City:</label>
-                   {{ form.city }}
-                </div>
-                <div class="fieldWrapper">
-                   {{ form.neighborhood.errors }}
-                   <label for="{{ form.neighborhood.id_for_label }}" class="col-form-label">Bairro:</label>
-                   {{ form.neighborhood }}
-                </div>
-             </div>
-             <div class="form-row">
-                <div class="fieldWrapper">
-                   {{ form.street.errors }}
-                   <label for="{{ form.street.id_for_label }}" class="col-form-label">Rua:</label>
-                   {{ form.street }}
-                </div>
-                <div class="fieldWrapper">
-                   {{ form.block.errors }}
-                   <label for="{{ form.block.id_for_label }}" class="col-form-label">Conj:</label>
-                   {{ form.block }}
-                </div>
-             </div>
-             <div class="form-row">
-                <div class="fieldWrapper">
-                   {{ form.number.errors }}
-                   <label for="{{ form.number.id_for_label }}" class="col-form-label">Num:</label>
-                   {{ form.number }}
-                </div>
-                <div class="fieldWrapper">
-                   {{ form.isInQueue.errors }}
-                   <label for="{{ form.isInQueue.id_for_label }}" class="col-form-label">Está na fila:</label>
-                   {{ form.isInQueue }}
-                </div>
-             </div>
-             <div class="form-row">
-                <div class="fieldWrapper">
-                   {{ form.queuePosition.errors }}
-                   <label for="{{ form.queuePosition.id_for_label }}" class="col-form-label">Posição da fila:</label>
-                   {{ form.queuePosition }}
-                </div>
-             </div>
-          </div>
-          <div id="botoes_cadastro">
-            {% if user.is_admin %}
-                <a href="{% url 'users:admin' %}" class="btn btn btn-outline-secondary btn-lg" >Cancelar</a>
-            {% elif user.profile == 1 %}
-                <a href="{% url 'users:home_receptionist' %}" class="btn btn btn-outline-secondary btn-lg" >Cancelar</a>
-            {% elif user.profile == 2 %}
-                <a href="{% url 'users:home_attendant' %}" class="btn btn btn-outline-secondary btn-lg" >Cancelar</a>
-            {% endif %}
-             <button class="btn btn-primary" name='action' value='address' type="submit">Cadastrar</button>
-          </div>
-       </form>
+            </div>
+
+        </div>
     </div>
 {% endblock %}
