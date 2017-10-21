@@ -1,6 +1,12 @@
   [![Coverage Status](https://coveralls.io/repos/github/fga-gpp-mds/2017.2-Classificacao-de-Risco-Pediatrico/badge.svg)](https://coveralls.io/github/fga-gpp-mds/2017.2-Classificacao-de-Risco-Pediatrico)
-  ![BuildStatus](https://travis-ci.org/fga-gpp-mds/2017.2-Classificacao-de-Risco-Pediatrico.svg?branch=devel)  
+  ![BuildStatus](https://travis-ci.org/fga-gpp-mds/2017.2-Classificacao-de-Risco-Pediatrico.svg?branch=devel)
+
 # Classificação de risco na pediatria
+  [![Issue Count](https://codeclimate.com/github/fga-gpp-mds/2017.2-Classificacao-de-Risco-Pediatrico/badges/issue_count.svg)](https://codeclimate.com/github/fga-gpp-mds/2017.2-Classificacao-de-Risco-Pediatrico)
+  [![Code Climate](https://codeclimate.com/github/fga-gpp-mds/2017.2-Classificacao-de-Risco-Pediatrico/badges/gpa.svg)](https://codeclimate.com/github/fga-gpp-mds/2017.2-Classificacao-de-Risco-Pediatrico)
+  [![Coverage Status](https://coveralls.io/repos/github/fga-gpp-mds/2017.2-Classificacao-de-Risco-Pediatrico/badge.svg?branch=devel)](https://coveralls.io/github/fga-gpp-mds/2017.2-Classificacao-de-Risco-Pediatrico?branch=devel)
+  [![Build Status](https://travis-ci.org/fga-gpp-mds/2017.2-Classificacao-de-Risco-Pediatrico.svg?branch=devel)](https://travis-ci.org/fga-gpp-mds/2017.2-Classificacao-de-Risco-Pediatrico)
+  [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 O projeto busca melhorar a eficiência da atual classificação de risco do Hospital Materno-Infantil de Brasília, por meio de sua automatização.
 
@@ -17,7 +23,7 @@ O software terá como função classificar os pacientes em estados imediato,  ho
 Para contribuir com o projeto você deve possuir o docker, docker-compose e uma conta no github, após isso clone o projeto.
   - [Download docker](https://docs.docker.com/engine/installation/)
   - [Download docker-compose](https://docs.docker.com/compose/install/)
-  - Para instalar o git nos sistemas linux que utilizam o apt-get, utilize o comando
+  - Para instalar o git nos sistemas linux que utilizam o apt-get, utilize o comando:
 
   ``` sudo apt-get install git ```
 
@@ -35,11 +41,11 @@ Para contribuir com o projeto você deve possuir o docker, docker-compose e uma 
 
   - Faça as migrações pelo comando
 
-  `sudo docker-compose run web python makemigrations`
+  `sudo docker-compose run web python manage.py makemigrations`
 
   - Aplique as migrações pelo comando
 
-  `sudo docker-compose run web python migrate`
+  `sudo docker-compose run web python manage.py migrate`
 
   ## Rodando Aplicação
 
