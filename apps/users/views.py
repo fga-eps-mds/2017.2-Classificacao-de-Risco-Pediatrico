@@ -31,7 +31,7 @@ def login_view(request, *args, **kwargs):
 
             if user.profile == 2:
                 login(request, user)
-                return redirect("/risk_rating")
+                return redirect("/home/attendant/")
         else:
 
             kwargs['extra_context'] = {'next': reverse('users:login'),
@@ -113,7 +113,7 @@ def home_receptionist_view(request):
     return render(request, 'users/homeReceptionist.html')
 
 
-def admin_view(request):
+def home_admin_view(request):
     """
     return rendered text from homeReceptionist
     """

@@ -76,7 +76,14 @@
          Brincando
          </label>
       </div>
-      <button type="submit" class="btn btn btn-outline-secondary float-right">Enviar</button>
+      <div id="botoes-cadastro">
+        <button type="submit" class="btn btn-primary float-right">Enviar</button>
+        {% if user.profile == 1 %}
+          <a href="/home/receptionist"><button class="btn btn btn-outline-secondary float-right" type="button">Cancelar</button></a>
+        {% else %}
+          <a href="/home/attendant"><button class="btn btn btn-outline-secondary float-right" type="button">Cancelar</button></a>
+        {% endif %}
+      </div>
    </form>
 </div>
 {% endblock %}
