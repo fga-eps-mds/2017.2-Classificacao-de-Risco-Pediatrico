@@ -107,7 +107,7 @@ def sign_up_patient(request):
                   status=status)
 
 
-def home_admin_view(request):
+def admin_view(request):
     """
     return rendered text from homeReceptionist
     """
