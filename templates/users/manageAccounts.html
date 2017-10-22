@@ -1,16 +1,9 @@
-  {% extends 'layout/layout.html' %}
+{% extends 'layout/layout.html' %}
 {% load staticfiles %}
 
-{% block background %}
-  <div class="admin-page"></div>
-{% endblock %}
-
-
 {% block head %}
-  <link rel="stylesheet" href="{% static "css/main.css" %}">
-  <link rel="stylesheet" href="{% static "css/mainAdmin.css" %}">
-  <link rel="stylesheet" href="{% static "css/managePage.css" %}">
-  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="{% static "css/manageAccounts.css" %}">
 {% endblock %}
 
 
@@ -21,40 +14,68 @@
 {% endblock %}
 
 {% block content %}
-  <div class="box rounded float-right">
-    <h1>Listagem das contas</h1>
-
-    <table id="example" class="display" cellspacing="0" width="100%">
-        <thead>
-            <tr>
-              <th>ID</th>
-              <th>Nome</th>
-              <th>Função</th>
-              <th>Editar</th>
-              <th>Deletar</th>
-            </tr>
-        </thead>
-        <tbody>
-          {% for staff in staffs %}
-              <tr>
-                  <td>{{ staff.id_user}}</td>
-                  <td>{{ staff.name }}</td>
-                  <td>
-                    {% if staff.profile == 1 %}
-                      Recepcionista
-                    {% else %}
-                      Atendente
-                    {% endif %}
-                  </td>
-                  <td><a href="edit/{{ staff.id_user }}"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
-                  <td><a href="{% url 'users:staff_remove' staff.id_user %}"><i class="fa fa-ban" aria-hidden="true"></i>
-                  </a></td>
-              </tr>
-          {% endfor %}
-        </tbody>
-    </table>
-    <div class="backButton">
-      <a href="/home/admin"><button class="btn btn btn-primary float-right" type="button">Voltar</button></a>
+    <div class="container-fluid">
+        <div class="row mt-5">
+            <div class="col-lg-7 col-md-10 mx-auto my-auto">
+                <div class="card bg-light border-secondary slide-in-blurred-top">
+                    <div class="card-header text-center">
+                        Classificação de Risco Pediátrico
+                    </div>
+                    <table id="example" class="display" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nome</th>
+                                <th>Função</th>
+                                <th>Editar</th>
+                                <th>Deletar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for staff in staffs %}
+                                <tr>
+                                    <td>{{ staff.id_user }}</td>
+                                    <td>{{ staff.name }}</td>
+                                    <td>
+                                        {% if staff.profile == 1 %}
+                                        Recepcionista
+                                        {% else %}
+                                        Atendente
+                                        {% endif %}
+                                    </td>
+                                    <td><a href="edit/{{ staff.id_user }}"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
+                                    <td><a href="#" data-toggle="modal" data-target="#{{ staff.id_user }}"><i class="fa fa-ban" aria-hidden="true"></i></a></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <div class="card-footer text-right">
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
+
+    {% for staff in staffs %}
+        <div class="modal fade" id="{{ staff.id_user }}" tabindex="-1" role="dialog" aria-labelledby="Deletar Usuário" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Deletar Funcionário</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Tem certeza que deseja deletar a conta do {{ staff.name }}?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                        <a href="{% url 'users:staff_remove' staff.id_user %}" class="btn btn-danger">Deletar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
 {% endblock %}
