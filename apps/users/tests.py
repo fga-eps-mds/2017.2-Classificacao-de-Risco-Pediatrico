@@ -4,8 +4,11 @@ import pytest
 # from factories import PatientFactory
 # Create your tests here.
 
-from apps.users.forms import RegistrationStaffForm, RegistrationPatientForm
+from apps.users.forms import RegistrationStaffForm, RegistrationPatientForm, \
+    EditPatientForm
 from apps.users.models import Staff, Patient
+# from django.test import Client
+from apps.users.factories import PatientFactory, StaffFactory
 
 
 @pytest.mark.django_db
@@ -47,7 +50,7 @@ class TestUsers:
         response = client.post('/', {'username': 'email@gmail.com',
                                      'password': "1234asdf"})
 
-        assert response.url == '/risk_rating'
+        assert response.url == '/home/attendant/'
 
     def test_login_view_user_do_not_exists(self, client):
         response = client.post('/', {'username': 'email@gmail.com',
@@ -67,7 +70,9 @@ class TestUsers:
                             'url',
                             ['/register/profile/',
                                 '/register/patient/',
-                                '/home/receptionist/', '/'])
+                                '/home/receptionist/',
+                                '/registered/patient/',
+                                '/'])
     def test_get_route(self, client, url):
         response = client.get(url)
         assert response.status_code == 200
@@ -93,7 +98,8 @@ class TestUsers:
         'parents_name': 'parents_nameTest', 'uf': 'ufTest',
         'city': 'cityTeste', 'neighborhood': 'neighborhoodTest',
         'street': 'streetTeste', 'block': 'blockTeste',
-        'number': 'numberTest'})
+        'number': 'numberTest', 'isInQueue': 'True',
+        'queuePosition': '5'})
 
     @pytest.mark.parametrize('url, model, data', [
         ('/register/patient/', Patient, patient_data),
@@ -114,7 +120,7 @@ class TestUsers:
 
     @pytest.mark.parametrize('url, data, urlredirect', [
         ('/register/profile/', profile_data, '/'),
-        ('/register/patient/', patient_data, '/')])
+        ('/register/patient/', patient_data, '/queue/patient/')])
     def test_sign_up_post_redirect(self, client, url, data, urlredirect):
         response = client.post(url, data, follow=True)
         assert response.status_code == 200
@@ -173,3 +179,91 @@ class TestUsers:
     def test__str__(self):
         user_email = Staff(email='bruno@gmail.com')
         assert str(user_email) == 'bruno@gmail.com'
+
+    def test_show_patient_view(self, client):
+        Patient()
+        name = Patient(cpf='001002012', birth_date='2017-02-01')
+        name.save()
+        response = client.get('/show/patient/001002012/')
+        assert response.status_code == 200
+
+    def test_registered_patient_view(self, client):
+        patient = PatientFactory.create_batch(3)
+        response = client.get('/registered/patient/')
+        assert response.status_code == 200
+        assert list(response.context['patients']) == patient
+
+    def test_edit_patient_form(self, client):
+        """
+        Test edit patient form with a valid cpf
+        """
+        Patient()
+        name = Patient(cpf='001002012', birth_date='2017-02-01')
+        name.save()
+        response = client.get('/patients/edit/001002012/')
+        assert 'form' in response.context
+        assert 'patient' in response.context
+        assert response.context['form'] is not None
+        assert isinstance(response.context['form'], EditPatientForm)
+
+    def test_edit_patient_invalid_cpf(self, client):
+        """
+        Test edit patient form with a invalid cpf
+        """
+        with pytest.raises(IndexError):
+            client.get('/patients/edit/007/')
+
+    def test_edit_patient_post_valid_data(self, client):
+        """
+        Test edit patient post mehtod with valid data
+        """
+        Patient()
+        name = Patient(cpf='156498', birth_date='2017-02-01')
+        name.save()
+        response = client.post('/patients/edit/156498/', self.patient_data)
+        assert response.status_code == 302
+        assert Patient.objects.count() == 1
+
+    def test_edit_patient_post_invalid_data(self, client):
+        """
+        Test edit patient post mehtod with invalid data
+        """
+        invalid_patient_data = ({
+            'name': 'nameTest', 'guardian': 'guardianTeste',
+            'birth_date': '12/2/12', 'cpf': '156498'})
+        Patient()
+        name = Patient(cpf='156498', birth_date='2017-02-01')
+        name.save()
+        response = client.post('/patients/edit/156498/', invalid_patient_data)
+        assert response.status_code == 400
+
+    def test_edit_patient_is_update_data(self, client):
+        """
+        Test if edit patient post method is actualy updating
+        """
+        Patient()
+        name = Patient(cpf='156498', birth_date='2017-02-01', name='Victor')
+        name.save()
+        client.post('/patients/edit/156498/', self.patient_data)
+        assert Patient.objects.filter(cpf='156498')[0].name == 'nameTest'
+
+    def test_edit_accounts_view(self, client):
+        Staff()
+        name = Staff(id_user='456')
+        name.save()
+        response = client.get('/accounts/edit/456/')
+        assert response.status_code == 200
+
+    def test_manage_accounts_view(self, client):
+        staff = StaffFactory.create_batch(3)
+        response = client.get('/accounts/')
+        assert response.status_code == 200
+        assert list(response.context['staffs']) == staff
+
+    def test_staff_remove(self, client):
+        Staff()
+        name = Staff(id_user='456')
+        name.save()
+        response = client.delete('/accounts/remove/456/', follow=True)
+        assert response.redirect_chain == [('/accounts/', 302)]
+        assert Staff.objects.count() == 0

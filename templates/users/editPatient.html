@@ -1,8 +1,22 @@
 {% extends 'layout/layout.html' %}
 {% load staticfiles %}
 
+
+{% block brand %}
+  {% if user.is_authenticated %}
+    <a class="navbar-brand" href="{% url 'users:home' %}">
+      <img src="/static/img/LogoCRP.png" width="100" height="50" alt="">
+    </a>
+  {% else %}
+    <a class="navbar-brand" href="{% url 'users:login' %}">
+      <img src="/static/img/LogoCRP.png" width="100" height="50" alt="">
+    </a>
+  {% endif %}
+{% endblock %}
+
+
 {% block head %}
-    <link rel="stylesheet" href="{% static "css/box-animation.css" %}">
+  <link rel="stylesheet" href="{% static "css/main.css" %}">
 {% endblock %}
 
 {% block content %}
@@ -29,7 +43,7 @@
                                     <div class="cols-sm-10">
                                         <div class="input-group">
                                             <span class="input-group-addon" id="basic-addon1"><i class="fa fa-user" aria-hidden="true"></i></span>
-                                            <input type="text" name="{{ form.name.name }}" maxlength="150" id="{{ form.name.id_for_label }}" class="form-control"  placeholder="Nome" aria-label="Nome" aria-describedby="basic-addon1" autofocus required>
+                                            <input type="text" name="{{ form.name.name }}" maxlength="150" id="{{ form.name.id_for_label }}" class="form-control" value={{patient.name}}  placeholder="Nome" aria-label="Nome" aria-describedby="basic-addon1" autofocus required>
                                         </div>
                                         {% if form.name.errors %}
                                             <div class="error-holder">
@@ -45,7 +59,7 @@
                                     <div class="cols-sm-10">
                                         <div class="input-group">
                                             <span class="input-group-addon" id="basic-addon1"><i class="fa fa-user-plus" aria-hidden="true"></i></span>
-                                            <input type="text" name="{{ form.guardian.name }}" id="{{ form.guardian.id_for_label }}" class="form-control"  placeholder="Responsável" aria-label="Responsável" aria-describedby="basic-addon3" required>
+                                            <input type="text" name="{{ form.guardian.name }}" id="{{ form.guardian.id_for_label }}" class="form-control" value={{patient.guardian}}  placeholder="Responsável" aria-label="Responsável" aria-describedby="basic-addon3" required>
                                         </div>
                                         {% if form.guardian.errors %}
                                             <div class="error-holder">
@@ -61,7 +75,7 @@
                                     <div class="cols-sm-10">
                                         <div class="input-group">
                                             <span class="input-group-addon" id="basic-addon1"><i class="fa fa-calendar-o" aria-hidden="true"></i></span>
-                                            <input type="text" name="{{ form.birth_date.name }}" id="{{ form.birth_date.id_for_label }}" class="form-control"  placeholder="Data de nascimento" aria-label="Data de nascimento" aria-describedby="basic-addon3" required>
+                                            <input type="text" name="{{ form.birth_date.name }}" id="{{ form.birth_date.id_for_label }}" class="form-control" value={{patient.birth_date}}  placeholder="Data de nascimento" aria-label="Data de nascimento" aria-describedby="basic-addon3" required>
                                         </div>
                                         {% if form.birth_date.errors %}
                                             <div class="error-holder">
@@ -77,7 +91,7 @@
                                     <div class="cols-sm-10">
                                         <div class="input-group">
                                             <span class="input-group-addon" id="basic-addon1"><i class="fa fa-id-badge" aria-hidden="true"></i></span>
-                                            <input type="text" name="{{ form.cpf.name }}" id="{{ form.cpf.id_for_label }}" class="form-control"  placeholder="CPF" aria-label="CPF" aria-describedby="basic-addon2" required>
+                                            <input type="text" name="{{ form.cpf.name }}" id="{{ form.cpf.id_for_label }}" class="form-control" value={{patient.cpf}}  placeholder="CPF" aria-label="CPF" aria-describedby="basic-addon2" required>
                                         </div>
                                         {% if form.cpf.errors %}
                                             <div class="error-holder">
@@ -93,7 +107,7 @@
                                     <div class="cols-sm-10">
                                         <div class="input-group">
                                             <span class="input-group-addon" id="basic-addon1"><i class="fa fa-users" aria-hidden="true"></i></span>
-                                            <input type="text" name="{{ form.parents_name.name }}" id="{{ form.parents_name.id_for_label }}" class="form-control"  placeholder="Nome dos pais" aria-label="Nome dos pais" aria-describedby="basic-addon4" required>
+                                            <input type="text" name="{{ form.parents_name.name }}" id="{{ form.parents_name.id_for_label }}" class="form-control" value={{patient.parents_name}}  placeholder="Nome dos pais" aria-label="Nome dos pais" aria-describedby="basic-addon4" required>
                                         </div>
                                         {% if form.parents_name.errors %}
                                             <div class="error-holder">
@@ -109,7 +123,7 @@
                                     <div class="cols-sm-10">
                                         <div class="input-group">
                                             <div>
-                                              Está na fila: <input type="checkbox" name="{{ form.isInQueue.name }}" id="{{ form.isInQueue.id_for_label }}" class="form-check-input ml-1" placeholder="Está na fila" aria-label="Está na fila" aria-describedby="basic-addon4" required /></span>
+                                              Está na fila: <input type="checkbox" name="{{ form.isInQueue.name }}" id="{{ form.isInQueue.id_for_label }}" class="form-check-input ml-1" value={{patient.isInQueue}} placeholder="Está na fila" aria-label="Está na fila" aria-describedby="basic-addon4" required /></span>
                                             </div>
                                         </div>
                                         {% if form.isInQueue.errors %}
@@ -126,7 +140,7 @@
                                     <div class="cols-sm-10">
                                         <div class="input-group">
                                             <span class="input-group-addon" id="basic-addon1"><i class="fa fa-list-ol" aria-hidden="true"></i></span>
-                                            <input type="text" name="{{ form.queuePosition.name }}" id="{{ form.queuePosition.id_for_label }}" class="form-control"  placeholder="Posição na fila" aria-label="Posição na fila" aria-describedby="basic-addon4" required>
+                                            <input type="text" name="{{ form.queuePosition.name }}" id="{{ form.queuePosition.id_for_label }}" class="form-control" value={{patient.queuePosition}} placeholder="Posição na fila" aria-label="Posição na fila" aria-describedby="basic-addon4" required>
                                         </div>
                                         {% if form.queuePosition.errors %}
                                             <div class="error-holder">
@@ -145,7 +159,7 @@
                                     <div class="cols-sm-10">
                                         <div class="input-group">
                                             <span class="input-group-addon" id="basic-addon1"><i class="fa fa-globe" aria-hidden="true"></i></span>
-                                            <input type="text" name="{{ form.uf.name }}" id="{{ form.uf.id_for_label }}" class="form-control"  placeholder="UF" aria-label="UF" aria-describedby="basic-addon6" required>
+                                            <input type="text" name="{{ form.uf.name }}" id="{{ form.uf.id_for_label }}" class="form-control" value={{patient.uf}}  placeholder="UF" aria-label="UF" aria-describedby="basic-addon6" required>
                                         </div>
                                         {% if form.uf.errors %}
                                             <div class="error-holder">
@@ -161,7 +175,7 @@
                                     <div class="cols-sm-10">
                                         <div class="input-group">
                                             <span class="input-group-addon" id="basic-addon1"><i class="fa fa-map-o" aria-hidden="true"></i></span>
-                                            <input type="text" name="{{ form.city.name }}" id="{{ form.city.id_for_label }}" class="form-control"  placeholder="Cidade" aria-label="Cidade" aria-describedby="basic-addon7" required>
+                                            <input type="text" name="{{ form.city.name }}" id="{{ form.city.id_for_label }}" class="form-control" value={{patient.city}} placeholder="Cidade" aria-label="Cidade" aria-describedby="basic-addon7" required>
                                         </div>
                                         {% if form.city.errors %}
                                             <div class="error-holder">
@@ -177,7 +191,7 @@
                                     <div class="cols-sm-10">
                                         <div class="input-group">
                                             <span class="input-group-addon" id="basic-addon1"><i class="fa fa-road" aria-hidden="true"></i></span>
-                                            <input type="text" name="{{ form.street.name }}" id="{{ form.street.id_for_label }}" class="form-control"  placeholder="Rua" aria-label="Rua" aria-describedby="basic-addon7" required>
+                                            <input type="text" name="{{ form.street.name }}" id="{{ form.street.id_for_label }}" class="form-control" value={{patient.street}} placeholder="Rua" aria-label="Rua" aria-describedby="basic-addon7" required>
                                         </div>
                                         {% if form.street.errors %}
                                             <div class="error-holder">
@@ -193,7 +207,7 @@
                                     <div class="cols-sm-10">
                                         <div class="input-group">
                                             <span class="input-group-addon" id="basic-addon1"><i class="fa fa-home" aria-hidden="true"></i></span>
-                                            <input type="text" name="{{ form.neighborhood.name }}" id="{{ form.neighborhood.id_for_label }}" class="form-control"  placeholder="Bairro" aria-label="Bairro" aria-describedby="basic-addon8" required>
+                                            <input type="text" name="{{ form.neighborhood.name }}" id="{{ form.neighborhood.id_for_label }}" class="form-control" value={{patient.neighborhood}}  placeholder="Bairro" aria-label="Bairro" aria-describedby="basic-addon8" required>
                                         </div>
                                         {% if form.neighborhood.errors %}
                                             <div class="error-holder">
@@ -209,7 +223,7 @@
                                     <div class="cols-sm-10">
                                         <div class="input-group">
                                             <span class="input-group-addon" id="basic-addon1"><i class="fa fa-th-large" aria-hidden="true"></i></span>
-                                            <input type="text" name="{{ form.block.name }}" id="{{ form.block.id_for_label }}" class="form-control"  placeholder="Conjunto" aria-label="Conjunto" aria-describedby="basic-addon9" required>
+                                            <input type="text" name="{{ form.block.name }}" id="{{ form.block.id_for_label }}" class="form-control" value={{patient.block}} placeholder="Conjunto" aria-label="Conjunto" aria-describedby="basic-addon9" required>
                                         </div>
                                         {% if form.block.errors %}
                                             <div class="error-holder">
@@ -225,7 +239,7 @@
                                     <div class="cols-sm-10">
                                         <div class="input-group">
                                             <span class="input-group-addon" id="basic-addon1">00</span>
-                                            <input type="text" name="{{ form.number.name }}" id="{{ form.number.id_for_label }}" class="form-control"  placeholder="Número" aria-label="Número" aria-describedby="basic-addon10" required>
+                                            <input type="text" name="{{ form.number.name }}" id="{{ form.number.id_for_label }}" class="form-control" value={{patient.number}} placeholder="Número" aria-label="Número" aria-describedby="basic-addon10" required>
                                         </div>
                                         {% if form.number.errors %}
                                             <div class="error-holder">
@@ -241,11 +255,81 @@
 
                         <div class="card-footer text-right">
                             <a href="{% url 'users:login' %}" class="btn btn btn-outline-secondary btn-lg" >Cancelar</a>
-                            <button type="submit" class="btn btn-outline-secondary btn-lg">Cadastrar</button>
+                            <button type="submit" class="btn btn-outline-secondary btn-lg">Editar</button>
                         </div>
                     </form>
                 </div>
             </div>
+
         </div>
     </div>
+
+<!-- <div class="box rounded float-right">
+    <form role="form" class="form" method="POST">
+      {% csrf_token %}
+
+      {{ form.non_field_errors }}
+
+
+      <h1>Editar Paciente</h1>
+      <div class="form-group">
+        <p>{{ form.name.errors }}</p>
+        <p>{{ form.name.label_tag }} <input type="text" name= "name" value= {{ patient.name }}> </p>
+      </div>
+      <div class="form-group">
+        <p>{{ form.cpf.errors }}</p>
+        <p>{{ form.cpf.label_tag }} <input type="text" name= "cpf" value= {{ patient.cpf }}> </p>
+      </div>
+      <div class="form-group">
+        <p>{{ form.guardian.errors }}</p>
+        <p>{{ form.guardian.label_tag }} <input type="text" name= "guardian" value= {{ patient.guardian }}> </p>
+      </div>
+      <div class="form-group">
+        <p>{{ form.birth_date.errors }}</p>
+        <p>{{ form.birth_date.label_tag }} <input type="text" name= "birth_date" value= {{ patient.birth_date|date:"d/m/y" }}> </p>
+      </div>
+      <div class="form-group">
+        <p>{{ form.parents_name.errors }}</p>
+        <p>{{ form.parents_name.label_tag }} <input type="text" name= "parents_name" value= {{ patient.parents_name }}> </p>
+      </div>
+      <div class="form-group">
+        <p>{{ form.uf.errors }}</p>
+        <p>{{ form.uf.label_tag }} <input type="text" name= "uf" value= {{ patient.uf }}> </p>
+      </div>
+      <div class="form-group">
+        <p>{{ form.city.errors }}</p>
+        <p>{{ form.city.label_tag }} <input type="text" name= "city" value= {{ patient.city }}> </p>
+      </div>
+      <div class="form-group">
+        <p>{{ form.neighborhood.errors }}</p>
+        <p>{{ form.neighborhood.label_tag }} <input type="text" name= "neighborhood" value= {{ patient.neighborhood }}> </p>
+      </div>
+      <div class="form-group">
+        <p>{{ form.street.label_tag }} <input type="text" name= "street" value= {{ patient.street }}> </p>
+        <p>{{ form.street.errors }}</p>
+      </div>
+      <div class="form-group">
+        <p>{{ form.block.errors }}</p>
+        <p>{{ form.block.label_tag }} <input type="text" name= "block" value= {{ patient.block }}> </p>
+      </div>
+      <div class="form-group">
+        <p>{{ form.number.errors }}</p>
+        <p>{{ form.number.label_tag }} <input type="text" name= "number" value= {{ patient.number }}> </p>
+      </div> -->
+
+
+      <!-- <p>Nome: <input type="text" value= {{ patient.name }}> </p>
+      <p>Nascimento: <input type="text" value= {{ patient.birth_date|date:"d/m/y" }}> </p>
+      <p>CPF: <input type="text" value= {{ patient.cpf }}></p>
+      <p>Endereço:</p>
+      <p>UF: <input type="text" value= {{ patient.uf }}></p>
+      <p>Cidade: <input type="text" value= {{ patient.city }}></p>
+      <p>Bairro: <input type="text" value= {{ patient.neighborhood }}></p>
+      <p>Rua: <input type="text" value=  {{ patient.street }}></p>
+      <p>Conjunto: <input type="text" value= {{ patient.block }}></p>
+      <p>Número: <input type="text" value= {{ patient.number }}></p> -->
+
+      <!-- <button class="btn btn-outline-secondary float-right" name='action' value='address' type="submit">Editar Perfil</button>
+    </form>
+  </div> -->
 {% endblock %}

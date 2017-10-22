@@ -1,47 +1,46 @@
 {% extends 'layout/layout.html' %}
 {% load staticfiles %}
 
-{% block head %}
-    <link rel="stylesheet" href="{% static "css/main.css" %}">
-{% endblock %}
-
-{% block js %}
-    <script src="{% static "js/tab.js" %}"></script>
-{% endblock %}
-
-
 {% block content %}
-<div class="mainLogo">
-  <img src="/static/img/LogoCRP.png" width="330" height="150" alt="">
-</div>
-<div class="boxLogin">
-  <div class="box rounded float-right">
-   <h1 class="display-4">Login</h1><br />
-   <form role="form" class="form" method="POST" >
-      {% csrf_token %}
+<div class="container-fluid">
+    <div class="row mt-5">
+        <div class="col-lg-5 col-md-6 mx-auto my-auto text-center">
+            <div class="card bg-light border-secondary mb-4 z-depth-2 slide-in-blurred-top">
+                <form role="form" class="form" method="POST" >
+                    <div class="card-header">
+                        Classificação de Risco Pediátrico
+                    </div>
 
-       <input type="hidden" name="user_type" id="user_type" value="Staff">
-       {% if errors %}
-           <div class="errortext">
-             {{ errors }}
-           </div>
-       {% endif %}
+                    {% csrf_token %}
 
-      <div id="login-form-group">
-         <div class="form-group">
-            {{ form.username.label_tag }}
-            <input  type="email" name="{{ form.username.name }}" class="rounded" id="{{ form.username.id_for_label }}"  placeholder="exemplo@exemplo.com" required>
-            {{ field.errors }}
-         </div>
-         <div class="form-group">
-            {{ form.password.label_tag }}
-            <input  type="password" name="{{ form.password.name }}" class="rounded" id="{{ form.password.id_for_label }}"  placeholder="*******" required>
-            {{ field.errors }}
-         </div>
-      </div>
-      <button type="submit" class="btn btn-outline-secondary btn-lg float-right"><i class="fa fa-plus" aria-hidden="true"></i> Login</button>
-   </form>
- </div>
+                    {% if errors %}
+                        <div class="alert alert-warning" role="alert">
+                            {{ errors }}
+                        </div>
+                    {% endif %}
+
+                    <div class="form-group px-3 mt-3">
+                        <div class="input-group">
+                          <span class="input-group-addon" id="basic-addon1">@</span>
+                          <input type="email" name="{{ form.username.name }}" id="{{ form.username.id_for_label }}" class="form-control"  placeholder="E-mail" aria-label="E-mail" aria-describedby="basic-addon1" required>
+                        </div>
+                        {{ field.errors }}
+                    </div>
+
+                    <div class="form-group px-3">
+                        <div class="input-group">
+                          <span class="input-group-addon" id="basic-addon2"><i class="fa fa-key" aria-hidden="true"></i></span>
+                          <input type="password" name="{{ form.password.name }}" id="{{ form.password.id_for_label }}" class="form-control"  placeholder="Senha" aria-label="Senha" aria-describedby="basic-addon2" required>
+                        </div>
+                        {{ field.errors }}
+                    </div>
+                    <div class="card-footer text-right">
+                        <button type="submit" class="btn btn-outline-secondary btn-lg">Entrar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 
 {% endblock %}

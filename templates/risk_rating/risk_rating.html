@@ -1,82 +1,88 @@
 {% extends 'layout/layout.html' %}
 {% load staticfiles %}
 
-{% block login-button %}
-{% endblock %}
-
-{% block dropdown-button %}
-     <ul class="navbar-nav ml-auto">
-           <li>
-              <div>
-                <a href={% url 'users:logout' %}> Logout </a>
-              </div>
-           </li>
-        </ul>
-{% endblock %}
-
-
-{% block head %}
-    <link rel="stylesheet" href="{% static "css/risk_rating.css" %}">
-{% endblock %}
-
-{% block js %}
-    <script src="{% static "js/tab.js" %}"></script>
-{% endblock %}
-
 {% block content %}
-<div class="box rounded float-right">
-   <h1>Sintomas do paciente:</h1>
-   <form method="POST">
-    {% csrf_token %}
-      <div class="form-check">
-         <label class="form-check-label">
-         <input class="form-check-input" type="checkbox" name="prostrado">
-         Prostrado
-         </label>
-      </div>
-      <div class="form-check">
-         <label class="form-check-label">
-         <input class="form-check-input" type="checkbox" name="respiracao">
-         Má respiração
-         </label>
-      </div>
-      <div class="form-check">
-         <label class="form-check-label">
-         <input class="form-check-input" type="checkbox" name="febre">
-         Frebre
-         </label>
-      </div>
-      <div class="form-check">
-         <label class="form-check-label">
-         <input class="form-check-input" type="checkbox" name="irritado">
-         Irritado
-         </label>
-      </div>
-      <div class="form-check">
-         <label class="form-check-label">
-         <input class="form-check-input" type="checkbox" name="convulsao">
-         Convulsão recente
-         </label>
-      </div>
-      <div class="form-check">
-         <label class="form-check-label">
-         <input class="form-check-input" type="checkbox" name="palido">
-         Pálido
-         </label>
-      </div>
-      <div class="form-check">
-         <label class="form-check-label">
-         <input class="form-check-input" type="checkbox" name="cabeca">
-         Dor de cabeça
-         </label>
-      </div>
-      <div class="form-check">
-         <label class="form-check-label">
-         <input class="form-check-input" type="checkbox" name="brincando">
-         Brincando
-         </label>
-      </div>
-      <button type="submit" class="btn btn btn-outline-secondary float-right">Enviar</button>
-   </form>
-</div>
+    <div class="container-fluid">
+        <div class="row mt-5">
+            <div class="col-lg-5 col-md-6 mx-auto my-auto text-center">
+                <div class="card bg-light border-secondary mb-4 z-depth-2 slide-in-blurred-top">
+                    <form role="form" class="form" method="POST" >
+                        <div class="card-header">
+                            Classificação de Risco Pediátrico
+                        </div>
+
+                        {% csrf_token %}
+
+                        {% if errors %}
+                            <div class="alert alert-warning" role="alert">
+                                {{ errors }}
+                            </div>
+                        {% endif %}
+
+                        <div class="text-left ml-5">
+                            <div class="form-check">
+                               <label class="form-check-label">
+                               <input class="form-check-input" type="checkbox" name="prostrado">
+                               Prostrado
+                               </label>
+                            </div>
+                            <div class="form-check">
+                               <label class="form-check-label">
+                               <input class="form-check-input" type="checkbox" name="respiracao">
+                               Má respiração
+                               </label>
+                            </div>
+                            <div class="form-check">
+                               <label class="form-check-label">
+                               <input class="form-check-input" type="checkbox" name="febre">
+                               Frebre
+                               </label>
+                            </div>
+                            <div class="form-check">
+                               <label class="form-check-label">
+                               <input class="form-check-input" type="checkbox" name="irritado">
+                               Irritado
+                               </label>
+                            </div>
+                            <div class="form-check">
+                               <label class="form-check-label">
+                               <input class="form-check-input" type="checkbox" name="convulsao">
+                               Convulsão recente
+                               </label>
+                            </div>
+                            <div class="form-check">
+                               <label class="form-check-label">
+                               <input class="form-check-input" type="checkbox" name="palido">
+                               Pálido
+                               </label>
+                            </div>
+                            <div class="form-check">
+                               <label class="form-check-label">
+                               <input class="form-check-input" type="checkbox" name="cabeca">
+                               Dor de cabeça
+                               </label>
+                            </div>
+                            <div class="form-check">
+                               <label class="form-check-label">
+                               <input class="form-check-input" type="checkbox" name="brincando">
+                               Brincando
+                               </label>
+                            </div>
+                        </div>
+                        <div class="card-footer text-right">
+                            {% if user.is_admin %}
+                                <a href="{% url 'users:admin' %}" class="btn btn btn-outline-secondary btn-lg" >Cancelar</a>
+                            {% elif user.profile == 1 %}
+                                <a href="{% url 'users:home_receptionist' %}" class="btn btn btn-outline-secondary btn-lg" >Cancelar</a>
+                            {% elif user.profile == 2 %}
+                                <a href="{% url 'users:home_attendant' %}" class="btn btn btn-outline-secondary btn-lg" >Cancelar</a>
+                            {% endif %}
+                            <button type="submit" class="btn btn-outline-secondary btn-lg">Entrar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}
