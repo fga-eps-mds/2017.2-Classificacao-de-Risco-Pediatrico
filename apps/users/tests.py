@@ -69,13 +69,22 @@ class TestUsers:
     @pytest.mark.parametrize(
                             'url',
                             ['/register/profile/',
-                                '/register/patient/',
-                                '/home/receptionist/',
-                                '/registered/patient/',
-                                '/'])
+                             '/'])
     def test_get_route(self, client, url):
         response = client.get(url)
         assert response.status_code == 200
+
+
+    @pytest.mark.parametrize(
+                            'url',
+                            ['/register/patient/',
+                            '/home/receptionist/',
+                            '/registered/patient/'])
+    def test_get_route_logged(self, client, url):
+        staff = StaffFactory.create_batch(1)
+        response = client.get(url)
+        assert response.status_code == 302
+
 
     @pytest.mark.parametrize('url, template', [
         ('/register/profile/', 'users/registerProfile.html'),
@@ -102,9 +111,20 @@ class TestUsers:
         'queuePosition': '5'})
 
     @pytest.mark.parametrize('url, model, data', [
-        ('/register/patient/', Patient, patient_data),
-        ('/register/profile/', Staff, profile_data)])
+                            ('/register/profile/', Staff, profile_data)])
     def test_sign_up_post(self, client, url, model, data):
+        response = client.post(url, data)
+        assert response.status_code == 302
+        assert model.objects.count() == 1
+
+    @pytest.mark.parametrize('url, model, data', [
+                            ('/register/patient/', Patient, patient_data)])
+    def test_sign_up_post_patient(self, client, url, model, data):
+        staff = Staff()
+        if staff.is_authenticated():
+            print('ta autenticado')
+        else:
+            print('nao ta autenticado')
         response = client.post(url, data)
         assert response.status_code == 302
         assert model.objects.count() == 1
@@ -264,6 +284,10 @@ class TestUsers:
         Staff()
         name = Staff(id_user='456')
         name.save()
+        if name.is_authenticated():
+            print('autenticou')
+        else:
+            print('nao autenticou')
         response = client.delete('/accounts/remove/456/', follow=True)
         assert response.redirect_chain == [('/accounts/', 302)]
         assert Staff.objects.count() == 0
