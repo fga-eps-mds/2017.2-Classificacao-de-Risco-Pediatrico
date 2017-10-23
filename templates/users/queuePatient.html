@@ -21,7 +21,43 @@
 {% endblock %}
 
 {% block content %}
-  <div class="box rounded float-right">
+<div class="container-fluid">
+    <div class="row mt-5">
+        <div class="col-lg-7 col-md-10 mx-auto my-auto">
+            <div class="card bg-light border-secondary slide-in-blurred-top">
+                <div class="card-header text-center">
+                    Classificação de Risco Pediátrico
+                </div>
+                <table id="example" class="display" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                          <th>Posição na fila</th>
+                          <th>CPF</th>
+                          <th>Nome</th>
+                          <th>Responsável</th>
+                          <th>Realizar Classificação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for queuedPatient in queuedPatients %}
+                            <tr>
+                              <td>{{ queuedPatient.queuePosition }}</td>
+                              <td>{{ queuedPatient.cpf}}</td>
+                              <td>{{ queuedPatient.name }}</td>
+                              <td>{{ queuedPatient.guardian }}</td>
+                              <td><a href="{% url 'users:classification' queuedPatient.cpf %}"><i class="fa fa-user-md" aria-hidden="true"></i></a></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <div class="card-footer text-right">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+  <!-- <div class="box rounded float-right">
     <h1>Fila de Pacientes</h1>
 
     <table id="example" class="display" cellspacing="0" width="100%">
@@ -45,5 +81,5 @@
           {% endfor %}
         </tbody>
     </table>
-  </div>
+  </div> -->
 {% endblock %}

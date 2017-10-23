@@ -50,7 +50,7 @@ class TestUsers:
         response = client.post('/', {'username': 'email@gmail.com',
                                      'password': "1234asdf"})
 
-        assert response.url == '/risk_rating'
+        assert response.url == '/home/attendant/'
 
     def test_login_view_user_do_not_exists(self, client):
         response = client.post('/', {'username': 'email@gmail.com',

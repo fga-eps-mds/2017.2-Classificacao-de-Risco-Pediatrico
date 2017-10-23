@@ -1,109 +1,66 @@
 {% extends 'layout/layout.html' %}
 {% load staticfiles %}
 
-
-{% block login-button %}
-{% endblock %}
-
-{% block background %}
-    <div class="admin-page"></div>
-{% endblock %}
-
-
 {% block head %}
-    <link rel="stylesheet" href="{% static "css/main.css" %}">
-    <link rel="stylesheet" href="{% static "css/mainAdmin.css" %}">
+    <link rel="stylesheet" href="{% static "css/admin.css" %}">
 {% endblock %}
 
 {% block content %}
-
-<div class="container">
-
-   <h1 class="display-6">Seja bem-vindo, {{ username }}!</h1>
-   <h2 class="description display-6" style="padding-bottom: 30px"> Selecione uma das opções a seguir:</h2>
-
-    <div class="row">
-        <div class="col-md-4">
-            <div class="block">
-                <div class="block-title">
-                    <h2> Histórico </h2>
+    <div class="container text-center">
+        <div class="row justify-content-center mt-5">
+            <div class="col">
+                <div class="card text-white mb-3 slide-in-blurred-top">
+                    <div class="card-header"><i class="fa fa-history" aria-hidden="true"></i> Histórico</div>
+                    <div class="card-body">
+                        <p class="card-text">Visualizar histórico pessoal</p>
+                        <p class="card-text">Visualizar histórico geral</p>
+                    </div>
                 </div>
-                <div class ="block-body">
-                    <h4><u> - Visualizar histórico pessoal.</u></h4>
-                    <h4><u> - Visualizar histórico geral.</u></h4>
-
+            </div>
+            <div class="col">
+                <div class="card text-white mb-3 slide-in-blurred-top">
+                    <div class="card-header"><i class="fa fa-stack-exchange" aria-hidden="true"></i> Estatísticas</div>
+                    <div class="card-body">
+                        <p class="card-text">Visualizar estatísticas gerais</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card text-white mb-3 slide-in-blurred-top">
+                    <div class="card-header"><i class="fa fa-user-o" aria-hidden="true"></i> Administração</div>
+                    <div class="card-body">
+                        <p class="card-text"><a href="{% url 'users:manage_accounts' %}"> Visualizar contas</a></p>
+                    </div>
                 </div>
             </div>
         </div>
-
-        <div class="col-md-4 ">
-            <div class="block">
-                <div class="block-title">
-                    <h2> Estatísticas </h2>
+        
+        <div class="row">
+            <div class="col">
+                <div class="card text-white mb-3 slide-in-blurred-top">
+                    <div class="card-header"><i class="fa fa-user" aria-hidden="true"></i> Pacientes</div>
+                    <div class="card-body">
+                        <p class="card-text"><a href="{% url 'users:manage_patients' %}">Listar pacientes</a></p>
+                        <p class="card-text"><a href="{% url 'users:register_patient' %}">Registrar paciente</a></p>
+                    </div>
                 </div>
-                <div class ="block-body">
-
-                    <h4><u> - Visualizar estatística geral.</u></h4>
-
+            </div>
+            <div class="col">
+                <div class="card text-white mb-3 slide-in-blurred-top">
+                     <div class="card-header"><i class="fa fa-user-md" aria-hidden="true"></i> Classificação</div>
+                    <div class="card-body">
+                        <p class="card-text"><a href={% url 'risk_rating:risk_rating' %}>Gerar classificação de risco</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card text-white mb-3 slide-in-blurred-top">
+                    <div class="card-header"><i class="fa fa-users" aria-hidden="true"></i> Filas</div>
+                    <div class="card-body">
+                        <p class="card-text">Gerar filas</p>
+                    </div>
                 </div>
             </div>
         </div>
-
-        <div class="col-md-4">
-            <div class="block">
-                <div class="block-title">
-                    <h2> Contas </h2>
-                </div>
-                <div class ="block-body">
-
-                     <h4><a href="{% url 'users:manage_accounts' %}"><u> - Visualizar contas.</u></a></h4>
-
-                </div>
-            </div>
-        </div>
-
-
-
     </div>
-
-    <div class="row">
-        <div class="col-md-4">
-            <div class="block">
-                <div class="block-title">
-                    <h2> Pacientes </h2>
-                </div>
-                <div class ="block-body">
-                    <h4><a href="{% url 'users:manage_patients' %}"><u> - Gerenciar pacientes.</u></a></h4>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4 ">
-            <div class="block">
-                <div class="block-title">
-                    <h2>Classificação</h2>
-                </div>
-                <div class ="block-body">
-                    <h4><a href={% url 'risk_rating:risk_rating' %}>Gerar classificação de risco</a></h4>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="block">
-                <div class="block-title">
-                     <h2> Filas </h2>
-                </div>
-                <div class ="block-body">
-                    <h4><u>Gerar filas</u></h4>
-                </div>
-            </div>
-        </div>
-
-
-
-    </div>
-
-</div>
-
 {% endblock %}

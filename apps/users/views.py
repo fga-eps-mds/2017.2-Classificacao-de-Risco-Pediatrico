@@ -8,9 +8,10 @@ from django.http import HttpResponseRedirect
 
 from django.contrib.auth import authenticate
 
-from .forms import RegistrationStaffForm
-from .forms import RegistrationPatientForm
-from .forms import EditPatientForm
+from apps.users.forms import RegistrationStaffForm
+from apps.users.forms import RegistrationPatientForm
+from apps.users.forms import EditPatientForm
+
 
 from .models import Patient, Staff, QueuedPatient
 
@@ -33,7 +34,7 @@ def login_view(request, *args, **kwargs):
 
             if user.profile == 2:
                 login(request, user)
-                return redirect("/risk_rating")
+                return redirect("/home/attendant/")
         else:
 
             kwargs['extra_context'] = {'next': reverse('users:login'),
