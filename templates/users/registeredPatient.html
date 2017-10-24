@@ -31,8 +31,7 @@
                             </ul>
                             <div class="clearfix"></div>
                         </div>
-
-
+                <input id="test" type="search" class="form-control form-control-sm" placeholder="" aria-controls="example">
                 <table id="example" class="table table-condensed" cellspacing="0" width="100%">
                     <thead>
                         <tr>
@@ -92,35 +91,5 @@
     </div>
 {% endfor %}
 
-
-  <!-- <div class="box rounded float-right">
-    <h1>Pacientes Cadastrados</h1>
-
-    <table id="example" class="display" cellspacing="0" width="100%">
-        <thead>
-            <tr>
-              <th>CPF</th>
-              <th>Nome</th>
-              <th>Responsável</th>
-              <th>Editar</th>
-              <th>Deletar</th>
-              <th>Enviar para fila</th>
-            </tr>
-        </thead>
-        <tbody>
-          {% for patient in patients %}
-              <tr>
-                  <td>{{ patient.cpf}}</td>
-                  <td>{{ patient.name }}</td>
-                  <td>{{ patient.guardian }}</td>
-                  <td><a href="edit/{{patient.cpf}}"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
-                  <td><a href="{% url 'users:patient_remove' patient.cpf %}"><i class="fa fa-ban" aria-hidden="true"></i>
-                  </a></td>
-                  <td><a href="{% url 'users:queue_patient' patient.cpf %}"><i class="fa fa-arrow-right" aria-hidden="true"></i>
-                  </a></td>
-              </tr>
-          {% endfor %}
-        </tbody>
-    </table>
-  </div> -->
 {% endblock %}
+

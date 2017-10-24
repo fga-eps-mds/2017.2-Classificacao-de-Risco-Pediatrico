@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $('#example').DataTable({
+    var table = $('#example').DataTable({
         "language": {
             "lengthMenu": "Mostrar _MENU_ por página",
             "zeroRecords": "Nada encontrado - Desculpe :(",
@@ -13,4 +13,7 @@ $(document).ready(function() {
             }
         }
     });
+    $('#test').on( 'keyup', function () {
+        table.search( this.value ).draw();
+    } );
 } );
