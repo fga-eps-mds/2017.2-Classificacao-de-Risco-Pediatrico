@@ -7,12 +7,20 @@ import pytest
 from apps.users.forms import RegistrationStaffForm, RegistrationPatientForm, \
     EditPatientForm
 from apps.users.models import Staff, Patient
+# from django.contrib.auth import authenticate
+# from django.contrib.auth.views import login
 # from django.test import Client
 from apps.users.factories import PatientFactory, StaffFactory
 
 
 @pytest.mark.django_db
 class TestUsers:
+
+    # @class_method
+    # def setup_class(self, cls):
+    #     Staff.objects.create_superuser(**self.default_user_data())
+    #     response = client.post('/', {'username': 'email@gmail.com',
+    #                                  'password': "1234asdf"})
 
     def test_home(self, client):
         response = client.get('/')
@@ -74,22 +82,22 @@ class TestUsers:
         response = client.get(url)
         assert response.status_code == 200
 
-
-    @pytest.mark.parametrize(
-                            'url',
-                            ['/register/patient/',
-                            '/home/receptionist/',
-                            '/registered/patient/'])
+    @pytest.mark.parametrize('url',
+                             ['/register/patient/',
+                              '/home/receptionist/',
+                              '/registered/patient/'])
     def test_get_route_logged(self, client, url):
-        staff = StaffFactory.create_batch(1)
+        StaffFactory.create_batch(1)
         response = client.get(url)
         assert response.status_code == 302
-
 
     @pytest.mark.parametrize('url, template', [
         ('/register/profile/', 'users/registerProfile.html'),
         ('/register/patient/', 'users/registerPatient.html')])
     def test_sign_up_template(self, client, url, template):
+        Staff.objects.create_superuser(**self.default_user_data())
+        response = client.post('/', {'username': 'email@gmail.com',
+                                     'password': "1234asdf"})
         response = client.get(url)
         assert response.templates[0].name == template
 
@@ -120,11 +128,9 @@ class TestUsers:
     @pytest.mark.parametrize('url, model, data', [
                             ('/register/patient/', Patient, patient_data)])
     def test_sign_up_post_patient(self, client, url, model, data):
-        staff = Staff()
-        if staff.is_authenticated():
-            print('ta autenticado')
-        else:
-            print('nao ta autenticado')
+        Staff.objects.create_superuser(**self.default_user_data())
+        response = client.post('/', {'username': 'email@gmail.com',
+                                     'password': "1234asdf"})
         response = client.post(url, data)
         assert response.status_code == 302
         assert model.objects.count() == 1
@@ -133,6 +139,9 @@ class TestUsers:
         ('/register/profile/', RegistrationStaffForm),
         ('/register/patient/', RegistrationPatientForm)])
     def test_sign_up_has_form(self, client, url, form):
+        Staff.objects.create_superuser(**self.default_user_data())
+        response = client.post('/', {'username': 'email@gmail.com',
+                                     'password': "1234asdf"})
         response = client.get(url)
         assert 'form' in response.context
         assert response.context['form'] is not None
@@ -142,11 +151,17 @@ class TestUsers:
         ('/register/profile/', profile_data, '/'),
         ('/register/patient/', patient_data, '/queue/patient/')])
     def test_sign_up_post_redirect(self, client, url, data, urlredirect):
+        Staff.objects.create_superuser(**self.default_user_data())
+        response = client.post('/', {'username': 'email@gmail.com',
+                                     'password': "1234asdf"})
         response = client.post(url, data, follow=True)
         assert response.status_code == 200
         assert response.redirect_chain == [(urlredirect, 302)]
 
     def test_home_receptionist_view(self, client):
+        Staff.objects.create_superuser(**self.default_user_data())
+        response = client.post('/', {'username': 'email@gmail.com',
+                                     'password': "1234asdf"})
         response = client.get('/home/receptionist/')
         assert response.status_code == 200
 
@@ -201,6 +216,9 @@ class TestUsers:
         assert str(user_email) == 'bruno@gmail.com'
 
     def test_show_patient_view(self, client):
+        Staff.objects.create_superuser(**self.default_user_data())
+        response = client.post('/', {'username': 'email@gmail.com',
+                                     'password': "1234asdf"})
         Patient()
         name = Patient(cpf='001002012', birth_date='2017-02-01')
         name.save()
@@ -208,6 +226,9 @@ class TestUsers:
         assert response.status_code == 200
 
     def test_registered_patient_view(self, client):
+        Staff.objects.create_superuser(**self.default_user_data())
+        response = client.post('/', {'username': 'email@gmail.com',
+                                     'password': "1234asdf"})
         patient = PatientFactory.create_batch(3)
         response = client.get('/registered/patient/')
         assert response.status_code == 200
@@ -217,6 +238,9 @@ class TestUsers:
         """
         Test edit patient form with a valid cpf
         """
+        Staff.objects.create_superuser(**self.default_user_data())
+        response = client.post('/', {'username': 'email@gmail.com',
+                                     'password': "1234asdf"})
         Patient()
         name = Patient(cpf='001002012', birth_date='2017-02-01')
         name.save()
@@ -230,6 +254,9 @@ class TestUsers:
         """
         Test edit patient form with a invalid cpf
         """
+        Staff.objects.create_superuser(**self.default_user_data())
+        client.post('/', {'username': 'email@gmail.com',
+                          'password': "1234asdf"})
         with pytest.raises(IndexError):
             client.get('/patients/edit/007/')
 
@@ -237,6 +264,9 @@ class TestUsers:
         """
         Test edit patient post mehtod with valid data
         """
+        Staff.objects.create_superuser(**self.default_user_data())
+        response = client.post('/', {'username': 'email@gmail.com',
+                                     'password': "1234asdf"})
         Patient()
         name = Patient(cpf='156498', birth_date='2017-02-01')
         name.save()
@@ -248,6 +278,9 @@ class TestUsers:
         """
         Test edit patient post mehtod with invalid data
         """
+        Staff.objects.create_superuser(**self.default_user_data())
+        response = client.post('/', {'username': 'email@gmail.com',
+                                     'password': "1234asdf"})
         invalid_patient_data = ({
             'name': 'nameTest', 'guardian': 'guardianTeste',
             'birth_date': '12/2/12', 'cpf': '156498'})
@@ -261,6 +294,9 @@ class TestUsers:
         """
         Test if edit patient post method is actualy updating
         """
+        Staff.objects.create_superuser(**self.default_user_data())
+        client.post('/', {'username': 'email@gmail.com',
+                          'password': "1234asdf"})
         Patient()
         name = Patient(cpf='156498', birth_date='2017-02-01', name='Victor')
         name.save()
@@ -268,6 +304,9 @@ class TestUsers:
         assert Patient.objects.filter(cpf='156498')[0].name == 'nameTest'
 
     def test_edit_accounts_view(self, client):
+        Staff.objects.create_superuser(**self.default_user_data())
+        response = client.post('/', {'username': 'email@gmail.com',
+                                     'password': "1234asdf"})
         Staff()
         name = Staff(id_user='456')
         name.save()
@@ -275,19 +314,47 @@ class TestUsers:
         assert response.status_code == 200
 
     def test_manage_accounts_view(self, client):
-        staff = StaffFactory.create_batch(3)
+        stafflogin = Staff.objects.create_superuser(**self.default_user_data())
+        response = client.post('/', {'username': 'email@gmail.com',
+                                     'password': "1234asdf"})
+        staff1 = Staff(id_user='456')
+        staff1.save()
+        allstaff = [stafflogin, staff1]
         response = client.get('/accounts/')
         assert response.status_code == 200
-        assert list(response.context['staffs']) == staff
+        assert list(response.context['staffs']) == allstaff
 
     def test_staff_remove(self, client):
+        Staff.objects.create_superuser(**self.default_user_data())
+        response = client.post('/', {'username': 'email@gmail.com',
+                                     'password': "1234asdf",
+                                     'id_user': "1234"})
         Staff()
         name = Staff(id_user='456')
         name.save()
-        if name.is_authenticated():
-            print('autenticou')
-        else:
-            print('nao autenticou')
         response = client.delete('/accounts/remove/456/', follow=True)
         assert response.redirect_chain == [('/accounts/', 302)]
-        assert Staff.objects.count() == 0
+        assert Staff.objects.count() == 1
+        # foram instanciados 2 staffs
+        # por isso o assert igual a 1
+
+    # @pytest.mark.parametrize('url, urlredirect', [
+    #     ('/register/patient', '/'),
+    #     ('/home/admin', '/'),
+    #     ('/home/receptionist', '/'),
+    #     ('/home/attendant', '/'),
+    #     ('/accounts', '/'),
+    #     ('/patients', '/'),
+    #     ('/registered/patient', '/'),
+    #     ('/queue/patient', '/'),
+    #     ('/classification', '/')])
+    # def test_unauthorized_status_code(self, client, url, urlredirect):
+    #     response = client.get(url,follow=True)
+    #     assert response.status_code == 200
+    #     assert response.redirect_chain == [('/', 200)]
+
+    def test_unlogged_show_patient(self, client):
+        name = Patient(cpf='456', birth_date='2000-10-10')
+        name.save()
+        response = client.get('/show/patient/456/', follow=True)
+        assert response.redirect_chain == [('/', 302)]
