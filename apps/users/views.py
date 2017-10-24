@@ -93,10 +93,10 @@ def sign_up_patient(request):
             raw_password = form.cleaned_data.get('password1')
             username = authenticate(username=username, password=raw_password)
             login(request, 'users:login')
-            allPatients = Patient.objects.all()
+            Patient.objects.all()
             patient = Patient.objects.get(cpf=cpf_patient)
             patient.isInQueue = True
-            #patient.queuePosition = checkQueueLastPosition(allPatients)
+            # patient.queuePosition = checkQueueLastPosition(allPatients)
             patient.save()
             return redirect('users:queue_patient')
         else:
