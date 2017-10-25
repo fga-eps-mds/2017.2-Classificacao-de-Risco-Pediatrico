@@ -1,5 +1,6 @@
 $(document).ready(function() {
     var table = $('#example').DataTable({
+
         "language": {
             "lengthMenu": "Mostrar _MENU_ por página",
             "zeroRecords": "Nada encontrado - Desculpe :(",
@@ -13,7 +14,12 @@ $(document).ready(function() {
             }
         }
     });
-    $('#test').on( 'keyup', function () {
+    $('#example_filter').hide()
+    //$('#example_length').hide()
+    // $('#example_info').hide()
+    // $('#example_paginate').hide()
+
+    $('#searchPatient').on( 'keyup', function () {
         table.search( this.value ).draw();
     } );
 } );
