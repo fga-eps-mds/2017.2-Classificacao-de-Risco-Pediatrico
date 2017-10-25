@@ -338,20 +338,21 @@ class TestUsers:
         # foram instanciados 2 staffs
         # por isso o assert igual a 1
 
-    # @pytest.mark.parametrize('url, urlredirect', [
-    #     ('/register/patient', '/'),
-    #     ('/home/admin', '/'),
-    #     ('/home/receptionist', '/'),
-    #     ('/home/attendant', '/'),
-    #     ('/accounts', '/'),
-    #     ('/patients', '/'),
-    #     ('/registered/patient', '/'),
-    #     ('/queue/patient', '/'),
-    #     ('/classification', '/')])
-    # def test_unauthorized_status_code(self, client, url, urlredirect):
-    #     response = client.get(url,follow=True)
-    #     assert response.status_code == 200
-    #     assert response.redirect_chain == [('/', 200)]
+    @pytest.mark.parametrize('url, urlredirect', [
+        ('/register/patient', '/'),
+        ('/home/admin', '/'),
+        ('/home/receptionist', '/'),
+        ('/home/attendant', '/'),
+        ('/accounts', '/'),
+        ('/patients', '/'),
+        ('/registered/patient', '/'),
+        ('/queue/patient', '/'),
+        ('/classification', '/')])
+    def test_unauthorized_status_code(self, client, url, urlredirect):
+        response = client.get(url,follow=True)
+        last_url, status_code = response.redirect_chain[-1]
+        assert response.status_code == 200
+        assert last_url == urlredirect
 
     def test_unlogged_show_patient(self, client):
         name = Patient(cpf='456', birth_date='2000-10-10')
