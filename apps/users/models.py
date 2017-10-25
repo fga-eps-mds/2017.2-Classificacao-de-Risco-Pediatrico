@@ -183,10 +183,14 @@ class Patient(models.Model):
         max_length=10,
         blank=False
     )
+    date = models.DateField(
+        verbose_name='Data',
+        blank=False,
+        default='2017-01-01'
+    )
 
 class QueuedPatient(models.Model):
 
     queuePosition = models.AutoField(primary_key=True)
 
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
-
