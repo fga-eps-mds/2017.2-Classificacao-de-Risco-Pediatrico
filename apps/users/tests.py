@@ -349,7 +349,7 @@ class TestUsers:
         ('/queue/patient', '/'),
         ('/classification', '/')])
     def test_unauthorized_status_code(self, client, url, urlredirect):
-        response = client.get(url,follow=True)
+        response = client.get(url, follow=True)
         last_url, status_code = response.redirect_chain[-1]
         assert response.status_code == 200
         assert last_url == urlredirect
