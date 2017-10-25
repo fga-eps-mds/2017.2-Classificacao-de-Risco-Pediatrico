@@ -1,0 +1,43 @@
+Carimbo de data/hora,dispneia,profissional,ictericia,PerdadaConsciencia,Cianose,Febre,Solucos,Prostracao,Vomitos,Tosse,Coriza,ObstrucaoNasal,ConvulsaoNoMomento,Diarreia,ChoroInconsolavel,Dificuldade_De_Evacuar,Nao_Suga_O_Seio,Manchas_Na_Pele,Salivacao,Queda,ChiadoNoPeito,DiminuicaoDaDiurese,DorAbdominal,DorDeOuvido,FontanelaAbaulada,SecrecaoNoUmbigo,SecrecaoOcular,SangueNasFezes,Classificacao,Diagnostico,RelatoDeConvulsaoHoje
+16/09/2017 09:24:31,Nao,Pediatra,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Sim,Sim,Sim,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,AmbulatorialGeral,Resfriado,Nao
+16/09/2017 09:35:37,Sim,Pediatra,Nao,Nao,Sim,Sim,Nao,Sim,Nao,Sim,Sim,Sim,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Sim,Nao,Nao,Nao,Nao,Nao,Nao,Nao,AtendimentoHospitalar,Pneumonia,Nao
+16/09/2017 09:36:37,Sim,Pediatra,Nao,Nao,Nao,Nao,Nao,Sim,Nao,Sim,Sim,Sim,Nao,Nao,Nao,Nao,Sim,Nao,Nao,Nao,Sim,Nao,Nao,Nao,Nao,Nao,Nao,Nao,AtendimentoHospitalar,Pneumonia,Nao
+16/09/2017 09:47:43,Nao,Pediatra,Sim,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,AmbulatorialGeral,IctericiaNeonatal,Nao
+16/09/2017 10:12:34,Nao,Pediatra,Sim,Nao,Nao,Sim,Nao,Sim,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Sim,Nao,Nao,Nao,Nao,Sim,Nao,Nao,Nao,Nao,Nao,Nao,AtendimentoHospitalar,Sepse tardia,Nao
+16/09/2017 10:14:00,Nao,Pediatra,Sim,Nao,Nao,Nao,Nao,Sim,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Sim,Nao,Nao,Nao,Nao,Sim,Nao,Nao,Nao,Nao,Nao,Nao,AtendimentoHospitalar,Baixa ingesta,Nao
+16/09/2017 10:15:14,Nao,Pediatra,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Sim,Sim,Sim,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,AmbulatorialGeral,Infecção de vias aéreas superiores,Nao
+16/09/2017 10:18:07,Nao,Pediatra,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Sim,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Sim,Nao,AmbulatorialGeral,Conjuntivite ,Nao
+16/09/2017 10:19:21,Nao,Pediatra,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Sim,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,AmbulatorialGeral,Eritema tóxico ,Nao
+16/09/2017 10:21:27,Sim,Pediatra,Nao,Nao,Sim,Nao,Nao,Sim,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Sim,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,AtendimentoImediato,Cardiopatia congênita,Nao
+16/09/2017 10:22:24,Nao,Pediatra,Nao,Sim,Sim,Sim,Nao,Sim,Nao,Nao,Nao,Nao,Sim,Nao,Sim,Nao,Sim,Nao,Sim,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,AtendimentoImediato,meningite,Nao
+16/09/2017 10:28:01,Nao,Pediatra,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Sim,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Sim,Nao,Nao,Nao,Nao,Nao,AmbulatorialGeral,Cólica ,Nao
+16/09/2017 10:29:07,Nao,Pediatra,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Sim,AtendimentoHospitalar,Alergia a proteina do leite de vaca ,Nao
+16/09/2017 10:30:43,Nao,Pediatra,Nao,Nao,Nao,Sim,Nao,Sim,Sim,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Sim,Nao,Nao,Nao,Nao,Sim,Nao,Nao,Nao,Nao,Nao,Nao,AtendimentoHospitalar,Infecção do trato urinário,Nao
+16/09/2017 10:35:25,Nao,Pediatra,Sim,Nao,Nao,Nao,Sim,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,AmbulatorialGeral,puericultura ictericia fisiologica,Nao
+16/09/2017 10:37:52,Sim,Pediatra,Nao,Nao,Sim,Nao,Nao,Sim,Nao,Sim,Sim,Sim,Nao,Nao,Nao,Nao,Nao,Nao,Sim,Nao,Sim,Nao,Nao,Nao,Nao,Nao,Nao,Nao,AtendimentoHospitalar,cardiopatia congenita?,Nao
+16/09/2017 14:55:30,Sim,Pediatra,Nao,Nao,Sim,Sim,Nao,Sim,Nao,Sim,Sim,Sim,Nao,Nao,Nao,Nao,Sim,Nao,Nao,Nao,Sim,Nao,Nao,Nao,Nao,Nao,Nao,Nao,AtendimentoHospitalar,Bronquiolite ,Nao
+16/09/2017 14:56:58,Nao,Pediatra,Nao,Sim,Nao,Nao,Nao,Sim,Sim,Nao,Nao,Nao,Sim,Nao,Sim,Nao,Nao,Nao,Nao,Sim,Nao,Nao,Nao,Nao,Sim,Nao,Nao,Nao,AtendimentoImediato,Tce ,Nao
+16/09/2017 21:20:18,Sim,Pediatra,Sim,Sim,Sim,Sim,Nao,Sim,Sim,Sim,Nao,Nao,Sim,Nao,Sim,Nao,Nao,Nao,Nao,Sim,Sim,Sim,Nao,Sim,Sim,Nao,Nao,Sim,AtendimentoImediato,Sepse,Nao
+17/09/2017 06:27:34,Nao,Pediatra,Sim,Sim,Sim,Sim,Nao,Sim,Sim,Nao,Nao,Nao,Sim,Sim,Sim,Nao,Sim,Sim,Nao,Sim,Nao,Sim,Nao,Nao,Sim,Sim,Nao,Sim,AtendimentoImediato,Sepse,Nao
+14/10/2017 18:24:24,Nao,Pediatra,Sim,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Sim,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,AmbulatorialGeral,Icterícia Neonatal Fisiológica,Nao
+14/10/2017 18:25:36,Nao,Pediatra,Nao,Nao,Nao,Nao,Sim,Nao,Nao,Nao,Sim,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,AmbulatorialGeral,Soluços,Nao
+14/10/2017 18:26:37,Nao,Pediatra,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Sim,Sim,Sim,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Sim,Nao,Nao,Nao,Nao,Nao,Nao,Nao,AmbulatorialGeral,Resfriado Comum,Nao
+14/10/2017 18:27:51,Sim,Pediatra,Nao,Nao,Nao,Sim,Nao,Nao,Nao,Sim,Sim,Sim,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Sim,Nao,Nao,Nao,Nao,Nao,Nao,Nao,AtendimentoHospitalar,Pneumonia Viral,Nao
+14/10/2017 18:33:52,Nao,Pediatra,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Sim,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,AmbulatorialGeral,Obstipação,Nao
+14/10/2017 18:35:08,Nao,Pediatra,Nao,Nao,Nao,Sim,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,AtendimentoHospitalar,Infecção Urinária,Nao
+14/10/2017 18:39:41,Nao,Pediatra,Nao,Sim,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Sim,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,AtendimentoImediato,Convulsão,Nao
+14/10/2017 18:42:04,Nao,Pediatra,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,AtendimentoHospitalar,Convulsão,Sim
+14/10/2017 19:17:24,Sim,Pediatra,Nao,Nao,Nao,Sim,Nao,Sim,Sim,Sim,Sim,Sim,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Sim,Nao,Sim,Nao,Nao,Nao,Nao,Nao,AtendimentoImediato,Pneumonia com desconforto  respiratorio,Nao
+16/10/2017 23:30:27,Nao,Pediatra,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Sim,Nao,Nao,Nao,Nao,Sim,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,AmbulatorialGeral,Obstrucão nasal ,Nao
+16/10/2017 23:31:37,Nao,Pediatra,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Sim,Nao,Nao,AmbulatorialGeral,Coto umbilical em cicatrização ,Nao
+16/10/2017 23:32:40,Nao,Pediatra,Sim,Nao,Nao,Sim,Nao,Sim,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Sim,Nao,Nao,Nao,Nao,Sim,Nao,Nao,Nao,Nao,Nao,Nao,AtendimentoHospitalar,Baixa ingesta ,Nao
+16/10/2017 23:34:19,Nao,Pediatra,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Sim,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,AmbulatorialGeral,Constipação a/e,Nao
+16/10/2017 23:35:33,Sim,Pediatra,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Sim,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Sim,Nao,Nao,Nao,Nao,Nao,Nao,Nao,AtendimentoHospitalar,Bronquiolite ,Nao
+16/10/2017 23:36:53,Nao,Pediatra,Sim,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,AtendimentoHospitalar,Icterícia ,Nao
+16/10/2017 23:38:37,Sim,Pediatra,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,AtendimentoHospitalar,Taquipneia transitória ,Nao
+16/10/2017 23:39:42,Nao,Pediatra,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Sim,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,AtendimentoHospitalar,Queda,Nao
+16/10/2017 23:41:16,Sim,Pediatra,Nao,Nao,Nao,Sim,Nao,Sim,Sim,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Sim,Nao,Nao,Nao,Nao,Sim,Nao,Nao,Nao,Nao,Nao,Nao,AtendimentoImediato,Febre sem sinais localizatórios ,Nao
+16/10/2017 23:42:28,Nao,Pediatra,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Sim,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,AmbulatorialGeral,Eritema tóxico ,Nao
+19/10/2017 23:36:55,Sim,Pediatra,Nao,Nao,Nao,Sim,Nao,Sim,Sim,Sim,Sim,Nao,Nao,Nao,Nao,Nao,Sim,Nao,Nao,Nao,Nao,Sim,Nao,Nao,Nao,Nao,Nao,Nao,AtendimentoHospitalar,Pneumonia,Nao
+19/10/2017 23:37:49,Nao,Pediatra,Sim,Nao,Nao,Sim,Nao,Sim,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Sim,Nao,Nao,Nao,Nao,Sim,Nao,Nao,Nao,Nao,Nao,Nao,AtendimentoHospitalar,Baixa ingesta ,Nao
+19/10/2017 23:38:40,Nao,Pediatra,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Nao,Sim,AmbulatorialGeral,APLV ,Nao
