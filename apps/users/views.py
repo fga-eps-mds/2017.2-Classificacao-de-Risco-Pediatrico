@@ -261,3 +261,8 @@ def manage_patients_view(request):
             Q(cpf__icontains=search)
             )
     return render(request, 'users/managePatients.html', {'patients': patients})
+
+
+@login_required(redirect_field_name='', login_url='users:login')
+def home_view(request):
+    return render(request, 'users/home.html')
