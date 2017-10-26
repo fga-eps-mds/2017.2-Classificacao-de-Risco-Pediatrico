@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="{% static "css/main.css" %}">
   <link rel="stylesheet" href="{% static "css/mainAdmin.css" %}">
   <link rel="stylesheet" href="{% static "css/managePage.css" %}">
+    <link rel="stylesheet" href="{% static "css/registeredPatient.css" %}">
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css">
 {% endblock %}
 
@@ -24,26 +25,29 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="card bg-light border-secondary slide-in-blurred-top">
-                 <div class="x_title">
-                            <h2></h2>
-                            <ul class="nav navbar-right panel_toolbox">
-                            </ul>
-                            <div class="clearfix"></div>
-                        </div>
-                <input id="test" type="search" class="form-control form-control-sm" placeholder="" aria-controls="example">
-                <table id="example" class="table table-condensed" cellspacing="0" width="100%">
+
+
+
+                <div class="form-group title_left mt-4" >
+                <input id="searchPatient" type="search" class="form-control pull-right mr-1" placeholder="Pesquisar Paciente..." aria-controls="example">
+               <h2>Cadastrados</h2>
+                </div>
+
+
+
+            <div id="list" class="x_panel" style="background-color: white">
+
+                    <table id="example" class="table table-condensed"  cellspacing="0" width="100%">
                     <thead>
                         <tr>
                             <th class="hidden-xs hidden-sm">CPF</th>
                             <th>Nome</th>
-
-                            <th>Responsável</th>
+                            <th>Classificação</th>
                             <th>Editar</th>
-                            <th>Deletar</th>
-                            <th>Enviar para fila</th>
-                            <th>Posição na fila</th>
-                            <th>Está na fila</th>
+                            <th>Sintomas</th>
+                            <th>Faixa-etária</th>
+                            <th>Data de Cadastro</th>
+                            <th>Atendente</th>
 
 
                         </tr>
@@ -53,20 +57,17 @@
                             <tr>
                               <td>{{ patient.cpf}}</td>
                               <td>{{ patient.name }}</td>
-
-                              <td>{{ patient.guardian }}</td>
-
+                              <td class=" h6 badge badge-success">{{ patient.guardian }}</td>
                               <td><a href="edit/{{ patient.cpf }}"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
                               <td><a href="#" data-toggle="modal" data-target="#{{ patient.cpf }}"><i class="fa fa-ban" aria-hidden="true"></i></a></td>
                               <td><a href="{% url 'users:queue_patient' patient.cpf %}"><i class="fa fa-arrow-right" aria-hidden="true"></i></a></td>
                               <td>{{ patient.queuePosition }}</td>
                               <td>{{ patient.isInQueue }}</td>
-
                             </tr>
                         {% endfor %}
                     </tbody>
                 </table>
-                <div class="card-footer text-right">
+                <div class="card-footer text-right mt-1">
                 </div>
             </div>
         </div>
@@ -96,3 +97,4 @@
 {% endfor %}
 
 {% endblock %}
+
