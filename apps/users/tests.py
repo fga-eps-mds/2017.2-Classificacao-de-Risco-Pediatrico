@@ -270,7 +270,9 @@ class TestUsers:
 
     def test_patient_remove(self, client):
         Patient()
-        name = Patient(cpf='156498', birth_date='2017-02-01', name='Test Patient')
+        name = Patient(cpf='156498',
+                       birth_date='2017-02-01',
+                       name='Test Patient')
         name.save()
         response = client.delete('/patients/remove/156498/', follow=True)
         assert response.redirect_chain == [('/patients/', 302)]
