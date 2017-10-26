@@ -75,7 +75,7 @@
                                     <div class="cols-sm-10">
                                         <div class="input-group">
                                             <span class="input-group-addon" id="basic-addon1"><i class="fa fa-calendar-o" aria-hidden="true"></i></span>
-                                            <input type="text" name="{{ form.birth_date.name }}" id="{{ form.birth_date.id_for_label }}" class="form-control" value={{patient.birth_date}}  placeholder="Data de nascimento" aria-label="Data de nascimento" aria-describedby="basic-addon3" required>
+                                            <input type="text" name="{{ form.birth_date.name }}" id="{{ form.birth_date.id_for_label }}" class="form-control" value={{patient.birth_date|date:"d/m/y" }}  placeholder="Data de nascimento" aria-label="Data de nascimento" aria-describedby="basic-addon3" required>
                                         </div>
                                         {% if form.birth_date.errors %}
                                             <div class="error-holder">

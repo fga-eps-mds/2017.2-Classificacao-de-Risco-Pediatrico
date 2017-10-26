@@ -338,6 +338,20 @@ class TestUsers:
         # foram instanciados 2 staffs
         # por isso o assert igual a 1
 
+    def test_patient_remove(self, client):
+        Staff.objects.create_superuser(**self.default_user_data())
+        response = client.post('/', {'username': 'email@gmail.com',
+                                     'password': "1234asdf",
+                                     'id_user': "1234"})
+        Patient()
+        name = Patient(cpf='156498',
+                       birth_date='2017-02-01',
+                       name='Test Patient')
+        name.save()
+        response = client.delete('/patients/remove/156498/', follow=True)
+        assert response.redirect_chain == [('/patients/', 302)]
+        assert Patient.objects.count() == 0
+
     @pytest.mark.parametrize('url, urlredirect', [
         ('/register/patient', '/'),
         ('/home/admin', '/'),
