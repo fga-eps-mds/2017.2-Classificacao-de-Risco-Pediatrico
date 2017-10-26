@@ -1,4 +1,4 @@
-  {% extends 'layout/layout.html' %}
+{% extends 'layout/layout.html' %}
 {% load staticfiles %}
 
 {% block background %}
@@ -15,12 +15,13 @@
 
 
 {% block js %}
-    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
-    <script src="{% static "js/manageAccounts.js" %}"></script>
+  <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+  <script src="{% static "js/manageAccounts.js" %}"></script>
 {% endblock %}
 
 {% block content %}
+{% include 'risk_rating/risk_rating.html' %}
 <div class="container-fluid">
     <div class="row mt-5">
         <div class="col-lg-7 col-md-10 mx-auto my-auto">
@@ -45,7 +46,9 @@
                               <td>{{ queuedPatient.cpf}}</td>
                               <td>{{ queuedPatient.name }}</td>
                               <td>{{ queuedPatient.guardian }}</td>
-                              <td><a href="{% url 'users:classification' queuedPatient.cpf %}"><i class="fa fa-user-md" aria-hidden="true"></i></a></td>
+                              <td>
+                                <a href="#" data-toggle="modal" data-target="#classification-modal">
+                                  <i class="fa fa-user-md" aria-hidden="true"></i></a></td>
                             </tr>
                         {% endfor %}
                     </tbody>
