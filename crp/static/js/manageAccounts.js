@@ -17,6 +17,10 @@ $(document).ready(function() {
     //$('#example_length').hide()
     // $('#example_info').hide()
     // $('#example_paginate').hide()
+    $('#myModal').on('shown.bs.modal', function () {
+        $('#myInput').trigger('focus')
+    })
+
     $('#searchPatient').on( 'keyup', function () {
         table.search( this.value ).draw();
     } );

@@ -25,15 +25,11 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
-
-
-
-                <div class="form-group title_left mt-4" >
-                <input id="searchPatient" type="search" class="form-control pull-right mr-1" placeholder="Pesquisar Paciente..." aria-controls="example">
+            <div class="form-group title_left mt-4" >
+                <input id="searchPatient" type="search" class="form-control pull-right mr-1"
+                       placeholder="Pesquisar Paciente..." aria-controls="example">
                <h2>Cadastrados</h2>
-                </div>
-
-
+            </div>
 
             <div id="list" class="x_panel" style="background-color: white">
 
@@ -48,8 +44,6 @@
                             <th>Faixa-etária</th>
                             <th>Data de Cadastro</th>
                             <th>Atendente</th>
-
-
                         </tr>
                     </thead>
                     <tbody>
@@ -57,7 +51,7 @@
                             <tr>
                               <td>{{ patient.cpf}}</td>
                               <td>{{ patient.name }}</td>
-                              <td class=" h6 badge badge-success">{{ patient.guardian }}</td>
+                              <td class="badge badge-success btn btn-primary" data-toggle="modal" data-target="#exampleModal">{{ patient.guardian }}</td>
                               <td><a href="edit/{{ patient.cpf }}"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
                               <td><a href="#" data-toggle="modal" data-target="#{{ patient.cpf }}"><i class="fa fa-ban" aria-hidden="true"></i></a></td>
                               <td><a href="{% url 'users:queue_patient' patient.cpf %}"><i class="fa fa-arrow-right" aria-hidden="true"></i></a></td>
@@ -95,6 +89,28 @@
         </div>
     </div>
 {% endfor %}
+
+    <!-- Modal Classification-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 {% endblock %}
 
