@@ -5,7 +5,7 @@ from django.contrib.auth.views import logout
 from django.core.urlresolvers import reverse
 from django.db.models import Q
 from django.http import HttpResponseRedirect
-
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate
 
 from apps.users.forms import RegistrationStaffForm
@@ -78,6 +78,7 @@ def sign_up_profile(request):
                   status=status)
 
 
+@login_required(redirect_field_name='', login_url='users:login')
 def sign_up_patient(request):
     if request.method == 'POST':
         form = RegistrationPatientForm(request.POST)
@@ -92,10 +93,10 @@ def sign_up_patient(request):
             raw_password = form.cleaned_data.get('password1')
             username = authenticate(username=username, password=raw_password)
             login(request, 'users:login')
-            allPatients = Patient.objects.all()
+            Patient.objects.all()
             patient = Patient.objects.get(cpf=cpf_patient)
             patient.isInQueue = True
-            patient.queuePosition = checkQueueLastPosition(allPatients)
+            # patient.queuePosition = checkQueueLastPosition(allPatients)
             patient.save()
             return redirect('users:queue_patient')
         else:
@@ -107,6 +108,7 @@ def sign_up_patient(request):
                   status=status)
 
 
+@login_required(redirect_field_name='', login_url='users:login')
 def admin_view(request):
     """
     return rendered text from homeReceptionist
@@ -114,6 +116,7 @@ def admin_view(request):
     return render(request, 'users/admin.html')
 
 
+@login_required(redirect_field_name='', login_url='users:login')
 def home_attendant_view(request):
     """
     return rendered text from homeAttendant
@@ -121,12 +124,14 @@ def home_attendant_view(request):
     return render(request, 'users/homeAttendant.html')
 
 
+@login_required(redirect_field_name='', login_url='users:login')
 def registered_patient_view(request):
     patients = Patient.objects.all()
     return render(request, 'users/registeredPatient.html',
                            {'patients': patients})
 
 
+@login_required(redirect_field_name='', login_url='users:login')
 def queue_patient(request, cpf_patient):
     patients = Patient.objects.filter(cpf=cpf_patient)
     allPatients = Patient.objects.all()
@@ -142,6 +147,7 @@ def queue_patient(request, cpf_patient):
     return render(request, 'users/queuePatient.html', {'patients': patients})
 
 
+@login_required(redirect_field_name='', login_url='users:login')
 def checkQueueLastPosition(patients):
     lastPosition = 0
     for patients in patients:
@@ -152,11 +158,13 @@ def checkQueueLastPosition(patients):
     return lastPosition
 
 
+@login_required(redirect_field_name='', login_url='users:login')
 def manage_accounts_view(request):
     staffs = Staff.objects.all()
     return render(request, 'users/manageAccounts.html', {'staffs': staffs})
 
 
+@login_required(redirect_field_name='', login_url='users:login')
 def edit_accounts_view(request, id_user):
     staff = Staff.objects.filter(id_user=id_user)
     if len(staff) == 1:
@@ -164,18 +172,21 @@ def edit_accounts_view(request, id_user):
     return render(request, 'users/editAccounts.html', status=404)
 
 
+@login_required(redirect_field_name='', login_url='users:login')
 def staff_remove(request, id_user):
     staff = Staff.objects.filter(id_user=id_user)
     staff.delete()
     return HttpResponseRedirect(reverse('users:manage_accounts'))
 
 
+@login_required(redirect_field_name='', login_url='users:login')
 def patient_remove(request, cpf):
     patient = Patient.objects.filter(cpf=cpf)
     patient.delete()
     return HttpResponseRedirect(reverse('users:manage_patients'))
 
 
+@login_required(redirect_field_name='', login_url='users:login')
 def edit_patient(request, cpf):
     """
     edit an existing patient with post method
@@ -203,21 +214,25 @@ def edit_patient(request, cpf):
                       {'patient': patient, 'form': form})
 
 
+@login_required(redirect_field_name='', login_url='users:login')
 def queue_patient_view(request):
     queuedPatients = Patient.objects.filter(isInQueue=True)
     return render(request, 'users/queuePatient.html',
                            {'queuedPatients': queuedPatients})
 
 
+@login_required(redirect_field_name='', login_url='users:login')
 def classification_view(request):
     return render(request, 'users/classification.html')
 
 
+@login_required(redirect_field_name='', login_url='users:login')
 def classification(request, cpf_patient):
     patients = Patient.objects.filter(cpf=cpf_patient)
     return render(request, 'users/classification.html', {'patients': patients})
 
 
+@login_required(redirect_field_name='', login_url='users:login')
 def show_pacient_view(request, cpf):
     """
     return rendered text from showPatient
@@ -228,6 +243,7 @@ def show_pacient_view(request, cpf):
     return render(request, 'users/showPatient.html', status=404)
 
 
+@login_required(redirect_field_name='', login_url='users:login')
 def home_receptionist_view(request):
     """
     return rendered text from homeReceptionist
@@ -235,6 +251,7 @@ def home_receptionist_view(request):
     return render(request, 'users/homeReceptionist.html')
 
 
+@login_required(redirect_field_name='', login_url='users:login')
 def manage_patients_view(request):
     patients = Patient.objects.all()
     search = request.GET.get('q')
