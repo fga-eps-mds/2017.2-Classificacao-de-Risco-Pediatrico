@@ -186,8 +186,14 @@ class Patient(models.Model):
     date = models.DateField(
         verbose_name='Data',
         blank=False,
-        default='2017-01-01'
+        auto_now=True
     )
+    classifier = models.CharField(
+        verbose_name=_('Classifier'),
+        max_length=150,
+        blank=False,
+    )
+
 
 class QueuedPatient(models.Model):
 

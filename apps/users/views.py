@@ -88,6 +88,8 @@ def sign_up_patient(request):
         # [print(field.label, field.name, field.errors) for field in form]
 
         if form.is_valid():
+            instance = form.save(commit=False)
+            instance.classifier = request.user
             form.save()
             cpf_patient = form.cleaned_data.get('cpf')
             username = form.cleaned_data.get('username')
@@ -98,6 +100,8 @@ def sign_up_patient(request):
             patient = Patient.objects.get(cpf=cpf_patient)
             patient.isInQueue = True
             # patient.queuePosition = checkQueueLastPosition(allPatients)
+            # patient.classifier.get_username()
+            
             patient.save()
             return redirect('users:queue_patient')
         else:

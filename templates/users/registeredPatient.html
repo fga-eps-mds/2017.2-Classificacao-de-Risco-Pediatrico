@@ -55,8 +55,8 @@
                               <td><a href="edit/{{ patient.cpf }}"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
                               <td><a href="#" data-toggle="modal" data-target="#{{ patient.cpf }}"><i class="fa fa-ban" aria-hidden="true"></i></a></td>
                               <td><a href="{% url 'users:queue_patient' patient.cpf %}"><i class="fa fa-arrow-right" aria-hidden="true"></i></a></td>
-                              <td>{{ patient.queuePosition }}</td>
-                              <td>{{ patient.isInQueue }}</td>
+                              <td>{{ patient.date }}</td>
+                              <td>{{ patient.classifier }}</td>
                             </tr>
                         {% endfor %}
                     </tbody>
@@ -113,4 +113,3 @@
 </div>
 
 {% endblock %}
-
