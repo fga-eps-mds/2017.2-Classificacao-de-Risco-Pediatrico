@@ -98,7 +98,6 @@ def sign_up_patient(request):
             login(request, 'users:login')
             Patient.objects.all()
             patient = Patient.objects.get(cpf=cpf_patient)
-            # patient.classifier.get_username()
             patient.save()
             return redirect('users:registered_patient')
         else:
