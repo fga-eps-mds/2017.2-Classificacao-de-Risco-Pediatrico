@@ -103,7 +103,7 @@ def sign_up_patient(request):
             # patient.classifier.get_username()
             
             patient.save()
-            return redirect('users:queue_patient')
+            return redirect('users:registered_patient')
         else:
             status = 400
     else:

@@ -24,7 +24,7 @@
                 <div class="form-group title_left mt-4" >
                     <input id="searchPatient" type="search" class="form-control pull-right mr-1"
                         placeholder="Pesquisar Paciente..." aria-controls="example">
-                    <h2>Cadastrados</h2>
+                    <h2>Pacientes Cadastrados</h2>
                 </div>
                 <div id="list" class="x_panel" style="background-color: white">
                     <table id="example" class="table table-condensed"  cellspacing="0" width="100%">
@@ -36,7 +36,7 @@
                                 <th class="hidden-xs hidden-sm">Sintomas</th>
                                 <th class="hidden-xs hidden-sm">Faixa-etária</th>
                                 <th class="hidden-xs hidden-sm">Data de Cadastro</th>
-                                <th class="hidden-xs hidden-sm">Atendente</th>
+                                <th class="hidden-xs hidden-sm">Responsável pela Classificação</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -45,19 +45,19 @@
                                 <td>{{ patient.cpf}}</td>
                                 <td>{{ patient.name }}</td>
                                 {% if patient.classification == 0 %}
-                                    <td><span class="badge badge-pill badge-secondary"  data-toggle="modal" data-target="#{{ patient.id }}">Não classificado</span></td>
+                                    <td><span class="btn btn-primary badge badge-pill badge-secondary"  data-toggle="modal" data-target="#{{ patient.id }}">Não classificado</span></td>
                                 {% elif patient.classification == 1 %}
-                                    <td><span class="badge badge-pill badge-danger"  data-toggle="modal" data-target="#{{ patient.id }}">Atendimento Imediato</span></td>
+                                    <td><span class="btn btn-primary badge badge-pill badge-danger"  data-toggle="modal" data-target="#{{ patient.id }}">Atendimento Imediato</span></td>
                                 {% elif patient.classification == 2 %}
-                                    <td><span class="badge badge-pill badge-success"  data-toggle="modal" data-target="#{{ patient.id }}">Atendimento Ambulatorial</span></td>
+                                    <td><span class="btn btn-primary badge badge-pill badge-success"  data-toggle="modal" data-target="#{{ patient.id }}">Atendimento Ambulatorial</span></td>
                                 {% elif patient.classification == 3 %}
-                                    <td><span class="badge badge-pill badge-warning"  data-toggle="modal" data-target="#{{ patient.id }}">Atendimento Hospitalar</span></td>
+                                    <td><span class="btn btn-primary badge badge-pill badge-warning"  data-toggle="modal" data-target="#{{ patient.id }}">Atendimento Hospitalar</span></td>
                                 {% elif patient.classification == 4 %}
-                                    <td><span class="badge badge-pill badge-info"  data-toggle="modal" data-target="#{{ patient.id }}">Atendimento Eletivo</span></td>
+                                    <td><span class="btn btn-primary badge badge-pill badge-info"  data-toggle="modal" data-target="#{{ patient.id }}">Atendimento Eletivo</span></td>
                                 {% endif %}
+                                <td></td>
+                                <td></td>
                                 <td>{{ patient.date }}</td>
-                                <td></td>
-                                <td></td>
                                 <td></td>
                             </tr>
                             {% endfor %}
@@ -84,6 +84,7 @@
                     <form role="form" class="form" method="POST" >
                         {% csrf_token %}
                         <div class="modal-body">
+                            <p>Selecione a classificação desejada:</p>
                             <div class="text-left">
                                 <div class="form-check">
                                    <label class="form-check-label">
@@ -112,7 +113,10 @@
                                 </div>
                             </div>
                         </div>
-                        <input type="hidden" name="patient" value="{{ patient.id }}">
+                            {% if value != 1 or value != 2 or value != 3 or value != 4 %}
+                                <input type="hidden" name="classification" value="0">
+                            {% endif %}
+                                <input type="hidden" name="patient" value="{{ patient.id }}">
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                             <button type="submit" class="btn btn-primary">Salvar</button>
