@@ -194,6 +194,11 @@ class Patient(models.Model):
         blank=False,
     )
 
+    AGE_RANGE = (
+        (1, 'até 28 dias'),
+        (2, '29 dias à 3 meses'),
+    )
+
 
 class QueuedPatient(models.Model):
 

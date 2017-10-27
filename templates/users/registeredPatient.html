@@ -54,7 +54,22 @@
                               <td class="badge badge-success btn btn-primary" data-toggle="modal" data-target="#exampleModal">{{ patient.guardian }}</td>
                               <td><a href="edit/{{ patient.cpf }}"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
                               <td><a href="#" data-toggle="modal" data-target="#{{ patient.cpf }}"><i class="fa fa-ban" aria-hidden="true"></i></a></td>
-                              <td><a href="{% url 'users:queue_patient' patient.cpf %}"><i class="fa fa-arrow-right" aria-hidden="true"></i></a></td>
+                              <td>
+
+                                          <select name="{{ form.profile.name }}" class="form-control">
+                                              <option value="" selected disabled>Faixa etária</option>
+                                              <option value="1">Até 28 dias</option>
+                                              <option value="2">29 dias à 3 meses</option>
+                                          </select>
+                                          {% if form.profile.errors %}
+                                              <div class="error-holder">
+                                                  <div class="alert alert-warning" role="alert">
+                                                      {{ form.profile.errors }}
+                                                  </div>
+                                              </div>
+                                          {% endif %}
+
+                              </td>
                               <td>{{ patient.date }}</td>
                               <td>{{ patient.classifier }}</td>
                             </tr>
