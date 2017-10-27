@@ -99,7 +99,6 @@ def sign_up_patient(request):
             Patient.objects.all()
             patient = Patient.objects.get(cpf=cpf_patient)
             # patient.classifier.get_username()
-            
             patient.save()
             return redirect('users:registered_patient')
         else:
@@ -147,7 +146,6 @@ def registered_patient_view(request):
 @login_required(redirect_field_name='', login_url='users:login')
 def queue_patient(request, cpf_patient):
     patients = Patient.objects.filter(cpf=cpf_patient)
-    allPatients = Patient.objects.all()
     patient = Patient.objects.get(cpf=cpf_patient)
     patientsInQueue = QueuedPatient.objects.all()
     patientList = list()
@@ -157,7 +155,7 @@ def queue_patient(request, cpf_patient):
         return render(request, 'users/queuePatient.html',
                                {'patientList': patientList})
     else:
-        queuedPatient = QueuedPatient.objects.create(patient = patient)
+        queuedPatient = QueuedPatient.objects.create(patient=patient)
         queuedPatient.save()
         patientList.append(patient)
         return render(request, 'users/queuePatient.html',
@@ -229,7 +227,7 @@ def classification_view(request):
 @login_required(redirect_field_name='', login_url='users:login')
 def classification(request, cpf_patient):
     patient = Patient.objects.filter(cpf=cpf_patient)
-    chosenPatient = QueuedPatient.objects.filter(patient = patient)
+    chosenPatient = QueuedPatient.objects.filter(patient=patient)
     chosenPatient.delete()
     return render(request, 'users/classification.html', {'patient': patient})
 

@@ -115,7 +115,8 @@ class TestUsers:
         'parents_name': 'parents_nameTest', 'uf': 'ufTest',
         'city': 'cityTeste', 'neighborhood': 'neighborhoodTest',
         'street': 'streetTeste', 'block': 'blockTeste',
-        'number': 'numberTest'}),''' 'isInQueue': 'True', 'queuePosition': '5' '''
+        'number': 'numberTest'}), ''' 'isInQueue': 'True',
+         'queuePosition': '5' '''
 
     @pytest.mark.parametrize('url, model, data', [
                             ('/register/profile/', Staff, profile_data)])
