@@ -50,23 +50,23 @@
                             <tr>
                               <td>{{ patient.cpf}}</td>
                               <td>{{ patient.name }}</td>
-                              <td class="badge badge-pill badge-secondary mt-2" data-toggle="modal" data-target="#exampleModal">Não Classificado</td>
+                              <td><span class="badge badge-pill badge-secondary"  data-toggle="modal" data-target="#exampleModal">Não Classificado</span></td>
 
-                              <td><a href="#" data-toggle="modal" data-target="#{{ patient.cpf }}"><i class="fa fa-ban" aria-hidden="true"></i></a></td>
+                              <td>{% comment %}sintomas{% endcomment %}</td>
                               <td>
 
-                                          <select name="{{ form.profile.name }}" class="form-control">
-                                              <option value="" selected disabled>Faixa etária</option>
-                                              <option value="1">Até 28 dias</option>
-                                              <option value="2">29 dias à 3 meses</option>
-                                          </select>
-                                          {% if form.profile.errors %}
-                                              <div class="error-holder">
-                                                  <div class="alert alert-warning" role="alert">
-                                                      {{ form.profile.errors }}
-                                                  </div>
-                                              </div>
-                                          {% endif %}
+{#                                          <select name="{{ form.profile.name }}" class="form-control">#}
+{#                                              <option value="" selected disabled>Faixa etária</option>#}
+{#                                              <option value="1">Até 28 dias</option>#}
+{#                                              <option value="2">29 dias à 3 meses</option>#}
+{#                                          </select>#}
+{#                                          {% if form.profile.errors %}#}
+{#                                              <div class="error-holder">#}
+{#                                                  <div class="alert alert-warning" role="alert">#}
+{#                                                      {{ form.profile.errors }}#}
+{#                                                  </div>#}
+{#                                              </div>#}
+{#                                          {% endif %}#}
 
                               </td>
                               <td>{{ patient.date }}</td>

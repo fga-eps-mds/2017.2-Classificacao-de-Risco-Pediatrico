@@ -89,7 +89,7 @@ def sign_up_patient(request):
 
         if form.is_valid():
             instance = form.save(commit=False)
-            instance.classifier = request.user
+            instance.classifier = request.user.name
             form.save()
             cpf_patient = form.cleaned_data.get('cpf')
             username = form.cleaned_data.get('username')
