@@ -212,10 +212,3 @@ class Patient(models.Model):
         (1, 'até 28 dias'),
         (2, '29 dias à 3 meses'),
     )
-
-
-class QueuedPatient(models.Model):
-
-    queuePosition = models.AutoField(primary_key=True)
-
-    patient = models.ForeignKey(Patient, on_delete=models.CASCADE)

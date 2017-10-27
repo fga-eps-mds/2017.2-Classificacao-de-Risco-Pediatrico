@@ -111,12 +111,14 @@
                                    <span class="badge badge-pill badge-info">Atendimento Eletivo</span>
                                    </label>
                                 </div>
+                                 <div class="form-check">
+                                   <label class="form-check-label">
+                                   <input class="form-check-input" type="radio" style="display:none" name="classification" value="0" checked>
+                                   </label>
+                                </div>
                             </div>
                         </div>
-                            {% if value != 1 or value != 2 or value != 3 or value != 4 %}
-                                <input type="hidden" name="classification" value="0">
-                            {% endif %}
-                                <input type="hidden" name="patient" value="{{ patient.id }}">
+                            <input type="hidden" name="patient" value="{{ patient.id }}">
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                             <button type="submit" class="btn btn-primary">Salvar</button>

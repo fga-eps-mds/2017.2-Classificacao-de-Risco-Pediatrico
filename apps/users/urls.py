@@ -35,10 +35,6 @@ urlpatterns = [
         name="registered_patient"),  # falta
     url(r'^registered/patient/(?P<cpf_patient>\w+)/$', views.queue_patient,
         name="queue_patient"),  # falta
-    url(r'^queue/patient/$', views.queue_patient_view,
-        name="queue_patient"),
-    url(r'^queue/patient/(?P<cpf_patient>\w+)/$', views.classification,
-        name="classification"),  # falta
     url(r'^classification/$', views.classification_view,
         name="classification")  # falta
 ]
