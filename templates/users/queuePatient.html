@@ -18,6 +18,7 @@
   <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
   <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
   <script src="{% static "js/manageAccounts.js" %}"></script>
+  <script src="{% static "js/modal.js" %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -44,7 +45,7 @@
                             <tr>
                               <td>{{ queuedPatient.queuePosition }}</td>
                               <td>{{ queuedPatient.cpf}}</td>
-                              <td>{{ queuedPatient.name }}</td>
+                              <td><a href="#" data-toggle="modal" data-target="#{{ queuedPatient.id }}">{{ queuedPatient.name }}</a></td>
                               <td>{{ queuedPatient.guardian }}</td>
                               <td>
                                 <a href="#" data-toggle="modal" data-target="#classification-modal-lg">
