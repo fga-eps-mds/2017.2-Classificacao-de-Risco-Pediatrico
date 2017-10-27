@@ -13,15 +13,14 @@ $(document).ready(function() {
             }
         }
     });
-    $('#example_filter').hide()
-    //$('#example_length').hide()
-    // $('#example_info').hide()
-    // $('#example_paginate').hide()
-    $('#myModal').on('shown.bs.modal', function () {
-        $('#myInput').trigger('focus')
-    })
+
+    $('#example_filter').hide();
 
     $('#searchPatient').on( 'keyup', function () {
         table.search( this.value ).draw();
-    } );
+    });
+
+    $('td:nth-child(3) > span').click(function () {
+        console.log('clickou aqui aehoo')
+    });
 } );

@@ -132,6 +132,16 @@ def home_attendant_view(request):
 @login_required(redirect_field_name='', login_url='users:login')
 def registered_patient_view(request):
     patients = Patient.objects.all()
+
+    if request.method == "POST":
+        patient_classification = request.POST.get("classification")
+        patient_id = request.POST.get("patient")
+
+        patient = Patient.objects.get(id=patient_id)
+        patient.classification = patient_classification
+
+        patient.save()
+
     return render(request, 'users/registeredPatient.html',
                            {'patients': patients})
 

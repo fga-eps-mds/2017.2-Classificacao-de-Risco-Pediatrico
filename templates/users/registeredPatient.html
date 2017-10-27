@@ -2,18 +2,14 @@
 {% load staticfiles %}
 
 {% block background %}
-  <div class="admin-page"></div>
+    <div class="admin-page"></div>
 {% endblock %}
-
 
 {% block head %}
-  <link rel="stylesheet" href="{% static "css/main.css" %}">
-  <link rel="stylesheet" href="{% static "css/mainAdmin.css" %}">
-  <link rel="stylesheet" href="{% static "css/managePage.css" %}">
+    <link rel="stylesheet" href="{% static "css/main.css" %}">
     <link rel="stylesheet" href="{% static "css/registeredPatient.css" %}">
-  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css">
 {% endblock %}
-
 
 {% block js %}
     <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
@@ -22,111 +18,108 @@
 {% endblock %}
 
 {% block content %}
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="form-group title_left mt-4" >
-                <input id="searchPatient" type="search" class="form-control pull-right mr-1"
-                       placeholder="Pesquisar Paciente..." aria-controls="example">
-               <h2>Cadastrados</h2>
-            </div>
-
-            <div id="list" class="x_panel" style="background-color: white">
-
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="form-group title_left mt-4" >
+                    <input id="searchPatient" type="search" class="form-control pull-right mr-1"
+                        placeholder="Pesquisar Paciente..." aria-controls="example">
+                    <h2>Cadastrados</h2>
+                </div>
+                <div id="list" class="x_panel" style="background-color: white">
                     <table id="example" class="table table-condensed"  cellspacing="0" width="100%">
-                    <thead>
-                        <tr>
-                            <th>CPF</th>
-                            <th>Nome</th>
-                            <th>Classificação</th>
-                            <th class="hidden-xs hidden-sm">Sintomas</th>
-                            <th class="hidden-xs hidden-sm">Faixa-etária</th>
-                            <th class="hidden-xs hidden-sm">Data de Cadastro</th>
-                            <th class="hidden-xs hidden-sm">Atendente</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for patient in patients %}
+                        <thead>
                             <tr>
-                              <td>{{ patient.cpf}}</td>
-                              <td>{{ patient.name }}</td>
-                              <td><span class="badge badge-pill badge-secondary"  data-toggle="modal" data-target="#exampleModal">Não Classificado</span></td>
-
-                              <td>{% comment %}sintomas{% endcomment %}</td>
-                              <td>
-
-{#                                          <select name="{{ form.profile.name }}" class="form-control">#}
-{#                                              <option value="" selected disabled>Faixa etária</option>#}
-{#                                              <option value="1">Até 28 dias</option>#}
-{#                                              <option value="2">29 dias à 3 meses</option>#}
-{#                                          </select>#}
-{#                                          {% if form.profile.errors %}#}
-{#                                              <div class="error-holder">#}
-{#                                                  <div class="alert alert-warning" role="alert">#}
-{#                                                      {{ form.profile.errors }}#}
-{#                                                  </div>#}
-{#                                              </div>#}
-{#                                          {% endif %}#}
-
-                              </td>
-                              <td>{{ patient.date }}</td>
-                              <td>{{ patient.classifier }}</td>
+                                <th>CPF</th>
+                                <th>Nome</th>
+                                <th>Classificação</th>
+                                <th class="hidden-xs hidden-sm">Sintomas</th>
+                                <th class="hidden-xs hidden-sm">Faixa-etária</th>
+                                <th class="hidden-xs hidden-sm">Data de Cadastro</th>
+                                <th class="hidden-xs hidden-sm">Atendente</th>
                             </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-                <div class="card-footer text-right mt-1">
+                        </thead>
+                        <tbody>
+                            {% for patient in patients %}
+                            <tr>
+                                <td>{{ patient.cpf}}</td>
+                                <td>{{ patient.name }}</td>
+                                {% if patient.classification == 0 %}
+                                    <td><span class="badge badge-pill badge-secondary"  data-toggle="modal" data-target="#{{ patient.id }}">Não classificado</span></td>
+                                {% elif patient.classification == 1 %}
+                                    <td><span class="badge badge-pill badge-danger"  data-toggle="modal" data-target="#{{ patient.id }}">Atendimento Imediato</span></td>
+                                {% elif patient.classification == 2 %}
+                                    <td><span class="badge badge-pill badge-success"  data-toggle="modal" data-target="#{{ patient.id }}">Atendimento Ambulatorial</span></td>
+                                {% elif patient.classification == 3 %}
+                                    <td><span class="badge badge-pill badge-warning"  data-toggle="modal" data-target="#{{ patient.id }}">Atendimento Hospitalar</span></td>
+                                {% elif patient.classification == 4 %}
+                                    <td><span class="badge badge-pill badge-info"  data-toggle="modal" data-target="#{{ patient.id }}">Atendimento Eletivo</span></td>
+                                {% endif %}
+                                <td>{{ patient.date }}</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <div class="card-footer text-right mt-1">
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+    
+    {% for patient in patients %}
+        <div class="modal fade" id="{{ patient.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Classificação</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form role="form" class="form" method="POST" >
+                        {% csrf_token %}
+                        <div class="modal-body">
+                            <div class="text-left">
+                                <div class="form-check">
+                                   <label class="form-check-label">
+                                   <input class="form-check-input" type="radio" name="classification" value="1">
+                                   <span class="badge badge-pill badge-danger">Atendimento Imediato</span>
+                                   </label>
+                                </div>
+                                <div class="form-check">
+                                   <label class="form-check-label">
+                                   <input class="form-check-input" type="radio" name="classification" value="2">
+                                  <span class="badge badge-pill badge-success">Atendimento Ambulatorial</span>
 
-{#{% for patient in patients %}#}
-{#    <div class="modal fade" id="{{ patient.id_user }}" tabindex="-1" role="dialog" aria-labelledby="Deletar Paciente" aria-hidden="true">#}
-{#        <div class="modal-dialog" role="document">#}
-{#            <div class="modal-content">#}
-{#                <div class="modal-header">#}
-{#                    <h5 class="modal-title" id="exampleModalLabel">Deletar Paciente</h5>#}
-{#                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">#}
-{#                    <span aria-hidden="true">&times;</span>#}
-{#                    </button>#}
-{#                </div>#}
-{#                <div class="modal-body">#}
-{#                    Tem certeza que deseja deletar o registro do {{ patient.name }}?#}
-{#                </div>#}
-{#                <div class="modal-footer">#}
-{#                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>#}
-{#                    <a href="{% url 'users:patient_remove' patient.cpf %}" class="btn btn-danger">Deletar</a>#}
-{#                </div>#}
-{#            </div>#}
-{#        </div>#}
-{#    </div>#}
-{#{% endfor %}#}
-
-    <!-- Modal Classification-->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Classificação</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-              <span class="badge badge-pill badge-danger">Atendimento Imediato</span>
-              <span class="badge badge-pill badge-warning">Atendimento Hospitalar</span>
-              <span class="badge badge-pill badge-success">Atendimento Ambulatorial</span>
-              <span class="badge badge-pill badge-info">Atendimento Eletivo</span>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-
+                                   </label>
+                                </div>
+                                <div class="form-check">
+                                   <label class="form-check-label">
+                                   <input class="form-check-input" type="radio" name="classification" value="3">
+                                   <span class="badge badge-pill badge-warning">Atendimento Hospitalar</span>
+                                   </label>
+                                </div>
+                                <div class="form-check">
+                                   <label class="form-check-label">
+                                   <input class="form-check-input" type="radio" name="classification" value="4">
+                                   <span class="badge badge-pill badge-info">Atendimento Eletivo</span>
+                                   </label>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" name="patient" value="{{ patient.id }}">
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                            <button type="submit" class="btn btn-primary">Salvar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
 {% endblock %}
