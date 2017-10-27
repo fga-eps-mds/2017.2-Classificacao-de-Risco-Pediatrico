@@ -10,7 +10,6 @@
 #title {
     margin-left: 10%;
 
-
 }
 
 #list {
@@ -19,4 +18,8 @@
     margin-top: 2%;
     margin-bottom: 3%;
     padding-top: 2%;
+}
+
+.button {
+    margin-top: 100px;
 }

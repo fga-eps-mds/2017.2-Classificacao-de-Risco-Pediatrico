@@ -36,14 +36,13 @@
                     <table id="example" class="table table-condensed"  cellspacing="0" width="100%">
                     <thead>
                         <tr>
-                            <th class="hidden-xs hidden-sm">CPF</th>
+                            <th>CPF</th>
                             <th>Nome</th>
                             <th>Classificação</th>
-                            <th>Editar</th>
-                            <th>Sintomas</th>
-                            <th>Faixa-etária</th>
-                            <th>Data de Cadastro</th>
-                            <th>Atendente</th>
+                            <th class="hidden-xs hidden-sm">Sintomas</th>
+                            <th class="hidden-xs hidden-sm">Faixa-etária</th>
+                            <th class="hidden-xs hidden-sm">Data de Cadastro</th>
+                            <th class="hidden-xs hidden-sm">Atendente</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -51,8 +50,8 @@
                             <tr>
                               <td>{{ patient.cpf}}</td>
                               <td>{{ patient.name }}</td>
-                              <td class="badge badge-success btn btn-primary" data-toggle="modal" data-target="#exampleModal">{{ patient.guardian }}</td>
-                              <td><a href="edit/{{ patient.cpf }}"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
+                              <td class="badge badge-pill badge-secondary mt-2" data-toggle="modal" data-target="#exampleModal">Não Classificado</td>
+
                               <td><a href="#" data-toggle="modal" data-target="#{{ patient.cpf }}"><i class="fa fa-ban" aria-hidden="true"></i></a></td>
                               <td>
 
@@ -83,27 +82,27 @@
     </div>
 </div>
 
-{% for patient in patients %}
-    <div class="modal fade" id="{{ patient.id_user }}" tabindex="-1" role="dialog" aria-labelledby="Deletar Paciente" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Deletar Paciente</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    Tem certeza que deseja deletar o registro do {{ patient.name }}?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                    <a href="{% url 'users:patient_remove' patient.cpf %}" class="btn btn-danger">Deletar</a>
-                </div>
-            </div>
-        </div>
-    </div>
-{% endfor %}
+{#{% for patient in patients %}#}
+{#    <div class="modal fade" id="{{ patient.id_user }}" tabindex="-1" role="dialog" aria-labelledby="Deletar Paciente" aria-hidden="true">#}
+{#        <div class="modal-dialog" role="document">#}
+{#            <div class="modal-content">#}
+{#                <div class="modal-header">#}
+{#                    <h5 class="modal-title" id="exampleModalLabel">Deletar Paciente</h5>#}
+{#                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">#}
+{#                    <span aria-hidden="true">&times;</span>#}
+{#                    </button>#}
+{#                </div>#}
+{#                <div class="modal-body">#}
+{#                    Tem certeza que deseja deletar o registro do {{ patient.name }}?#}
+{#                </div>#}
+{#                <div class="modal-footer">#}
+{#                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>#}
+{#                    <a href="{% url 'users:patient_remove' patient.cpf %}" class="btn btn-danger">Deletar</a>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#{% endfor %}#}
 
     <!-- Modal Classification-->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -111,13 +110,16 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Classificação</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        ...
+              <span class="badge badge-pill badge-danger">Atendimento Imediato</span>
+              <span class="badge badge-pill badge-warning">Atendimento Hospitalar</span>
+              <span class="badge badge-pill badge-success">Atendimento Ambulatorial</span>
+              <span class="badge badge-pill badge-info">Atendimento Eletivo</span>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
