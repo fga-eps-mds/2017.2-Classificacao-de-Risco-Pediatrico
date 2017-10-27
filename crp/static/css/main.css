@@ -29,6 +29,8 @@ body {
 }
 
 .btn-primary {
+  /*display: none;*/
+  word-wrap: break-word;
   white-space:normal !important;
   color: #007bff;
   background-color: white;
@@ -53,6 +55,7 @@ body {
   padding-right: 22px;
   padding-left: 19px
 }
+
 /*input[type="checkbox"] + label {
     color: #ffffff;
 }*/
