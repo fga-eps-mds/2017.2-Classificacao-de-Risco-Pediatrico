@@ -43,7 +43,7 @@
                             {% for patient in patients %}
                             <tr>
                                 <td>{{ patient.cpf}}</td>
-                                <td>{{ patient.name }}</td>
+                                <td><a href="#" data-toggle="modal" data-target="#{{ patient.id }}">{{ patient.name }}</a></td>
                                 {% if patient.classification == 0 %}
                                     <td><span class="btn btn-primary badge badge-pill badge-secondary"  data-toggle="modal" data-target="#{{ patient.id }}">Não classificado</span></td>
                                 {% elif patient.classification == 1 %}
@@ -69,7 +69,7 @@
             </div>
         </div>
     </div>
-    
+
     {% for patient in patients %}
         <div class="modal fade" id="{{ patient.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
