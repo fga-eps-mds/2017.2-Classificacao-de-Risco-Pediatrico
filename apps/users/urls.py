@@ -8,6 +8,7 @@ urlpatterns = [
     url(r'^$', views.login_view, name="login"),
     url(r'^logout/$', views.logout_view, name="logout"),
     url(r'^home/admin/$', views.admin_view, name="admin"),
+    url(r'^home/$', views.home_view, name="home"),
     url(r'^register/profile/$', views.sign_up_profile,
         name="register_profile"),
     url(r'^register/patient/$', views.sign_up_patient,
@@ -34,10 +35,6 @@ urlpatterns = [
         name="registered_patient"),  # falta
     url(r'^registered/patient/(?P<cpf_patient>\w+)/$', views.queue_patient,
         name="queue_patient"),  # falta
-    url(r'^queue/patient/$', views.queue_patient_view,
-        name="queue_patient"),
-    url(r'^queue/patient/(?P<cpf_patient>\w+)/$', views.classification,
-        name="classification"),  # falta
     url(r'^classification/$', views.classification_view,
         name="classification")  # falta
 ]
