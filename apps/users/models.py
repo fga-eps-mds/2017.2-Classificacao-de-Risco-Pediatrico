@@ -183,11 +183,32 @@ class Patient(models.Model):
         max_length=10,
         blank=False
     )
-
-    isInQueue = models.BooleanField(
-        default=False
+    date = models.DateField(
+        verbose_name='Data',
+        blank=False,
+        auto_now=True
+    )
+    classifier = models.CharField(
+        verbose_name=_('Classifier'),
+        max_length=150,
+        blank=False,
     )
 
-    queuePosition = models.IntegerField(
+    CLASSIFICATION_TYPES = (
+        (0, 'Não classificado'),
+        (1, 'Atendimento Imediato'),
+        (2, 'Atendimento Ambulatorial'),
+        (3, 'Atendimento Hospitalar'),
+        (4, 'Atendimento Eletivo')
+    )
+
+    classification = models.IntegerField(
+        verbose_name=_('Classification'),
+        choices=CLASSIFICATION_TYPES,
         default=0
+    )
+
+    AGE_RANGE = (
+        (1, 'até 28 dias'),
+        (2, '29 dias à 3 meses'),
     )

@@ -12,7 +12,8 @@ from apps.users.forms import RegistrationStaffForm
 from apps.users.forms import RegistrationPatientForm
 from apps.users.forms import EditPatientForm
 
-from apps.users.models import Patient, Staff
+
+from .models import Patient, Staff
 
 
 def login_view(request, *args, **kwargs):
@@ -87,6 +88,8 @@ def sign_up_patient(request):
         # [print(field.label, field.name, field.errors) for field in form]
 
         if form.is_valid():
+            instance = form.save(commit=False)
+            instance.classifier = request.user.name
             form.save()
             cpf_patient = form.cleaned_data.get('cpf')
             username = form.cleaned_data.get('username')
@@ -95,10 +98,8 @@ def sign_up_patient(request):
             login(request, 'users:login')
             Patient.objects.all()
             patient = Patient.objects.get(cpf=cpf_patient)
-            patient.isInQueue = True
-            # patient.queuePosition = checkQueueLastPosition(allPatients)
             patient.save()
-            return redirect('users:queue_patient')
+            return redirect('users:registered_patient')
         else:
             status = 400
     else:
@@ -127,6 +128,16 @@ def home_attendant_view(request):
 @login_required(redirect_field_name='', login_url='users:login')
 def registered_patient_view(request):
     patients = Patient.objects.all()
+
+    if request.method == "POST":
+        patient_classification = request.POST.get("classification")
+        patient_id = request.POST.get("patient")
+
+        patient = Patient.objects.get(id=patient_id)
+        patient.classification = patient_classification
+
+        patient.save()
+
     return render(request, 'users/registeredPatient.html',
                            {'patients': patients})
 
@@ -134,28 +145,21 @@ def registered_patient_view(request):
 @login_required(redirect_field_name='', login_url='users:login')
 def queue_patient(request, cpf_patient):
     patients = Patient.objects.filter(cpf=cpf_patient)
-    allPatients = Patient.objects.all()
     patient = Patient.objects.get(cpf=cpf_patient)
-    if patient.isInQueue:
-        return HttpResponseRedirect(reverse('users:registered_patient'))
+    patientsInQueue = Patient.objects.all()
+    patientList = list()
+    for patient0 in patientsInQueue:
+        patientList.append(patient0.patient)
+    if patient in patientList:
+        return render(request, 'users/queuePatient.html',
+                               {'patientList': patientList})
     else:
-        patient.isInQueue = True
-        patient.queuePosition = checkQueueLastPosition(allPatients)
-        patient.save()
+        queuedPatient = Patient.objects.create(patient=patient)
+        queuedPatient.save()
+        patientList.append(patient)
         return render(request, 'users/queuePatient.html',
                                {'patients': patients})
     return render(request, 'users/queuePatient.html', {'patients': patients})
-
-
-@login_required(redirect_field_name='', login_url='users:login')
-def checkQueueLastPosition(patients):
-    lastPosition = 0
-    for patients in patients:
-        if patients.isInQueue:
-            if lastPosition < patients.queuePosition:
-                lastPosition = patients.queuePosition
-    lastPosition = lastPosition + 1
-    return lastPosition
 
 
 @login_required(redirect_field_name='', login_url='users:login')
@@ -215,21 +219,16 @@ def edit_patient(request, cpf):
 
 
 @login_required(redirect_field_name='', login_url='users:login')
-def queue_patient_view(request):
-    queuedPatients = Patient.objects.filter(isInQueue=True)
-    return render(request, 'users/queuePatient.html',
-                           {'queuedPatients': queuedPatients})
-
-
-@login_required(redirect_field_name='', login_url='users:login')
 def classification_view(request):
     return render(request, 'users/classification.html')
 
 
 @login_required(redirect_field_name='', login_url='users:login')
 def classification(request, cpf_patient):
-    patients = Patient.objects.filter(cpf=cpf_patient)
-    return render(request, 'users/classification.html', {'patients': patients})
+    patient = Patient.objects.filter(cpf=cpf_patient)
+    chosenPatient = Patient.objects.filter(patient=patient)
+    chosenPatient.delete()
+    return render(request, 'users/classification.html', {'patient': patient})
 
 
 @login_required(redirect_field_name='', login_url='users:login')
@@ -261,3 +260,8 @@ def manage_patients_view(request):
             Q(cpf__icontains=search)
             )
     return render(request, 'users/managePatients.html', {'patients': patients})
+
+
+@login_required(redirect_field_name='', login_url='users:login')
+def home_view(request):
+    return render(request, 'users/home.html')

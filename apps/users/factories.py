@@ -22,8 +22,8 @@ class PatientFactory(factory.DjangoModelFactory):
     street = factory.faker.Faker("word")
     block = factory.faker.Faker("word")
     number = factory.faker.Faker("pyint")
-    isInQueue = factory.faker.Faker("pybool")
-    queuePosition = factory.Sequence(lambda n: n)
+    '''isInQueue = factory.faker.Faker("pybool")
+    queuePosition = factory.Sequence(lambda n: n)'''
 
 
 class StaffFactory(factory.DjangoModelFactory):

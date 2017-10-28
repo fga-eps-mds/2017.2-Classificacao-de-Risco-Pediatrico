@@ -115,8 +115,7 @@ class TestUsers:
         'parents_name': 'parents_nameTest', 'uf': 'ufTest',
         'city': 'cityTeste', 'neighborhood': 'neighborhoodTest',
         'street': 'streetTeste', 'block': 'blockTeste',
-        'number': 'numberTest', 'isInQueue': 'True',
-        'queuePosition': '5'})
+        'number': 'numberTest'})
 
     @pytest.mark.parametrize('url, model, data', [
                             ('/register/profile/', Staff, profile_data)])
@@ -149,7 +148,7 @@ class TestUsers:
 
     @pytest.mark.parametrize('url, data, urlredirect', [
         ('/register/profile/', profile_data, '/'),
-        ('/register/patient/', patient_data, '/queue/patient/')])
+        ('/register/patient/', patient_data, '/registered/patient/')])
     def test_sign_up_post_redirect(self, client, url, data, urlredirect):
         Staff.objects.create_superuser(**self.default_user_data())
         response = client.post('/', {'username': 'email@gmail.com',
@@ -335,8 +334,7 @@ class TestUsers:
         response = client.delete('/accounts/remove/456/', follow=True)
         assert response.redirect_chain == [('/accounts/', 302)]
         assert Staff.objects.count() == 1
-        # foram instanciados 2 staffs
-        # por isso o assert igual a 1
+        # foram instanciados 2 staffs por isso o assert igual a 1
 
     def test_patient_remove(self, client):
         Staff.objects.create_superuser(**self.default_user_data())
@@ -360,7 +358,6 @@ class TestUsers:
         ('/accounts', '/'),
         ('/patients', '/'),
         ('/registered/patient', '/'),
-        ('/queue/patient', '/'),
         ('/classification', '/')])
     def test_unauthorized_status_code(self, client, url, urlredirect):
         response = client.get(url, follow=True)

@@ -6,10 +6,10 @@
 
 
 {% block content %}
-  {% for queuedPatient in queuedPatients %}
+  {% for patient in patients %}
     <form>
       <div class="modal fade bd-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"
-          id="{{ queuedPatient.id }}">
+          id="{{ Patient.id }}">
         <div class="modal-dialog modal-lg" role="document">
          <div class="modal-content">
            <div id="header-modal">
