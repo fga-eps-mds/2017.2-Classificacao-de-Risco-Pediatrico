@@ -1,5 +1,5 @@
 body {
-    background: url('/static/img/land-background.jpg') no-repeat center center fixed;
+    background: url('/static/img/land-background.jpg') no-repeat fixed left 0;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -9,6 +9,6 @@ body {
 }
 
 #logo {
-  width: 100px;
-  height: 50px;
+    width: 100px;
+    height: 50px;
 }
