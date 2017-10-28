@@ -1,10 +1,10 @@
 body {
-    /*background: url('/static/img/background_image.jpeg') no-repeat center center fixed;*/
-    background-color: #D3D3D3;
+    background: url('/static/img/land-background.jpg') no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    background-position-y: 75px;
     font-family: 'Roboto', sans-serif;
 }
 
