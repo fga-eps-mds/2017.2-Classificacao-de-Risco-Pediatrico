@@ -1,15 +1,10 @@
 {% load staticfiles %}
 
-{% block js %}
-  <!-- <script src="{% static "js/modal.js" %}"></script> -->
-{% endblock %}
-
-
 {% block content %}
   {% for patient in patients %}
     <form>
       <div class="modal fade bd-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"
-          id="{{ Patient.id }}">
+          id="risk_{{ patient.id }}">
         <div class="modal-dialog modal-lg" role="document">
          <div class="modal-content">
            <div id="header-modal">
@@ -23,7 +18,7 @@
             <div class="container-fuild " id="container-modal">
               <div class="row" id="row-modal">
                 <div class="btn-group-responsive" data-toggle="buttons">
-                  <label class="btn btn-primary col-md-2">
+                  <label class="btn btn-primary col-md-2" >
                     <input type="checkbox" autocomplete="off">Dispneia
                   </label>
                   <label class="btn btn-primary col-md-2">
