@@ -30,7 +30,6 @@ body {
 }
 
 .btn-primary {
-  /*display: none;*/
   word-wrap: break-word;
   white-space:normal !important;
   color: #007bff;
@@ -39,6 +38,10 @@ body {
   width: 150px;
   margin-left: 10px;
   margin-top: 10px;
+}
+
+.btn-info  {
+  border-color: #fff;
 }
 
 #classification {
