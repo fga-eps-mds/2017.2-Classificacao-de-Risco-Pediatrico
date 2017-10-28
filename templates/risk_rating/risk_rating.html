@@ -1,88 +1,119 @@
-{% extends 'layout/layout.html' %}
 {% load staticfiles %}
 
 {% block content %}
-    <div class="container-fluid">
-        <div class="row mt-5">
-            <div class="col-lg-5 col-md-6 mx-auto my-auto text-center">
-                <div class="card bg-light border-secondary mb-4 z-depth-2 slide-in-blurred-top">
-                    <form role="form" class="form" method="POST" >
-                        <div class="card-header">
-                            Classificação de Risco Pediátrico
-                        </div>
+  {% for patient in patients %}
+    <form>
+      <div class="modal fade bd-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"
+          id="risk_{{ patient.id }}">
+        <div class="modal-dialog modal-lg" role="document">
+         <div class="modal-content">
+           <div id="header-modal">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h5 class="modal-title" id="exampleModalLabel">Classificação de Risco</h5>
+          </div>
 
-                        {% csrf_token %}
-
-                        {% if errors %}
-                            <div class="alert alert-warning" role="alert">
-                                {{ errors }}
-                            </div>
-                        {% endif %}
-
-                        <div class="text-left ml-5">
-                            <div class="form-check">
-                               <label class="form-check-label">
-                               <input class="form-check-input" type="checkbox" name="prostrado">
-                               Prostrado
-                               </label>
-                            </div>
-                            <div class="form-check">
-                               <label class="form-check-label">
-                               <input class="form-check-input" type="checkbox" name="respiracao">
-                               Má respiração
-                               </label>
-                            </div>
-                            <div class="form-check">
-                               <label class="form-check-label">
-                               <input class="form-check-input" type="checkbox" name="febre">
-                               Frebre
-                               </label>
-                            </div>
-                            <div class="form-check">
-                               <label class="form-check-label">
-                               <input class="form-check-input" type="checkbox" name="irritado">
-                               Irritado
-                               </label>
-                            </div>
-                            <div class="form-check">
-                               <label class="form-check-label">
-                               <input class="form-check-input" type="checkbox" name="convulsao">
-                               Convulsão recente
-                               </label>
-                            </div>
-                            <div class="form-check">
-                               <label class="form-check-label">
-                               <input class="form-check-input" type="checkbox" name="palido">
-                               Pálido
-                               </label>
-                            </div>
-                            <div class="form-check">
-                               <label class="form-check-label">
-                               <input class="form-check-input" type="checkbox" name="cabeca">
-                               Dor de cabeça
-                               </label>
-                            </div>
-                            <div class="form-check">
-                               <label class="form-check-label">
-                               <input class="form-check-input" type="checkbox" name="brincando">
-                               Brincando
-                               </label>
-                            </div>
-                        </div>
-                        <div class="card-footer text-right">
-                            {% if user.is_admin %}
-                                <a href="{% url 'users:admin' %}" class="btn btn btn-outline-secondary btn-lg" >Cancelar</a>
-                            {% elif user.profile == 1 %}
-                                <a href="{% url 'users:home_receptionist' %}" class="btn btn btn-outline-secondary btn-lg" >Cancelar</a>
-                            {% elif user.profile == 2 %}
-                                <a href="{% url 'users:home_attendant' %}" class="btn btn btn-outline-secondary btn-lg" >Cancelar</a>
-                            {% endif %}
-                            <button type="submit" class="btn btn-outline-secondary btn-lg">Entrar</button>
-                        </div>
-                    </form>
+          <div class="modal-body">
+            <div class="container-fuild " id="container-modal">
+              <div class="row" id="row-modal">
+                <div class="btn-group-responsive" data-toggle="buttons">
+                  <label class="btn btn-primary col-md-2" >
+                    <input type="checkbox" autocomplete="off">Dispneia
+                  </label>
+                  <label class="btn btn-primary col-md-2">
+                    <input type="checkbox" autocomplete="off">Ictericia
+                  </label>
+                  <label class="btn btn-primary col-md-2">
+                    <input type="checkbox" autocomplete="off">Perda de Consciencia
+                  </label>
+                  <label class="btn btn-primary col-md-2">
+                    <input type="checkbox" autocomplete="off">Cianose
+                  </label>
+                  <label class="btn btn-primary col-md-2">
+                    <input type="checkbox" autocomplete="off">Febre
+                  </label>
+                  <label class="btn btn-primary col-md-2">
+                    <input type="checkbox" autocomplete="off">Soluços
+                  </label>
+                  <label class="btn btn-primary col-md-2">
+                    <input type="checkbox" autocomplete="off">Prostação
+                  </label>
+                  <label class="btn btn-primary col-md-2">
+                    <input type="checkbox" autocomplete="off">Vomitos
+                  </label>
+                  <label class="btn btn-primary col-md-2">
+                    <input type="checkbox" autocomplete="off">Tosse
+                  </label>
+                  <label class="btn btn-primary col-md-2">
+                    <input type="checkbox" autocomplete="off">Coriza
+                  </label>
+                  <label class="btn btn-primary col-md-2">
+                    <input type="checkbox" autocomplete="off">Obstrução Nasal
+                  </label>
+                  <label class="btn btn-primary col-md-2">
+                    <input type="checkbox" autocomplete="off">Convulsão No Momento
+                  </label>
+                  <label class="btn btn-primary col-md-2">
+                    <input type="checkbox" autocomplete="off">Diarreia
+                  </label>
+                  <label class="btn btn-primary col-md-2">
+                    <input type="checkbox" autocomplete="off">Choro Inconsolável
+                  </label>
+                  <label class="btn btn-primary col-md-2">
+                    <input type="checkbox" autocomplete="off">Dificuldade de Evacuar
+                  </label>
+                  <label class="btn btn-primary col-md-2">
+                    <input type="checkbox" autocomplete="off">Não Suga o Seio
+                  </label>
+                  <label class="btn btn-primary col-md-2">
+                    <input type="checkbox" autocomplete="off">Manchas na Pele
+                  </label>
+                  <label class="btn btn-primary col-md-2">
+                    <input type="checkbox" autocomplete="off">Salivação
+                  </label>
+                  <label class="btn btn-primary col-md-2">
+                    <input type="checkbox" autocomplete="off">Queda
+                  </label>
+                  <label class="btn btn-primary col-md-2">
+                    <input type="checkbox" autocomplete="off">Chiado no Peito
+                  </label>
+                  <label class="btn btn-primary col-md-2">
+                    <input type="checkbox" autocomplete="off">Diminuiçao da Diurese
+                  </label>
+                  <label class="btn btn-primary col-md-2">
+                    <input type="checkbox" autocomplete="off">Dor Abdominal
+                  </label>
+                  <label class="btn btn-primary col-md-2">
+                    <input type="checkbox" autocomplete="off">Dor de Ouvido
+                  </label>
+                  <label class="btn btn-primary col-md-2">
+                    <input type="checkbox" autocomplete="off">Fontanela Abaulada
+                  </label>
+                  <label class="btn btn-primary col-md-2">
+                    <input type="checkbox" autocomplete="off">Secreção No Umbigo
+                  </label>
+                  <label class="btn btn-primary col-md-2">
+                    <input type="checkbox" autocomplete="off">Secreção Ocular
+                  </label>
+                  <label class="btn btn-primary col-md-2">
+                    <input type="checkbox" autocomplete="off">Sangue nas Fezes
+                  </label>
+                  <label class="btn btn-primary col-md-2">
+                    <input type="checkbox" autocomplete="off">Convulção hoje
+                  </label>
                 </div>
-            </div>
+              </div>
+          </div>
+          <div>
+            <button type="submit" class="btn btn-primary" id="classification">
+              Classificar
+            </button>
+          </div>
+          </div>
+          </div>
         </div>
-    </div>
-
+      </div>
+    </form>
+  {% endfor %}
 {% endblock %}
