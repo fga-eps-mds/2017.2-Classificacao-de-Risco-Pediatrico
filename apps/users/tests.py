@@ -335,10 +335,8 @@ class TestUsers:
         response = client.delete('/accounts/remove/456/', follow=True)
         assert response.redirect_chain == [('/accounts/', 302)]
         assert Staff.objects.count() == 1
-        # foram instanciados 2 staffs
-        # por isso o assert igual a 1
+        # foram instanciados 2 staffs por isso o assert igual a 1
 
-        
     def test_patient_remove(self, client):
         Staff.objects.create_superuser(**self.default_user_data())
         response = client.post('/', {'username': 'email@gmail.com',
