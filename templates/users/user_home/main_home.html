@@ -16,6 +16,7 @@
                     <th>Faixa-etária</th>
                     <th>Data</th>
                     <th>Classificador</th>
+                    <th>Deletar</th>
                 </tr>
             </thead>
             <tbody>
@@ -36,6 +37,7 @@
                     <td></td>
                     <td>{{ patient.created_at }}</td>
                     <td></td>
+                    <td><a href="#" data-toggle="modal" data-target="#deletar-{{ patient.cpf }}"><i class="fa fa-ban" aria-hidden="true"></i></a></td>
                 </tr>
                 {% endfor %}
             </tbody>
@@ -98,6 +100,26 @@
                             <button type="submit" class="btn btn-primary">Salvar</button>
                         </div>
                     </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="deletar-{{ patient.cpf }}" tabindex="-1" role="dialog" aria-labelledby="Deletar Paciente" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Deletar Paciente</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Tem certeza que deseja deletar o registro de {{ patient.name }}?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                        <a href="{% url 'users:patient_remove' patient.cpf %}" class="btn btn-danger">Deletar</a>
+                    </div>
                 </div>
             </div>
         </div>

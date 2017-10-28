@@ -24,17 +24,8 @@ def login_view(request, *args, **kwargs):
         user = authenticate(username=username, password=password)
 
         if user is not None:
-            if user.is_admin:
-                login(request, user)
-                return redirect("/home/admin")
-
-            if user.profile == 1:
-                login(request, user)
-                return redirect("/home/receptionist/")
-
-            if user.profile == 2:
-                login(request, user)
-                return redirect("/home/attendant/")
+            login(request, user)
+            return redirect("/home")
         else:
 
             kwargs['extra_context'] = {'next': reverse('users:login'),
@@ -49,68 +40,8 @@ def login_view(request, *args, **kwargs):
     return login(request, *args, **kwargs)
 
 
-def logout_view(request, *args, **kwargs):
-    """
-    Define the logout page
-    """
-    kwargs['next_page'] = reverse('users:login')
-    return logout(request, *args, **kwargs)
-
-
-def sign_up_profile(request):
-    if request.method == 'POST':
-        form = RegistrationStaffForm(request.POST)
-        form.is_valid()
-        form.non_field_errors()
-        # [print(field.label, field.name, field.errors) for field in form]
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
-            username = authenticate(username=username, password=raw_password)
-            login(request, 'users:login')
-            return redirect('users:login')
-        else:
-            status = 400
-    else:
-        form = RegistrationStaffForm()
-        status = 200
-    return render(request, 'users/user_login/registerUser.html', {'form': form},
-                  status=status)
-
-
 @login_required(redirect_field_name='', login_url='users:login')
-def sign_up_patient(request):
-    if request.method == 'POST':
-        form = RegistrationPatientForm(request.POST)
-        form.is_valid()
-        form.non_field_errors()
-        # [print(field.label, field.name, field.errors) for field in form]
-
-        if form.is_valid():
-            instance = form.save(commit=False)
-            instance.classifier = request.user.name
-            form.save()
-            cpf_patient = form.cleaned_data.get('cpf')
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
-            username = authenticate(username=username, password=raw_password)
-            login(request, 'users:login')
-            Patient.objects.all()
-            patient = Patient.objects.get(cpf=cpf_patient)
-            patient.save()
-            return redirect('users:registered_patient')
-        else:
-            status = 400
-    else:
-        form = RegistrationPatientForm()
-        status = 200
-    return render(request, 'users/registerPatient.html', {'form': form},
-                  status=status)
-
-
-@login_required(redirect_field_name='', login_url='users:login')
-def admin_view(request):
+def home(request):
     """
     return rendered text from homeReceptionist
     """
@@ -129,41 +60,36 @@ def admin_view(request):
                            {'patients': patients})
 
 
-@login_required(redirect_field_name='', login_url='users:login')
-def home_attendant_view(request):
+def logout_view(request, *args, **kwargs):
     """
-    return rendered text from homeAttendant
+    Define the logout page
     """
-    patients = Patient.objects.all()
+    kwargs['next_page'] = reverse('users:login')
+    return logout(request, *args, **kwargs)
 
-    if request.method == "POST":
-        patient_classification = request.POST.get("classification")
-        patient_id = request.POST.get("patient")
 
-        patient = Patient.objects.get(id=patient_id)
-        patient.classification = patient_classification
+def sign_up_profile(request):
+    form = RegistrationStaffForm()
+    if request.method == 'POST':
+        form = RegistrationStaffForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('users:home')
 
-        patient.save()
-
-    return render(request, 'users/user_home/main_home.html',
-                           {'patients': patients})
+    return render(request, 'users/user_login/registerUser.html' , {'form': form})
 
 
 @login_required(redirect_field_name='', login_url='users:login')
-def registered_patient_view(request):
-    patients = Patient.objects.all()
+def register_patient(request):
+    form = RegistrationPatientForm()
+    if request.method == 'POST':
+        form = RegistrationPatientForm(request.POST)
 
-    if request.method == "POST":
-        patient_classification = request.POST.get("classification")
-        patient_id = request.POST.get("patient")
+        if form.is_valid():
+            form.save()
+            return redirect('users:home')
 
-        patient = Patient.objects.get(id=patient_id)
-        patient.classification = patient_classification
-
-        patient.save()
-
-    return render(request, 'users/registeredPatient.html',
-                           {'patients': patients})
+    return render(request, 'users/user_home/registerPatient.html', {'form': form})
 
 
 @login_required(redirect_field_name='', login_url='users:login')
@@ -211,7 +137,7 @@ def staff_remove(request, id_user):
 def patient_remove(request, cpf):
     patient = Patient.objects.filter(cpf=cpf)
     patient.delete()
-    return HttpResponseRedirect(reverse('users:manage_patients'))
+    return HttpResponseRedirect(reverse('users:home'))
 
 
 @login_required(redirect_field_name='', login_url='users:login')
@@ -235,10 +161,10 @@ def edit_patient(request, cpf):
             return redirect('users:manage_patients')
         else:
             status = 400
-            return render(request, 'users/editPatient.html',
+            return render(request, 'users/user_home/../../templates/users/editPatient.html',
                           {'patient': patient, 'form': form}, status=status)
     else:
-        return render(request, 'users/editPatient.html',
+        return render(request, 'users/user_home/../../templates/users/editPatient.html',
                       {'patient': patient, 'form': form})
 
 
@@ -250,8 +176,8 @@ def classification_view(request):
 @login_required(redirect_field_name='', login_url='users:login')
 def classification(request, cpf_patient):
     patient = Patient.objects.filter(cpf=cpf_patient)
-    chosenPatient = Patient.objects.filter(patient=patient)
-    chosenPatient.delete()
+    chosen_patient = Patient.objects.filter(patient=patient)
+    chosen_patient.delete()
     return render(request, 'users/classification.html', {'patient': patient})
 
 
@@ -267,26 +193,6 @@ def show_pacient_view(request, cpf):
 
 
 @login_required(redirect_field_name='', login_url='users:login')
-def home_receptionist_view(request):
-    """
-    return rendered text from homeReceptionist
-    """
-    patients = Patient.objects.all()
-
-    if request.method == "POST":
-        patient_classification = request.POST.get("classification")
-        patient_id = request.POST.get("patient")
-
-        patient = Patient.objects.get(id=patient_id)
-        patient.classification = patient_classification
-
-        patient.save()
-
-    return render(request, 'users/user_home/main_home.html',
-                           {'patients': patients})
-
-
-@login_required(redirect_field_name='', login_url='users:login')
 def manage_patients_view(request):
     patients = Patient.objects.all()
     search = request.GET.get('q')
@@ -296,21 +202,3 @@ def manage_patients_view(request):
             Q(cpf__icontains=search)
             )
     return render(request, 'users/managePatients.html', {'patients': patients})
-
-
-@login_required(redirect_field_name='', login_url='users:login')
-def home_view(request):
-    patients = Patient.objects.all()
-
-    if request.method == "POST":
-        patient_classification = request.POST.get("classification")
-        patient_id = request.POST.get("patient")
-
-        patient = Patient.objects.get(id=patient_id)
-        patient.classification = patient_classification
-
-        patient.save()
-
-    return render(request, 'users/user_home/main_home.html',
-                           {'patients': patients})
-

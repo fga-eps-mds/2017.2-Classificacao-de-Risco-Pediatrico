@@ -1,14 +1,9 @@
-{% extends 'layout/layout.html' %}
-{% load staticfiles %}
+{% extends 'users/user_home/home_layout.html' %}
 
-{% block head %}
-    <link rel="stylesheet" href="{% static "css/box-animation.css" %}">
-{% endblock %}
-
-{% block content %}
+{% block content_pos %}
     <div class="container-fluid">
         <div class="row mt-5">
-            <div class="col-lg-7 col-md-10 mx-auto my-auto text-center">
+            <div class="mx-auto my-auto text-center">
                 <div class="card bg-light border-secondary mb-4 z-depth-2 slide-in-blurred-top">
                     <form role="form" class="form" method="POST" >
                         <div class="card-header">
@@ -208,7 +203,7 @@
                         </div>
 
                         <div class="card-footer text-right">
-                            <a href="{% url 'users:login' %}" class="btn btn btn-outline-secondary btn-lg" >Cancelar</a>
+                            <a href="{% url 'users:home' %}" class="btn btn btn-outline-secondary btn-lg" >Cancelar</a>
                             <button type="submit" class="btn btn-outline-secondary btn-lg">Cadastrar</button>
                         </div>
                     </form>

@@ -15,7 +15,6 @@
 
 {% block content %}
     <div class="wrapper">
-        <!-- Sidebar Holder -->
         <nav id="sidebar">
             <div class="sidebar-header">
                 <h3>Bootstrap Sidebar</h3>
@@ -28,7 +27,7 @@
                     Paciente
                     </a>
                     <ul class="collapse list-unstyled" id="pageSubmenu">
-                        <li><a href="#">Cadastrar Paciente</a></li>
+                        <li><a href="{% url "users:register_patient" %}">Cadastrar Paciente</a></li>
                         <li><a href="#">Editar Paciente</a></li>
                     </ul>
                 </li>

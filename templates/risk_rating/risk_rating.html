@@ -70,13 +70,7 @@
                             </div>
                         </div>
                         <div class="card-footer text-right">
-                            {% if user.is_admin %}
-                                <a href="{% url 'users:admin' %}" class="btn btn btn-outline-secondary btn-lg" >Cancelar</a>
-                            {% elif user.profile == 1 %}
-                                <a href="{% url 'users:home_receptionist' %}" class="btn btn btn-outline-secondary btn-lg" >Cancelar</a>
-                            {% elif user.profile == 2 %}
-                                <a href="{% url 'users:home_attendant' %}" class="btn btn btn-outline-secondary btn-lg" >Cancelar</a>
-                            {% endif %}
+                            <a href="{% url 'users:home' %}" class="btn btn btn-outline-secondary btn-lg" >Cancelar</a>
                             <button type="submit" class="btn btn-outline-secondary btn-lg">Entrar</button>
                         </div>
                     </form>
