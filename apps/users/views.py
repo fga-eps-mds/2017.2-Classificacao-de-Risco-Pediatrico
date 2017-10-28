@@ -3,7 +3,6 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.views import login
 from django.contrib.auth.views import logout
 from django.core.urlresolvers import reverse
-from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate
@@ -159,20 +158,7 @@ def edit_patient(request, cpf):
 
 
 @login_required(redirect_field_name='', login_url='users:login')
-def classification_view(request):
-    return render(request, 'users/classification.html')
-
-
-@login_required(redirect_field_name='', login_url='users:login')
-def classification(request, cpf_patient):
-    patient = Patient.objects.filter(cpf=cpf_patient)
-    chosen_patient = Patient.objects.filter(patient=patient)
-    chosen_patient.delete()
-    return render(request, 'users/classification.html', {'patient': patient})
-
-
-@login_required(redirect_field_name='', login_url='users:login')
-def show_pacient_view(request, cpf):
+def show_patient_view(request, cpf):
     """
     return rendered text from showPatient
     """

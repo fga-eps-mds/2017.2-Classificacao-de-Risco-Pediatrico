@@ -2,13 +2,13 @@
 {% load staticfiles %}
 
 {% block content_pos %}
-    <div class="form-group title_left mt-4" >
+    <div class="form-group title_left mt-4">
         <input id="searchPatient" type="search" class="form-control pull-right mr-1"
             placeholder="Pesquisar Paciente..." aria-controls="example">
         <h2>Pacientes</h2>
     </div>
-    <div id="list" class="x_panel" style="background-color: white">
-        <table id="example" class="table table-condensed"  cellspacing="0" width="100%">
+    <div id="list" class="x_panel slide-in-blurred-top" style="background-color: white">
+        <table id="example" class="table table-condensed" cellspacing="0" width="100%">
             <thead>
                 <tr>
                     <th>Nome</th>
@@ -23,7 +23,7 @@
             <tbody>
                 {% for patient in patients %}
                 <tr>
-                    <td><p>{{ patient.name }}</p></td>
+                    <td><a href="#" data-toggle="modal" data-target="#risk_{{ patient.id }}">{{ patient.name }}</a></td>
                     {% if patient.classification == 0 %}
                         <td><span class="btn btn-primary badge badge-pill badge-secondary"  data-toggle="modal" data-target="#{{ patient.id }}">Não classificado</span></td>
                     {% elif patient.classification == 1 %}
@@ -126,4 +126,5 @@
             </div>
         </div>
     {% endfor %}
+    {% include 'risk_rating/risk_rating.html' %}
 {% endblock %}
