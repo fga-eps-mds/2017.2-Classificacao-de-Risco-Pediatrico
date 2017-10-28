@@ -16,8 +16,6 @@ urlpatterns = [
         name="show_patient"),
     url(r'^accounts/$', views.manage_accounts_view,
         name="manage_accounts"),
-    url(r'^patients/$', views.manage_patients_view,
-        name="manage_patients"),
     url(r'^accounts/edit/(?P<id_user>\w+)/$', views.edit_accounts_view,
         name="edit_accounts"),  # falta
     url(r'^accounts/remove/(?P<id_user>\w+)/$', views.staff_remove,
