@@ -1,0 +1,89 @@
+{% extends 'layout/layout.html' %}
+{% load staticfiles %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.16/b-1.4.2/r-2.2.0/datatables.min.css"/>
+    <link rel="stylesheet" href="{% static "css/home.css" %}">
+    <link rel="stylesheet" href="{% static "css/registeredPatient.css" %}">
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.16/b-1.4.2/r-2.2.0/datatables.min.js"></script>
+    <script src="{% static "js/home.js" %}"></script>
+    <script src="{% static "js/manageAccounts.js" %}"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="wrapper">
+        <!-- Sidebar Holder -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>Bootstrap Sidebar</h3>
+                <strong>BS</strong>
+            </div>
+            <ul class="list-unstyled components">
+                <li>
+                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">
+                    <i class="fa fa-user-o" aria-hidden="true"></i>
+                    Paciente
+                    </a>
+                    <ul class="collapse list-unstyled" id="pageSubmenu">
+                        <li><a href="#">Cadastrar Paciente</a></li>
+                        <li><a href="#">Editar Paciente</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">
+                    <i class="fa fa-check-circle-o" aria-hidden="true"></i>
+                    Realizar Classificação
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                    <i class="glyphicon glyphicon-link"></i>
+                    Portfolio
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                    <i class="glyphicon glyphicon-paperclip"></i>
+                    FAQ
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                    <i class="glyphicon glyphicon-send"></i>
+                    Contact
+                    </a>
+                </li>
+            </ul>
+            <ul class="list-unstyled CTAs">
+                <li><a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Download source</a></li>
+                <li><a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Back to article</a></li>
+            </ul>
+        </nav>
+
+        <div id="content">
+            <nav class="navbar sticky-top navbar-light bg-light">
+                <div class="container-fluid">
+
+                    <div class="navbar-header">
+                        <button id="sidebarCollapse" class="btn btn-info navbar-btn">
+                            <i id="sidebarCollapse" class="fa fa-bars" aria-hidden="true"></i>
+                        </button>
+                    </div>
+
+                    <p class="pt-3 ml-2" id="sidebarCollapse"><span>Seja bem-vindo(a), {{ user.name }}</span></p>
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'users:logout' %}">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            {% block content_pos %}
+            {% endblock %}
+
+        </div>
+    </div>
+{% endblock %}

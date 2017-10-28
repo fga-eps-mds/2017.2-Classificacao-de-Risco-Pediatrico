@@ -1,0 +1,105 @@
+{% extends 'users/user_home/home_layout.html' %}
+{% load staticfiles %}
+
+{% block content_pos %}
+    <div class="form-group title_left mt-4" >
+        <input id="searchPatient" type="search" class="form-control pull-right mr-1"
+            placeholder="Pesquisar Paciente..." aria-controls="example">
+        <h2>Pacientes</h2>
+    </div>
+    <div id="list" class="x_panel" style="background-color: white">
+        <table id="example" class="table table-condensed"  cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Classificação</th>
+                    <th>Faixa-etária</th>
+                    <th>Data</th>
+                    <th>Classificador</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for patient in patients %}
+                <tr>
+                    <td><p>{{ patient.name }}</p></td>
+                    {% if patient.classification == 0 %}
+                        <td><span class="btn btn-primary badge badge-pill badge-secondary"  data-toggle="modal" data-target="#{{ patient.id }}">Não classificado</span></td>
+                    {% elif patient.classification == 1 %}
+                        <td><span class="btn btn-primary badge badge-pill badge-danger"  data-toggle="modal" data-target="#{{ patient.id }}">Atendimento Imediato</span></td>
+                    {% elif patient.classification == 2 %}
+                        <td><span class="btn btn-primary badge badge-pill badge-success"  data-toggle="modal" data-target="#{{ patient.id }}">Atendimento Ambulatorial</span></td>
+                    {% elif patient.classification == 3 %}
+                        <td><span class="btn btn-primary badge badge-pill badge-warning"  data-toggle="modal" data-target="#{{ patient.id }}">Atendimento Hospitalar</span></td>
+                    {% elif patient.classification == 4 %}
+                        <td><span class="btn btn-primary badge badge-pill badge-info"  data-toggle="modal" data-target="#{{ patient.id }}">Atendimento Eletivo</span></td>
+                    {% endif %}
+                    <td></td>
+                    <td>{{ patient.created_at }}</td>
+                    <td></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="card-footer text-right mt-1">
+        </div>
+    </div>
+
+    {% for patient in patients %}
+        <div class="modal fade" id="{{ patient.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Classificação</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form role="form" class="form" method="POST" >
+                        {% csrf_token %}
+                        <div class="modal-body">
+                            <p>Selecione a classificação desejada:</p>
+                            <div class="text-left">
+                                <div class="form-check">
+                                   <label class="form-check-label">
+                                   <input class="form-check-input" type="radio" name="classification" value="1">
+                                   <span class="badge badge-pill badge-danger">Atendimento Imediato</span>
+                                   </label>
+                                </div>
+                                <div class="form-check">
+                                   <label class="form-check-label">
+                                   <input class="form-check-input" type="radio" name="classification" value="2">
+                                  <span class="badge badge-pill badge-success">Atendimento Ambulatorial</span>
+
+                                   </label>
+                                </div>
+                                <div class="form-check">
+                                   <label class="form-check-label">
+                                   <input class="form-check-input" type="radio" name="classification" value="3">
+                                   <span class="badge badge-pill badge-warning">Atendimento Hospitalar</span>
+                                   </label>
+                                </div>
+                                <div class="form-check">
+                                   <label class="form-check-label">
+                                   <input class="form-check-input" type="radio" name="classification" value="4">
+                                   <span class="badge badge-pill badge-info">Atendimento Eletivo</span>
+                                   </label>
+                                </div>
+                                 <div class="form-check">
+                                   <label class="form-check-label">
+                                   <input class="form-check-input" type="radio" style="display:none" name="classification" value="0" checked>
+                                   </label>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" name="patient" value="{{ patient.id }}">
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                            <button type="submit" class="btn btn-primary">Salvar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

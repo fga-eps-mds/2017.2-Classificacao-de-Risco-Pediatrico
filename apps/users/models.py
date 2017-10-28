@@ -118,6 +118,8 @@ class Staff(AbstractBaseUser):
 
 class Patient(models.Model):
 
+    created_at = models.DateTimeField(auto_now_add=True)
+
     name = models.CharField(
         verbose_name=_('Nome'),
         max_length=150,

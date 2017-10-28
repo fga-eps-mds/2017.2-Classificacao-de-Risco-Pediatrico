@@ -9,8 +9,8 @@ urlpatterns = [
     url(r'^logout/$', views.logout_view, name="logout"),
     url(r'^home/admin/$', views.admin_view, name="admin"),
     url(r'^home/$', views.home_view, name="home"),
-    url(r'^register/profile/$', views.sign_up_profile,
-        name="register_profile"),
+    url(r'^register/user/$', views.sign_up_profile,
+        name="register_user"),
     url(r'^register/patient/$', views.sign_up_patient,
         name="register_patient"),
     url(r'^show/patient/(?P<cpf>\w+)/$', views.show_pacient_view,  # falta

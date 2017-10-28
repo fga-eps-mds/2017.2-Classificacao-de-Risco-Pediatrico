@@ -1,11 +1,7 @@
-{% extends 'layout/layout.html' %}
+{% extends 'users/user_login/pre_home_layout.html' %}
 {% load staticfiles %}
 
-{% block head %}
-    <link rel="stylesheet" href="{% static "css/box-animation.css" %}">
-{% endblock %}
-
-{% block content %}
+{% block content_pre %}
     <div class="container-fluid">
         <div class="row mt-5">
             <div class="col-lg-7 col-md-10 mx-auto my-auto text-center">
@@ -230,7 +226,6 @@
                     </form>
                 </div>
             </div>
-
         </div>
     </div>
 {% endblock %}

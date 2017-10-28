@@ -1,5 +1,6 @@
 $(document).ready(function() {
     var table = $('#example').DataTable({
+        responsive: true,
         "language": {
             "lengthMenu": "Mostrar _MENU_ por página",
             "zeroRecords": "Nada encontrado - Desculpe :(",
@@ -18,8 +19,5 @@ $(document).ready(function() {
 
     $('#searchPatient').on( 'keyup', function () {
         table.search( this.value ).draw();
-    });
-
-    $('td:nth-child(3) > span').click(function () {
     });
 } );

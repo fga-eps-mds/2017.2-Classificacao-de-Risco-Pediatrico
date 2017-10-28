@@ -41,11 +41,11 @@ def login_view(request, *args, **kwargs):
                                        'errors': 'Usuário e/ou senha inválido.'
                                        }
 
-            kwargs['template_name'] = 'users/login.html'
+            kwargs['template_name'] = 'users/user_login/login.html'
             return login(request, *args, **kwargs)
 
     kwargs['extra_context'] = {'next': reverse('users:login')}
-    kwargs['template_name'] = 'users/login.html'
+    kwargs['template_name'] = 'users/user_login/login.html'
     return login(request, *args, **kwargs)
 
 
@@ -75,7 +75,7 @@ def sign_up_profile(request):
     else:
         form = RegistrationStaffForm()
         status = 200
-    return render(request, 'users/registerProfile.html', {'form': form},
+    return render(request, 'users/user_login/registerUser.html', {'form': form},
                   status=status)
 
 
@@ -114,7 +114,19 @@ def admin_view(request):
     """
     return rendered text from homeReceptionist
     """
-    return render(request, 'users/admin.html')
+    patients = Patient.objects.all()
+
+    if request.method == "POST":
+        patient_classification = request.POST.get("classification")
+        patient_id = request.POST.get("patient")
+
+        patient = Patient.objects.get(id=patient_id)
+        patient.classification = patient_classification
+
+        patient.save()
+
+    return render(request, 'users/user_home/main_home.html',
+                           {'patients': patients})
 
 
 @login_required(redirect_field_name='', login_url='users:login')
@@ -122,7 +134,19 @@ def home_attendant_view(request):
     """
     return rendered text from homeAttendant
     """
-    return render(request, 'users/homeAttendant.html')
+    patients = Patient.objects.all()
+
+    if request.method == "POST":
+        patient_classification = request.POST.get("classification")
+        patient_id = request.POST.get("patient")
+
+        patient = Patient.objects.get(id=patient_id)
+        patient.classification = patient_classification
+
+        patient.save()
+
+    return render(request, 'users/user_home/main_home.html',
+                           {'patients': patients})
 
 
 @login_required(redirect_field_name='', login_url='users:login')
@@ -247,7 +271,19 @@ def home_receptionist_view(request):
     """
     return rendered text from homeReceptionist
     """
-    return render(request, 'users/homeReceptionist.html')
+    patients = Patient.objects.all()
+
+    if request.method == "POST":
+        patient_classification = request.POST.get("classification")
+        patient_id = request.POST.get("patient")
+
+        patient = Patient.objects.get(id=patient_id)
+        patient.classification = patient_classification
+
+        patient.save()
+
+    return render(request, 'users/user_home/main_home.html',
+                           {'patients': patients})
 
 
 @login_required(redirect_field_name='', login_url='users:login')
@@ -264,4 +300,17 @@ def manage_patients_view(request):
 
 @login_required(redirect_field_name='', login_url='users:login')
 def home_view(request):
-    return render(request, 'users/home.html')
+    patients = Patient.objects.all()
+
+    if request.method == "POST":
+        patient_classification = request.POST.get("classification")
+        patient_id = request.POST.get("patient")
+
+        patient = Patient.objects.get(id=patient_id)
+        patient.classification = patient_classification
+
+        patient.save()
+
+    return render(request, 'users/user_home/main_home.html',
+                           {'patients': patients})
+
