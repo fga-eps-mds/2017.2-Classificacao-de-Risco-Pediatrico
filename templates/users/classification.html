@@ -84,35 +84,4 @@
         </div>
     </div>
 {% endfor %}
-
-  <!-- <div class="box rounded float-right">
-    <h1>Classificação de Paciente</h1>
-
-        <table id="example" class="display" cellspacing="0" width="100%">
-        <thead>
-            <tr>
-              <th>CPF</th>
-              <th>Nome</th>
-              <th>Responsável</th>
-              <th>Editar</th>
-              <th>Deletar</th>
-              <th>Enviar para fila</th>
-            </tr>
-        </thead>
-        <tbody>
-          {% for patient in patients %}
-              <tr>
-                  <td>{{ patient.cpf}}</td>
-                  <td>{{ patient.name }}</td>
-                  <td>{{ patient.guardian }}</td>
-                  <td><a href="edit/{{patient.cpf}}"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
-                  <td><a href="{% url 'users:staff_remove' patient.cpf %}"><i class="fa fa-ban" aria-hidden="true"></i>
-                  </a></td>
-                  <td><a href="{% url 'users:queue_patient' patient.cpf %}"><i class="fa fa-arrow-right" aria-hidden="true"></i>
-                  </a></td>
-              </tr>
-          {% endfor %}
-        </tbody>
-    </table>
-  </div> -->
 {% endblock %}

@@ -12,7 +12,7 @@
                 <div class="card bg-light border-secondary mb-4 z-depth-2 slide-in-blurred-top">
                     <form role="form" class="form" method="POST" >
                         <div class="card-header">
-                            Classificação de Risco Pediátrico
+                            Cadastro de Paciente
                         </div>
 
                         {% csrf_token %}
@@ -204,23 +204,6 @@
                                         {% endif %}
                                     </div>
                                 </div>
-
-                                <!-- <div class="form-group px-3">
-                                    <div class="cols-sm-10">
-                                        <div class="input-group">
-                                            <span class="input-group-addon" id="basic-addon1"><i class="fa fa-calendar-o" aria-hidden="true"></i></span>
-                                            <input type="text" name="{{ form.date.name }}" id="{{ form.date.id_for_label }}" class="form-control"  placeholder="Data cadastro. YYYY-MM-DD" aria-label="Data" aria-describedby="basic-addon10" required>
-                                        </div>
-                                        {% if form.date.errors %}
-                                            <div class="error-holder">
-                                                <div class="alert alert-warning" role="alert">
-                                                    {{ form.date.errors }}
-                                                </div>
-                                            </div>
-                                        {% endif %}
-                                    </div>
-                                </div> -->
-
                             </div>
                         </div>
 

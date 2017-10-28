@@ -21,6 +21,5 @@ $(document).ready(function() {
     });
 
     $('td:nth-child(3) > span').click(function () {
-        console.log('clickou aqui aehoo')
     });
 } );
