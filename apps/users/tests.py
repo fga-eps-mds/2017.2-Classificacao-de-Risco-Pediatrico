@@ -87,7 +87,7 @@ class TestUsers:
 
     @pytest.mark.parametrize(
                             'url',
-                            ['/register/profile/',
+                            ['/register/user/',
                              '/'])
     def test_get_route(self, client, url):
         response = client.get(url)
@@ -95,16 +95,15 @@ class TestUsers:
 
     @pytest.mark.parametrize('url',
                              ['/register/patient/',
-                              '/home/receptionist/',
-                              '/registered/patient/'])
+                              '/home/'])
     def test_get_route_logged(self, client, url):
         StaffFactory.create_batch(1)
         response = client.get(url)
         assert response.status_code == 302
 
     @pytest.mark.parametrize('url, template', [
-        ('/register/profile/', 'users/registerProfile.html'),
-        ('/register/patient/', 'users/registerPatient.html')])
+        ('/register/user/', 'users/user_login/registerUser.html'),
+        ('/register/patient/', 'users/user_home/registerPatient.html')])
     def test_sign_up_template(self, client, url, template):
         Staff.objects.create_superuser(**self.default_user_data())
         response = client.post('/', {'username': 'email@gmail.com',
@@ -130,7 +129,7 @@ class TestUsers:
         'queuePosition': '5'})
 
     @pytest.mark.parametrize('url, model, data', [
-                            ('/register/profile/', Staff, profile_data)])
+                            ('/register/user/', Staff, profile_data)])
     def test_sign_up_post(self, client, url, model, data):
         response = client.post(url, data)
         assert response.status_code == 302
