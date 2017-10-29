@@ -168,11 +168,11 @@ class TestUsers:
         assert response.status_code == 200
         assert response.redirect_chain == [(urlredirect, 302)]
 
-    def test_home_receptionist_view(self, client):
+    def test_home_view(self, client):
         Staff.objects.create_superuser(**self.default_user_data())
         response = client.post('/', {'username': 'email@gmail.com',
                                      'password': "1234asdf"})
-        response = client.get('/home/receptionist/')
+        response = client.get('/home/')
         assert response.status_code == 200
 
     def default_user_data(self):
@@ -240,7 +240,7 @@ class TestUsers:
         response = client.post('/', {'username': 'email@gmail.com',
                                      'password': "1234asdf"})
         patient = PatientFactory.create_batch(3)
-        response = client.get('/registered/patient/')
+        response = client.get('/home/')
         assert response.status_code == 200
         assert list(response.context['patients']) == patient
 
