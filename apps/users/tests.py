@@ -146,7 +146,7 @@ class TestUsers:
         assert model.objects.count() == 1
 
     @pytest.mark.parametrize('url, form', [
-        ('/register/profile/', RegistrationStaffForm),
+        ('/register/user/', RegistrationStaffForm),
         ('/register/patient/', RegistrationPatientForm)])
     def test_sign_up_has_form(self, client, url, form):
         Staff.objects.create_superuser(**self.default_user_data())
@@ -158,8 +158,8 @@ class TestUsers:
         assert isinstance(response.context['form'], form)
 
     @pytest.mark.parametrize('url, data, urlredirect', [
-        ('/register/profile/', profile_data, '/'),
-        ('/register/patient/', patient_data, '/queue/patient/')])
+        ('/register/user/', profile_data, '/home/'),
+        ('/register/patient/', patient_data, '/home/')])
     def test_sign_up_post_redirect(self, client, url, data, urlredirect):
         Staff.objects.create_superuser(**self.default_user_data())
         response = client.post('/', {'username': 'email@gmail.com',
