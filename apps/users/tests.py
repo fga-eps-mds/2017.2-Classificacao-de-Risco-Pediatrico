@@ -350,13 +350,9 @@ class TestUsers:
 
     @pytest.mark.parametrize('url, urlredirect', [
         ('/register/patient', '/'),
-        ('/home/admin', '/'),
-        ('/home/receptionist', '/'),
-        ('/home/attendant', '/'),
+        ('/home', '/'),
         ('/accounts', '/'),
         ('/patients', '/'),
-        ('/registered/patient', '/'),
-        ('/queue/patient', '/'),
         ('/classification', '/')])
     def test_unauthorized_status_code(self, client, url, urlredirect):
         response = client.get(url, follow=True)
