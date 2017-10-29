@@ -75,7 +75,8 @@ def sign_up_profile(request):
             form.save()
             return redirect('users:home')
 
-    return render(request, 'users/user_login/registerUser.html' , {'form': form})
+    return render(request, 'users/user_login/registerUser.html',
+                  {'form': form})
 
 
 @login_required(redirect_field_name='', login_url='users:login')
@@ -88,7 +89,8 @@ def register_patient(request):
             form.save()
             return redirect('users:home')
 
-    return render(request, 'users/user_home/registerPatient.html', {'form': form})
+    return render(request, 'users/user_home/registerPatient.html',
+                  {'form': form})
 
 
 @login_required(redirect_field_name='', login_url='users:login')
@@ -157,7 +159,7 @@ def edit_patient(request, cpf):
         else:
             status = 400
     return render(request, 'users/editPatient.html',
-                  {'patient': patient, 'form': form}, status = status)
+                  {'patient': patient, 'form': form}, status=status)
 
 
 @login_required(redirect_field_name='', login_url='users:login')
