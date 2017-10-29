@@ -33,6 +33,17 @@ class TestUsers:
         response = client.get('/')
         assert response.status_code == 200
 
+
+    def test_login_view_for_user(self, client):
+
+        Staff.objects.create_user(**self.default_user_data())
+        response = client.post('/', {'username': 'email@gmail.com',
+                                     'password': "1234asdf"})
+
+        assert response.url == '/home'
+
+
+    '''
     def test_login_view_for_admin(self, client):
 
         Staff.objects.create_superuser(**self.default_user_data())
@@ -59,12 +70,12 @@ class TestUsers:
                                      'password': "1234asdf"})
 
         assert response.url == '/home/attendant/'
-
+    '''
     def test_login_view_user_do_not_exists(self, client):
         response = client.post('/', {'username': 'email@gmail.com',
                                      'password': "1234asdf"})
 
-        assert response.template_name[0] == 'users/login.html'
+        assert response.template_name[0] == 'users/user_login/login.html'
 
     def test_logout_view(self, client):
         # TODO: review this test:
@@ -115,7 +126,8 @@ class TestUsers:
         'parents_name': 'parents_nameTest', 'uf': 'ufTest',
         'city': 'cityTeste', 'neighborhood': 'neighborhoodTest',
         'street': 'streetTeste', 'block': 'blockTeste',
-        'number': 'numberTest'})
+        'number': 'numberTest', 'isInQueue': 'True',
+        'queuePosition': '5'})
 
     @pytest.mark.parametrize('url, model, data', [
                             ('/register/profile/', Staff, profile_data)])
@@ -148,7 +160,7 @@ class TestUsers:
 
     @pytest.mark.parametrize('url, data, urlredirect', [
         ('/register/profile/', profile_data, '/'),
-        ('/register/patient/', patient_data, '/registered/patient/')])
+        ('/register/patient/', patient_data, '/queue/patient/')])
     def test_sign_up_post_redirect(self, client, url, data, urlredirect):
         Staff.objects.create_superuser(**self.default_user_data())
         response = client.post('/', {'username': 'email@gmail.com',
@@ -334,21 +346,8 @@ class TestUsers:
         response = client.delete('/accounts/remove/456/', follow=True)
         assert response.redirect_chain == [('/accounts/', 302)]
         assert Staff.objects.count() == 1
-        # foram instanciados 2 staffs por isso o assert igual a 1
-
-    def test_patient_remove(self, client):
-        Staff.objects.create_superuser(**self.default_user_data())
-        response = client.post('/', {'username': 'email@gmail.com',
-                                     'password': "1234asdf",
-                                     'id_user': "1234"})
-        Patient()
-        name = Patient(cpf='156498',
-                       birth_date='2017-02-01',
-                       name='Test Patient')
-        name.save()
-        response = client.delete('/patients/remove/156498/', follow=True)
-        assert response.redirect_chain == [('/patients/', 302)]
-        assert Patient.objects.count() == 0
+        # foram instanciados 2 staffs
+        # por isso o assert igual a 1
 
     @pytest.mark.parametrize('url, urlredirect', [
         ('/register/patient', '/'),
@@ -358,6 +357,7 @@ class TestUsers:
         ('/accounts', '/'),
         ('/patients', '/'),
         ('/registered/patient', '/'),
+        ('/queue/patient', '/'),
         ('/classification', '/')])
     def test_unauthorized_status_code(self, client, url, urlredirect):
         response = client.get(url, follow=True)
