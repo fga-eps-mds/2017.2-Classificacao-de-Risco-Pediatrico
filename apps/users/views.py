@@ -147,14 +147,17 @@ def edit_patient(request, cpf):
     patient = Patient.objects.filter(cpf=cpf)[0]
     form = EditPatientForm()
 
+    status = 200
+
     if request.method == 'POST':
         form = EditPatientForm(request.POST, instance=patient)
         if form.is_valid():
             form.save()
             return redirect('users:home')
-
+        else:
+            status = 400
     return render(request, 'users/editPatient.html',
-                  {'patient': patient, 'form': form})
+                  {'patient': patient, 'form': form}, status = status)
 
 
 @login_required(redirect_field_name='', login_url='users:login')
