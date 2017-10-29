@@ -251,7 +251,6 @@ class TestUsers:
         Staff.objects.create_superuser(**self.default_user_data())
         response = client.post('/', {'username': 'email@gmail.com',
                                      'password': "1234asdf"})
-        Patient()
         name = Patient(cpf='001002012', birth_date='2017-02-01')
         name.save()
         response = client.get('/patients/edit/001002012/')
@@ -351,9 +350,7 @@ class TestUsers:
     @pytest.mark.parametrize('url, urlredirect', [
         ('/register/patient', '/'),
         ('/home', '/'),
-        ('/accounts', '/'),
-        ('/patients', '/'),
-        ('/classification', '/')])
+        ('/accounts', '/')])
     def test_unauthorized_status_code(self, client, url, urlredirect):
         response = client.get(url, follow=True)
         last_url, status_code = response.redirect_chain[-1]
