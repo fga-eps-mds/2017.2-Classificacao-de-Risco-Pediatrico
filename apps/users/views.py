@@ -136,9 +136,6 @@ def staff_remove(request, id_user):
 
 @login_required(redirect_field_name='', login_url='users:login')
 def patient_remove(request, id):
-    print('//////////////////////')
-    print(id)
-    print('///////////////////////')
     patient = Patient.objects.filter(id=id)
     patient.delete()
     return HttpResponseRedirect(reverse('users:home'))

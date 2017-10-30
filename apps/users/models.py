@@ -143,7 +143,7 @@ class Patient(models.Model):
 
     cpf = models.CharField(
         verbose_name=_('CPF'),
-        max_length=11,
+        max_length=14,
         null=True,
         blank=True,
         unique=True,

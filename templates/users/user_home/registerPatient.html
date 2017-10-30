@@ -4,12 +4,14 @@
 
 {% block content_pos %}
     <div class="container-fluid">
-        <div class="row mt-5">
+        <!-- <div class="row mt-5">
             <div class="mx-auto my-auto text-center">
-                <div class="card bg-light border-secondary mb-4 z-depth-2 slide-in-blurred-top">
+                <div class="card bg-light border-secondary mb-4 z-depth-2 slide-in-blurred-top"> -->
+                <div id="list" class="x_panel slide-in-blurred-top" style="background-color: white">
                     <form role="form" class="form" method="POST" >
                         <div class="card-header">
-                            Cadastro de Paciente
+                          <h1 style="font-size:150%;">Dados do Paciente</h1>
+                          <!-- Dados do Paciente -->
                         </div>
 
                         {% csrf_token %}
@@ -20,7 +22,139 @@
                             </div>
                         {% endif %}
 
-                        <div class="row mt-3">
+                        <div class="form-group">
+                          <label for="exampleInputFile">Nome do paciente:</label>
+                          <input type="text" name="{{ form.name.name }}" maxlength="80" id="{{ form.name.id_for_label }}" class="form-control"  placeholder="Nome" aria-label="Nome" aria-describedby="basic-addon1" pattern="[a-zA-Z\s]+$" autofocus >
+                          {% if form.name.errors %}
+                              <div class="error-holder">
+                                  <div class="alert alert-warning" role="alert">
+                                      {{ form.name.errors }}
+                                  </div>
+                              </div>
+                          {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                          <label for="exampleInputFile">Nome do responsável:</label>
+                          <input type="text" name="{{ form.guardian.name }}" maxlength="80" id="{{ form.guardian.id_for_label }}" class="form-control"  placeholder="Responsável" aria-label="Responsável" aria-describedby="basic-addon3" pattern="[a-zA-Z\s]+$">
+                          {% if form.guardian.errors %}
+                              <div class="error-holder">
+                                  <div class="alert alert-warning" role="alert">
+                                      {{ form.guardian.errors }}
+                                  </div>
+                              </div>
+                          {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                          <label for="exampleInputFile">Data de nascimento:</label>
+                          <input type="text" name="{{ form.birth_date.name }}" id="{{ form.birth_date.id_for_label }}" class="form-control date"  placeholder="mm/dd/aaaa" aria-label="Data de nascimento" aria-describedby="basic-addon3" required>
+                          {% if form.birth_date.errors %}
+                              <div class="error-holder">
+                                  <div class="alert alert-warning" role="alert">
+                                      {{ form.birth_date.errors }}
+                                  </div>
+                              </div>
+                          {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                          <label for="exampleInputFile">CPF:</label>
+                          <input type="text" name="{{ form.cpf.name }}" id="{{ form.cpf.id_for_label }}" class="form-control cpf"  placeholder="000.000.000-00" aria-label="CPF" aria-describedby="basic-addon2" >
+                          {% if form.cpf.errors %}
+                              <div class="error-holder">
+                                  <div class="alert alert-warning" role="alert">
+                                      {{ form.cpf.errors }}
+                                  </div>
+                              </div>
+                          {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                          <label for="exampleInputFile">Nome dos pais:</label>
+                          <input type="text" name="{{ form.parents_name.name }}" maxlength="80" id="{{ form.parents_name.id_for_label }}" class="form-control"  placeholder="Nome dos pais" aria-label="Nome dos pais" aria-describedby="basic-addon4" >
+                          {% if form.parents_name.errors %}
+                              <div class="error-holder">
+                                  <div class="alert alert-warning" role="alert">
+                                      {{ form.parents_name.errors }}
+                                  </div>
+                              </div>
+                          {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                          <label for="exampleInputFile">UF:</label>
+                          <input type="text" name="{{ form.uf.name }}" id="{{ form.uf.id_for_label }}" class="form-control"  placeholder="UF" aria-label="UF" aria-describedby="basic-addon6" >
+                          {% if form.uf.errors %}
+                              <div class="error-holder">
+                                  <div class="alert alert-warning" role="alert">
+                                      {{ form.uf.errors }}
+                                  </div>
+                              </div>
+                          {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                          <label for="exampleInputFile">Cidade:</label>
+                          <input type="text" name="{{ form.city.name }}" id="{{ form.city.id_for_label }}" class="form-control"  placeholder="Cidade" aria-label="Cidade" aria-describedby="basic-addon7" >
+                          {% if form.city.errors %}
+                              <div class="error-holder">
+                                  <div class="alert alert-warning" role="alert">
+                                      {{ form.city.errors }}
+                                  </div>
+                              </div>
+                          {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                          <label for="exampleInputFile">Rua:</label>
+                          <input type="text" name="{{ form.street.name }}" id="{{ form.street.id_for_label }}" class="form-control"  placeholder="Rua" aria-label="Rua" aria-describedby="basic-addon7" >
+                          {% if form.street.errors %}
+                              <div class="error-holder">
+                                  <div class="alert alert-warning" role="alert">
+                                      {{ form.street.errors }}
+                                  </div>
+                              </div>
+                          {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                          <label for="exampleInputFile">Bairro:</label>
+                          <input type="text" name="{{ form.neighborhood.name }}" id="{{ form.neighborhood.id_for_label }}" class="form-control"  placeholder="Bairro" aria-label="Bairro" aria-describedby="basic-addon8" >
+                          {% if form.neighborhood.errors %}
+                              <div class="error-holder">
+                                  <div class="alert alert-warning" role="alert">
+                                      {{ form.neighborhood.errors }}
+                                  </div>
+                              </div>
+                          {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                          <label for="exampleInputFile">Conjunto:</label>
+                          <input type="text" name="{{ form.block.name }}" id="{{ form.block.id_for_label }}" class="form-control"  placeholder="Conjunto" aria-label="Conjunto" aria-describedby="basic-addon9" >
+                          {% if form.block.errors %}
+                              <div class="error-holder">
+                                  <div class="alert alert-warning" role="alert">
+                                      {{ form.block.errors }}
+                                  </div>
+                              </div>
+                          {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                          <label for="exampleInputFile">Número:</label>
+                          <input type="text" name="{{ form.number.name }}" id="{{ form.number.id_for_label }}" class="form-control"  placeholder="Número" pattern="[0-9]+$" aria-label="Número" aria-describedby="basic-addon10" >
+                          {% if form.number.errors %}
+                              <div class="error-holder">
+                                  <div class="alert alert-warning" role="alert">
+                                      {{ form.number.errors }}
+                                  </div>
+                              </div>
+                          {% endif %}
+                        </div>
+
+                        <!-- <div class="row mt-3">
                             <div class="col">
                                 <div class="form-group px-3">
                                     <div class="cols-sm-10">
@@ -202,12 +336,14 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
+                        </div> -->
                         <div class="card-footer text-right">
                             <a href="{% url 'users:home' %}" class="btn btn btn-outline-secondary btn-lg" >Cancelar</a>
                             <button type="submit" class="btn btn-outline-secondary btn-lg">Cadastrar</button>
                         </div>
+                      </div>
+
+
                     </form>
                 </div>
             </div>
