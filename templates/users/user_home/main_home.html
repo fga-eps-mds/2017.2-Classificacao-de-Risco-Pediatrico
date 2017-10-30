@@ -14,7 +14,7 @@
                     <th>Nome</th>
                     <th>Classificação</th>
                     <th>Faixa-etária</th>
-                    <th>Data</th>
+                    <th>Data de criação</th>
                     <th>Classificador</th>
                     <th>Deletar</th>
                     <th>Editar</th>
@@ -23,7 +23,11 @@
             <tbody>
                 {% for patient in patients %}
                 <tr>
-                    <td><a href="#" data-toggle="modal" data-target="#risk_{{ patient.id }}">{{ patient.name }}</a></td>
+                    {% if patient.name %}
+                        <td><a href="#" data-toggle="modal" data-target="#risk_{{ patient.id }}">{{ patient.name }}</a></td>
+                    {% else %}
+                        <td><a href="#" data-toggle="modal" data-target="#risk_{{ patient.id }}">{{ patient.id }}</a></td>
+                    {% endif %}
                     {% if patient.classification == 0 %}
                         <td><span class="btn btn-primary badge badge-pill badge-secondary"  data-toggle="modal" data-target="#{{ patient.id }}">Não classificado</span></td>
                     {% elif patient.classification == 1 %}
@@ -38,8 +42,8 @@
                     <td></td>
                     <td>{{ patient.created_at }}</td>
                     <td></td>
-                    <td><a href="#" data-toggle="modal" data-target="#deletar-{{ patient.cpf }}"><i class="fa fa-ban" aria-hidden="true"></i></a></td>
-                    <td><a href="{% url 'users:edit_patient' patient.cpf %}"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
+                    <td><a href="#" data-toggle="modal" data-target="#deletar-{{ patient.id }}"><i class="fa fa-ban" aria-hidden="true"></i></a></td>
+                    <td><a href="{% url 'users:edit_patient' patient.id %}"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
                 </tr>
                 {% endfor %}
             </tbody>
@@ -106,7 +110,7 @@
             </div>
         </div>
 
-        <div class="modal fade" id="deletar-{{ patient.cpf }}" tabindex="-1" role="dialog" aria-labelledby="Deletar Paciente" aria-hidden="true">
+        <div class="modal fade" id="deletar-{{ patient.id }}" tabindex="-1" role="dialog" aria-labelledby="Deletar Paciente" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -116,11 +120,11 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        Tem certeza que deseja deletar o registro de {{ patient.name }}?
+                        Tem certeza que deseja deletar o registro {{ patient.id }}?
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                        <a href="{% url 'users:patient_remove' patient.cpf %}" class="btn btn-danger">Deletar</a>
+                        <a href="{% url 'users:patient_remove' patient.id %}" class="btn btn-danger">Deletar</a>
                     </div>
                 </div>
             </div>
