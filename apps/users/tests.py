@@ -47,7 +47,7 @@ class TestUsers:
         response = client.post('/', {'username': 'email@gmail.com',
                                      'password': "1234asdf"})
 
-        assert response.url == '/home/receptionist/'
+        assert response.url == '/home'
 
     def test_login_view_for_attendant(self, client):
 
@@ -84,7 +84,7 @@ class TestUsers:
 
     @pytest.mark.parametrize('url',
                              ['/register/patient/',
-                              '/home/receptionist/',
+                              '/home',
                               '/registered/patient/'])
     def test_get_route_logged(self, client, url):
         StaffFactory.create_batch(1)
@@ -161,7 +161,7 @@ class TestUsers:
         Staff.objects.create_superuser(**self.default_user_data())
         response = client.post('/', {'username': 'email@gmail.com',
                                      'password': "1234asdf"})
-        response = client.get('/home/receptionist/')
+        response = client.get('/home')
         assert response.status_code == 200
 
     def default_user_data(self):
@@ -352,9 +352,7 @@ class TestUsers:
 
     @pytest.mark.parametrize('url, urlredirect', [
         ('/register/patient', '/'),
-        ('/home/admin', '/'),
-        ('/home/receptionist', '/'),
-        ('/home/attendant', '/'),
+        ('/home', '/'),
         ('/accounts', '/'),
         ('/patients', '/'),
         ('/registered/patient', '/'),

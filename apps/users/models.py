@@ -123,13 +123,15 @@ class Patient(models.Model):
     name = models.CharField(
         verbose_name=_('Nome'),
         max_length=150,
-        blank=False,
+        default='',
+        blank=True
     )
 
     guardian = models.CharField(
         verbose_name=_('Nome do Responsável'),
         max_length=50,
-        blank=False,
+        default='',
+        blank=True,
         help_text=_('Informe o nome do responsável'),
     )
 
@@ -142,48 +144,55 @@ class Patient(models.Model):
     cpf = models.CharField(
         verbose_name=_('CPF'),
         max_length=11,
-        default="",
-        blank=False,
-        help_text=_('Informe o CPF'),
-        unique=True
+        null=True,
+        blank=True,
+        unique=True,
+        help_text=_('Informe o CPF')
     )
 
     parents_name = models.CharField(
         verbose_name=_('Nome dos pais'),
         max_length=150,
-        blank=False,
+        default='',
+        blank=True,
         help_text=_('Informe o nome dos pais')
     )
 
     uf = models.CharField(
         verbose_name='UF',
         max_length=50,
-        blank=False
+        default='',
+        blank=True
     )
     city = models.CharField(
         verbose_name='Cidade',
         max_length=50,
-        blank=False
+        default='',
+        blank=True
     )
     neighborhood = models.CharField(
         verbose_name='Bairro',
         max_length=100,
-        blank=False
+        default='',
+        blank=True
     )
     street = models.CharField(
         verbose_name='Rua',
         max_length=50,
-        blank=False
+        default='',
+        blank=True
     )
     block = models.CharField(
         verbose_name='Conjunto',
         max_length=50,
-        blank=False
+        default='',
+        blank=True
     )
     number = models.CharField(
         verbose_name='Numero',
         max_length=10,
-        blank=False
+        default='',
+        blank=True
     )
     date = models.DateField(
         verbose_name='Data',
