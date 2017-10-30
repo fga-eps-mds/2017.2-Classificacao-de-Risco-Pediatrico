@@ -118,7 +118,7 @@ def manage_accounts_view(request):
 
 
 @login_required(redirect_field_name='', login_url='users:login')
-def edit_accounts_view(request, id_user):
+def edit_accounts_view(request, birth_date):
     staff = Staff.objects.filter(id_user=id_user)
     if len(staff) == 1:
         return render(request, 'users/editAccounts.html', {'staff': staff[0]})
@@ -133,18 +133,21 @@ def staff_remove(request, id_user):
 
 
 @login_required(redirect_field_name='', login_url='users:login')
-def patient_remove(request, cpf):
-    patient = Patient.objects.filter(cpf=cpf)
+def patient_remove(request, id):
+    print('//////////////////////')
+    print(id)
+    print('///////////////////////')
+    patient = Patient.objects.filter(id=id)
     patient.delete()
     return HttpResponseRedirect(reverse('users:home'))
 
 
 @login_required(redirect_field_name='', login_url='users:login')
-def edit_patient(request, cpf):
+def edit_patient(request, id):
     """
     edit an existing patient with post method
     """
-    patient = Patient.objects.filter(cpf=cpf)[0]
+    patient = Patient.objects.filter(id=id)[0]
     form = EditPatientForm()
 
     if request.method == 'POST':
@@ -155,14 +158,3 @@ def edit_patient(request, cpf):
 
     return render(request, 'users/editPatient.html',
                   {'patient': patient, 'form': form})
-
-
-@login_required(redirect_field_name='', login_url='users:login')
-def show_patient_view(request, cpf):
-    """
-    return rendered text from showPatient
-    """
-    patient = Patient.objects.filter(cpf=cpf)
-    if len(patient) == 1:
-        return render(request, 'users/showPatient.html', {'patient': patient})
-    return render(request, 'users/showPatient.html', status=404)
