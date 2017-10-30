@@ -196,15 +196,6 @@ class TestUsers:
         user_email = Staff(email='bruno@gmail.com')
         assert str(user_email) == 'bruno@gmail.com'
 
-    def test_show_patient_view(self, client):
-        Staff.objects.create_superuser(**self.default_user_data())
-        response = client.post('/', {'username': 'email@gmail.com',
-                                     'password': "1234asdf"})
-        Patient()
-        name = Patient(cpf='001002012', birth_date='2017-02-01')
-        name.save()
-        response = client.get('/show/patient/001002012/')
-        assert response.status_code == 200
 
     def test_registered_patient_view(self, client):
         Staff.objects.create_superuser(**self.default_user_data())
@@ -265,7 +256,7 @@ class TestUsers:
             'name': 'nameTest', 'guardian': 'guardianTeste',
             'birth_date': '12/2/12', 'cpf': '156498'})
         Patient()
-        name = Patient(cpf='156498', birth_date='2017-02-01')
+        name = Patient(cpf='156498', birth_date='09/09/2010')
         name.save()
         response = client.post('/patients/edit/156498/', invalid_patient_data)
         assert response.status_code == 400
@@ -278,17 +269,17 @@ class TestUsers:
         client.post('/', {'username': 'email@gmail.com',
                           'password': "1234asdf"})
         Patient()
-        name = Patient(cpf='156498', birth_date='2017-02-01', name='Victor')
+        name = Patient(id='1', birth_date='2017-02-01', name='Victor')
         name.save()
         client.post('/patients/edit/156498/', self.patient_data)
-        assert Patient.objects.filter(cpf='156498')[0].name == 'nameTest'
+        assert Patient.objects.filter(id='1')[0].name == 'nameTest'
 
     def test_edit_accounts_view(self, client):
         Staff.objects.create_superuser(**self.default_user_data())
         response = client.post('/', {'username': 'email@gmail.com',
                                      'password': "1234asdf"})
         Staff()
-        name = Staff(id_user='456')
+        name = Staff(id='456')
         name.save()
         response = client.get('/accounts/edit/456/')
         assert response.status_code == 200
@@ -327,9 +318,3 @@ class TestUsers:
         last_url, status_code = response.redirect_chain[-1]
         assert response.status_code == 200
         assert last_url == urlredirect
-
-    def test_unlogged_show_patient(self, client):
-        name = Patient(cpf='456', birth_date='2000-10-10')
-        name.save()
-        response = client.get('/show/patient/456/', follow=True)
-        assert response.redirect_chain == [('/', 302)]
