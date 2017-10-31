@@ -6,6 +6,7 @@ from . import views
 app_name = 'users'
 urlpatterns = [
     url(r'^$', views.login_view, name="login"),
+    url(r'^landing/page/$', views.landing_page, name="landing_page"),
     url(r'^home/$', views.home, name="home"),
     url(r'^logout/$', views.logout_view, name="logout"),
     url(r'^register/user/$', views.sign_up_profile,

@@ -15,6 +15,11 @@ from apps.users.forms import EditPatientForm
 from .models import Patient, Staff
 
 
+def landing_page(request):
+
+    return render(request, 'landing_page/landingPage.html', {})
+
+
 def login_view(request, *args, **kwargs):
     if request.method == "POST":
         username = request.POST['username']
