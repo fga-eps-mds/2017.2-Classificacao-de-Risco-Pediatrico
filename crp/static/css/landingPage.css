@@ -8,8 +8,8 @@ body {
   position: relative;
   width: 100%;
   height: 100%;
-  color: white;
-  background-color: black; }
+  color: black;
+  background-color: white; }
 
 html {
   width: 100%;
@@ -66,7 +66,7 @@ a {
     -moz-transition: background 0.3s ease-in-out;
     transition: background 0.3s ease-in-out; }
     #mainNav .navbar-nav .nav-item:hover {
-      color: fade(white, 80%);
+      /*color: fade(white, 80%);*/
       outline: none;
       background-color: transparent; }
     #mainNav .navbar-nav .nav-item:active, #mainNav .navbar-nav .nav-item:focus {
@@ -81,15 +81,15 @@ a {
       transition: background 0.3s ease-in-out, padding-top 0.3s ease-in-out, padding-bottom 0.3s;
       letter-spacing: 1px;
       border-bottom: none;
-      background: transparent; }
+      background: rgba(0, 0, 0, 0.7 ); }
       #mainNav.navbar-shrink {
-        padding-top: 10px;
-        padding-bottom: 10px;
+        padding-top: 20px;
+        padding-bottom: 20px;
         border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-        background: black; }
+        background: rgba(0, 0, 0, 0.7 ); }
       #mainNav .nav-link.active {
         outline: none;
-        background-color: rgba(255, 255, 255, 0.3); }
+        background-color: rgba(255, 255, 255, 0.3 ); }
         #mainNav .nav-link.active:hover {
           color: white; } }
 
@@ -100,7 +100,7 @@ a {
   padding: 200px 0;
   text-align: center;
   color: white;
-  background: url("../img/intro-bg.jpg") no-repeat bottom center scroll;
+  background: url("../img/land-background.jpg") no-repeat bottom center scroll;
   background-color: black;
   -webkit-background-size: cover;
   -moz-background-size: cover;

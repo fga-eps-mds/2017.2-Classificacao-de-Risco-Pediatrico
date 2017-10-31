@@ -15,7 +15,7 @@
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 
       <!-- Custom fonts for this template -->
-      <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+      <link href="{% static "css/font-awesome.min.css" %} rel="stylesheet" type="text/css">
       <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
       <link href='https://fonts.googleapis.com/css?family=Cabin:700' rel='stylesheet' type='text/css'>
 
@@ -62,9 +62,6 @@
                   <h1 class="brand-heading">CRP</h1>
                   <p class="intro-text">Ganhando tempo,
                     <br>salvando vidas!</p>
-                  <a href="#" data-toggle="#about" class="btn btn-circle js-scroll-trigger">
-                    <i class="fa fa-angle-double-down animated"></i>
-                  </a>
                 </div>
               </div>
             </div>
@@ -76,7 +73,7 @@
           <div class="container">
             <div class="row">
               <div class="col-lg-8 mx-auto">
-                <h2>O que é o CRP?</h2>
+                <h4>O que é o CRP?</h4>
                 <p>
                     O Classificação de Risco Pediátrico é um programa top!
                 </p>
@@ -150,10 +147,11 @@
     <script src={% static "js/landingPage/bootstrap.bundle.min.js" %}></script>
 
     <!-- Plugin JavaScript -->
-    <script src={% static "js/landingPage/jquery.easing.min.js" %}"vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src={% static "js/landingPage/jquery.easing.min.js" %}></script>
 
     <!-- Custom scripts for this template -->
     <script src={% static "js/landingPage/landingPage.js" %}></script>
 
 </body>
 
+</html>
