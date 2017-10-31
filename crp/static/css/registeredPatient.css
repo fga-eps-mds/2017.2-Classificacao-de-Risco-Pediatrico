@@ -1,0 +1,11 @@
+#searchPatient {
+    border-radius: 50px;
+    background-color:white;
+    width: 25%;
+    box-shadow: 0 0 0.5em #666;
+}
+
+#list {
+    box-shadow: 0 0 0.5em #666;
+    padding: 10px;
+}

@@ -75,7 +75,7 @@
                                     <div class="cols-sm-10">
                                         <div class="input-group">
                                             <span class="input-group-addon" id="basic-addon1"><i class="fa fa-calendar-o" aria-hidden="true"></i></span>
-                                            <input type="text" name="{{ form.birth_date.name }}" id="{{ form.birth_date.id_for_label }}" class="form-control" value={{patient.birth_date}}  placeholder="Data de nascimento" aria-label="Data de nascimento" aria-describedby="basic-addon3" required>
+                                            <input type="text" name="{{ form.birth_date.name }}" id="{{ form.birth_date.id_for_label }}" class="form-control" value={{patient.birth_date|date:"d/m/y" }}  placeholder="Data de nascimento" aria-label="Data de nascimento" aria-describedby="basic-addon3" required>
                                         </div>
                                         {% if form.birth_date.errors %}
                                             <div class="error-holder">
@@ -254,8 +254,8 @@
                         </div>
 
                         <div class="card-footer text-right">
-                            <a href="{% url 'users:login' %}" class="btn btn btn-outline-secondary btn-lg" >Cancelar</a>
-                            <button type="submit" class="btn btn-outline-secondary btn-lg">Editar</button>
+                            <a href="{% url 'users:home' %}" class="btn btn btn-outline-secondary btn-lg">Cancelar</a>
+                            <button type="submit" class="btn btn-outline-secondary btn-lg">Confirmar</button>
                         </div>
                     </form>
                 </div>
@@ -263,73 +263,4 @@
 
         </div>
     </div>
-
-<!-- <div class="box rounded float-right">
-    <form role="form" class="form" method="POST">
-      {% csrf_token %}
-
-      {{ form.non_field_errors }}
-
-
-      <h1>Editar Paciente</h1>
-      <div class="form-group">
-        <p>{{ form.name.errors }}</p>
-        <p>{{ form.name.label_tag }} <input type="text" name= "name" value= {{ patient.name }}> </p>
-      </div>
-      <div class="form-group">
-        <p>{{ form.cpf.errors }}</p>
-        <p>{{ form.cpf.label_tag }} <input type="text" name= "cpf" value= {{ patient.cpf }}> </p>
-      </div>
-      <div class="form-group">
-        <p>{{ form.guardian.errors }}</p>
-        <p>{{ form.guardian.label_tag }} <input type="text" name= "guardian" value= {{ patient.guardian }}> </p>
-      </div>
-      <div class="form-group">
-        <p>{{ form.birth_date.errors }}</p>
-        <p>{{ form.birth_date.label_tag }} <input type="text" name= "birth_date" value= {{ patient.birth_date|date:"d/m/y" }}> </p>
-      </div>
-      <div class="form-group">
-        <p>{{ form.parents_name.errors }}</p>
-        <p>{{ form.parents_name.label_tag }} <input type="text" name= "parents_name" value= {{ patient.parents_name }}> </p>
-      </div>
-      <div class="form-group">
-        <p>{{ form.uf.errors }}</p>
-        <p>{{ form.uf.label_tag }} <input type="text" name= "uf" value= {{ patient.uf }}> </p>
-      </div>
-      <div class="form-group">
-        <p>{{ form.city.errors }}</p>
-        <p>{{ form.city.label_tag }} <input type="text" name= "city" value= {{ patient.city }}> </p>
-      </div>
-      <div class="form-group">
-        <p>{{ form.neighborhood.errors }}</p>
-        <p>{{ form.neighborhood.label_tag }} <input type="text" name= "neighborhood" value= {{ patient.neighborhood }}> </p>
-      </div>
-      <div class="form-group">
-        <p>{{ form.street.label_tag }} <input type="text" name= "street" value= {{ patient.street }}> </p>
-        <p>{{ form.street.errors }}</p>
-      </div>
-      <div class="form-group">
-        <p>{{ form.block.errors }}</p>
-        <p>{{ form.block.label_tag }} <input type="text" name= "block" value= {{ patient.block }}> </p>
-      </div>
-      <div class="form-group">
-        <p>{{ form.number.errors }}</p>
-        <p>{{ form.number.label_tag }} <input type="text" name= "number" value= {{ patient.number }}> </p>
-      </div> -->
-
-
-      <!-- <p>Nome: <input type="text" value= {{ patient.name }}> </p>
-      <p>Nascimento: <input type="text" value= {{ patient.birth_date|date:"d/m/y" }}> </p>
-      <p>CPF: <input type="text" value= {{ patient.cpf }}></p>
-      <p>Endereço:</p>
-      <p>UF: <input type="text" value= {{ patient.uf }}></p>
-      <p>Cidade: <input type="text" value= {{ patient.city }}></p>
-      <p>Bairro: <input type="text" value= {{ patient.neighborhood }}></p>
-      <p>Rua: <input type="text" value=  {{ patient.street }}></p>
-      <p>Conjunto: <input type="text" value= {{ patient.block }}></p>
-      <p>Número: <input type="text" value= {{ patient.number }}></p> -->
-
-      <!-- <button class="btn btn-outline-secondary float-right" name='action' value='address' type="submit">Editar Perfil</button>
-    </form>
-  </div> -->
 {% endblock %}

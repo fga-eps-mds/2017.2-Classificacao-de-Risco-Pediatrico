@@ -1,0 +1,14 @@
+body {
+    background: url('/static/img/land-background.jpg') no-repeat fixed left 0;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-position-y: 75px;
+    font-family: 'Roboto', sans-serif;
+}
+
+#logo {
+    width: 100px;
+    height: 50px;
+}

@@ -1,0 +1,19 @@
+{% extends 'layout/layout.html' %}
+{% load staticfiles %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static "css/pre-home.css" %}">
+{% endblock %}
+
+{% block content %}
+    {% include 'layout/navbar.html' %}
+
+    {% block content_pre %}
+    {% endblock %}
+
+    <div class="row align-items-end">
+        <div class="col text-center">
+            <a class="text-white" href="https://br.freepik.com/fotos-gratis/estetoscopio-com-fundo-azul_1200929.htm">Projetado pelo Freepik</a>
+        </div>
+    </div>
+{% endblock %}
