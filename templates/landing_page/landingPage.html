@@ -1,48 +1,34 @@
-{% extends 'layout/layout.html' %}
 {% load staticfiles %}
 
-{% block head %}
-  <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    
-    <title>Grayscale - Start Bootstrap Theme</title>
+<!DOCTYPE html>
+<html lang="pt">
+<head>
 
-    <!-- Bootstrap core CSS -->
-    <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta name="description" content="">
+      <meta name="author" content="">
 
-    <!-- Custom fonts for this template -->
-    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
-    <link href='https://fonts.googleapis.com/css?family=Cabin:700' rel='stylesheet' type='text/css'>
+      <title>CRP - Classificação de Risco</title>
 
-    <!-- Custom styles for this template -->
-    <link href="{% static "css/landingPage.css" %}" rel="stylesheet">
-{% endblock %}
+      <!-- Bootstrap core CSS -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 
-{% block js %}
-    <!-- Bootstrap core JavaScript -->
-    <script src={% static "js/landingPage/jquery.js" %}></script>
-    <script src={% static "js/landingPage/bootstrap.bundle.min.js" %}></script>
+      <!-- Custom fonts for this template -->
+      <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+      <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+      <link href='https://fonts.googleapis.com/css?family=Cabin:700' rel='stylesheet' type='text/css'>
 
-    <!-- Plugin JavaScript -->
-    <script src={% static "js/landingPage/jquery.easing.min.js" %}"vendor/jquery-easing/jquery.easing.min.js"></script>
+      <!-- Custom styles for this template -->
+      <link href="{% static "css/landingPage.css" %}" rel="stylesheet">
+</head>
 
-    <!-- Google Maps API Key - Use your own API key to enable the map feature. More information on the Google Maps API can be found at https://developers.google.com/maps/ -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRngKslUGJTlibkQ3FkfTxj3Xss1UlZDA&sensor=false"></script>
+<body id="page-top">
 
-    <!-- Custom scripts for this template -->
-    <script src={% static "js/landingPage/landingPage.js" %}></script>
-{% endblock %}
-
-{% block content%}
-
-<div id="page-top">
         <!-- Navigation -->
         <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
           <div class="container">
-            <a class="navbar-brand js-scroll-trigger" href="#page-top">Start Bootstrap</a>
+            <a class="navbar-brand js-scroll-trigger" href="{% url 'users:landing_page' %}">CRP</a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
               Menu
               <i class="fa fa-bars"></i>
@@ -50,13 +36,17 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
               <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                  <a class="nav-link js-scroll-trigger" href="#about">About</a>
+                  <a class="nav-link js-scroll-trigger" href="{% url 'users:register_user' %}">Cadastre-se</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link js-scroll-trigger" href="#download">Download</a>
+                  <a class="nav-link js-scroll-trigger" >|</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
+                    {% if user.is_authenticated %}
+                        <a class="nav-link js-scroll-trigger" href="{%  url 'users:home' %}">Entrar</a>
+                    {% else %}
+                        <a class="nav-link js-scroll-trigger" href="{%  url 'users:login' %}">Entrar</a>
+                    {% endif %}
                 </li>
               </ul>
             </div>
@@ -69,10 +59,10 @@
             <div class="container">
               <div class="row">
                 <div class="col-lg-8 mx-auto">
-                  <h1 class="brand-heading">Grayscale</h1>
-                  <p class="intro-text">A free, responsive, one page Bootstrap theme.
-                    <br>Created by Start Bootstrap.</p>
-                  <a href="#about" class="btn btn-circle js-scroll-trigger">
+                  <h1 class="brand-heading">CRP</h1>
+                  <p class="intro-text">Ganhando tempo,
+                    <br>salvando vidas!</p>
+                  <a href="#" data-toggle="#about" class="btn btn-circle js-scroll-trigger">
                     <i class="fa fa-angle-double-down animated"></i>
                   </a>
                 </div>
@@ -86,14 +76,16 @@
           <div class="container">
             <div class="row">
               <div class="col-lg-8 mx-auto">
-                <h2>About Grayscale</h2>
-                <p>Grayscale is a free Bootstrap theme created by Start Bootstrap. It can be yours right now, simply download the template on
-                  <a href="http://startbootstrap.com/template-overviews/grayscale/">the preview page</a>. The theme is open source, and you can use it for any purpose, personal or commercial.</p>
-                <p>This theme features stock photos by
-                  <a href="http://gratisography.com/">Gratisography</a>
-                  along with a custom Google Maps skin courtesy of
-                  <a href="http://snazzymaps.com/">Snazzy Maps</a>.</p>
-                <p>Grayscale includes full HTML, CSS, and custom JavaScript files along with SASS and LESS files for easy customization!</p>
+                <h2>O que é o CRP?</h2>
+                <p>
+                    O Classificação de Risco Pediátrico é um programa top!
+                </p>
+                <p>
+                    O bagulho é loko!
+                </p>
+                  <p>
+                      E o movimento é sexy!
+                  </p>
               </div>
             </div>
           </div>
@@ -103,8 +95,10 @@
         <section id="download" class="download-section content-section text-center">
           <div class="container">
             <div class="col-lg-8 mx-auto">
-              <h2>Download Grayscale</h2>
-              <p>You can download Grayscale for free on the preview page at Start Bootstrap.</p>
+              <h2>Como usar?</h2>
+              <p>
+                  Usando!
+              </p>
               <a href="http://startbootstrap.com/template-overviews/grayscale/" class="btn btn-default btn-lg">Visit Download Page</a>
             </div>
           </div>
@@ -144,14 +138,22 @@
           </div>
         </section>
 
-        <!-- Map Section -->
-        <div id="map"></div>
-
         <!-- Footer -->
         <footer>
           <div class="container text-center">
             <p>Copyright &copy; Your Website 2017</p>
           </div>
         </footer>
-</div>
-{% endblock %}
+
+        <!-- Bootstrap core JavaScript -->
+    <script src={% static "js/landingPage/jquery.js" %}></script>
+    <script src={% static "js/landingPage/bootstrap.bundle.min.js" %}></script>
+
+    <!-- Plugin JavaScript -->
+    <script src={% static "js/landingPage/jquery.easing.min.js" %}"vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src={% static "js/landingPage/landingPage.js" %}></script>
+
+</body>
+
