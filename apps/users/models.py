@@ -158,12 +158,27 @@ class Patient(models.Model):
         help_text=_('Informe o nome dos pais')
     )
 
+    STATE_CHOICES = (
+    	('AC', 'Acre'), ('AL', 'Alagoas'), ('AP', 'Amapá'),
+    	('AM', 'Amazonas'), ('BA', 'Bahia'), ('CE', 'Ceará'),
+    	('DF', 'Distrito Federal'), ('ES', 'Espírito Santo'),
+    	('GO', 'Goiás'), ('MA', 'Maranhão'), ('MT', 'Mato Grosso'),
+    	('MS', 'Mato Grosso do Sul'), ('MG', 'Minas Gerais'),
+    	('PA', 'Pará'), ('PB', 'Paraíba'), ('PR', 'Paraná'),
+    	('PE', 'Pernambuco'), ('PI', 'Piauí'), ('RJ', 'Rio de Janeiro'),
+    	('RN', 'Rio Grande do Norte'), ('RS', 'Rio Grande do Sul'),
+    	('RO', 'Rondônia'), ('RR', 'Roraima'), ('SC', 'Santa Catarina'),
+    	('SP', 'São Paulo'), ('SE', 'Sergipe'), ('TO', 'Tocantins')
+    )
+
     uf = models.CharField(
         verbose_name='UF',
-        max_length=50,
+        max_length=2,
+        choices=STATE_CHOICES,
         default='',
         blank=True
     )
+    
     city = models.CharField(
         verbose_name='Cidade',
         max_length=50,
