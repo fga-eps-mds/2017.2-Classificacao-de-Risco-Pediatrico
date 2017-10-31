@@ -1,5 +1,8 @@
 {% for patient in patients %}
-<form>
+<form role="form" class="form" method="POST">
+
+  {% csrf_token %}
+
     <div class="modal fade bd-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"
         id="risk_{{ patient.id }}">
         <div class="modal-dialog modal-lg" role="document">
@@ -15,88 +18,88 @@
                         <div class="row" id="row-modal">
                             <div class="btn-group-responsive" data-toggle="buttons">
                                 <label class="btn btn-primary classification-button col-md-2" >
-                                <input type="checkbox" autocomplete="off">Dispneia
+                                <input class="form-check-input" type="checkbox" autocomplete="off" name="dispineia">Dispneia
                                 </label>
                                 <label class="btn btn-primary classification-button col-md-2">
-                                <input type="checkbox" autocomplete="off">Ictericia
+                                <input class="form-check-input" type="checkbox" autocomplete="off" name="ictericia">Ictericia
                                 </label>
                                 <label class="btn btn-primary classification-button col-md-2">
-                                <input type="checkbox" autocomplete="off">Perda de Consciencia
+                                <input class="form-check-input" type="checkbox" autocomplete="off" name="consciencia">Perda de Consciencia
                                 </label>
                                 <label class="btn btn-primary classification-button col-md-2">
-                                <input type="checkbox" autocomplete="off">Cianose
+                                <input class="form-check-input" type="checkbox" autocomplete="off" name="cianose">Cianose
                                 </label>
                                 <label class="btn btn-primary classification-button col-md-2">
-                                <input type="checkbox" autocomplete="off">Febre
+                                <input class="form-check-input" type="checkbox" autocomplete="off" name="febre">Febre
                                 </label>
                                 <label class="btn btn-primary classification-button col-md-2">
-                                <input type="checkbox" autocomplete="off">Soluços
+                                <input class="form-check-input" type="checkbox" autocomplete="off" name="solucos">Soluços
                                 </label>
                                 <label class="btn btn-primary classification-button col-md-2">
-                                <input type="checkbox" autocomplete="off">Prostação
+                                <input class="form-check-input" type="checkbox" autocomplete="off" name="prostracao">Prostação
                                 </label>
                                 <label class="btn btn-primary classification-button col-md-2">
-                                <input type="checkbox" autocomplete="off">Vomitos
+                                <input class="form-check-input" type="checkbox" autocomplete="off" name="vomitos">Vomitos
                                 </label>
                                 <label class="btn btn-primary classification-button col-md-2">
-                                <input type="checkbox" autocomplete="off">Tosse
+                                <input class="form-check-input" type="checkbox" autocomplete="off" name="tosse">Tosse
                                 </label>
                                 <label class="btn btn-primary classification-button col-md-2">
-                                <input type="checkbox" autocomplete="off">Coriza
+                                <input class="form-check-input" type="checkbox" autocomplete="off" name="coriza">Coriza
                                 </label>
                                 <label class="btn btn-primary classification-button col-md-2">
-                                <input type="checkbox" autocomplete="off">Obstrução Nasal
+                                <input class="form-check-input" type="checkbox" autocomplete="off" name="obstrucaoNasal">Obstrução Nasal
                                 </label>
                                 <label class="btn btn-primary classification-button col-md-2">
-                                <input type="checkbox" autocomplete="off">Convulsão No Momento
+                                <input class="form-check-input" type="checkbox" autocomplete="off" name="convulsaoMomento">Convulsão No Momento
                                 </label>
                                 <label class="btn btn-primary classification-button col-md-2">
-                                <input type="checkbox" autocomplete="off">Diarreia
+                                <input class="form-check-input" type="checkbox" autocomplete="off"name="diarreia">Diarreia
                                 </label>
                                 <label class="btn btn-primary classification-button col-md-2">
-                                <input type="checkbox" autocomplete="off">Choro Inconsolável
+                                <input class="form-check-input" type="checkbox" autocomplete="off" name="choroIncosolavel">Choro Inconsolável
                                 </label>
                                 <label class="btn btn-primary classification-button col-md-2">
-                                <input type="checkbox" autocomplete="off">Dificuldade de Evacuar
+                                <input class="form-check-input" type="checkbox" autocomplete="off" name="dificuldadeEvacuar">Dificuldade de Evacuar
                                 </label>
                                 <label class="btn btn-primary classification-button col-md-2">
-                                <input type="checkbox" autocomplete="off">Não Suga o Seio
+                                <input class="form-check-input" type="checkbox" autocomplete="off" name="naoSugaSeio">Não Suga o Seio
                                 </label>
                                 <label class="btn btn-primary classification-button col-md-2">
-                                <input type="checkbox" autocomplete="off">Manchas na Pele
+                                <input class="form-check-input" type="checkbox" autocomplete="off" name="manchaPele">Manchas na Pele
                                 </label>
                                 <label class="btn btn-primary classification-button col-md-2">
-                                <input type="checkbox" autocomplete="off">Salivação
+                                <input class="form-check-input" type="checkbox" autocomplete="off" name="salivacao">Salivação
                                 </label>
                                 <label class="btn btn-primary classification-button col-md-2">
-                                <input type="checkbox" autocomplete="off">Queda
+                                <input class="form-check-input" type="checkbox" autocomplete="off" name="queda">Queda
                                 </label>
                                 <label class="btn btn-primary classification-button col-md-2">
-                                <input type="checkbox" autocomplete="off">Chiado no Peito
+                                <input class="form-check-input" type="checkbox" autocomplete="off" name="chiadoPeito">Chiado no Peito
                                 </label>
                                 <label class="btn btn-primary classification-button col-md-2">
-                                <input type="checkbox" autocomplete="off">Diminuiçao da Diurese
+                                <input class="form-check-input" type="checkbox" autocomplete="off" name="diminuicaoDiurese">Diminuiçao da Diurese
                                 </label>
                                 <label class="btn btn-primary classification-button col-md-2">
-                                <input type="checkbox" autocomplete="off">Dor Abdominal
+                                <input class="form-check-input" type="checkbox" autocomplete="off" name="dorAbdominal">Dor Abdominal
                                 </label>
                                 <label class="btn btn-primary classification-button col-md-2">
-                                <input type="checkbox" autocomplete="off">Dor de Ouvido
+                                <input class="form-check-input" type="checkbox" autocomplete="off" name="dorOuvido">Dor de Ouvido
                                 </label>
                                 <label class="btn btn-primary classification-button col-md-2">
-                                <input type="checkbox" autocomplete="off">Fontanela Abaulada
+                                <input class="form-check-input" type="checkbox" autocomplete="off" name="fontanelaAbaulada">Fontanela Abaulada
                                 </label>
                                 <label class="btn btn-primary classification-button col-md-2">
-                                <input type="checkbox" autocomplete="off">Secreção No Umbigo
+                                <input class="form-check-input" type="checkbox" autocomplete="off" name="secrecaoUmbigo">Secreção No Umbigo
                                 </label>
                                 <label class="btn btn-primary classification-button col-md-2">
-                                <input type="checkbox" autocomplete="off">Secreção Ocular
+                                <input class="form-check-input" type="checkbox" autocomplete="off" name="secrecaoOcular">Secreção Ocular
                                 </label>
                                 <label class="btn btn-primary classification-button col-md-2">
-                                <input type="checkbox" autocomplete="off">Sangue nas Fezes
+                                <input class="form-check-input" type="checkbox" autocomplete="off" name="sangueFezes">Sangue nas Fezes
                                 </label>
                                 <label class="btn btn-primary classification-button col-md-2">
-                                <input type="checkbox" autocomplete="off">Convulção hoje
+                                <input class="form-check-input" type="checkbox" autocomplete="off" name="convulsaoHoje">Convulção hoje
                                 </label>
                             </div>
                         </div>
