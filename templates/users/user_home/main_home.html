@@ -39,7 +39,19 @@
                     {% elif patient.classification == 4 %}
                         <td><span class="btn btn-primary badge badge-pill badge-info"  data-toggle="modal" data-target="#{{ patient.id }}">Atendimento Eletivo</span></td>
                     {% endif %}
-                    <td></td>
+                    {% if patient.age_range == 0 %}
+                        <td>Faixa etária indefinida</td>
+                    {% elif patient.age_range == 1 %}
+                        <td>0 até 28 dias</td>
+                    {% elif patient.age_range == 2 %}
+                        <td>29 dias à 3 meses</td>
+                    {% elif patient.age_range == 3 %}
+                        <td>3 meses à 2 anos</td>
+                    {% elif patient.age_range == 4 %}
+                        <td>2 anos à 10 anos</td>
+                    {% elif patient.age_range == 5 %}
+                        <td>Acima de 10 anos</span></td>
+                    {% endif %}
                     <td>{{ patient.created_at }}</td>
                     <td></td>
                     <td><a href="#" data-toggle="modal" data-target="#deletar-{{ patient.id }}"><i class="fa fa-ban" aria-hidden="true"></i></a></td>
