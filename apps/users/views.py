@@ -84,6 +84,7 @@ def register_patient(request):
     form = RegistrationPatientForm()
     if request.method == 'POST':
         form = RegistrationPatientForm(request.POST)
+        print(request.POST.get('uf'))
 
         if form.is_valid():
             form.save()

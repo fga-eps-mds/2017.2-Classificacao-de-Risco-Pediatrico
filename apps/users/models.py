@@ -178,7 +178,7 @@ class Patient(models.Model):
         default='',
         blank=True
     )
-    
+
     city = models.CharField(
         verbose_name='Cidade',
         max_length=50,
@@ -235,6 +235,16 @@ class Patient(models.Model):
     )
 
     AGE_RANGE = (
-        (1, 'até 28 dias'),
+        (0, 'Faixa etária indefinida'),
+        (1, '0 até 28 dias'),
         (2, '29 dias à 3 meses'),
+        (3, '3 meses à 2 anos'),
+        (4, '2 anos à 10 anos'),
+        (5, 'Acima de 10 anos')
+    )
+
+    age_range = models.IntegerField(
+        verbose_name=_('Classification'),
+        choices=AGE_RANGE,
+        default=0
     )
