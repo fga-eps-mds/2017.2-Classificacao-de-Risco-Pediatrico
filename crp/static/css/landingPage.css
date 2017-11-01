@@ -83,8 +83,8 @@ a {
       border-bottom: none;
       background: rgba(0, 0, 0, 0.7 ); }
       #mainNav.navbar-shrink {
-        padding-top: 20px;
-        padding-bottom: 20px;
+        padding-top: 10px;
+        padding-bottom: 10px;
         border-bottom: 1px solid rgba(255, 255, 255, 0.3);
         background: rgba(0, 0, 0, 0.7 ); }
       #mainNav .nav-link.active {
@@ -220,3 +220,16 @@ img::-moz-selection {
 
 body {
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0.2); }
+
+/*Animated*/
+.animate {
+  display: block;
+  opacity: 0;
+  transition: all 1s ease-in-out;
+}
+
+.js-animated {
+  opacity: 1;
+
+}
+
