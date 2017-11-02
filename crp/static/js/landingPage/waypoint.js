@@ -2,8 +2,8 @@
 
   $animate.waypoint(function (direction) {
     if (direction == 'down') {
-        $animate.addClass('fadeInUp');
+        $animate.addClass('js-animated');
     }else {
-        $animate.removeClass('fadeInUp');
+        $animate.removeClass('js-animated');
     }
   }, {offset:'90%'});
