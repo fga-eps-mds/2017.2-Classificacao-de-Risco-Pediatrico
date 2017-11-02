@@ -1,6 +1,8 @@
 # Arquivo: apps/users/models.py
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.db import models
+from datetime import date
+from django.contrib.postgres.fields import DateRangeField
 from django.utils.translation import ugettext as _
 
 
@@ -246,5 +248,6 @@ class Patient(models.Model):
     age_range = models.IntegerField(
         verbose_name=_('Classification'),
         choices=AGE_RANGE,
+        blank=True,
         default=0
     )
