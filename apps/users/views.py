@@ -6,6 +6,7 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate
+from django.http import HttpResponse
 from apps.risk_rating.ml_classifier import MachineLearning
 
 from apps.users.forms import RegistrationStaffForm
@@ -47,7 +48,8 @@ def home(request):
     return rendered text from homeReceptionist
     """
     patients = Patient.objects.all()
-
+    patient = None
+    classification = None
     if request.method == "POST":
         if request.POST.get("classification"):
             patient_classification = request.POST.get("classification")
@@ -55,8 +57,8 @@ def home(request):
 
             patient = Patient.objects.get(id=patient_id)
             patient.classification = patient_classification
-
             patient.save()
+
         else:
             dispineia = check_patient_problem(request.POST.get("dispineia"))
             ictericia = check_patient_problem(request.POST.get("ictericia"))
@@ -127,7 +129,8 @@ def home(request):
             print(impact_list)
 
     return render(request, 'users/user_home/main_home.html',
-                           {'patients': patients})
+                           {'patients': patients,
+                           'classification': classification})
 
 def check_patient_problem(problem):
     if problem is not None:
