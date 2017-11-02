@@ -140,7 +140,7 @@ class Patient(models.Model):
     birth_date = models.DateField(
         verbose_name=_('Data de Nascimento'),
         blank=False,
-        help_text=_('Informe a data de Nascimento'),
+        help_text=_('Informe a data de Nascimento')
     )
 
     cpf = models.CharField(

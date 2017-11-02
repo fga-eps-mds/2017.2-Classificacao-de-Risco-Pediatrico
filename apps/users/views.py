@@ -6,6 +6,7 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate
+from datetime import date
 
 from apps.users.forms import RegistrationStaffForm
 from apps.users.forms import RegistrationPatientForm
@@ -79,8 +80,32 @@ def sign_up_profile(request):
                   {'form': form})
 
 
-# def calculate_age(form):
-
+def calculate_age_range(form):
+    birth_date = form.cleaned_data['birth_date']
+    print('///////////DATA ANIVERSARIO/////////////')
+    print(birth_date)
+    print('///////////DATA ANIVERSARIO/////////////')
+    print('//////////DATA DE HOJE//////////////')
+    age_now = date.today()
+    print(age_now)
+    print('///////////DATA HOJE/////////////')
+    age_range = (date.today() - birth_date).days
+    int(age_range)
+    print('//////////DIFERENÇA//////////////')
+    print(age_range)
+    print('///////////DIFERENÇA/////////////')
+    if age_range <= 28:
+        form.cleaned_data['age_range'] = 1
+    elif age_range >= 29 or age_range < 90:
+        form.cleaned_data['age_range'] = 2
+    elif age_range <= 90 or age_range < 730:
+        form.cleaned_data['age_range'] = 3
+    elif age_range <= 730 or age_range < 3650:
+        form.cleaned_data['age_range'] = 4
+    elif age_range > 3650:
+        form.cleaned_data['age_range'] = 5
+    else:
+        form.cleaned_data['age_range'] = 0
 
 
 @login_required(redirect_field_name='', login_url='users:login')
@@ -89,9 +114,7 @@ def register_patient(request):
     if request.method == 'POST':
         form = RegistrationPatientForm(request.POST)
         if form.is_valid():
-            # print('////////////////////////')
-            # print(form.cleaned_data['birth_date'])
-            # print('////////////////////////')
+            calculate_age_range(form)
             form.save()
             return redirect('users:home')
 
