@@ -214,3 +214,9 @@ class Patient(models.Model):
         (1, 'até 28 dias'),
         (2, '29 dias à 3 meses'),
     )
+
+    age_range = models.IntegerField(
+        verbose_name=_('Faixa etária'),
+        choices=AGE_RANGE,
+        default=1
+    )
