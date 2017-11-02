@@ -79,14 +79,19 @@ def sign_up_profile(request):
                   {'form': form})
 
 
+# def calculate_age(form):
+
+
+
 @login_required(redirect_field_name='', login_url='users:login')
 def register_patient(request):
     form = RegistrationPatientForm()
     if request.method == 'POST':
         form = RegistrationPatientForm(request.POST)
-        print(request.POST.get('uf'))
-
         if form.is_valid():
+            # print('////////////////////////')
+            # print(form.cleaned_data['birth_date'])
+            # print('////////////////////////')
             form.save()
             return redirect('users:home')
 
@@ -121,7 +126,7 @@ def manage_accounts_view(request):
 
 
 @login_required(redirect_field_name='', login_url='users:login')
-def edit_accounts_view(request, birth_date):
+def edit_accounts_view(request, id_user):
     staff = Staff.objects.filter(id_user=id_user)
     if len(staff) == 1:
         return render(request, 'users/editAccounts.html', {'staff': staff[0]})

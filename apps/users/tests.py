@@ -92,12 +92,11 @@ class TestUsers:
 
     patient_data = ({
         'name': 'nameTest', 'guardian': 'guardianTeste',
-        'birth_date': '12/2/12', 'cpf': '156498',
-        'parents_name': 'parents_nameTest', 'uf': 'ufTest',
+        'birth_date': '2009-09-09', 'cpf': '156.498.222.09',
+        'parents_name': 'parentsnameTest', 'uf': 'GO',
         'city': 'cityTeste', 'neighborhood': 'neighborhoodTest',
         'street': 'streetTeste', 'block': 'blockTeste',
-        'number': 'numberTest', 'isInQueue': 'True',
-        'queuePosition': '5'})
+        'number': '2222', 'age_range': '0'})
 
     @pytest.mark.parametrize('url, model, data', [
                             ('/register/user/', Staff, profile_data)])
@@ -213,7 +212,7 @@ class TestUsers:
         Staff.objects.create_superuser(**self.default_user_data())
         response = client.post('/', {'username': 'email@gmail.com',
                                      'password': "1234asdf"})
-        name = Patient(cpf='001002012', birth_date='2017-02-01')
+        name = Patient(id='001002012', birth_date='2017-02-01')
         name.save()
         response = client.get('/patients/edit/001002012/')
         assert 'form' in response.context
@@ -239,7 +238,7 @@ class TestUsers:
         response = client.post('/', {'username': 'email@gmail.com',
                                      'password': "1234asdf"})
         Patient()
-        name = Patient(cpf='156498', birth_date='2017-02-01')
+        name = Patient(id='156498', birth_date='2017-02-01')
         name.save()
         response = client.post('/patients/edit/156498/', self.patient_data)
         assert response.status_code == 302
@@ -254,9 +253,9 @@ class TestUsers:
                                      'password': "1234asdf"})
         invalid_patient_data = ({
             'name': 'nameTest', 'guardian': 'guardianTeste',
-            'birth_date': '12/2/12', 'cpf': '156498'})
+            'birth_date': '2010-08-06', 'cpf': 'cpferror'})
         Patient()
-        name = Patient(cpf='156498', birth_date='09/09/2010')
+        name = Patient(id='156498', birth_date='2008-09-05')
         name.save()
         response = client.post('/patients/edit/156498/', invalid_patient_data)
         assert response.status_code == 400
@@ -271,7 +270,7 @@ class TestUsers:
         Patient()
         name = Patient(id='1', birth_date='2017-02-01', name='Victor')
         name.save()
-        client.post('/patients/edit/156498/', self.patient_data)
+        client.post('/patients/edit/1/', self.patient_data)
         assert Patient.objects.filter(id='1')[0].name == 'nameTest'
 
     def test_edit_accounts_view(self, client):
@@ -279,7 +278,7 @@ class TestUsers:
         response = client.post('/', {'username': 'email@gmail.com',
                                      'password': "1234asdf"})
         Staff()
-        name = Staff(id='456')
+        name = Staff(id_user='456')
         name.save()
         response = client.get('/accounts/edit/456/')
         assert response.status_code == 200
