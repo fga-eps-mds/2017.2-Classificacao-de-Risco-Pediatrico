@@ -16,3 +16,9 @@ body {
 #contact {
 	padding-top: 100px;
 }
+
+h2.ser-title {
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-weight: 300;
+    color: #222222;
+}
