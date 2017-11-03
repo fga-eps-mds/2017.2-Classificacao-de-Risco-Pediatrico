@@ -51,19 +51,11 @@ def home(request):
     patient = None
     classification = None
     if request.method == "POST":
-        if request.POST.get("classification"):
-            patient_classification = request.POST.get("classification")
-            patient_id = request.POST.get("patient")
-
-            patient = Patient.objects.get(id=patient_id)
-            patient.classification = patient_classification
-            patient.save()
-
-        else:
             symptoms_form = request.POST
             patient = get_under_28_symptoms(symptoms_form)
-            patient_id = request.POST.get("patient")
-            print (patient_id)
+            subject_patient_id = symptoms_form.get("patient_id")
+            subject_patient = Patient.objects.get(id=subject_patient_id)
+            print (subject_patient.name)
 
             # machine learning here:
             probability = ml.calc_probabilities(patient)
