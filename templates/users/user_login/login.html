@@ -1,5 +1,30 @@
-{% extends 'users/user_login/pre_home_layout.html' %}
 {% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>CRP - Login</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+
+    <!-- Custom fonts for this template -->
+{% comment %}
+    <link href="{% static "css/font-awesome.min.css" %}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Cabin:700' rel='stylesheet' type='text/css'>
+{% endcomment %}
+
+    <!-- Custom styles for this template -->
+    <link href="{% static "css/login.css" %}" rel="stylesheet">
+    <link href="{% static "css/landingPage.css" %}" rel="stylesheet">
+</head>
 
 {% block content_pre %}
     <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
@@ -59,6 +84,6 @@
             </p>
         </div>
     </footer>
-    
+
     </body>
 {% endblock %}
