@@ -15,17 +15,17 @@ html {
   width: 100%;
   height: 100%; }
 
-/*h1,*/
-/*h2,*/
-/*h3,*/
-/*h4,*/
-/*h5,*/
-/*h6 {*/
-  /*font-family: 'Cabin', 'Helvetica Neue', Helvetica, Arial, sans-serif;*/
-  /*font-weight: 700;*/
-  /*margin: 0 0 35px;*/
-  /*letter-spacing: 1px;*/
-  /*text-transform: uppercase; }*/
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Cabin', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  margin: 0 0 35px;
+  letter-spacing: 1px;
+  text-transform: uppercase; }
 
 p {
   font-size: 16px;
@@ -228,9 +228,56 @@ body {
   transition: all 1s ease-in ;
 }
 
+.animate-2 {
+  display: block;
+  opacity: 0;
+  transition: all 1s ease-in ;
+}
+
+.animate-3 {
+  display: block;
+  opacity: 0;
+  transition: all 1s ease-in ;
+}
+
+.animate-4 {
+  display: block;
+  opacity: 0;
+  transition: all 1s ease-in ;
+}
+
+.animate-5 {
+  display: block;
+  opacity: 0;
+  transition: all 1s ease-in ;
+}
+
+.animate-6 {
+  display: block;
+  opacity: 0;
+  transition: all 1s ease-in ;
+}
+
+.animate-7 {
+  display: block;
+  opacity: 0;
+  transition: all 1s ease-in ;
+}
+
+.animate-8 {
+  display: block;
+  opacity: 0;
+  transition: all 1s ease-in ;
+}
+
+.animate-9 {
+  display: block;
+  opacity: 0;
+  transition: all 1s ease-in ;
+}
+
 .js-animated {
   opacity: 1;
 
 }
-
 
