@@ -22,3 +22,9 @@ h2.ser-title {
     font-weight: 300;
     color: #222222;
 }
+
+h4.white.no-padding {
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-weight: 300;
+    color: #222222;
+}
