@@ -172,7 +172,7 @@
                                     <div class="cols-sm-10">
                                         <div class="input-group">
                                             <span class="input-group-addon" id="basic-addon1"><i class="fa fa-map-o" aria-hidden="true"></i></span>
-                                            <input type="text" name="{{ form.city.name }}" id="{{ form.city.id_for_label }}" class="form-control" aria-label="Cidade" aria-describedby="basic-addon7" value={{patient.city}}>
+                                            <input type="text" name="{{ form.city.name }}" id="{{ form.city.id_for_label }}" class="form-control" aria-label="Cidade" aria-describedby="basic-addon7" pattern="[a-zA-Z\s]+$" value={{patient.city}}>
                                         </div>
                                         {% if form.city.errors %}
                                             <div class="error-holder">
@@ -236,7 +236,7 @@
                                     <div class="cols-sm-10">
                                         <div class="input-group">
                                             <span class="input-group-addon" id="basic-addon1">00</span>
-                                            <input type="text" name="{{ form.number.name }}" id="{{ form.number.id_for_label }}" class="form-control" aria-label="Número" aria-describedby="basic-addon10" value={{patient.number}}>
+                                            <input type="text" name="{{ form.number.name }}" id="{{ form.number.id_for_label }}" class="form-control" aria-label="Número" aria-describedby="basic-addon10"  pattern="[0-9]+$" value={{patient.number}}>
                                         </div>
                                         {% if form.number.errors %}
                                             <div class="error-holder">
@@ -251,7 +251,7 @@
                         </div>
                         <div class="card-footer text-right">
                             <a href="{% url 'users:home' %}" class="btn btn btn-outline-secondary btn-lg" >Cancelar</a>
-                            <button type="submit" class="btn btn-outline-secondary btn-lg">Cadastrar</button>
+                            <button type="submit" class="btn btn-outline-secondary btn-lg">Editar</button>
                         </div>
                       </div>
                     </form>
