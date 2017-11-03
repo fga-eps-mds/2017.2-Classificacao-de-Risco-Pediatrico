@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate
 from django.http import HttpResponse
 from apps.risk_rating.ml_classifier import MachineLearning
+from apps.risk_rating.ml_classifier_range2 import MachineLearningRange2
 
 from apps.users.forms import RegistrationStaffForm
 from apps.users.forms import RegistrationPatientForm
@@ -17,6 +18,7 @@ from apps.users.forms import EditPatientForm
 from .models import Patient, Staff
 
 ml = MachineLearning()
+ml2 = MachineLearningRange2()
 
 def login_view(request, *args, **kwargs):
     if request.method == "POST":
@@ -50,17 +52,26 @@ def home(request):
     patients = Patient.objects.all()
     patient = None
     classification = None
+    symptoms_form = None
     if request.method == "POST":
             symptoms_form = request.POST
-            patient = get_under_28_symptoms(symptoms_form)
             subject_patient_id = symptoms_form.get("patient_id")
             subject_patient = Patient.objects.get(id=subject_patient_id)
             print (subject_patient.name)
 
-            # machine learning here:
-            probability = ml.calc_probabilities(patient)
-            classification = ml.classify_patient(patient)
-            impact_list = ml.feature_importance()
+            if subject_patient.age_range == 1:
+                # machine learning here:
+                patient = get_under_28_symptoms(symptoms_form)
+                probability = ml.calc_probabilities(patient)
+                classification = ml.classify_patient(patient)
+                impact_list = ml.feature_importance()
+            elif subject_patient.age_range == 2:
+                patient = get_29d_2m_symptoms(symptoms_form)
+                probability = ml2.calc_probabilities(patient)
+                classification = ml2.classify_patient(patient)
+                impact_list = ml2.feature_importance()
+            else:
+                pass
 
             # printing the results:
             print(probability)
@@ -135,9 +146,66 @@ def get_under_28_symptoms(symptoms_form):
 
     return patient
 
-def get_28d_2m_symptoms(form):
-    pass
-    #return patient
+def get_29d_2m_symptoms(symptoms_form):
+    dispineia = check_patient_problem(symptoms_form.get("dispineia"))
+    ictericia = check_patient_problem(symptoms_form.get("ictericia"))
+    consciencia = check_patient_problem(symptoms_form.get("consciência"))
+    cianose = check_patient_problem(symptoms_form.get("cianose"))
+    febre = check_patient_problem(symptoms_form.get("febre"))
+    solucos = check_patient_problem(symptoms_form.get("solucos"))
+    prostracao = check_patient_problem(symptoms_form.get("prostracao"))
+    vomitos = check_patient_problem(symptoms_form.get("vomitos"))
+    tosse = check_patient_problem(symptoms_form.get("tosse"))
+    coriza = check_patient_problem(symptoms_form.get("coriza"))
+    obstrucaoNasal = check_patient_problem(symptoms_form.get("obstrucaoNasal"))
+    convulsaoMomento = check_patient_problem(symptoms_form.get("convulsaoMomento"))
+    diarreia = check_patient_problem(symptoms_form.get("diarreia"))
+    dificuldadeEvacuar = check_patient_problem(symptoms_form.get("dificuldadeEvacuar"))
+    naoSugaSeio = check_patient_problem(symptoms_form.get("naoSugaSeio"))
+    manchaPele = check_patient_problem(symptoms_form.get("manchaPele"))
+    salivacao = check_patient_problem(symptoms_form.get("salivacao"))
+    queda = check_patient_problem(symptoms_form.get("queda"))
+    chiadoPeito = check_patient_problem(symptoms_form.get("chiadoPeito"))
+    diminuicaoDiurese = check_patient_problem(symptoms_form.get("diminuicaoDiurese"))
+    dorAbdominal = check_patient_problem(symptoms_form.get("dorAbdominal"))
+    dorOuvido = check_patient_problem(symptoms_form.get("dorOuvido"))
+    fontanelaAbaulada = check_patient_problem(symptoms_form.get("fontanelaAbaulada"))
+    secrecaoUmbigo = check_patient_problem(symptoms_form.get("secrecaoUmbigo"))
+    secrecaoOcular = check_patient_problem(symptoms_form.get("secrecaoOcular"))
+    sangueFezes = check_patient_problem(symptoms_form.get("sangueFezes"))
+    convulsaoHoje = check_patient_problem(symptoms_form.get("convulsaoHoje"))
+
+    patient = [[
+        dispineia,
+        ictericia,
+        consciencia,
+        cianose,
+        febre,
+        solucos,
+        prostracao,
+        vomitos,
+        tosse,
+        coriza,
+        obstrucaoNasal,
+        convulsaoMomento,
+        diarreia,
+        dificuldadeEvacuar,
+        naoSugaSeio,
+        manchaPele,
+        salivacao,
+        queda,
+        chiadoPeito,
+        diminuicaoDiurese,
+        dorAbdominal,
+        dorOuvido,
+        fontanelaAbaulada,
+        secrecaoUmbigo,
+        secrecaoOcular,
+        sangueFezes,
+        convulsaoHoje,
+    ]]
+
+    return patient
 
 def check_patient_problem(problem):
     if problem is not None:
