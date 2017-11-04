@@ -36,14 +36,14 @@ class TestUsers:
     def test_login_view_for_user(self, client):
 
         Staff.objects.create_user(**self.default_user_data())
-        response = client.post('/', {'username': 'email@gmail.com',
-                                     'password': "1234asdf"})
+        response = client.post('/login', {'username': 'email@gmail.com',
+                               'password': "1234asdf"})
 
         assert response.url == '/home'
 
     def test_login_view_user_do_not_exists(self, client):
-        response = client.post('/', {'username': 'email@gmail.com',
-                                     'password': "1234asdf"})
+        response = client.post('/login', {'username': 'email@gmail.com',
+                               'password': "1234asdf"})
 
         assert response.template_name[0] == 'users/user_login/login.html'
 
@@ -76,7 +76,7 @@ class TestUsers:
         ('/register/patient/', 'users/user_home/registerPatient.html')])
     def test_sign_up_template(self, client, url, template):
         Staff.objects.create_superuser(**self.default_user_data())
-        response = client.post('/', {'username': 'email@gmail.com',
+        response = client.post('/login', {'username': 'email@gmail.com',
                                      'password': "1234asdf"})
         response = client.get(url)
         assert response.templates[0].name == template
@@ -109,7 +109,7 @@ class TestUsers:
                             ('/register/patient/', Patient, patient_data)])
     def test_sign_up_post_patient(self, client, url, model, data):
         Staff.objects.create_superuser(**self.default_user_data())
-        response = client.post('/', {'username': 'email@gmail.com',
+        response = client.post('/login', {'username': 'email@gmail.com',
                                      'password': "1234asdf"})
         response = client.post(url, data)
         assert response.status_code == 302
@@ -120,7 +120,7 @@ class TestUsers:
         ('/register/patient/', RegistrationPatientForm)])
     def test_sign_up_has_form(self, client, url, form):
         Staff.objects.create_superuser(**self.default_user_data())
-        response = client.post('/', {'username': 'email@gmail.com',
+        response = client.post('/login', {'username': 'email@gmail.com',
                                      'password': "1234asdf"})
         response = client.get(url)
         assert 'form' in response.context
@@ -132,7 +132,7 @@ class TestUsers:
         ('/register/patient/', patient_data, '/home/')])
     def test_sign_up_post_redirect(self, client, url, data, urlredirect):
         Staff.objects.create_superuser(**self.default_user_data())
-        response = client.post('/', {'username': 'email@gmail.com',
+        response = client.post('/login', {'username': 'email@gmail.com',
                                      'password': "1234asdf"})
         response = client.post(url, data, follow=True)
         assert response.status_code == 200
@@ -140,7 +140,7 @@ class TestUsers:
 
     def test_home_view(self, client):
         Staff.objects.create_superuser(**self.default_user_data())
-        response = client.post('/', {'username': 'email@gmail.com',
+        response = client.post('/login', {'username': 'email@gmail.com',
                                      'password': "1234asdf"})
         response = client.get('/home/')
         assert response.status_code == 200
@@ -197,7 +197,7 @@ class TestUsers:
 
     def test_show_patient_view(self, client):
         Staff.objects.create_superuser(**self.default_user_data())
-        response = client.post('/', {'username': 'email@gmail.com',
+        response = client.post('/login', {'username': 'email@gmail.com',
                                      'password': "1234asdf"})
         Patient()
         name = Patient(cpf='001002012', birth_date='2017-02-01')
@@ -207,7 +207,7 @@ class TestUsers:
 
     def test_registered_patient_view(self, client):
         Staff.objects.create_superuser(**self.default_user_data())
-        response = client.post('/', {'username': 'email@gmail.com',
+        response = client.post('/login', {'username': 'email@gmail.com',
                                      'password': "1234asdf"})
         patient = PatientFactory.create_batch(3)
         response = client.get('/home/')
@@ -219,7 +219,7 @@ class TestUsers:
         Test edit patient form with a valid cpf
         """
         Staff.objects.create_superuser(**self.default_user_data())
-        response = client.post('/', {'username': 'email@gmail.com',
+        response = client.post('/login', {'username': 'email@gmail.com',
                                      'password': "1234asdf"})
         name = Patient(cpf='001002012', birth_date='2017-02-01')
         name.save()
@@ -234,7 +234,7 @@ class TestUsers:
         Test edit patient form with a invalid cpf
         """
         Staff.objects.create_superuser(**self.default_user_data())
-        client.post('/', {'username': 'email@gmail.com',
+        client.post('/login', {'username': 'email@gmail.com',
                           'password': "1234asdf"})
         with pytest.raises(IndexError):
             client.get('/patients/edit/007/')
@@ -258,7 +258,7 @@ class TestUsers:
         Test edit patient post mehtod with invalid data
         """
         Staff.objects.create_superuser(**self.default_user_data())
-        response = client.post('/', {'username': 'email@gmail.com',
+        response = client.post('/login', {'username': 'email@gmail.com',
                                      'password': "1234asdf"})
         invalid_patient_data = ({
             'name': 'nameTest', 'guardian': 'guardianTeste',
@@ -274,7 +274,7 @@ class TestUsers:
         Test if edit patient post method is actualy updating
         """
         Staff.objects.create_superuser(**self.default_user_data())
-        client.post('/', {'username': 'email@gmail.com',
+        client.post('/login', {'username': 'email@gmail.com',
                           'password': "1234asdf"})
         Patient()
         name = Patient(cpf='156498', birth_date='2017-02-01', name='Victor')
@@ -284,7 +284,7 @@ class TestUsers:
 
     def test_edit_accounts_view(self, client):
         Staff.objects.create_superuser(**self.default_user_data())
-        response = client.post('/', {'username': 'email@gmail.com',
+        response = client.post('/login', {'username': 'email@gmail.com',
                                      'password': "1234asdf"})
         Staff()
         name = Staff(id_user='456')
@@ -294,7 +294,7 @@ class TestUsers:
 
     def test_manage_accounts_view(self, client):
         stafflogin = Staff.objects.create_superuser(**self.default_user_data())
-        response = client.post('/', {'username': 'email@gmail.com',
+        response = client.post('/login', {'username': 'email@gmail.com',
                                      'password': "1234asdf"})
         staff1 = Staff(id_user='456')
         staff1.save()
@@ -305,7 +305,7 @@ class TestUsers:
 
     def test_staff_remove(self, client):
         Staff.objects.create_superuser(**self.default_user_data())
-        response = client.post('/', {'username': 'email@gmail.com',
+        response = client.post('/login', {'username': 'email@gmail.com',
                                      'password': "1234asdf",
                                      'id_user': "1234"})
         Staff()
@@ -318,9 +318,9 @@ class TestUsers:
         # por isso o assert igual a 1
 
     @pytest.mark.parametrize('url, urlredirect', [
-        ('/register/patient', '/'),
-        ('/home', '/'),
-        ('/accounts', '/')])
+        ('/register/patient', '/login'),
+        ('/home', '/login'),
+        ('/accounts', '/login')])
     def test_unauthorized_status_code(self, client, url, urlredirect):
         response = client.get(url, follow=True)
         last_url, status_code = response.redirect_chain[-1]
@@ -331,4 +331,4 @@ class TestUsers:
         name = Patient(cpf='456', birth_date='2000-10-10')
         name.save()
         response = client.get('/show/patient/456/', follow=True)
-        assert response.redirect_chain == [('/', 302)]
+        assert response.redirect_chain == [('/login', 302)]
