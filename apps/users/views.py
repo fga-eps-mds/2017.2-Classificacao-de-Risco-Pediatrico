@@ -100,7 +100,6 @@ def specify_age_range(age_range, aux_age_range, form):
 
 def calculate_age_range(form):
     birth_date = form.cleaned_data['birth_date']
-    age_now = date.today()
     age_range = (date.today() - birth_date).days
     int(age_range)
     aux_age_range = 0
