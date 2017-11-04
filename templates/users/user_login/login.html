@@ -47,21 +47,6 @@
                                 Cadastre-se
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" >
-                                |
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger"
-                                {% if user.is_authenticated %}
-                                    href="{%  url 'users:home' %}">
-                                {% else %}
-                                    href="{%  url 'users:login' %}">
-                                {% endif %}
-                                Entrar
-                            </a>
-                        </li>
                     </ul>
                 </div>
             </div>
