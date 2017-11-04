@@ -1,6 +1,6 @@
 from sklearn.ensemble import RandomForestClassifier
 import pandas as pd
-import numpy as np
+# import numpy as np commented for flake8 reasons
 
 
 class MachineLearningRange2:
@@ -31,17 +31,18 @@ class MachineLearningRange2:
         return clf
 
     def feature_importance(self):
-        return list(zip(self.__data_frame[self.__features], self.__clf.feature_importances_))
+        return list(zip(self.__data_frame[self.__features],
+                        self.__clf.feature_importances_))
 
     def read_csv(self):
         df = pd.read_csv('apps/risk_rating/class_29d_2m.csv',
                          true_values=["Sim"], false_values=["Não", "Nao"])
         df = df.drop(df.columns[[0, 2, 29]], axis=1)
-        columns_titles = list(df.columns.values)
+        columns_tls = list(df.columns.values)
 
         # changing last and penultimate values
-        columns_titles[26], columns_titles[27] = columns_titles[27], columns_titles[26]
-        df = df.reindex(columns=columns_titles)
+        columns_tls[26], columns_tls[27] = columns_tls[27], columns_tls[26]
+        df = df.reindex(columns=columns_tls)
 
         return df
 

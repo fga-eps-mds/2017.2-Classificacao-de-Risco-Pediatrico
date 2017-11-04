@@ -6,7 +6,6 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate
-from django.http import HttpResponse
 from apps.risk_rating.ml_classifier import MachineLearning
 from apps.risk_rating.ml_classifier_range2 import MachineLearningRange2
 
@@ -19,6 +18,7 @@ from .models import Patient, Staff
 
 ml = MachineLearning()
 ml2 = MachineLearningRange2()
+
 
 def login_view(request, *args, **kwargs):
     if request.method == "POST":
@@ -52,21 +52,20 @@ def home(request):
     patients = Patient.objects.all()
     patient = None
     classification = None
-    symptoms_form = None
+    form = None
     if request.method == "POST":
-            symptoms_form = request.POST
-            subject_patient_id = symptoms_form.get("patient_id")
+            form = request.POST
+            subject_patient_id = form.get("patient_id")
             subject_patient = Patient.objects.get(id=subject_patient_id)
-            print (subject_patient.name)
 
             # machine learning methods are called here:
             if subject_patient.age_range == 1:
-                patient = get_under_28_symptoms(symptoms_form)
+                patient = get_under_28_symptoms(form)
                 probability = ml.calc_probabilities(patient)
                 classification = ml.classify_patient(patient)
                 impact_list = ml.feature_importance()
             elif subject_patient.age_range == 2:
-                patient = get_29d_2m_symptoms(symptoms_form)
+                patient = get_29d_2m_symptoms(form)
                 probability = ml2.calc_probabilities(patient)
                 classification = ml2.classify_patient(patient)
                 impact_list = ml2.feature_importance()
@@ -80,18 +79,16 @@ def home(request):
             print(probability)
             print(classification)
             print(impact_list)
-            print(subject_patient.classification)
 
     return render(request, 'users/user_home/main_home.html',
                            {'patients': patients,
-                           'classification': classification})
+                            'classification': classification})
 
 
 def define_patient_classification(subject_patient, classification):
     """
-    triggers the machine learning based on patient's age range
+    edit patient's classification attribute
     """
-    
     if classification == 'AtendimentoImediato':
         subject_patient.classification = 1
     elif classification == 'AmbulatorialGeral':
@@ -226,36 +223,39 @@ def show_patient_view(request, cpf):
         return render(request, 'users/showPatient.html', {'patient': patient})
     return render(request, 'users/showPatient.html', status=404)
 
-def get_under_28_symptoms(symptoms_form):
 
-    dispineia = check_patient_problem(symptoms_form.get("dispineia"))
-    ictericia = check_patient_problem(symptoms_form.get("ictericia"))
-    consciencia = check_patient_problem(symptoms_form.get("consciência"))
-    cianose = check_patient_problem(symptoms_form.get("cianose"))
-    febre = check_patient_problem(symptoms_form.get("febre"))
-    solucos = check_patient_problem(symptoms_form.get("solucos"))
-    prostracao = check_patient_problem(symptoms_form.get("prostracao"))
-    vomitos = check_patient_problem(symptoms_form.get("vomitos"))
-    tosse = check_patient_problem(symptoms_form.get("tosse"))
-    coriza = check_patient_problem(symptoms_form.get("coriza"))
-    obstrucaoNasal = check_patient_problem(symptoms_form.get("obstrucaoNasal"))
-    convulsaoMomento = check_patient_problem(symptoms_form.get("convulsaoMomento"))
-    diarreia = check_patient_problem(symptoms_form.get("diarreia"))
-    choroIncosolavel = check_patient_problem(symptoms_form.get("choroIncosolavel"))
-    dificuldadeEvacuar = check_patient_problem(symptoms_form.get("dificuldadeEvacuar"))
-    naoSugaSeio = check_patient_problem(symptoms_form.get("naoSugaSeio"))
-    manchaPele = check_patient_problem(symptoms_form.get("manchaPele"))
-    salivacao = check_patient_problem(symptoms_form.get("salivacao"))
-    queda = check_patient_problem(symptoms_form.get("queda"))
-    chiadoPeito = check_patient_problem(symptoms_form.get("chiadoPeito"))
-    diminuicaoDiurese = check_patient_problem(symptoms_form.get("diminuicaoDiurese"))
-    dorAbdominal = check_patient_problem(symptoms_form.get("dorAbdominal"))
-    dorOuvido = check_patient_problem(symptoms_form.get("dorOuvido"))
-    fontanelaAbaulada = check_patient_problem(symptoms_form.get("fontanelaAbaulada"))
-    secrecaoUmbigo = check_patient_problem(symptoms_form.get("secrecaoUmbigo"))
-    secrecaoOcular = check_patient_problem(symptoms_form.get("secrecaoOcular"))
-    sangueFezes = check_patient_problem(symptoms_form.get("sangueFezes"))
-    convulsaoHoje = check_patient_problem(symptoms_form.get("convulsaoHoje"))
+def get_under_28_symptoms(form):
+    """
+    get symptoms from form to build patient's clinical condition
+    """
+    dispineia = check_patient_problem(form.get("dispineia"))
+    ictericia = check_patient_problem(form.get("ictericia"))
+    consciencia = check_patient_problem(form.get("consciência"))
+    cianose = check_patient_problem(form.get("cianose"))
+    febre = check_patient_problem(form.get("febre"))
+    solucos = check_patient_problem(form.get("solucos"))
+    prostracao = check_patient_problem(form.get("prostracao"))
+    vomitos = check_patient_problem(form.get("vomitos"))
+    tosse = check_patient_problem(form.get("tosse"))
+    coriza = check_patient_problem(form.get("coriza"))
+    obstrucaoNasal = check_patient_problem(form.get("obstrucaoNasal"))
+    convulsaoMomento = check_patient_problem(form.get("convulsaoMomento"))
+    diarreia = check_patient_problem(form.get("diarreia"))
+    choroIncosolavel = check_patient_problem(form.get("choroIncosolavel"))
+    dificuldadeEvacuar = check_patient_problem(form.get("dificuldadeEvacuar"))
+    naoSugaSeio = check_patient_problem(form.get("naoSugaSeio"))
+    manchaPele = check_patient_problem(form.get("manchaPele"))
+    salivacao = check_patient_problem(form.get("salivacao"))
+    queda = check_patient_problem(form.get("queda"))
+    chiadoPeito = check_patient_problem(form.get("chiadoPeito"))
+    diminuicaoDiurese = check_patient_problem(form.get("diminuicaoDiurese"))
+    dorAbdominal = check_patient_problem(form.get("dorAbdominal"))
+    dorOuvido = check_patient_problem(form.get("dorOuvido"))
+    fontanelaAbaulada = check_patient_problem(form.get("fontanelaAbaulada"))
+    secrecaoUmbigo = check_patient_problem(form.get("secrecaoUmbigo"))
+    secrecaoOcular = check_patient_problem(form.get("secrecaoOcular"))
+    sangueFezes = check_patient_problem(form.get("sangueFezes"))
+    convulsaoHoje = check_patient_problem(form.get("convulsaoHoje"))
 
     patient = [[
         dispineia,
@@ -290,34 +290,38 @@ def get_under_28_symptoms(symptoms_form):
 
     return patient
 
-def get_29d_2m_symptoms(symptoms_form):
-    dispineia = check_patient_problem(symptoms_form.get("dispineia"))
-    ictericia = check_patient_problem(symptoms_form.get("ictericia"))
-    consciencia = check_patient_problem(symptoms_form.get("consciência"))
-    cianose = check_patient_problem(symptoms_form.get("cianose"))
-    febre = check_patient_problem(symptoms_form.get("febre"))
-    solucos = check_patient_problem(symptoms_form.get("solucos"))
-    prostracao = check_patient_problem(symptoms_form.get("prostracao"))
-    vomitos = check_patient_problem(symptoms_form.get("vomitos"))
-    tosse = check_patient_problem(symptoms_form.get("tosse"))
-    coriza = check_patient_problem(symptoms_form.get("coriza"))
-    obstrucaoNasal = check_patient_problem(symptoms_form.get("obstrucaoNasal"))
-    convulsaoMomento = check_patient_problem(symptoms_form.get("convulsaoMomento"))
-    diarreia = check_patient_problem(symptoms_form.get("diarreia"))
-    dificuldadeEvacuar = check_patient_problem(symptoms_form.get("dificuldadeEvacuar"))
-    naoSugaSeio = check_patient_problem(symptoms_form.get("naoSugaSeio"))
-    manchaPele = check_patient_problem(symptoms_form.get("manchaPele"))
-    salivacao = check_patient_problem(symptoms_form.get("salivacao"))
-    queda = check_patient_problem(symptoms_form.get("queda"))
-    chiadoPeito = check_patient_problem(symptoms_form.get("chiadoPeito"))
-    diminuicaoDiurese = check_patient_problem(symptoms_form.get("diminuicaoDiurese"))
-    dorAbdominal = check_patient_problem(symptoms_form.get("dorAbdominal"))
-    dorOuvido = check_patient_problem(symptoms_form.get("dorOuvido"))
-    fontanelaAbaulada = check_patient_problem(symptoms_form.get("fontanelaAbaulada"))
-    secrecaoUmbigo = check_patient_problem(symptoms_form.get("secrecaoUmbigo"))
-    secrecaoOcular = check_patient_problem(symptoms_form.get("secrecaoOcular"))
-    sangueFezes = check_patient_problem(symptoms_form.get("sangueFezes"))
-    convulsaoHoje = check_patient_problem(symptoms_form.get("convulsaoHoje"))
+
+def get_29d_2m_symptoms(form):
+    """
+    get symptoms from form to build patient's clinical condition
+    """
+    dispineia = check_patient_problem(form.get("dispineia"))
+    ictericia = check_patient_problem(form.get("ictericia"))
+    consciencia = check_patient_problem(form.get("consciência"))
+    cianose = check_patient_problem(form.get("cianose"))
+    febre = check_patient_problem(form.get("febre"))
+    solucos = check_patient_problem(form.get("solucos"))
+    prostracao = check_patient_problem(form.get("prostracao"))
+    vomitos = check_patient_problem(form.get("vomitos"))
+    tosse = check_patient_problem(form.get("tosse"))
+    coriza = check_patient_problem(form.get("coriza"))
+    obstrucaoNasal = check_patient_problem(form.get("obstrucaoNasal"))
+    convulsaoMomento = check_patient_problem(form.get("convulsaoMomento"))
+    diarreia = check_patient_problem(form.get("diarreia"))
+    dificuldadeEvacuar = check_patient_problem(form.get("dificuldadeEvacuar"))
+    naoSugaSeio = check_patient_problem(form.get("naoSugaSeio"))
+    manchaPele = check_patient_problem(form.get("manchaPele"))
+    salivacao = check_patient_problem(form.get("salivacao"))
+    queda = check_patient_problem(form.get("queda"))
+    chiadoPeito = check_patient_problem(form.get("chiadoPeito"))
+    diminuicaoDiurese = check_patient_problem(form.get("diminuicaoDiurese"))
+    dorAbdominal = check_patient_problem(form.get("dorAbdominal"))
+    dorOuvido = check_patient_problem(form.get("dorOuvido"))
+    fontanelaAbaulada = check_patient_problem(form.get("fontanelaAbaulada"))
+    secrecaoUmbigo = check_patient_problem(form.get("secrecaoUmbigo"))
+    secrecaoOcular = check_patient_problem(form.get("secrecaoOcular"))
+    sangueFezes = check_patient_problem(form.get("sangueFezes"))
+    convulsaoHoje = check_patient_problem(form.get("convulsaoHoje"))
 
     patient = [[
         dispineia,
