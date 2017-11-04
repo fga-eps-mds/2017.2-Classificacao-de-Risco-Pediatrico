@@ -1,3 +1,9 @@
+#mainNav {
+    background: rgba(22, 52, 89, 0.8); }
+#mainNav.navbar-shrink {
+    background: rgba(22, 52, 89, 0.8);
+}
+
 body {
     background: white;
     padding-top: 100px;
@@ -11,7 +17,7 @@ body {
 }
 
 footer {
-    font-color: white;
+    color: white;
     bottom: 0px;
     left: 0px;
     width: 100%;
@@ -19,18 +25,18 @@ footer {
 }
 
 h2.ser-title {
-    font-color: white;
-    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-size: 28px;
+    font-family: 'Raleway', sans-serif;
     font-weight: 300;
     color: #222222;
     margin-bottom: 0px;
 }
 
 h4.white.no-padding {
-    font-color: white;
-    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    color: white;
+    font-family: 'Raleway', sans-serif;
+    font-size: 22px;
     font-weight: 300;
-    color: #222222;
+    text-transform: capitalize;
 }
-
 
