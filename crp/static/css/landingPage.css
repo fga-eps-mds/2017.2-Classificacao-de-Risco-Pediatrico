@@ -100,7 +100,7 @@ a {
   padding: 200px 0;
   text-align: center;
   color: white;
-  background: url("../img/capa_crp.png") no-repeat bottom center scroll;
+  background: url("../img/doctors.jpg") no-repeat bottom center scroll;
   background-color: black;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -146,7 +146,7 @@ a {
 
 .download-section {
   color: white;
-  background: url("../img/capa_crp2.png") no-repeat center center scroll;
+  background: url("../img/doctors.jpg") no-repeat center center scroll;
   background-color: black;
   -webkit-background-size: cover;
   -moz-background-size: cover;
