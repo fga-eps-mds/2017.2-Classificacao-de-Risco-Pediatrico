@@ -47,7 +47,7 @@ def login_view(request, *args, **kwargs):
 @login_required(redirect_field_name='', login_url='users:login')
 def home(request):
     """
-    return rendered text from homeReceptionist
+    triggers the machine learning based on patient's age range
     """
     patients = Patient.objects.all()
     patient = None
@@ -59,8 +59,8 @@ def home(request):
             subject_patient = Patient.objects.get(id=subject_patient_id)
             print (subject_patient.name)
 
+            # machine learning methods are called here:
             if subject_patient.age_range == 1:
-                # machine learning here:
                 patient = get_under_28_symptoms(symptoms_form)
                 probability = ml.calc_probabilities(patient)
                 classification = ml.classify_patient(patient)
@@ -70,17 +70,161 @@ def home(request):
                 probability = ml2.calc_probabilities(patient)
                 classification = ml2.classify_patient(patient)
                 impact_list = ml2.feature_importance()
+            # to add another age range, use another elif
             else:
                 pass
+
+            define_patient_classification(subject_patient, classification)
 
             # printing the results:
             print(probability)
             print(classification)
             print(impact_list)
+            print(subject_patient.classification)
 
     return render(request, 'users/user_home/main_home.html',
                            {'patients': patients,
                            'classification': classification})
+
+
+def define_patient_classification(subject_patient, classification):
+    """
+    triggers the machine learning based on patient's age range
+    """
+    
+    if classification == 'AtendimentoImediato':
+        subject_patient.classification = 1
+    elif classification == 'AmbulatorialGeral':
+        subject_patient.classification = 2
+    elif classification == 'AtendimentoHospitalar':
+        subject_patient.classification = 3
+    else:
+        pass
+
+    subject_patient.save()
+
+
+def check_patient_problem(problem):
+    if problem is not None:
+        problem = 1
+    else:
+        problem = 0
+
+    return problem
+
+
+def logout_view(request, *args, **kwargs):
+    """
+    Define the logout page
+    """
+    kwargs['next_page'] = reverse('users:login')
+    return logout(request, *args, **kwargs)
+
+
+def sign_up_profile(request):
+    form = RegistrationStaffForm()
+    if request.method == 'POST':
+        form = RegistrationStaffForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('users:home')
+
+    return render(request, 'users/user_login/registerUser.html',
+                  {'form': form})
+
+
+@login_required(redirect_field_name='', login_url='users:login')
+def register_patient(request):
+    form = RegistrationPatientForm()
+    if request.method == 'POST':
+        form = RegistrationPatientForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            return redirect('users:home')
+
+    return render(request, 'users/user_home/registerPatient.html',
+                  {'form': form})
+
+
+@login_required(redirect_field_name='', login_url='users:login')
+def queue_patient(request, cpf_patient):
+    patients = Patient.objects.filter(cpf=cpf_patient)
+    patient = Patient.objects.get(cpf=cpf_patient)
+    patientsInQueue = Patient.objects.all()
+    patientList = list()
+    for patient0 in patientsInQueue:
+        patientList.append(patient0.patient)
+    if patient in patientList:
+        return render(request, 'users/queuePatient.html',
+                               {'patientList': patientList})
+    else:
+        queuedPatient = Patient.objects.create(patient=patient)
+        queuedPatient.save()
+        patientList.append(patient)
+        return render(request, 'users/queuePatient.html',
+                               {'patients': patients})
+    return render(request, 'users/queuePatient.html', {'patients': patients})
+
+
+@login_required(redirect_field_name='', login_url='users:login')
+def manage_accounts_view(request):
+    staffs = Staff.objects.all()
+    return render(request, 'users/manageAccounts.html', {'staffs': staffs})
+
+
+@login_required(redirect_field_name='', login_url='users:login')
+def edit_accounts_view(request, id_user):
+    staff = Staff.objects.filter(id_user=id_user)
+    if len(staff) == 1:
+        return render(request, 'users/editAccounts.html', {'staff': staff[0]})
+    return render(request, 'users/editAccounts.html', status=404)
+
+
+@login_required(redirect_field_name='', login_url='users:login')
+def staff_remove(request, id_user):
+    staff = Staff.objects.filter(id_user=id_user)
+    staff.delete()
+    return HttpResponseRedirect(reverse('users:manage_accounts'))
+
+
+@login_required(redirect_field_name='', login_url='users:login')
+def patient_remove(request, cpf):
+    patient = Patient.objects.filter(cpf=cpf)
+    patient.delete()
+    return HttpResponseRedirect(reverse('users:home'))
+
+
+@login_required(redirect_field_name='', login_url='users:login')
+def edit_patient(request, cpf):
+    """
+    edit an existing patient with post method
+    """
+    patient = Patient.objects.filter(cpf=cpf)[0]
+    form = EditPatientForm()
+
+    status = 200
+
+    if request.method == 'POST':
+        form = EditPatientForm(request.POST, instance=patient)
+        if form.is_valid():
+            form.save()
+            return redirect('users:home')
+        else:
+            status = 400
+    return render(request, 'users/editPatient.html',
+                  {'patient': patient, 'form': form}, status=status)
+
+
+@login_required(redirect_field_name='', login_url='users:login')
+def show_patient_view(request, cpf):
+    """
+    return rendered text from showPatient
+    """
+    patient = Patient.objects.filter(cpf=cpf)
+    if len(patient) == 1:
+        return render(request, 'users/showPatient.html', {'patient': patient})
+    return render(request, 'users/showPatient.html', status=404)
 
 def get_under_28_symptoms(symptoms_form):
 
@@ -206,125 +350,3 @@ def get_29d_2m_symptoms(symptoms_form):
     ]]
 
     return patient
-
-def check_patient_problem(problem):
-    if problem is not None:
-        problem = 1
-    else:
-        problem = 0
-
-    return problem
-
-
-def logout_view(request, *args, **kwargs):
-    """
-    Define the logout page
-    """
-    kwargs['next_page'] = reverse('users:login')
-    return logout(request, *args, **kwargs)
-
-
-def sign_up_profile(request):
-    form = RegistrationStaffForm()
-    if request.method == 'POST':
-        form = RegistrationStaffForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('users:home')
-
-    return render(request, 'users/user_login/registerUser.html',
-                  {'form': form})
-
-
-@login_required(redirect_field_name='', login_url='users:login')
-def register_patient(request):
-    form = RegistrationPatientForm()
-    if request.method == 'POST':
-        form = RegistrationPatientForm(request.POST)
-
-        if form.is_valid():
-            form.save()
-            return redirect('users:home')
-
-    return render(request, 'users/user_home/registerPatient.html',
-                  {'form': form})
-
-
-@login_required(redirect_field_name='', login_url='users:login')
-def queue_patient(request, cpf_patient):
-    patients = Patient.objects.filter(cpf=cpf_patient)
-    patient = Patient.objects.get(cpf=cpf_patient)
-    patientsInQueue = Patient.objects.all()
-    patientList = list()
-    for patient0 in patientsInQueue:
-        patientList.append(patient0.patient)
-    if patient in patientList:
-        return render(request, 'users/queuePatient.html',
-                               {'patientList': patientList})
-    else:
-        queuedPatient = Patient.objects.create(patient=patient)
-        queuedPatient.save()
-        patientList.append(patient)
-        return render(request, 'users/queuePatient.html',
-                               {'patients': patients})
-    return render(request, 'users/queuePatient.html', {'patients': patients})
-
-
-@login_required(redirect_field_name='', login_url='users:login')
-def manage_accounts_view(request):
-    staffs = Staff.objects.all()
-    return render(request, 'users/manageAccounts.html', {'staffs': staffs})
-
-
-@login_required(redirect_field_name='', login_url='users:login')
-def edit_accounts_view(request, id_user):
-    staff = Staff.objects.filter(id_user=id_user)
-    if len(staff) == 1:
-        return render(request, 'users/editAccounts.html', {'staff': staff[0]})
-    return render(request, 'users/editAccounts.html', status=404)
-
-
-@login_required(redirect_field_name='', login_url='users:login')
-def staff_remove(request, id_user):
-    staff = Staff.objects.filter(id_user=id_user)
-    staff.delete()
-    return HttpResponseRedirect(reverse('users:manage_accounts'))
-
-
-@login_required(redirect_field_name='', login_url='users:login')
-def patient_remove(request, cpf):
-    patient = Patient.objects.filter(cpf=cpf)
-    patient.delete()
-    return HttpResponseRedirect(reverse('users:home'))
-
-
-@login_required(redirect_field_name='', login_url='users:login')
-def edit_patient(request, cpf):
-    """
-    edit an existing patient with post method
-    """
-    patient = Patient.objects.filter(cpf=cpf)[0]
-    form = EditPatientForm()
-
-    status = 200
-
-    if request.method == 'POST':
-        form = EditPatientForm(request.POST, instance=patient)
-        if form.is_valid():
-            form.save()
-            return redirect('users:home')
-        else:
-            status = 400
-    return render(request, 'users/editPatient.html',
-                  {'patient': patient, 'form': form}, status=status)
-
-
-@login_required(redirect_field_name='', login_url='users:login')
-def show_patient_view(request, cpf):
-    """
-    return rendered text from showPatient
-    """
-    patient = Patient.objects.filter(cpf=cpf)
-    if len(patient) == 1:
-        return render(request, 'users/showPatient.html', {'patient': patient})
-    return render(request, 'users/showPatient.html', status=404)
