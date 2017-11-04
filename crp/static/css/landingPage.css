@@ -100,7 +100,7 @@ a {
   padding: 200px 0;
   text-align: center;
   color: white;
-  background: url("../img/land-background.jpg") no-repeat bottom center scroll;
+  background: url("../img/doctors.jpg") no-repeat bottom center scroll;
   background-color: black;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -225,7 +225,55 @@ body {
 .animate {
   display: block;
   opacity: 0;
-  transition:all 1s ease-in-out;
+  transition: all 1s ease-in ;
+}
+
+.animate-2 {
+  display: block;
+  opacity: 0;
+  transition: all 1s ease-in ;
+}
+
+.animate-3 {
+  display: block;
+  opacity: 0;
+  transition: all 1s ease-in ;
+}
+
+.animate-4 {
+  display: block;
+  opacity: 0;
+  transition: all 1s ease-in ;
+}
+
+.animate-5 {
+  display: block;
+  opacity: 0;
+  transition: all 1s ease-in ;
+}
+
+.animate-6 {
+  display: block;
+  opacity: 0;
+  transition: all 1s ease-in ;
+}
+
+.animate-7 {
+  display: block;
+  opacity: 0;
+  transition: all 1s ease-in ;
+}
+
+.animate-8 {
+  display: block;
+  opacity: 0;
+  transition: all 1s ease-in ;
+}
+
+.animate-9 {
+  display: block;
+  opacity: 0;
+  transition: all 1s ease-in ;
 }
 
 .js-animated {
