@@ -1,0 +1,184 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>CRP - Classificação de Risco</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+
+
+    <!-- Custom styles for this template -->
+    <link href="{% static "css/landingPage.css" %}" rel="stylesheet">
+</head>
+
+<body id="page-top">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand js-scroll-trigger" href="{% url 'users:landing_page' %}">
+                CRP
+            </a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fa fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="{% url 'users:register_user' %}">
+                            Cadastre-se
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" >
+                            |
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger"
+                            {% if user.is_authenticated %}
+                                href="{%  url 'users:home' %}">
+                            {% else %}
+                                href="{%  url 'users:login' %}">
+                            {% endif %}
+                            Entrar
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Intro Header -->
+    <header class="masthead">
+        <div class="intro-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <h1 class="brand-heading">
+                            CRP
+                        </h1>
+                        <p class="intro-text">
+                            Ganhando tempo,<br>salvando vidas!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about" class="content-section text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <h2 class="animate">
+                        O que é o CRP?
+                    </h2>
+                    <p class="animate-2">
+                        O Classificação de Risco Pediátrico é um programa desenvolvido para facilitar e agilizar o processo de classificação de risco nos hospitais, focado na área da pediatria.
+                    </p>
+                    <p class="animate-3">
+                        Ele busca atender de um modo prático e intuitivo à comunidade médica, além de oferecer uma nova visão de classificação com uso de machine learning!
+                    </p>
+                    <p class="animate-4">
+                        Com o CRP, você terá uma ferramenta a mais em que confiar!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How to use -->
+    <section id="how_to_use" class="download-section content-section text-center">
+        <div class="container">
+            <div class="col-lg-8 mx-auto">
+                <h2 class="animate-5">
+                    Como usar?
+                </h2>
+                <p class="animate-6">
+                    O programa garante um uso intuitivo utilizando de interfaces modernas. Além do mais, ele oferece total liberdade na hora da classificação, servindo apenas de ferramenta nas mãos do classificador.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="content-section text-center animate">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <h2 class="animate-7">
+                        Contato com os desenvolvedores:
+                    </h2>
+                    <p class="animate-8">
+                        Sinta-se à vontade para contatar os desenvolvedores pela plataforma de desenvolvimento
+                        <a href="http://github.com/fga-gpp-mds/2017.2-Classificacao-de-Risco-Pediatrico/wiki">
+                            Github
+                        </a>
+                        para o esclarecimento de qualquer tipo de dúvidas!
+                    </p>
+                    <ul class="list-inline banner-social-buttons animate-9">
+                        <li class="list-inline-item">
+                            <a href="https://twitter.com/SBootstrap" class="btn btn-default btn-lg">
+                                <i class="fa fa-twitter fa-fw"></i>
+                                <span class="network-name">
+                                    Twitter
+                                </span>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="http://github.com/fga-gpp-mds/2017.2-Classificacao-de-Risco-Pediatrico/wiki" class="btn btn-default btn-lg">
+                                <i class="fa fa-github fa-fw"></i>
+                                <span class="network-name">
+                                    Github
+                                </span>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="https://plus.google.com/+Startbootstrap/posts" class="btn btn-default btn-lg">
+                                <i class="fa fa-google-plus fa-fw"></i>
+                                <span class="network-name">
+                                    Google+
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="background: black">
+        <div class="container text-center">
+            <p style="color: white">
+                Copyright &copy; Classificação de Risco Pediátrico
+            </p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src={% static "js/landingPage/jquery.min.js" %}></script>
+    <script src={% static "js/landingPage/bootstrap.bundle.min.js" %}></script>
+
+    <!-- Plugin JavaScript -->
+    <script src={% static "js/landingPage/jquery.easing.min.js" %}></script>
+
+    <!-- Custom scripts for this template -->
+    <script src={% static "js/landingPage/landingPage.js" %}></script>
+    <script src={% static "js/landingPage/jquery.waypoints.min.js" %}></script>
+    <script src={% static "js/landingPage/waypoint.js" %}></script>
+
+
+</body>
+</html>

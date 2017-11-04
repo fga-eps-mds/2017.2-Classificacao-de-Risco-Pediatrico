@@ -4,42 +4,45 @@
 }
 
 @-webkit-keyframes slide-in-blurred-top {
-  0% {
-    -webkit-transform: translateY(-30px) scaleY(1.1) scaleX(0.9);
-            transform: translateY(-30px) scaleY(1.1) scaleX(0.9);
-    -webkit-transform-origin: 50% 0%;
-            transform-origin: 50% 0%;
-    -webkit-filter: blur(10px);
-            filter: blur(10px);
-    opacity: 0;
-  }
-  100% {
-    -webkit-transform: translateY(0) scaleY(1) scaleX(1);
-            transform: translateY(0) scaleY(1) scaleX(1);
-    -webkit-transform-origin: 50% 50%;
-            transform-origin: 50% 50%;
-    -webkit-filter: blur(0);
-            filter: blur(0);
-    opacity: 1;
-  }
+    0% {
+        -webkit-transform: translateY(-30px) scaleY(1.1) scaleX(0.9);
+                transform: translateY(-30px) scaleY(1.1) scaleX(0.9);
+        -webkit-transform-origin: 50% 0%;
+                transform-origin: 50% 0%;
+        -webkit-filter: blur(10px);
+                filter: blur(10px);
+        opacity: 0;
+    }
+
+    100% {
+        -webkit-transform: translateY(0) scaleY(1) scaleX(1);
+                transform: translateY(0) scaleY(1) scaleX(1);
+        -webkit-transform-origin: 50% 50%;
+                transform-origin: 50% 50%;
+        -webkit-filter: blur(0);
+                filter: blur(0);
+        opacity: 1;
+    }
 }
+
 @keyframes slide-in-blurred-top {
-  0% {
-    -webkit-transform: translateY(-30px) scaleY(1.1) scaleX(0.9);
-            transform: translateY(-30px) scaleY(1.1) scaleX(0.9);
-    -webkit-transform-origin: 50% 0%;
-            transform-origin: 50% 0%;
-    -webkit-filter: blur(10px);
-            filter: blur(10px);
-    opacity: 0;
-  }
-  100% {
-    -webkit-transform: translateY(0) scaleY(1) scaleX(1);
-            transform: translateY(0) scaleY(1) scaleX(1);
-    -webkit-transform-origin: 50% 50%;
-            transform-origin: 50% 50%;
-    -webkit-filter: blur(0);
-            filter: blur(0);
-    opacity: 1;
-  }
+    0% {
+        -webkit-transform: translateY(-30px) scaleY(1.1) scaleX(0.9);
+                transform: translateY(-30px) scaleY(1.1) scaleX(0.9);
+        -webkit-transform-origin: 50% 0%;
+                transform-origin: 50% 0%;
+        -webkit-filter: blur(10px);
+                filter: blur(10px);
+        opacity: 0;
+    }
+    
+    100% {
+        -webkit-transform: translateY(0) scaleY(1) scaleX(1);
+                transform: translateY(0) scaleY(1) scaleX(1);
+        -webkit-transform-origin: 50% 50%;
+                transform-origin: 50% 50%;
+        -webkit-filter: blur(0);
+                filter: blur(0);
+        opacity: 1;
+    }
 }

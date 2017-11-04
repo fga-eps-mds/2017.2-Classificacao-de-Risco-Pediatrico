@@ -20,6 +20,11 @@ ml = MachineLearning()
 ml2 = MachineLearningRange2()
 
 
+def landing_page(request):
+
+    return render(request, 'landing_page/landingPage.html', {})
+
+
 def login_view(request, *args, **kwargs):
     if request.method == "POST":
         username = request.POST['username']
@@ -114,7 +119,7 @@ def logout_view(request, *args, **kwargs):
     """
     Define the logout page
     """
-    kwargs['next_page'] = reverse('users:login')
+    kwargs['next_page'] = reverse('users:landing_page')
     return logout(request, *args, **kwargs)
 
 
