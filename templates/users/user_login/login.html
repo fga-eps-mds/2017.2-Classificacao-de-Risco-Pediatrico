@@ -29,8 +29,7 @@
     <link href="{% static "css/login.css" %}" rel="stylesheet">
 </head>
 
-<body id="page-top">
-
+    <body id="page-top">
         <!-- Navigation -->
         <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
             <div class="container">
@@ -76,7 +75,7 @@
 
                         <div class="col-md-12">
                             <h2 class="ser-title">Login</h2>
-                            <hr class="botm-line" align="left" width="6%">
+                            <hr class="botm-line">
                         </div>
 
                         <div class="col-md-6 col-sm-8 col-lg-offset-2">
@@ -126,8 +125,10 @@
         <script src={% static "js/landingPage/jquery.waypoints.min.js" %}></script>
         <script src={% static "js/landingPage/waypoint.js" %}></script>
 
+        <div class="push"></div>
+
     </body>
-    <footer id="footer">
+    <footer>
         <div class="footer-line">
             <div class="container">
                 <div class="row">
@@ -151,15 +152,21 @@
                         </div>
                         <div class="info-sec">
                             <ul class="quick-info" style="list-style: none;">
-                                <li><a href="https://google.com" link="true">GOOGLE</a></li>
-
+                                <li>
+                                    <a class="nav-link js-scroll-trigger" href="{% url 'users:landing_page' %}">
+                                    Home
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="nav-link js-scroll-trigger" href="{% url 'users:register_user' %}">
+                                    Cadastre-se
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
-
     </footer>
 </html>

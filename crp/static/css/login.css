@@ -1,30 +1,36 @@
 body {
-    background: lightblue no-repeat fixed left 0;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    background-position-y: 75px;
-    font-family: 'Roboto', sans-serif;
+    background: white;
+    padding-top: 100px;
+    min-height: 100%;
+    height: 100%; 
+    margin-bottom: -200px;
 }
 
-#logo {
-    width: 100px;
+.push {
     height: 50px;
 }
 
-#contact {
-	padding-top: 100px;
+footer {
+    font-color: white;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    background:#0d2a43;
 }
 
 h2.ser-title {
+    font-color: white;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-weight: 300;
+    color: #222222;
+    margin-bottom: 0px;
+}
+
+h4.white.no-padding {
+    font-color: white;
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     font-weight: 300;
     color: #222222;
 }
 
-h4.white.no-padding {
-    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-    font-weight: 300;
-    color: #222222;
-}
+
