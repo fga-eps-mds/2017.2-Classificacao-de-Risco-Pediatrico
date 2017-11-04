@@ -15,7 +15,7 @@ urlpatterns = [
     url(r'^accounts/$', views.manage_accounts_view,
         name="manage_accounts"),
     url(r'^accounts/edit/(?P<id_user>\w+)/$', views.edit_accounts_view,
-        name="edit_accounts"),  
+        name="edit_accounts"),
     url(r'^accounts/remove/(?P<id_user>\w+)/$', views.staff_remove,
         name="staff_remove"),
     url(r'^patients/remove/(?P<id>\w+)/$', views.patient_remove,

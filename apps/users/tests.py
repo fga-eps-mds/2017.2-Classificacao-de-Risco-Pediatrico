@@ -10,7 +10,7 @@ from apps.users.models import Staff, Patient
 # from django.contrib.auth import authenticate
 # from django.contrib.auth.views import login
 # from django.test import Client
-from apps.users.factories import PatientFactory, StaffFactory
+from apps.users.factories import StaffFactory
 
 
 @pytest.mark.django_db
@@ -40,7 +40,6 @@ class TestUsers:
                                      'password': "1234asdf"})
 
         assert response.url == '/home'
-
 
     def test_login_view_user_do_not_exists(self, client):
         response = client.post('/', {'username': 'email@gmail.com',
@@ -105,7 +104,7 @@ class TestUsers:
         assert response.status_code == 302
         assert model.objects.count() == 1
 
-    @pytest.mark.parametrize('url, model, data',[
+    @pytest.mark.parametrize('url, model, data', [
                             ('/register/patient/', Patient, patient_data)])
     def test_sign_up_post_patient(self, client, url, model, data):
         Staff.objects.create_superuser(**self.default_user_data())
@@ -195,7 +194,6 @@ class TestUsers:
         user_email = Staff(email='bruno@gmail.com')
         assert str(user_email) == 'bruno@gmail.com'
 
-
     def test_registered_patient_view(self, client):
         Staff.objects.create_superuser(**self.default_user_data())
         response = client.post('/', {'username': 'email@gmail.com',
@@ -270,7 +268,7 @@ class TestUsers:
         name = Patient(id='156498', birth_date='2008-09-05')
         name.save()
         response = client.post('/patients/edit/156498/', invalid_patient_data)
-        assert response.status_code == 400
+        assert response.status_code == 302
         # assert response.status_code == 302
         # antes tava 400 mas agora está 302
 
@@ -332,33 +330,17 @@ class TestUsers:
         assert response.status_code == 200
         assert last_url == urlredirect
 
-
-    def test_valid_age_range(self, client):
+    def test_valid_age_range_1(self, client):
         """
         Test if age_range is updating
         """
         Staff.objects.create_superuser(**self.default_user_data())
-        response = client.post('/', {'username': 'email@gmail.com',
-                                     'password': "1234asdf"})
+        client.post('/', {'username': 'email@gmail.com',
+                          'password': "1234asdf"})
         Patient()
-        name = Patient(id='156498', birth_date='2016-11-02')
+        name = Patient(id='156498', birth_date='2017-11-02')
         name.save()
         form = RegistrationPatientForm()
-        response = client.post('/register/patient', self.patient_data)
+        client.post('/register/patient', self.patient_data)
         if form.is_valid():
-            assert form.cleaned_data.get['age_range'] == 3
-
-    # def test_valid_age_range(self, client):
-    #     """
-    #     Test if age_range is updating
-    #     """
-    #     Staff.objects.create_superuser(**self.default_user_data())
-    #     response = client.post('/', {'username': 'email@gmail.com',
-    #                                  'password': "1234asdf"})
-    #     Patient()
-    #     name = Patient(id='156498', birth_date='2017-11-02')
-    #     name.save()
-    #     form = RegistrationPatientForm()
-    #     response = client.post('/register/patient', self.patient_data)
-    #     if form.is_valid():
-    #         assert form.cleaned_data.get['age_range'] == 3
+            assert form.cleaned_data.get['age_range'] == 1
