@@ -55,6 +55,7 @@ class Migration(migrations.Migration):
                 ('date', models.DateField(auto_now=True, verbose_name='Data')),
                 ('classifier', models.CharField(max_length=150, verbose_name='Classifier')),
                 ('classification', models.IntegerField(choices=[(0, 'Não classificado'), (1, 'Atendimento Imediato'), (2, 'Atendimento Ambulatorial'), (3, 'Atendimento Hospitalar'), (4, 'Atendimento Eletivo')], default=0, verbose_name='Classification')),
+                ('age_range', models.IntegerField(choices=[(1, 'até 28 dias'), (2, '29 dias à 3 meses')], default=1, verbose_name='Faixa etária')),
             ],
         ),
     ]
