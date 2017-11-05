@@ -197,7 +197,7 @@ class TestUsers:
     def test_registered_patient_view(self, client):
         Staff.objects.create_superuser(**self.default_user_data())
         response = client.post('/login', {'username': 'email@gmail.com',
-                                     'password': "1234asdf"})
+                                          'password': "1234asdf"})
         patient1 = Patient(birth_date='2015-11-08')
         patient2 = Patient(birth_date='2014-10-08')
         patient1.save()
@@ -221,7 +221,7 @@ class TestUsers:
         """
         Staff.objects.create_superuser(**self.default_user_data())
         response = client.post('/login', {'username': 'email@gmail.com',
-                                     'password': "1234asdf"})
+                                          'password': "1234asdf"})
         name = Patient(id='001002012', birth_date='2017-02-01')
         name.save()
         response = client.get('/patients/edit/001002012/')
