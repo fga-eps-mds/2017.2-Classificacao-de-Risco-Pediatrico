@@ -74,7 +74,7 @@
                                     <div class="cols-sm-10">
                                         <div class="input-group">
                                             <span class="input-group-addon" id="basic-addon1"><i class="fa fa-id-badge" aria-hidden="true"></i></span>
-                                            <input type="text" name="{{ form.id_user.name }}" id="{{ form.id_user.id_for_label }}" class="form-control"  placeholder="ID" aria-label="ID" aria-describedby="basic-addon2" required>
+                                            <input type="text" name="{{ form.id_user.name }}" id="{{ form.id_user.id_for_label }}" class="form-control"  placeholder="ID" aria-label="ID" aria-describedby="basic-addon2" pattern="[0-9]+$" required>
                                         </div>
                                         {% if form.id_user.errors %}
                                             <div class="error-holder">

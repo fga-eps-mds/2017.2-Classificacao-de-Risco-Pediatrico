@@ -123,67 +123,91 @@ class Patient(models.Model):
     name = models.CharField(
         verbose_name=_('Nome'),
         max_length=150,
-        blank=False,
+        default='',
+        blank=True
     )
 
     guardian = models.CharField(
         verbose_name=_('Nome do Responsável'),
         max_length=50,
-        blank=False,
+        default='',
+        blank=True,
         help_text=_('Informe o nome do responsável'),
     )
 
     birth_date = models.DateField(
         verbose_name=_('Data de Nascimento'),
         blank=False,
-        help_text=_('Informe a data de Nascimento'),
+        help_text=_('Informe a data de Nascimento')
     )
 
     cpf = models.CharField(
         verbose_name=_('CPF'),
-        max_length=11,
-        default="",
-        blank=False,
-        help_text=_('Informe o CPF'),
-        unique=True
+        max_length=14,
+        null=True,
+        blank=True,
+        unique=True,
+        help_text=_('Informe o CPF')
     )
 
     parents_name = models.CharField(
         verbose_name=_('Nome dos pais'),
         max_length=150,
-        blank=False,
+        default='',
+        blank=True,
         help_text=_('Informe o nome dos pais')
+    )
+
+    STATE_CHOICES = (
+        ('AC', 'Acre'), ('AL', 'Alagoas'), ('AP', 'Amapá'),
+        ('AM', 'Amazonas'), ('BA', 'Bahia'), ('CE', 'Ceará'),
+        ('DF', 'Distrito Federal'), ('ES', 'Espírito Santo'),
+        ('GO', 'Goiás'), ('MA', 'Maranhão'), ('MT', 'Mato Grosso'),
+        ('MS', 'Mato Grosso do Sul'), ('MG', 'Minas Gerais'),
+        ('PA', 'Pará'), ('PB', 'Paraíba'), ('PR', 'Paraná'),
+        ('PE', 'Pernambuco'), ('PI', 'Piauí'), ('RJ', 'Rio de Janeiro'),
+        ('RN', 'Rio Grande do Norte'), ('RS', 'Rio Grande do Sul'),
+        ('RO', 'Rondônia'), ('RR', 'Roraima'), ('SC', 'Santa Catarina'),
+        ('SP', 'São Paulo'), ('SE', 'Sergipe'), ('TO', 'Tocantins')
     )
 
     uf = models.CharField(
         verbose_name='UF',
-        max_length=50,
-        blank=False
+        max_length=2,
+        choices=STATE_CHOICES,
+        default='',
+        blank=True
     )
+
     city = models.CharField(
         verbose_name='Cidade',
         max_length=50,
-        blank=False
+        default='',
+        blank=True
     )
     neighborhood = models.CharField(
         verbose_name='Bairro',
         max_length=100,
-        blank=False
+        default='',
+        blank=True
     )
     street = models.CharField(
         verbose_name='Rua',
         max_length=50,
-        blank=False
+        default='',
+        blank=True
     )
     block = models.CharField(
         verbose_name='Conjunto',
         max_length=50,
-        blank=False
+        default='',
+        blank=True
     )
     number = models.CharField(
         verbose_name='Numero',
         max_length=10,
-        blank=False
+        default='',
+        blank=True
     )
     date = models.DateField(
         verbose_name='Data',
@@ -211,12 +235,17 @@ class Patient(models.Model):
     )
 
     AGE_RANGE = (
-        (1, 'até 28 dias'),
+        (0, 'Faixa etária indefinida'),
+        (1, '0 até 28 dias'),
         (2, '29 dias à 3 meses'),
+        (3, '3 meses à 2 anos'),
+        (4, '2 anos à 10 anos'),
+        (5, 'Acima de 10 anos')
     )
 
     age_range = models.IntegerField(
-        verbose_name=_('Faixa etária'),
+        verbose_name=_('Classification'),
         choices=AGE_RANGE,
-        default=1
+        blank=True,
+        default=0
     )

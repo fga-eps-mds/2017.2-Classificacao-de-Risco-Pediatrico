@@ -1,13 +1,16 @@
 {% extends 'users/user_home/home_layout.html' %}
+{% load staticfiles%}
+
 
 {% block content_pos %}
     <div class="container-fluid">
         <div class="row mt-5">
             <div class="mx-auto my-auto text-center">
                 <div class="card bg-light border-secondary mb-4 z-depth-2 slide-in-blurred-top">
+                <div id="list" class="x_panel slide-in-blurred-top" style="background-color: white">
                     <form role="form" class="form" method="POST" >
                         <div class="card-header">
-                            Cadastro de Paciente
+                          <h1 style="font-size:150%;">Dados do Paciente</h1>
                         </div>
 
                         {% csrf_token %}
@@ -24,7 +27,7 @@
                                     <div class="cols-sm-10">
                                         <div class="input-group">
                                             <span class="input-group-addon" id="basic-addon1"><i class="fa fa-user" aria-hidden="true"></i></span>
-                                            <input type="text" name="{{ form.name.name }}" maxlength="150" id="{{ form.name.id_for_label }}" class="form-control"  placeholder="Nome" aria-label="Nome" aria-describedby="basic-addon1" autofocus required>
+                                            <input type="text" name="{{ form.name.name }}" maxlength="80" id="{{ form.name.id_for_label }}" class="form-control"  placeholder="Nome do paciente" aria-label="Nome" aria-describedby="basic-addon1" pattern="[a-zA-Z\s]+$" autofocus >
                                         </div>
                                         {% if form.name.errors %}
                                             <div class="error-holder">
@@ -40,7 +43,7 @@
                                     <div class="cols-sm-10">
                                         <div class="input-group">
                                             <span class="input-group-addon" id="basic-addon1"><i class="fa fa-user-plus" aria-hidden="true"></i></span>
-                                            <input type="text" name="{{ form.guardian.name }}" id="{{ form.guardian.id_for_label }}" class="form-control"  placeholder="Responsável" aria-label="Responsável" aria-describedby="basic-addon3" required>
+                                            <input type="text" name="{{ form.guardian.name }}" maxlength="80" id="{{ form.guardian.id_for_label }}" class="form-control"  placeholder="Responsável" aria-label="Responsável" aria-describedby="basic-addon3" pattern="[a-zA-Z\s]+$">
                                         </div>
                                         {% if form.guardian.errors %}
                                             <div class="error-holder">
@@ -56,7 +59,7 @@
                                     <div class="cols-sm-10">
                                         <div class="input-group">
                                             <span class="input-group-addon" id="basic-addon1"><i class="fa fa-calendar-o" aria-hidden="true"></i></span>
-                                            <input type="text" name="{{ form.birth_date.name }}" id="{{ form.birth_date.id_for_label }}" class="form-control"  placeholder="Data de nascimento" aria-label="Data de nascimento" aria-describedby="basic-addon3" required>
+                                            <input type="text" name="{{ form.birth_date.name }}" id="{{ form.birth_date.id_for_label }}" class="form-control"  placeholder="mm/dd/aaaa" aria-label="Data de nascimento" aria-describedby="basic-addon3" required>
                                         </div>
                                         {% if form.birth_date.errors %}
                                             <div class="error-holder">
@@ -72,7 +75,7 @@
                                     <div class="cols-sm-10">
                                         <div class="input-group">
                                             <span class="input-group-addon" id="basic-addon1"><i class="fa fa-id-badge" aria-hidden="true"></i></span>
-                                            <input type="text" name="{{ form.cpf.name }}" id="{{ form.cpf.id_for_label }}" class="form-control"  placeholder="CPF" aria-label="CPF" aria-describedby="basic-addon2" required>
+                                            <input type="text" name="{{ form.cpf.name }}" id="{{ form.cpf.id_for_label }}" class="form-control cpf"  placeholder="000.000.000-00" aria-label="CPF" aria-describedby="basic-addon2" >
                                         </div>
                                         {% if form.cpf.errors %}
                                             <div class="error-holder">
@@ -88,7 +91,7 @@
                                     <div class="cols-sm-10">
                                         <div class="input-group">
                                             <span class="input-group-addon" id="basic-addon1"><i class="fa fa-users" aria-hidden="true"></i></span>
-                                            <input type="text" name="{{ form.parents_name.name }}" id="{{ form.parents_name.id_for_label }}" class="form-control"  placeholder="Nome dos pais" aria-label="Nome dos pais" aria-describedby="basic-addon4" required>
+                                            <input type="text" name="{{ form.parents_name.name }}" maxlength="80" id="{{ form.parents_name.id_for_label }}" class="form-control"  placeholder="Nome dos pais" aria-label="Nome dos pais" aria-describedby="basic-addon4" >
                                         </div>
                                         {% if form.parents_name.errors %}
                                             <div class="error-holder">
@@ -100,31 +103,76 @@
                                     </div>
                                 </div>
 
-                            </div>
-
-
-                            <div class="col">
-                                <div class="form-group px-3">
+                                <div class="form-group px-3 mt-3">
                                     <div class="cols-sm-10">
-                                        <div class="input-group">
-                                            <span class="input-group-addon" id="basic-addon1"><i class="fa fa-globe" aria-hidden="true"></i></span>
-                                            <input type="text" name="{{ form.uf.name }}" id="{{ form.uf.id_for_label }}" class="form-control"  placeholder="UF" aria-label="UF" aria-describedby="basic-addon6" required>
-                                        </div>
-                                        {% if form.uf.errors %}
+                                      <select name="{{ form.age_range.name }}" class="form-control">
+                                          <option value="" selected disabled>Faixa etária</option>
+                                          <option value="0">Faixa etária indefinida</option>
+                                          <option value="1">0 até 28 dias</option>
+                                          <option value="2">29 dias à 3 meses</option>
+                                          <option value="3">3 meses à 2 anos</option>
+                                          <option value="4">2 à 10 anos</option>
+                                          <option value="5">acima de 10 anos</option>
+                                      </select>
+                                        {% if form.age_range.errors %}
                                             <div class="error-holder">
                                                 <div class="alert alert-warning" role="alert">
-                                                    {{ form.uf.errors }}
+                                                    {{ form.age_range.errors }}
                                                 </div>
                                             </div>
                                         {% endif %}
                                     </div>
                                 </div>
+                            </div>
+
+
+                            <div class="col">
+                              <div class="form-group px-3 mt-3">
+                                  <div class="cols-sm-10">
+                                      <select name="{{ form.uf.name }}" class="form-control">
+                                        <option value="" selected disabled>UF</option>
+                                        <option value="AC">AC</option>Acre
+                                        <option value="AL">AL</option> Alagoas
+                                        <option value="AM">AM</option> Amazonas
+                                        <option value="BA">BA</option> Bahia
+                                        <option value="CE">CE</option> Ceará
+                                        <option value="DF">DF</option> Distrito Federal
+                                        <option value="ES">ES</option> Espírito Santo
+                                        <option value="GO">GO</option> Goiás
+                                        <option value="MA">MA</option> Maranhão
+                                        <option value="MT">MT</option> Mato Grosso
+                                        <option value="MS">MS</option> Mato Grosso do Sul
+                                        <option value="MG">MG</option> Minas Gerais
+                                        <option value="PA">PA</option> Pará
+                                        <option value="PB">PB</option> Paraíba
+                                        <option value="PR">PR</option> Paraná
+                                        <option value="PE">PE</option> Pernambuco
+                                        <option value="PI">PI</option> Piauí
+                                        <option value="RJ">RJ</option> Rio de Janeiro
+                                        <option value="RN">RN</option> Rio Grande do Norte
+                                        <option value="RS">RS</option> Rio Grande do Sul
+                                        <option value="RO">RO</option> Rondônia
+                                        <option value="RR">RR</option> Roraima
+                                        <option value="SC">SC</option> Santa Catarina
+                                        <option value="SE">SE</option> Sergipe
+                                        <option value="SP">SP</option> São Paulo
+                                        <option value="TO">TO</option> Tocantins
+                                      </select>
+                                      {% if form.uf.errors %}
+                                          <div class="error-holder">
+                                              <div class="alert alert-warning" role="alert">
+                                                  {{ form.uf.errors }}
+                                              </div>
+                                          </div>
+                                      {% endif %}
+                                  </div>
+                              </div>
 
                                 <div class="form-group px-3">
                                     <div class="cols-sm-10">
                                         <div class="input-group">
                                             <span class="input-group-addon" id="basic-addon1"><i class="fa fa-map-o" aria-hidden="true"></i></span>
-                                            <input type="text" name="{{ form.city.name }}" id="{{ form.city.id_for_label }}" class="form-control"  placeholder="Cidade" aria-label="Cidade" aria-describedby="basic-addon7" required>
+                                            <input type="text" name="{{ form.city.name }}" id="{{ form.city.id_for_label }}" class="form-control"  placeholder="Cidade" aria-label="Cidade" aria-describedby="basic-addon7" pattern="[a-zA-Z\s]+$">
                                         </div>
                                         {% if form.city.errors %}
                                             <div class="error-holder">
@@ -140,7 +188,7 @@
                                     <div class="cols-sm-10">
                                         <div class="input-group">
                                             <span class="input-group-addon" id="basic-addon1"><i class="fa fa-road" aria-hidden="true"></i></span>
-                                            <input type="text" name="{{ form.street.name }}" id="{{ form.street.id_for_label }}" class="form-control"  placeholder="Rua" aria-label="Rua" aria-describedby="basic-addon7" required>
+                                            <input type="text" name="{{ form.street.name }}" id="{{ form.street.id_for_label }}" class="form-control"  placeholder="Rua" aria-label="Rua" aria-describedby="basic-addon7" >
                                         </div>
                                         {% if form.street.errors %}
                                             <div class="error-holder">
@@ -156,7 +204,7 @@
                                     <div class="cols-sm-10">
                                         <div class="input-group">
                                             <span class="input-group-addon" id="basic-addon1"><i class="fa fa-home" aria-hidden="true"></i></span>
-                                            <input type="text" name="{{ form.neighborhood.name }}" id="{{ form.neighborhood.id_for_label }}" class="form-control"  placeholder="Bairro" aria-label="Bairro" aria-describedby="basic-addon8" required>
+                                            <input type="text" name="{{ form.neighborhood.name }}" id="{{ form.neighborhood.id_for_label }}" class="form-control"  placeholder="Bairro" aria-label="Bairro" aria-describedby="basic-addon8" >
                                         </div>
                                         {% if form.neighborhood.errors %}
                                             <div class="error-holder">
@@ -172,7 +220,7 @@
                                     <div class="cols-sm-10">
                                         <div class="input-group">
                                             <span class="input-group-addon" id="basic-addon1"><i class="fa fa-th-large" aria-hidden="true"></i></span>
-                                            <input type="text" name="{{ form.block.name }}" id="{{ form.block.id_for_label }}" class="form-control"  placeholder="Conjunto" aria-label="Conjunto" aria-describedby="basic-addon9" required>
+                                            <input type="text" name="{{ form.block.name }}" id="{{ form.block.id_for_label }}" class="form-control"  placeholder="Conjunto" aria-label="Conjunto" aria-describedby="basic-addon9" >
                                         </div>
                                         {% if form.block.errors %}
                                             <div class="error-holder">
@@ -188,7 +236,7 @@
                                     <div class="cols-sm-10">
                                         <div class="input-group">
                                             <span class="input-group-addon" id="basic-addon1">00</span>
-                                            <input type="text" name="{{ form.number.name }}" id="{{ form.number.id_for_label }}" class="form-control"  placeholder="Número" aria-label="Número" aria-describedby="basic-addon10" required>
+                                            <input type="text" name="{{ form.number.name }}" id="{{ form.number.id_for_label }}" class="form-control"  placeholder="Número" aria-label="Número" aria-describedby="basic-addon10" pattern="[0-9]+$" >
                                         </div>
                                         {% if form.number.errors %}
                                             <div class="error-holder">
@@ -201,11 +249,11 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="card-footer text-right">
                             <a href="{% url 'users:home' %}" class="btn btn btn-outline-secondary btn-lg" >Cancelar</a>
                             <button type="submit" class="btn btn-outline-secondary btn-lg">Cadastrar</button>
                         </div>
+                      </div>
                     </form>
                 </div>
             </div>
