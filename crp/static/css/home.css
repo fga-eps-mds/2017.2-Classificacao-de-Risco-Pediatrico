@@ -5,8 +5,11 @@
 
 
 body {
-    font-family: 'Poppins', sans-serif;
-    background: #fafafa;
+    color: #73879C;
+    font-family: "Helvetica Neue",Roboto,Arial,"Droid Sans",sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.471;
 }
 
 p {
@@ -22,6 +25,7 @@ p {
 }
 
 #content {
+    background: #F7F7F7;
     width: 100%;
 }
 
