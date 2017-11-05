@@ -5,5 +5,46 @@
 }
 
 #list {
+    border: 1px solid #E6E9ED;
     padding: 10px;
+}
+
+div.dataTables_wrapper div.dataTables_length select {
+    width: 55px;
+    display: inline-block;
+    color: #73879C;
+    font-family: "Helvetica Neue",Roboto,Arial,"Droid Sans",sans-serif;
+    font-size: 13px;
+}
+
+.badge {
+    display: inline;
+    padding: .4em 1.2em .6em;
+    font-size: 75%;
+    font-weight: 700;
+    border-color: #FFF;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25em;
+}
+
+.badge:hover {
+    cursor: pointer;
+}
+
+.page-item.active .page-link {
+    z-index: 2;
+    color: #fff;
+    background-color: #73879C;
+    border-color: #73879C;
+}
+
+a:hover, a:focus {
+    font-weight: 500;
+    color: #5A738E;
+    text-decoration: none;
+    transition: all 0.3s;
 }
