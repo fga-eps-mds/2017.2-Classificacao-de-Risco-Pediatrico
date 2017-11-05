@@ -1,52 +1,157 @@
-{% extends 'users/user_login/pre_home_layout.html' %}
 {% load staticfiles %}
 
-{% block content_pre %}
-    <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
-        
 
-        <section id="contact" class="section-padding">
+
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>CRP - Classificação de Risco</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+
+    <!-- Custom fonts for this template -->
+{% comment %}
+    <link href="{% static "css/font-awesome.min.css" %}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Cabin:700' rel='stylesheet' type='text/css'>
+{% endcomment %}
+
+    <!-- Custom styles for this template -->
+    <link href="{% static "css/landingPage.css" %}" rel="stylesheet">
+    <link href="{% static "css/login.css" %}" rel="stylesheet">
+</head>
+
+    <body id="page-top">
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+            <div class="container">
+                <a class="navbar-brand js-scroll-trigger" href="{% url 'users:landing_page' %}">
+                    CRP
+                </a>
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fa fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="{% url 'users:register_user' %}">
+                                Cadastre-se
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+    <!-- >>>>>>> ff45930862c04dc9726a925b664a993c44de35f5 -->
+
+            <section id="contact" class="section-padding">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-md-12">
+                            <h2 class="ser-title">Login</h2>
+                            <hr class="botm-line">
+                        </div>
+
+                        <div class="col-md-6 col-sm-8 col-lg-offset-2">
+                            <div class="contact-info">
+
+                                <form role="form" class="form" method="POST" >
+
+                                    {% csrf_token %}
+
+                                    {% if errors %}
+                                        <div class="alert alert-warning" role="alert">
+                                            {{ errors }}
+                                        </div>
+                                    {% endif %}
+
+                                    <div class="form-group">
+                                        <label for="email">E-mail:</label>
+                                        <input type="email" class="form-control br-radius-zero" name="{{ form.username.name }}" id="{{ form.username.id_for_label }}" placeholder="E-mail" required />
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="email">Senha:</label>
+                                        <input type="password" name="{{ form.password.name }}" class="form-control br-radius-zero" id="{{ form.password.id_for_label }}" placeholder="Sua senha" required />
+                                    </div>
+
+
+                                    <div class="form-action">
+                                        <button type="submit" class="btn btn-form">Acessar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        <!-- Bootstrap core JavaScript -->
+        <script src={% static "js/landingPage/jquery.min.js" %}></script>
+        <script src={% static "js/landingPage/bootstrap.bundle.min.js" %}></script>
+
+        <!-- Plugin JavaScript -->
+        <script src={% static "js/landingPage/jquery.easing.min.js" %}></script>
+
+        <!-- Custom scripts for this template -->
+        <script src={% static "js/landingPage/landingPage.js" %}></script>
+        <script src={% static "js/landingPage/jquery.waypoints.min.js" %}></script>
+        <script src={% static "js/landingPage/waypoint.js" %}></script>
+
+        <div class="push"></div>
+
+    </body>
+    <footer>
+        <div class="footer-line">
             <div class="container">
                 <div class="row">
-
-                    <div class="col-md-12">
-                        <h2 class="ser-title">Login</h2>
-                        <hr class="botm-line">
+                    <div class="col-md-4 col-sm-4 marb20">
+                        <div class="ftr-tle">
+                            <h4 class="white no-padding">Contato</h4>
+                        </div>
+                        <div class="info-sec">
+                            <p id="footer_p">
+                                Sinta-se à vontade para contatar os desenvolvedores pela plataforma de desenvolvimento
+                                <a href="http://github.com/fga-gpp-mds/2017.2-Classificacao-de-Risco-Pediatrico/wiki">
+                                    Github
+                                </a>
+                                para o esclarecimento de qualquer tipo de dúvidas!
+                            </p>
+                        </div>
                     </div>
-
-                    <div class="col-md-6 col-sm-8 col-lg-offset-2">
-                        <div class="contact-info">
-
-                            <form role="form" class="form" method="POST" >
-
-                                {% csrf_token %}
-
-                                {% if errors %}
-                                    <div class="alert alert-warning" role="alert">
-                                        {{ errors }}
-                                    </div>
-                                {% endif %}
-
-                                <div class="form-group">
-                                    <label for="email">E-mail:</label>
-                                    <input type="email" class="form-control br-radius-zero" name="{{ form.username.name }}" id="{{ form.username.id_for_label }}" placeholder="E-mail" required />
-
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="email">Senha:</label>
-                                    <input type="password" name="{{ form.password.name }}" class="form-control br-radius-zero" id="{{ form.password.id_for_label }}" placeholder="Sua senha" required />
-                                </div>
-
-
-                                <div class="form-action">
-                                    <button type="submit" class="btn btn-form">Acessar</button>
-                                </div>
-                            </form>
+                    <div class="col-md-4 col-sm-4 marb20">
+                        <div class="ftr-tle">
+                            <h4 class="white no-padding">Acesso rápido</h4>
+                        </div>
+                        <div class="info-sec">
+                            <ul class="quick-info" style="list-style: none;">
+                                <li>
+                                    <a class="nav-link js-scroll-trigger" href="{% url 'users:landing_page' %}">
+                                    Home
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="nav-link js-scroll-trigger" href="{% url 'users:register_user' %}">
+                                    Cadastre-se
+                                    </a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-    </body>
-{% endblock %}
+        </div>
+    </footer>
+</html>
