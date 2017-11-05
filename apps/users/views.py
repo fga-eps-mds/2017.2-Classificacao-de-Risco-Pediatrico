@@ -134,7 +134,7 @@ def sign_up_profile(request):
 
 
 def specify_age_range(age_range, aux_age_range, form):
-    if age_range > 0 and age_range <= 28:
+    if age_range >= 0 and age_range <= 28:
         aux_age_range = form.cleaned_data['age_range'] = 1
     elif age_range > 28 and age_range <= 90:
         aux_age_range = form.cleaned_data['age_range'] = 2
@@ -153,7 +153,13 @@ def specify_age_range(age_range, aux_age_range, form):
 
 def calculate_age_range(form):
     birth_date = form.cleaned_data['birth_date']
+    print('/////////////////////////')
+    print(birth_date)
+    print('/////////////////////////')
     age_range = (date.today() - birth_date).days
+    print('/////////////////////////')
+    print(age_range)
+    print('/////////////////////////')
     int(age_range)
     aux_age_range = 0
     specify_age_range(age_range, aux_age_range, form)
