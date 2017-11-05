@@ -7,18 +7,14 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate
 from apps.risk_rating.ml_classifier import MachineLearning
-from apps.risk_rating.ml_classifier_range2 import MachineLearningRange2
-
 from apps.users.forms import RegistrationStaffForm
 from apps.users.forms import RegistrationPatientForm
 from apps.users.forms import EditPatientForm
-
-
 from .models import Patient, Staff
 
-ml = MachineLearning()
-ml2 = MachineLearningRange2()
-
+# MachineLearning ( age_range, number_of_symptoms )
+ml = MachineLearning(1, 28)
+ml2 = MachineLearning(2, 27)
 
 def landing_page(request):
 
@@ -52,43 +48,48 @@ def login_view(request, *args, **kwargs):
 @login_required(redirect_field_name='', login_url='users:login')
 def home(request):
     """
-    triggers the machine learning based on patient's age range
+    define home page behaviour
     """
     patients = Patient.objects.all()
     patient = None
     classification = None
     form = None
     if request.method == "POST":
-            form = request.POST
-            subject_patient_id = form.get("patient_id")
-            subject_patient = Patient.objects.get(id=subject_patient_id)
+        form = request.POST
+        subject_patient_id = form.get("patient_id")
+        subject_patient = Patient.objects.get(id=subject_patient_id)
 
-            # machine learning methods are called here:
-            if subject_patient.age_range == 1:
-                patient = get_under_28_symptoms(form)
-                probability = ml.calc_probabilities(patient)
-                classification = ml.classify_patient(patient)
-                impact_list = ml.feature_importance()
-            elif subject_patient.age_range == 2:
-                patient = get_29d_2m_symptoms(form)
-                probability = ml2.calc_probabilities(patient)
-                classification = ml2.classify_patient(patient)
-                impact_list = ml2.feature_importance()
-            # to add another age range, use another elif
-            else:
-                pass
-
-            define_patient_classification(subject_patient, classification)
-
-            # printing the results:
-            print(probability)
-            print(classification)
-            print(impact_list)
+        # calling  ML method
+        trigger_ml(subject_patient, form, patient)
 
     return render(request, 'users/user_home/main_home.html',
                            {'patients': patients,
                             'classification': classification})
 
+def trigger_ml(subject_patient, form, patient):
+    """
+    triggers the machine learning based on patient's age range
+    """
+    if subject_patient.age_range == 1:
+        patient = get_under_28_symptoms(form)
+        probability = ml.calc_probabilities(patient)
+        classification = ml.classify_patient(patient)
+        impact_list = ml.feature_importance()
+    elif subject_patient.age_range == 2:
+        patient = get_29d_2m_symptoms(form)
+        probability = ml2.calc_probabilities(patient)
+        classification = ml2.classify_patient(patient)
+        impact_list = ml2.feature_importance()
+    # to add another age range, use another elif
+    else:
+        pass
+
+    # printing the results:
+    print(probability)
+    print(classification)
+    print(impact_list)
+
+    define_patient_classification(subject_patient, classification)
 
 def define_patient_classification(subject_patient, classification):
     """
