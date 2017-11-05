@@ -1,7 +1,9 @@
 #mainNav {
-    background: #163459; }
+    background: rgba(22, 52, 89, 0.8);
+}
+
 #mainNav.navbar-shrink {
-    background: #163459;
+    background: rgba(22, 52, 89, 0.8);
 }
 
 .js-scroll-trigger {
