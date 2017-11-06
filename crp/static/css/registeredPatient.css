@@ -19,7 +19,7 @@ div.dataTables_wrapper div.dataTables_length select {
 
 .badge {
     display: inline;
-    padding: .4em 1.2em .6em;
+    padding: .2em .6em .3em;
     font-size: 75%;
     font-weight: 700;
     border-color: #FFF;
@@ -47,4 +47,16 @@ a:hover, a:focus {
     color: #5A738E;
     text-decoration: none;
     transition: all 0.3s;
+}
+
+.table td, .table th {
+    padding: .15rem;
+}
+
+.table th:first-child {
+    padding: .25rem;
+}
+
+h2 {
+    font-size: 24px;
 }
