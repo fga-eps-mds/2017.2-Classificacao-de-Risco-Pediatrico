@@ -1,15 +1,17 @@
-{% extends 'users/user_login/pre_home_layout.html' %}
 {% load staticfiles %}
 
 
- {% block content_pre %}
+{% block content_pre %}
 
 <!--{% include 'layout/navbar.html' %} -->
 {% include 'layout/header.html' %}
 
+{% include 'layout/navbar.html' %}
 
     <body id="page-top">
             <section id="contact" class="section-padding">
+                <div class="container">
+                    <div class="row">
               <div class="col-md-12">
                   <h2 class="ser-title">Cadastro</h2>
                   <hr class="botm-line">
@@ -133,7 +135,7 @@
 
 
                                       <div class="col">
-                              <div class="form-group px-3 mt-3">
+                              <div class="form-group px-3 mt-3" id="uf-box">
                                   <div class="cols-sm-10">
                                       <select name="{{ form.uf.name }}" class="form-control">
                                         <option value="" selected disabled>UF</option>
@@ -265,7 +267,9 @@
                       </div>
                   </div>
               </div>
-            </section>
+                  </div>
+              </div>
+        </section>
 
         <!-- Bootstrap core JavaScript -->
         <script src={% static "js/landingPage/jquery.min.js" %}></script>
