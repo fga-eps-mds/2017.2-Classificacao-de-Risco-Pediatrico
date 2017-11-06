@@ -3,11 +3,11 @@ import pandas as pd
 # import numpy as np commented for flake8 reasons
 
 
-class MachineLearning:
+class MachineLearningRange2:
 
     def __init__(self):
         self.__data_frame = self.read_csv()
-        self.__features = self.__data_frame.columns[:28]
+        self.__features = self.__data_frame.columns[:27]
         self.__clf = self.random_forest(self.__data_frame, self.__features)
         self.__target_names = self.get_target_names(self.__data_frame)
 
@@ -35,14 +35,13 @@ class MachineLearning:
                         self.__clf.feature_importances_))
 
     def read_csv(self):
-        df = pd.read_csv('apps/risk_rating/class_menos_28.csv',
+        df = pd.read_csv('apps/risk_rating/class_29d_2m.csv',
                          true_values=["Sim"], false_values=["Não", "Nao"])
-        df = df.drop(df.columns[[0, 2, 30]], axis=1)
-        # columns_tls are the columns tiles
+        df = df.drop(df.columns[[0, 2, 29]], axis=1)
         columns_tls = list(df.columns.values)
 
         # changing last and penultimate values
-        columns_tls[27], columns_tls[28] = columns_tls[28], columns_tls[27]
+        columns_tls[26], columns_tls[27] = columns_tls[27], columns_tls[26]
         df = df.reindex(columns=columns_tls)
 
         return df
