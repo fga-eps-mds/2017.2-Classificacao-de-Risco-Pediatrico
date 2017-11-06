@@ -23,7 +23,7 @@ urlpatterns = [
         name="show_patient"),
     url(r'^patients/remove/(?P<cpf>\w+)/$', views.patient_remove,
         name="patient_remove"),  # falta
-    url(r'^patients/edit/(?P<cpf>\d+)/$', views.edit_patient,
+    url(r'^patients/edit/(?P<id>\w+)/$', views.edit_patient,
         name="edit_patient"),
     url(r'^registered/patient/(?P<cpf_patient>\w+)/$', views.queue_patient,
         name="queue_patient"),  # falta
