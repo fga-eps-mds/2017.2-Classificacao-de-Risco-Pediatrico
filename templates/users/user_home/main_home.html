@@ -38,7 +38,7 @@
                         <td><span class="btn btn-primary badge badge-pill badge-info"  data-toggle="modal" data-target="#{{ patient.id }}">Atendimento Eletivo</span></td>
                     {% endif %}
                     <td></td>
-                    <td>{{ patient.created_at }}</td>
+                    <td>{{ patient.created_at|date:"H:i - d/m/y" }}</td>
                     <td>
                         <a href="{% url 'users:edit_patient' patient.cpf %}"><i class="fa fa-pencil actions-icon" aria-hidden="true"></i></a>
                         <a href="#" data-toggle="modal" data-target="#deletar-{{ patient.cpf }}"><i class="fa fa-ban actions-icon" aria-hidden="true"></i></a>
