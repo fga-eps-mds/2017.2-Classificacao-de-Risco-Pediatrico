@@ -153,13 +153,7 @@ def specify_age_range(age_range, aux_age_range, form):
 
 def calculate_age_range(form):
     birth_date = form.cleaned_data['birth_date']
-    print('/////////////////////////')
-    print(birth_date)
-    print('/////////////////////////')
     age_range = (date.today() - birth_date).days
-    print('/////////////////////////')
-    print(age_range)
-    print('/////////////////////////')
     int(age_range)
     aux_age_range = 0
     specify_age_range(age_range, aux_age_range, form)
@@ -169,9 +163,12 @@ def calculate_age_range(form):
 def register_patient(request):
     form = RegistrationPatientForm()
     if request.method == 'POST':
-        form = RegistrationPatientForm(request.POST)
+        form = RegistrationPatientForm(request.POST)        
         if form.is_valid():
-            calculate_age_range(form)
+            if 'birth_date' in form.changed_data:
+                calculate_age_range(form)
+            else:
+                pass
             form.save()
             return redirect('users:home')
 

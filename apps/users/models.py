@@ -137,8 +137,9 @@ class Patient(models.Model):
 
     birth_date = models.DateField(
         verbose_name=_('Data de Nascimento'),
-        blank=False,
-        help_text=_('Informe a data de Nascimento')
+        help_text=_('Informe a data de Nascimento'),
+        blank=True,
+        null=True
     )
 
     cpf = models.CharField(
@@ -246,6 +247,6 @@ class Patient(models.Model):
     age_range = models.IntegerField(
         verbose_name=_('Classification'),
         choices=AGE_RANGE,
-        blank=True,
-        default=0
+        default='',
+        blank=True
     )
