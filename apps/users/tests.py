@@ -1,15 +1,10 @@
 import pytest
-# import apps.users.views
-# from apps.users.views import RegistrationAdminView
-# from factories import PatientFactory
-# Create your tests here.
-
 from apps.users.forms import RegistrationStaffForm, RegistrationPatientForm, \
     EditPatientForm
 from apps.users.models import Staff, Patient
-# from django.contrib.auth import authenticate
-# from django.contrib.auth.views import login
-# from django.test import Client
+from datetime import date
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
 from apps.users.factories import StaffFactory
 
 
@@ -337,7 +332,12 @@ class TestUsers:
         client.post('/', {'username': 'email@gmail.com',
                           'password': "1234asdf"})
         Patient()
-        name = Patient(id='156498', birth_date='2017-11-02')
+        birth_date = date.today() - relativedelta(days=1)
+        birth_date.strftime('%Y-%m-%d')
+        datetime.strptime(birth_date, '%Y-%m-%d')
+        print()
+        print(birth_date)
+        name = Patient(id='156498', birth_date='2016-11-03')
         name.save()
         form = RegistrationPatientForm()
         client.post('/register/patient', self.patient_data)
