@@ -9,8 +9,8 @@ class ClinicalState_28dForm(forms.ModelForm):
     """
     class Meta:
         model = ClinicalState_28d
-        fields = ['patient', 'dispineia', 'ictericia', 'perdada_consciencia', 'cianose', 'febre',
-                  'solucos', 'prostacao', 'vomitos', 'coriza', 'obstrucao_nasal', 'convulcao_no_momento',
+        fields = ['patient_id', 'dispineia', 'ictericia', 'perdada_consciencia', 'cianose', 'febre',
+                  'solucos', 'prostracao', 'vomitos', 'tosse', 'coriza', 'obstrucao_nasal', 'convulcao_no_momento',
                   'diarreia', 'choro_inconsolavel', 'dificuldade_evacuar', 'nao_suga_seio', 'manchas_na_pele',
                   'salivacao', 'chiado_no_peito', 'diminuicao_da_diurese', 'dor_abdominal', 'fontanela_abaulada',
-                  'secrecao_no_umbigo', 'secrecao_ocular', 'convulcao_hoje']
+                  'secrecao_no_umbigo', 'secrecao_ocular', 'sangue_nas_fezes','convulsao_hoje']

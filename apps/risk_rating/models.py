@@ -1,16 +1,15 @@
 from django.db import models
-from apps.users.models import Patient
 
 class ClinicalState_28d(models.Model):
 
-    patient = models.CharField(
+    patient_id = models.CharField(
         verbose_name=('ID do Paciente'),
         max_length=150,
-        blank=False,
+        blank=True,
         unique=False
     )
 
-    # simptoms:
+    # symptoms:
     dispineia = models.BooleanField(
         verbose_name=("Dispinéia"),
         default=False,
@@ -47,14 +46,20 @@ class ClinicalState_28d(models.Model):
         blank=True
     )
 
-    prostacao = models.BooleanField(
-        verbose_name=("Prostação"),
+    prostracao = models.BooleanField(
+        verbose_name=("Prostração"),
         default=False,
         blank=True
     )
 
     vomitos = models.BooleanField(
         verbose_name=("Vômitos"),
+        default=False,
+        blank=True
+    )
+
+    tosse = models.BooleanField(
+        verbose_name=("Tosse"),
         default=False,
         blank=True
     )
@@ -113,6 +118,12 @@ class ClinicalState_28d(models.Model):
         blank=True
     )
 
+    queda = models.BooleanField(
+        verbose_name=("Queda"),
+        default=False,
+        blank=True
+    )
+
     chiado_no_peito = models.BooleanField(
         verbose_name=("Chiado no peito"),
         default=False,
@@ -127,6 +138,12 @@ class ClinicalState_28d(models.Model):
 
     dor_abdominal = models.BooleanField(
         verbose_name=("Dor abdominal"),
+        default=False,
+        blank=True
+    )
+
+    dor_de_ouvido = models.BooleanField(
+        verbose_name=("Dor de ouvido"),
         default=False,
         blank=True
     )
@@ -149,8 +166,14 @@ class ClinicalState_28d(models.Model):
         blank=True
     )
 
-    convulcao_hoje = models.BooleanField(
-        verbose_name=("Relato de convulcão hoje"),
+    sangue_nas_fezes = models.BooleanField(
+        verbose_name=("Secreção ocular"),
+        default=False,
+        blank=True
+    )
+
+    convulsao_hoje = models.BooleanField(
+        verbose_name=("Relato de convulsão hoje"),
         default=False,
         blank=True
     )
