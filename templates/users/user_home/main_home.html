@@ -37,7 +37,7 @@
                     {% elif patient.classification == 4 %}
                         <td><span class="btn btn-primary badge badge-pill badge-info"  data-toggle="modal" data-target="#{{ patient.id }}">Atendimento Eletivo</span></td>
                     {% endif %}
-                    <!--td faixa etária-->
+                    <!-- td faixa etária -->
                     {% if patient.age_range  == 0 %}
                         <td>Faixa etária indefinida</td>
                     {% elif patient.age_range == 1 %}
@@ -51,10 +51,12 @@
                     {% elif patient.age_range == 5 %}
                         <td>Acima de 10 anos</td>
                     {% endif %}
+                    <!-- td hora de chegada -->
                     <td>{{ patient.created_at|date:"d/m/y - H:i" }}</td>
+                    <!-- td ações -->
                     <td>
-                        <a href="{% url 'users:edit_patient' patient.cpf %}"><i class="fa fa-pencil actions-icon" aria-hidden="true"></i></a>
-                        <a href="#" data-toggle="modal" data-target="#deletar-{{ patient.cpf }}"><i class="fa fa-ban actions-icon" aria-hidden="true"></i></a>
+                        <a href="{% url 'users:edit_patient' patient.id %}"><i class="fa fa-pencil actions-icon" aria-hidden="true"></i></a>
+                        <a href="#" data-toggle="modal" data-target="#deletar-{{ patient.id }}"><i class="fa fa-ban actions-icon" aria-hidden="true"></i></a>
                     </td>
                 </tr>
                 {% endfor %}
