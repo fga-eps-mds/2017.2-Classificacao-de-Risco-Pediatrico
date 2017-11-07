@@ -1,12 +1,22 @@
 #mainNav {
-    background: #163459; }
+    background: rgba(22, 52, 89, 0.8);
+}
+
 #mainNav.navbar-shrink {
-    background: #163459;
+    background: rgba(22, 52, 89, 0.8);
 }
 
 .js-scroll-trigger {
     font-family: 'Raleway', sans-serif;
     font-size: 16px;
+}
+
+.form-group.px-3.mt-3 {
+    margin-top: 0 !important;
+}
+
+.mt-5 {
+    margin-top: 0 !important;
 }
 
 body {
