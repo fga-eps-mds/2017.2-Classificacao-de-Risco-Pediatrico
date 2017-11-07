@@ -178,7 +178,7 @@ a:focus, a:hover {
     color: white;
     font-size: 26px;
     height: 55px;
-    line-height: 45px;
+    line-height: 37px;
     margin-top: 15px;
     transition: background 0.3s ease-in-out;
     width: 55px;
@@ -189,15 +189,6 @@ a:focus, a:hover {
     background: rgba(255, 255, 255, 0.1);
     color: white;
     outline: none;
-}
-
-.fa {
-    display: inline-block;
-    font: normal normal normal 14px/1 FontAwesome;
-    font-size: inherit;
-    text-rendering: auto;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
 }
 
 .content-section {
@@ -270,7 +261,7 @@ ul.banner-social-buttons {
         margin-bottom: 20px;
         padding: 0;
     }
-    
+
     ul.banner-social-buttons li:last-child {
         margin-bottom: 0;
     }
