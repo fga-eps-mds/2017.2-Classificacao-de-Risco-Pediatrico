@@ -13,8 +13,10 @@ from apps.users.forms import EditPatientForm
 from .models import Patient, Staff
 from apps.risk_rating.forms import ClinicalState_28dForm
 from apps.risk_rating.forms import ClinicalState_29d_2mForm
+from apps.risk_rating.forms import ClinicalState_2m_3yForm
 from apps.risk_rating.models import ClinicalState_28d
 from apps.risk_rating.models import ClinicalState_29d_2m
+from apps.risk_rating.models import ClinicalState_2m_3y
 
 # MachineLearning ( age_range, number_of_symptoms )
 ml = MachineLearning(1, 28)
@@ -56,6 +58,7 @@ def home(request):
     """
     form1 = ClinicalState_28dForm()
     form2 = ClinicalState_29d_2mForm()
+    form3 = ClinicalState_2m_3yForm()
     patients = Patient.objects.all()
     classification = None
     if request.method == "POST" and "form1" in request.POST:
@@ -83,7 +86,8 @@ def home(request):
                            {'patients': patients,
                             'classification': classification,
                             'form1': form1,
-                            'form2': form2})
+                            'form2': form2,
+                            'form3': form3})
 
 def trigger_ml(subject_patient, clinical_state):
     """

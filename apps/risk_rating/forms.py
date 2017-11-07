@@ -35,7 +35,7 @@ class ClinicalState_2m_3yForm(forms.ModelForm):
     """
     class Meta:
         model = ClinicalState_2m_3y
-        fields = ['patient_id2', 'dispineia', 'ictericia', 'perdada_consciencia', 'cianose', 'febre',
+        fields = ['patient_id3', 'dispineia', 'ictericia', 'perdada_consciencia', 'cianose', 'febre',
                   'solucos', 'prostracao', 'vomitos', 'tosse', 'coriza', 'obstrucao_nasal', 'convulcao_no_momento',
                   'diarreia', 'dificuldade_evacuar', 'nao_suga_seio', 'manchas_na_pele',
                   'salivacao', 'chiado_no_peito', 'diminuicao_da_diurese', 'dor_abdominal', 'fontanela_abaulada',

@@ -17,7 +17,7 @@ class ClinicalState_28d(models.Model):
     )
 
     ictericia = models.BooleanField(
-        verbose_name=("Icteria"),
+        verbose_name=("Icterícia"),
         default=False,
         blank=True
     )
@@ -41,7 +41,7 @@ class ClinicalState_28d(models.Model):
     )
 
     solucos = models.BooleanField(
-        verbose_name=("Solucos"),
+        verbose_name=("Soluços"),
         default=False,
         blank=True
     )
@@ -113,7 +113,7 @@ class ClinicalState_28d(models.Model):
     )
 
     salivacao = models.BooleanField(
-        verbose_name=("Salivacao"),
+        verbose_name=("Salivação"),
         default=False,
         blank=True
     )
@@ -167,7 +167,7 @@ class ClinicalState_28d(models.Model):
     )
 
     sangue_nas_fezes = models.BooleanField(
-        verbose_name=("Secreção ocular"),
+        verbose_name=("Sangue nas fezes"),
         default=False,
         blank=True
     )
@@ -195,7 +195,7 @@ class ClinicalState_29d_2m(models.Model):
     )
 
     ictericia = models.BooleanField(
-        verbose_name=("Icteria"),
+        verbose_name=("Icterícia"),
         default=False,
         blank=True
     )
@@ -219,7 +219,7 @@ class ClinicalState_29d_2m(models.Model):
     )
 
     solucos = models.BooleanField(
-        verbose_name=("Solucos"),
+        verbose_name=("Soluços"),
         default=False,
         blank=True
     )
@@ -285,7 +285,7 @@ class ClinicalState_29d_2m(models.Model):
     )
 
     salivacao = models.BooleanField(
-        verbose_name=("Salivacao"),
+        verbose_name=("Salivação"),
         default=False,
         blank=True
     )
@@ -366,7 +366,7 @@ class ClinicalState_2m_3y(models.Model):
     )
 
     ictericia = models.BooleanField(
-        verbose_name=("Icteria"),
+        verbose_name=("Icterícia"),
         default=False,
         blank=True
     )
@@ -390,7 +390,7 @@ class ClinicalState_2m_3y(models.Model):
     )
 
     solucos = models.BooleanField(
-        verbose_name=("Solucos"),
+        verbose_name=("Soluços"),
         default=False,
         blank=True
     )
@@ -456,7 +456,7 @@ class ClinicalState_2m_3y(models.Model):
     )
 
     salivacao = models.BooleanField(
-        verbose_name=("Salivacao"),
+        verbose_name=("Salivação"),
         default=False,
         blank=True
     )
