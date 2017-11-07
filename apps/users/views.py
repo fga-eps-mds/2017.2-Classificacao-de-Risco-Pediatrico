@@ -127,7 +127,7 @@ def sign_up_profile(request):
         form = RegistrationStaffForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('users:home')
+            return redirect('users:login')
 
     return render(request, 'users/user_login/registerUser.html',
                   {'form': form})
@@ -163,12 +163,9 @@ def calculate_age_range(form):
 def register_patient(request):
     form = RegistrationPatientForm()
     if request.method == 'POST':
-        form = RegistrationPatientForm(request.POST)        
+        form = RegistrationPatientForm(request.POST)
         if form.is_valid():
-            if 'birth_date' in form.changed_data:
-                calculate_age_range(form)
-            else:
-                pass
+            calculate_age_range(form)
             form.save()
             return redirect('users:home')
 
