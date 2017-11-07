@@ -6,14 +6,12 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate
+from datetime import date
 from apps.risk_rating.ml_classifier import MachineLearning
 from apps.risk_rating.ml_classifier_range2 import MachineLearningRange2
-
 from apps.users.forms import RegistrationStaffForm
 from apps.users.forms import RegistrationPatientForm
 from apps.users.forms import EditPatientForm
-
-
 from .models import Patient, Staff
 
 ml = MachineLearning()
@@ -129,10 +127,36 @@ def sign_up_profile(request):
         form = RegistrationStaffForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('users:home')
+            return redirect('users:login')
 
     return render(request, 'users/user_login/registerUser.html',
                   {'form': form})
+
+
+def specify_age_range(age_range, aux_age_range, form):
+    if age_range >= 0 and age_range <= 28:
+        aux_age_range = form.cleaned_data['age_range'] = 1
+    elif age_range > 28 and age_range <= 90:
+        aux_age_range = form.cleaned_data['age_range'] = 2
+    elif age_range > 90 and age_range <= 730:
+        aux_age_range = form.cleaned_data['age_range'] = 3
+    elif age_range > 730 and age_range <= 3650:
+        aux_age_range = form.cleaned_data['age_range'] = 4
+    elif age_range > 3650:
+        aux_age_range = form.cleaned_data['age_range'] = 5
+    else:
+        aux_age_range = form.cleaned_data['age_range'] = 0
+    instance = form.save(commit=False)
+    instance.age_range = aux_age_range
+    instance.save()
+
+
+def calculate_age_range(form):
+    birth_date = form.cleaned_data['birth_date']
+    age_range = (date.today() - birth_date).days
+    int(age_range)
+    aux_age_range = 0
+    specify_age_range(age_range, aux_age_range, form)
 
 
 @login_required(redirect_field_name='', login_url='users:login')
@@ -140,8 +164,8 @@ def register_patient(request):
     form = RegistrationPatientForm()
     if request.method == 'POST':
         form = RegistrationPatientForm(request.POST)
-
         if form.is_valid():
+            calculate_age_range(form)
             form.save()
             return redirect('users:home')
 
@@ -191,18 +215,18 @@ def staff_remove(request, id_user):
 
 
 @login_required(redirect_field_name='', login_url='users:login')
-def patient_remove(request, cpf):
-    patient = Patient.objects.filter(cpf=cpf)
+def patient_remove(request, id):
+    patient = Patient.objects.filter(id=id)
     patient.delete()
     return HttpResponseRedirect(reverse('users:home'))
 
 
 @login_required(redirect_field_name='', login_url='users:login')
-def edit_patient(request, cpf):
+def edit_patient(request, id):
     """
     edit an existing patient with post method
     """
-    patient = Patient.objects.filter(cpf=cpf)[0]
+    patient = Patient.objects.filter(id=id)[0]
     form = EditPatientForm()
 
     status = 200
