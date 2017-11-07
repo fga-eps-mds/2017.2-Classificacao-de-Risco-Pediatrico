@@ -20,8 +20,8 @@
                         <div class="row" id="row-modal">
                             <div class="btn-group-responsive" data-toggle="buttons">
                                 {% for field in form %}
-                                  {% if field.name == 'patient' %}
-                                    <input type="hidden" value="{{ patient.id }}" name="{{ form.patient.name }}"/>
+                                  {% if field.name == 'patient_id' %}
+                                    <input type="hidden" value="{{ patient.id }}" name="{{ form.patient_id.name }}"/>
                                   {% else %}
                                     <label class="btn btn-primary classification-button col-md-2" >
                                       <input class="form-check-input" type="checkbox" autocomplete="off" name="{{ field.name }}">{{ field.label }}

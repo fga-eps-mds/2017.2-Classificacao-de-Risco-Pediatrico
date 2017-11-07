@@ -57,14 +57,28 @@ def home(request):
     classification = None
     patient = None
     if request.method == "POST" and "form1" in request.POST:
+    # this 'if' with the form1' runs when you submit the form of
+    # patients under 28 days
         form = ClinicalState_28dForm(request.POST)
         form.save()
 
-        # Done: Criamos e salvamos um estado clínico, com os sintomas preenchido para o paciente.
-        # O estado é um objeto da classe ClinicalState
-        # Todo: Acessar o estado clinico que acabamos de criar, tentar filtrar por patient
-        # Chamar os métodos do machine learning
-        # Preencher o Vetor com o método get_under_28_symptoms
+        patient_id = request.POST.get("patient_id")
+        subject_patient = Patient.objects.filter(id = patient_id)[0]
+        clinical_state = ClinicalState_28d.objects.filter(patient_id = patient_id).order_by('-id')[0]
+        patient = get_under_28_symptoms(clinical_state)
+
+        probability = ml.calc_probabilities(patient)
+        classification = ml.classify_patient(patient)
+        impact_list = ml.feature_importance()
+
+        # printing the results:
+        print(patient_id)
+        print(patient)
+        print(probability)
+        print(classification)
+        print(impact_list)
+
+        define_patient_classification(subject_patient, classification)
 
     return render(request, 'users/user_home/main_home.html',
                            {'patients': patients,
@@ -89,11 +103,6 @@ def trigger_ml(subject_patient, form, patient):
     else:
         pass
 
-    # printing the results:
-    print(probability)
-    print(classification)
-    print(impact_list)
-
     define_patient_classification(subject_patient, classification)
 
 def define_patient_classification(subject_patient, classification):
@@ -113,7 +122,7 @@ def define_patient_classification(subject_patient, classification):
 
 
 def check_patient_problem(problem):
-    if problem is not None:
+    if problem is not None and problem is True:
         problem = 1
     else:
         problem = 0
@@ -237,68 +246,38 @@ def show_patient_view(request, cpf):
 
 def get_under_28_symptoms(clinical_state):
     """
-    get symptoms from form to build patient's clinical condition
+    building patient to use on ml based on patient's clinical condition
     """
-    dispineia = check_patient_problem(clinical_state("dispineia"))
-    ictericia = check_patient_problem(clinical_state("ictericia"))
-    consciencia = check_patient_problem(clinical_state("consciência"))
-    cianose = check_patient_problem(clinical_state("cianose"))
-    febre = check_patient_problem(clinical_state("febre"))
-    solucos = check_patient_problem(clinical_state("solucos"))
-    prostracao = check_patient_problem(clinical_state("prostracao"))
-    vomitos = check_patient_problem(clinical_state("vomitos"))
-    tosse = check_patient_problem(clinical_state("tosse"))
-    coriza = check_patient_problem(clinical_state("coriza"))
-    obstrucaoNasal = check_patient_problem(clinical_state("obstrucaoNasal"))
-    convulsaoMomento = check_patient_problem(clinical_state("convulsaoMomento"))
-    diarreia = check_patient_problem(clinical_state("diarreia"))
-    choroIncosolavel = check_patient_problem(clinical_state("choroIncosolavel"))
-    dificuldadeEvacuar = check_patient_problem(clinical_state("dificuldadeEvacuar"))
-    naoSugaSeio = check_patient_problem(clinical_state("naoSugaSeio"))
-    manchaPele = check_patient_problem(clinical_state("manchaPele"))
-    salivacao = check_patient_problem(clinical_state("salivacao"))
-    queda = check_patient_problem(clinical_state("queda"))
-    chiadoPeito = check_patient_problem(clinical_state("chiadoPeito"))
-    diminuicaoDiurese = check_patient_problem(clinical_state("diminuicaoDiurese"))
-    dorAbdominal = check_patient_problem(clinical_state("dorAbdominal"))
-    dorOuvido = check_patient_problem(clinical_state("dorOuvido"))
-    fontanelaAbaulada = check_patient_problem(clinical_state("fontanelaAbaulada"))
-    secrecaoUmbigo = check_patient_problem(clinical_state("secrecaoUmbigo"))
-    secrecaoOcular = check_patient_problem(clinical_state("secrecaoOcular"))
-    sangueFezes = check_patient_problem(clinical_state("sangueFezes"))
-    convulsaoHoje = check_patient_problem(clinical_state("convulsaoHoje"))
-
     patient = [[
-        dispineia,
-        ictericia,
-        consciencia,
-        cianose,
-        febre,
-        solucos,
-        prostracao,
-        vomitos,
-        tosse,
-        coriza,
-        obstrucaoNasal,
-        convulsaoMomento,
-        diarreia,
-        choroIncosolavel,
-        dificuldadeEvacuar,
-        naoSugaSeio,
-        manchaPele,
-        salivacao,
-        queda,
-        chiadoPeito,
-        diminuicaoDiurese,
-        dorAbdominal,
-        dorOuvido,
-        fontanelaAbaulada,
-        secrecaoUmbigo,
-        secrecaoOcular,
-        sangueFezes,
-        convulsaoHoje,
+        check_patient_problem(clinical_state.dispineia),
+        check_patient_problem(clinical_state.ictericia),
+        check_patient_problem(clinical_state.perdada_consciencia),
+        check_patient_problem(clinical_state.cianose),
+        check_patient_problem(clinical_state.febre),
+        check_patient_problem(clinical_state.solucos),
+        check_patient_problem(clinical_state.prostracao),
+        check_patient_problem(clinical_state.vomitos),
+        check_patient_problem(clinical_state.tosse),
+        check_patient_problem(clinical_state.coriza),
+        check_patient_problem(clinical_state.obstrucao_nasal),
+        check_patient_problem(clinical_state.convulcao_no_momento),
+        check_patient_problem(clinical_state.diarreia),
+        check_patient_problem(clinical_state.choro_inconsolavel),
+        check_patient_problem(clinical_state.dificuldade_evacuar),
+        check_patient_problem(clinical_state.nao_suga_seio),
+        check_patient_problem(clinical_state.manchas_na_pele),
+        check_patient_problem(clinical_state.salivacao),
+        check_patient_problem(clinical_state.queda),
+        check_patient_problem(clinical_state.chiado_no_peito),
+        check_patient_problem(clinical_state.diminuicao_da_diurese),
+        check_patient_problem(clinical_state.dor_abdominal),
+        check_patient_problem(clinical_state.dor_de_ouvido),
+        check_patient_problem(clinical_state.fontanela_abaulada),
+        check_patient_problem(clinical_state.secrecao_no_umbigo),
+        check_patient_problem(clinical_state.secrecao_ocular),
+        check_patient_problem(clinical_state.sangue_nas_fezes),
+        check_patient_problem(clinical_state.convulsao_hoje)
     ]]
-
     return patient
 
 
