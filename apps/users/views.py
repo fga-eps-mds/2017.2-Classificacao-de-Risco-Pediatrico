@@ -21,6 +21,7 @@ from apps.risk_rating.models import ClinicalState_2m_3y
 # MachineLearning ( age_range, number_of_symptoms )
 ml = MachineLearning(1, 28)
 ml2 = MachineLearning(2, 27)
+ml3 = MachineLearning(3, 25)
 
 def landing_page(request):
 
@@ -81,6 +82,15 @@ def home(request):
         clinical_state = ClinicalState_29d_2m.objects.filter(patient_id2 = patient_id).order_by('-id')[0]
         trigger_ml(subject_patient, clinical_state)
 
+    elif request.method == "POST" and "form3" in request.POST:
+        form = ClinicalState_2m_3yForm(request.POST)
+        form.save()
+
+        patient_id = request.POST.get("patient_id3")
+        subject_patient = Patient.objects.filter(id = patient_id)[0]
+        clinical_state = ClinicalState_2m_3y.objects.filter(patient_id3 = patient_id).order_by('-id')[0]
+        trigger_ml(subject_patient, clinical_state)
+
 
     return render(request, 'users/user_home/main_home.html',
                            {'patients': patients,
@@ -104,9 +114,12 @@ def trigger_ml(subject_patient, clinical_state):
         classification = ml2.classify_patient(patient)
         impact_list = ml2.feature_importance()
         # due to the lack of data, this classification is always being "AmbulatorialGeral"
+    elif subject_patient.age_range == 3:
+        patient = get_2m_3y_symptoms(clinical_state)
+        probability = ml3.calc_probabilities(patient)
+        classification = ml3.classify_patient(patient)
+        impact_list = ml3.feature_importance()
     # to add another age range, use another elif
-    else:
-        pass
 
     define_patient_classification(subject_patient, classification)
 
@@ -318,5 +331,38 @@ def get_29d_2m_symptoms(clinical_state):
         check_patient_problem(clinical_state.secrecao_ocular),
         check_patient_problem(clinical_state.sangue_nas_fezes),
         check_patient_problem(clinical_state.convulsao_hoje)
+    ]]
+    return patient
+
+def get_2m_3y_symptoms(clinical_state):
+    """
+    building patient (2m-3y) to use on ml based on patient's clinical condition
+    """
+    patient = [[
+        check_patient_problem(clinical_state.dispineia),
+        check_patient_problem(clinical_state.ictericia),
+        check_patient_problem(clinical_state.perdada_consciencia),
+        check_patient_problem(clinical_state.cianose),
+        check_patient_problem(clinical_state.febre),
+        check_patient_problem(clinical_state.solucos),
+        check_patient_problem(clinical_state.prostracao),
+        check_patient_problem(clinical_state.vomitos),
+        check_patient_problem(clinical_state.tosse),
+        check_patient_problem(clinical_state.coriza),
+        check_patient_problem(clinical_state.obstrucao_nasal),
+        check_patient_problem(clinical_state.convulcao_no_momento),
+        check_patient_problem(clinical_state.diarreia),
+        check_patient_problem(clinical_state.dificuldade_evacuar),
+        check_patient_problem(clinical_state.nao_suga_seio),
+        check_patient_problem(clinical_state.manchas_na_pele),
+        check_patient_problem(clinical_state.salivacao),
+        check_patient_problem(clinical_state.queda),
+        check_patient_problem(clinical_state.chiado_no_peito),
+        check_patient_problem(clinical_state.diminuicao_da_diurese),
+        check_patient_problem(clinical_state.dor_abdominal),
+        check_patient_problem(clinical_state.dor_de_ouvido),
+        check_patient_problem(clinical_state.fontanela_abaulada),
+        check_patient_problem(clinical_state.secrecao_no_umbigo),
+        check_patient_problem(clinical_state.secrecao_ocular)
     ]]
     return patient

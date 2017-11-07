@@ -69,6 +69,16 @@ class MachineLearning:
 
         return df
 
+    def read_csv_3(self):
+        df = pd.read_csv('apps/risk_rating/class_2m_3y.csv',
+                         true_values=["Sim"], false_values=["Não", "Nao"])
+        df = df.drop(df.columns[[0, 2, 28]], axis=1)
+        columns_tls = list(df.columns.values)
+
+        df = df.reindex(columns=columns_tls)
+
+        return df
+
     def get_target_names(self, data_frame):
         duplicateless_df = data_frame['Classificacao'].drop_duplicates()
         return duplicateless_df.values.tolist()
