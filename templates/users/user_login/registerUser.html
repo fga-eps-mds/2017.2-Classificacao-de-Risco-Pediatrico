@@ -38,7 +38,7 @@
                                               <div class="cols-sm-10">
                                                   <div class="input-group">
                                                       <span class="input-group-addon" id="basic-addon1"><i class="fa fa-user" aria-hidden="true"></i></span>
-                                                      <input type="text" name="{{ form.name.name }}" maxlength="150" id="{{ form.name.id_for_label }}" class="form-control"  placeholder="Nome" aria-label="Nome" aria-describedby="basic-addon1" autofocus "[a-zA-Z\s]+$" required value={{staff.name.value}}>
+                                                      <input type="text" name="{{ form.name.name }}" maxlength="150" id="{{ form.name.id_for_label }}" class="form-control"  placeholder="Nome" aria-label="Nome" aria-describedby="basic-addon1" autofocus "[a-zA-Z\s]+$" required>
                                                   </div>
                                                   {% if form.name.errors %}
                                                       <div class="error-holder">
@@ -54,7 +54,7 @@
                                               <div class="cols-sm-10">
                                                   <div class="input-group">
                                                       <span class="input-group-addon" id="basic-addon1">@</span>
-                                                      <input type="email" name="{{ form.email.name }}" id="{{ form.email.id_for_label }}" class="form-control"  placeholder="E-mail" aria-label="Email" aria-describedby="basic-addon3" required value={{staff.email.value}}>
+                                                      <input type="email" name="{{ form.email.name }}" id="{{ form.email.id_for_label }}" class="form-control"  placeholder="E-mail" aria-label="Email" aria-describedby="basic-addon3" required>
                                                   </div>
                                                   {% if form.email.errors %}
                                                       <div class="error-holder">
@@ -68,7 +68,7 @@
 
                                           <div class="form-group px-3 mt-3">
                                               <div class="cols-sm-10">
-                                                  <select name="{{ form.profile.name }}" class="form-control" required value={{staff.profile.value}}>
+                                                  <select name="{{ form.profile.name }}" class="form-control" required>
                                                       <option value="" selected disabled>Escolha um perfil</option>
                                                       <option value="1">Recepcionista</option>
                                                       <option value="2">Atendente</option>
@@ -87,7 +87,7 @@
                                               <div class="cols-sm-10">
                                                   <div class="input-group">
                                                       <span class="input-group-addon" id="basic-addon1"><i class="fa fa-id-badge" aria-hidden="true"></i></span>
-                                                      <input type="text" name="{{ form.id_user.name }}" id="{{ form.id_user.id_for_label }}" class="form-control"  placeholder="ID" aria-label="ID" aria-describedby="basic-addon2" pattern="[0-9]+$" required value={{staff.id.value}}>
+                                                      <input type="text" name="{{ form.id_user.name }}" id="{{ form.id_user.id_for_label }}" class="form-control"  placeholder="ID" aria-label="ID" aria-describedby="basic-addon2" pattern="[0-9]+$" required>
                                                   </div>
                                                   {% if form.id_user.errors %}
                                                       <div class="error-holder">
@@ -136,7 +136,7 @@
                                       <div class="col">
                               <div class="form-group px-3 mt-3" id="uf-box">
                                   <div class="cols-sm-10">
-                                      <select name="{{ form.uf.name }}" class="form-control" required value ={{staff.uf.value}}>
+                                      <select name="{{ form.uf.name }}" class="form-control" required>
                                         <option value="" selected disabled>UF</option>
                                         <option value="AC">AC</option>Acre
                                         <option value="AL">AL</option> Alagoas
@@ -179,7 +179,7 @@
                                               <div class="cols-sm-10">
                                                   <div class="input-group">
                                                       <span class="input-group-addon" id="basic-addon1"><i class="fa fa-map-o" aria-hidden="true"></i></span>
-                                                      <input type="text" name="{{ form.city.name }}" id="{{ form.city.id_for_label }}" class="form-control"  placeholder="Cidade" aria-label="Cidade" aria-describedby="basic-addon7" "[a-zA-Z\s]+$" required value={{staff.city.value}}>
+                                                      <input type="text" name="{{ form.city.name }}" id="{{ form.city.id_for_label }}" class="form-control"  placeholder="Cidade" aria-label="Cidade" aria-describedby="basic-addon7" "[a-zA-Z\s]+$" required>
                                                   </div>
                                                   {% if form.city.errors %}
                                                       <div class="error-holder">
@@ -195,7 +195,7 @@
                                               <div class="cols-sm-10">
                                                   <div class="input-group">
                                                       <span class="input-group-addon" id="basic-addon1"><i class="fa fa-road" aria-hidden="true"></i></span>
-                                                      <input type="text" name="{{ form.street.name }}" id="{{ form.street.id_for_label }}" class="form-control"  placeholder="Rua" aria-label="Rua" aria-describedby="basic-addon7" required value={{staff.street.value}}>
+                                                      <input type="text" name="{{ form.street.name }}" id="{{ form.street.id_for_label }}" class="form-control"  placeholder="Rua" aria-label="Rua" aria-describedby="basic-addon7" required>
                                                   </div>
                                                   {% if form.street.errors %}
                                                       <div class="error-holder">
@@ -211,7 +211,7 @@
                                               <div class="cols-sm-10">
                                                   <div class="input-group">
                                                       <span class="input-group-addon" id="basic-addon1"><i class="fa fa-users" aria-hidden="true"></i></span>
-                                                      <input type="text" name="{{ form.neighborhood.name }}" id="{{ form.neighborhood.id_for_label }}" class="form-control"  placeholder="Bairro" aria-label="Bairro" aria-describedby="basic-addon8" required value={{staff.neighborhood.value}}>
+                                                      <input type="text" name="{{ form.neighborhood.name }}" id="{{ form.neighborhood.id_for_label }}" class="form-control"  placeholder="Bairro" aria-label="Bairro" aria-describedby="basic-addon8" required>
                                                   </div>
                                                   {% if form.neighborhood.errors %}
                                                       <div class="error-holder">
@@ -227,7 +227,7 @@
                                               <div class="cols-sm-10">
                                                   <div class="input-group">
                                                       <span class="input-group-addon" id="basic-addon1"><i class="fa fa-th-large" aria-hidden="true"></i></span>
-                                                      <input type="text" name="{{ form.block.name }}" id="{{ form.block.id_for_label }}" class="form-control"  placeholder="Conjunto" aria-label="Conjunto" aria-describedby="basic-addon9" required value={{staff.block.value}}>
+                                                      <input type="text" name="{{ form.block.name }}" id="{{ form.block.id_for_label }}" class="form-control"  placeholder="Conjunto" aria-label="Conjunto" aria-describedby="basic-addon9" required>
                                                   </div>
                                                   {% if form.block.errors %}
                                                       <div class="error-holder">
@@ -243,7 +243,7 @@
                                               <div class="cols-sm-10">
                                                   <div class="input-group">
                                                       <span class="input-group-addon" id="basic-addon1">00</span>
-                                                      <input type="text" name="{{ form.number.name }}" id="{{ form.number.id_for_label }}" class="form-control"  placeholder="Número" aria-label="Número" aria-describedby="basic-addon10" pattern="[0-9]+$" required value={{staff.number.value}}>
+                                                      <input type="text" name="{{ form.number.name }}" id="{{ form.number.id_for_label }}" class="form-control"  placeholder="Número" aria-label="Número" aria-describedby="basic-addon10" pattern="[0-9]+$" required>
                                                   </div>
                                                   {% if form.number.errors %}
                                                       <div class="error-holder">
