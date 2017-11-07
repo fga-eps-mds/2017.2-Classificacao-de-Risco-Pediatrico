@@ -11,20 +11,16 @@ urlpatterns = [
     url(r'^home/$', views.home, name="home"),
     url(r'^register/user/$', views.sign_up_profile,
         name="register_user"),
+    url(r'^register/patient/$', views.register_patient,
+        name="register_patient"),
     url(r'^accounts/$', views.manage_accounts_view,
         name="manage_accounts"),
     url(r'^accounts/edit/(?P<id_user>\w+)/$', views.edit_accounts_view,
-        name="edit_accounts"),  # falta
+        name="edit_accounts"),
     url(r'^accounts/remove/(?P<id_user>\w+)/$', views.staff_remove,
         name="staff_remove"),
-    url(r'^register/patient/$', views.register_patient,
-        name="register_patient"),
-    url(r'^show/patient/(?P<cpf>\w+)/$', views.show_patient_view,  # falta
-        name="show_patient"),
-    url(r'^patients/remove/(?P<cpf>\w+)/$', views.patient_remove,
-        name="patient_remove"),  # falta
-    url(r'^patients/edit/(?P<cpf>\d+)/$', views.edit_patient,
-        name="edit_patient"),
-    url(r'^registered/patient/(?P<cpf_patient>\w+)/$', views.queue_patient,
-        name="queue_patient"),  # falta
+    url(r'^patients/remove/(?P<id>\w+)/$', views.patient_remove,
+        name="patient_remove"),
+    url(r'^patients/edit/(?P<id>\w+)/$', views.edit_patient,
+        name="edit_patient")
 ]
