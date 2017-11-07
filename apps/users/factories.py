@@ -22,7 +22,7 @@ class PatientFactory(factory.DjangoModelFactory):
     street = factory.faker.Faker("word")
     block = factory.faker.Faker("word")
     number = factory.faker.Faker("pyint")
-    age_range = factory.faker.Faker("pyint")
+    age_range = FuzzyInteger(0, 5)
     '''isInQueue = factory.faker.Faker("pybool")
     queuePosition = factory.Sequence(lambda n: n)'''
 
