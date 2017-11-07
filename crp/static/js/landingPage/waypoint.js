@@ -43,3 +43,38 @@
     $animate9.waypoint(function () {
         $animate9.addClass('js-animated');
   }, {offset:'85%'});
+
+  var $animate10 = $('.animate-10');
+    $animate10.waypoint(function () {
+        $animate10.addClass('js-animated');
+  }, {offset:'85%'});
+
+  var $animate11 = $('.animate-11');
+    $animate11.waypoint(function () {
+        $animate11.addClass('js-animated');
+  }, {offset:'85%'});
+
+  var $animate12 = $('.animate-12');
+    $animate12.waypoint(function () {
+        $animate12.addClass('js-animated');
+  }, {offset:'85%'});
+
+  var $animate13 = $('.animate-13');
+    $animate13.waypoint(function () {
+        $animate13.addClass('js-animated');
+  }, {offset:'85%'});
+
+  var $animate14 = $('.animate-14');
+    $animate14.waypoint(function () {
+        $animate14.addClass('js-animated');
+  }, {offset:'85%'});
+
+  var $animate15 = $('.animate-15');
+    $animate15.waypoint(function () {
+        $animate15.addClass('js-animated');
+  }, {offset:'85%'});
+
+  var $animate16 = $('.animate-16');
+    $animate16.waypoint(function () {
+        $animate16.addClass('js-animated');
+  }, {offset:'85%'});

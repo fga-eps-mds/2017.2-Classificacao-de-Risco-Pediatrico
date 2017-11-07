@@ -373,6 +373,49 @@ body {
     transition: all 1s ease-in;
 }
 
+.animate-10 {
+    display: block;
+    opacity: 0;
+    transition: all 1s ease-in;
+}
+
+.animate-11 {
+    display: block;
+    opacity: 0;
+    transition: all 1s ease-in;
+}
+
+.animate-12 {
+    display: block;
+    opacity: 0;
+    transition: all 1s ease-in;
+}
+
+.animate-13 {
+    display: block;
+    opacity: 0;
+    transition: all 1s ease-in;
+}
+
+.animate-14 {
+    display: block;
+    opacity: 0;
+    transition: all 1s ease-in;
+}
+
+.animate-15 {
+    display: block;
+    opacity: 0;
+    transition: all 1s ease-in;
+}
+
+.animate-16 {
+    display: block;
+    opacity: 0;
+    transition: all 1s ease-in;
+}
+
+
 .js-animated {
     opacity: 1;
 }
