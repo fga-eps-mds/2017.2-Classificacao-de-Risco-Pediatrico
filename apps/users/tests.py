@@ -2,10 +2,6 @@ import pytest
 from apps.users.forms import RegistrationStaffForm, RegistrationPatientForm, \
     EditPatientForm
 from apps.users.models import Staff, Patient
-from datetime import date
-from datetime import datetime
-from dateutil.relativedelta import relativedelta
-from apps.users.factories import StaffFactory
 
 
 @pytest.mark.django_db
@@ -62,9 +58,11 @@ class TestUsers:
                              ['/register/patient/',
                               '/home/'])
     def test_get_route_logged(self, client, url):
-        StaffFactory.create_batch(1)
+        Staff.objects.create_superuser(**self.default_user_data())
+        response = client.post('/login', {'username': 'email@gmail.com',
+                               'password': "1234asdf"})
         response = client.get(url)
-        assert response.status_code == 302
+        assert response.status_code == 200
 
     @pytest.mark.parametrize('url, template', [
         ('/register/user/', 'users/user_login/registerUser.html'),
@@ -78,7 +76,7 @@ class TestUsers:
 
     profile_data = ({
         'username': 'usernameTest', 'password1': 'password1Teste',
-        'id_user': 'idUserTest', 'uf': 'ufTest', 'city': 'cityTeste',
+        'id_user': 'idUserTest', 'uf': 'DF', 'city': 'cityTeste',
         'neighborhood': 'neighborhoodTest', 'street': 'streetTeste',
         'block': 'blockTeste', 'number': 'numberTest',
         'email': 'email@test.com', 'profile': '1', 'name': 'nameTest',
@@ -122,9 +120,18 @@ class TestUsers:
         assert isinstance(response.context['form'], form)
 
     @pytest.mark.parametrize('url, data, urlredirect', [
-        ('/register/user/', profile_data, '/home/'),
-        ('/register/patient/', patient_data, '/home/')])
+        ('/register/user/', profile_data, '/login')])
     def test_sign_up_post_redirect(self, client, url, data, urlredirect):
+        Staff.objects.create_superuser(**self.default_user_data())
+        response = client.post('/login', {'username': 'email@gmail.com',
+                               'password': "1234asdf"})
+        response = client.post(url, data, follow=True)
+        assert response.status_code == 200
+        assert response.redirect_chain == [(urlredirect, 302)]
+
+    @pytest.mark.parametrize('url, data, urlredirect', [
+        ('/register/patient/', patient_data, '/home/')])
+    def test_sign_up_patient_redirect(self, client, url, data, urlredirect):
         Staff.objects.create_superuser(**self.default_user_data())
         response = client.post('/login', {'username': 'email@gmail.com',
                                'password': "1234asdf"})
@@ -332,11 +339,6 @@ class TestUsers:
         client.post('/', {'username': 'email@gmail.com',
                           'password': "1234asdf"})
         Patient()
-        birth_date = date.today() - relativedelta(days=1)
-        birth_date.strftime('%Y-%m-%d')
-        datetime.strptime(birth_date, '%Y-%m-%d')
-        print()
-        print(birth_date)
         name = Patient(id='156498', birth_date='2016-11-03')
         name.save()
         form = RegistrationPatientForm()
