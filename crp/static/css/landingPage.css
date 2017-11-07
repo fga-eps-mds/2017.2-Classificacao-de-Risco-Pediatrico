@@ -206,6 +206,23 @@ a:focus, a:hover {
     color: white;
 }
 
+.accurate {
+    -o-background-size: cover;
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    background-color: black;
+    background-size: cover;
+    color: white;
+}
+.contact {
+    -o-background-size: cover;
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    background-color: black;
+    background-size: cover;
+    color: white;
+}
+
 #map {
     height: 300px;
     width: 100%;
