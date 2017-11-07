@@ -31,6 +31,7 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
+
 STATE_CHOICES = (
     ('AC', 'Acre'), ('AL', 'Alagoas'), ('AP', 'Amapá'),
     ('AM', 'Amazonas'), ('BA', 'Bahia'), ('CE', 'Ceará'),
@@ -43,10 +44,11 @@ STATE_CHOICES = (
     ('RO', 'Rondônia'), ('RR', 'Roraima'), ('SC', 'Santa Catarina'),
     ('SP', 'São Paulo'), ('SE', 'Sergipe'), ('TO', 'Tocantins')
 )
+
 # Classe dos usuarios possui atendente e recepcionista
 
-class Staff(AbstractBaseUser):
 
+class Staff(AbstractBaseUser):
     objects = UserManager()
 
     name = models.CharField(
@@ -171,7 +173,7 @@ class Patient(models.Model):
         blank=True,
         help_text=_('Informe o nome dos pais')
     )
-    
+
     uf = models.CharField(
         verbose_name='UF',
         max_length=2,
