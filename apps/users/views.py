@@ -16,7 +16,7 @@ from apps.users.forms import EditPatientForm
 
 from .models import Patient, Staff
 
-ml = MachineLearning()
+ml = MachineLearning('apps/risk_rating/class_menos_28.csv')
 ml2 = MachineLearningRange2()
 
 
