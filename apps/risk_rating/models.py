@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class ClinicalState_28d(models.Model):
 
     patient_id1 = models.CharField(
@@ -178,6 +179,7 @@ class ClinicalState_28d(models.Model):
         blank=True
     )
 
+
 class ClinicalState_29d_2m(models.Model):
 
     patient_id2 = models.CharField(
@@ -349,6 +351,8 @@ class ClinicalState_29d_2m(models.Model):
         default=False,
         blank=True
     )
+
+
 class ClinicalState_2m_3y(models.Model):
 
     patient_id3 = models.CharField(

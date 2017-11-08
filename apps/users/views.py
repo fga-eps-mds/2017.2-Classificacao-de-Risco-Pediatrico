@@ -24,6 +24,7 @@ ml = MachineLearning(1, 28)
 ml2 = MachineLearning(2, 27)
 ml3 = MachineLearning(3, 25)
 
+
 def landing_page(request):
 
     return render(request, 'landing_page/landingPage.html', {})
@@ -64,34 +65,36 @@ def home(request):
     patients = Patient.objects.all()
     classification = None
     if request.method == "POST" and "form1" in request.POST:
-    # this 'if' with the form1' runs when you submit the form of
-    # patients under 28 days
+        # this 'if' with the form1' runs when you submit the form of
+        # patients under 28 days
         form = ClinicalState_28dForm(request.POST)
         form.save()
 
-        patient_id = request.POST.get("patient_id1")
-        subject_patient = Patient.objects.filter(id = patient_id)[0]
-        clinical_state = ClinicalState_28d.objects.filter(patient_id1 = patient_id).order_by('-id')[0]
+        p_id = request.POST.get("patient_id1")
+        subject_patient = Patient.objects.filter(id=p_id)[0]
+        p_c_states_l = ClinicalState_28d.objects.filter(patient_id1=p_id)
+        clinical_state = p_c_states_l.order_by('-id')[0]
         trigger_ml(subject_patient, clinical_state)
 
     elif request.method == "POST" and "form2" in request.POST:
         form = ClinicalState_29d_2mForm(request.POST)
         form.save()
 
-        patient_id = request.POST.get("patient_id2")
-        subject_patient = Patient.objects.filter(id = patient_id)[0]
-        clinical_state = ClinicalState_29d_2m.objects.filter(patient_id2 = patient_id).order_by('-id')[0]
+        p_id = request.POST.get("patient_id2")
+        subject_patient = Patient.objects.filter(id=p_id)[0]
+        p_c_states_l = ClinicalState_29d_2m.objects.filter(patient_id2=p_id)
+        clinical_state = p_c_states_l.order_by('-id')[0]
         trigger_ml(subject_patient, clinical_state)
 
     elif request.method == "POST" and "form3" in request.POST:
         form = ClinicalState_2m_3yForm(request.POST)
         form.save()
 
-        patient_id = request.POST.get("patient_id3")
-        subject_patient = Patient.objects.filter(id = patient_id)[0]
-        clinical_state = ClinicalState_2m_3y.objects.filter(patient_id3 = patient_id).order_by('-id')[0]
+        p_id = request.POST.get("patient_id3")
+        subject_patient = Patient.objects.filter(id=p_id)[0]
+        p_c_states_l = ClinicalState_2m_3y.objects.filter(patient_id3=p_id)
+        clinical_state = p_c_states_l.order_by('-id')[0]
         trigger_ml(subject_patient, clinical_state)
-
 
     return render(request, 'users/user_home/main_home.html',
                            {'patients': patients,
@@ -99,6 +102,7 @@ def home(request):
                             'form1': form1,
                             'form2': form2,
                             'form3': form3})
+
 
 def trigger_ml(subject_patient, clinical_state):
     """
@@ -114,7 +118,8 @@ def trigger_ml(subject_patient, clinical_state):
         probability = ml2.calc_probabilities(patient)
         classification = ml2.classify_patient(patient)
         impact_list = ml2.feature_importance()
-        # due to the lack of data, this classification is always being "AmbulatorialGeral"
+        # due to the lack of data, this classification is
+        # always being "AmbulatorialGeral"
     elif subject_patient.age_range == 3:
         patient = get_2m_3y_symptoms(clinical_state)
         probability = ml3.calc_probabilities(patient)
@@ -122,7 +127,12 @@ def trigger_ml(subject_patient, clinical_state):
         impact_list = ml3.feature_importance()
     # to add another age range, use another elif
 
+    # printing results:
+    print(probability)
+    print(impact_list)
+    print(classification)
     define_patient_classification(subject_patient, classification)
+
 
 def define_patient_classification(subject_patient, classification):
     """
@@ -328,7 +338,8 @@ def get_under_28_symptoms(clinical_state):
 
 def get_29d_2m_symptoms(clinical_state):
     """
-    building patient (29d-2m) to use on ml based on patient's clinical condition
+    building patient (29d-2m) to use on ml based on
+    patient's clinical condition
     """
     patient = [[
         check_patient_problem(clinical_state.dispineia),
@@ -361,9 +372,11 @@ def get_29d_2m_symptoms(clinical_state):
     ]]
     return patient
 
+
 def get_2m_3y_symptoms(clinical_state):
     """
-    building patient (2m-3y) to use on ml based on patient's clinical condition
+    building patient (2m-3y) to use on ml based on
+    patient's clinical condition
     """
     patient = [[
         check_patient_problem(clinical_state.dispineia),

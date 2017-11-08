@@ -6,7 +6,7 @@ import pandas as pd
 class MachineLearning:
 
     def __init__(self, age_range, number_of_symptoms):
-        #building ML based on each age range csv characteristics:
+        # building ML based on each age range csv characteristics:
         if age_range == 1:
             self.__data_frame = self.read_csv_1()
         elif age_range == 2:
