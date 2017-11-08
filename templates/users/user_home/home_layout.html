@@ -11,13 +11,15 @@
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.16/b-1.4.2/r-2.2.0/datatables.min.js"></script>
     <script src="{% static "js/home.js" %}"></script>
     <script src="{% static "js/manageAccounts.js" %}"></script>
+    <script src="{% static "js/cleave.min.js" %}"></script>
+    <script src="{% static "js/registerPatient.js" %}"></script>
 {% endblock %}
 
 {% block content %}
     <div class="wrapper">
         <nav id="sidebar">
             <div class="sidebar-header">
-                <h3>Bootstrap Sidebar</h3>
+                <a href="{% url "users:home" %}"><h3>Bootstrap Sidebar</h3></a>
                 <strong>BS</strong>
             </div>
             <ul class="list-unstyled components">
@@ -66,9 +68,7 @@
                 <div class="container-fluid">
 
                     <div class="navbar-header">
-                        <button id="sidebarCollapse" class="btn btn-info navbar-btn">
-                            <i id="sidebarCollapse" class="fa fa-bars" aria-hidden="true"></i>
-                        </button>
+                        <i id="sidebarCollapse" class="fa fa-bars" aria-hidden="true"></i>
                     </div>
 
                     <p class="pt-3 ml-2" id="sidebarCollapse"><span>Seja bem-vindo(a), {{ user.name }}</span></p>
