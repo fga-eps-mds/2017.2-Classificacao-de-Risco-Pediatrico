@@ -31,6 +31,18 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
+STATE_CHOICES = (
+    ('AC', 'Acre'), ('AL', 'Alagoas'), ('AP', 'Amapá'),
+    ('AM', 'Amazonas'), ('BA', 'Bahia'), ('CE', 'Ceará'),
+    ('DF', 'Distrito Federal'), ('ES', 'Espírito Santo'),
+    ('GO', 'Goiás'), ('MA', 'Maranhão'), ('MT', 'Mato Grosso'),
+    ('MS', 'Mato Grosso do Sul'), ('MG', 'Minas Gerais'),
+    ('PA', 'Pará'), ('PB', 'Paraíba'), ('PR', 'Paraná'),
+    ('PE', 'Pernambuco'), ('PI', 'Piauí'), ('RJ', 'Rio de Janeiro'),
+    ('RN', 'Rio Grande do Norte'), ('RS', 'Rio Grande do Sul'),
+    ('RO', 'Rondônia'), ('RR', 'Roraima'), ('SC', 'Santa Catarina'),
+    ('SP', 'São Paulo'), ('SE', 'Sergipe'), ('TO', 'Tocantins')
+)
 
 # Classe dos usuarios possui atendente e recepcionista
 
@@ -67,20 +79,6 @@ class Staff(AbstractBaseUser):
         choices=PROFILE_TYPES,
         default=0
     )
-
-    STATE_CHOICES = (
-        ('AC', 'Acre'), ('AL', 'Alagoas'), ('AP', 'Amapá'),
-        ('AM', 'Amazonas'), ('BA', 'Bahia'), ('CE', 'Ceará'),
-        ('DF', 'Distrito Federal'), ('ES', 'Espírito Santo'),
-        ('GO', 'Goiás'), ('MA', 'Maranhão'), ('MT', 'Mato Grosso'),
-        ('MS', 'Mato Grosso do Sul'), ('MG', 'Minas Gerais'),
-        ('PA', 'Pará'), ('PB', 'Paraíba'), ('PR', 'Paraná'),
-        ('PE', 'Pernambuco'), ('PI', 'Piauí'), ('RJ', 'Rio de Janeiro'),
-        ('RN', 'Rio Grande do Norte'), ('RS', 'Rio Grande do Sul'),
-        ('RO', 'Rondônia'), ('RR', 'Roraima'), ('SC', 'Santa Catarina'),
-        ('SP', 'São Paulo'), ('SE', 'Sergipe'), ('TO', 'Tocantins')
-    )
-
     uf = models.CharField(
         verbose_name='UF',
         max_length=2,
@@ -154,8 +152,8 @@ class Patient(models.Model):
     birth_date = models.DateField(
         verbose_name=_('Data de Nascimento'),
         help_text=_('Informe a data de Nascimento'),
-        blank=False,
-        null=True        
+        blank=True,
+        null=True
     )
 
     cpf = models.CharField(
@@ -173,19 +171,6 @@ class Patient(models.Model):
         default='',
         blank=True,
         help_text=_('Informe o nome dos pais')
-    )
-
-    STATE_CHOICES = (
-        ('AC', 'Acre'), ('AL', 'Alagoas'), ('AP', 'Amapá'),
-        ('AM', 'Amazonas'), ('BA', 'Bahia'), ('CE', 'Ceará'),
-        ('DF', 'Distrito Federal'), ('ES', 'Espírito Santo'),
-        ('GO', 'Goiás'), ('MA', 'Maranhão'), ('MT', 'Mato Grosso'),
-        ('MS', 'Mato Grosso do Sul'), ('MG', 'Minas Gerais'),
-        ('PA', 'Pará'), ('PB', 'Paraíba'), ('PR', 'Paraná'),
-        ('PE', 'Pernambuco'), ('PI', 'Piauí'), ('RJ', 'Rio de Janeiro'),
-        ('RN', 'Rio Grande do Norte'), ('RS', 'Rio Grande do Sul'),
-        ('RO', 'Rondônia'), ('RR', 'Roraima'), ('SC', 'Santa Catarina'),
-        ('SP', 'São Paulo'), ('SE', 'Sergipe'), ('TO', 'Tocantins')
     )
 
     uf = models.CharField(
@@ -250,6 +235,20 @@ class Patient(models.Model):
         choices=CLASSIFICATION_TYPES,
         default=0
     )
+
+    GENDER = (
+        (0, 'Sexo indefinido'),
+        (1, 'Feminino'),
+        (2, 'Masculino')
+    )
+
+    gender = models.IntegerField(
+        verbose_name=_('Classification'),
+        choices=GENDER,
+        default=0,
+        blank=True
+    )
+
 
     AGE_RANGE = (
         (0, 'Faixa etária indefinida'),
