@@ -147,11 +147,24 @@ a:focus, a:hover {
 }
 
 .masthead .intro-body .brand-heading {
+    -o-background-size: cover;
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    background: url("../img/LogoCRP.png") no-repeat bottom center scroll;
+    background-size: cover;
+    color: white;
+    display: table;
+    height: auto;
+    padding: 23.3% ;
+    text-align: center;
+    width: 100%;
     font-size: 150px;
 }
 
 .masthead .intro-body .intro-text {
-    font-size: 40px;
+    margin-top: 5%;
+    line-height: 50px;
+    font-size: 30px;
 }
 
 @media (min-width: 768px) {
@@ -176,12 +189,11 @@ a:focus, a:hover {
     border: 2px solid white;
     border-radius: 100% !important;
     color: white;
-    font-size: 26px;
-    height: 55px;
+    font-size: 40px;
     line-height: 37px;
     margin-top: 15px;
     transition: background 0.3s ease-in-out;
-    width: 55px;
+    text-align: center;
 }
 
 .btn-circle:focus, .btn-circle:hover {
