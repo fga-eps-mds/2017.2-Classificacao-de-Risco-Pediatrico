@@ -201,7 +201,10 @@ a:focus, a:hover {
     background: rgba(255, 255, 255, 0.1);
     color: white;
     outline: none;
+
 }
+
+
 
 .content-section {
     padding-bottom: 150px;
@@ -235,21 +238,6 @@ a:focus, a:hover {
     color: white;
 }
 
-#map {
-    height: 300px;
-    width: 100%;
-}
-
-@media (min-width: 992px) {
-    .content-section {
-        padding-bottom: 200px;
-        padding-top: 200px;
-    }
-
-    #map {
-        height: 350px;
-    }
-}
 
 .btn {
     -moz-transition: all 0.3s ease-in-out;
@@ -427,7 +415,56 @@ body {
     transition: all 1s ease-in;
 }
 
-
 .js-animated {
     opacity: 1;
+}
+
+.flip{
+    width: 100%;
+    height: 100px;
+    text-align: center;
+    perspective: 1000px;
+}
+
+.flip .frente{
+    width: 130px;
+    height: 100px;
+    margin-left: 30px;
+    border-radius: 30px;
+    border-color: white;
+    position: absolute;
+    transform: rotateY(0deg);
+    backface-visibility: hidden;
+    transition: all .4s linear;
+}
+
+.flip .fundo{
+    width: 130px;
+    height: 100px;
+    margin-left: 30px;
+    border-radius: 30px;
+    border-color: white;
+    position: absolute;
+    transform: rotateY(180deg);
+    backface-visibility: hidden;
+    transition: all .4s linear;
+
+}
+
+.flip:hover .frente{
+    transform: rotateY(-180deg);
+    cursor: pointer;
+}
+
+.flip:hover .fundo{
+    transform: rotateY(0deg);
+    cursor: pointer;
+}
+
+.flip h2 {
+    font-family: 'Lora', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    width: 100%;
+    bottom: 35px;
+    position: absolute;
+    opacity: .8;
 }
