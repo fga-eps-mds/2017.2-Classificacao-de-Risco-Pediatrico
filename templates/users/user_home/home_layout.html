@@ -19,41 +19,52 @@
     <div class="wrapper">
         <nav id="sidebar">
             <div class="sidebar-header">
-                <a href="{% url "users:home" %}"><h3>Bootstrap Sidebar</h3></a>
+                <a href="{% url "users:home" %}"><h3>CRP</h3></a>
                 <strong>BS</strong>
             </div>
             <ul class="list-unstyled components">
                 <li>
-                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">
+                    <a href="#patients" data-toggle="collapse" aria-expanded="false">
                     <i class="fa fa-user-o" aria-hidden="true"></i>
                     Paciente
                     </a>
-                    <ul class="collapse list-unstyled" id="pageSubmenu">
+                    <ul class="collapse list-unstyled" id="patients">
                         <li><a href="{% url "users:register_patient" %}">Cadastrar Paciente</a></li>
                     </ul>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="#attendence" data-toggle="collapse" aria-expanded="false">
                     <i class="fa fa-check-circle-o" aria-hidden="true"></i>
-                    Realizar Classificação
+                    Atendimento
                     </a>
+                    <ul class="collapse list-unstyled" id="attendence">
+                        <li><a href="{% url "users:home" %}">Classificar Paciente</a></li>
+                        <li><a href="#">Atender Paciente</a></li>
+                    </ul>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="#statistics" data-toggle="collapse" aria-expanded="false">
                     <i class="glyphicon glyphicon-link"></i>
-                    Portfolio
+                    Estatísticas
                     </a>
+                    <ul class="collapse list-unstyled" id="statistics">
+                        <li><a href="#">Gerar gráfico de classificações</a></li>
+                        <li><a href="#">Estatisticas Classificação Pessoal</a></li>
+                    </ul>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="#help" data-toggle="collapse" aria-expanded="false">
                     <i class="glyphicon glyphicon-paperclip"></i>
-                    FAQ
+                    Ajuda
                     </a>
+                    <ul class="collapse list-unstyled" id="help">
+                        <li><a href="#">Contato</a></li>
+                    </ul>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="{% url 'users:logout' %}">
                     <i class="glyphicon glyphicon-send"></i>
-                    Contact
+                    Sair
                     </a>
                 </li>
             </ul>
