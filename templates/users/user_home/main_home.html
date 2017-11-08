@@ -23,8 +23,10 @@
             <tbody>
                 {% for patient in patients %}
                 <tr>
-                    {% if patient.name %}
-                        <td><a href="#" data-toggle="modal" data-target="#risk_range_1{{ patient.id }}">{{ patient.name }}</a></td>
+                    {% if patient.name and patient.gender == 1 %}
+                        <td><a href="#" data-toggle="modal" data-target="#risk_range_1{{ patient.id }}"><i class="fa fa-female" aria-hidden="true"></i>&nbsp{{ patient.name }}</a></td>
+                    {% elif  patient.name and patient.gender == 2%}
+                        <td><a href="#" data-toggle="modal" data-target="#risk_range_1{{ patient.id }}"><i class="fa fa-male" aria-hidden="true"></i>&nbsp{{ patient.name }}</a></td>
                     {% else %}
                         <td><a href="#" data-toggle="modal" data-target="#risk_range_1{{ patient.id }}">{{ patient.id }}</a></td>
                     {% endif %}<!-- td nome-->

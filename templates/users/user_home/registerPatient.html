@@ -125,8 +125,8 @@
                                 </div>
                             </div>
 
-
                             <div class="col">
+
                               <div class="form-group px-3 mt-3">
                                   <div class="cols-sm-10">
                                       <select name="{{ form.uf.name }}" class="form-control">
@@ -167,6 +167,26 @@
                                       {% endif %}
                                   </div>
                               </div>
+
+
+                              <div class="form-group px-3 mt-3">
+                                  <div class="cols-sm-10">
+                                      <select name="{{ form.gender.name }}" class="form-control">
+                                        <option value="" selected disabled>Sexo</option>
+                                        <option value="0">Sexo Indefinido</option> Sexo Indefinido
+                                        <option value="1">Feminino</option> Feminino
+                                        <option value="2">Masculino</option> Masculino
+                                      </select>
+                                      {% if form.gender.errors %}
+                                          <div class="error-holder">
+                                              <div class="alert alert-warning" role="alert">
+                                                  {{ form.gender.errors }}
+                                              </div>
+                                          </div>
+                                      {% endif %}
+                                  </div>
+                              </div>
+
 
                                 <div class="form-group px-3">
                                     <div class="cols-sm-10">
