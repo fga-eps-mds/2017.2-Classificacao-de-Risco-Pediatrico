@@ -40,6 +40,12 @@
                       {% else %}
                           <td><a href="#" data-toggle="modal" data-target="#risk_range_3{{ patient.id }}">{{ patient.id }}</a></td>
                       {% endif %}<!-- td nome-->
+                    {% else %}
+                      {% if patient.name %}
+                          <td><a href="#" data-toggle="modal" data-target="#no_ml{{ patient.id }}">{{ patient.name }}</a></td>
+                      {% else %}
+                          <td><a href="#" data-toggle="modal" data-target="#no_ml{{ patient.id }}">{{ patient.id }}</a></td>
+                      {% endif %}
                     {% endif %}
 
                     {% if patient.classification == 0 %}
