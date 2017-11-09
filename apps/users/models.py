@@ -263,5 +263,5 @@ class Patient(models.Model):
         verbose_name=_('Classification'),
         choices=AGE_RANGE,
         default=0,
-        blank=True
+        blank=False
     )
