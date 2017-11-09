@@ -223,20 +223,27 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact content-section text-center animate">
-        <div class="container">
+    <!-- Footer -->
+    <footer style="background: black">
+        <div>
             <div class="row">
-                <div class="col-lg-8 mx-auto">
-                    <h2 class="animate-15">
-                        Contato com os desenvolvedores:
-                    </h2>
-                    <p class="animate-16">
-                        Caso tenha alguma dúvida sobre a utilização ou desenvolvimento do site, você pode contatar nossos desenvolvedores por meio do
-                        <a href="http://github.com/fga-gpp-mds/2017.2-Classificacao-de-Risco-Pediatrico/wiki">
-                            GitHub do projeto
-                        </a>
-                    </p>
+                <div id="footer_left" class=" col-md-6">
+                    <div class="col-md-4 col-sm-4 marb20">
+                        <div class="ftr-tle">
+                            <h4 class="white no-padding">Contato</h4>
+                        </div>
+                        <div class="info-sec">
+                            <p id="footer_p">
+                                Sinta-se à vontade para contatar os desenvolvedores pela plataforma de desenvolvimento
+                                <a href="http://github.com/fga-gpp-mds/2017.2-Classificacao-de-Risco-Pediatrico/wiki">
+                                    Github
+                                </a>
+                                para o esclarecimento de qualquer tipo de dúvidas!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div id="footer_right" class="col-md-4 col-sm-4 marb20">
                     <ul class="list-inline banner-social-buttons animate-9">
                         <li class="list-inline-item">
                             <a href="{% url 'users:landing_page' %}" class="btn btn-default btn-lg">
@@ -264,16 +271,13 @@
                         </li>
                     </ul>
                 </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Footer -->
-    <footer style="background: black">
-        <div class="container text-center">
-            <p style="color: white">
-                Copyright &copy; Classificação de Risco Pediátrico
-            </p>
+            </div>
+            <div class="container text-center">
+                <p style="color: white">
+                    Copyright &copy; Classificação de Risco Pediátrico
+                </p>
+            </div>
         </div>
     </footer>
 

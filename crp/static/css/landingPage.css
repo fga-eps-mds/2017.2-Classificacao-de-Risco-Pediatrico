@@ -162,7 +162,7 @@ a:focus, a:hover {
 }
 
 .masthead .intro-body .intro-text {
-    margin-top: 3%;
+    margin-top: 2%;
     line-height: 50px;
     font-size: 30px;
 }
@@ -465,6 +465,18 @@ body {
 
 #classifica {
     margin-top: 10%;
+    margin-left: -5px;
     font-size: 13px;
     font-weight: bold;
+}
+
+#footer_left {
+    color: white;
+    margin-left: 15%;
+    margin-bottom: 2%;
+}
+
+#footer_right {
+    margin-top: 5%;
+
 }
