@@ -19,12 +19,18 @@
     <div class="wrapper">
         <nav id="sidebar">
             <div class="sidebar-header">
-                <a href="{% url "users:home" %}"><h3>CRP</h3></a>
+                <a href="{% url "users:home" %}" id="logobar"><h3>CRP</h3></a>
                 <strong>CRP</strong>
             </div>
 
-            <p class="pt-2 ml-2"><span>Bem-vindo(a), <br /> {{ user.name }}</span></p>
+            <p class="pt-2 ml-2" id="welcome"><span>Bem-vindo(a), <br /> {{ user.name }}</span></p>
             <ul class="list-unstyled components">
+                <li>
+                    <a href="{% url "users:register_patient" %}">
+                    <i class="fa fa-user-o" aria-hidden="true"></i>
+                    Cadastrar Paciente
+                    </a>
+                </li>
                 <li>
                     <a href="#patients" data-toggle="collapse" aria-expanded="false">
                     <i class="fa fa-user-o" aria-hidden="true"></i>

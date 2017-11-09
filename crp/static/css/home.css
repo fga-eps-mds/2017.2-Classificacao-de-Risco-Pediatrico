@@ -77,8 +77,12 @@ i, span {
     align-items: stretch;
 }
 
+#welcome {
+    text-align: center;
+}
+
 #sidebar {
-    min-width: 250px;
+    min-width: 230px;
     max-width: 250px;
     background: #00171F;
     color: #fff;
@@ -132,6 +136,11 @@ i, span {
 #sidebar .sidebar-header {
     padding: 20px;
     background: #00171F;
+    text-align: center;
+}
+
+#sidebar .sidebar-header h3 {
+    font-size: 50px;
 }
 
 #sidebar .sidebar-header strong {
@@ -324,7 +333,7 @@ a.article, a.article:hover {
     #sidebar {
         margin-left: 0;
     }
-    
+
     #sidebarCollapse span {
         display: none;
     }
