@@ -23,11 +23,11 @@
                 <strong>CRP</strong>
             </div>
 
-            <p class="pt-2 ml-2" id="welcome"><span>Bem-vindo(a), <br /> {{ user.name }}</span></p>
+            <p class="ml-2" id="welcome"><span>Bem-vindo(a), <br /><span id="welcomeName">{{ user.name }}</span></span></p>
             <ul class="list-unstyled components">
                 <li>
                     <a href="{% url "users:register_patient" %}">
-                    <i class="fa fa-user-o" aria-hidden="true"></i>
+                    <i class="fa fa-pencil" aria-hidden="true"></i>
                     Cadastrar Paciente
                     </a>
                 </li>
@@ -37,7 +37,7 @@
                     Paciente
                     </a>
                     <ul class="collapse list-unstyled" id="patients">
-                        <li><a href="{% url "users:register_patient" %}">Cadastrar Paciente</a></li>
+                        <li><a href="{% url "users:home" %}">Visualizar pacientes</a></li>
                     </ul>
                 </li>
                 <li>
@@ -52,7 +52,7 @@
                 </li>
                 <li>
                     <a href="#statistics" data-toggle="collapse" aria-expanded="false">
-                    <i class="glyphicon glyphicon-link"></i>
+                    <i class="fa fa-area-chart"></i>
                     Estatísticas
                     </a>
                     <ul class="collapse list-unstyled" id="statistics">
@@ -62,13 +62,14 @@
                 </li>
                 <li>
                     <a href="#help" data-toggle="collapse" aria-expanded="false">
-                    <i class="glyphicon glyphicon-paperclip"></i>
+                    <i class="fa fa-question-circle"></i>
                     Ajuda
                     </a>
                     <ul class="collapse list-unstyled" id="help">
                         <li><a href="#">Contato</a></li>
                     </ul>
                 </li>
+                <li><i></i></li>
                 <li>
                     <a href="{% url 'users:logout' %}">
                     <i class="glyphicon glyphicon-send"></i>
@@ -86,7 +87,7 @@
                         <i id="sidebarCollapse" class="fa fa-bars" aria-hidden="true"></i>
                     </div>
 
-                    <p class="pt-3 ml-2" id="sidebarCollapse"><span>Seja bem-vindo(a), {{ user.name }}</span></p>
+                    <p class="pt-3 ml-2" id="sidebarCollapse"></p>
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'users:logout' %}">Logout</a>

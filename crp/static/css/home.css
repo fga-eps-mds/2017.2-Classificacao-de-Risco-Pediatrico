@@ -81,8 +81,12 @@ i, span {
     text-align: center;
 }
 
+#welcomeName {
+    color: white;
+}
+
 #sidebar {
-    min-width: 230px;
+    min-width: 210px;
     max-width: 250px;
     background: #00171F;
     color: #fff;
