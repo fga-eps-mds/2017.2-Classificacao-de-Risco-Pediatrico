@@ -11,10 +11,10 @@
         <table id="example" class="table table-condensed" cellspacing="0" width="100%">
             <thead>
                 <tr>
-                    <th>Nome</th>
+                    <th>Nome / ID</th>
                     <th>Classificação</th>
                     <th>Faixa-etária</th>
-                    <th>Data</th>
+                    <th>Data de criação</th>
                     <th>Classificador</th>
                     <th>Deletar</th>
                     <th>Editar</th>
@@ -30,6 +30,17 @@
                     {% elif patient.age_range == 4 %}
                         <td><a href="#" data-toggle="modal" data-target="#risk_range_4{{ patient.id }}">{{ patient.name }}</a></td>
                     {% endif %}
+
+                    {% if patient.name and patient.gender == 1 %}
+                        <td><a href="#" data-toggle="modal" data-target="#risk_range_1{{ patient.id }}"><i class="fa fa-female" aria-hidden="true"></i>&nbsp{{ patient.name }}</a></td>
+                    {% elif  patient.name and patient.gender == 2%}
+                        <td><a href="#" data-toggle="modal" data-target="#risk_range_1{{ patient.id }}"><i class="fa fa-male" aria-hidden="true"></i>&nbsp{{ patient.name }}</a></td>
+                    {% elif patient.age_range == 4 %}
+                        <td><a href="#" data-toggle="modal" data-target="#risk_range_4{{ patient.id }}">{{ patient.name }}</a></td>
+                    {% else %}
+                        <td><a href="#" data-toggle="modal" data-target="#risk_range_1{{ patient.id }}">{{ patient.id }}</a></td>
+                    {% endif %}<!-- td nome-->
+                    
                     {% if patient.classification == 0 %}
                         <td><span class="btn btn-primary badge badge-pill badge-secondary"  data-toggle="modal" data-target="#{{ patient.id }}">Não classificado</span></td>
                     {% elif patient.classification == 1 %}
@@ -40,12 +51,24 @@
                         <td><span class="btn btn-primary badge badge-pill badge-warning"  data-toggle="modal" data-target="#{{ patient.id }}">Atendimento Hospitalar</span></td>
                     {% elif patient.classification == 4 %}
                         <td><span class="btn btn-primary badge badge-pill badge-info"  data-toggle="modal" data-target="#{{ patient.id }}">Atendimento Eletivo</span></td>
-                    {% endif %}
-                    <td></td>
-                    <td>{{ patient.created_at }}</td>
-                    <td></td>
-                    <td><a href="#" data-toggle="modal" data-target="#deletar-{{ patient.cpf }}"><i class="fa fa-ban" aria-hidden="true"></i></a></td>
-                    <td><a href="{% url 'users:edit_patient' patient.cpf %}"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
+                    {% endif %}<!--td classificação-->
+                    {% if patient.age_range  == 0 %}
+                        <td>Faixa etária indefinida</td>
+                    {% elif patient.age_range == 1 %}
+                        <td>0 até 28 dias</td>
+                    {% elif patient.age_range == 2 %}
+                        <td>29 dias à 3 meses</td>
+                    {% elif patient.age_range == 3 %}
+                        <td>3 meses à 2 anos</td>
+                    {% elif patient.age_range == 4 %}
+                        <td>2 anos à 10 anos</td>
+                    {% elif patient.age_range == 5 %}
+                        <td>Acima de 10 anos</td>
+                    {% endif %}<!--td faixa etária-->
+                    <td>{{ patient.created_at }}</td><!-- td data de criação-->
+                    <td></td><!-- td classificador  -->
+                    <td><a href="#" data-toggle="modal" data-target="#deletar-{{ patient.id }}"><i class="fa fa-ban" aria-hidden="true"></i></a></td><!--td deletar-->
+                    <td><a href="{% url 'users:edit_patient' patient.id %}"><i class="fa fa-pencil" aria-hidden="true"></i></a></td><!--td editar-->
                 </tr>
                 {% endfor %}
             </tbody>
@@ -112,7 +135,7 @@
             </div>
         </div>
 
-        <div class="modal fade" id="deletar-{{ patient.cpf }}" tabindex="-1" role="dialog" aria-labelledby="Deletar Paciente" aria-hidden="true">
+        <div class="modal fade" id="deletar-{{ patient.id }}" tabindex="-1" role="dialog" aria-labelledby="Deletar Paciente" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -122,11 +145,11 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        Tem certeza que deseja deletar o registro de {{ patient.name }}?
+                        Tem certeza que deseja deletar o registro {{ patient.id }}?
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                        <a href="{% url 'users:patient_remove' patient.cpf %}" class="btn btn-danger">Deletar</a>
+                        <a href="{% url 'users:patient_remove' patient.id %}" class="btn btn-danger">Deletar</a>
                     </div>
                 </div>
             </div>
