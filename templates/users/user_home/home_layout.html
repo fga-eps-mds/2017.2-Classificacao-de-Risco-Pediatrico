@@ -19,7 +19,10 @@
     <div class="wrapper">
         <nav id="sidebar">
             <div class="sidebar-header">
-                <a href="{% url "users:home" %}" id="logobar"><h3>CRP</h3></a>
+                <a href="{% url "users:home" %}" id="logobar">
+                  <div class="gradiente"></div>
+                  <h3>CRP</h3>
+                </a>
                 <strong>CRP</strong>
             </div>
 
@@ -34,7 +37,7 @@
                 <li>
                     <a href="#patients" data-toggle="collapse" aria-expanded="false">
                     <i class="fa fa-user-o" aria-hidden="true"></i>
-                    Paciente
+                    Paciente<span class="fa fa-chevron down"></span>
                     </a>
                     <ul class="collapse list-unstyled" id="patients">
                         <li><a href="{% url "users:home" %}">Visualizar pacientes</a></li>

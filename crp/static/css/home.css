@@ -85,6 +85,10 @@ i, span {
     color: white;
 }
 
+#logobar {
+
+}
+
 #sidebar {
     min-width: 210px;
     max-width: 250px;
@@ -140,7 +144,7 @@ i, span {
 #sidebar .sidebar-header {
     padding: 20px;
     background: #00171F;
-    text-align: center;
+    display: block;
 }
 
 #sidebar .sidebar-header h3 {
@@ -341,4 +345,26 @@ a.article, a.article:hover {
     #sidebarCollapse span {
         display: none;
     }
+}
+
+.gradiente {
+ 		/* Tamanho */
+		height: 40px;
+		width: 10px;
+    margin-left: 30px;
+    margin-top: 7px;
+    margin-right: 10px;
+    float: left;
+
+ 		/* Color */
+    /* For browsers that do not support gradients */
+    background: red;
+    /* For Safari 5.1 to 6.0 */
+    background: -webkit-linear-gradient(#ec2a2b , #f45e24, #fdb02a, #fed530, #b9ca29, #468657, #184dbb);
+    /* For Opera 11.1 to 12.0 */
+    background: -o-linear-gradient(#ec2a2b , #f45e24, #fdb02a, #fed530, #b9ca29, #468657, #184dbb);
+    /* For Firefox 3.6 to 15 */
+    background: -moz-linear-gradient(#ec2a2b , #f45e24, #fdb02a, #fed530, #b9ca29, #468657, #184dbb);
+    /* Standard syntax (must be last) */
+    background: linear-gradient(#ec2a2b , #f45e24, #fdb02a, #fed530, #b9ca29, #468657, #184dbb);
 }
