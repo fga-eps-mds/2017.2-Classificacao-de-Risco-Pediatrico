@@ -162,7 +162,7 @@ a:focus, a:hover {
 }
 
 .masthead .intro-body .intro-text {
-    margin-top: 5%;
+    margin-top: 3%;
     line-height: 50px;
     font-size: 30px;
 }
@@ -183,17 +183,9 @@ a:focus, a:hover {
 }
 
 .btn-circle {
-    -moz-transition: background 0.3s ease-in-out;
-    -webkit-transition: background 0.3s ease-in-out;
-    background: transparent;
-    border: 2px solid white;
-    border-radius: 100% !important;
-    color: white;
-    font-size: 40px;
-    line-height: 37px;
-    margin-top: 15px;
-    transition: background 0.3s ease-in-out;
-    text-align: center;
+    width: 100%;
+    height:100%;
+    border-radius: 30px;
 }
 
 .btn-circle:focus, .btn-circle:hover {
@@ -203,8 +195,6 @@ a:focus, a:hover {
     outline: none;
 
 }
-
-
 
 .content-section {
     padding-bottom: 150px;
@@ -238,11 +228,10 @@ a:focus, a:hover {
     color: white;
 }
 
-
 .btn {
     -moz-transition: all 0.3s ease-in-out;
     -webkit-transition: all 0.3s ease-in-out;
-    border-radius: 0;
+    border-radius: 30px;
     font-family: 'Cabin', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: 400;
     transition: all 0.3s ease-in-out;
@@ -431,7 +420,7 @@ body {
     height: 100px;
     margin-left: 30px;
     border-radius: 30px;
-    border-color: white;
+    border: 2px solid white;
     position: absolute;
     transform: rotateY(0deg);
     backface-visibility: hidden;
@@ -443,7 +432,7 @@ body {
     height: 100px;
     margin-left: 30px;
     border-radius: 30px;
-    border-color: white;
+    border: 2px solid white;
     position: absolute;
     transform: rotateY(180deg);
     backface-visibility: hidden;
@@ -461,10 +450,21 @@ body {
     cursor: pointer;
 }
 
-.flip h2 {
-    font-family: 'Lora', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    width: 100%;
-    bottom: 35px;
-    position: absolute;
-    opacity: .8;
+.size{
+    font-size: 60px;
+    text-align: center;
+    margin-top: 15px;
+}
+
+#hospital {
+    margin-top: 15%;
+
+    font-size: 15px;
+    font-weight: bold;
+}
+
+#classifica {
+    margin-top: 10%;
+    font-size: 13px;
+    font-weight: bold;
 }
