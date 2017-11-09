@@ -120,7 +120,8 @@ class TestUsers:
         assert isinstance(response.context['form'], form)
 
     @pytest.mark.parametrize('url, data, urlredirect', [
-        ('/register/user/', profile_data, '/login')])
+        ('/register/user/', profile_data, '/login'),
+        ('/register/patient/', patient_data, '/home/')])
     def test_sign_up_post_redirect(self, client, url, data, urlredirect):
         Staff.objects.create_superuser(**self.default_user_data())
         response = client.post('/login', {'username': 'email@gmail.com',
@@ -129,15 +130,15 @@ class TestUsers:
         assert response.status_code == 200
         assert response.redirect_chain == [(urlredirect, 302)]
 
-    @pytest.mark.parametrize('url, data, urlredirect', [
-        ('/register/patient/', patient_data, '/home/')])
-    def test_sign_up_patient_redirect(self, client, url, data, urlredirect):
-        Staff.objects.create_superuser(**self.default_user_data())
-        response = client.post('/login', {'username': 'email@gmail.com',
-                               'password': "1234asdf"})
-        response = client.post(url, data, follow=True)
-        assert response.status_code == 200
-        assert response.redirect_chain == [(urlredirect, 302)]
+    # @pytest.mark.parametrize('url, data, urlredirect', [
+    #     ('/register/patient/', patient_data, '/home/')])
+    # def test_sign_up_patient_redirect(self, client, url, data, urlredirect):
+    #     Staff.objects.create_superuser(**self.default_user_data())
+    #     response = client.post('/login', {'username': 'email@gmail.com',
+    #                            'password': "1234asdf"})
+    #     response = client.post(url, data, follow=True)
+    #     assert response.status_code == 200
+    #     assert response.redirect_chain == [(urlredirect, 302)]
 
     def test_home_view(self, client):
         Staff.objects.create_superuser(**self.default_user_data())

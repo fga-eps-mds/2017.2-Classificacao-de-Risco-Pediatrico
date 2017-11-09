@@ -46,8 +46,8 @@ STATE_CHOICES = (
 
 # Classe dos usuarios possui atendente e recepcionista
 
-class Staff(AbstractBaseUser):
 
+class Staff(AbstractBaseUser):
     objects = UserManager()
 
     name = models.CharField(
@@ -79,6 +79,7 @@ class Staff(AbstractBaseUser):
         choices=PROFILE_TYPES,
         default=0
     )
+    
     uf = models.CharField(
         verbose_name='UF',
         max_length=2,
