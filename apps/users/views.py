@@ -16,12 +16,11 @@ from apps.users.forms import EditPatientForm
 
 from .models import Patient, Staff
 
-ml = MachineLearning('apps/risk_rating/class_menos_28.csv')
+ml1 = MachineLearning('apps/risk_rating/class_menos_28.csv')
 ml2 = MachineLearningRange2()
-
+ml4 = MachineLearning('apps/risk_rating/class_10y+.csv')
 
 def landing_page(request):
-
     return render(request, 'landing_page/landingPage.html', {})
 
 
@@ -66,14 +65,19 @@ def home(request):
             # machine learning methods are called here:
             if subject_patient.age_range == 1:
                 patient = get_under_28_symptoms(form)
-                probability = ml.calc_probabilities(patient)
-                classification = ml.classify_patient(patient)
-                impact_list = ml.feature_importance()
+                probability = ml1.calc_probabilities(patient)
+                classification = ml1.classify_patient(patient)
+                impact_list = ml1.feature_importance()
             elif subject_patient.age_range == 2:
                 patient = get_29d_2m_symptoms(form)
                 probability = ml2.calc_probabilities(patient)
                 classification = ml2.classify_patient(patient)
                 impact_list = ml2.feature_importance()
+            elif subject_patient.age_range == 4:
+                patient = get_10yMore(form)
+                probability = ml4.calc_probabilities(patient)
+                classification = ml4.classify_patient(patient)
+                impact_list = ml4.feature_importance()
             # to add another age range, use another elif
             else:
                 pass
@@ -356,6 +360,119 @@ def get_29d_2m_symptoms(form):
         secrecaoOcular,
         sangueFezes,
         convulsaoHoje,
+    ]]
+
+    return patient
+
+
+def get_10yMore(form):
+    """
+    get symptoms from form to build patient's clinical condition
+    """
+    mais72hFebre = check_patient_problem(form.get("mais72hrFebre"))
+    menos72hrFebre = check_patient_problem(form.get("menos72hrFebre"))
+    tontura = check_patient_problem(form.get("tontura"))
+    corpoEstranho = check_patient_problem(form.get("corpoEstranho"))
+    dorDeDente = check_patient_problem(form.get("dorDeDente"))
+    disuria = check_patient_problem(form.get("disuria"))
+    urinaConcentrada = check_patient_problem(form.get("urinaConcentrada"))
+    dispineia = check_patient_problem(form.get("dispineia"))
+    dorToracica = check_patient_problem(form.get("dorToracica"))
+    choqueEletrico = check_patient_problem(form.get("choqueEletrico"))
+    quaseAfogamento = check_patient_problem(form.get("quaseAfogamento"))
+    artralgia = check_patient_problem(form.get("artralgia"))
+    ictericia = check_patient_problem(form.get("ictericia"))
+    perdaDaConsciencia = check_patient_problem(form.get("perdaDaConsciencia"))
+    palidez = check_patient_problem(form.get("palidez"))
+    cianose = check_patient_problem(form.get("cianose"))
+    solucos = check_patient_problem(form.get("solucos"))
+    prostracao = check_patient_problem(form.get("prostracao"))
+    febre = check_patient_problem(form.get("febre"))
+    vomitos = check_patient_problem(form.get("vomitos"))
+    tosse = check_patient_problem(form.get("tosse"))
+    coriza = check_patient_problem(form.get("coriza"))
+    espirros = check_patient_problem(form.get("espirros"))
+    hiperemiaConjuntival = check_patient_problem(form.get("hiperemiaConjuntival"))
+    secrecaoOcular = check_patient_problem(form.get("secrecaoOcular"))
+    obstrucaoNasal = check_patient_problem(form.get("obstrucaoNasal"))
+    convulsao = check_patient_problem(form.get("convulsao"))
+    diarreia = check_patient_problem(form.get("diarreia"))
+    dificuldadeEvacuar = check_patient_problem(form.get("dificuldadeEvacuar"))
+    cefaleia = check_patient_problem(form.get("cefaleia"))
+    manchasNaPele = check_patient_problem(form.get("manchasNaPele"))
+    salivacao = check_patient_problem(form.get("salivacao"))
+    queda = check_patient_problem(form.get("queda"))
+    hiporexia = check_patient_problem(form.get("hiporexia"))
+    salivacao = check_patient_problem(form.get("salivacao"))
+    hiporexia = check_patient_problem(form.get("hiporexia"))
+    constipacao = check_patient_problem(form.get("constipacao"))
+    chiadoNoPeito = check_patient_problem(form.get("chiadoNoPeito"))
+    diminuicaoDaDiurese = check_patient_problem(form.get("diminuicaoDaDiurese"))
+    dorAbdominal = check_patient_problem(form.get("dorAbdominal"))
+    otalgia = check_patient_problem(form.get("otalgia"))
+    epistaxe = check_patient_problem(form.get("epistaxe"))
+    otorreia = check_patient_problem(form.get("otorreia"))
+    edema = check_patient_problem(form.get("edema"))
+    adenomegalias = check_patient_problem(form.get("adenomegalias"))
+    dorArticular = check_patient_problem(form.get("dorArticular"))
+    dificuldadesDeMarcha = check_patient_problem(form.get("dificuldadesDeMarcha"))
+    sonolencia = check_patient_problem(form.get("sonolencia"))
+    secrecaoOcular = check_patient_problem(form.get("secrecaoOcular"))
+    dorMuscular = check_patient_problem(form.get("dorMuscular"))
+    dorRetroobitaria = check_patient_problem(form.get("dorRetroobitaria"))
+
+    patient = [[
+        mais72hrFebre,
+        menos72hrFebre,
+        tontura,
+        corpoEstranho,
+        dorDeDente,
+        disuria,
+        urinaConcentrada,
+        dispineia,
+        dorToracica,
+        choqueEletrico,
+        quaseAfogamento,
+        artralgia,
+        ictericia,
+        perdaDaConsciencia,
+        palidez,
+        cianose,
+        solucos,
+        prostracao,
+        febre,
+        vomitos,
+        tosse,
+        coriza,
+        espirros,
+        hiperemiaConjuntival,
+        secrecaoOcular,
+        obstrucaoNasal,
+        convulsao,
+        diarreia,
+        dificuldadeEvacuar,
+        cefaleia,
+        manchasNaPele,
+        salivacao,
+        queda,
+        hiporexia,
+        salivacao,
+        hiporexia,
+        constipacao,
+        chiadoNoPeito,
+        diminuicaoDaDiurese,
+        dorAbdominal,
+        otalgia,
+        epistaxe,
+        otorreia,
+        edema,
+        adenomegalias,
+        dorArticular,
+        dificuldadesDeMarcha,
+        sonolencia,
+        secrecaoOcular,
+        dorMuscular,
+        dorRetroobitaria,
     ]]
 
     return patient

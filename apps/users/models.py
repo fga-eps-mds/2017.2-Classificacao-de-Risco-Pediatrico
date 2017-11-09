@@ -213,6 +213,7 @@ class Patient(models.Model):
     AGE_RANGE = (
         (1, 'até 28 dias'),
         (2, '29 dias à 3 meses'),
+        (4, '10 anos ou mais'),
     )
 
     age_range = models.IntegerField(
