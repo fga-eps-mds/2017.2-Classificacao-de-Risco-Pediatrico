@@ -485,16 +485,14 @@ body {
     margin-left: 15%;
 }
 
-.colorbar {
-    background-color: #17a2b8;
+.colorbar-top {
     width: 90%;
     height: 25px;
     margin-top: 30px;
     border-radius: 50px;
 }
 
-.colorbar-down {
-    background-color: #17a2b8;
+.colorbar-bottom {
     width: 90%;
     height: 25px;
     margin-top: 30px;
