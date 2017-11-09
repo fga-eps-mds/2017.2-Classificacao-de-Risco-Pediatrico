@@ -155,7 +155,7 @@ a:focus, a:hover {
     color: white;
     display: table;
     height: auto;
-    padding: 23.3% ;
+    padding: 22% ;
     text-align: center;
     width: 100%;
     font-size: 150px;
@@ -198,7 +198,7 @@ a:focus, a:hover {
 
 .content-section {
     padding-bottom: 150px;
-    padding-top: 150px;
+    padding-top: 100px;
 }
 
 .download-section {
@@ -215,9 +215,9 @@ a:focus, a:hover {
     -o-background-size: cover;
     -moz-background-size: cover;
     -webkit-background-size: cover;
-    background-color: black;
+    background-color: white;
     background-size: cover;
-    color: white;
+    color: black;
 }
 .contact {
     -o-background-size: cover;
@@ -478,5 +478,26 @@ body {
 
 #footer_right {
     margin-top: 5%;
+}
 
+.icon {
+    margin-bottom: 5%;
+    margin-left: 15%;
+}
+
+.colorbar {
+    background-color: #17a2b8;
+    width: 90%;
+    height: 25px;
+    margin-top: 30px;
+    border-radius: 50px;
+}
+
+.colorbar-down {
+    background-color: #17a2b8;
+    width: 90%;
+    height: 25px;
+    margin-top: 30px;
+    border-radius: 50px;
+    margin-left: 10%;
 }
