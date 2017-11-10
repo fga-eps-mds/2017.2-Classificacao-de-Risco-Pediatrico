@@ -101,7 +101,7 @@ def home(request):
         p_c_states_l = ClinicalState_2m_3y.objects.filter(patient_id3=p_id)
         clinical_state = p_c_states_l.order_by('-id')[0]
         trigger_ml(subject_patient, clinical_state)
-    
+
     elif request.method == "POST" and "form5" in request.POST:
         form = ClinicalState_10yMoreForm(request.POST)
         form.save()
@@ -236,7 +236,7 @@ def register_patient(request):
             if ['birth_date'] in form.changed_data:
                 calculate_age_range(form)
             else:
-                pass    
+                pass
             form.save()
             return redirect('users:home')
 

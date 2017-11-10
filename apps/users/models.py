@@ -31,6 +31,7 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
+
 STATE_CHOICES = (
     ('AC', 'Acre'), ('AL', 'Alagoas'), ('AP', 'Amapá'),
     ('AM', 'Amazonas'), ('BA', 'Bahia'), ('CE', 'Ceará'),

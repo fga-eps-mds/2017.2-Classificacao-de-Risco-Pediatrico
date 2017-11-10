@@ -56,6 +56,7 @@ class ClinicalState_2m_3yForm(forms.ModelForm):
                   'fontanela_abaulada', 'secrecao_no_umbigo',
                   'secrecao_ocular']
 
+
 class ClinicalState_10yMoreForm(forms.ModelForm):
     """
     Defining fields patients (29 days and 2 months old) clinical state
