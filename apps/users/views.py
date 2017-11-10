@@ -12,12 +12,16 @@ from apps.users.forms import RegistrationStaffForm
 from apps.users.forms import RegistrationPatientForm
 from apps.users.forms import EditPatientForm
 from .models import Patient, Staff
+
 from apps.risk_rating.forms import ClinicalState_28dForm
 from apps.risk_rating.forms import ClinicalState_29d_2mForm
 from apps.risk_rating.forms import ClinicalState_2m_3yForm
+from apps.risk_rating.forms import ClinicalState_10yMoreForm
+
 from apps.risk_rating.models import ClinicalState_28d
 from apps.risk_rating.models import ClinicalState_29d_2m
 from apps.risk_rating.models import ClinicalState_2m_3y
+from apps.risk_rating.models import ClinicalState_10yMore
 
 
 ml1 = MachineLearning('apps/risk_rating/class_menos_28.csv')
@@ -62,6 +66,7 @@ def home(request):
     form1 = ClinicalState_28dForm()
     form2 = ClinicalState_29d_2mForm()
     form3 = ClinicalState_2m_3yForm()
+    form5 = ClinicalState_10yMoreForm()
     patients = Patient.objects.all()
     classification = None
 
@@ -96,13 +101,24 @@ def home(request):
         p_c_states_l = ClinicalState_2m_3y.objects.filter(patient_id3=p_id)
         clinical_state = p_c_states_l.order_by('-id')[0]
         trigger_ml(subject_patient, clinical_state)
+    
+    elif request.method == "POST" and "form5" in request.POST:
+        form = ClinicalState_10yMoreForm(request.POST)
+        form.save()
+
+        p_id = request.POST.get("patient_id5")
+        subject_patient = Patient.objects.filter(id=p_id)[0]
+        p_c_states_l = ClinicalState_2m_3y.objects.filter(patient_id5=p_id)
+        clinical_state = p_c_states_l.order_by('-id')[0]
+        trigger_ml(subject_patient, clinical_state)
 
     return render(request, 'users/user_home/main_home.html',
                            {'patients': patients,
                             'classification': classification,
                             'form1': form1,
                             'form2': form2,
-                            'form3': form3})
+                            'form3': form3,
+                            'form5': form5})
 
 
 def trigger_ml(subject_patient, clinical_state):

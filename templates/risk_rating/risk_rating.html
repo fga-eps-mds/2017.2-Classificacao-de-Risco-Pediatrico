@@ -5,9 +5,11 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content" id="classification-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Classificação de risco</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        Classificação de risco
+                    </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                        <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <form role="form" class="form" method="POST" id="form1">
@@ -17,20 +19,21 @@
                             <div class="row" id="row-modal">
                                 <div class="btn-group-responsive" data-toggle="buttons">
                                     {% for field in form1 %}
-                                    {% if field.name == 'patient_id1' %}
-                                    <input type="hidden" value="{{ patient.id }}" name="patient_id1"/>
-                                    {% else %}
-                                    <label class="btn btn-primary classification-button col-md-2" >
-                                    <input class="form-check-input" type="checkbox" autocomplete="off" name="{{ field.name }}">{{ field.label }}
-                                    </label>
-                                    {% endif %}
+                                        {% if field.name == 'patient_id1' %}
+                                            <input type="hidden" value="{{ patient.id }}" name="patient_id1"/>
+                                        {% else %}
+                                            <label class="btn btn-primary classification-button col-md-2" >
+                                                <input class="form-check-input" type="checkbox" autocomplete="off" name="{{ field.name }}">
+                                                    {{ field.label }}
+                                            </label>
+                                        {% endif %}
                                     {% endfor %}
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary classification-button" id="classification" name="form1">
-                            Classificar
+                                Classificar
                             </button>
                         </div>
                     </div>
@@ -38,6 +41,7 @@
             </div>
         </div>
     </div>
+
     <div class="modal fade bd-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"
         id="risk_range_2{{ patient.id }}">
         <div class="modal-dialog modal-lg" role="document">
@@ -45,7 +49,7 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Classificação de risco</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                        <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <form role="form" class="form" method="POST" id="form2">
@@ -55,20 +59,21 @@
                             <div class="row" id="row-modal">
                                 <div class="btn-group-responsive" data-toggle="buttons">
                                     {% for field in form2 %}
-                                    {% if field.name == 'patient_id2' %}
-                                    <input type="hidden" value="{{ patient.id }}" name="patient_id2"/>
-                                    {% else %}
-                                    <label class="btn btn-primary classification-button col-md-2" >
-                                    <input class="form-check-input" type="checkbox" autocomplete="off" name="{{ field.name }}">{{ field.label }}
-                                    </label>
-                                    {% endif %}
+                                        {% if field.name == 'patient_id2' %}
+                                            <input type="hidden" value="{{ patient.id }}" name="patient_id2"/>
+                                        {% else %}
+                                            <label class="btn btn-primary classification-button col-md-2" >
+                                                <input class="form-check-input" type="checkbox" autocomplete="off" name="{{ field.name }}">
+                                                    {{ field.label }}
+                                            </label>
+                                        {% endif %}
                                     {% endfor %}
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary classification-button" id="classification" name="form2">
-                            Classificar
+                                Classificar
                             </button>
                         </div>
                     </div>
@@ -76,14 +81,17 @@
             </div>
         </div>
     </div>
+
     <div class="modal fade bd-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"
         id="risk_range_3{{ patient.id }}">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content" id="classification-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Classificação de risco</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        Classificação de risco
+                    </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                        <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <form role="form" class="form" method="POST" id="form3">
@@ -93,20 +101,21 @@
                             <div class="row" id="row-modal">
                                 <div class="btn-group-responsive" data-toggle="buttons">
                                     {% for field in form3 %}
-                                    {% if field.name == 'patient_id3' %}
-                                    <input type="hidden" value="{{ patient.id }}" name="patient_id3"/>
-                                    {% else %}
-                                    <label class="btn btn-primary classification-button col-md-2" >
-                                    <input class="form-check-input" type="checkbox" autocomplete="off" name="{{ field.name }}">{{ field.label }}
-                                    </label>
-                                    {% endif %}
+                                        {% if field.name == 'patient_id3' %}
+                                            <input type="hidden" value="{{ patient.id }}" name="patient_id3"/>
+                                        {% else %}
+                                            <label class="btn btn-primary classification-button col-md-2" >
+                                                <input class="form-check-input" type="checkbox" autocomplete="off" name="{{ field.name }}">
+                                                    {{ field.label }}
+                                            </label>
+                                        {% endif %}
                                     {% endfor %}
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary classification-button" id="classification" name="form3">
-                            Classificar
+                                Classificar
                             </button>
                         </div>
                     </div>
@@ -114,21 +123,70 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade bd-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"
+        id="risk_range_5{{ patient.id }}">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content" id="classification-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        Classificação de risco
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form role="form" class="form" method="POST" id="form5">
+                    {% csrf_token %}
+                    <div class="modal-body">
+                        <div class="container-fuild " id="container-modal">
+                            <div class="row" id="row-modal">
+                                <div class="btn-group-responsive" data-toggle="buttons">
+                                    {% for field in form5 %}
+                                        {% if field.name == 'patient_id5' %}
+                                            <input type="hidden" value="{{ patient.id }}" name="patient_id5"/>
+                                        {% else %}
+                                            <label class="btn btn-primary classification-button col-md-2" >
+                                                <input class="form-check-input" type="checkbox" autocomplete="off" name="{{ field.name }}">
+                                                    {{ field.label }}
+                                            </label>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary classification-button" id="classification" name="form5">
+                                Classificar
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <div class="modal fade bd-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"
         id="no_ml{{ patient.id }}">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content" id="classification-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Classificação de risco</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        Classificação de risco
+                    </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                        <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 {% csrf_token %}
                 <div class="modal-body">
                     <div class="container-fuild " id="container-modal">
-                        <h5>Desculpe, mas ainda não é possível classificar um paciente desta faixa etária</h5>
-                        <h6>Faixa etaria: {{patient.age_range}}</h6>
+                        <h5>
+                            Desculpe, mas ainda não é possível classificar um paciente desta faixa etária
+                        </h5>
+                        <h6>
+                            Faixa etaria: {{patient.age_range}}
+                        </h6>
                     </div>
                 </div>
             </div>
