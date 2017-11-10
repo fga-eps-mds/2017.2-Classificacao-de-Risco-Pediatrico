@@ -108,7 +108,7 @@ def home(request):
 
         p_id = request.POST.get("patient_id5")
         subject_patient = Patient.objects.filter(id=p_id)[0]
-        p_c_states_l = ClinicalState_2m_3y.objects.filter(patient_id5=p_id)
+        p_c_states_l = ClinicalState_10yMore.objects.filter(patient_id5=p_id)
         clinical_state = p_c_states_l.order_by('-id')[0]
         trigger_ml(subject_patient, clinical_state)
 
@@ -142,6 +142,11 @@ def trigger_ml(subject_patient, clinical_state):
         probability = ml3.calc_probabilities(patient)
         classification = ml3.classify_patient(patient)
         impact_list = ml3.feature_importance()
+    elif subject_patient.age_range == 5:
+        patient = get_10y_more_symptoms(clinical_state)
+        probability = ml5.calc_probabilities(patient)
+        classification = ml5.classify_patient(patient)
+        impact_list = ml5.feature_importance()
     # to add another age range, use another elif
 
     # printing results:
@@ -428,114 +433,62 @@ def get_2m_3y_symptoms(clinical_state):
     return patient
 
 
-def get_10y_more(form):
+def get_10y_more_symptoms(clinical_state):
     """
-    get symptoms from form to build patient's clinical condition
+    building patient (2m-3y) to use on ml based on
+    patient's clinical condition
     """
-    mais72hFebre = check_patient_problem(form.get("mais72hrFebre"))
-    menos72hrFebre = check_patient_problem(form.get("menos72hrFebre"))
-    tontura = check_patient_problem(form.get("tontura"))
-    corpoEstranho = check_patient_problem(form.get("corpoEstranho"))
-    dorDeDente = check_patient_problem(form.get("dorDeDente"))
-    disuria = check_patient_problem(form.get("disuria"))
-    urinaConcentrada = check_patient_problem(form.get("urinaConcentrada"))
-    dispineia = check_patient_problem(form.get("dispineia"))
-    dorToracica = check_patient_problem(form.get("dorToracica"))
-    choqueEletrico = check_patient_problem(form.get("choqueEletrico"))
-    quaseAfogamento = check_patient_problem(form.get("quaseAfogamento"))
-    artralgia = check_patient_problem(form.get("artralgia"))
-    ictericia = check_patient_problem(form.get("ictericia"))
-    perdaDaConsciencia = check_patient_problem(form.get("perdaDaConsciencia"))
-    palidez = check_patient_problem(form.get("palidez"))
-    cianose = check_patient_problem(form.get("cianose"))
-    solucos = check_patient_problem(form.get("solucos"))
-    prostracao = check_patient_problem(form.get("prostracao"))
-    febre = check_patient_problem(form.get("febre"))
-    vomitos = check_patient_problem(form.get("vomitos"))
-    tosse = check_patient_problem(form.get("tosse"))
-    coriza = check_patient_problem(form.get("coriza"))
-    espirros = check_patient_problem(form.get("espirros"))
-    hiperemiaConjuntival = check_patient_problem(form.get("hiperemiaConjuntival"))
-    secrecaoOcular = check_patient_problem(form.get("secrecaoOcular"))
-    obstrucaoNasal = check_patient_problem(form.get("obstrucaoNasal"))
-    convulsao = check_patient_problem(form.get("convulsao"))
-    diarreia = check_patient_problem(form.get("diarreia"))
-    dificuldadeEvacuar = check_patient_problem(form.get("dificuldadeEvacuar"))
-    cefaleia = check_patient_problem(form.get("cefaleia"))
-    manchasNaPele = check_patient_problem(form.get("manchasNaPele"))
-    salivacao = check_patient_problem(form.get("salivacao"))
-    queda = check_patient_problem(form.get("queda"))
-    hiporexia = check_patient_problem(form.get("hiporexia"))
-    salivacao = check_patient_problem(form.get("salivacao"))
-    hiporexia = check_patient_problem(form.get("hiporexia"))
-    constipacao = check_patient_problem(form.get("constipacao"))
-    chiadoNoPeito = check_patient_problem(form.get("chiadoNoPeito"))
-    diminuicaoDaDiurese = check_patient_problem(form.get("diminuicaoDaDiurese"))
-    dorAbdominal = check_patient_problem(form.get("dorAbdominal"))
-    otalgia = check_patient_problem(form.get("otalgia"))
-    epistaxe = check_patient_problem(form.get("epistaxe"))
-    otorreia = check_patient_problem(form.get("otorreia"))
-    edema = check_patient_problem(form.get("edema"))
-    adenomegalias = check_patient_problem(form.get("adenomegalias"))
-    dorArticular = check_patient_problem(form.get("dorArticular"))
-    dificuldadesDeMarcha = check_patient_problem(form.get("dificuldadesDeMarcha"))
-    sonolencia = check_patient_problem(form.get("sonolencia"))
-    secrecaoOcular = check_patient_problem(form.get("secrecaoOcular"))
-    dorMuscular = check_patient_problem(form.get("dorMuscular"))
-    dorRetroobitaria = check_patient_problem(form.get("dorRetroobitaria"))
-
     patient = [[
-        mais72hFebre,
-        menos72hrFebre,
-        tontura,
-        corpoEstranho,
-        dorDeDente,
-        disuria,
-        urinaConcentrada,
-        dispineia,
-        dorToracica,
-        choqueEletrico,
-        quaseAfogamento,
-        artralgia,
-        ictericia,
-        perdaDaConsciencia,
-        palidez,
-        cianose,
-        solucos,
-        prostracao,
-        febre,
-        vomitos,
-        tosse,
-        coriza,
-        espirros,
-        hiperemiaConjuntival,
-        secrecaoOcular,
-        obstrucaoNasal,
-        convulsao,
-        diarreia,
-        dificuldadeEvacuar,
-        cefaleia,
-        manchasNaPele,
-        salivacao,
-        queda,
-        hiporexia,
-        salivacao,
-        hiporexia,
-        constipacao,
-        chiadoNoPeito,
-        diminuicaoDaDiurese,
-        dorAbdominal,
-        otalgia,
-        epistaxe,
-        otorreia,
-        edema,
-        adenomegalias,
-        dorArticular,
-        dificuldadesDeMarcha,
-        sonolencia,
-        secrecaoOcular,
-        dorMuscular,
-        dorRetroobitaria,
+        check_patient_problem(clinical_state.mais_de_72h_febre),
+        check_patient_problem(clinical_state.menos_de_72h_febre),
+        check_patient_problem(clinical_state.tontura),
+        check_patient_problem(clinical_state.corpo_estranho),
+        check_patient_problem(clinical_state.dor_de_dente),
+        check_patient_problem(clinical_state.disuria),
+        check_patient_problem(clinical_state.urina_concentrada),
+        check_patient_problem(clinical_state.dispineia),
+        check_patient_problem(clinical_state.dor_toracica),
+        check_patient_problem(clinical_state.choque_eletrico),
+        check_patient_problem(clinical_state.quase_afogamento),
+        check_patient_problem(clinical_state.artralgia),
+        check_patient_problem(clinical_state.ictericia),
+        check_patient_problem(clinical_state.perda_da_consciencia),
+        check_patient_problem(clinical_state.palidez),
+        check_patient_problem(clinical_state.cianose),
+        check_patient_problem(clinical_state.solucos),
+        check_patient_problem(clinical_state.prostracao),
+        check_patient_problem(clinical_state.febre),
+        check_patient_problem(clinical_state.vomitos),
+        check_patient_problem(clinical_state.tosse),
+        check_patient_problem(clinical_state.coriza),
+        check_patient_problem(clinical_state.espirros),
+        check_patient_problem(clinical_state.hiperemia_conjuntival),
+        check_patient_problem(clinical_state.secrecao_ocular),
+        check_patient_problem(clinical_state.obstrucao_nasal),
+        check_patient_problem(clinical_state.convulsao),
+        check_patient_problem(clinical_state.diarreia),
+        check_patient_problem(clinical_state.dificuldade_evacuar),
+        check_patient_problem(clinical_state.cefaleia),
+        check_patient_problem(clinical_state.manchas_na_pele),
+        check_patient_problem(clinical_state.salivacao),
+        check_patient_problem(clinical_state.queda),
+        check_patient_problem(clinical_state.hiporexia),
+        check_patient_problem(clinical_state.salivacao),
+        check_patient_problem(clinical_state.hiporexia),
+        check_patient_problem(clinical_state.constipacao),
+        check_patient_problem(clinical_state.chiado_no_peito),
+        check_patient_problem(clinical_state.diminuicao_da_diurese),
+        check_patient_problem(clinical_state.dor_abdominal),
+        check_patient_problem(clinical_state.otalgia),
+        check_patient_problem(clinical_state.epistaxe),
+        check_patient_problem(clinical_state.otorreia),
+        check_patient_problem(clinical_state.edema),
+        check_patient_problem(clinical_state.adenomegalias),
+        check_patient_problem(clinical_state.dor_articular),
+        check_patient_problem(clinical_state.dificuldade_de_marcha),
+        check_patient_problem(clinical_state.sonolencia),
+        check_patient_problem(clinical_state.secrecao_ocular),
+        check_patient_problem(clinical_state.dor_muscular),
+        check_patient_problem(clinical_state.dor_retroorbitaria)
     ]]
-
     return patient
