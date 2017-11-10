@@ -45,8 +45,8 @@ class MachineLearning:
         for index in range(len(columns_tls)):
             if columns_tls[index] == 'Classificacao':
                 # changing last and penultimate values
-                columns_tls[index], columns_tls[-1] = columns_tls[-1],
-                columns_tls[index]
+                columns_tls[index], columns_tls[-1] = columns_tls[-1], \
+                                                      columns_tls[index]
                 break
 
         df = df.reindex(columns=columns_tls)
