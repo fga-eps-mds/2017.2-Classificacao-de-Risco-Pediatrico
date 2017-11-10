@@ -611,4 +611,57 @@ class ClinicalState_3y_10y(models.Model):
         default=False,
         blank=True
     )
-    
+
+    artralgia = models.BooleanField(
+        verbose_name=("Artralgia"),
+        default=False,
+        blank=True
+    )
+
+    ictericia = models.BooleanField(
+        verbose_name=("Icterícia"),
+        default=False,
+        blank=True
+    )
+
+    perda_consciencia = models.BooleanField(
+        verbose_name=("Perda de consciencia"),
+        default=False,
+        blank=True
+    )
+
+    palidez = models.BooleanField(
+        verbose_name=("Palidez"),
+        default=False,
+        blank=True
+    )
+
+    cianose = models.BooleanField(
+        verbose_name=("Cianose"),
+        default=False,
+        blank=True
+    )
+
+    solucos = models.BooleanField(
+        verbose_name=("Soluços"),
+        default=False,
+        blank=True
+    )
+
+    prostracao = models.BooleanField(
+        verbose_name=("Prostração"),
+        default=False,
+        blank=True
+    )
+
+    febre = models.BooleanField(
+        verbose_name=("Febre"),
+        default=False,
+        blank=True
+    )
+
+    vomitos = models.BooleanField(
+        verbose_name=("Vomitos"),
+        default=False,
+        blank=True
+    )
