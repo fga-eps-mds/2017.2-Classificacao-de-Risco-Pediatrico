@@ -134,7 +134,7 @@ a:focus, a:hover {
     -o-background-size: cover;
     -moz-background-size: cover;
     -webkit-background-size: cover;
-    background: url("../img/doctors.jpg") no-repeat bottom center scroll;
+    background: url("../img/2.jpg") no-repeat bottom center scroll;
     background-color: black;
     background-size: cover;
     color: white;
@@ -260,6 +260,9 @@ a:focus, a:hover {
     font-weight: bold;
 }
 
+.link {
+  color: inherit;
+}
 
 /*SECTIONS*/
 
@@ -267,6 +270,8 @@ a:focus, a:hover {
     padding-bottom: 150px;
     padding-top: 100px;
 }
+
+
 
 .download-section {
     -o-background-size: cover;
@@ -287,22 +292,20 @@ a:focus, a:hover {
     color: black;
 }
 
-
 .icon {
     margin-bottom: 5%;
-
 }
 
 .colorbar-top {
     width: 80%;
-    height: 25px;
+    height: 10px;
     margin-top: 30px;
     border-radius: 50px;
 }
 
 .colorbar-bottom {
     width: 80%;
-    height: 25px;
+    height: 10px;
     margin-top: 30px;
     border-radius: 50px;
 
@@ -510,6 +513,3 @@ body {
     opacity: 1;
 }
 
-.link {
-  color: inherit;
-}
