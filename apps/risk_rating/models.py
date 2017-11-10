@@ -703,8 +703,54 @@ class ClinicalState_3y_10y(models.Model):
         default=False,
         blank=True
     )
+
     diarreia = models.BooleanField(
         verbose_name=("Diarreia"),
+        default=False,
+        blank=True
+    )
+
+    manchas_na_pele = models.BooleanField(
+        verbose_name=("Manchas na pele"),
+        default=False,
+        blank=True
+    )
+    queda = models.BooleanField(
+        verbose_name=("Queda"),
+        default=False,
+        blank=True
+    )
+    hiporexia = models.BooleanField(
+        verbose_name=("Hiporexia"),
+        default=False,
+        blank=True
+    )
+    salivacao = models.BooleanField(
+        verbose_name=("Salivacao"),
+        default=False,
+        blank=True
+    )
+
+    constipacao = models.BooleanField(
+        verbose_name=("Constipação"),
+        default=False,
+        blank=True
+    )
+
+    chiado_no_peito = models.BooleanField(
+        verbose_name=("Chiado no Peito"),
+        default=False,
+        blank=True
+    )
+
+    diminuicao_da_diurese = models.BooleanField(
+        verbose_name=("Diminuição da Diurese"),
+        default=False,
+        blank=True
+    )
+
+    dor_abdominal = models.BooleanField(
+        verbose_name=("Dor Abdominal"),
         default=False,
         blank=True
     )
