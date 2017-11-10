@@ -44,10 +44,9 @@ STATE_CHOICES = (
     ('SP', 'São Paulo'), ('SE', 'Sergipe'), ('TO', 'Tocantins')
 )
 
+
 # Classe dos usuarios possui atendente e recepcionista
-
 class Staff(AbstractBaseUser):
-
     objects = UserManager()
 
     name = models.CharField(
@@ -79,24 +78,30 @@ class Staff(AbstractBaseUser):
         choices=PROFILE_TYPES,
         default=0
     )
+
     uf = models.CharField(
         verbose_name='UF',
         max_length=2,
         choices=STATE_CHOICES,
         blank=False
     )
+
     city = models.CharField(verbose_name='Cidade',
                             max_length=50,
                             blank=False)
+
     neighborhood = models.CharField(verbose_name='Bairro',
                                     max_length=100,
                                     blank=False)
+
     street = models.CharField(verbose_name='Rua',
                               max_length=50,
                               blank=False)
+
     block = models.CharField(verbose_name='Conjunto',
                              max_length=50,
                              blank=False)
+
     number = models.CharField(verbose_name='Numero',
                               max_length=10,
                               blank=False)

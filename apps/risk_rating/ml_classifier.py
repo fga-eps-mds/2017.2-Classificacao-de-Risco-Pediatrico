@@ -1,6 +1,5 @@
 from sklearn.ensemble import RandomForestClassifier
 import pandas as pd
-# import numpy as np commented for flake8 reasons
 
 
 class MachineLearning:
@@ -8,8 +7,8 @@ class MachineLearning:
     def __init__(self, csv):
         self.__csv = csv
         self.__data_frame = self.read_csv()
-        data_frame_lenght = len(list(self.__data_frame))
-        self.__features = self.__data_frame.columns[:data_frame_lenght-1]
+        data_frame_length = len(list(self.__data_frame))
+        self.__features = self.__data_frame.columns[:data_frame_length-1]
         self.__clf = self.random_forest(self.__data_frame, self.__features)
         self.__target_names = self.get_target_names(self.__data_frame)
 
@@ -40,7 +39,7 @@ class MachineLearning:
         df = pd.read_csv(self.__csv,
                          true_values=["Sim"], false_values=["Não", "Nao"])
         df = df.drop(["Carimbo de data/hora", "Diagnostico", "profissional"],
-                    axis=1)
+                     axis=1)
         # columns_tls are the columns tiles
         columns_tls = df.columns.tolist()
         for index in range(len(columns_tls)):

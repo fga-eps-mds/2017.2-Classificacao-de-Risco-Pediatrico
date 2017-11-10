@@ -1,11 +1,79 @@
 #searchPatient {
-    border-radius: 50px;
     background-color:white;
-    width: 25%;
-    box-shadow: 0 0 0.5em #666;
+    border-radius: 50px;
+    width: 50%;
 }
 
 #list {
-    box-shadow: 0 0 0.5em #666;
+    border: 1px solid #E6E9ED;
     padding: 10px;
+}
+
+div.dataTables_wrapper div.dataTables_length select {
+    color: #73879C;
+    display: inline-block;
+    font-family: "Helvetica Neue",Roboto,Arial,"Droid Sans",sans-serif;
+    font-size: 13px;
+    width: 55px;
+}
+
+.badge {
+    border-color: #FFF;
+    border-radius: .25em;
+    color: #fff;
+    display: inline;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    padding: .2em .6em .3em;
+    text-align: center;
+    vertical-align: baseline;
+    white-space: nowrap;
+}
+
+.badge:hover {
+    cursor: pointer;
+}
+
+.page-link {
+    color: #73879C;
+}
+
+.page-item.active .page-link {
+    background-color: #73879C;
+    border-color: #73879C;
+    color: #fff;
+    z-index: 2;
+}
+
+a:hover, a:focus {
+    color: #5A738E;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.table td, .table th {
+    padding: .15rem;
+}
+
+.table th:first-child {
+    padding: .25rem;
+}
+
+h2 {
+    font-size: 24px;
+}
+
+table.dataTable thead .sorting:before,
+table.dataTable thead .sorting:after,
+table.dataTable thead .sorting_asc:before,
+table.dataTable thead .sorting_asc:after,
+table.dataTable thead .sorting_desc:before,
+table.dataTable thead .sorting_desc:after,
+table.dataTable thead .sorting_asc_disabled:before,
+table.dataTable thead .sorting_asc_disabled:after,
+table.dataTable thead .sorting_desc_disabled:before,
+table.dataTable thead .sorting_desc_disabled:after {
+    bottom: 0.35em;
 }
