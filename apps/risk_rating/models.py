@@ -665,3 +665,46 @@ class ClinicalState_3y_10y(models.Model):
         default=False,
         blank=True
     )
+
+    tosse = models.BooleanField(
+        verbose_name=("Tosse"),
+        default=False,
+        blank=True
+    )
+
+    coriza = models.BooleanField(
+        verbose_name=("Coriza"),
+        default=False,
+        blank=True
+    )
+
+    espirros = models.BooleanField(
+        verbose_name=("Espirros"),
+        default=False,
+        blank=True
+    )
+    hiperemia_conjuntival = models.BooleanField(
+        verbose_name=("Hiperemia Conjuntival"),
+        default=False,
+        blank=True
+    )
+    secrecao_ocular = models.BooleanField(
+        verbose_name=("Secrecao Ocular"),
+        default=False,
+        blank=True
+    )
+    obstrucao_nasal = models.BooleanField(
+        verbose_name=("Obstrução Nasal"),
+        default=False,
+        blank=True
+    )
+    convulsao = models.BooleanField(
+        verbose_name=("Convulsão"),
+        default=False,
+        blank=True
+    )
+    diarreia = models.BooleanField(
+        verbose_name=("Diarreia"),
+        default=False,
+        blank=True
+    )
