@@ -802,3 +802,15 @@ class ClinicalState_3y_10y(models.Model):
         default=False,
         blank=True
     )
+
+    dor_muscular = models.BooleanField(
+        verbose_name=("Dor Muscular"),
+        default=False,
+        blank=True
+    )
+
+    dor_retroorbitaria = models.BooleanField(
+        verbose_name=("Dor Retroorbitária"),
+        default=False,
+        blank=True
+    )
