@@ -512,3 +512,30 @@ class ClinicalState_2m_3y(models.Model):
         default=False,
         blank=True
     )
+
+class ClinicalState_3y_10y(models.Model):
+
+    patient_id4 = models.CharField(
+        verbose_name=('ID do Paciente'),
+        max_length=150,
+        blank=True,
+        unique=False
+    )
+
+    dispineia = models.BooleanField(
+        verbose_name=("Dispinéia"),
+        default=False,
+        blank=True
+    )
+
+    ictericia = models.BooleanField(
+        verbose_name=("Icterícia"),
+        default=False,
+        blank=True
+    )
+
+    perdada_consciencia = models.BooleanField(
+        verbose_name=("Perda de Consciência"),
+        default=False,
+        blank=True
+    )
