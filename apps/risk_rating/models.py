@@ -539,3 +539,34 @@ class ClinicalState_3y_10y(models.Model):
         default=False,
         blank=True
     )
+
+    febre_maior_72h = models.BooleanField(
+        verbose_name=("Febre Mais de 72 horas"),
+        default=False,
+        blank=True
+    )
+
+    febre_menos_72h = models.BooleanField(
+        verbose_name=("Febre Menos de 72 horas"),
+        default=False,
+        blank=True
+    )
+
+    odinofagia = models.BooleanField(
+        verbose_name=("Odinofagia"),
+        default=False,
+        blank=True
+    )
+
+    fascies_de_dor = models.BooleanField(
+        verbose_name=("Fascies De Dor"),
+        default=False,
+        blank=True
+    )
+
+    tontura = models.BooleanField(
+        verbose_name=("Tontura"),
+        default=False,
+        blank=True
+    )
+    
