@@ -35,13 +35,17 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#patients" data-toggle="collapse" aria-expanded="false">
+                  <a href="#patients" data-toggle="collapse" aria-expanded="false">
                     <i class="fa fa-user-o" aria-hidden="true"></i>
                     Paciente<span class="fa fa-chevron down"></span>
-                    </a>
-                    <ul class="collapse list-unstyled" id="patients">
-                        <li><a href="{% url "users:home" %}">Visualizar pacientes</a></li>
-                    </ul>
+                  </a>
+                  <ul class="collapse list-unstyled" id="patients">
+                    <li>
+                      <a href="{% url "users:home" %}"><i class="fa fa-caret-right" aria-hidden="true"></i>
+                        Visualizar pacientes
+                      </a>
+                    </li>
+                  </ul>
                 </li>
                 <li>
                     <a href="#attendence" data-toggle="collapse" aria-expanded="false">
@@ -49,28 +53,47 @@
                     Atendimento
                     </a>
                     <ul class="collapse list-unstyled" id="attendence">
-                        <li><a href="{% url "users:home" %}">Classificar Paciente</a></li>
-                        <li><a href="#">Atender Paciente</a></li>
+                      <li>
+                        <a href="{% url "users:home" %}"><i class="fa fa-caret-right" aria-hidden="true"></i>
+                          Classificar Paciente
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>
+                          Atender Paciente
+                        </a>
+                      </li>
                     </ul>
                 </li>
                 <li>
-                    <a href="#statistics" data-toggle="collapse" aria-expanded="false">
-                    <i class="fa fa-area-chart"></i>
+                  <a href="#statistics" data-toggle="collapse" aria-expanded="false"><i class="fa fa-area-chart"></i>
                     Estatísticas
-                    </a>
-                    <ul class="collapse list-unstyled" id="statistics">
-                        <li><a href="#">Gerar gráfico de classificações</a></li>
-                        <li><a href="#">Estatisticas Classificação Pessoal</a></li>
-                    </ul>
+                  </a>
+                  <ul class="collapse list-unstyled" id="statistics">
+                    <li>
+                      <a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>
+                        Gráfico de classificações
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>
+                        Estatisticas Pessoais
+                      </a>
+                    </li>
+                  </ul>
                 </li>
                 <li>
-                    <a href="#help" data-toggle="collapse" aria-expanded="false">
-                    <i class="fa fa-question-circle"></i>
-                    Ajuda
-                    </a>
-                    <ul class="collapse list-unstyled" id="help">
-                        <li><a href="#">Contato</a></li>
-                    </ul>
+                  <a href="#help" data-toggle="collapse" aria-expanded="false">
+                  <i class="fa fa-question-circle"></i>
+                  Ajuda
+                  </a>
+                  <ul class="collapse list-unstyled" id="help">
+                    <li>
+                      <a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>
+                        Contato
+                      </a>
+                    </li>
+                  </ul>
                 </li>
                 <li><i></i></li>
                 <li>
