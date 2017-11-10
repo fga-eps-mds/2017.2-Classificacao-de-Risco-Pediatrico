@@ -522,12 +522,6 @@ class ClinicalState_3y_10y(models.Model):
         unique=False
     )
 
-    ictericia = models.BooleanField(
-        verbose_name=("Icterícia"),
-        default=False,
-        blank=True
-    )
-
     perdada_consciencia = models.BooleanField(
         verbose_name=("Perda de Consciência"),
         default=False,

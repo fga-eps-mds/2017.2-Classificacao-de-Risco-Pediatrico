@@ -54,3 +54,27 @@ class ClinicalState_2m_3yForm(forms.ModelForm):
                   'diminuicao_da_diurese', 'dor_abdominal',
                   'fontanela_abaulada', 'secrecao_no_umbigo',
                   'secrecao_ocular']
+
+class ClinicalState_2y_10y(forms.ModelForm):
+    """
+    Defining filds patients (2 years and 3 years old) clinical state
+    """
+    class Meta:
+        model = ClinicalState_3y_10y
+        fields = ['patient_id4', 'perdada_consciencia', 'febre_maior_72h',
+                  'febre_menos_72h', 'odinofagia', 'fascies_de_dor',
+                  'tontura', 'corpo_estranho', 'dor_dentes',
+                  'disuria', 'urina_concentrada', 'dispineia',
+                  'dor_toracica', 'choque_eletrico', 'quase_afogamento',
+                  'artralgia', 'ictericia', 'perda_consciencia',
+                  'palidez', 'cianose', 'solucos',
+                  'prostracao', 'febre', 'vomitos',
+                  'tosse', 'coriza', 'espirros',
+                  'hiperemia_conjuntival', 'secrecao_ocular',
+                  'obstrucao_nasal', 'convulsao', 'diarreia',
+                  'manchas_na_pele', 'queda', 'hiporexia', 'salivacao',
+                  'constipacao', 'chiado_no_peito',
+                  'diminuicao_da_diurese', 'dor_abdominal',
+                  'otalgia', 'epistaxe', 'otorreia', 'edema', 'adenomegalias',
+                  'dor_articular', 'dificulade_de_marchar', 'sonolencia',
+                  'dor_muscular', 'dor_retroorbitaria']
