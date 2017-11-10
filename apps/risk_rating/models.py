@@ -754,3 +754,51 @@ class ClinicalState_3y_10y(models.Model):
         default=False,
         blank=True
     )
+
+    otalgia = models.BooleanField(
+        verbose_name=("Otalgia"),
+        default=False,
+        blank=True
+    )
+
+    epistaxe = models.BooleanField(
+        verbose_name=("Epistaxe"),
+        default=False,
+        blank=True
+    )
+
+    otorreia = models.BooleanField(
+        verbose_name=("Otorreia"),
+        default=False,
+        blank=True
+    )
+
+    edema = models.BooleanField(
+        verbose_name=("Edema"),
+        default=False,
+        blank=True
+    )
+
+    adenomegalias = models.BooleanField(
+        verbose_name=("Adenomegalias"),
+        default=False,
+        blank=True
+    )
+
+    dor_articular = models.BooleanField(
+        verbose_name=("Dor Articular"),
+        default=False,
+        blank=True
+    )
+
+    dificulade_de_marchar = models.BooleanField(
+        verbose_name=("Dificuldade Marchar"),
+        default=False,
+        blank=True
+    )
+
+    sonolencia = models.BooleanField(
+        verbose_name=("Sonolência"),
+        default=False,
+        blank=True
+    )
