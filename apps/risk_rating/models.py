@@ -522,12 +522,6 @@ class ClinicalState_3y_10y(models.Model):
         unique=False
     )
 
-    dispineia = models.BooleanField(
-        verbose_name=("Dispinéia"),
-        default=False,
-        blank=True
-    )
-
     ictericia = models.BooleanField(
         verbose_name=("Icterícia"),
         default=False,
@@ -566,6 +560,54 @@ class ClinicalState_3y_10y(models.Model):
 
     tontura = models.BooleanField(
         verbose_name=("Tontura"),
+        default=False,
+        blank=True
+    )
+
+    corpo_estranho = models.BooleanField(
+        verbose_name=("Corpo Estranho"),
+        default=False,
+        blank=True
+    )
+
+    dor_dentes = models.BooleanField(
+        verbose_name=("Dor de dentes"),
+        default=False,
+        blank=True
+    )
+
+    disuria = models.BooleanField(
+        verbose_name=("Disuria"),
+        default=False,
+        blank=True
+    )
+
+    urina_concentrada = models.BooleanField(
+        verbose_name=("Urina Concentrada"),
+        default=False,
+        blank=True
+    )
+
+    dispineia = models.BooleanField(
+        verbose_name=("Dispinéia"),
+        default=False,
+        blank=True
+    )
+
+    dor_toracica = models.BooleanField(
+        verbose_name=("Dor Toracica"),
+        default=False,
+        blank=True
+    )
+
+    choque_eletrico = models.BooleanField(
+        verbose_name=("Choque Eletrico"),
+        default=False,
+        blank=True
+    )
+
+    quase_afogamento = models.BooleanField(
+        verbose_name=("Quase Afogamento"),
         default=False,
         blank=True
     )
