@@ -40,9 +40,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" >
-                            |
-                        </a>
+                        <a class="nav-link js-scroll-trigger" >|</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link js-scroll-trigger"
@@ -74,7 +72,7 @@
                             <div class="col-md-3">
                                 <div class="flip">
                                     <div class="fundo" style="background-color:#295872">
-                                        <a href="#about" class="btn btn-circle js-scroll-trigger">
+                                        <a href="#about" class="btn btn-circle js-scroll-trigger link">
                                             <h4 style="margin-top: 10%">O que é <br> CRP?</h4>
                                         </a>
                                     </div>
@@ -83,38 +81,44 @@
                                     </div>
                                 </div>
                             </div>
-                            <div href="#how_to_use" class="col-md-3 flip">
-                                <div class="fundo" style="background-color: #1F5C0E">
-                                    <a href="#how_to_use" class="btn btn-circle js-scroll-trigger">
-                                        <h4 style="margin-top: 10%">Como <br> Usar?</h4>
-                                    </a>
-                                </div>
-                                <div class="frente" style="background-color: #28a745">
-                                    <i class="fa fa-hand-pointer-o size"></i>
-                                </div>
-                            </div>
-                            <div href="#hospitals" class="col-md-3 flip">
-                                <div class="fundo" style="background-color: #FFCC00">
-                                    <a href="#hospitals" class="btn btn-circle js-scroll-trigger">
-                                        <p id="hospital">
-                                            Hospitais <br> Inteligentes
-                                        </p>
-                                    </a>
-                                </div>
-                                <div class="frente" style="background-color: #ffc107">
-                                    <i class="fa fa-hospital-o size"></i>
+                            <div class="col-md-3">
+                                <div class="flip">
+                                    <div class="fundo" style="background-color: #1F5C0E">
+                                        <a href="#how_to_use" class="btn btn-circle js-scroll-trigger">
+                                            <h4 style="margin-top: 10%">Como <br> Usar?</h4>
+                                        </a>
+                                    </div>
+                                    <div class="frente" style="background-color: #28a745">
+                                        <i class="fa fa-hand-pointer-o size"></i>
+                                    </div>
                                 </div>
                             </div>
-                            <div href="#accurate" class="col-md-3 flip">
-                                <div class="fundo" style="background-color: #973027">
-                                    <a href="#accurate" class="btn btn-circle js-scroll-trigger">
-                                        <p id="classifica">
-                                            Classificações <br> rápidas e <br> corretas
-                                        </p>
-                                    </a>
+                            <div class="col-md-3">
+                                <div class="flip">
+                                    <div class="fundo" style="background-color: #FFCC00">
+                                        <a href="#hospitals" class="btn btn-circle js-scroll-trigger">
+                                            <p id="hospital">
+                                                Hospitais <br> Inteligentes
+                                            </p>
+                                        </a>
+                                    </div>
+                                    <div class="frente" style="background-color: #ffc107">
+                                        <i class="fa fa-hospital-o size"></i>
+                                    </div>
                                 </div>
-                                <div class="frente" style="background-color: #dc3545">
-                                    <i class="fa fa-clock-o size"></i>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="flip">
+                                    <div class="fundo" style="background-color: #973027">
+                                        <a href="#accurate" class="btn btn-circle js-scroll-trigger">
+                                            <p id="classifica">
+                                                Classificações <br> rápidas e <br> corretas
+                                            </p>
+                                        </a>
+                                    </div>
+                                    <div class="frente" style="background-color: #dc3545">
+                                        <i class="fa fa-clock-o size"></i>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -137,7 +141,7 @@
         </div>
         <div class="container">
             <div class="row">
-                <div class="col-lg-8 mx-auto">
+                <div class="col-lg-8 ">
                     <h2 class="animate">
                         O que é o CRP?
                     </h2>
@@ -151,6 +155,10 @@
                         Com o CRP, você terá uma ferramenta a mais em que confiar!
                     </p>
                 </div>
+                <div class="col-md-4">
+                    <img src="{% static "img/doctor.png" %}" class="about-image"/>
+                </div>
+
             </div>
         </div>
         <div class="row">
@@ -272,14 +280,14 @@
 
     <!-- Footer -->
     <footer style="background: black">
-        <div>
-            <div class="row">
-                <div id="footer_left" class=" col-md-6">
-                    <div class="col-md-4 col-sm-4 marb20">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div id="footer_left" class=" col-md-4">
+                    <div>
                         <div class="ftr-tle">
-                            <h4 class="white no-padding">Contato</h4>
+                            <h4 class="white no-padding text-white">Contato</h4>
                         </div>
-                        <div class="info-sec">
+                        <div class="info-sec text-white">
                             <p id="footer_p">
                                 Sinta-se à vontade para contatar os desenvolvedores pela plataforma de desenvolvimento
                                 <a href="http://github.com/fga-gpp-mds/2017.2-Classificacao-de-Risco-Pediatrico/wiki">
@@ -290,7 +298,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="footer_right" class="col-md-4 col-sm-4 marb20">
+                <div id="footer_right" class="col-md-6 mt-5 col-sm-4">
                     <ul class="list-inline banner-social-buttons animate-9">
                         <li class="list-inline-item">
                             <a href="{% url 'users:landing_page' %}" class="btn btn-default btn-lg">
