@@ -107,16 +107,16 @@
                                     <div class="cols-sm-10">
                                       <div class="input-group">
                                           <span class="input-group-addon" id="basic-addon1"><i class="fa fa-sort-numeric-asc" aria-hidden="true"></i></span>
-                                      <select name="{{ form.age_range.name }}" class="form-control" id="age_range" required>
-                                          <option value="" selected disabled>Faixa etária</option>
-                                          <option value="0">Faixa etária indefinida</option>
-                                          <option value="1">0 até 28 dias</option>
-                                          <option value="2">29 dias à 3 meses</option>
-                                          <option value="3">3 meses à 2 anos</option>
-                                          <option value="4">2 à 10 anos</option>
-                                          <option value="5">acima de 10 anos</option>
-                                      </select>
-                                    </div>
+                                          <select name="{{ form.age_range.name }}" class="form-control" id="age_range" required>
+                                              <option value="" selected disabled>Faixa etária</option>
+                                              <option value="0">Faixa etária indefinida</option>
+                                              <option value="1">0 até 28 dias</option>
+                                              <option value="2">29 dias à 3 meses</option>
+                                              <option value="3">3 meses à 2 anos</option>
+                                              <option value="4">2 à 10 anos</option>
+                                              <option value="5">acima de 10 anos</option>
+                                          </select>
+                                      </div>
                                         {% if form.age_range.errors %}
                                             <div class="error-holder">
                                                 <div class="alert alert-warning" role="alert">
