@@ -18,6 +18,7 @@ ml1 = MachineLearning('apps/risk_rating/class_menos_28.csv')
 ml2 = MachineLearningRange2()
 ml4 = MachineLearning('apps/risk_rating/class_10y+.csv')
 
+
 def landing_page(request):
     return render(request, 'landing_page/landingPage.html', {})
 
@@ -71,8 +72,8 @@ def home(request):
                 probability = ml2.calc_probabilities(patient)
                 classification = ml2.classify_patient(patient)
                 impact_list = ml2.feature_importance()
-            elif subject_patient.age_range == 4:
-                patient = get_10yMore(form)
+            elif subject_patient.age_range == 5:
+                patient = get_10y_more(form)
                 probability = ml4.calc_probabilities(patient)
                 classification = ml4.classify_patient(patient)
                 impact_list = ml4.feature_importance()
@@ -83,9 +84,7 @@ def home(request):
             define_patient_classification(subject_patient, classification)
 
             # printing the results:
-            print(probability)
             print(classification)
-            print(impact_list)
 
     return render(request, 'users/user_home/main_home.html',
                            {'patients': patients,
@@ -392,7 +391,7 @@ def get_29d_2m_symptoms(form):
     return patient
 
 
-def get_10yMore(form):
+def get_10y_more(form):
     """
     get symptoms from form to build patient's clinical condition
     """
@@ -449,7 +448,7 @@ def get_10yMore(form):
     dorRetroobitaria = check_patient_problem(form.get("dorRetroobitaria"))
 
     patient = [[
-        mais72hrFebre,
+        mais72hFebre,
         menos72hrFebre,
         tontura,
         corpoEstranho,

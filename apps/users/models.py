@@ -249,7 +249,6 @@ class Patient(models.Model):
         blank=True
     )
 
-
     AGE_RANGE = (
         (0, 'Faixa etária indefinida'),
         (1, '0 até 28 dias'),
