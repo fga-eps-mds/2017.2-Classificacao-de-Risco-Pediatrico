@@ -134,7 +134,7 @@ a:focus, a:hover {
     -o-background-size: cover;
     -moz-background-size: cover;
     -webkit-background-size: cover;
-    background: url("../img/4.jpg") no-repeat bottom center scroll;
+    background: url("../img/doctors.jpg") no-repeat bottom center scroll;
     background-color: black;
     background-size: cover;
     color: white;
@@ -410,7 +410,7 @@ body {
 .animate {
     display: block;
     opacity: 0;
-    transition: all 1s ease-in;
+    transition: all 3s ease;
 }
 
 .animate-2 {
@@ -464,7 +464,7 @@ body {
 .animate-10 {
     display: block;
     opacity: 0;
-    transition: all 1s ease-in;
+    transition: all 3s ease-in;
 }
 
 .animate-11 {
@@ -503,6 +503,52 @@ body {
     transition: all 1s ease-in;
 }
 
+.animate-17 {
+    display: block;
+    opacity: 0;
+    transition: all 1s ease-in;
+}
+
+.animate-18 {
+    display: block;
+    opacity: 0;
+    transition: all 3s ease-in;
+}
+
+.animate-19 {
+    display: block;
+    opacity: 0;
+    transition: all 1s ease-in;
+}
+
+.animate-20 {
+    display: block;
+    opacity: 0;
+    transition: all 1s ease-in;
+}
+
+.animate-21 {
+    display: block;
+    opacity: 0;
+    transition: all 3s ease-in;
+}
+.animate-22 {
+    display: block;
+    opacity: 0;
+    transition: all 1s ease-in;
+}
+
+.animate-23 {
+    display: block;
+    opacity: 0;
+    transition: all 1s ease-in;
+}
+
+.animate-24 {
+    display: block;
+    opacity: 0;
+    transition: all 3s ease-in;
+}
 .js-animated {
     opacity: 1;
 }
