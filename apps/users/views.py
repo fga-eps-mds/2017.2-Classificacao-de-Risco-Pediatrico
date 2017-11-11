@@ -27,6 +27,7 @@ from apps.risk_rating.models import ClinicalState_10yMore
 ml1 = MachineLearning('apps/risk_rating/class_menos_28.csv')
 ml2 = MachineLearning('apps/risk_rating/class_29d_2m.csv')
 ml3 = MachineLearning('apps/risk_rating/class_2m_3y.csv')
+ml4 = MachineLearning('apps/risk_rating/class_3y_10y.csv')
 ml5 = MachineLearning('apps/risk_rating/class_10y+.csv')
 
 
@@ -142,6 +143,11 @@ def trigger_ml(subject_patient, clinical_state):
         probability = ml3.calc_probabilities(patient)
         classification = ml3.classify_patient(patient)
         impact_list = ml3.feature_importance()
+    elif subject_patient.age_range == 4:
+        patient = get_3y_10y_symptoms(clinical_state)
+        probability = ml4.calc_probabilities(patient)
+        classification = ml4.classify_patient(patient)
+        impact_list = ml4.feature_importance()
     elif subject_patient.age_range == 5:
         patient = get_10y_more_symptoms(clinical_state)
         probability = ml5.calc_probabilities(patient)
