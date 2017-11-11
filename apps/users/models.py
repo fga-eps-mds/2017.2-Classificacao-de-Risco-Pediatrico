@@ -31,6 +31,7 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
+
 STATE_CHOICES = (
     ('AC', 'Acre'), ('AL', 'Alagoas'), ('AP', 'Amapá'),
     ('AM', 'Amazonas'), ('BA', 'Bahia'), ('CE', 'Ceará'),
@@ -79,7 +80,7 @@ class Staff(AbstractBaseUser):
         choices=PROFILE_TYPES,
         default=0
     )
-    
+
     uf = models.CharField(
         verbose_name='UF',
         max_length=2,
@@ -249,7 +250,6 @@ class Patient(models.Model):
         default=0,
         blank=True
     )
-
 
     AGE_RANGE = (
         (0, 'Faixa etária indefinida'),
