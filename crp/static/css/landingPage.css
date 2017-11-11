@@ -134,7 +134,7 @@ a:focus, a:hover {
     -o-background-size: cover;
     -moz-background-size: cover;
     -webkit-background-size: cover;
-    background: url("../img/1 (1).png") no-repeat bottom center scroll;
+    background: url("../img/bg_landing_page.png") no-repeat bottom center scroll;
     background-size: cover;
     color: white;
     display: table;
@@ -151,7 +151,7 @@ a:focus, a:hover {
 }
 
 .masthead .intro-body .brand-heading {
-    max-width: 80%;
+    max-width: 65%;
     height: auto;
 }
 
@@ -206,6 +206,7 @@ a:focus, a:hover {
     transform: rotateY(0deg);
     backface-visibility: hidden;
     transition: all .4s linear;
+    display: inline-block;
 }
 
 .flip .fundo {
@@ -217,15 +218,16 @@ a:focus, a:hover {
     transform: rotateY(180deg);
     backface-visibility: hidden;
     transition: all .4s linear;
+    display: inline-block;
 
 }
 
-.flip:hover .frente{
+.col-md-3:hover .frente{
     transform: rotateY(-180deg);
     cursor: pointer;
 }
 
-.flip:hover .fundo{
+.col-md-3:hover .fundo{
     transform: rotateY(0deg);
     cursor: pointer;
     -webkit-transform: scale(1.3);
@@ -544,4 +546,3 @@ body {
 .js-animated {
     opacity: 1;
 }
-
