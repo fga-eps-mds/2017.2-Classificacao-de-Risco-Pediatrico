@@ -3,11 +3,12 @@ from django import forms
 from apps.risk_rating.models import ClinicalState_28d
 from apps.risk_rating.models import ClinicalState_29d_2m
 from apps.risk_rating.models import ClinicalState_2m_3y
+from apps.risk_rating.models import ClinicalState_10yMore
 
 
 class ClinicalState_28dForm(forms.ModelForm):
     """
-    Defining filds for under 28 days patient's clinical state
+    Defining fields for under 28 days patient's clinical state
     """
     class Meta:
         model = ClinicalState_28d
@@ -24,7 +25,7 @@ class ClinicalState_28dForm(forms.ModelForm):
 
 class ClinicalState_29d_2mForm(forms.ModelForm):
     """
-    Defining filds patients (29 days and 2 months old) clinical state
+    Defining fields patients (29 days and 2 months old) clinical state
     """
     class Meta:
         model = ClinicalState_29d_2m
@@ -41,7 +42,7 @@ class ClinicalState_29d_2mForm(forms.ModelForm):
 
 class ClinicalState_2m_3yForm(forms.ModelForm):
     """
-    Defining filds patients (29 days and 2 months old) clinical state
+    Defining fields patients (29 days and 2 months old) clinical state
     """
     class Meta:
         model = ClinicalState_2m_3y
@@ -54,3 +55,26 @@ class ClinicalState_2m_3yForm(forms.ModelForm):
                   'diminuicao_da_diurese', 'dor_abdominal',
                   'fontanela_abaulada', 'secrecao_no_umbigo',
                   'secrecao_ocular']
+
+
+class ClinicalState_10yMoreForm(forms.ModelForm):
+    """
+    Defining fields patients (29 days and 2 months old) clinical state
+    """
+    class Meta:
+        model = ClinicalState_10yMore
+        fields = ['patient_id5', 'mais_de_72h_febre', 'menos_de_72h_febre',
+                  'tontura', 'corpo_estranho', 'dor_de_dente', 'disuria',
+                  'urina_concentrada', 'dispineia', 'dor_toracica',
+                  'choque_eletrico', 'quase_afogamento', 'artralgia',
+                  'ictericia', 'perda_da_consciencia', 'palidez', 'cianose',
+                  'solucos', 'prostracao', 'febre', 'vomitos', 'tosse',
+                  'coriza', 'espirros', 'hiperemia_conjuntival',
+                  'secrecao_ocular', 'obstrucao_nasal', 'convulsao',
+                  'diarreia', 'dificuldade_evacuar', 'cefaleia',
+                  'manchas_na_pele', 'salivacao', 'queda', 'hiporexia',
+                  'salivacao', 'hiporexia', 'constipacao', 'chiado_no_peito',
+                  'diminuicao_da_diurese', 'dor_abdominal', 'otalgia',
+                  'epistaxe', 'otorreia', 'edema', 'adenomegalias',
+                  'dor_articular', 'dificuldade_de_marcha', 'sonolencia',
+                  'secrecao_ocular', 'dor_muscular', 'dor_retroorbitaria']

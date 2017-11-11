@@ -45,9 +45,8 @@ STATE_CHOICES = (
     ('SP', 'São Paulo'), ('SE', 'Sergipe'), ('TO', 'Tocantins')
 )
 
+
 # Classe dos usuarios possui atendente e recepcionista
-
-
 class Staff(AbstractBaseUser):
     objects = UserManager()
 
@@ -87,18 +86,23 @@ class Staff(AbstractBaseUser):
         choices=STATE_CHOICES,
         blank=False
     )
+
     city = models.CharField(verbose_name='Cidade',
                             max_length=50,
                             blank=False)
+
     neighborhood = models.CharField(verbose_name='Bairro',
                                     max_length=100,
                                     blank=False)
+
     street = models.CharField(verbose_name='Rua',
                               max_length=50,
                               blank=False)
+
     block = models.CharField(verbose_name='Conjunto',
                              max_length=50,
                              blank=False)
+
     number = models.CharField(verbose_name='Numero',
                               max_length=10,
                               blank=False)
@@ -154,7 +158,8 @@ class Patient(models.Model):
     birth_date = models.DateField(
         verbose_name=_('Data de Nascimento'),
         help_text=_('Informe a data de Nascimento'),
-        blank=False
+        blank=True,
+        null=True
     )
 
     cpf = models.CharField(
@@ -237,6 +242,19 @@ class Patient(models.Model):
         default=0
     )
 
+    GENDER = (
+        (0, 'Sexo indefinido'),
+        (1, 'Feminino'),
+        (2, 'Masculino')
+    )
+
+    gender = models.IntegerField(
+        verbose_name=_('Classification'),
+        choices=GENDER,
+        default=0,
+        blank=True
+    )
+
     AGE_RANGE = (
         (0, 'Faixa etária indefinida'),
         (1, '0 até 28 dias'),
@@ -250,5 +268,5 @@ class Patient(models.Model):
         verbose_name=_('Classification'),
         choices=AGE_RANGE,
         default=0,
-        blank=True
+        blank=False
     )
