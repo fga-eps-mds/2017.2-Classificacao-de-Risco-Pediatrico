@@ -151,7 +151,7 @@ a:focus, a:hover {
 }
 
 .masthead .intro-body .brand-heading {
-    max-width: 65%;
+    max-width: 60%;
     height: auto;
 }
 
@@ -159,6 +159,7 @@ a:focus, a:hover {
     margin-top: 2%;
     line-height: 50px;
     font-size: 30px;
+    text-shadow: 1px 1px 1px #000;
 }
 
 @media (min-width: 768px) {
@@ -192,14 +193,14 @@ a:focus, a:hover {
 
 .flip {
     display: inline-block;
-    height: 100px;
+    height: 70px;
     margin-left: -140px;
 
 }
 
 .flip .frente {
-    width: 130px;
-    height: 100px;
+    width: 100px;
+    height: 70px;
     border-radius: 30px;
     border: 2px solid white;
     position: absolute;
@@ -236,9 +237,9 @@ a:focus, a:hover {
 }
 
 .size{
-    font-size: 60px;
+    font-size: 40px;
     text-align: center;
-    margin-top: 15px;
+    margin-top: 10px;
 }
 
 #hospital {
