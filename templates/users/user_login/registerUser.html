@@ -70,7 +70,7 @@
                                               <div class="cols-sm-10">
                                                 <div class="input-group">
                                                     <span class="input-group-addon" id="basic-addon1"><i class="fa fa-user-plus" aria-hidden="true"></i></span>
-                                                  <select name="{{ form.profile.name }}" class="form-control" required>
+                                                  <select name="{{ form.profile.name }}" id="dropdown" class="form-control" required>
                                                       <option value="" selected disabled>Escolha um perfil</option>
                                                       <option value="1">Recepcionista</option>
                                                       <option value="2">Atendente</option>
@@ -141,7 +141,7 @@
                                   <div class="cols-sm-10">
                                     <div class="input-group">
                                         <span class="input-group-addon" id="basic-addon1"><i class="fa fa-globe" aria-hidden="true"></i></span>
-                                        <select name="{{ form.uf.name }}" class="form-control" required>
+                                        <select name="{{ form.uf.name }}" id="dropdown" class="form-control" required>
                                           <option value="" selected disabled>UF</option>
                                           <option value="AC">AC</option>Acre
                                           <option value="AL">AL</option> Alagoas
@@ -264,8 +264,8 @@
                                   </div>
 
                                   <div class="card-footer text-right">
-                                      <a href="{% url 'users:login' %}" class="btn btn btn-outline-secondary btn-lg" >Cancelar</a>
-                                      <button type="submit" class="btn btn-outline-secondary btn-lg">Cadastrar</button>
+                                      <a href="{% url 'users:login' %}" id="cancel" class="btn btn-form" >Cancelar</a>
+                                      <button type="submit" class="btn btn-form">Cadastrar</button>
                                   </div>
                               </form>
                           </div>
