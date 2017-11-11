@@ -142,7 +142,7 @@ a:focus, a:hover {
     padding: 200px 0;
     text-align: center;
     width: 100%;
-
+    background-position-y: 0;
 }
 
 .masthead .intro-body {
