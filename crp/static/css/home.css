@@ -376,7 +376,6 @@ a.article, a.article:hover {
 .container-box {
     background: var(--grad-color);
     display: flex;
-    padding-right: 7px;
 }
 
 .box-content {
