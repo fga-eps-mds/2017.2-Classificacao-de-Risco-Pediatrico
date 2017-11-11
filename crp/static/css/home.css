@@ -4,6 +4,19 @@
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 
 
+:root {
+    /* For browsers that do not support gradients */
+    --grad-color: red;
+    /* For Safari 5.1 to 6.0 */
+    --grad-color: -webkit-linear-gradient(#ec2a2b , #f45e24, #fdb02a, #fed530, #b9ca29, #468657, #184dbb);
+    /* For Opera 11.1 to 12.0 */
+    --grad-color: -o-linear-gradient(#ec2a2b , #f45e24, #fdb02a, #fed530, #b9ca29, #468657, #184dbb);
+    /* For Firefox 3.6 to 15 */
+    --grad-color: -moz-linear-gradient(#ec2a2b , #f45e24, #fdb02a, #fed530, #b9ca29, #468657, #184dbb);
+    /* Standard syntax (must be last) */
+    --grad-color: linear-gradient(#ec2a2b , #f45e24, #fdb02a, #fed530, #b9ca29, #468657, #184dbb);
+}
+
 body {
     color: #73879C;
     font-family: "Helvetica Neue",Roboto,Arial,"Droid Sans",sans-serif;
@@ -92,7 +105,7 @@ i, span {
 #sidebar {
     min-width: 210px;
     max-width: 250px;
-    background: #00171F;
+    background: #2A3F54;
     color: #fff;
     transition: all 0.3s;
 }
@@ -143,7 +156,7 @@ i, span {
 
 #sidebar .sidebar-header {
     padding: 20px;
-    background: #00171F;
+    /*background: #2A3F54;*/
     display: block;
 }
 
@@ -178,7 +191,7 @@ i, span {
 
 #sidebar ul li.active > a, a[aria-expanded="true"] {
     color: #fff;
-    background: #00171F;
+    /*background: #00171F;*/
 }
 
 a[data-toggle="collapse"] {
@@ -201,7 +214,7 @@ a[aria-expanded="true"]::before {
 ul ul a {
     font-size: 0.9em !important;
     padding-left: 30px !important;
-    background: #00171F;
+    /*background: #00171F;*/
 }
 
 ul.CTAs {
@@ -348,23 +361,25 @@ a.article, a.article:hover {
 }
 
 .gradiente {
- 		/* Tamanho */
-		height: 40px;
-		width: 10px;
+    /* Tamanho */
+    height: 40px;
+    width: 10px;
     margin-left: 30px;
     margin-top: 7px;
     margin-right: 10px;
     float: left;
 
- 		/* Color */
-    /* For browsers that do not support gradients */
-    background: red;
-    /* For Safari 5.1 to 6.0 */
-    background: -webkit-linear-gradient(#ec2a2b , #f45e24, #fdb02a, #fed530, #b9ca29, #468657, #184dbb);
-    /* For Opera 11.1 to 12.0 */
-    background: -o-linear-gradient(#ec2a2b , #f45e24, #fdb02a, #fed530, #b9ca29, #468657, #184dbb);
-    /* For Firefox 3.6 to 15 */
-    background: -moz-linear-gradient(#ec2a2b , #f45e24, #fdb02a, #fed530, #b9ca29, #468657, #184dbb);
-    /* Standard syntax (must be last) */
-    background: linear-gradient(#ec2a2b , #f45e24, #fdb02a, #fed530, #b9ca29, #468657, #184dbb);
+    /* Color */
+    background: var(--grad-color);
+}
+
+.container-box {
+    background: var(--grad-color);
+    display: flex;
+    padding-right: 7px;
+}
+
+.box-content {
+    background: #2A3F54;
+    width:260px;
 }

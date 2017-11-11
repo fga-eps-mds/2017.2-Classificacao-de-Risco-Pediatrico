@@ -18,6 +18,7 @@
 {% block content %}
     <div class="wrapper">
         <nav id="sidebar">
+            <!-- Sidebar header -->
             <div class="sidebar-header">
                 <a href="{% url "users:home" %}" id="logobar">
                   <div class="gradiente"></div>
@@ -26,80 +27,107 @@
                 <strong>CRP</strong>
             </div>
 
+            <!-- Sidebar welcome message -->
             <p class="ml-2" id="welcome"><span>Bem-vindo(a), <br /><span id="welcomeName">{{ user.name }}</span></span></p>
+
             <ul class="list-unstyled components">
+                <!-- Register patient -->
                 <li>
-                    <a href="{% url "users:register_patient" %}">
-                    <i class="fa fa-pencil" aria-hidden="true"></i>
-                    Cadastrar Paciente
-                    </a>
+                    <div class="container-box">
+                        <div class="box-content">
+                            <a href="{% url "users:register_patient" %}">
+                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                                Cadastrar Paciente
+                            </a>
+                        </div>
+                    </div>
                 </li>
+                <!-- Patients -->
                 <li>
-                  <a href="#patients" data-toggle="collapse" aria-expanded="false">
-                    <i class="fa fa-user-o" aria-hidden="true"></i>
-                    Paciente<span class="fa fa-chevron down"></span>
-                  </a>
-                  <ul class="collapse list-unstyled" id="patients">
-                    <li>
-                      <a href="{% url "users:home" %}"><i class="fa fa-caret-right" aria-hidden="true"></i>
-                        Visualizar pacientes
-                      </a>
-                    </li>
-                  </ul>
+                    <div class="container-box">
+                        <div class="box-content">
+                            <a href="#patients" data-toggle="collapse" aria-expanded="false">
+                                <i class="fa fa-user-o" aria-hidden="true"></i>
+                                Paciente<span class="fa fa-chevron down"></span>
+                            </a>
+                            <ul class="collapse list-unstyled" id="patients">
+                                <li>
+                                    <a href="{% url "users:home" %}"><i class="fa fa-caret-right" aria-hidden="true"></i>
+                                        Visualizar pacientes
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </li>
+                <!-- Attendence -->
                 <li>
-                    <a href="#attendence" data-toggle="collapse" aria-expanded="false">
-                    <i class="fa fa-check-circle-o" aria-hidden="true"></i>
-                    Atendimento
-                    </a>
-                    <ul class="collapse list-unstyled" id="attendence">
-                      <li>
-                        <a href="{% url "users:home" %}"><i class="fa fa-caret-right" aria-hidden="true"></i>
-                          Classificar Paciente
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>
-                          Atender Paciente
-                        </a>
-                      </li>
-                    </ul>
+                    <div class="container-box">
+                        <div class="box-content">
+                            <a class="link-group" href="#attendence" data-toggle="collapse" aria-expanded="false">
+                                <i class="fa fa-check-circle-o" aria-hidden="true"></i>
+                                Atendimento
+                            </a>
+                            <ul class="collapse list-unstyled" id="attendence">
+                                <li>
+                                    <a href="{% url "users:home" %}"><i class="fa fa-caret-right" aria-hidden="true"></i>
+                                        Classificar Paciente
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>
+                                        Atender Paciente
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </li>
+                <!-- Statistics -->
                 <li>
-                  <a href="#statistics" data-toggle="collapse" aria-expanded="false"><i class="fa fa-area-chart"></i>
-                    Estatísticas
-                  </a>
-                  <ul class="collapse list-unstyled" id="statistics">
-                    <li>
-                      <a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>
-                        Gráfico de classificações
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>
-                        Estatisticas Pessoais
-                      </a>
-                    </li>
-                  </ul>
+                    <div class="container-box">
+                        <div class="box-content">
+                            <a href="#statistics" data-toggle="collapse" aria-expanded="false"><i class="fa fa-area-chart"></i>
+                                Estatísticas
+                            </a>
+                            <ul class="collapse list-unstyled" id="statistics">
+                                <li>
+                                    <a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>
+                                        Gráfico de classificações
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>
+                                        Estatisticas Pessoais
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </li>
+                <!-- Help -->
                 <li>
-                  <a href="#help" data-toggle="collapse" aria-expanded="false">
-                  <i class="fa fa-question-circle"></i>
-                  Ajuda
-                  </a>
-                  <ul class="collapse list-unstyled" id="help">
-                    <li>
-                      <a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>
-                        Contato
-                      </a>
-                    </li>
-                  </ul>
+                    <div class="container-box">
+                        <div class="box-content">
+                            <a href="#help" data-toggle="collapse" aria-expanded="false">
+                                <i class="fa fa-question-circle"></i>
+                                Ajuda
+                            </a>
+                            <ul class="collapse list-unstyled" id="help">
+                                <li>
+                                    <a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>
+                                        Contato
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </li>
                 <li><i></i></li>
                 <li>
                     <a href="{% url 'users:logout' %}">
-                    <i class="glyphicon glyphicon-send"></i>
-                    Sair
+                        <i class="glyphicon glyphicon-send"></i>
+                        Sair
                     </a>
                 </li>
             </ul>
