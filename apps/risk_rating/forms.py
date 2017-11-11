@@ -79,9 +79,9 @@ class ClinicalState_10yMoreForm(forms.ModelForm):
                   'dor_articular', 'dificuldade_de_marcha', 'sonolencia',
                   'secrecao_ocular', 'dor_muscular', 'dor_retroorbitaria']
 
-class ClinicalState_3y_10yForm(forms.ModelForm):
+class ClinicalState_3y_10y(forms.ModelForm):
     """
-    Defining filds patients (2 years and 3 years old) clinical state
+    Defining filds patients (3 years and 10 years old) clinical state
     """
     class Meta:
         model = ClinicalState_3y_10y

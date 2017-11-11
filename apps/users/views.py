@@ -67,6 +67,7 @@ def home(request):
     form1 = ClinicalState_28dForm()
     form2 = ClinicalState_29d_2mForm()
     form3 = ClinicalState_2m_3yForm()
+    form4 = ClinicalState_3y_10yForm()
     form5 = ClinicalState_10yMoreForm()
     patients = Patient.objects.all()
     classification = None
@@ -113,12 +114,23 @@ def home(request):
         clinical_state = p_c_states_l.order_by('-id')[0]
         trigger_ml(subject_patient, clinical_state)
 
+    elif request.method == "POST" and "form4" in request.POST:
+        form = ClinicalState_3y_10yForm(request.POST)
+        form.save()
+
+        p_id = request.POST.get("patient_id4")
+        subject_patient = Patient.objects.filter(id=p_id)[0]
+        p_c_states_l = ClinicalState_3y_10y.objects.filter(patient_id4=p_id)
+        clinical_state = p_c_states_l.order_by('-id')[0]
+        trigger_ml(subject_patient, clinical_state)
+
     return render(request, 'users/user_home/main_home.html',
                            {'patients': patients,
                             'classification': classification,
                             'form1': form1,
                             'form2': form2,
                             'form3': form3,
+                            'form4': form4,
                             'form5': form5})
 
 
