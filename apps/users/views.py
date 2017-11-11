@@ -8,18 +8,29 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate
 from datetime import date
 from apps.risk_rating.ml_classifier import MachineLearning
-from apps.risk_rating.ml_classifier_range2 import MachineLearningRange2
 from apps.users.forms import RegistrationStaffForm
 from apps.users.forms import RegistrationPatientForm
 from apps.users.forms import EditPatientForm
 from .models import Patient, Staff
 
-ml = MachineLearning()
-ml2 = MachineLearningRange2()
+from apps.risk_rating.forms import ClinicalState_28dForm
+from apps.risk_rating.forms import ClinicalState_29d_2mForm
+from apps.risk_rating.forms import ClinicalState_2m_3yForm
+from apps.risk_rating.forms import ClinicalState_10yMoreForm
+
+from apps.risk_rating.models import ClinicalState_28d
+from apps.risk_rating.models import ClinicalState_29d_2m
+from apps.risk_rating.models import ClinicalState_2m_3y
+from apps.risk_rating.models import ClinicalState_10yMore
+
+
+ml1 = MachineLearning('apps/risk_rating/class_menos_28.csv')
+ml2 = MachineLearning('apps/risk_rating/class_29d_2m.csv')
+ml3 = MachineLearning('apps/risk_rating/class_2m_3y.csv')
+ml5 = MachineLearning('apps/risk_rating/class_10y+.csv')
 
 
 def landing_page(request):
-
     return render(request, 'landing_page/landingPage.html', {})
 
 
@@ -50,42 +61,99 @@ def login_view(request, *args, **kwargs):
 @login_required(redirect_field_name='', login_url='users:login')
 def home(request):
     """
-    triggers the machine learning based on patient's age range
+    define home page behaviour
     """
+    form1 = ClinicalState_28dForm()
+    form2 = ClinicalState_29d_2mForm()
+    form3 = ClinicalState_2m_3yForm()
+    form5 = ClinicalState_10yMoreForm()
     patients = Patient.objects.all()
-    patient = None
     classification = None
-    form = None
-    if request.method == "POST":
-            form = request.POST
-            subject_patient_id = form.get("patient_id")
-            subject_patient = Patient.objects.get(id=subject_patient_id)
 
-            # machine learning methods are called here:
-            if subject_patient.age_range == 1:
-                patient = get_under_28_symptoms(form)
-                probability = ml.calc_probabilities(patient)
-                classification = ml.classify_patient(patient)
-                impact_list = ml.feature_importance()
-            elif subject_patient.age_range == 2:
-                patient = get_29d_2m_symptoms(form)
-                probability = ml2.calc_probabilities(patient)
-                classification = ml2.classify_patient(patient)
-                impact_list = ml2.feature_importance()
-            # to add another age range, use another elif
-            else:
-                pass
+    if request.method == "POST" and "form1" in request.POST:
+        # this 'if' with the form1' runs when you submit the form of
+        # patients under 28 days
+        form = ClinicalState_28dForm(request.POST)
+        form.save()
 
-            define_patient_classification(subject_patient, classification)
+        p_id = request.POST.get("patient_id1")
+        subject_patient = Patient.objects.filter(id=p_id)[0]
+        p_c_states_l = ClinicalState_28d.objects.filter(patient_id1=p_id)
+        clinical_state = p_c_states_l.order_by('-id')[0]
+        trigger_ml(subject_patient, clinical_state)
 
-            # printing the results:
-            print(probability)
-            print(classification)
-            print(impact_list)
+    elif request.method == "POST" and "form2" in request.POST:
+        form = ClinicalState_29d_2mForm(request.POST)
+        form.save()
+
+        p_id = request.POST.get("patient_id2")
+        subject_patient = Patient.objects.filter(id=p_id)[0]
+        p_c_states_l = ClinicalState_29d_2m.objects.filter(patient_id2=p_id)
+        clinical_state = p_c_states_l.order_by('-id')[0]
+        trigger_ml(subject_patient, clinical_state)
+
+    elif request.method == "POST" and "form3" in request.POST:
+        form = ClinicalState_2m_3yForm(request.POST)
+        form.save()
+
+        p_id = request.POST.get("patient_id3")
+        subject_patient = Patient.objects.filter(id=p_id)[0]
+        p_c_states_l = ClinicalState_2m_3y.objects.filter(patient_id3=p_id)
+        clinical_state = p_c_states_l.order_by('-id')[0]
+        trigger_ml(subject_patient, clinical_state)
+
+    elif request.method == "POST" and "form5" in request.POST:
+        form = ClinicalState_10yMoreForm(request.POST)
+        form.save()
+
+        p_id = request.POST.get("patient_id5")
+        subject_patient = Patient.objects.filter(id=p_id)[0]
+        p_c_states_l = ClinicalState_10yMore.objects.filter(patient_id5=p_id)
+        clinical_state = p_c_states_l.order_by('-id')[0]
+        trigger_ml(subject_patient, clinical_state)
 
     return render(request, 'users/user_home/main_home.html',
                            {'patients': patients,
-                            'classification': classification})
+                            'classification': classification,
+                            'form1': form1,
+                            'form2': form2,
+                            'form3': form3,
+                            'form5': form5})
+
+
+def trigger_ml(subject_patient, clinical_state):
+    """
+    triggers the machine learning based on patient's age range
+    """
+    if subject_patient.age_range == 1:
+        patient = get_under_28_symptoms(clinical_state)
+        probability = ml1.calc_probabilities(patient)
+        classification = ml1.classify_patient(patient)
+        impact_list = ml1.feature_importance()
+    elif subject_patient.age_range == 2:
+        patient = get_29d_2m_symptoms(clinical_state)
+        probability = ml2.calc_probabilities(patient)
+        classification = ml2.classify_patient(patient)
+        impact_list = ml2.feature_importance()
+        # due to the lack of data, this classification is
+        # always being "AmbulatorialGeral"
+    elif subject_patient.age_range == 3:
+        patient = get_2m_3y_symptoms(clinical_state)
+        probability = ml3.calc_probabilities(patient)
+        classification = ml3.classify_patient(patient)
+        impact_list = ml3.feature_importance()
+    elif subject_patient.age_range == 5:
+        patient = get_10y_more_symptoms(clinical_state)
+        probability = ml5.calc_probabilities(patient)
+        classification = ml5.classify_patient(patient)
+        impact_list = ml5.feature_importance()
+    # to add another age range, use another elif
+
+    # printing results:
+    print(probability)
+    print(impact_list)
+    print(classification)
+    define_patient_classification(subject_patient, classification)
 
 
 def define_patient_classification(subject_patient, classification):
@@ -105,7 +173,7 @@ def define_patient_classification(subject_patient, classification):
 
 
 def check_patient_problem(problem):
-    if problem is not None:
+    if problem is not None and problem is True:
         problem = 1
     else:
         problem = 0
@@ -165,7 +233,10 @@ def register_patient(request):
     if request.method == 'POST':
         form = RegistrationPatientForm(request.POST)
         if form.is_valid():
-            calculate_age_range(form)
+            if ['birth_date'] in form.changed_data:
+                calculate_age_range(form)
+            else:
+                pass
             form.save()
             return redirect('users:home')
 
@@ -253,133 +324,171 @@ def show_patient_view(request, cpf):
     return render(request, 'users/showPatient.html', status=404)
 
 
-def get_under_28_symptoms(form):
+def get_under_28_symptoms(clinical_state):
     """
-    get symptoms from form to build patient's clinical condition
+    building patient (28d) to use on ml based on patient's clinical condition
     """
-    dispineia = check_patient_problem(form.get("dispineia"))
-    ictericia = check_patient_problem(form.get("ictericia"))
-    consciencia = check_patient_problem(form.get("consciência"))
-    cianose = check_patient_problem(form.get("cianose"))
-    febre = check_patient_problem(form.get("febre"))
-    solucos = check_patient_problem(form.get("solucos"))
-    prostracao = check_patient_problem(form.get("prostracao"))
-    vomitos = check_patient_problem(form.get("vomitos"))
-    tosse = check_patient_problem(form.get("tosse"))
-    coriza = check_patient_problem(form.get("coriza"))
-    obstrucaoNasal = check_patient_problem(form.get("obstrucaoNasal"))
-    convulsaoMomento = check_patient_problem(form.get("convulsaoMomento"))
-    diarreia = check_patient_problem(form.get("diarreia"))
-    choroIncosolavel = check_patient_problem(form.get("choroIncosolavel"))
-    dificuldadeEvacuar = check_patient_problem(form.get("dificuldadeEvacuar"))
-    naoSugaSeio = check_patient_problem(form.get("naoSugaSeio"))
-    manchaPele = check_patient_problem(form.get("manchaPele"))
-    salivacao = check_patient_problem(form.get("salivacao"))
-    queda = check_patient_problem(form.get("queda"))
-    chiadoPeito = check_patient_problem(form.get("chiadoPeito"))
-    diminuicaoDiurese = check_patient_problem(form.get("diminuicaoDiurese"))
-    dorAbdominal = check_patient_problem(form.get("dorAbdominal"))
-    dorOuvido = check_patient_problem(form.get("dorOuvido"))
-    fontanelaAbaulada = check_patient_problem(form.get("fontanelaAbaulada"))
-    secrecaoUmbigo = check_patient_problem(form.get("secrecaoUmbigo"))
-    secrecaoOcular = check_patient_problem(form.get("secrecaoOcular"))
-    sangueFezes = check_patient_problem(form.get("sangueFezes"))
-    convulsaoHoje = check_patient_problem(form.get("convulsaoHoje"))
-
     patient = [[
-        dispineia,
-        ictericia,
-        consciencia,
-        cianose,
-        febre,
-        solucos,
-        prostracao,
-        vomitos,
-        tosse,
-        coriza,
-        obstrucaoNasal,
-        convulsaoMomento,
-        diarreia,
-        choroIncosolavel,
-        dificuldadeEvacuar,
-        naoSugaSeio,
-        manchaPele,
-        salivacao,
-        queda,
-        chiadoPeito,
-        diminuicaoDiurese,
-        dorAbdominal,
-        dorOuvido,
-        fontanelaAbaulada,
-        secrecaoUmbigo,
-        secrecaoOcular,
-        sangueFezes,
-        convulsaoHoje,
+        check_patient_problem(clinical_state.dispineia),
+        check_patient_problem(clinical_state.ictericia),
+        check_patient_problem(clinical_state.perdada_consciencia),
+        check_patient_problem(clinical_state.cianose),
+        check_patient_problem(clinical_state.febre),
+        check_patient_problem(clinical_state.solucos),
+        check_patient_problem(clinical_state.prostracao),
+        check_patient_problem(clinical_state.vomitos),
+        check_patient_problem(clinical_state.tosse),
+        check_patient_problem(clinical_state.coriza),
+        check_patient_problem(clinical_state.obstrucao_nasal),
+        check_patient_problem(clinical_state.convulcao_no_momento),
+        check_patient_problem(clinical_state.diarreia),
+        check_patient_problem(clinical_state.choro_inconsolavel),
+        check_patient_problem(clinical_state.dificuldade_evacuar),
+        check_patient_problem(clinical_state.nao_suga_seio),
+        check_patient_problem(clinical_state.manchas_na_pele),
+        check_patient_problem(clinical_state.salivacao),
+        check_patient_problem(clinical_state.queda),
+        check_patient_problem(clinical_state.chiado_no_peito),
+        check_patient_problem(clinical_state.diminuicao_da_diurese),
+        check_patient_problem(clinical_state.dor_abdominal),
+        check_patient_problem(clinical_state.dor_de_ouvido),
+        check_patient_problem(clinical_state.fontanela_abaulada),
+        check_patient_problem(clinical_state.secrecao_no_umbigo),
+        check_patient_problem(clinical_state.secrecao_ocular),
+        check_patient_problem(clinical_state.sangue_nas_fezes),
+        check_patient_problem(clinical_state.convulsao_hoje)
     ]]
-
     return patient
 
 
-def get_29d_2m_symptoms(form):
+def get_29d_2m_symptoms(clinical_state):
     """
-    get symptoms from form to build patient's clinical condition
+    building patient (29d-2m) to use on ml based on
+    patient's clinical condition
     """
-    dispineia = check_patient_problem(form.get("dispineia"))
-    ictericia = check_patient_problem(form.get("ictericia"))
-    consciencia = check_patient_problem(form.get("consciência"))
-    cianose = check_patient_problem(form.get("cianose"))
-    febre = check_patient_problem(form.get("febre"))
-    solucos = check_patient_problem(form.get("solucos"))
-    prostracao = check_patient_problem(form.get("prostracao"))
-    vomitos = check_patient_problem(form.get("vomitos"))
-    tosse = check_patient_problem(form.get("tosse"))
-    coriza = check_patient_problem(form.get("coriza"))
-    obstrucaoNasal = check_patient_problem(form.get("obstrucaoNasal"))
-    convulsaoMomento = check_patient_problem(form.get("convulsaoMomento"))
-    diarreia = check_patient_problem(form.get("diarreia"))
-    dificuldadeEvacuar = check_patient_problem(form.get("dificuldadeEvacuar"))
-    naoSugaSeio = check_patient_problem(form.get("naoSugaSeio"))
-    manchaPele = check_patient_problem(form.get("manchaPele"))
-    salivacao = check_patient_problem(form.get("salivacao"))
-    queda = check_patient_problem(form.get("queda"))
-    chiadoPeito = check_patient_problem(form.get("chiadoPeito"))
-    diminuicaoDiurese = check_patient_problem(form.get("diminuicaoDiurese"))
-    dorAbdominal = check_patient_problem(form.get("dorAbdominal"))
-    dorOuvido = check_patient_problem(form.get("dorOuvido"))
-    fontanelaAbaulada = check_patient_problem(form.get("fontanelaAbaulada"))
-    secrecaoUmbigo = check_patient_problem(form.get("secrecaoUmbigo"))
-    secrecaoOcular = check_patient_problem(form.get("secrecaoOcular"))
-    sangueFezes = check_patient_problem(form.get("sangueFezes"))
-    convulsaoHoje = check_patient_problem(form.get("convulsaoHoje"))
-
     patient = [[
-        dispineia,
-        ictericia,
-        consciencia,
-        cianose,
-        febre,
-        solucos,
-        prostracao,
-        vomitos,
-        tosse,
-        coriza,
-        obstrucaoNasal,
-        convulsaoMomento,
-        diarreia,
-        dificuldadeEvacuar,
-        naoSugaSeio,
-        manchaPele,
-        salivacao,
-        queda,
-        chiadoPeito,
-        diminuicaoDiurese,
-        dorAbdominal,
-        dorOuvido,
-        fontanelaAbaulada,
-        secrecaoUmbigo,
-        secrecaoOcular,
-        sangueFezes,
-        convulsaoHoje,
+        check_patient_problem(clinical_state.dispineia),
+        check_patient_problem(clinical_state.ictericia),
+        check_patient_problem(clinical_state.perdada_consciencia),
+        check_patient_problem(clinical_state.cianose),
+        check_patient_problem(clinical_state.febre),
+        check_patient_problem(clinical_state.solucos),
+        check_patient_problem(clinical_state.prostracao),
+        check_patient_problem(clinical_state.vomitos),
+        check_patient_problem(clinical_state.tosse),
+        check_patient_problem(clinical_state.coriza),
+        check_patient_problem(clinical_state.obstrucao_nasal),
+        check_patient_problem(clinical_state.convulcao_no_momento),
+        check_patient_problem(clinical_state.diarreia),
+        check_patient_problem(clinical_state.dificuldade_evacuar),
+        check_patient_problem(clinical_state.nao_suga_seio),
+        check_patient_problem(clinical_state.manchas_na_pele),
+        check_patient_problem(clinical_state.salivacao),
+        check_patient_problem(clinical_state.queda),
+        check_patient_problem(clinical_state.chiado_no_peito),
+        check_patient_problem(clinical_state.diminuicao_da_diurese),
+        check_patient_problem(clinical_state.dor_abdominal),
+        check_patient_problem(clinical_state.dor_de_ouvido),
+        check_patient_problem(clinical_state.fontanela_abaulada),
+        check_patient_problem(clinical_state.secrecao_no_umbigo),
+        check_patient_problem(clinical_state.secrecao_ocular),
+        check_patient_problem(clinical_state.sangue_nas_fezes),
+        check_patient_problem(clinical_state.convulsao_hoje)
     ]]
+    return patient
 
+
+def get_2m_3y_symptoms(clinical_state):
+    """
+    building patient (2m-3y) to use on ml based on
+    patient's clinical condition
+    """
+    patient = [[
+        check_patient_problem(clinical_state.dispineia),
+        check_patient_problem(clinical_state.ictericia),
+        check_patient_problem(clinical_state.perdada_consciencia),
+        check_patient_problem(clinical_state.cianose),
+        check_patient_problem(clinical_state.febre),
+        check_patient_problem(clinical_state.solucos),
+        check_patient_problem(clinical_state.prostracao),
+        check_patient_problem(clinical_state.vomitos),
+        check_patient_problem(clinical_state.tosse),
+        check_patient_problem(clinical_state.coriza),
+        check_patient_problem(clinical_state.obstrucao_nasal),
+        check_patient_problem(clinical_state.convulcao_no_momento),
+        check_patient_problem(clinical_state.diarreia),
+        check_patient_problem(clinical_state.dificuldade_evacuar),
+        check_patient_problem(clinical_state.nao_suga_seio),
+        check_patient_problem(clinical_state.manchas_na_pele),
+        check_patient_problem(clinical_state.salivacao),
+        check_patient_problem(clinical_state.queda),
+        check_patient_problem(clinical_state.chiado_no_peito),
+        check_patient_problem(clinical_state.diminuicao_da_diurese),
+        check_patient_problem(clinical_state.dor_abdominal),
+        check_patient_problem(clinical_state.dor_de_ouvido),
+        check_patient_problem(clinical_state.fontanela_abaulada),
+        check_patient_problem(clinical_state.secrecao_no_umbigo),
+        check_patient_problem(clinical_state.secrecao_ocular)
+    ]]
+    return patient
+
+
+def get_10y_more_symptoms(clinical_state):
+    """
+    building patient (2m-3y) to use on ml based on
+    patient's clinical condition
+    """
+    patient = [[
+        check_patient_problem(clinical_state.mais_de_72h_febre),
+        check_patient_problem(clinical_state.menos_de_72h_febre),
+        check_patient_problem(clinical_state.tontura),
+        check_patient_problem(clinical_state.corpo_estranho),
+        check_patient_problem(clinical_state.dor_de_dente),
+        check_patient_problem(clinical_state.disuria),
+        check_patient_problem(clinical_state.urina_concentrada),
+        check_patient_problem(clinical_state.dispineia),
+        check_patient_problem(clinical_state.dor_toracica),
+        check_patient_problem(clinical_state.choque_eletrico),
+        check_patient_problem(clinical_state.quase_afogamento),
+        check_patient_problem(clinical_state.artralgia),
+        check_patient_problem(clinical_state.ictericia),
+        check_patient_problem(clinical_state.perda_da_consciencia),
+        check_patient_problem(clinical_state.palidez),
+        check_patient_problem(clinical_state.cianose),
+        check_patient_problem(clinical_state.solucos),
+        check_patient_problem(clinical_state.prostracao),
+        check_patient_problem(clinical_state.febre),
+        check_patient_problem(clinical_state.vomitos),
+        check_patient_problem(clinical_state.tosse),
+        check_patient_problem(clinical_state.coriza),
+        check_patient_problem(clinical_state.espirros),
+        check_patient_problem(clinical_state.hiperemia_conjuntival),
+        check_patient_problem(clinical_state.secrecao_ocular),
+        check_patient_problem(clinical_state.obstrucao_nasal),
+        check_patient_problem(clinical_state.convulsao),
+        check_patient_problem(clinical_state.diarreia),
+        check_patient_problem(clinical_state.dificuldade_evacuar),
+        check_patient_problem(clinical_state.cefaleia),
+        check_patient_problem(clinical_state.manchas_na_pele),
+        check_patient_problem(clinical_state.salivacao),
+        check_patient_problem(clinical_state.queda),
+        check_patient_problem(clinical_state.hiporexia),
+        check_patient_problem(clinical_state.salivacao),
+        check_patient_problem(clinical_state.hiporexia),
+        check_patient_problem(clinical_state.constipacao),
+        check_patient_problem(clinical_state.chiado_no_peito),
+        check_patient_problem(clinical_state.diminuicao_da_diurese),
+        check_patient_problem(clinical_state.dor_abdominal),
+        check_patient_problem(clinical_state.otalgia),
+        check_patient_problem(clinical_state.epistaxe),
+        check_patient_problem(clinical_state.otorreia),
+        check_patient_problem(clinical_state.edema),
+        check_patient_problem(clinical_state.adenomegalias),
+        check_patient_problem(clinical_state.dor_articular),
+        check_patient_problem(clinical_state.dificuldade_de_marcha),
+        check_patient_problem(clinical_state.sonolencia),
+        check_patient_problem(clinical_state.secrecao_ocular),
+        check_patient_problem(clinical_state.dor_muscular),
+        check_patient_problem(clinical_state.dor_retroorbitaria)
+    ]]
     return patient
