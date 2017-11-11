@@ -271,9 +271,7 @@ class TestUsers:
         name = Patient(id='156498', birth_date='2008-09-05')
         name.save()
         response = client.post('/patients/edit/156498/', invalid_patient_data)
-        assert response.status_code == 302
-        # assert response.status_code == 302
-        # antes tava 400 mas agora está 302
+        assert response.status_code == 400
 
     def test_edit_patient_is_update_data(self, client):
         """
