@@ -16,11 +16,13 @@ from .models import Patient, Staff
 from apps.risk_rating.forms import ClinicalState_28dForm
 from apps.risk_rating.forms import ClinicalState_29d_2mForm
 from apps.risk_rating.forms import ClinicalState_2m_3yForm
+from apps.risk_rating.forms import ClinicalState_3y_10yForm
 from apps.risk_rating.forms import ClinicalState_10yMoreForm
 
 from apps.risk_rating.models import ClinicalState_28d
 from apps.risk_rating.models import ClinicalState_29d_2m
 from apps.risk_rating.models import ClinicalState_2m_3y
+from apps.risk_rating.models import ClinicalState_3y_10y
 from apps.risk_rating.models import ClinicalState_10yMore
 
 
@@ -505,8 +507,8 @@ def get_3y_10y_symptoms (clinical_state):
         check_patient_problem(clinical_state.sonolencia),
         check_patient_problem(clinical_state.dor_muscular),
         check_patient_problem(clinical_state.dor_retroorbitaria)
-        ]]
-        return patient
+    ]]
+    return patient
 
 
 

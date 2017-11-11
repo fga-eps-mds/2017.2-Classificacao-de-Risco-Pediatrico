@@ -3,6 +3,7 @@ from django import forms
 from apps.risk_rating.models import ClinicalState_28d
 from apps.risk_rating.models import ClinicalState_29d_2m
 from apps.risk_rating.models import ClinicalState_2m_3y
+from apps.risk_rating.models import ClinicalState_3y_10y
 from apps.risk_rating.models import ClinicalState_10yMore
 
 
@@ -79,7 +80,7 @@ class ClinicalState_10yMoreForm(forms.ModelForm):
                   'dor_articular', 'dificuldade_de_marcha', 'sonolencia',
                   'secrecao_ocular', 'dor_muscular', 'dor_retroorbitaria']
 
-class ClinicalState_3y_10y(forms.ModelForm):
+class ClinicalState_3y_10yForm(forms.ModelForm):
     """
     Defining filds patients (3 years and 10 years old) clinical state
     """
