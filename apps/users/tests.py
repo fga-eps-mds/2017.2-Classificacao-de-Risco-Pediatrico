@@ -268,7 +268,7 @@ class TestUsers:
             'name': 'nameTest', 'guardian': 'guardianTeste',
             'birth_date': '2010-08-06', 'cpf': 'cpferror'})
         Patient()
-        name = Patient(id='156498', birth_date='2008-09-05')
+        name = Patient(id='156498', birth_date='2008-09-05', age_range='0')
         name.save()
         response = client.post('/patients/edit/156498/', invalid_patient_data)
         assert response.status_code == 302
