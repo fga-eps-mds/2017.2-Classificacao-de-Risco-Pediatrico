@@ -33,9 +33,9 @@
             <ul class="list-unstyled components">
                 <!-- Register patient -->
                 <li>
-                    <div class="container-box" onclick="changePadding(this)">
+                    <div class="container-box">
                         <div class="box-content">
-                            <a href="{% url "users:register_patient" %}">
+                            <a href="{% url "users:register_patient" %}" onclick="changeGradientWidth(this)">
                                 <i class="fa fa-pencil" aria-hidden="true"></i>
                                 Cadastrar Paciente
                             </a>
@@ -44,9 +44,9 @@
                 </li>
                 <!-- Patients -->
                 <li>
-                    <div class="container-box" onclick="changePadding(this)">
+                    <div class="container-box">
                         <div class="box-content">
-                            <a href="#patients" data-toggle="collapse" aria-expanded="false">
+                            <a href="#patients" data-toggle="collapse" aria-expanded="false" onclick="changeGradientWidth(this)">
                                 <i class="fa fa-user-o" aria-hidden="true"></i>
                                 Paciente<span class="fa fa-chevron down"></span>
                             </a>
@@ -62,9 +62,9 @@
                 </li>
                 <!-- Attendence -->
                 <li>
-                    <div class="container-box" onclick="changePadding(this)">
+                    <div class="container-box">
                         <div class="box-content">
-                            <a class="link-group" href="#attendence" data-toggle="collapse" aria-expanded="false">
+                            <a class="link-group" href="#attendence" data-toggle="collapse" aria-expanded="false" onclick="changeGradientWidth(this)">
                                 <i class="fa fa-check-circle-o" aria-hidden="true"></i>
                                 Atendimento
                             </a>
@@ -85,9 +85,10 @@
                 </li>
                 <!-- Statistics -->
                 <li>
-                    <div class="container-box" onclick="changePadding(this)">
+                    <div class="container-box">
                         <div class="box-content">
-                            <a href="#statistics" data-toggle="collapse" aria-expanded="false"><i class="fa fa-area-chart"></i>
+                            <a href="#statistics" data-toggle="collapse" aria-expanded="false" onclick="changeGradientWidth(this)">
+                                <i class="fa fa-area-chart"></i>
                                 Estatísticas
                             </a>
                             <ul class="collapse list-unstyled" id="statistics">
@@ -107,9 +108,9 @@
                 </li>
                 <!-- Help -->
                 <li>
-                    <div class="container-box" onclick="changePadding(this)">
+                    <div class="container-box">
                         <div class="box-content">
-                            <a href="#help" data-toggle="collapse" aria-expanded="false">
+                            <a href="#help" data-toggle="collapse" aria-expanded="false" onclick="changeGradientWidth(this)">
                                 <i class="fa fa-question-circle"></i>
                                 Ajuda
                             </a>

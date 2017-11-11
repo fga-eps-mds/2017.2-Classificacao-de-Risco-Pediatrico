@@ -46,8 +46,8 @@ p {
     width: 100%;
 }
 
-a, a:hover, a:focus {
-    color: inherit;
+#sidebar a, #sidebar a:hover, #sidebar a:focus {
+    color: white;
     text-decoration: none;
     transition: all 0.3s;
 }
@@ -156,7 +156,6 @@ i, span {
 
 #sidebar .sidebar-header {
     padding: 20px;
-    /*background: #2A3F54;*/
     display: block;
 }
 
@@ -171,7 +170,6 @@ i, span {
 
 #sidebar ul.components {
     padding: 20px 0;
-    border-bottom: 1px solid #47748b;
 }
 
 #sidebar ul li a {
@@ -180,18 +178,15 @@ i, span {
     display: block;
 }
 
-#sidebar ul li a:hover {
-    color: #00A8E8;
-    background: #172C33;
-}
-
 #sidebar ul li a i {
     margin-right: 10px;
 }
 
 #sidebar ul li.active > a, a[aria-expanded="true"] {
     color: #fff;
-    /*background: #00171F;*/
+    background: linear-gradient(#334556,#2C4257),#2A3F54;
+    box-shadow: rgba(0,0,0,.25) 0 1px 0, inset rgba(255,255,255,.16) 0 1px 0;
+    text-shadow: rgba(0,0,0,.25) 0 -1px 0;
 }
 
 a[data-toggle="collapse"] {
@@ -214,7 +209,6 @@ a[aria-expanded="true"]::before {
 ul ul a {
     font-size: 0.9em !important;
     padding-left: 30px !important;
-    /*background: #00171F;*/
 }
 
 ul.CTAs {

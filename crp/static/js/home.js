@@ -6,10 +6,12 @@ $(document).ready(function () {
 
 });
 
-function changePadding(element) {
-    if(element.style.paddingRight === "7px")
-        element.style.paddingRight = "0px";
+function changeGradientWidth(element) {
+    var containerBox = element.parentNode.parentNode;
+
+    if(containerBox.style.paddingRight === "7px")
+        containerBox.style.paddingRight = "0px";
     else {
-        element.style.paddingRight = "7px";
+        containerBox.style.paddingRight = "7px";
     }
 }
