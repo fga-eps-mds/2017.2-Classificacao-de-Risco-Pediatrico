@@ -235,8 +235,6 @@ def register_patient(request):
         if form.is_valid():
             if ['birth_date'] in form.changed_data:
                 calculate_age_range(form)
-            else:
-                pass
             form.save()
             return redirect('users:home')
 
