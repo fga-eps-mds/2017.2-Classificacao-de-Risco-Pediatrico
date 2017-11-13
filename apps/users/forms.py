@@ -1,7 +1,6 @@
 # Arquivo: apps/users/forms.py
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
-
 from apps.users.models import Patient, Staff
 
 
@@ -16,11 +15,13 @@ class RegistrationPatientForm(forms.ModelForm):
     class Meta:
         model = Patient
         fields = ['name', 'cpf', 'guardian', 'birth_date', 'parents_name',
-                  'uf', 'city', 'neighborhood', 'street', 'block', 'number']
+                  'uf', 'city', 'neighborhood', 'street', 'block', 'number',
+                  'age_range', 'gender']
 
 
 class EditPatientForm(forms.ModelForm):
     class Meta:
         model = Patient
         fields = ['name', 'cpf', 'guardian', 'birth_date', 'parents_name',
-                  'uf', 'city', 'neighborhood', 'street', 'block', 'number']
+                  'uf', 'city', 'neighborhood', 'street', 'block', 'number',
+                  'age_range']

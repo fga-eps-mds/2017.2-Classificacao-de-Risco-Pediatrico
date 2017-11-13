@@ -4,9 +4,25 @@
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 
 
+:root {
+    /* For browsers that do not support gradients */
+    --grad-color: red;
+    /* For Safari 5.1 to 6.0 */
+    --grad-color: -webkit-linear-gradient(#ec2a2b , #f45e24, #fdb02a, #fed530, #b9ca29, #468657, #184dbb);
+    /* For Opera 11.1 to 12.0 */
+    --grad-color: -o-linear-gradient(#ec2a2b , #f45e24, #fdb02a, #fed530, #b9ca29, #468657, #184dbb);
+    /* For Firefox 3.6 to 15 */
+    --grad-color: -moz-linear-gradient(#ec2a2b , #f45e24, #fdb02a, #fed530, #b9ca29, #468657, #184dbb);
+    /* Standard syntax (must be last) */
+    --grad-color: linear-gradient(#ec2a2b , #f45e24, #fdb02a, #fed530, #b9ca29, #468657, #184dbb);
+}
+
 body {
-    font-family: 'Poppins', sans-serif;
-    background: #fafafa;
+    color: #73879C;
+    font-family: "Helvetica Neue",Roboto,Arial,"Droid Sans",sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.471;
 }
 
 p {
@@ -18,15 +34,20 @@ p {
 }
 
 #searchPatient {
+    box-shadow: inset 0 1px 0 rgba(0,0,0,.075);
+    border-radius: 25px 0 0 25px;
+    padding-left: 20px;
+    border: 1px solid rgba(221,226,232,.49);
     min-width: 185px;
 }
 
 #content {
+    background: #F7F7F7;
     width: 100%;
 }
 
-a, a:hover, a:focus {
-    color: inherit;
+#sidebar a, #sidebar a:hover, #sidebar a:focus {
+    color: white;
     text-decoration: none;
     transition: all 0.3s;
 }
@@ -36,7 +57,7 @@ a, a:hover, a:focus {
     background: #fff;
     border: none;
     border-radius: 0;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
 
@@ -57,6 +78,10 @@ i, span {
     display: inline-block;
 }
 
+.actions-icon {
+    margin: 5px;
+}
+
 /* ---------------------------------------------------
     SIDEBAR STYLE
 ----------------------------------------------------- */
@@ -65,10 +90,22 @@ i, span {
     align-items: stretch;
 }
 
+#welcome {
+    text-align: center;
+}
+
+#welcomeName {
+    color: white;
+}
+
+#logobar {
+
+}
+
 #sidebar {
-    min-width: 250px;
+    min-width: 210px;
     max-width: 250px;
-    background: #00171F;
+    background: #2A3F54;
     color: #fff;
     transition: all 0.3s;
 }
@@ -119,7 +156,11 @@ i, span {
 
 #sidebar .sidebar-header {
     padding: 20px;
-    background: #00171F;
+    display: block;
+}
+
+#sidebar .sidebar-header h3 {
+    font-size: 50px;
 }
 
 #sidebar .sidebar-header strong {
@@ -129,7 +170,6 @@ i, span {
 
 #sidebar ul.components {
     padding: 20px 0;
-    border-bottom: 1px solid #47748b;
 }
 
 #sidebar ul li a {
@@ -138,18 +178,15 @@ i, span {
     display: block;
 }
 
-#sidebar ul li a:hover {
-    color: #00A8E8;
-    background: #172C33;
-}
-
 #sidebar ul li a i {
     margin-right: 10px;
 }
 
 #sidebar ul li.active > a, a[aria-expanded="true"] {
     color: #fff;
-    background: #00171F;
+    background: linear-gradient(#334556,#2C4257),#2A3F54;
+    box-shadow: rgba(0,0,0,.25) 0 1px 0, inset rgba(255,255,255,.16) 0 1px 0;
+    text-shadow: rgba(0,0,0,.25) 0 -1px 0;
 }
 
 a[data-toggle="collapse"] {
@@ -172,7 +209,6 @@ a[aria-expanded="true"]::before {
 ul ul a {
     font-size: 0.9em !important;
     padding-left: 30px !important;
-    background: #00171F;
 }
 
 ul.CTAs {
@@ -312,8 +348,31 @@ a.article, a.article:hover {
     #sidebar {
         margin-left: 0;
     }
-    
+
     #sidebarCollapse span {
         display: none;
     }
+}
+
+.gradiente {
+    /* Tamanho */
+    height: 40px;
+    width: 10px;
+    margin-left: 30px;
+    margin-top: 7px;
+    margin-right: 10px;
+    float: left;
+
+    /* Color */
+    background: var(--grad-color);
+}
+
+.container-box {
+    background: var(--grad-color);
+    display: flex;
+}
+
+.box-content {
+    background: #2A3F54;
+    width:260px;
 }
