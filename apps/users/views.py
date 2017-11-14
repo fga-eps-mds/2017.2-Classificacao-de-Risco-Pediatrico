@@ -70,7 +70,6 @@ def home(request):
     patients = Patient.objects.all()
     classification = None
 
-
     if request.method == 'POST':
         p_id = request.POST.get("patient_id")
         subject_patient = Patient.objects.filter(id=p_id)[0]
