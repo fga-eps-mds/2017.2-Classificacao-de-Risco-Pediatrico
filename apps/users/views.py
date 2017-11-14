@@ -76,7 +76,7 @@ def home(request):
         form = ClinicalState_28dForm(request.POST)
         form.save()
 
-        p_id = request.POST.get("patient_id1")
+        p_id = request.POST.get("patient_id")
         subject_patient = Patient.objects.filter(id=p_id)[0]
         p_c_states_l = ClinicalState_28d.objects.filter(patient_id1=p_id)
         clinical_state = p_c_states_l.order_by('-id')[0]
@@ -86,7 +86,7 @@ def home(request):
         form = ClinicalState_29d_2mForm(request.POST)
         form.save()
 
-        p_id = request.POST.get("patient_id2")
+        p_id = request.POST.get("patient_id")
         subject_patient = Patient.objects.filter(id=p_id)[0]
         p_c_states_l = ClinicalState_29d_2m.objects.filter(patient_id2=p_id)
         clinical_state = p_c_states_l.order_by('-id')[0]
@@ -96,7 +96,7 @@ def home(request):
         form = ClinicalState_2m_3yForm(request.POST)
         form.save()
 
-        p_id = request.POST.get("patient_id3")
+        p_id = request.POST.get("patient_id")
         subject_patient = Patient.objects.filter(id=p_id)[0]
         p_c_states_l = ClinicalState_2m_3y.objects.filter(patient_id3=p_id)
         clinical_state = p_c_states_l.order_by('-id')[0]
@@ -106,7 +106,7 @@ def home(request):
         form = ClinicalState_10yMoreForm(request.POST)
         form.save()
 
-        p_id = request.POST.get("patient_id5")
+        p_id = request.POST.get("patient_id")
         subject_patient = Patient.objects.filter(id=p_id)[0]
         p_c_states_l = ClinicalState_10yMore.objects.filter(patient_id5=p_id)
         clinical_state = p_c_states_l.order_by('-id')[0]
