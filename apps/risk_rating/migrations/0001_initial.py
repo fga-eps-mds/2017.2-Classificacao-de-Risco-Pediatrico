@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
             name='ClinicalState_28d',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('patient_id1', models.CharField(blank=True, max_length=150, verbose_name='ID do Paciente')),
+                ('patient_id', models.CharField(blank=True, max_length=150, verbose_name='ID do Paciente')),
                 ('dispineia', models.BooleanField(default=False, verbose_name='Dispinéia')),
                 ('ictericia', models.BooleanField(default=False, verbose_name='Icterícia')),
                 ('perdada_consciencia', models.BooleanField(default=False, verbose_name='Perda de Consciência')),
@@ -52,7 +52,7 @@ class Migration(migrations.Migration):
             name='ClinicalState_29d_2m',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('patient_id2', models.CharField(blank=True, max_length=150, verbose_name='ID do Paciente')),
+                ('patient_id', models.CharField(blank=True, max_length=150, verbose_name='ID do Paciente')),
                 ('dispineia', models.BooleanField(default=False, verbose_name='Dispinéia')),
                 ('ictericia', models.BooleanField(default=False, verbose_name='Icterícia')),
                 ('perdada_consciencia', models.BooleanField(default=False, verbose_name='Perda de Consciência')),
@@ -86,7 +86,7 @@ class Migration(migrations.Migration):
             name='ClinicalState_2m_3y',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('patient_id3', models.CharField(blank=True, max_length=150, verbose_name='ID do Paciente')),
+                ('patient_id', models.CharField(blank=True, max_length=150, verbose_name='ID do Paciente')),
                 ('dispineia', models.BooleanField(default=False, verbose_name='Dispinéia')),
                 ('ictericia', models.BooleanField(default=False, verbose_name='Icterícia')),
                 ('perdada_consciencia', models.BooleanField(default=False, verbose_name='Perda de Consciência')),
