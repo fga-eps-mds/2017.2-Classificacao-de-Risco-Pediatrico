@@ -61,12 +61,6 @@ p {
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-.navbar-btn {
-    box-shadow: none;
-    outline: none !important;
-    border: none;
-}
-
 .line {
     width: 100%;
     height: 1px;
@@ -111,12 +105,13 @@ i, span {
 }
 
 #sidebar.active {
-    min-width: 105px;
-    max-width: 105px;
+    min-width: 125px;
+
+    max-width: 125px;
     text-align: center;
 }
 
-#sidebar.active .sidebar-header h3, #sidebar.active .CTAs {
+#sidebar.active .sidebar-header #crpname, #sidebar.active .CTAs {
     display: none;
 }
 
@@ -142,7 +137,7 @@ i, span {
 }
 
 #sidebar.active ul ul a {
-    padding: 10px !important;
+    padding: 10px;
 }
 
 #sidebar.active a[aria-expanded="false"]::before, #sidebar.active a[aria-expanded="true"]::before {
@@ -159,7 +154,7 @@ i, span {
     display: block;
 }
 
-#sidebar .sidebar-header h3 {
+#sidebar .sidebar-header #crpname {
     font-size: 50px;
 }
 
@@ -207,8 +202,8 @@ a[aria-expanded="true"]::before {
 }
 
 ul ul a {
-    font-size: 0.9em !important;
-    padding-left: 30px !important;
+    font-size: 0.9em;
+    padding-left: 30px;
 }
 
 ul.CTAs {
@@ -316,7 +311,7 @@ a.article, a.article:hover {
         margin-left: 0 !important;
     }
 
-    #sidebar .sidebar-header h3, #sidebar .CTAs {
+    #sidebar .sidebar-header #crpname, #sidebar .CTAs {
         display: none;
     }
 
