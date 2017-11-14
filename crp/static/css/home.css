@@ -92,10 +92,6 @@ i, span {
     color: white;
 }
 
-#logobar {
-
-}
-
 #sidebar {
     min-width: 210px;
     max-width: 250px;
@@ -138,6 +134,10 @@ i, span {
 
 #sidebar.active ul ul a {
     padding: 10px;
+}
+
+#sidebar.active .gradiente {
+    margin-left: 40px;
 }
 
 #sidebar.active a[aria-expanded="false"]::before, #sidebar.active a[aria-expanded="true"]::before {
@@ -212,7 +212,7 @@ ul.CTAs {
 
 ul.CTAs a {
     text-align: center;
-    font-size: 0.9em !important;
+    font-size: 0.9em;
     display: block;
     border-radius: 5px;
     margin-bottom: 5px;
@@ -224,8 +224,8 @@ a.download {
 }
 
 a.article, a.article:hover {
-    background: #6d7fcc !important;
-    color: #fff !important;
+    background: #6d7fcc
+    color: #fff;
 }
 
 /* ---------------------------------------------------
@@ -254,7 +254,7 @@ a.article, a.article:hover {
 
 .classification-button {
     word-wrap: break-word;
-    white-space:normal !important;
+    white-space:normal;
     color: #007bff;
     background-color: white;
     height: 67px;
@@ -295,7 +295,7 @@ a.article, a.article:hover {
         min-width: 80px;
         max-width: 80px;
         text-align: center;
-        margin-left: -80px !important ;
+        margin-left: -80px;
     }
 
     a[aria-expanded="false"]::before, a[aria-expanded="true"]::before {
@@ -308,7 +308,7 @@ a.article, a.article:hover {
     }
 
     #sidebar.active {
-        margin-left: 0 !important;
+        margin-left: 0;
     }
 
     #sidebar .sidebar-header #crpname, #sidebar .CTAs {
@@ -333,7 +333,7 @@ a.article, a.article:hover {
     }
 
     #sidebar ul ul a {
-        padding: 10px !important;
+        padding: 10px;
     }
 
     #sidebar ul li a i {
