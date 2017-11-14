@@ -78,24 +78,25 @@ def home(request):
         if 'form1' in request.POST:
             form = ClinicalState_28dForm(request.POST)
             form.save()
-            p_c_states_l = ClinicalState_28d.objects.filter(patient_id=p_id)
+            state = ClinicalState_28d
             ml = ml1
         elif "form2" in request.POST:
             form = ClinicalState_29d_2mForm(request.POST)
             form.save()
-            p_c_states_l = ClinicalState_29d_2m.objects.filter(patient_id=p_id)
+            state = ClinicalState_29d_2m
             ml = ml2
         elif "form3" in request.POST:
             form = ClinicalState_2m_3yForm(request.POST)
             form.save()
-            p_c_states_l = ClinicalState_2m_3y.objects.filter(patient_id=p_id)
+            state = ClinicalState_2m_3y
             ml = ml3
         elif "form5" in request.POST:
             form = ClinicalState_10yMoreForm(request.POST)
             form.save()
-            p_c_states_l = ClinicalState_10yMore.objects.filter(patient_id=p_id)
+            state = ClinicalState_10yMore
             ml = ml5
 
+        p_c_states_l = state.objects.filter(patient_id=p_id)
         clinical_state = p_c_states_l.order_by('-id')[0]
         trigger_ml(subject_patient, clinical_state, ml)
 

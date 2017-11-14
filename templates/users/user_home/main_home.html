@@ -21,41 +21,41 @@
             <tbody>
                 {% for patient in patients %}
                 <tr>
-                    {% if patient.name and patient.gender == 1 %}
-                        <td><a href="#" data-toggle="modal" data-target="#risk_range{{ patient.id }}"><i class="fa fa-female" aria-hidden="true"></i>&nbsp{{ patient.name }}</a></td>
-                    {% elif  patient.name and patient.gender == 2%}
-                        <td><a href="#" data-toggle="modal" data-target="#risk_range{{ patient.id }}"><i class="fa fa-male" aria-hidden="true"></i>&nbsp{{ patient.name }}</a></td>
-                    {% else %}
-                      {% if patient.name %}
-                          <td><a href="#" data-toggle="modal" data-target="#risk_range{{ patient.id }}">{{ patient.name }}</a></td>
-                      {% else %}
-                          <td><a href="#" data-toggle="modal" data-target="#risk_range{{ patient.id }}">{{ patient.id }}</a></td>
-                      {% endif %}
-                    {% endif %}
+                    <td>
+                        <a href="#" data-toggle="modal" data-target="#risk_range{{ patient.id }}">
+                            {% if patient.gender == 1 %}
+                                <i class="fa fa-female" aria-hidden="true"></i>
+                            {% elif patient.gender == 2%}
+                                <i class="fa fa-male" aria-hidden="true"></i>
+                            {% endif %}
 
+                            {% if patient.name %}
+                                &nbsp{{ patient.name }}
+                            {% else %}
+                                &nbsp{{ patient.id }}
+                            {% endif %}
+                        </a>
+                    </td><!--td gênero e nome-->
 
                     <td>
-                        {% if patient.classification == 0 %}
-                            <span class="btn btn-primary badge badge-pill badge-secondary"  data-toggle="modal" data-target="#{{ patient.id }}">
-                                Não classificado
-                            </span>
-                        {% elif patient.classification == 1 %}
-                            <span class="btn btn-primary badge badge-pill badge-danger"  data-toggle="modal" data-target="#{{ patient.id }}">
-                                Atendimento Imediato
-                            </span>
-                        {% elif patient.classification == 2 %}
-                            <span class="btn btn-primary badge badge-pill badge-success"  data-toggle="modal" data-target="#{{ patient.id }}">
-                                Atendimento Ambulatorial
-                            </span>
-                        {% elif patient.classification == 3 %}
-                            <span class="btn btn-primary badge badge-pill badge-warning"  data-toggle="modal" data-target="#{{ patient.id }}">
-                                Atendimento Hospitalar
-                            </span>
-                        {% elif patient.classification == 4 %}
-                            <span class="btn btn-primary badge badge-pill badge-info"  data-toggle="modal" data-target="#{{ patient.id }}">
-                                Atendimento Eletivo
-                            </span>
-                        {% endif %}
+                        <span data-toggle="modal" data-target="#{{ patient.id }}"
+                            {% if patient.classification == 0 %}
+                                class="btn btn-primary badge badge-pill badge-secondary">
+                                    Não classificado
+                            {% elif patient.classification == 1 %}
+                                class="btn btn-primary badge badge-pill badge-danger">
+                                    Atendimento Imediato
+                            {% elif patient.classification == 2 %}
+                                class="btn btn-primary badge badge-pill badge-success">
+                                    Atendimento Ambulatorial
+                            {% elif patient.classification == 3 %}
+                                class="btn btn-primary badge badge-pill badge-warning">
+                                    Atendimento Hospitalar
+                            {% elif patient.classification == 4 %}
+                                class="btn btn-primary badge badge-pill badge-info">
+                                    Atendimento Eletivo
+                            {% endif %}
+                        </span>
                     </td><!--td classificação-->
 
                     <td>
@@ -72,12 +72,20 @@
                         {% elif patient.age_range == 5 %}
                             Acima de 10 anos
                         {% endif %}
-                    </td>
-                    <td>{{ patient.created_at|date:"d/m/y - H:i" }}</td>
+                    </td><!--td faixa etária-->
+
                     <td>
-                        <a href="{% url 'users:edit_patient' patient.id %}"><i class="fa fa-pencil actions-icon" aria-hidden="true"></i></a>
-                        <a href="#" data-toggle="modal" data-target="#deletar-{{ patient.id }}"><i class="fa fa-ban actions-icon" aria-hidden="true"></i></a>
-                    </td>
+                        {{ patient.created_at|date:"d/m/y - H:i" }}
+                    </td><!--td data de criação-->
+
+                    <td>
+                        <a href="{% url 'users:edit_patient' patient.id %}">
+                            <i class="fa fa-pencil actions-icon" aria-hidden="true"></i>
+                        </a>
+                        <a href="#" data-toggle="modal" data-target="#deletar-{{ patient.id }}">
+                            <i class="fa fa-ban actions-icon" aria-hidden="true"></i>
+                        </a>
+                    </td><!--td ações-->
                 </tr>
                 {% endfor %}
             </tbody>
