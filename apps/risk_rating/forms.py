@@ -12,7 +12,7 @@ class ClinicalState_28dForm(forms.ModelForm):
     """
     class Meta:
         model = ClinicalState_28d
-        fields = ['patient_id1', 'dispineia', 'ictericia',
+        fields = ['patient_id', 'dispineia', 'ictericia',
                   'perdada_consciencia', 'cianose', 'febre',
                   'solucos', 'prostracao', 'vomitos', 'tosse',
                   'coriza', 'obstrucao_nasal', 'convulcao_no_momento',
@@ -29,7 +29,7 @@ class ClinicalState_29d_2mForm(forms.ModelForm):
     """
     class Meta:
         model = ClinicalState_29d_2m
-        fields = ['patient_id2', 'dispineia', 'ictericia',
+        fields = ['patient_id', 'dispineia', 'ictericia',
                   'perdada_consciencia', 'cianose', 'febre',
                   'solucos', 'prostracao', 'vomitos', 'tosse',
                   'coriza', 'obstrucao_nasal', 'convulcao_no_momento',
@@ -46,7 +46,7 @@ class ClinicalState_2m_3yForm(forms.ModelForm):
     """
     class Meta:
         model = ClinicalState_2m_3y
-        fields = ['patient_id3', 'dispineia', 'ictericia',
+        fields = ['patient_id', 'dispineia', 'ictericia',
                   'perdada_consciencia', 'cianose', 'febre',
                   'solucos', 'prostracao', 'vomitos', 'tosse',
                   'coriza', 'obstrucao_nasal', 'convulcao_no_momento',
@@ -63,7 +63,7 @@ class ClinicalState_10yMoreForm(forms.ModelForm):
     """
     class Meta:
         model = ClinicalState_10yMore
-        fields = ['patient_id5', 'mais_de_72h_febre', 'menos_de_72h_febre',
+        fields = ['patient_id', 'mais_de_72h_febre', 'menos_de_72h_febre',
                   'tontura', 'corpo_estranho', 'dor_de_dente', 'disuria',
                   'urina_concentrada', 'dispineia', 'dor_toracica',
                   'choque_eletrico', 'quase_afogamento', 'artralgia',
