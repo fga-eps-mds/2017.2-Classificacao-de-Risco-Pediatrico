@@ -295,30 +295,25 @@ class TestUsers:
         assert response.status_code == 200
         assert list(response.context['staffs']) == allstaff
 
-    def test_staff_remove(self, client):
-        """Test for remove staff."""
+    @pytest.mark.parametrize(
+        'data_type, url', [(Patient, '/home/'), (Staff, '/accounts/')])
+    def test_remove_object(self, client, data_type, url):
+        """Test remove object."""
         Staff.objects.create_superuser(**self.default_user_data())
         response = client.post('/login', {'username': 'email@gmail.com',
                                'password': "1234asdf", 'id_user': "1234"})
-        Staff()
-        name = Staff(id_user='456')
-        name.save()
-        response = client.delete('/accounts/remove/456/', follow=True)
-        assert response.redirect_chain == [('/accounts/', 302)]
-        assert Staff.objects.count() == 1
-        # foram instanciados 2 staffs
-        # por isso o assert igual a 1
+        data_type()
 
-    def test_patient_remove(self, client):
-        """Test for remove patient."""
-        Staff.objects.create_superuser(**self.default_user_data())
-        response = client.post('/login', {'username': 'email@gmail.com',
-                               'password': "1234asdf", 'id_user': "1234"})
-        Patient()
-        name = Patient(id='125987', birth_date='2016-11-03')
+        if data_type == Staff:
+            name = data_type(id_user='456')
+            method = '/accounts/remove/456/'
+        else:
+            name = data_type(id='125987', birth_date='2016-11-03')
+            method = '/patients/remove/125987/'
+
         name.save()
-        response = client.delete('/patients/remove/125987/', follow=True)
-        assert response.redirect_chain == [('/home/', 302)]
+        response = client.delete(method, follow=True)
+        assert response.redirect_chain == [(url, 302)]
         assert Patient.objects.count() == 0
 
     @pytest.mark.parametrize('url, urlredirect', [
