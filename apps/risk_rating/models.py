@@ -3,7 +3,7 @@ from django.db import models
 
 class ClinicalState_28d(models.Model):
 
-    patient_id1 = models.CharField(
+    patient_id = models.CharField(
         verbose_name=('ID do Paciente'),
         max_length=150,
         blank=True,
@@ -182,7 +182,7 @@ class ClinicalState_28d(models.Model):
 
 class ClinicalState_29d_2m(models.Model):
 
-    patient_id2 = models.CharField(
+    patient_id = models.CharField(
         verbose_name=('ID do Paciente'),
         max_length=150,
         blank=True,
@@ -355,7 +355,7 @@ class ClinicalState_29d_2m(models.Model):
 
 class ClinicalState_2m_3y(models.Model):
 
-    patient_id3 = models.CharField(
+    patient_id = models.CharField(
         verbose_name=('ID do Paciente'),
         max_length=150,
         blank=True,
@@ -516,7 +516,7 @@ class ClinicalState_2m_3y(models.Model):
 
 class ClinicalState_10yMore(models.Model):
 
-    patient_id5 = models.CharField(
+    patient_id = models.CharField(
         verbose_name=('ID do Paciente'),
         max_length=150,
         blank=True,
@@ -832,7 +832,7 @@ class ClinicalState_10yMore(models.Model):
 
 class ClinicalState_3y_10y(models.Model):
 
-    patient_id4 = models.CharField(
+    patient_id = models.CharField(
         verbose_name=('ID do Paciente'),
         max_length=150,
         blank=True,

@@ -13,6 +13,7 @@
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
     <!-- Custom styles for this template -->
@@ -39,9 +40,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" >
-                            |
-                        </a>
+                        <a class="nav-link js-scroll-trigger" >|</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link js-scroll-trigger"
@@ -62,14 +61,68 @@
     <header class="masthead">
         <div class="intro-body">
             <div class="container">
-                <div class="row">
+                <div class="row pt-5">
                     <div class="col-lg-8 mx-auto">
-                        <h1 class="brand-heading">
-                            CRP
-                        </h1>
-                        <p class="intro-text">
-                            Ganhando tempo,<br>salvando vidas!
+                        <div >
+                            <img src="{% static "img/LogoCRP.png" %}" class="brand-heading" alt="Responsive image"/>
+                        </div>
+                        <p class="intro-text pt-3" style="font-size: 30px">
+                            Ganhando tempo. Salvando vidas.
                         </p>
+                        <div class="row pt-5">
+                            <div class="col-md-3">
+                                <div class="flip">
+                                    <div class="fundo" style="background-color:#295872">
+                                        <a href="#about" class="btn btn-circle js-scroll-trigger link">
+                                            <h4 style="margin-top: 10%">O que é <br> CRP?</h4>
+                                        </a>
+                                    </div>
+                                    <div class="frente" style="background-color:#17a2b8">
+                                        <i class="fa fa-user-md size"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="flip">
+                                    <div class="fundo" style="background-color: #1F5C0E">
+                                        <a href="#how_to_use" class="btn btn-circle js-scroll-trigger link">
+                                            <h4 style="margin-top: 10%">Como <br> Usar?</h4>
+                                        </a>
+                                    </div>
+                                    <div class="frente" style="background-color: #28a745">
+                                        <i class="fa fa-hand-pointer-o size"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="flip">
+                                    <div class="fundo" style="background-color: #CCCC00">
+                                        <a href="#hospitals" class="btn btn-circle js-scroll-trigger link">
+                                            <p id="hospital">
+                                                Hospitais <br> Inteligentes
+                                            </p>
+                                        </a>
+                                    </div>
+                                    <div class="frente" style="background-color: #ffc107">
+                                        <i class="fa fa-hospital-o size"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="flip">
+                                    <div class="fundo" style="background-color: #973027">
+                                        <a href="#accurate" class="btn btn-circle js-scroll-trigger link">
+                                            <p id="classifica">
+                                                Classificações <br> rápidas e <br> corretas
+                                            </p>
+                                        </a>
+                                    </div>
+                                    <div class="frente" style="background-color: #dc3545">
+                                        <i class="fa fa-clock-o size"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -77,59 +130,155 @@
     </header>
 
     <!-- About Section -->
-    <section id="about" class="content-section text-center">
+    <section id="about" class="content-section container-fluid text-center pt-3" style="background-color:#17a2b8">
+        <div class="row ">
+            <div class="col-md-2 animate-7">
+                <i class="fa fa-user-md size icon text-white"></i>
+            </div>
+            <div class="col-md-9 animate-6">
+                <div class="colorbar-top" style="background-color:#295872">
+                </div>
+            </div>
+        </div>
         <div class="container">
             <div class="row">
-                <div class="col-lg-8 mx-auto">
-                    <h2 class="animate">
+                <div class="col-lg-8 ">
+                    <h2 class="animate-2">
                         O que é o CRP?
                     </h2>
-                    <p class="animate-2">
-                        O Classificação de Risco Pediátrico é um programa desenvolvido para facilitar e agilizar o processo de classificação de risco nos hospitais, focado na área da pediatria.
-                    </p>
                     <p class="animate-3">
-                        Ele busca atender de um modo prático e intuitivo à comunidade médica, além de oferecer uma nova visão de classificação com uso de machine learning!
+                        O CRP (Classificação de Risco Pediátrico) é um programa desenvolvido para facilitar e agilizar o processo de classificação de risco nos hospitais, com foco na área da pediatria.
                     </p>
                     <p class="animate-4">
+                        Ele busca atender de modo prático e intuitivo à comunidade médica, além de oferecer uma nova visão de classificação com uso do aprendizado de máquina.
+                    </p>
+                    <p class="animate-5">
                         Com o CRP, você terá uma ferramenta a mais em que confiar!
                     </p>
+                </div>
+                <div class="col-md-4 animate">
+                    <img src="{% static "img/doctor.png" %}" class="about-image"/>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- How to Use Section -->
+
+    <section id="how_to_use" class="content-section container-fluid text-center pt-3" style="background-color: #28a745">
+        <div class="row">
+            <div class="col-md-2 animate-8">
+                <i class="fa fa-hand-pointer-o size icon text-white"></i>
+            </div>
+            <div class="col-md-9 animate-9">
+                <div class="colorbar-top" style="background-color: #1F5C0E">
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 animate-10">
+                    <img src="{% static "img/PC 3.png" %}" class="about-image"/>
+                </div>
+                <div class="col-lg-8 mx-auto">
+                    <h2 class="animate-11">
+                        Como Usar?
+                    </h2>
+                    <p class="animate-12">
+                        Basta cadastrar o paciente, selecionar os sintomas apresentados, e pronto! A classificação é exibida na hora para que você possa indicá-lo ao local de atendimento mais apropriado.
+                    </p>
+                    <p class="animate-13">
+                        Não era a classificação esperada? O CRP permite que você altere a classificação obtida e, se desejar, você pode deixar um comentário e contribuir para que nossas classificações sejam ainda melhores.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Smarter Hospitals Section -->
+    <section id="hospitals" class="content-section container-fluid text-center pt-3" style="background-color:#FFFD79">
+        <div class="row">
+            <div class="col-md-2 animate-14">
+                <i class="fa fa-hospital-o size icon text-white"></i>
+            </div>
+            <div class="col-md-9 animate-15">
+                <div class="colorbar-top" style="background-color:  #ffc107">
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 animate-16">
+                    <h2 class="animate-8">
+                        Hospitais Mais Inteligentes
+                    </h2>
+                    <p class="animate-9 animate-17">
+                        Nosso site surge como uma alternativa mais eficiente frente aos sistemas utilizados atualmente, que com frequência geram classificações de risco incorretas e fazem com que pacientes em estado grave sejam atendidos após pacientes com menos urgência.
+                    </p>
+                </div>
+                <div class="col-md-4 animate-18">
+                    <img src="{% static "img/Hospital 1.png" %}" class="about-image"/>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- How to use -->
-    <section id="how_to_use" class="download-section content-section text-center">
+    <!-- Faster and More Accurate Ratings Section -->
+    <section id="accurate" class="content-section container-fluid text-center pt-3" style="background-color: #dc3545">
+        <div class="row">
+            <div class="col-md-2 animate-19">
+                <i class="fa fa-clock-o size icon text-white"></i>
+            </div>
+            <div class="col-md-9">
+                <div class="colorbar-top animate-20" style="background-color: #973027">
+                </div>
+            </div>
+        </div>
         <div class="container">
-            <div class="col-lg-8 mx-auto">
-                <h2 class="animate-5">
-                    Como usar?
-                </h2>
-                <p class="animate-6">
-                    O programa garante um uso intuitivo utilizando de interfaces modernas. Além do mais, ele oferece total liberdade na hora da classificação, servindo apenas de ferramenta nas mãos do classificador.
-                </p>
+            <div class="row">
+                    <div class="col-md-4 animate-21">
+                    <img src="{% static "img/Relogio.png" %}" class="about-image"/>
+                </div>
+                <div class="col-lg-8 mx-auto animate-22">
+                    <h2 class="animate-8">
+                        Classificações Mais Rápidas e Precisas
+                    </h2>
+                    <p class="animate-9 animate-23">
+                        O uso do inovador sistema de aprendizagem de máquina e o nosso layout simplificado permitem economizar tempo e recursos para que você possa focar no mais importante: o tratamento.
+                    </p>
+                </div>
+
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="content-section text-center animate">
+
+    <!-- Footer -->
+    <footer style="background: black">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-8 mx-auto">
-                    <h2 class="animate-7">
-                        Contato com os desenvolvedores:
-                    </h2>
-                    <p class="animate-8">
-                        Sinta-se à vontade para contatar os desenvolvedores pela plataforma de desenvolvimento
-                        <a href="http://github.com/fga-gpp-mds/2017.2-Classificacao-de-Risco-Pediatrico/wiki">
-                            Github
-                        </a>
-                        para o esclarecimento de qualquer tipo de dúvidas!
-                    </p>
+            <div class="row justify-content-center">
+                <div id="footer_left" class=" col-md-4">
+                    <div>
+                        <div class="ftr-tle">
+                            <h4 class="white no-padding text-white">Contato</h4>
+                        </div>
+                        <div class="info-sec text-white">
+                            <p id="footer_p">
+                                Sinta-se à vontade para contatar os desenvolvedores pela plataforma de desenvolvimento
+                                <a href="http://github.com/fga-gpp-mds/2017.2-Classificacao-de-Risco-Pediatrico/wiki">
+                                    Github
+                                </a>
+                                para o esclarecimento de qualquer tipo de dúvidas!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div id="footer_right" class="col-md-6 mt-5 col-sm-4 animate-24">
                     <ul class="list-inline banner-social-buttons animate-9">
                         <li class="list-inline-item">
-                            <a href="https://twitter.com/SBootstrap" class="btn btn-default btn-lg">
+                            <a href="{% url 'users:landing_page' %}" class="btn btn-default btn-lg">
                                 <i class="fa fa-twitter fa-fw"></i>
                                 <span class="network-name">
                                     Twitter
@@ -145,7 +294,7 @@
                             </a>
                         </li>
                         <li class="list-inline-item">
-                            <a href="https://plus.google.com/+Startbootstrap/posts" class="btn btn-default btn-lg">
+                            <a href="{% url 'users:landing_page' %}" class="btn btn-default btn-lg">
                                 <i class="fa fa-google-plus fa-fw"></i>
                                 <span class="network-name">
                                     Google+
@@ -154,16 +303,13 @@
                         </li>
                     </ul>
                 </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Footer -->
-    <footer style="background: black">
-        <div class="container text-center">
-            <p style="color: white">
-                Copyright &copy; Classificação de Risco Pediátrico
-            </p>
+            </div>
+            <div class="container text-center">
+                <p style="color: white">
+                    Copyright &copy; Classificação de Risco Pediátrico
+                </p>
+            </div>
         </div>
     </footer>
 
