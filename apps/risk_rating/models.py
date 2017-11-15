@@ -830,6 +830,7 @@ class ClinicalState_10yMore(models.Model):
         blank=True
     )
 
+
 class ClinicalState_3y_10y(models.Model):
 
     patient_id = models.CharField(
