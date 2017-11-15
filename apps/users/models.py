@@ -258,9 +258,9 @@ class Patient(models.Model):
     AGE_RANGE = (
         (0, 'Faixa etária indefinida'),
         (1, '0 até 28 dias'),
-        (2, '29 dias à 3 meses'),
-        (3, '3 meses à 2 anos'),
-        (4, '2 anos à 10 anos'),
+        (2, '29 dias à 2 meses'),
+        (3, '2 meses à 3 anos'),
+        (4, '3 anos à 10 anos'),
         (5, 'Acima de 10 anos')
     )
 
