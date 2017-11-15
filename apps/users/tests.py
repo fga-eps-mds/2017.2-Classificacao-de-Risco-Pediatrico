@@ -176,12 +176,9 @@ class TestUsers:
 
     def test_has_perm(self):
         perm = None
-        user = Staff()
-        assert user.has_perm(perm) is True
-
-    def test_has_module_perms(self):
         app_name = None
         user = Staff()
+        assert user.has_perm(perm) is True
         assert user.has_module_perms(app_name) is True
 
     def test_is_admin(self):
