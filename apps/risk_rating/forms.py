@@ -80,6 +80,7 @@ class ClinicalState_10yMoreForm(forms.ModelForm):
                   'dor_articular', 'dificuldade_de_marcha', 'sonolencia',
                   'secrecao_ocular', 'dor_muscular', 'dor_retroorbitaria']
 
+
 class ClinicalState_3y_10yForm(forms.ModelForm):
     """
     Defining filds patients (3 years and 10 years old) clinical state
