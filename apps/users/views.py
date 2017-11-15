@@ -257,16 +257,25 @@ def edit_accounts_view(request, id_user):
 
 @login_required(redirect_field_name='', login_url='users:login')
 def staff_remove(request, id_user):
-    staff = Staff.objects.filter(id_user=id_user)
-    staff.delete()
-    return HttpResponseRedirect(reverse('users:manage_accounts'))
+    """Remove an existing staff."""
+    return remove_register(id_user, Staff, 'manage_accounts')
 
 
 @login_required(redirect_field_name='', login_url='users:login')
 def patient_remove(request, id):
-    patient = Patient.objects.filter(id=id)
-    patient.delete()
-    return HttpResponseRedirect(reverse('users:home'))
+    """Remove an existing patient."""
+    return remove_register(id, Patient, 'home')
+
+
+def remove_register(id, data_type, url):
+    """Remove register data based on parameter."""
+    if data_type == Staff:
+        data = data_type.objects.filter(id_user=id)
+    else:
+        data = data_type.objects.filter(id=id)
+
+    data.delete()
+    return HttpResponseRedirect(reverse('users:' + url))
 
 
 @login_required(redirect_field_name='', login_url='users:login')
