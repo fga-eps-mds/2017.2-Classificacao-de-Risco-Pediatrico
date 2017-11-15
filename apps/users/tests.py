@@ -296,6 +296,7 @@ class TestUsers:
         assert list(response.context['staffs']) == allstaff
 
     def test_staff_remove(self, client):
+        """Test for remove staff."""
         Staff.objects.create_superuser(**self.default_user_data())
         response = client.post('/login', {'username': 'email@gmail.com',
                                'password': "1234asdf", 'id_user': "1234"})
@@ -307,6 +308,18 @@ class TestUsers:
         assert Staff.objects.count() == 1
         # foram instanciados 2 staffs
         # por isso o assert igual a 1
+
+    def test_patient_remove(self, client):
+        """Test for remove patient."""
+        Staff.objects.create_superuser(**self.default_user_data())
+        response = client.post('/login', {'username': 'email@gmail.com',
+                               'password': "1234asdf", 'id_user': "1234"})
+        Patient()
+        name = Patient(id='125987', birth_date='2016-11-03')
+        name.save()
+        response = client.delete('/patients/remove/125987/', follow=True)
+        assert response.redirect_chain == [('/home/', 302)]
+        assert Patient.objects.count() == 0
 
     @pytest.mark.parametrize('url, urlredirect', [
         ('/register/patient', '/login'),
