@@ -74,7 +74,6 @@ def home(request):
     patients = Patient.objects.all()
     classification = None
 
-
     if request.method == 'POST':
         p_id = request.POST.get("patient_id")
         subject_patient = Patient.objects.filter(id=p_id)[0]
@@ -438,7 +437,8 @@ def get_2m_3y_symptoms(clinical_state):
     ]]
     return patient
 
-def get_3y_10y_symptoms (clinical_state):
+
+def get_3y_10y_symptoms(clinical_state):
     """
     building patient (3y-10y) to use on ml based on
     patient's clinical condition
@@ -495,7 +495,6 @@ def get_3y_10y_symptoms (clinical_state):
         check_patient_problem(clinical_state.dor_retroorbitaria)
     ]]
     return patient
-
 
 
 def get_10y_more_symptoms(clinical_state):
