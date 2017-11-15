@@ -74,6 +74,7 @@ def home(request):
     patients = Patient.objects.all()
     classification = None
 
+
     if request.method == 'POST':
         p_id = request.POST.get("patient_id")
         subject_patient = Patient.objects.filter(id=p_id)[0]
@@ -93,6 +94,11 @@ def home(request):
             form.save()
             state = ClinicalState_2m_3y
             ml = ml3
+        elif "form4" in request.POST:
+            form = ClinicalState_3y_10yForm(request.POST)
+            form.save()
+            state = ClinicalState_3y_10y
+            ml = ml4
         elif "form5" in request.POST:
             form = ClinicalState_10yMoreForm(request.POST)
             form.save()
@@ -103,15 +109,15 @@ def home(request):
         clinical_state = p_c_states_l.order_by('-id')[0]
         trigger_ml(subject_patient, clinical_state, ml)
 
-    elif request.method == "POST" and "form4" in request.POST:
-        form = ClinicalState_3y_10yForm(request.POST)
-        form.save()
-
-        p_id = request.POST.get("patient_id4")
-        subject_patient = Patient.objects.filter(id=p_id)[0]
-        p_c_states_l = ClinicalState_3y_10y.objects.filter(patient_id4=p_id)
-        clinical_state = p_c_states_l.order_by('-id')[0]
-        trigger_ml(subject_patient, clinical_state)
+    # elif request.method == "POST" and "form4" in request.POST:
+    #     form = ClinicalState_3y_10yForm(request.POST)
+    #     form.save()
+    #
+    #     p_id = request.POST.get("patient_id4")
+    #     subject_patient = Patient.objects.filter(id=p_id)[0]
+    #     p_c_states_l = ClinicalState_3y_10y.objects.filter(patient_id4=p_id)
+    #     clinical_state = p_c_states_l.order_by('-id')[0]
+    #     trigger_ml(subject_patient, clinical_state)
 
     return render(request, 'users/user_home/main_home.html',
                            {'patients': patients,
@@ -135,6 +141,14 @@ def trigger_ml(subject_patient, clinical_state, ml):
         # always being "AmbulatorialGeral"
     elif subject_patient.age_range == 3:
         patient = get_2m_3y_symptoms(clinical_state)
+        probability = ml3.calc_probabilities(patient)
+        classification = ml3.classify_patient(patient)
+        impact_list = ml3.feature_importance()
+    elif subject_patient.age_range == 4:
+        patient = get_3y_10y_symptoms(clinical_state)
+        probability = ml4.calc_probabilities(patient)
+        classification = ml4.classify_patient(patient)
+        impact_list = ml4.feature_importance()
     elif subject_patient.age_range == 5:
         patient = get_10y_more_symptoms(clinical_state)
     # to add another age range, use another elif

@@ -832,7 +832,7 @@ class ClinicalState_10yMore(models.Model):
 
 class ClinicalState_3y_10y(models.Model):
 
-    patient_id4 = models.CharField(
+    patient_id = models.CharField(
         verbose_name=('ID do Paciente'),
         max_length=150,
         blank=True,

@@ -86,7 +86,7 @@ class ClinicalState_3y_10yForm(forms.ModelForm):
     """
     class Meta:
         model = ClinicalState_3y_10y
-        fields = ['patient_id4', 'perdada_consciencia', 'febre_maior_72h',
+        fields = ['patient_id', 'perdada_consciencia', 'febre_maior_72h',
                   'febre_menos_72h', 'odinofagia', 'fascies_de_dor',
                   'tontura', 'corpo_estranho', 'dor_dentes',
                   'disuria', 'urina_concentrada', 'dispineia',

@@ -101,6 +101,36 @@
                         </div>
                     </form>
 
+                    {% elif patient.age_range == 4 %}
+
+                        <form role="form" class="form" method="POST" id="form4">
+                            {% csrf_token %}
+                            <div class="modal-body">
+                                <div class="container-fuild " id="container-modal">
+                                    <div class="row" id="row-modal">
+                                        <div class="btn-group-responsive" data-toggle="buttons">
+                                            {% for field in form4 %}
+                                                {% if field.name == 'patient_id' %}
+                                                    <input type="hidden" value="{{ patient.id }}" name="patient_id"/>
+                                                {% else %}
+                                                    <label class="btn btn-primary classification-button col-md-2" >
+                                                        <input class="form-check-input" type="checkbox" autocomplete="off" name="{{ field.name }}">
+                                                            {{ field.label }}
+                                                    </label>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary classification-button" id="classification" name="form4">
+                                        Classificar
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+
+
                 {% elif patient.age_range == 5 %}
 
                     <form role="form" class="form" method="POST" id="form5">
@@ -129,7 +159,6 @@
                             </div>
                         </div>
                     </form>
-
                 {% else %}
 
                     {% csrf_token %}
