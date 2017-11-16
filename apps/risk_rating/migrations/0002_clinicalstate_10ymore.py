@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
             name='ClinicalState_10yMore',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('patient_id5', models.CharField(blank=True, max_length=150, verbose_name='ID do Paciente')),
+                ('patient_id', models.CharField(blank=True, max_length=150, verbose_name='ID do Paciente')),
                 ('mais_de_72h_febre', models.BooleanField(default=False, verbose_name='Febre a mais de 72 horas')),
                 ('menos_de_72h_febre', models.BooleanField(default=False, verbose_name='Febre a menos de 72 horas')),
                 ('tontura', models.BooleanField(default=False, verbose_name='Tontura')),

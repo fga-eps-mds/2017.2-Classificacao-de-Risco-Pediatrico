@@ -59,7 +59,7 @@
                                     <div class="cols-sm-10">
                                         <div class="input-group">
                                             <span class="input-group-addon" id="basic-addon1"><i class="fa fa-calendar-o" aria-hidden="true"></i></span>
-                                            <input type="text" name="{{ form.birth_date.name }}" id="{{ form.birth_date.id_for_label }}" class="form-control"  placeholder="mm/dd/aaaa" aria-label="Data de nascimento" aria-describedby="basic-addon3">
+                                            <input type="text" name="{{ form.birth_date.name }}" id="{{ form.birth_date.id_for_label }}" class="form-control date"  placeholder="dd/mm/aaaa" aria-label="Data de nascimento" aria-describedby="basic-addon3">
                                         </div>
                                         {% if form.birth_date.errors %}
                                             <div class="error-holder">
@@ -107,16 +107,16 @@
                                     <div class="cols-sm-10">
                                       <div class="input-group">
                                           <span class="input-group-addon" id="basic-addon1"><i class="fa fa-sort-numeric-asc" aria-hidden="true"></i></span>
-                                      <select name="{{ form.age_range.name }}" class="form-control" id="age_range" required>
-                                          <option value="" selected disabled>Faixa etária</option>
-                                          <option value="0">Faixa etária indefinida</option>
-                                          <option value="1">0 até 28 dias</option>
-                                          <option value="2">29 dias à 3 meses</option>
-                                          <option value="3">3 meses à 2 anos</option>
-                                          <option value="4">2 à 10 anos</option>
-                                          <option value="5">acima de 10 anos</option>
-                                      </select>
-                                    </div>
+                                          <select name="{{ form.age_range.name }}" class="form-control" id="age_range" required>
+                                              <option value="" selected disabled>Faixa etária</option>
+                                              <option value="0">Faixa etária indefinida</option>
+                                              <option value="1">0 até 28 dias</option>
+                                              <option value="2">29 dias à 2 meses</option>
+                                              <option value="3">2 meses à 3 anos</option>
+                                              <option value="4">3 à 10 anos</option>
+                                              <option value="5">acima de 10 anos</option>
+                                          </select>
+                                      </div>
                                         {% if form.age_range.errors %}
                                             <div class="error-holder">
                                                 <div class="alert alert-warning" role="alert">
@@ -129,7 +129,7 @@
                                 <div class="form-group px-3 mt-3">
                                     <div class="cols-sm-10">
                                         <div class="input-group">
-                                          <span class="input-group-addon" id="basic-addon1"><i class="fa fa-male" aria-hidden="true"></i></span>
+                                          <span class="input-group-addon" id="basic-addon1"><i class="fa fa-venus-mars" aria-hidden="true"></i></span>
                                           <select name="{{ form.gender.name }}" class="form-control">
                                             <option value="" selected disabled>Sexo</option>
                                             <option value="0">Sexo Indefinido</option> Sexo Indefinido

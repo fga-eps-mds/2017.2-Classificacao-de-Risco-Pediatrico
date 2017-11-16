@@ -1,7 +1,7 @@
-// var cleave = new Cleave('.date', {
-//     date: true,
-//     datePattern: ['d', 'm', 'Y']
-// });
+var cleave = new Cleave('.date', {
+    date: true,
+    datePattern: ['d', 'm', 'Y']
+});
 
 var cleave = new Cleave('.cpf', {
     delimiters: ['.', '.', '-'],
