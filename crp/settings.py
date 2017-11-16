@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'apps.risk_rating'
 ]
 
+INSTALLED_APPS += ('behave_django',)
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
