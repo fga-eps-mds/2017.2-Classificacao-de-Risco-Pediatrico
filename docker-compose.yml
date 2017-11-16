@@ -5,7 +5,6 @@ services:
     image: postgres
     ports:
       - "5433:5432"
-#    network_mode: bridge
 
   web:
     build: .
@@ -16,15 +15,15 @@ services:
       - "8000:8000"
     depends_on:
       - db
+      - selenium-hub
+      - chrome
     links:
       - db
-#    network_mode: bridge
 
   selenium-hub:
     image: selenium/hub
     ports:
       - "4444:4444"
-#    network_mode: bridge
 
   chrome:
     image: selenium/node-chrome
