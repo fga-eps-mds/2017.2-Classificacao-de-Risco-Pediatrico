@@ -5,6 +5,8 @@ services:
     image: postgres
     ports:
       - "5433:5432"
+#    network_mode: bridge
+
   web:
     build: .
     command: /bin/bash -l -c "python manage.py makemigrations && python manage.py migrate && python3 manage.py runserver 0.0.0.0:8000"
@@ -16,3 +18,20 @@ services:
       - db
     links:
       - db
+#    network_mode: bridge
+
+  selenium-hub:
+    image: selenium/hub
+    ports:
+      - "4444:4444"
+#    network_mode: bridge
+
+  chrome:
+    image: selenium/node-chrome
+    links:
+      - selenium-hub
+    environment:
+      - HUB_PORT_4444_TCP_ADDR=selenium-hub
+      - HUB_PORT_4444_TCP_PORT=4444
+    volumes:
+      - /dev/shm:/dev/shm # Mitigates the Chromium issue described at https://code.google.com/p/chromium/issues/detail?id=519952
