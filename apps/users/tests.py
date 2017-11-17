@@ -377,3 +377,16 @@ class TestUsers:
         response = client.post ('/home/', self.form1data)
         # the assertion below makes sure that the patient was classified
         assert Patient.objects.filter(id='111')[0].classification != 0
+
+    def test_rate_patient_age_range_2(self, client):
+        stafflogin = Staff.objects.create_superuser(**self.default_user_data())
+        response = client.post('/login', {'username': 'email@gmail.com',
+                               'password': "1234asdf"})
+
+        Patient()
+        patient_test = Patient(id='222', age_range='2')
+        patient_test.save()
+
+        response = client.post ('/home/', self.form2data)
+        # the assertion below makes sure that the patient was classified
+        assert Patient.objects.filter(id='222')[0].classification != 0
