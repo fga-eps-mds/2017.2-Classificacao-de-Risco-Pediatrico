@@ -2,6 +2,7 @@ import pytest
 from apps.users.forms import RegistrationStaffForm, RegistrationPatientForm, \
     EditPatientForm
 from apps.users.models import Staff, Patient
+from apps.risk_rating.models import ClinicalState_2m_3y
 
 
 @pytest.mark.django_db
@@ -83,6 +84,12 @@ class TestUsers:
         'password2': 'password1Teste'})
 
     patient_data = ({'birth_date': '2017-11-02'})
+
+    form1data = ({'patient_id': '111','form1': ''})
+    form2data = ({'patient_id': '222','form2': ''})
+    form3data = ({'patient_id': '333','form3': ''})
+    form4data = ({'patient_id': '444','form4': ''})
+    form5data = ({'patient_id': '555','form5': ''})
 
     @pytest.mark.parametrize('url, model, data', [
                             ('/register/user/', Staff, profile_data)])
@@ -335,3 +342,38 @@ class TestUsers:
         client.post('/register/patient', self.patient_data)
         if form.is_valid():
             assert form.cleaned_data.get['age_range'] == 1
+
+    def test_home_patient_list(self, client):
+        stafflogin = Staff.objects.create_superuser(**self.default_user_data())
+        response = client.post('/login', {'username': 'email@gmail.com',
+                               'password': "1234asdf"})
+        Patient()
+        patient_test = Patient(id='156498', birth_date='2016-11-03')
+        patient_test.save()
+
+        response = client.get('/home/')
+        assert response.status_code == 200
+        assert set(list(response.context['patients'])) == set(list(Patient.objects.all()))
+
+    def test_trigger_ml(self, client):
+        stafflogin = Staff.objects.create_superuser(**self.default_user_data())
+        response = client.post('/login', {'username': 'email@gmail.com',
+                               'password': "1234asdf"})
+        Patient()
+        patient_test = Patient(id='156498', age_range='1')
+        patient_test.save()
+
+        response = client.get('/home/')
+
+    def test_rate_patient_age_range_1(self, client):
+        stafflogin = Staff.objects.create_superuser(**self.default_user_data())
+        response = client.post('/login', {'username': 'email@gmail.com',
+                               'password': "1234asdf"})
+
+        Patient()
+        patient_test = Patient(id='111', age_range='1')
+        patient_test.save()
+
+        response = client.post ('/home/', self.form1data)
+        # the assertion below makes sure that the patient was classified
+        assert Patient.objects.filter(id='111')[0].classification != 0
