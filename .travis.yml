@@ -1,16 +1,27 @@
 sudo: required
 language: python
 python:
-  - '3.6'
+- '3.6'
 services:
-  - docker
+- docker
 before_install:
-  - docker-compose up --build -d
+- docker-compose up --build -d
 script:
-  - docker-compose run web python manage.py collectstatic
-  - docker-compose run web py.test --cov=apps
-  - docker-compose run web flake8 --exclude test_settings.py,*/migrations/,manage.py .
+- docker-compose run web python manage.py collectstatic
+- docker-compose run web py.test --cov=apps
+- docker-compose run web flake8 --exclude test_settings.py,*/migrations/,manage.py
+  .
 after_script:
-  - docker-compose down
+- docker-compose down
 after_success:
-  - docker-compose run web coveralls
+- docker-compose run web coveralls
+deploy:
+  provider: heroku
+  api_key:
+    secure: dKWUK/OfjLG0PwItURvZoeD/ck2E/tH05jrqKg4MUIRRFDiA+s+4cCdYPJAgJTGyBzKKmAXEazP6+1jT1GUNaD0tGx/2N17Jn3Wa5JZ0RiwrJjhIggILWgMI10w/CEMV8nACQPvJKWU13jKdqy9RV7mAMuUJsES2fkDhTD7dRIZdY5PX4PdWMtju3xXLelcwF4W8q7G2cYyNh9+FLtANOYmMmnx0OhDF9pMpNK/QlyasjqCagrITb1dS5qYRe+G/cVck3bCqNXZnPcXdalmfjgQApzXJv89b3KV0d0oxOkdxvlSnCv3+MHKVDtEF5CkQr4RYFpkSmsTE3+E52FIEUFtaJAsJTIdb1c90mZ+USURt4xhGrKVKTnR8RezGNLaLZPmiBxodjx04+iy2Mtg4SmKvNJlRtNgPNsCQt25wAUIJWx6jksHcyQ7W+Vs3smEJXlpBNu9jn8gA55O0im4WP814/tOpT7DIUnRrHNTYAyIJaJBu1ueoFIkke56stV99CjYwGcBz7zAD5PLYGnxKHXX0jh6y3iH9LskVYKL950MwELShuXUd8jgaWHcj2ruVwHrF1fCHWSLvmZ3bClcpe2PHCSjo4ucQoK3R51csuIYUd6xhczbEmCf3Dddbdi3UxmsfBkgUam1Rc2cm6zv9HRaLsuYh+0/G/BStT/cfjho=
+  app:
+    master: fga-crp-staging
+    devel: fga-crp-production
+  run:
+    - "python manage.py makemigrations"
+    - "python manage.py migrate"
