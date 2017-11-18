@@ -21,3 +21,5 @@ scikit-learn
 matplotlib
 pandas
 factory-boy
+behave-django
+selenium

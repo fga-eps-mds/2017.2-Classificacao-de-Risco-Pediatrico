@@ -84,6 +84,12 @@ class TestUsers:
 
     patient_data = ({'birth_date': '2017-11-02'})
 
+    form1data = ({'patient_id': '111', 'form1': ''})
+    form2data = ({'patient_id': '222', 'form2': ''})
+    form3data = ({'patient_id': '333', 'form3': ''})
+    form4data = ({'patient_id': '444', 'form4': ''})
+    form5data = ({'patient_id': '555', 'form5': ''})
+
     @pytest.mark.parametrize('url, model, data', [
                             ('/register/user/', Staff, profile_data)])
     def test_sign_up_post(self, client, url, model, data):
@@ -176,12 +182,9 @@ class TestUsers:
 
     def test_has_perm(self):
         perm = None
-        user = Staff()
-        assert user.has_perm(perm) is True
-
-    def test_has_module_perms(self):
         app_name = None
         user = Staff()
+        assert user.has_perm(perm) is True
         assert user.has_module_perms(app_name) is True
 
     def test_is_admin(self):
@@ -298,18 +301,26 @@ class TestUsers:
         assert response.status_code == 200
         assert list(response.context['staffs']) == allstaff
 
-    def test_staff_remove(self, client):
+    @pytest.mark.parametrize(
+        'data_type, url', [(Patient, '/home/'), (Staff, '/accounts/')])
+    def test_remove_object(self, client, data_type, url):
+        """Test remove object."""
         Staff.objects.create_superuser(**self.default_user_data())
         response = client.post('/login', {'username': 'email@gmail.com',
                                'password': "1234asdf", 'id_user': "1234"})
-        Staff()
-        name = Staff(id_user='456')
+        data_type()
+
+        if data_type == Staff:
+            name = data_type(id_user='456')
+            method = '/accounts/remove/456/'
+        else:
+            name = data_type(id='125987', birth_date='2016-11-03')
+            method = '/patients/remove/125987/'
+
         name.save()
-        response = client.delete('/accounts/remove/456/', follow=True)
-        assert response.redirect_chain == [('/accounts/', 302)]
-        assert Staff.objects.count() == 1
-        # foram instanciados 2 staffs
-        # por isso o assert igual a 1
+        response = client.delete(method, follow=True)
+        assert response.redirect_chain == [(url, 302)]
+        assert Patient.objects.count() == 0
 
     @pytest.mark.parametrize('url, urlredirect', [
         ('/register/patient', '/login'),
@@ -335,3 +346,68 @@ class TestUsers:
         client.post('/register/patient', self.patient_data)
         if form.is_valid():
             assert form.cleaned_data.get['age_range'] == 1
+
+    def test_home_patient_list(self, client):
+        Staff.objects.create_superuser(**self.default_user_data())
+        response = client.post('/login', {'username': 'email@gmail.com',
+                               'password': "1234asdf"})
+        Patient()
+        patient_test = Patient(id='156498', birth_date='2016-11-03')
+        patient_test.save()
+
+        response = client.get('/home/')
+        assert response.status_code == 200
+        assert set(list(response.context['patients'])) == \
+            set(list(Patient.objects.all()))
+
+    def test_rate_patient_age_range_1(self, client):
+        Staff.objects.create_superuser(**self.default_user_data())
+        client.post('/login', {'username': 'email@gmail.com',
+                               'password': "1234asdf"})
+
+        Patient()
+        patient_test = Patient(id='111', age_range='1')
+        patient_test.save()
+
+        client.post('/home/', self.form1data)
+        # the assertion below makes sure that the patient was classified
+        assert Patient.objects.filter(id='111')[0].classification != 0
+
+    def test_rate_patient_age_range_2(self, client):
+        Staff.objects.create_superuser(**self.default_user_data())
+        client.post('/login', {'username': 'email@gmail.com',
+                               'password': "1234asdf"})
+
+        Patient()
+        patient_test = Patient(id='222', age_range='2')
+        patient_test.save()
+
+        client.post('/home/', self.form2data)
+        # the assertion below makes sure that the patient was classified
+        assert Patient.objects.filter(id='222')[0].classification != 0
+
+    def test_rate_patient_age_range_3(self, client):
+        Staff.objects.create_superuser(**self.default_user_data())
+        client.post('/login', {'username': 'email@gmail.com',
+                               'password': "1234asdf"})
+
+        Patient()
+        patient_test = Patient(id='333', age_range='3')
+        patient_test.save()
+
+        client.post('/home/', self.form3data)
+        # the assertion below makes sure that the patient was classified
+        assert Patient.objects.filter(id='333')[0].classification != 0
+
+    def test_rate_patient_age_range_5(self, client):
+        Staff.objects.create_superuser(**self.default_user_data())
+        client.post('/login', {'username': 'email@gmail.com',
+                               'password': "1234asdf"})
+
+        Patient()
+        patient_test = Patient(id='555', age_range='5')
+        patient_test.save()
+
+        client.post('/home/', self.form5data)
+        # the assertion below makes sure that the patient was classified
+        assert Patient.objects.filter(id='555')[0].classification != 0

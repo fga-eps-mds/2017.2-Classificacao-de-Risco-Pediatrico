@@ -20,9 +20,9 @@
         <nav id="sidebar">
             <!-- Sidebar header -->
             <div class="sidebar-header">
-                <a href="{% url "users:home" %}" id="logobar">
+                <a href="{% url "users:home" %}">
                   <div class="gradiente"></div>
-                  <h3>CRP</h3>
+                  <h3 id="crpname">CRP</h3>
                 </a>
                 <strong>CRP</strong>
             </div>
@@ -48,7 +48,7 @@
                         <div class="box-content">
                             <a href="#patients" data-toggle="collapse" aria-expanded="false" onclick="changeGradientWidth(this)">
                                 <i class="fa fa-user-o" aria-hidden="true"></i>
-                                Paciente<span class="fa fa-chevron down"></span>
+                                Pacientes<span class="fa fa-chevron down"></span>
                             </a>
                             <ul class="collapse list-unstyled" id="patients">
                                 <li>
@@ -88,13 +88,13 @@
                     <div class="container-box">
                         <div class="box-content">
                             <a href="#statistics" data-toggle="collapse" aria-expanded="false" onclick="changeGradientWidth(this)">
-                                <i class="fa fa-area-chart"></i>
+                                <i class="fa fa-area-chart" aria-hidden="true"></i>
                                 Estatísticas
                             </a>
                             <ul class="collapse list-unstyled" id="statistics">
                                 <li>
                                     <a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>
-                                        Gráfico de classificações
+                                        Grafico de Classificações
                                     </a>
                                 </li>
                                 <li>
