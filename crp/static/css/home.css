@@ -271,7 +271,7 @@ a.article, a.article:hover {
     border-color: #fff;
 }
 
-#classification {
+.classification {
     color: white;
     background-color: #007bff;
     width: 97%;
