@@ -270,3 +270,9 @@ class Patient(models.Model):
         default=0,
         blank=False
     )
+
+    def age_range_verbose(self):
+        return dict(Patient.AGE_RANGE)[self.age_range]
+
+    def gender_verbose(self):
+        return dict(Patient.GENDER)[self.gender]
