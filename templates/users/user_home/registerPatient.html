@@ -107,7 +107,7 @@
                                     <div class="cols-sm-10">
                                       <div class="input-group">
                                           <span class="input-group-addon" id="basic-addon1"><i class="fa fa-sort-numeric-asc" aria-hidden="true"></i></span>
-                                          <select name="{{ form.age_range.name }}" class="form-control" id="age_range" required>
+                                          <select name="{{ form.age_range.name }}" id="dropdown" class="form-control" id="age_range" required>
                                               <option value="" selected disabled>Faixa etária</option>
                                               <option value="0">Faixa etária indefinida</option>
                                               <option value="1">0 até 28 dias</option>
@@ -130,7 +130,7 @@
                                     <div class="cols-sm-10">
                                         <div class="input-group">
                                           <span class="input-group-addon" id="basic-addon1"><i class="fa fa-venus-mars" aria-hidden="true"></i></span>
-                                          <select name="{{ form.gender.name }}" class="form-control">
+                                          <select name="{{ form.gender.name }}" id="dropdown" class="form-control">
                                             <option value="" selected disabled>Sexo</option>
                                             <option value="0">Sexo Indefinido</option> Sexo Indefinido
                                             <option value="1">Feminino</option> Feminino
@@ -154,7 +154,7 @@
                                   <div class="cols-sm-10">
                                     <div class="input-group">
                                       <span class="input-group-addon" id="basic-addon1"><i class="fa fa-globe" aria-hidden="true"></i></span>
-                                        <select name="{{ form.uf.name }}" class="form-control">
+                                        <select name="{{ form.uf.name }}" id="dropdown" class="form-control">
                                           <option value="" selected disabled>UF</option>
                                           <option value="AC">AC</option>Acre
                                           <option value="AL">AL</option> Alagoas

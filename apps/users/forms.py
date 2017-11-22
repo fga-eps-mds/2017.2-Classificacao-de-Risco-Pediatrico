@@ -20,6 +20,8 @@ class RegistrationPatientForm(forms.ModelForm):
 
 
 class EditPatientForm(forms.ModelForm):
+    age_range = forms.IntegerField(required=False)
+
     class Meta:
         model = Patient
         fields = ['name', 'cpf', 'guardian', 'birth_date', 'parents_name',
