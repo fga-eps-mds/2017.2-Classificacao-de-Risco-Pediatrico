@@ -46,11 +46,11 @@
                                 class="badge badge-pill badge-danger">
                                     Atendimento Imediato
                             {% elif patient.classification == 2 %}
-                                class="badge badge-pill badge-success">
-                                    Atendimento Ambulatorial
-                            {% elif patient.classification == 3 %}
                                 class="badge badge-pill badge-warning">
                                     Atendimento Hospitalar
+                            {% elif patient.classification == 3 %}
+                                class="badge badge-pill badge-success">
+                                    Atendimento Ambulatorial
                             {% elif patient.classification == 4 %}
                                 class="badge badge-pill badge-info">
                                     Atendimento Eletivo
@@ -119,14 +119,14 @@
                                 <div class="form-check">
                                    <label class="form-check-label">
                                    <input class="form-check-input" type="radio" name="classification" value="2">
-                                  <span class="badge badge-pill badge-success">Atendimento Ambulatorial</span>
+                                  <span class="badge badge-pill badge-warning">Atendimento Hospitalar</span>
 
                                    </label>
                                 </div>
                                 <div class="form-check">
                                    <label class="form-check-label">
                                    <input class="form-check-input" type="radio" name="classification" value="3">
-                                   <span class="badge badge-pill badge-warning">Atendimento Hospitalar</span>
+                                   <span class="badge badge-pill badge-success">Atendimento Ambulatorial</span>
                                    </label>
                                 </div>
                                 <div class="form-check">

@@ -169,9 +169,9 @@ def define_patient_classification(subject_patient, classification):
     """
     if classification == 'AtendimentoImediato':
         subject_patient.classification = 1
-    elif classification == 'AmbulatorialGeral':
-        subject_patient.classification = 2
     elif classification == 'AtendimentoHospitalar':
+        subject_patient.classification = 2
+    elif classification == 'AmbulatorialGeral':
         subject_patient.classification = 3
     else:
         pass
