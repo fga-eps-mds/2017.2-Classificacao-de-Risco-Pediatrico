@@ -250,26 +250,6 @@ def register_patient(request):
 
 
 @login_required(redirect_field_name='', login_url='users:login')
-def queue_patient(request, cpf_patient):
-    patients = Patient.objects.filter(cpf=cpf_patient)
-    patient = Patient.objects.get(cpf=cpf_patient)
-    patientsInQueue = Patient.objects.all()
-    patientList = list()
-    for patient0 in patientsInQueue:
-        patientList.append(patient0.patient)
-    if patient in patientList:
-        return render(request, 'users/queuePatient.html',
-                               {'patientList': patientList})
-    else:
-        queuedPatient = Patient.objects.create(patient=patient)
-        queuedPatient.save()
-        patientList.append(patient)
-        return render(request, 'users/queuePatient.html',
-                               {'patients': patients})
-    return render(request, 'users/queuePatient.html', {'patients': patients})
-
-
-@login_required(redirect_field_name='', login_url='users:login')
 def manage_accounts_view(request):
     staffs = Staff.objects.all()
     return render(request, 'users/manageAccounts.html', {'staffs': staffs})
