@@ -117,49 +117,15 @@ def home(request):
     patients = Patient.objects.all()
     classification = None
 
-    if request.method == 'POST':
-        p_id = request.POST.get("patient_id")
-        subject_patient = Patient.objects.filter(id=p_id)[0]
+    if request.method == 'POST' and request.POST.get("classification"):
+        classification = request.POST.get("classification")
+        patient_id = request.POST.get("patient")
 
-        if 'form1' in request.POST:
-            form = ClinicalState_28dForm(request.POST)
-            form.save()
-            state = ClinicalState_28d
-            ml = ml1
-        elif "form2" in request.POST:
-            form = ClinicalState_29d_2mForm(request.POST)
-            form.save()
-            state = ClinicalState_29d_2m
-            ml = ml2
-        elif "form3" in request.POST:
-            form = ClinicalState_2m_3yForm(request.POST)
-            form.save()
-            state = ClinicalState_2m_3y
-            ml = ml3
-        elif "form4" in request.POST:
-            form = ClinicalState_3y_10yForm(request.POST)
-            form.save()
-            state = ClinicalState_3y_10y
-            ml = ml4
-        elif "form5" in request.POST:
-            form = ClinicalState_10yMoreForm(request.POST)
-            form.save()
-            state = ClinicalState_10yMore
-            ml = ml5
-
-        p_c_states_l = state.objects.filter(patient_id=p_id)
-        clinical_state = p_c_states_l.order_by('-id')[0]
-        trigger_ml(subject_patient, clinical_state, ml)
-
-    # elif request.method == "POST" and "form4" in request.POST:
-    #     form = ClinicalState_3y_10yForm(request.POST)
-    #     form.save()
-    #
-    #     p_id = request.POST.get("patient_id4")
-    #     subject_patient = Patient.objects.filter(id=p_id)[0]
-    #     p_c_states_l = ClinicalState_3y_10y.objects.filter(patient_id4=p_id)
-    #     clinical_state = p_c_states_l.order_by('-id')[0]
-    #     trigger_ml(subject_patient, clinical_state)
+        print("*" * 15)
+        print(classification)
+        print(patient_id)
+        print("*" * 15)
+        define_patient_classification(patient_id, classification)
 
     return render(request, 'users/user_home/main_home.html',
                            {'patients': patients,
@@ -209,20 +175,13 @@ def trigger_ml(subject_patient, clinical_state, ml):
     return ml_array
 
 
-# def define_patient_classification(subject_patient, classification):
-#     """
-#     edit patient's classification attribute
-#     """
-#     if classification == 'AtendimentoImediato':
-#         subject_patient.classification = 1
-#     elif classification == 'AmbulatorialGeral':
-#         subject_patient.classification = 2
-#     elif classification == 'AtendimentoHospitalar':
-#         subject_patient.classification = 3
-#     else:
-#         pass
-#
-#     subject_patient.save()
+def define_patient_classification(patient_id, classification):
+    """
+    edit patient's classification attribute
+    """
+    patient = Patient.objects.filter(id=patient_id)[0]
+    patient.classification = classification
+    patient.save()
 
 
 def check_patient_problem(problem):
