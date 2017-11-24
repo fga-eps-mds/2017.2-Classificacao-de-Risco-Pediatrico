@@ -105,6 +105,7 @@
                         <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
+                    <div id="probability-{{ patient.id }}"></div>
                     <div id="classify-patient-{{ patient.id }}"></div>
                     <form role="form" class="form" method="POST" >
                         {% csrf_token %}
@@ -113,27 +114,26 @@
                             <div class="text-left">
                                 <div class="form-check">
                                    <label class="form-check-label">
-                                   <input class="form-check-input" type="radio" name="classification" value="1">
+                                   <input id="AtendimentoImediato" class="form-check-input" type="radio" name="classification" value="1">
                                    <span class="badge badge-pill badge-danger">Atendimento Imediato</span>
                                    </label>
                                 </div>
                                 <div class="form-check">
                                    <label class="form-check-label">
-                                   <input class="form-check-input" type="radio" name="classification" value="2">
-                                  <span class="badge badge-pill badge-success">Atendimento Ambulatorial</span>
-
+                                   <input id="AmbulatorialGeral" class="form-check-input" type="radio" name="classification" value="2">
+                                   <span class="badge badge-pill badge-success">Atendimento Ambulatorial</span>
                                    </label>
                                 </div>
                                 <div class="form-check">
                                    <label class="form-check-label">
                                    <input class="form-check-input" type="radio" name="classification" value="3">
-                                   <span class="badge badge-pill badge-warning">Atendimento Hospitalar</span>
+                                   <span id="AtendimentoHospitalar" class="badge badge-pill badge-warning">Atendimento Hospitalar</span>
                                    </label>
                                 </div>
                                 <div class="form-check">
                                    <label class="form-check-label">
                                    <input class="form-check-input" type="radio" name="classification" value="4">
-                                   <span class="badge badge-pill badge-info">Atendimento Eletivo</span>
+                                   <span id="eletivo" class="badge badge-pill badge-info">Atendimento Eletivo</span>
                                    </label>
                                 </div>
                                  <div class="form-check">
