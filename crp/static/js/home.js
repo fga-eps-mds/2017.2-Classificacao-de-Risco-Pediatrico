@@ -30,10 +30,10 @@ $(document).ready(function () {
       data: values,
       success: function (data) {
         if (data) {
-          console.log("ola mundo cruel")
-          console.log(data["patient_id"]);
+          $("#" + data["patient_id"] + " " + "#" + data["classification"]).prop('checked', true);
           $('#' + data["patient_id"]).modal('show');
-          $('#classify-patient-' + data["patient_id"]).text(data["classification"]);
+          $('#classify-patient-' + data["patient_id"]).text("Depois de muita an na maniche learning chegamos a conclusão que o resultado é:"  +data["classification"]);
+          $('#probability-' + data["patient_id"]).text(Math.max.apply(Math, data["probability"][0])*100 + "%");
         }
       }
     });
