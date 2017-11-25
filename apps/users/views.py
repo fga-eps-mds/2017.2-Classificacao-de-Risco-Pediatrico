@@ -120,12 +120,16 @@ def home(request):
     if request.method == 'POST' and request.POST.get("classification"):
         classification = request.POST.get("classification")
         patient_id = request.POST.get("patient")
-
-        print("*" * 15)
-        print(classification)
-        print(patient_id)
-        print("*" * 15)
         define_patient_classification(patient_id, classification)
+
+        patient = Patient.objects.filter(id=patient_id)[0]
+        patient.comment_receptionist = request.POST.get('comment')
+
+        print("deusa me leva:")
+        print(patient.comment_receptionist)
+        patient.save()
+
+
 
     return render(request, 'users/user_home/main_home.html',
                            {'patients': patients,
