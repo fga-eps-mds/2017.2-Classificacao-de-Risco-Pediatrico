@@ -84,12 +84,6 @@ class TestUsers:
 
     patient_data = ({'birth_date': '2017-11-02'})
 
-    form1data = ({'patient_id': '111', 'form1': ''})
-    form2data = ({'patient_id': '222', 'form2': ''})
-    form3data = ({'patient_id': '333', 'form3': ''})
-    form4data = ({'patient_id': '444', 'form4': ''})
-    form5data = ({'patient_id': '555', 'form5': ''})
-
     @pytest.mark.parametrize('url, model, data', [
                             ('/register/user/', Staff, profile_data)])
     def test_sign_up_post(self, client, url, model, data):
@@ -360,54 +354,58 @@ class TestUsers:
         assert set(list(response.context['patients'])) == \
             set(list(Patient.objects.all()))
 
-    def test_rate_patient_age_range_1(self, client):
+    form1data = ({'patient_id': '1', 'convulcao': 'True',
+                  'sangue_nas_fezes': 'True', 'form1': ''})
+    form2data = ({'patient_id': '2', 'form2': ''})
+    form3data = ({'patient_id': '3', 'form3': ''})
+    form4data = ({'patient_id': '4', 'form4': ''})
+    form5data = ({'patient_id': '5', 'form5': ''})
+    formdatas = [form1data, form2data, form3data, form4data, form5data]
+
+    def generate_all_age_patients(self):
+        """
+            generating one test patient for each age range
+        """
+
+        Patient()
+        for x in range(1, 6):
+            patient = Patient(id=x, age_range=x)
+            patient.save()
+
+    def test_rate_patient(self, client):
+        Staff.objects.create_superuser(**self.default_user_data())
+        client.post('/login', {'username': 'email@gmail.com',
+                               'password': "1234asdf"})
+
+        self.generate_all_age_patients()
+
+        # the loop below posts the symptoms form for every one of the
+        # 5 fictional patients
+        for index, formdata in enumerate(self.formdatas):
+            client.post('/home/', formdata)
+
+        Patient()
+        patients = Patient.objects.all()
+        classifications = []
+        # getting the classification of every ficcional test patient
+        for patient in patients:
+            classifications.append(patient.classification)
+
+        # making sure that no classification is "Não classificado"
+        assert 0 not in classifications
+
+    def test_edit_patient_is_valid(self, client):
         Staff.objects.create_superuser(**self.default_user_data())
         client.post('/login', {'username': 'email@gmail.com',
                                'password': "1234asdf"})
 
         Patient()
-        patient_test = Patient(id='111', age_range='1')
+        patient_test = Patient(id='1', birth_date='2017-10-10', age_range='0')
         patient_test.save()
 
-        client.post('/home/', self.form1data)
-        # the assertion below makes sure that the patient was classified
-        assert Patient.objects.filter(id='111')[0].classification != 0
+        client.post('/patients/edit/1/', {'name': 'New Name',
+                                          'age_range': '1'})
+        edited_patient = Patient.objects.get(id=1)
 
-    def test_rate_patient_age_range_2(self, client):
-        Staff.objects.create_superuser(**self.default_user_data())
-        client.post('/login', {'username': 'email@gmail.com',
-                               'password': "1234asdf"})
-
-        Patient()
-        patient_test = Patient(id='222', age_range='2')
-        patient_test.save()
-
-        client.post('/home/', self.form2data)
-        # the assertion below makes sure that the patient was classified
-        assert Patient.objects.filter(id='222')[0].classification != 0
-
-    def test_rate_patient_age_range_3(self, client):
-        Staff.objects.create_superuser(**self.default_user_data())
-        client.post('/login', {'username': 'email@gmail.com',
-                               'password': "1234asdf"})
-
-        Patient()
-        patient_test = Patient(id='333', age_range='3')
-        patient_test.save()
-
-        client.post('/home/', self.form3data)
-        # the assertion below makes sure that the patient was classified
-        assert Patient.objects.filter(id='333')[0].classification != 0
-
-    def test_rate_patient_age_range_5(self, client):
-        Staff.objects.create_superuser(**self.default_user_data())
-        client.post('/login', {'username': 'email@gmail.com',
-                               'password': "1234asdf"})
-
-        Patient()
-        patient_test = Patient(id='555', age_range='5')
-        patient_test.save()
-
-        client.post('/home/', self.form5data)
-        # the assertion below makes sure that the patient was classified
-        assert Patient.objects.filter(id='555')[0].classification != 0
+        assert edited_patient.name == 'New Name'
+        assert edited_patient.age_range == 1
