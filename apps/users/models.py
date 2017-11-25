@@ -231,8 +231,8 @@ class Patient(models.Model):
     CLASSIFICATION_TYPES = (
         (0, 'Não classificado'),
         (1, 'Atendimento Imediato'),
-        (2, 'Atendimento Ambulatorial'),
-        (3, 'Atendimento Hospitalar'),
+        (2, 'Atendimento Hospitalar'),
+        (3, 'Atendimento Ambulatorial'),
         (4, 'Atendimento Eletivo')
     )
 
@@ -270,3 +270,9 @@ class Patient(models.Model):
         default=0,
         blank=False
     )
+
+    def age_range_verbose(self):
+        return dict(Patient.AGE_RANGE)[self.age_range]
+
+    def gender_verbose(self):
+        return dict(Patient.GENDER)[self.gender]
