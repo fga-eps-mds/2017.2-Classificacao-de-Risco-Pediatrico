@@ -22,7 +22,7 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(max_length=150, verbose_name='Nome')),
                 ('id_user', models.CharField(max_length=150, unique=True, verbose_name='ID de usuário')),
                 ('email', models.EmailField(default='', max_length=254, unique=True, verbose_name='Email do usuário')),
-                ('profile', models.IntegerField(choices=[(1, 'Recepcionista'), (2, 'Atendente')], default=0, verbose_name='Perfil')),
+                ('profile', models.IntegerField(choices=[(1, 'receptionista'), (2, 'Atendente')], default=0, verbose_name='Perfil')),
                 ('uf', models.CharField(choices=[('AC', 'Acre'), ('AL', 'Alagoas'), ('AP', 'Amapá'), ('AM', 'Amazonas'), ('BA', 'Bahia'), ('CE', 'Ceará'), ('DF', 'Distrito Federal'), ('ES', 'Espírito Santo'), ('GO', 'Goiás'), ('MA', 'Maranhão'), ('MT', 'Mato Grosso'), ('MS', 'Mato Grosso do Sul'), ('MG', 'Minas Gerais'), ('PA', 'Pará'), ('PB', 'Paraíba'), ('PR', 'Paraná'), ('PE', 'Pernambuco'), ('PI', 'Piauí'), ('RJ', 'Rio de Janeiro'), ('RN', 'Rio Grande do Norte'), ('RS', 'Rio Grande do Sul'), ('RO', 'Rondônia'), ('RR', 'Roraima'), ('SC', 'Santa Catarina'), ('SP', 'São Paulo'), ('SE', 'Sergipe'), ('TO', 'Tocantins')], max_length=2, verbose_name='UF')),
                 ('city', models.CharField(max_length=50, verbose_name='Cidade')),
                 ('neighborhood', models.CharField(max_length=100, verbose_name='Bairro')),
