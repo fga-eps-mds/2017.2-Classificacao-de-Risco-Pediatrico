@@ -354,7 +354,6 @@ class TestUsers:
         assert set(list(response.context['patients'])) == \
             set(list(Patient.objects.all()))
 
-
     form1data = ({'patient_id': '1', 'form1': ''})
     form2data = ({'patient_id': '2', 'form2': ''})
     form3data = ({'patient_id': '3', 'form3': ''})
@@ -371,7 +370,6 @@ class TestUsers:
         for x in range(1, 6):
             patient = Patient(id=x, age_range=x)
             patient.save()
-            
 
     def test_rate_patient(self, client):
         Staff.objects.create_superuser(**self.default_user_data())
