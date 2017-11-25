@@ -26,6 +26,9 @@
                                             {% if field.name == 'patient_id' %}
                                                 <input type="hidden" value="{{ patient.id }}" name="patient_id" />
                                                 <input type="hidden" value="1" name="form1" />
+                                            {% elif field.name == 'patient.comment_receptionist' %}
+                                              <input type="hidden" value="{{ patient.comment_receptionist }}" name="patient_id" />
+                                              <input type="hidden" value="1" name="form1" />
                                             {% else %}
                                                 <label class="btn btn-primary classification-button col-md-2" >
                                                     <input class="form-check-input" type="checkbox" autocomplete="off" name="{{ field.name }}">
@@ -56,6 +59,9 @@
                                             {% if field.name == 'patient_id' %}
                                                 <input type="hidden" value="{{ patient.id }}" name="patient_id" />
                                                 <input type="hidden" value="1" name="form2" />
+                                            {% elif field.name == 'patient.comment_receptionist' %}
+                                              <input type="hidden" value="{{ patient.comment_receptionist }}" name="patient_id" />
+                                              <input type="hidden" value="1" name="form2" />
                                             {% else %}
                                                 <label class="btn btn-primary classification-button col-md-2" >
                                                     <input class="form-check-input" type="checkbox" autocomplete="off" name="{{ field.name }}">
@@ -86,6 +92,9 @@
                                             {% if field.name == 'patient_id' %}
                                                 <input type="hidden" value="{{ patient.id }}" name="patient_id" />
                                                 <input type="hidden" value="1" name="form3" />
+                                        {% elif field.name == 'patient.comment_receptionist' %}
+                                          <input type="hidden" value="{{ patient.comment_receptionist }}" name="patient_id" />
+                                          <input type="hidden" value="1" name="form3" />
                                             {% else %}
                                                 <label class="btn btn-primary classification-button col-md-2" >
                                                     <input class="form-check-input" type="checkbox" autocomplete="off" name="{{ field.name }}">
@@ -115,7 +124,10 @@
                                             {% for field in form4 %}
                                                 {% if field.name == 'patient_id' %}
                                                     <input type="hidden" value="{{ patient.id }}" name="patient_id" />
-                                                <input type="hidden" value="1" name="form4" />
+                                                    <input type="hidden" value="1" name="form4" />
+                                                {% elif field.name == 'patient.comment_receptionist' %}
+                                                  <input type="hidden" value="{{ patient.comment_receptionist }}" name="patient_id" />
+                                                  <input type="hidden" value="1" name="form4" />
                                                 {% else %}
                                                     <label class="btn btn-primary classification-button col-md-2" >
                                                         <input class="form-check-input" type="checkbox" autocomplete="off" name="{{ field.name }}">
@@ -147,6 +159,9 @@
                                             {% if field.name == 'patient_id' %}
                                                 <input type="hidden" value="{{ patient.id }}" name="patient_id" />
                                                 <input type="hidden" value="1" name="form5" />
+                                            {% elif field.name == 'patient.comment_receptionist' %}
+                                              <input type="hidden" value="{{ patient.comment_receptionist }}" name="patient_id" />
+                                              <input type="hidden" value="1" name="form5" />
                                             {% else %}
                                                 <label class="btn btn-primary classification-button col-md-2" >
                                                     <input class="form-check-input" type="checkbox" autocomplete="off" name="{{ field.name }}">
