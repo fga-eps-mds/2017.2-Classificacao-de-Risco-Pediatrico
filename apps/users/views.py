@@ -6,7 +6,6 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate
-from datetime import date
 from apps.risk_rating.ml_classifier import MachineLearning
 from apps.users.forms import RegistrationStaffForm
 from apps.users.forms import RegistrationPatientForm
@@ -196,7 +195,6 @@ def sign_up_profile(request):
 
     return render(request, 'users/user_login/registerUser.html',
                   {'form': form})
-
 
 
 @login_required(redirect_field_name='', login_url='users:login')

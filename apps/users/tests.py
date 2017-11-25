@@ -394,7 +394,7 @@ class TestUsers:
         # making sure that no classification is "Não classificado"
         assert 0 not in classifications
 
-    def test_edit_patient_is_valid (self, client):
+    def test_edit_patient_is_valid(self, client):
         Staff.objects.create_superuser(**self.default_user_data())
         client.post('/login', {'username': 'email@gmail.com',
                                'password': "1234asdf"})
@@ -403,7 +403,8 @@ class TestUsers:
         patient_test = Patient(id='1', birth_date='2017-10-10', age_range='0')
         patient_test.save()
 
-        client.post('/patients/edit/1/', {'name': 'New Name', 'age_range' : '1'})
+        client.post('/patients/edit/1/', {'name': 'New Name',
+                                          'age_range': '1'})
         edited_patient = Patient.objects.get(id=1)
 
         assert edited_patient.name == 'New Name'
