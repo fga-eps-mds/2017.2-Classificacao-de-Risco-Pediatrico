@@ -840,6 +840,7 @@ class ClinicalState_3y_10y(models.Model):
         unique=False
     )
 
+    # symptoms:
     perdada_consciencia = models.BooleanField(
         verbose_name=("Perda de Consciência"),
         default=False,

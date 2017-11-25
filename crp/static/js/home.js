@@ -32,8 +32,10 @@ $(document).ready(function () {
         if (data) {
           $("#" + data["patient_id"] + " " + "#" + data["classification"]).prop('checked', true);
           $('#' + data["patient_id"]).modal('show');
-          $('#classify-patient-' + data["patient_id"]).text("Depois de muita an na maniche learning chegamos a conclusão que o resultado é:"  +data["classification"]);
-          $('#probability-' + data["patient_id"]).text(Math.max.apply(Math, data["probability"][0])*100 + "%");
+          $('#classify-patient-' + data["patient_id"]).text("Recomendado encaminhar para "
+            + data["classification"]);
+          $('#probability-' + data["patient_id"]).text("Porcentagem de Confiabilidade: "
+            + (Math.max.apply(Math, data["probability"][0])*100).toFixed(1) + "%");
         }
       }
     });
