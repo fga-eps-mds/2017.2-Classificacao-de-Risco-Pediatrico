@@ -6,7 +6,6 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate
-from datetime import date
 from apps.risk_rating.ml_classifier import MachineLearning
 from apps.users.forms import RegistrationStaffForm
 from apps.users.forms import RegistrationPatientForm
@@ -108,16 +107,6 @@ def home(request):
         clinical_state = p_c_states_l.order_by('-id')[0]
         trigger_ml(subject_patient, clinical_state, ml)
 
-    # elif request.method == "POST" and "form4" in request.POST:
-    #     form = ClinicalState_3y_10yForm(request.POST)
-    #     form.save()
-    #
-    #     p_id = request.POST.get("patient_id4")
-    #     subject_patient = Patient.objects.filter(id=p_id)[0]
-    #     p_c_states_l = ClinicalState_3y_10y.objects.filter(patient_id4=p_id)
-    #     clinical_state = p_c_states_l.order_by('-id')[0]
-    #     trigger_ml(subject_patient, clinical_state)
-
     return render(request, 'users/user_home/main_home.html',
                            {'patients': patients,
                             'classification': classification,
@@ -169,9 +158,9 @@ def define_patient_classification(subject_patient, classification):
     """
     if classification == 'AtendimentoImediato':
         subject_patient.classification = 1
-    elif classification == 'AmbulatorialGeral':
-        subject_patient.classification = 2
     elif classification == 'AtendimentoHospitalar':
+        subject_patient.classification = 2
+    elif classification == 'AmbulatorialGeral':
         subject_patient.classification = 3
     else:
         pass
@@ -208,65 +197,17 @@ def sign_up_profile(request):
                   {'form': form})
 
 
-def specify_age_range(age_range, aux_age_range, form):
-    if age_range >= 0 and age_range <= 28:
-        aux_age_range = form.cleaned_data['age_range'] = 1
-    elif age_range > 28 and age_range <= 90:
-        aux_age_range = form.cleaned_data['age_range'] = 2
-    elif age_range > 90 and age_range <= 730:
-        aux_age_range = form.cleaned_data['age_range'] = 3
-    elif age_range > 730 and age_range <= 3650:
-        aux_age_range = form.cleaned_data['age_range'] = 4
-    elif age_range > 3650:
-        aux_age_range = form.cleaned_data['age_range'] = 5
-    else:
-        aux_age_range = form.cleaned_data['age_range'] = 0
-    instance = form.save(commit=False)
-    instance.age_range = aux_age_range
-    instance.save()
-
-
-def calculate_age_range(form):
-    birth_date = form.cleaned_data['birth_date']
-    age_range = (date.today() - birth_date).days
-    int(age_range)
-    aux_age_range = 0
-    specify_age_range(age_range, aux_age_range, form)
-
-
 @login_required(redirect_field_name='', login_url='users:login')
 def register_patient(request):
     form = RegistrationPatientForm()
     if request.method == 'POST':
         form = RegistrationPatientForm(request.POST)
         if form.is_valid():
-            if ['birth_date'] in form.changed_data:
-                calculate_age_range(form)
             form.save()
             return redirect('users:home')
 
     return render(request, 'users/user_home/registerPatient.html',
                   {'form': form})
-
-
-@login_required(redirect_field_name='', login_url='users:login')
-def queue_patient(request, cpf_patient):
-    patients = Patient.objects.filter(cpf=cpf_patient)
-    patient = Patient.objects.get(cpf=cpf_patient)
-    patientsInQueue = Patient.objects.all()
-    patientList = list()
-    for patient0 in patientsInQueue:
-        patientList.append(patient0.patient)
-    if patient in patientList:
-        return render(request, 'users/queuePatient.html',
-                               {'patientList': patientList})
-    else:
-        queuedPatient = Patient.objects.create(patient=patient)
-        queuedPatient.save()
-        patientList.append(patient)
-        return render(request, 'users/queuePatient.html',
-                               {'patients': patients})
-    return render(request, 'users/queuePatient.html', {'patients': patients})
 
 
 @login_required(redirect_field_name='', login_url='users:login')
@@ -325,17 +266,6 @@ def edit_patient(request, id):
             status = 400
     return render(request, 'users/editPatient.html',
                   {'patient': patient, 'form': form}, status=status)
-
-
-@login_required(redirect_field_name='', login_url='users:login')
-def show_patient_view(request, cpf):
-    """
-    return rendered text from showPatient
-    """
-    patient = Patient.objects.filter(cpf=cpf)
-    if len(patient) == 1:
-        return render(request, 'users/showPatient.html', {'patient': patient})
-    return render(request, 'users/showPatient.html', status=404)
 
 
 def get_under_28_symptoms(clinical_state):
