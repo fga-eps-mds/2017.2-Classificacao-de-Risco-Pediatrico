@@ -354,8 +354,7 @@ class TestUsers:
         assert set(list(response.context['patients'])) == \
             set(list(Patient.objects.all()))
 
-    form1data = ({'patient_id': '1', 'convulcao': 'True',
-                  'sangue_nas_fezes': 'True', 'form1': ''})
+    form1data = ({'patient_id': '1', 'form1': ''})
     form2data = ({'patient_id': '2', 'form2': ''})
     form3data = ({'patient_id': '3', 'form3': ''})
     form4data = ({'patient_id': '4', 'form4': ''})
