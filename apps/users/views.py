@@ -180,22 +180,9 @@ def define_patient_classification(patient_id, classification):
     """
     edit patient's classification attribute
     """
-<<<<<<< HEAD
     patient = Patient.objects.filter(id=patient_id)[0]
     patient.classification = classification
     patient.save()
-=======
-    if classification == 'AtendimentoImediato':
-        subject_patient.classification = 1
-    elif classification == 'AtendimentoHospitalar':
-        subject_patient.classification = 2
-    elif classification == 'AmbulatorialGeral':
-        subject_patient.classification = 3
-    else:
-        pass
-
-    subject_patient.save()
->>>>>>> 09ea96e9d9edf37590524b503421f369c3b9ab27
 
 
 def check_patient_problem(problem):
