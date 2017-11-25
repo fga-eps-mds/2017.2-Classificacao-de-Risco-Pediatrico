@@ -9,90 +9,101 @@
     </div>
     <div id="list" class="x_panel slide-in-blurred-top" style="background-color: white">
         <table id="example" class="table table-condensed" cellspacing="0" width="100%">
-            <thead>
-                <tr>
-                    <th>Nome / ID</th>
-                    <th>Classificação</th>
-                    <th>Faixa-etária</th>
-                    <th>Data e hora de chegada</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for patient in patients %}
-                <tr>
-                    <td>
-                        <a href="#" data-toggle="modal" data-target="#risk_range{{ patient.id }}">
-                            {% if patient.gender == 1 %}
-                                <i class="fa fa-female" aria-hidden="true"></i>
-                            {% elif patient.gender == 2%}
-                                <i class="fa fa-male" aria-hidden="true"></i>
-                            {% endif %}
+          <thead>
+             <tr>
+                 <th></th>
+                 <th>Nome / ID</th>
+                 <th>Classificação</th>
+                 <th>Sintomas</th>
+                 <th>Idade</th>
+                 <th>Data/hora</th>
+                 <th>Ações</th>
+             </tr>
+         </thead>
+         <tbody>
+             {% for patient in patients %}
+             <tr>
+                 <td id="sex">
+                   {% if patient.gender == 1 %}
+                     <i class="fa fa-female" aria-hidden="true"></i>
+                   {% elif patient.gender == 2%}
+                     <i class="fa fa-male" aria-hidden="true"></i>
+                   {% endif %}
+                 </td><!-- sexo -->
+                 <td id="name_patient">
+                   <a href="#" data-toggle="modal" data-target="#risk_range{{ patient.id }}">
+                     {% if patient.name %}
+                       {{ patient.name }}
+                     {% else %}
+                       {{ patient.id }}
+                     {% endif %}
+                   </a>
+                 </td><!--nome-->
 
-                            {% if patient.name %}
-                                &nbsp{{ patient.name }}
-                            {% else %}
-                                &nbsp{{ patient.id }}
-                            {% endif %}
-                        </a>
-                    </td><!--td gênero e nome-->
+                 <td id="classify_table_patient">
+                     <span data-toggle="modal" data-target="#{{ patient.id }}"
+                         {% if patient.classification == 0 %}
+                             class="btn btn-primary badge badge-pill badge-secondary">
+                                 Não classificado
+                         {% elif patient.classification == 1 %}
+                             class="btn btn-primary badge badge-pill badge-danger">
+                                 Atendimento Imediato
+                         {% elif patient.classification == 2 %}
+                             class="btn btn-primary badge badge-pill badge-success">
+                                 Atendimento Ambulatorial
+                         {% elif patient.classification == 3 %}
+                             class="btn btn-primary badge badge-pill badge-warning">
+                                 Atendimento Hospitalar
+                         {% elif patient.classification == 4 %}
+                             class="btn btn-primary badge badge-pill badge-info">
+                                 Atendimento Eletivo
+                         {% endif %}
+                     </span>
+                 </td><!--td classificação-->
+                 <td id="symptoms">
 
-                    <td>
-                        <span data-toggle="modal" data-target="#{{ patient.id }}"
-                            {% if patient.classification == 0 %}
-                                class="btn btn-primary badge badge-pill badge-secondary">
-                                    Não classificado
-                            {% elif patient.classification == 1 %}
-                                class="btn btn-primary badge badge-pill badge-danger">
-                                    Atendimento Imediato
-                            {% elif patient.classification == 2 %}
-                                class="btn btn-primary badge badge-pill badge-success">
-                                    Atendimento Ambulatorial
-                            {% elif patient.classification == 3 %}
-                                class="btn btn-primary badge badge-pill badge-warning">
-                                    Atendimento Hospitalar
-                            {% elif patient.classification == 4 %}
-                                class="btn btn-primary badge badge-pill badge-info">
-                                    Atendimento Eletivo
-                            {% endif %}
-                        </span>
-                    </td><!--td classificação-->
 
-                    <td>
-                        {% if patient.age_range  == 0 %}
-                            Faixa etária indefinida
-                        {% elif patient.age_range == 1 %}
-                            0 até 28 dias
-                        {% elif patient.age_range == 2 %}
-                            29 dias à 2 meses
-                        {% elif patient.age_range == 3 %}
-                            2 meses à 3 anos
-                        {% elif patient.age_range == 4 %}
-                            3 anos à 10 anos
-                        {% elif patient.age_range == 5 %}
-                            Acima de 10 anos
-                        {% endif %}
-                    </td><!--td faixa etária-->
 
-                    <td>
-                        {{ patient.created_at|date:"d/m/y - H:i" }}
-                    </td><!--td data de criação-->
+                 </td><!--td sintomas-->
+                 <td id="age_range_table">
+                   {% if patient.birth_date == None %}
+                       {% if patient.age_range  == 0 %}
+                           Faixa etária indefinida
+                       {% elif patient.age_range == 1 %}
+                           0 até 28 dias
+                       {% elif patient.age_range == 2 %}
+                           29 dias à 2 meses
+                       {% elif patient.age_range == 3 %}
+                           2 meses à 3 anos
+                       {% elif patient.age_range == 4 %}
+                           3 anos à 10 anos
+                       {% elif patient.age_range == 5 %}
+                           Acima de 10 anos
+                       {% endif %}
+                     {% else %}
+                       {{ patient.age }}
+                     {% endif %}
+                 </td><!--td faixa etária-->
 
-                    <td>
-                        <a href="{% url 'users:edit_patient' patient.id %}">
-                            <i class="fa fa-pencil actions-icon" aria-hidden="true"></i>
-                        </a>
-                        <a href="#" data-toggle="modal" data-target="#deletar-{{ patient.id }}">
-                            <i class="fa fa-ban actions-icon" aria-hidden="true"></i>
-                        </a>
-                    </td><!--td ações-->
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        <div class="card-footer text-right mt-1">
-        </div>
-    </div>
+                 <td id="data">
+                     {{ patient.created_at|date:"d/m/y - H:i" }}
+                 </td><!--td data de criação-->
+
+                 <td id="actions">
+                     <a href="{% url 'users:edit_patient' patient.id %}">
+                         <i class="fa fa-pencil actions-icon" aria-hidden="true"></i>
+                     </a>
+                     <a href="#" data-toggle="modal" data-target="#deletar-{{ patient.id }}">
+                         <i class="fa fa-ban actions-icon" aria-hidden="true"></i>
+                     </a>
+                 </td><!--td ações-->
+             </tr>
+             {% endfor %}
+         </tbody>
+     </table>
+     <div class="card-footer text-right mt-1">
+     </div>
+</div>
 
     {% for patient in patients %}
         <div class="modal fade" id="{{ patient.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -105,8 +116,8 @@
                         <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div id="probability-{{ patient.id }}"></div>
-                    <div id="classify-patient-{{ patient.id }}"></div>
+                    <div class="result-classification" id="classify-patient-{{ patient.id }}"></div>
+                    <div class="result-classification" id="probability-{{ patient.id }}"></div>
                     <form role="form" class="form" method="POST" >
                         {% csrf_token %}
                         <div class="modal-body">
@@ -143,6 +154,12 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div id="comment-receptionist-{{ patient.id }}">
+                          <label>Comentário </label>
+                          <textarea class="form-control" name="comment" rows="4" maxlength="10" cols="10" placeholder="Comentário é obrigatório!"></textarea>
+                        </div>
+
                         <input type="hidden" name="patient" value="{{ patient.id }}">
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
