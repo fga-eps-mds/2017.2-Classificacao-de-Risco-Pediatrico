@@ -354,7 +354,8 @@ class TestUsers:
         assert set(list(response.context['patients'])) == \
             set(list(Patient.objects.all()))
 
-    form1data = ({'patient_id': '1', 'form1': ''})
+    form1data = ({'patient_id': '1', 'convulcao': 'True',
+                  'sangue_nas_fezes': 'True', 'form1': ''})
     form2data = ({'patient_id': '2', 'form2': ''})
     form3data = ({'patient_id': '3', 'form3': ''})
     form4data = ({'patient_id': '4', 'form4': ''})
@@ -392,3 +393,18 @@ class TestUsers:
 
         # making sure that no classification is "Não classificado"
         assert 0 not in classifications
+
+    def test_edit_patient_is_valid (self, client):
+        Staff.objects.create_superuser(**self.default_user_data())
+        client.post('/login', {'username': 'email@gmail.com',
+                               'password': "1234asdf"})
+
+        Patient()
+        patient_test = Patient(id='1', birth_date='2017-10-10', age_range='0')
+        patient_test.save()
+
+        client.post('/patients/edit/1/', {'name': 'New Name', 'age_range' : '1'})
+        edited_patient = Patient.objects.get(id=1)
+
+        assert edited_patient.name == 'New Name'
+        assert edited_patient.age_range == 1
