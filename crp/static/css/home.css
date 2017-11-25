@@ -252,6 +252,42 @@ a.article, a.article:hover {
     border-radius: 1.3rem;
 }
 
+#name_patient a {
+  color: #5A738E;
+  font-weight: bold;
+  width: 80px;
+}
+
+#sex {
+  width: 1px;
+}
+
+#classify_table_patient {
+  width: 130px;
+}
+
+#symptoms {
+  width: 340px;
+}
+
+#age_range_table {
+  width: 106px;
+}
+
+#data {
+  width: 110px;
+}
+
+#actions{
+  width: 70px;
+}
+
+.result-classification {
+  text-align: center;
+  padding-top: 6px;
+  font-weight: bold;
+}
+
 .classification-button {
     word-wrap: break-word;
     white-space:normal;
