@@ -177,6 +177,15 @@ i, span {
     margin-right: 10px;
 }
 
+#sidebar ul li ul a {
+  padding-left: 25px;
+  font-size: 0.95em;
+}
+
+#sidebar ul li ul a:hover {
+    background-color: #213243;
+}
+
 #sidebar ul li.active > a, a[aria-expanded="true"] {
     color: #fff;
     background: linear-gradient(#334556,#2C4257),#2A3F54;
