@@ -46,7 +46,7 @@ STATE_CHOICES = (
 )
 
 
-# Classe dos usuarios possui atendente e recepcionista
+# Classe dos usuarios possui atendente e receptionista
 class Staff(AbstractBaseUser):
     objects = UserManager()
 
@@ -70,7 +70,7 @@ class Staff(AbstractBaseUser):
     )
 
     PROFILE_TYPES = (
-        (1, 'Recepcionista'),
+        (1, 'receptionista'),
         (2, 'Atendente'),
     )
 
@@ -145,6 +145,14 @@ class Patient(models.Model):
         max_length=150,
         default='',
         blank=True
+    )
+
+    comment_receptionist = models.CharField(
+        verbose_name=_('Comentário do receptionista'),
+        max_length=300,
+        default='',
+        blank=True,
+        unique=False
     )
 
     guardian = models.CharField(
@@ -249,7 +257,7 @@ class Patient(models.Model):
     )
 
     gender = models.IntegerField(
-        verbose_name=_('Classification'),
+        verbose_name=_('Genero'),
         choices=GENDER,
         default=0,
         blank=True
@@ -265,7 +273,7 @@ class Patient(models.Model):
     )
 
     age_range = models.IntegerField(
-        verbose_name=_('Classification'),
+        verbose_name=_('Faixa etária'),
         choices=AGE_RANGE,
         default=0,
         blank=False
