@@ -123,9 +123,6 @@ def home(request):
 
         patient = Patient.objects.filter(id=patient_id)[0]
         patient.comment_receptionist = request.POST.get('comment')
-
-        print("deusa me leva:")
-        print(patient.comment_receptionist)
         patient.save()
 
     return render(request, 'users/user_home/main_home.html',

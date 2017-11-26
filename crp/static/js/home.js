@@ -1,6 +1,6 @@
 $(document).ready(function() {
       var table = $('#example').DataTable( {
-        order: [[1,'desc']],
+        order: [[2,'desc']],
         responsive: true,
         "lengthMenu": [ 50, 75, 100 ],
         "columnDefs": [
