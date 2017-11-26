@@ -291,6 +291,10 @@ a.article, a.article:hover {
   width: 70px;
 }
 
+#actions a {
+  color: #5A738E;
+}
+
 .result-classification {
   text-align: center;
   padding-top: 6px;
