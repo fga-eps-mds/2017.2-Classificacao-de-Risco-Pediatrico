@@ -366,7 +366,7 @@ class TestUsers:
             generating one test patient for each age range
         """
 
-        Patient()
+        # Patient()
         for x in range(1, 6):
             patient = Patient(id=x, age_range=x)
             patient.save()
@@ -380,18 +380,15 @@ class TestUsers:
 
         # the loop below posts the symptoms form for every one of the
         # 5 fictional patients
-        for index, formdata in enumerate(self.formdatas):
-            client.post('/home/', formdata)
-
-        Patient()
-        patients = Patient.objects.all()
         classifications = []
-        # getting the classification of every ficcional test patient
-        for patient in patients:
-            classifications.append(patient.classification)
+        for index, formdata in enumerate(self.formdatas):
+            response = client.post('/classify_patient/', formdata)
+            import json
+            data  = json.loads(response.content.decode("utf-8"))
+            classifications.append(data["classification"])
 
         # making sure that no classification is "Não classificado"
-        assert 0 not in classifications
+        assert "Não classificado" not in classifications
 
     def test_edit_patient_is_valid(self, client):
         Staff.objects.create_superuser(**self.default_user_data())
