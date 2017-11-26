@@ -6,14 +6,13 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate
+from django.views.decorators.csrf import csrf_exempt
 from apps.risk_rating.ml_classifier import MachineLearning
 from apps.users.forms import RegistrationStaffForm
 from apps.users.forms import RegistrationPatientForm
 from apps.users.forms import EditPatientForm
 
 from .models import Patient, Staff
-import json
-
 
 from apps.risk_rating.forms import ClinicalState_28dForm
 from apps.risk_rating.forms import ClinicalState_29d_2mForm
@@ -64,35 +63,36 @@ def login_view(request, *args, **kwargs):
 
 
 @login_required(redirect_field_name='', login_url='users:login')
+@csrf_exempt
 def machine_learning(request):
 
-    if 'form1' in request.GET:
-        form = ClinicalState_28dForm(request.GET)
+    if 'form1' in request.POST:
+        form = ClinicalState_28dForm(request.POST)
         form.save()
         state = ClinicalState_28d
         ml = ml1
-    elif "form2" in request.GET:
-        form = ClinicalState_29d_2mForm(request.GET)
+    elif "form2" in request.POST:
+        form = ClinicalState_29d_2mForm(request.POST)
         form.save()
         state = ClinicalState_29d_2m
         ml = ml2
-    elif "form3" in request.GET:
-        form = ClinicalState_2m_3yForm(request.GET)
+    elif "form3" in request.POST:
+        form = ClinicalState_2m_3yForm(request.POST)
         form.save()
         state = ClinicalState_2m_3y
         ml = ml3
-    elif "form4" in request.GET:
-        form = ClinicalState_3y_10yForm(request.GET)
+    elif "form4" in request.POST:
+        form = ClinicalState_3y_10yForm(request.POST)
         form.save()
         state = ClinicalState_3y_10y
         ml = ml4
-    elif "form5" in request.GET:
-        form = ClinicalState_10yMoreForm(request.GET)
+    elif "form5" in request.POST:
+        form = ClinicalState_10yMoreForm(request.POST)
         form.save()
         state = ClinicalState_10yMore
         ml = ml5
 
-    p_id = request.GET.get("patient_id")
+    p_id = request.POST.get("patient_id")
     subject_patient = Patient.objects.filter(id=p_id)[0]
 
     p_c_states_l = state.objects.filter(patient_id=p_id)
