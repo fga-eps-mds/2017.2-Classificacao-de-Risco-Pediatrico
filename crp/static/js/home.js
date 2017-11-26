@@ -49,6 +49,7 @@ $(document).ready(function() {
 
     $.ajax({
       url: '/classify_patient/',
+      type: 'POST',
       dataType: 'json',
       data: values,
       success: function (data) {
