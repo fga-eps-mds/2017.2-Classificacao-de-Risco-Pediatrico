@@ -384,7 +384,7 @@ class TestUsers:
         for index, formdata in enumerate(self.formdatas):
             response = client.post('/classify_patient/', formdata)
             import json
-            data  = json.loads(response.content.decode("utf-8"))
+            data = json.loads(response.content.decode("utf-8"))
             classifications.append(data["classification"])
 
         # making sure that no classification is "Não classificado"
