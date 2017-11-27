@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Symptoms_28d(models.Model):
 
     class Meta:
@@ -173,6 +174,7 @@ class Symptoms_28d(models.Model):
         blank=True
     )
 
+
 class ClinicalState_28d(Symptoms_28d):
 
     patient_id = models.CharField(
@@ -181,6 +183,12 @@ class ClinicalState_28d(Symptoms_28d):
         blank=True,
         unique=False
     )
+
+
+class MachineLearning_28d(Symptoms_28d):
+
+    pass
+
 
 class Symptoms_29d_2m(models.Model):
 
@@ -349,6 +357,7 @@ class Symptoms_29d_2m(models.Model):
         blank=True
     )
 
+
 class ClinicalState_29d_2m(Symptoms_29d_2m):
 
     patient_id = models.CharField(
@@ -357,6 +366,12 @@ class ClinicalState_29d_2m(Symptoms_29d_2m):
         blank=True,
         unique=False
     )
+
+
+class MachineLearning_29d_2m(Symptoms_29d_2m):
+
+    pass
+
 
 class Symptoms_2m_3y(models.Model):
 
@@ -513,6 +528,7 @@ class Symptoms_2m_3y(models.Model):
         blank=True
     )
 
+
 class ClinicalState_2m_3y(Symptoms_2m_3y):
 
     patient_id = models.CharField(
@@ -521,6 +537,12 @@ class ClinicalState_2m_3y(Symptoms_2m_3y):
         blank=True,
         unique=False
     )
+
+
+class MachineLearning_2m_3y(Symptoms_2m_3y):
+
+    pass
+
 
 class Symptoms_3y_10y(models.Model):
 
@@ -814,6 +836,7 @@ class Symptoms_3y_10y(models.Model):
         blank=True
     )
 
+
 class ClinicalState_3y_10y(Symptoms_3y_10y):
 
     patient_id = models.CharField(
@@ -822,6 +845,12 @@ class ClinicalState_3y_10y(Symptoms_3y_10y):
         blank=True,
         unique=False
     )
+
+
+class MachineLearning_3y_10y(Symptoms_3y_10y):
+
+    pass
+
 
 class Symptoms_10yMore(models.Model):
 
@@ -1134,6 +1163,7 @@ class Symptoms_10yMore(models.Model):
         blank=True
     )
 
+
 class ClinicalState_10yMore(Symptoms_10yMore):
 
     patient_id = models.CharField(
@@ -1142,3 +1172,8 @@ class ClinicalState_10yMore(Symptoms_10yMore):
         blank=True,
         unique=False
     )
+
+
+class MachineLearning_10yMore(Symptoms_10yMore):
+
+    pass
