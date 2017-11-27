@@ -4,81 +4,89 @@
 {% block content_pos %}
     <div class="form-group title_left mt-4">
         <input id="searchPatient" type="search" class="form-control pull-right mr-1"
-            placeholder="Pesquisar Paciente..." aria-controls="example">
+               placeholder="Pesquisar Paciente..." aria-controls="example">
         <h2>Pacientes</h2>
     </div>
     <div id="list" class="x_panel slide-in-blurred-top" style="background-color: white">
         <table id="example" class="table table-condensed" cellspacing="0" width="100%">
             <thead>
-                <tr>
-                    <th>Nome / ID</th>
-                    <th>Classificação</th>
-                    <th>Faixa-etária</th>
-                    <th>Data e hora de chegada</th>
-                    <th>Ações</th>
-                </tr>
+            <tr>
+                <th></th>
+                <th>Nome / ID</th>
+                <th>Classificação</th>
+                <th>Sintomas</th>
+                <th>Idade</th>
+                <th>Data/hora</th>
+                <th>Ações</th>
+            </tr>
             </thead>
             <tbody>
-                {% for patient in patients %}
+            {% for patient in patients %}
                 <tr>
-                    <td>
+                    <td id="sex">
+                        {% if patient.gender == 1 %}
+                            <i class="fa fa-female" aria-hidden="true"></i>
+                        {% elif patient.gender == 2 %}
+                            <i class="fa fa-male" aria-hidden="true"></i>
+                        {% endif %}
+                    </td><!-- sexo -->
+                    <td id="name_patient">
                         <a href="#" data-toggle="modal" data-target="#risk_range{{ patient.id }}">
-                            {% if patient.gender == 1 %}
-                                <i class="fa fa-female" aria-hidden="true"></i>
-                            {% elif patient.gender == 2%}
-                                <i class="fa fa-male" aria-hidden="true"></i>
-                            {% endif %}
-
                             {% if patient.name %}
-                                &nbsp{{ patient.name }}
+                                {{ patient.name }}
                             {% else %}
-                                &nbsp{{ patient.id }}
+                                {{ patient.id }}
                             {% endif %}
                         </a>
-                    </td><!--td gênero e nome-->
+                    </td><!--nome-->
 
-                    <td>
-                        <span data-toggle="modal" data-target="#{{ patient.id }}"
-                            {% if patient.classification == 0 %}
-                                class="badge badge-pill badge-secondary">
-                                    Não classificado
-                            {% elif patient.classification == 1 %}
-                                class="badge badge-pill badge-danger">
-                                    Atendimento Imediato
-                            {% elif patient.classification == 2 %}
-                                class="badge badge-pill badge-warning">
-                                    Atendimento Hospitalar
-                            {% elif patient.classification == 3 %}
-                                class="badge badge-pill badge-success">
-                                    Atendimento Ambulatorial
-                            {% elif patient.classification == 4 %}
-                                class="badge badge-pill badge-info">
-                                    Atendimento Eletivo
-                            {% endif %}
-                        </span>
+                    <td id="classify_table_patient">
+
+
+                        {% if patient.classification == 0 %}
+                            <span class="invisible m-0">z</span><span data-toggle="modal" data-target="#{{ patient.id }}"
+                                                                  class="ml-1 btn btn-primary badge badge-pill badge-secondary"> Não classificado </span>
+                        {% elif patient.classification == 1 %}
+                            <span class="invisible m-0">y</span><span data-toggle="modal" data-target="#{{ patient.id }}"
+                                                                  class="ml-1 btn btn-primary badge badge-pill badge-danger"> Atendimento Imediato </span>
+                        {% elif patient.classification == 2 %}
+                            <span class="invisible m-0">x</span><span data-toggle="modal" data-target="#{{ patient.id }}"
+                                                                  class="ml-1 btn btn-primary badge badge-pill badge-warning"> Atendimento Hospitalar </span>
+                        {% elif patient.classification == 3 %}
+                            <span class="invisible m-0">w</span><span data-toggle="modal" data-target="#{{ patient.id }}"
+                                                                  class="btn btn-primary badge badge-pill badge-success"> Atendimento Ambulatorial </span>
+                        {% elif patient.classification == 4 %}
+                            <span class="invisible m-0">u</span><span data-toggle="modal" data-target="#{{ patient.id }}"
+                                                                  class="ml-1 btn btn-primary badge badge-pill badge-info"> Atendimento Eletivo </span>
+                        {% endif %}
                     </td><!--td classificação-->
-
-                    <td>
-                        {% if patient.age_range  == 0 %}
-                            Faixa etária indefinida
-                        {% elif patient.age_range == 1 %}
-                            0 até 28 dias
-                        {% elif patient.age_range == 2 %}
-                            29 dias à 2 meses
-                        {% elif patient.age_range == 3 %}
-                            2 meses à 3 anos
-                        {% elif patient.age_range == 4 %}
-                            3 anos à 10 anos
-                        {% elif patient.age_range == 5 %}
-                            Acima de 10 anos
+                    <td id="symptoms">
+                    </td><!--td sintomas-->
+                    <td id="age_range_table">
+                        {% if patient.birth_date == None %}
+                            {% if patient.age_range  == 0 %}
+                                Faixa etária indefinida
+                            {% elif patient.age_range == 1 %}
+                                0 até 28 dias
+                            {% elif patient.age_range == 2 %}
+                                29 dias à 2 meses
+                            {% elif patient.age_range == 3 %}
+                                2 meses à 3 anos
+                            {% elif patient.age_range == 4 %}
+                                3 anos à 10 anos
+                            {% elif patient.age_range == 5 %}
+                                Acima de 10 anos
+                            {% endif %}
+                        {% else %}
+                            {{ patient.age }}
                         {% endif %}
                     </td><!--td faixa etária-->
 
-                    <td>
+                    <td id="data">
                         {{ patient.created_at|date:"d/m/y - H:i" }}
                     </td><!--td data de criação-->
 
-                    <td>
+                    <td id="actions">
                         <a href="{% url 'users:edit_patient' patient.id %}">
                             <i class="fa fa-pencil actions-icon" aria-hidden="true"></i>
                         </a>
@@ -87,7 +95,7 @@
                         </a>
                     </td><!--td ações-->
                 </tr>
-                {% endfor %}
+            {% endfor %}
             </tbody>
         </table>
         <div class="card-footer text-right mt-1">
@@ -96,52 +104,65 @@
 
     {% for patient in patients %}
         <div class="modal fade" id="{{ patient.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
+             aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Classificação</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                            <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form role="form" class="form" method="POST" >
+                    <div class="result-classification" id="classify-patient-{{ patient.id }}"></div>
+                    <div class="result-classification" id="probability-{{ patient.id }}"></div>
+                    <form role="form" class="form" method="POST">
                         {% csrf_token %}
                         <div class="modal-body">
                             <p>Selecione a classificação desejada:</p>
                             <div class="text-left">
                                 <div class="form-check">
-                                   <label class="form-check-label">
-                                   <input class="form-check-input" type="radio" name="classification" value="1">
-                                   <span class="badge badge-pill badge-danger">Atendimento Imediato</span>
-                                   </label>
+                                    <label class="form-check-label">
+                                        <input id="AtendimentoImediato" class="form-check-input" type="radio"
+                                               name="classification" value="1">
+                                        <span class="badge badge-pill badge-danger">Atendimento Imediato</span>
+                                    </label>
                                 </div>
                                 <div class="form-check">
-                                   <label class="form-check-label">
-                                   <input class="form-check-input" type="radio" name="classification" value="2">
-                                  <span class="badge badge-pill badge-warning">Atendimento Hospitalar</span>
-
-                                   </label>
+                                    <label class="form-check-label">
+                                        <input id="AtendimentoHospitalar" class="form-check-input" type="radio"
+                                               name="classification" value="2">
+                                        <span class="badge badge-pill badge-warning">Atendimento Hospitalar</span>
+                                    </label>
                                 </div>
                                 <div class="form-check">
-                                   <label class="form-check-label">
-                                   <input class="form-check-input" type="radio" name="classification" value="3">
-                                   <span class="badge badge-pill badge-success">Atendimento Ambulatorial</span>
-                                   </label>
+                                    <label class="form-check-label">
+                                        <input id="AmbulatorialGeral" class="form-check-input" type="radio"
+                                               name="classification" value="3">
+                                        <span class="badge badge-pill badge-success">Atendimento Ambulatorial</span>
+                                    </label>
                                 </div>
                                 <div class="form-check">
-                                   <label class="form-check-label">
-                                   <input class="form-check-input" type="radio" name="classification" value="4">
-                                   <span class="badge badge-pill badge-info">Atendimento Eletivo</span>
-                                   </label>
+                                    <label class="form-check-label">
+                                        <input id="eletivo" class="form-check-input" type="radio" name="classification"
+                                               value="4">
+                                        <span class="badge badge-pill badge-info">Atendimento Eletivo</span>
+                                    </label>
                                 </div>
-                                 <div class="form-check">
-                                   <label class="form-check-label">
-                                   <input class="form-check-input" type="radio" style="display:none" name="classification" value="0" checked>
-                                   </label>
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="radio" style="display:none"
+                                               name="classification" value="0" checked>
+                                    </label>
                                 </div>
                             </div>
                         </div>
+
+                        <div id="comment-receptionist-{{ patient.id }}">
+                            <label>Comentário </label>
+                            <textarea class="form-control" name="comment" rows="4" maxlength="10" cols="10"
+                                      placeholder="Comentário é obrigatório!"></textarea>
+                        </div>
+
                         <input type="hidden" name="patient" value="{{ patient.id }}">
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
@@ -152,13 +173,14 @@
             </div>
         </div>
 
-        <div class="modal fade" id="deletar-{{ patient.id }}" tabindex="-1" role="dialog" aria-labelledby="Deletar Paciente" aria-hidden="true">
+        <div class="modal fade" id="deletar-{{ patient.id }}" tabindex="-1" role="dialog"
+             aria-labelledby="Deletar Paciente" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Deletar Paciente</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                            <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
