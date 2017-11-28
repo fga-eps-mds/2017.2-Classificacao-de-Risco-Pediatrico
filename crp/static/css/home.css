@@ -316,6 +316,75 @@ a.article, a.article:hover {
     color: white;
 }
 
+.classification1-button {
+    white-space:normal;
+    color: #dc3545;
+    border-color: #dc3545;
+    background-color: white;
+    height: 67px;
+    width: 300px;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.classification1-button.active {
+    color: white;
+    background-color: #dc3545;
+    border-color: white;
+}
+
+.classification1-button:hover {
+    color: white;
+    background-color: #dc3545;
+    border-color: white;
+}
+
+.classification2-button {
+    white-space:normal;
+    color: #ffc107;
+    border-color: #ffc107;
+    background-color: white;
+    height: 67px;
+    width: 300px;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.classification2-button.active {
+    color: white;
+    background-color: #ffc107;
+    border-color: white;
+}
+
+.classification2-button:hover {
+    color: white;
+    background-color: #ffc107;
+    border-color: white;
+}
+
+.classification3-button {
+    white-space:normal;
+    color: #28a745;
+    border-color: #28a745;
+    background-color: white;
+    height: 67px;
+    width: 300px;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.classification3-button.active {
+    color: white;
+    background-color: #28a745;
+    border-color: white;
+}
+
+.classification3-button:hover {
+    color: white;
+    background-color: #28a745;
+    border-color: white;
+}
+
 .btn-info  {
     border-color: #fff;
 }

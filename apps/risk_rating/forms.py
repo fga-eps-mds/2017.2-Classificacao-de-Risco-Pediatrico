@@ -111,7 +111,6 @@ class ClinicalState_10yMoreForm(forms.ModelForm):
                   'secrecao_ocular', 'dor_muscular', 'dor_retroorbitaria']
 
 
-
 class MachineLearning_28dForm(forms.ModelForm):
     """
     Defining fields for under 28 days patient's clinical state
@@ -186,7 +185,6 @@ class MachineLearning_3y_10yForm(forms.ModelForm):
                   'otalgia', 'epistaxe', 'otorreia', 'edema', 'adenomegalias',
                   'dor_articular', 'dificulade_de_marchar', 'sonolencia',
                   'dor_muscular', 'dor_retroorbitaria']
-
 
 
 class MachineLearning_10yMoreForm(forms.ModelForm):
