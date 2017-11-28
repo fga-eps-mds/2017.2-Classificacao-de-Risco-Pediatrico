@@ -135,6 +135,17 @@ def home(request):
                             'form5': form5})
 
 
+def feed_ml(request):
+    """
+    define home page behaviour
+    """
+
+    if request.method == 'POST' and request.POST.get("feed"):
+        pass
+
+    return render(request, 'users/user_home/feed_ml.html')
+
+
 def trigger_ml(subject_patient, clinical_state, ml):
     """
     triggers the machine learning based on patient's age range
