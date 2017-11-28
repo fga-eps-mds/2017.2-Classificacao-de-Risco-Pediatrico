@@ -1,0 +1,39 @@
+{% extends 'users/user_home/home_layout.html' %}
+{% load staticfiles %}
+
+{% block content_pos %}
+    <div class="container-fluid">
+        <div class="row mt-5">
+            <div class="mx-auto my-auto text-center">
+                <div id="list" class="x_panel slide-in-blurred-top" style="background-color: white">
+                    <a href="#" data-toggle="modal" data-target="#range_ml">
+                        <label class="btn btn-primary classification-button col-md-2" >
+                            Até 28 dias
+                        </label>
+                    </a>
+                    <a href="#" data-toggle="modal" data-target="#range_ml">
+                    <label class="btn btn-primary classification-button col-md-2" >
+                        De 29 dias a 2 meses
+                    </label>
+                    </a>
+                    <a href="#" data-toggle="modal" data-target="#range_ml">
+                    <label class="btn btn-primary classification-button col-md-2" >
+                        De 2 meses a 3 anos
+                    </label>
+                    </a>
+                    <a href="#" data-toggle="modal" data-target="#range_ml">
+                    <label class="btn btn-primary classification-button col-md-2" >
+                        De 3 anos a 10 anos
+                    </label>
+                    </a>
+                    <a href="#" data-toggle="modal" data-target="#range_ml">
+                    <label class="btn btn-primary classification-button col-md-2" >
+                        Acima de 10 anos
+                    </label>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% include 'risk_rating/risk_rating_ml.html' %}
+{% endblock %}

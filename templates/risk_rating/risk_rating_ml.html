@@ -1,0 +1,26 @@
+    <div class="modal fade bd-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"
+        id="range_ml">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content" id="classification-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        Classificação de risco
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {% csrf_token %}
+                <div class="modal-body">
+                    <div class="container-fuild " id="container-modal">
+                        <h5>
+                            Desculpe, mas ainda não é possível classificar um paciente desta faixa etária
+                        </h5>
+                        <h6>
+                            Faixa etaria: {{ patient.age_range }}
+                        </h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
