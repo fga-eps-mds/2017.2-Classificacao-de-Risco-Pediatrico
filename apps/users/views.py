@@ -19,12 +19,22 @@ from apps.risk_rating.forms import ClinicalState_29d_2mForm
 from apps.risk_rating.forms import ClinicalState_2m_3yForm
 from apps.risk_rating.forms import ClinicalState_3y_10yForm
 from apps.risk_rating.forms import ClinicalState_10yMoreForm
+from apps.risk_rating.forms import MachineLearning_28dForm
+from apps.risk_rating.forms import MachineLearning_29d_2mForm
+from apps.risk_rating.forms import MachineLearning_2m_3yForm
+from apps.risk_rating.forms import MachineLearning_3y_10yForm
+from apps.risk_rating.forms import MachineLearning_10yMoreForm
 
 from apps.risk_rating.models import ClinicalState_28d
 from apps.risk_rating.models import ClinicalState_29d_2m
 from apps.risk_rating.models import ClinicalState_2m_3y
 from apps.risk_rating.models import ClinicalState_3y_10y
 from apps.risk_rating.models import ClinicalState_10yMore
+from apps.risk_rating.models import MachineLearning_28d
+from apps.risk_rating.models import MachineLearning_29d_2m
+from apps.risk_rating.models import MachineLearning_2m_3y
+from apps.risk_rating.models import MachineLearning_3y_10y
+from apps.risk_rating.models import MachineLearning_10yMore
 
 
 ml1 = MachineLearning('apps/risk_rating/class_menos_28.csv')
@@ -139,11 +149,21 @@ def feed_ml(request):
     """
     define home page behaviour
     """
+    form1 = MachineLearning_28dForm()
+    form2 = MachineLearning_29d_2mForm()
+    form3 = MachineLearning_2m_3yForm()
+    form4 = MachineLearning_3y_10yForm()
+    form5 = MachineLearning_10yMoreForm()
 
     if request.method == 'POST' and request.POST.get("feed"):
         pass
 
-    return render(request, 'users/user_home/feed_ml.html')
+    return render(request, 'users/user_home/feed_ml.html',
+                           {'form1': form1,
+                            'form2': form2,
+                            'form3': form3,
+                            'form4': form4,
+                            'form5': form5})
 
 
 def trigger_ml(subject_patient, clinical_state, ml):
