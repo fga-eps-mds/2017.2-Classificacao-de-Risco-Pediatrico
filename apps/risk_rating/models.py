@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.translation import ugettext as _
 
 
 class Symptoms_28d(models.Model):
@@ -187,7 +188,17 @@ class ClinicalState_28d(Symptoms_28d):
 
 class MachineLearning_28d(Symptoms_28d):
 
-    pass
+    CLASSIFICATION_TYPES = (
+        (1, 'Atendimento Imediato'),
+        (2, 'Atendimento Hospitalar'),
+        (3, 'Atendimento Ambulatorial')
+    )
+
+    classification = models.IntegerField(
+        verbose_name=_('Classification'),
+        choices=CLASSIFICATION_TYPES,
+        default=0
+    )
 
 
 class Symptoms_29d_2m(models.Model):
@@ -370,7 +381,17 @@ class ClinicalState_29d_2m(Symptoms_29d_2m):
 
 class MachineLearning_29d_2m(Symptoms_29d_2m):
 
-    pass
+    CLASSIFICATION_TYPES = (
+        (1, 'Atendimento Imediato'),
+        (2, 'Atendimento Hospitalar'),
+        (3, 'Atendimento Ambulatorial')
+    )
+
+    classification = models.IntegerField(
+        verbose_name=_('Classification'),
+        choices=CLASSIFICATION_TYPES,
+        default=0
+    )
 
 
 class Symptoms_2m_3y(models.Model):
@@ -541,7 +562,17 @@ class ClinicalState_2m_3y(Symptoms_2m_3y):
 
 class MachineLearning_2m_3y(Symptoms_2m_3y):
 
-    pass
+    CLASSIFICATION_TYPES = (
+        (1, 'Atendimento Imediato'),
+        (2, 'Atendimento Hospitalar'),
+        (3, 'Atendimento Ambulatorial')
+    )
+
+    classification = models.IntegerField(
+        verbose_name=_('Classification'),
+        choices=CLASSIFICATION_TYPES,
+        default=0
+    )
 
 
 class Symptoms_3y_10y(models.Model):
@@ -849,7 +880,17 @@ class ClinicalState_3y_10y(Symptoms_3y_10y):
 
 class MachineLearning_3y_10y(Symptoms_3y_10y):
 
-    pass
+    CLASSIFICATION_TYPES = (
+        (1, 'Atendimento Imediato'),
+        (2, 'Atendimento Hospitalar'),
+        (3, 'Atendimento Ambulatorial')
+    )
+
+    classification = models.IntegerField(
+        verbose_name=_('Classification'),
+        choices=CLASSIFICATION_TYPES,
+        default=0
+    )
 
 
 class Symptoms_10yMore(models.Model):
@@ -1176,4 +1217,14 @@ class ClinicalState_10yMore(Symptoms_10yMore):
 
 class MachineLearning_10yMore(Symptoms_10yMore):
 
-    pass
+    CLASSIFICATION_TYPES = (
+        (1, 'Atendimento Imediato'),
+        (2, 'Atendimento Hospitalar'),
+        (3, 'Atendimento Ambulatorial')
+    )
+
+    classification = models.IntegerField(
+        verbose_name=_('Classification'),
+        choices=CLASSIFICATION_TYPES,
+        default=0
+    )
