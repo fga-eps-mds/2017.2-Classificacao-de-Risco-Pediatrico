@@ -157,3 +157,56 @@
         </div>
     </div>
 </div>
+<!-- 3 anos a 10 anos -->
+<div class="modal fade bd-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="range4_ml">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content" id="classification-content">
+            <div class="modal-body">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        Classificação de risco
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+{#              <form role="form" class="form" method="POST" id="form4">#}
+                    {% csrf_token %}
+                        <div class="container-fuild " id="container-modal">
+                            <div class="row" id="row-modal">
+                                <div class="btn-group-responsive" data-toggle="buttons">
+                                    {% for field in form4 %}
+                                        <label class="btn btn-primary classification-button col-md-2" >
+                                            <input class="form-check-input" type="checkbox" autocomplete="off" name="{{ field.name }}">
+                                            {{ field.label }}
+                                        </label>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    <div class="modal-footer">
+                        <div class="btn-group-responsive" data-toggle="buttons" align="center">
+                            <label class="btn btn-primary classification1-button col-md-2" >
+                                <input class="form-check-input" type="radio" autocomplete="off" name="imediato">
+                                Atendimento Imediato
+                            </label>
+                            <label class="btn btn-primary classification2-button col-md-2" >
+                                <input class="form-check-input" type="radio" autocomplete="off" name="hospitalar">
+                                Atendimento Hospitalar
+                            </label>
+                            <label class="btn btn-primary classification3-button col-md-2" >
+                                <input class="form-check-input" type="radio" autocomplete="off" name="ambulatorial">
+                                Atendimento Ambulatorial
+                            </label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" data-dismiss="modal" aria-hidden="true" class="btn btn-primary classification-button classification" name="feed_ml" align="center">
+                            Enviar
+                        </button>
+                    </div>
+{#              </form>#}
+            </div>
+        </div>
+    </div>
+</div>
