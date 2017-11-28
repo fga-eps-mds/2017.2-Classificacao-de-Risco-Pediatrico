@@ -106,7 +106,7 @@ def machine_learning(request):
 @login_required(redirect_field_name='', login_url='users:login')
 def home(request):
     """
-    define home page behaviour
+    define home page behavior
     """
     form1 = ClinicalState_28dForm()
     form2 = ClinicalState_29d_2mForm()
@@ -280,6 +280,15 @@ def edit_patient(request, id):
             status = 400
     return render(request, 'users/editPatient.html',
                   {'patient': patient, 'form': form}, status=status)
+
+
+@login_required(redirect_field_name='', login_url='users:login')
+def my_history(request):
+    """
+    define history page behavior
+    """
+    # print (request.user.id_user)
+    return render(request, 'users/myHistory.html')
 
 
 def get_under_28_symptoms(clinical_state):

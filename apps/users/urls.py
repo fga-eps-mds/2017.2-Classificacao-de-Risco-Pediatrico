@@ -24,5 +24,6 @@ urlpatterns = [
     url(r'^patients/edit/(?P<id>\w+)/$', views.edit_patient,
         name="edit_patient"),
     url(r'^classify_patient/$', views.machine_learning,
-        name='classify_patient')
+        name='classify_patient'),
+    url(r'^my_history/$', views.my_history, name="my_history")
 ]
