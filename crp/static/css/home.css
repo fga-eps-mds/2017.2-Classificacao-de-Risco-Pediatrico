@@ -385,6 +385,21 @@ a.article, a.article:hover {
     border-color: white;
 }
 
+.send-classification-button {
+    word-wrap: break-word;
+    white-space:normal;
+    color: #007bff;
+    background-color: white;
+    height: 67px;
+    width: 150px;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.send-classification-button.active {
+    color: white;
+}
+
 .btn-info  {
     border-color: #fff;
 }
