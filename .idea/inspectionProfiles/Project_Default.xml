@@ -4,7 +4,7 @@
     <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="ignoredPackages">
         <value>
-          <list size="143">
+          <list size="144">
             <item index="0" class="java.lang.String" itemvalue="six" />
             <item index="1" class="java.lang.String" itemvalue="Django" />
             <item index="2" class="java.lang.String" itemvalue="matplotlib" />
@@ -148,6 +148,7 @@
             <item index="140" class="java.lang.String" itemvalue="openpyxl" />
             <item index="141" class="java.lang.String" itemvalue="behave-django" />
             <item index="142" class="java.lang.String" itemvalue="selenium" />
+            <item index="143" class="java.lang.String" itemvalue="radon" />
           </list>
         </value>
       </option>
