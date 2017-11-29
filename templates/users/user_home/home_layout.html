@@ -2,16 +2,16 @@
 {% load staticfiles %}
 
 {% block head %}
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.16/b-1.4.2/r-2.2.0/datatables.min.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.datatables.net/v/bs4/dt-1.10.16/b-1.4.2/r-2.2.0/datatables.min.css"/>
     <link rel="stylesheet" href="{% static "css/home.css" %}">
     <link rel="stylesheet" href="{% static "css/registeredPatient.css" %}">
 {% endblock %}
 
 {% block js %}
-    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.16/b-1.4.2/r-2.2.0/datatables.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdn.datatables.net/v/bs4/dt-1.10.16/b-1.4.2/r-2.2.0/datatables.min.js"></script>
     <script src="{% static "js/home.js" %}"></script>
-    <script src="{% static "js/cleave.min.js" %}"></script>
-    <script src="{% static "js/registerPatient.js" %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -20,14 +20,15 @@
             <!-- Sidebar header -->
             <div class="sidebar-header">
                 <a href="{% url "users:home" %}">
-                  <div class="gradiente"></div>
-                  <h3 id="crpname">CRP</h3>
+                    <div class="gradiente"></div>
+                    <h3 id="crpname">CRP</h3>
                 </a>
                 <strong>CRP</strong>
             </div>
 
             <!-- Sidebar welcome message -->
-            <p class="ml-2" id="welcome"><span>Bem-vindo(a), <br /><span id="welcomeName">{{ user.name }}</span></span></p>
+            <p class="ml-2" id="welcome"><span>Bem-vindo(a), <br/><span id="welcomeName">{{ user.name }}</span></span>
+            </p>
 
             <ul class="list-unstyled components">
                 <!-- Register patient -->
@@ -45,7 +46,8 @@
                 <li>
                     <div class="container-box">
                         <div class="box-content">
-                            <a href="#patients" data-toggle="collapse" aria-expanded="false" onclick="changeGradientWidth(this)">
+                            <a href="#patients" data-toggle="collapse" aria-expanded="false"
+                               onclick="changeGradientWidth(this)">
                                 <i class="fa fa-user-o" aria-hidden="true"></i>
                                 Pacientes<span class="fa fa-chevron down"></span>
                             </a>
@@ -63,7 +65,8 @@
                 <li>
                     <div class="container-box">
                         <div class="box-content">
-                            <a class="link-group" href="#attendence" data-toggle="collapse" aria-expanded="false" onclick="changeGradientWidth(this)">
+                            <a class="link-group" href="#attendence" data-toggle="collapse" aria-expanded="false"
+                               onclick="changeGradientWidth(this)">
                                 <i class="fa fa-check-circle-o" aria-hidden="true"></i>
                                 Atendimento
                             </a>
@@ -86,7 +89,8 @@
                 <li>
                     <div class="container-box">
                         <div class="box-content">
-                            <a href="#statistics" data-toggle="collapse" aria-expanded="false" onclick="changeGradientWidth(this)">
+                            <a href="#statistics" data-toggle="collapse" aria-expanded="false"
+                               onclick="changeGradientWidth(this)">
                                 <i class="fa fa-area-chart" aria-hidden="true"></i>
                                 Estatísticas
                             </a>
@@ -109,7 +113,8 @@
                 <li>
                     <div class="container-box">
                         <div class="box-content">
-                            <a href="#help" data-toggle="collapse" aria-expanded="false" onclick="changeGradientWidth(this)">
+                            <a href="#help" data-toggle="collapse" aria-expanded="false"
+                               onclick="changeGradientWidth(this)">
                                 <i class="fa fa-question-circle"></i>
                                 Ajuda
                             </a>
