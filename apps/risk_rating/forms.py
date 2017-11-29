@@ -125,7 +125,8 @@ class MachineLearning_28dForm(forms.ModelForm):
                   'nao_suga_seio', 'manchas_na_pele', 'salivacao',
                   'chiado_no_peito', 'diminuicao_da_diurese', 'dor_abdominal',
                   'fontanela_abaulada', 'secrecao_no_umbigo',
-                  'secrecao_ocular', 'sangue_nas_fezes', 'convulsao_hoje']
+                  'secrecao_ocular', 'sangue_nas_fezes', 'convulsao_hoje',
+                  'classification']
 
 
 class MachineLearning_29d_2mForm(forms.ModelForm):
@@ -142,7 +143,8 @@ class MachineLearning_29d_2mForm(forms.ModelForm):
                   'manchas_na_pele', 'salivacao', 'chiado_no_peito',
                   'diminuicao_da_diurese', 'dor_abdominal',
                   'fontanela_abaulada', 'secrecao_no_umbigo',
-                  'secrecao_ocular', 'sangue_nas_fezes', 'convulsao_hoje']
+                  'secrecao_ocular', 'sangue_nas_fezes', 'convulsao_hoje',
+                  'classification']
 
 
 class MachineLearning_2m_3yForm(forms.ModelForm):
@@ -159,7 +161,7 @@ class MachineLearning_2m_3yForm(forms.ModelForm):
                   'manchas_na_pele', 'salivacao', 'chiado_no_peito',
                   'diminuicao_da_diurese', 'dor_abdominal',
                   'fontanela_abaulada', 'secrecao_no_umbigo',
-                  'secrecao_ocular']
+                  'secrecao_ocular', 'classification']
 
 
 class MachineLearning_3y_10yForm(forms.ModelForm):
@@ -184,7 +186,7 @@ class MachineLearning_3y_10yForm(forms.ModelForm):
                   'diminuicao_da_diurese', 'dor_abdominal',
                   'otalgia', 'epistaxe', 'otorreia', 'edema', 'adenomegalias',
                   'dor_articular', 'dificulade_de_marchar', 'sonolencia',
-                  'dor_muscular', 'dor_retroorbitaria']
+                  'dor_muscular', 'dor_retroorbitaria', 'classification']
 
 
 class MachineLearning_10yMoreForm(forms.ModelForm):
@@ -207,4 +209,5 @@ class MachineLearning_10yMoreForm(forms.ModelForm):
                   'diminuicao_da_diurese', 'dor_abdominal', 'otalgia',
                   'epistaxe', 'otorreia', 'edema', 'adenomegalias',
                   'dor_articular', 'dificuldade_de_marcha', 'sonolencia',
-                  'secrecao_ocular', 'dor_muscular', 'dor_retroorbitaria']
+                  'secrecao_ocular', 'dor_muscular', 'dor_retroorbitaria',
+                  'classification']

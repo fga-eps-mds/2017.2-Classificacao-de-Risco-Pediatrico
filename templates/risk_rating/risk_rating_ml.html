@@ -11,42 +11,45 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-{#              <form role="form" class="form" method="POST" id="form1">#}
+                <form role="form" class="form" method="POST" id="form1_ml">
                     {% csrf_token %}
                         <div class="container-fuild " id="container-modal">
                             <div class="row" id="row-modal">
                                 <div class="btn-group-responsive" data-toggle="buttons">
-                                    {% for field in form1 %}
-                                        <label class="btn btn-primary classification-button col-md-2" >
-                                            <input class="form-check-input" type="checkbox" autocomplete="off" name="{{ field.name }}">
-                                            {{ field.label }}
-                                        </label>
+                                    {% for field in form1_ml %}
+                                        {% if field.name != 'classification' %}
+                                            <label class="btn btn-primary classification-button col-md-2" >
+                                                <input class="form-check-input" type="checkbox" autocomplete="off" name="{{ field.name }}">
+                                                {{ field.label }}
+                                            </label>
+                                        {% else %}
+                                            <div class="modal-footer">
+                                                <div class="btn-group-responsive" data-toggle="buttons" align="center">
+                                                    <label class="btn btn-primary classification1-button col-md-2" >
+                                                        <input class="form-check-input" type="radio" autocomplete="off" name="{{ field.name }}" value="1" required>
+                                                        Atendimento Imediato
+                                                    </label>
+                                                    <label class="btn btn-primary classification2-button col-md-2" >
+                                                        <input class="form-check-input" type="radio" autocomplete="off" name="{{ field.name }}" value="2" required>
+                                                        Atendimento Hospitalar
+                                                    </label>
+                                                    <label class="btn btn-primary classification3-button col-md-2" >
+                                                        <input class="form-check-input" type="radio" autocomplete="off" name="{{ field.name }}" value="3" required>
+                                                        Atendimento Ambulatorial
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        {% endif %}
                                     {% endfor %}
                                 </div>
                             </div>
                         </div>
                     <div class="modal-footer">
-                        <div class="btn-group-responsive" data-toggle="buttons" align="center">
-                            <label class="btn btn-primary classification1-button col-md-2" >
-                                <input class="form-check-input" type="radio" autocomplete="off" name="imediato">
-                                Atendimento Imediato
-                            </label>
-                            <label class="btn btn-primary classification2-button col-md-2" >
-                                <input class="form-check-input" type="radio" autocomplete="off" name="hospitalar">
-                                Atendimento Hospitalar
-                            </label>
-                            <label class="btn btn-primary classification3-button col-md-2" >
-                                <input class="form-check-input" type="radio" autocomplete="off" name="ambulatorial">
-                                Atendimento Ambulatorial
-                            </label>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" data-dismiss="modal" aria-hidden="true" class="btn btn-primary classification-button classification" name="feed_ml" align="center">
+                        <button type="submit" aria-hidden="true" class="btn btn-primary classification-button classification_ml" name="form1_ml" align="center">
                             Enviar
                         </button>
                     </div>
-{#              </form>#}
+                </form>
             </div>
         </div>
     </div>
@@ -64,42 +67,46 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-{#              <form role="form" class="form" method="POST" id="form2">#}
+                <form role="form" class="form" method="POST" id="form2_ml">
                     {% csrf_token %}
                         <div class="container-fuild " id="container-modal">
                             <div class="row" id="row-modal">
                                 <div class="btn-group-responsive" data-toggle="buttons">
-                                    {% for field in form2 %}
-                                        <label class="btn btn-primary classification-button col-md-2" >
-                                            <input class="form-check-input" type="checkbox" autocomplete="off" name="{{ field.name }}">
-                                            {{ field.label }}
-                                        </label>
+                                    {% for field in form2_ml %}
+                                        {% if field.name != 'classification' %}
+                                            <label class="btn btn-primary classification-button col-md-2" >
+                                                <input class="form-check-input" type="checkbox" autocomplete="off" name="{{ field.name }}">
+                                                {{ field.label }}
+                                            </label>
+                                        {% else %}
+                                            <div class="modal-footer">
+                                                <div class="btn-group-responsive" data-toggle="buttons" align="center">
+                                                    <label class="btn btn-primary classification1-button col-md-2" >
+                                                        <input class="form-check-input" type="radio" autocomplete="off" name="{{ field.name }}" value="1" required>
+                                                        Atendimento Imediato
+                                                    </label>
+                                                    <label class="btn btn-primary classification2-button col-md-2" >
+                                                        <input class="form-check-input" type="radio" autocomplete="off" name="{{ field.name }}" value="2" required>
+                                                        Atendimento Hospitalar
+                                                    </label>
+                                                    <label class="btn btn-primary classification3-button col-md-2" >
+                                                        <input class="form-check-input" type="radio" autocomplete="off" name="{{ field.name }}" value="3" required>
+                                                        Atendimento Ambulatorial
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        {% endif %}
                                     {% endfor %}
                                 </div>
                             </div>
                         </div>
-                    <div class="modal-footer">
-                        <div class="btn-group-responsive" data-toggle="buttons" align="center">
-                            <label class="btn btn-primary classification1-button col-md-2" >
-                                <input class="form-check-input" type="radio" autocomplete="off" name="imediato">
-                                Atendimento Imediato
-                            </label>
-                            <label class="btn btn-primary classification2-button col-md-2" >
-                                <input class="form-check-input" type="radio" autocomplete="off" name="hospitalar">
-                                Atendimento Hospitalar
-                            </label>
-                            <label class="btn btn-primary classification3-button col-md-2" >
-                                <input class="form-check-input" type="radio" autocomplete="off" name="ambulatorial">
-                                Atendimento Ambulatorial
-                            </label>
-                        </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" data-dismiss="modal" aria-hidden="true" class="btn btn-primary classification-button classification" name="feed_ml" align="center">
+                        <button type="submit" aria-hidden="true" class="btn btn-primary classification-button classification" name="form2_ml" align="center">
                             Enviar
                         </button>
                     </div>
-{#              </form>#}
+                </form>
             </div>
         </div>
     </div>
@@ -117,42 +124,45 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-{#              <form role="form" class="form" method="POST" id="form3">#}
+                <form role="form" class="form" method="POST" id="form3_ml">
                     {% csrf_token %}
                         <div class="container-fuild " id="container-modal">
                             <div class="row" id="row-modal">
                                 <div class="btn-group-responsive" data-toggle="buttons">
-                                    {% for field in form3 %}
-                                        <label class="btn btn-primary classification-button col-md-2" >
-                                            <input class="form-check-input" type="checkbox" autocomplete="off" name="{{ field.name }}">
-                                            {{ field.label }}
-                                        </label>
+                                    {% for field in form3_ml %}
+                                        {% if field.name != 'classification' %}
+                                            <label class="btn btn-primary classification-button col-md-2" >
+                                                <input class="form-check-input" type="checkbox" autocomplete="off" name="{{ field.name }}">
+                                                {{ field.label }}
+                                            </label>
+                                        {% else %}
+                                            <div class="modal-footer">
+                                                <div class="btn-group-responsive" data-toggle="buttons" align="center">
+                                                    <label class="btn btn-primary classification1-button col-md-2" >
+                                                        <input class="form-check-input" type="radio" autocomplete="off" name="{{ field.name }}" value="1" required>
+                                                        Atendimento Imediato
+                                                    </label>
+                                                    <label class="btn btn-primary classification2-button col-md-2" >
+                                                        <input class="form-check-input" type="radio" autocomplete="off" name="{{ field.name }}" value="2" required>
+                                                        Atendimento Hospitalar
+                                                    </label>
+                                                    <label class="btn btn-primary classification3-button col-md-2" >
+                                                        <input class="form-check-input" type="radio" autocomplete="off" name="{{ field.name }}" value="3" required>
+                                                        Atendimento Ambulatorial
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        {% endif %}
                                     {% endfor %}
                                 </div>
                             </div>
                         </div>
                     <div class="modal-footer">
-                        <div class="btn-group-responsive" data-toggle="buttons" align="center">
-                            <label class="btn btn-primary classification1-button col-md-2" >
-                                <input class="form-check-input" type="radio" autocomplete="off" name="imediato">
-                                Atendimento Imediato
-                            </label>
-                            <label class="btn btn-primary classification2-button col-md-2" >
-                                <input class="form-check-input" type="radio" autocomplete="off" name="hospitalar">
-                                Atendimento Hospitalar
-                            </label>
-                            <label class="btn btn-primary classification3-button col-md-2" >
-                                <input class="form-check-input" type="radio" autocomplete="off" name="ambulatorial">
-                                Atendimento Ambulatorial
-                            </label>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" data-dismiss="modal" aria-hidden="true" class="btn btn-primary classification-button classification" name="feed_ml" align="center">
+                        <button type="submit" aria-hidden="true" class="btn btn-primary classification-button classification" name="form3_ml" align="center">
                             Enviar
                         </button>
                     </div>
-{#              </form>#}
+                </form>
             </div>
         </div>
     </div>
@@ -170,42 +180,45 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-{#              <form role="form" class="form" method="POST" id="form4">#}
+                <form role="form" class="form" method="POST" id="form4_ml">
                     {% csrf_token %}
                         <div class="container-fuild " id="container-modal">
                             <div class="row" id="row-modal">
                                 <div class="btn-group-responsive" data-toggle="buttons">
-                                    {% for field in form4 %}
-                                        <label class="btn btn-primary classification-button col-md-2" >
-                                            <input class="form-check-input" type="checkbox" autocomplete="off" name="{{ field.name }}">
-                                            {{ field.label }}
-                                        </label>
+                                    {% for field in form4_ml %}
+                                        {% if field.name != 'classification' %}
+                                            <label class="btn btn-primary classification-button col-md-2" >
+                                                <input class="form-check-input" type="checkbox" autocomplete="off" name="{{ field.name }}">
+                                                {{ field.label }}
+                                            </label>
+                                        {% else %}
+                                            <div class="modal-footer">
+                                                <div class="btn-group-responsive" data-toggle="buttons" align="center">
+                                                    <label class="btn btn-primary classification1-button col-md-2" >
+                                                        <input class="form-check-input" type="radio" autocomplete="off" name="{{ field.name }}" value="1" required>
+                                                        Atendimento Imediato
+                                                    </label>
+                                                    <label class="btn btn-primary classification2-button col-md-2" >
+                                                        <input class="form-check-input" type="radio" autocomplete="off" name="{{ field.name }}" value="2" required>
+                                                        Atendimento Hospitalar
+                                                    </label>
+                                                    <label class="btn btn-primary classification3-button col-md-2" >
+                                                        <input class="form-check-input" type="radio" autocomplete="off" name="{{ field.name }}" value="3" required>
+                                                        Atendimento Ambulatorial
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        {% endif %}
                                     {% endfor %}
                                 </div>
                             </div>
                         </div>
                     <div class="modal-footer">
-                        <div class="btn-group-responsive" data-toggle="buttons" align="center">
-                            <label class="btn btn-primary classification1-button col-md-2" >
-                                <input class="form-check-input" type="radio" autocomplete="off" name="imediato">
-                                Atendimento Imediato
-                            </label>
-                            <label class="btn btn-primary classification2-button col-md-2" >
-                                <input class="form-check-input" type="radio" autocomplete="off" name="hospitalar">
-                                Atendimento Hospitalar
-                            </label>
-                            <label class="btn btn-primary classification3-button col-md-2" >
-                                <input class="form-check-input" type="radio" autocomplete="off" name="ambulatorial">
-                                Atendimento Ambulatorial
-                            </label>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" data-dismiss="modal" aria-hidden="true" class="btn btn-primary classification-button classification" name="feed_ml" align="center">
+                        <button type="submit" aria-hidden="true" class="btn btn-primary classification-button classification" name="form4_ml" align="center">
                             Enviar
                         </button>
                     </div>
-{#              </form>#}
+                </form>
             </div>
         </div>
     </div>
@@ -223,42 +236,45 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-{#              <form role="form" class="form" method="POST" id="form5">#}
+                <form role="form" class="form" method="POST" id="form5_ml">
                     {% csrf_token %}
                         <div class="container-fuild " id="container-modal">
                             <div class="row" id="row-modal">
                                 <div class="btn-group-responsive" data-toggle="buttons">
-                                    {% for field in form5 %}
-                                        <label class="btn btn-primary classification-button col-md-2" >
-                                            <input class="form-check-input" type="checkbox" autocomplete="off" name="{{ field.name }}">
-                                            {{ field.label }}
-                                        </label>
+                                    {% for field in form5_ml %}
+                                        {% if field.name != 'classification' %}
+                                            <label class="btn btn-primary classification-button col-md-2" >
+                                                <input class="form-check-input" type="checkbox" autocomplete="off" name="{{ field.name }}">
+                                                {{ field.label }}
+                                            </label>
+                                        {% else %}
+                                            <div class="modal-footer">
+                                                <div class="btn-group-responsive" data-toggle="buttons" align="center">
+                                                    <label class="btn btn-primary classification1-button col-md-2" >
+                                                        <input class="form-check-input" type="radio" autocomplete="off" name="{{ field.name }}" value="1" required>
+                                                        Atendimento Imediato
+                                                    </label>
+                                                    <label class="btn btn-primary classification2-button col-md-2" >
+                                                        <input class="form-check-input" type="radio" autocomplete="off" name="{{ field.name }}" value="2" required>
+                                                        Atendimento Hospitalar
+                                                    </label>
+                                                    <label class="btn btn-primary classification3-button col-md-2" >
+                                                        <input class="form-check-input" type="radio" autocomplete="off" name="{{ field.name }}" value="3" required>
+                                                        Atendimento Ambulatorial
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        {% endif %}
                                     {% endfor %}
                                 </div>
                             </div>
                         </div>
                     <div class="modal-footer">
-                        <div class="btn-group-responsive" data-toggle="buttons" align="center">
-                            <label class="btn btn-primary classification1-button col-md-2" >
-                                <input class="form-check-input" type="radio" autocomplete="off" name="imediato">
-                                Atendimento Imediato
-                            </label>
-                            <label class="btn btn-primary classification2-button col-md-2" >
-                                <input class="form-check-input" type="radio" autocomplete="off" name="hospitalar">
-                                Atendimento Hospitalar
-                            </label>
-                            <label class="btn btn-primary classification3-button col-md-2" >
-                                <input class="form-check-input" type="radio" autocomplete="off" name="ambulatorial">
-                                Atendimento Ambulatorial
-                            </label>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" data-dismiss="modal" aria-hidden="true" class="btn btn-primary classification-button classification" name="feed_ml" align="center">
+                        <button type="submit" aria-hidden="true" class="btn btn-primary classification-button classification" name="form5_ml" align="center">
                             Enviar
                         </button>
                     </div>
-{#              </form>#}
+                </form>
             </div>
         </div>
     </div>

@@ -412,6 +412,14 @@ a.article, a.article:hover {
     margin-top: 14px;
 }
 
+.classification_ml {
+    color: white;
+    background-color: #007bff;
+    width: 97%;
+    height: 37px;
+    margin-top: 14px;
+}
+
 #header-modal {
     margin-left: 10px;
     text-align: justify;
