@@ -147,23 +147,46 @@ def home(request):
 
 def feed_ml(request):
     """
-    define home page behaviour
+    define feed machine learning page behaviour
     """
-    form1 = MachineLearning_28dForm()
-    form2 = MachineLearning_29d_2mForm()
-    form3 = MachineLearning_2m_3yForm()
-    form4 = MachineLearning_3y_10yForm()
-    form5 = MachineLearning_10yMoreForm()
+    form1_ml = MachineLearning_28dForm()
+    form2_ml = MachineLearning_29d_2mForm()
+    form3_ml = MachineLearning_2m_3yForm()
+    form4_ml = MachineLearning_3y_10yForm()
+    form5_ml = MachineLearning_10yMoreForm()
 
-    if request.method == 'POST' and request.POST.get("feed"):
-        pass
+    if request.method == 'POST':
+        if "form1_ml" in request.POST:
+            form = MachineLearning_28dForm(request.POST)
+            if form.is_valid:
+                form.save()
+
+        if "form2_ml" in request.POST:
+            form = MachineLearning_29d_2mForm(request.POST)
+            if form.is_valid:
+                form.save()
+
+        if "form3_ml" in request.POST:
+            form = MachineLearning_2m_3yForm(request.POST)
+            if form.is_valid:
+                form.save()
+
+        if "form4_ml" in request.POST:
+            form = MachineLearning_3y_10yForm(request.POST)
+            if form.is_valid:
+                form.save()
+
+        if "form5_ml" in request.POST:
+            form = MachineLearning_10yMoreForm(request.POST)
+            if form.is_valid:
+                form.save()
 
     return render(request, 'users/user_home/feed_ml.html',
-                           {'form1': form1,
-                            'form2': form2,
-                            'form3': form3,
-                            'form4': form4,
-                            'form5': form5})
+                           {'form1_ml': form1_ml,
+                            'form2_ml': form2_ml,
+                            'form3_ml': form3_ml,
+                            'form4_ml': form4_ml,
+                            'form5_ml': form5_ml})
 
 
 def trigger_ml(subject_patient, clinical_state, ml):

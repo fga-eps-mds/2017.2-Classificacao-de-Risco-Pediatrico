@@ -197,6 +197,7 @@ class MachineLearning_28d(Symptoms_28d):
     classification = models.IntegerField(
         verbose_name=_('Classification'),
         choices=CLASSIFICATION_TYPES,
+        blank=False,
         default=0
     )
 
@@ -390,6 +391,7 @@ class MachineLearning_29d_2m(Symptoms_29d_2m):
     classification = models.IntegerField(
         verbose_name=_('Classification'),
         choices=CLASSIFICATION_TYPES,
+        blank=False,
         default=0
     )
 
@@ -571,6 +573,7 @@ class MachineLearning_2m_3y(Symptoms_2m_3y):
     classification = models.IntegerField(
         verbose_name=_('Classification'),
         choices=CLASSIFICATION_TYPES,
+        blank=False,
         default=0
     )
 
@@ -889,6 +892,7 @@ class MachineLearning_3y_10y(Symptoms_3y_10y):
     classification = models.IntegerField(
         verbose_name=_('Classification'),
         choices=CLASSIFICATION_TYPES,
+        blank=False,
         default=0
     )
 
@@ -1226,5 +1230,6 @@ class MachineLearning_10yMore(Symptoms_10yMore):
     classification = models.IntegerField(
         verbose_name=_('Classification'),
         choices=CLASSIFICATION_TYPES,
+        blank=False,
         default=0
     )
