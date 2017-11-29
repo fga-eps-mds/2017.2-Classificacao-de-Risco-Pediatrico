@@ -282,6 +282,11 @@ def edit_patient(request, id):
                   {'patient': patient, 'form': form}, status=status)
 
 
+@login_required(redirect_field_name='', login_url='users:login')
+def graphic_symptoms_view(request):
+    return render(request, 'users/user_home/graphic_symptoms.html')
+
+
 def get_under_28_symptoms(clinical_state):
     """
     building patient (28d) to use on ml based on patient's clinical condition
