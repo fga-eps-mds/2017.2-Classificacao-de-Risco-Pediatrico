@@ -30,11 +30,6 @@ from apps.risk_rating.models import ClinicalState_29d_2m
 from apps.risk_rating.models import ClinicalState_2m_3y
 from apps.risk_rating.models import ClinicalState_3y_10y
 from apps.risk_rating.models import ClinicalState_10yMore
-from apps.risk_rating.models import MachineLearning_28d
-from apps.risk_rating.models import MachineLearning_29d_2m
-from apps.risk_rating.models import MachineLearning_2m_3y
-from apps.risk_rating.models import MachineLearning_3y_10y
-from apps.risk_rating.models import MachineLearning_10yMore
 
 
 ml1 = MachineLearning('apps/risk_rating/class_menos_28.csv')
