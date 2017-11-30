@@ -153,28 +153,21 @@ def feed_ml(request):
     if request.method == 'POST':
         if "form1_ml" in request.POST:
             form = MachineLearning_28dForm(request.POST)
-            if form.is_valid:
-                form.save()
 
-        if "form2_ml" in request.POST:
+        elif "form2_ml" in request.POST:
             form = MachineLearning_29d_2mForm(request.POST)
-            if form.is_valid:
-                form.save()
 
-        if "form3_ml" in request.POST:
+        elif "form3_ml" in request.POST:
             form = MachineLearning_2m_3yForm(request.POST)
-            if form.is_valid:
-                form.save()
 
-        if "form4_ml" in request.POST:
+        elif "form4_ml" in request.POST:
             form = MachineLearning_3y_10yForm(request.POST)
-            if form.is_valid:
-                form.save()
 
-        if "form5_ml" in request.POST:
+        elif "form5_ml" in request.POST:
             form = MachineLearning_10yMoreForm(request.POST)
-            if form.is_valid:
-                form.save()
+
+        if form.is_valid:
+            form.save()
 
     return render(request, 'users/user_home/feed_ml.html',
                            {'form1_ml': form1_ml,
