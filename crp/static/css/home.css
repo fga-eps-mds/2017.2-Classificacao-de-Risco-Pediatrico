@@ -233,7 +233,7 @@ a.download {
 }
 
 a.article, a.article:hover {
-    background: #6d7fcc
+    background: #6d7fcc;
     color: #fff;
 }
 
@@ -419,4 +419,13 @@ a.article, a.article:hover {
 .box-content {
     background: #2A3F54;
     width:260px;
+}
+
+/* ---------------------------------------------------
+    MODAL GRAPHICS SYMPTOMS
+----------------------------------------------------- */
+
+.modal-graphics {
+    text-align: center;
+    margin-bottom: 5%;
 }
