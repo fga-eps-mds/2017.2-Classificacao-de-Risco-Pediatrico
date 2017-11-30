@@ -284,8 +284,16 @@ def edit_patient(request, id):
 
 @login_required(redirect_field_name='', login_url='users:login')
 def graphic_symptoms_view(request):
-    graphic_symptoms = ClinicalState_28dForm.objects.all()
-    graphic_symptoms.size()
+    graphic_symptoms = {}
+
+    for column in ClinicalState_28d._meta.get_fields():
+        graphic_symptoms[column.name] = 0
+
+    for state in ClinicalState_28d.objects.all():
+        for column in ClinicalState_28d._meta.get_fields():
+            if getattr(state, column.name):
+                graphic_symptoms[column.name] = graphic_symptoms[column.name] + 1
+
     return render(request, 'users/user_home/graphic_symptoms.html',
                   {'graphic_symptoms': graphic_symptoms})
 
