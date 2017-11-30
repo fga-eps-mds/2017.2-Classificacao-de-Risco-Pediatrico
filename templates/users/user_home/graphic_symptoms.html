@@ -1,6 +1,44 @@
 {% extends 'users/user_home/home_layout.html' %}
 {% load staticfiles %}
 
+{% block head_pos %}
+  {% include 'risk_rating/risk_rating.html' %}
+{% endblock %}
+
 {% block content_pos %}
-    {% include 'risk_rating/risk_rating.html' %}
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src={% static "js/graphicSymptoms/horizontalBarChart.js" %}></script>
+    <script>
+        window.addEventListener('resize', function (event) {
+            $("#chart").width(window.innerWidth * 0.9);
+            $("#chart").height(window.innerHeight);
+        });
+    </script>
+<div id="chart" style="width: 800;height: 600">
+</div>
+<script>
+    var groupChartData = [{ "2614": 8, "over": 1 }, { "2614": 7, "over": 2 }, { "2614": 4, "over": 3 }, { "2614": 19, "over": 4 }, { "2614": 3, "over": 5 }, { "2614": 6, "over": 6 }, { "2614": 7, "over": 7 }, { "2614": 13, "over": 8 }, { "2614": 1, "over": 9 }, { "2614": 8, "over": 10 }];
+    var columnsInfo = { "2614": "Team A" };
+
+    $("#chart").empty();
+    var barChartConfig = {
+        mainDiv: "#chart",
+        colorRange: ["#2a98cd", "#df7247"],
+        data: groupChartData,
+        columnsInfo: columnsInfo,
+        xAxis: "runs",
+        yAxis: "over",
+        label: {
+            xAxis: "Runs",
+            yAxis: "Over"
+        },
+        requireLegend: true
+    };
+    var groupChart = new horizontalGroupBarChart(barChartConfig);
+</script>
+{% endblock %}
+
+
+{% block js_pos %}
 {% endblock %}

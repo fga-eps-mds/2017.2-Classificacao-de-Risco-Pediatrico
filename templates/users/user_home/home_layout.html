@@ -6,12 +6,16 @@
           href="https://cdn.datatables.net/v/bs4/dt-1.10.16/b-1.4.2/r-2.2.0/datatables.min.css"/>
     <link rel="stylesheet" href="{% static "css/home.css" %}">
     <link rel="stylesheet" href="{% static "css/registeredPatient.css" %}">
+    {% block head_pos %}
+    {% endblock %}
 {% endblock %}
 
 {% block js %}
     <script type="text/javascript"
             src="https://cdn.datatables.net/v/bs4/dt-1.10.16/b-1.4.2/r-2.2.0/datatables.min.js"></script>
     <script src="{% static "js/home.js" %}"></script>
+    {% block js_pos %}
+    {% endblock %}
 {% endblock %}
 
 {% block content %}

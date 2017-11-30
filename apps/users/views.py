@@ -284,7 +284,10 @@ def edit_patient(request, id):
 
 @login_required(redirect_field_name='', login_url='users:login')
 def graphic_symptoms_view(request):
-    return render(request, 'users/user_home/graphic_symptoms.html')
+    graphic_symptoms = ClinicalState_28dForm.objects.all()
+    graphic_symptoms.size()
+    return render(request, 'users/user_home/graphic_symptoms.html',
+                  {'graphic_symptoms': graphic_symptoms})
 
 
 def get_under_28_symptoms(clinical_state):
