@@ -310,6 +310,7 @@ a.article, a.article:hover {
     width: 150px;
     margin-left: 10px;
     margin-top: 10px;
+    outline: none !important;
 }
 
 .classification-button.active {
@@ -383,6 +384,10 @@ a.article, a.article:hover {
     color: white;
     background-color: #28a745;
     border-color: white;
+}
+
+.classification1-button:focus, .classification1-button.focus, .classification2-button:focus, .classification2-button.focus, .classification3-button:focus, .classification3-button.focus {
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0) !important;
 }
 
 .send-classification-button {

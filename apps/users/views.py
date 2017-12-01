@@ -168,6 +168,7 @@ def feed_ml(request):
 
         if form.is_valid:
             form.save()
+            return HttpResponseRedirect(reverse('users:feed_ml'))
 
     return render(request, 'users/user_home/feed_ml.html',
                            {'form1_ml': form1_ml,
