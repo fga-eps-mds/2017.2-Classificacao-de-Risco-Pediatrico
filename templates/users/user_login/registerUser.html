@@ -2,295 +2,489 @@
 
 <!-- {% block content_pre %}  -->
 
-<!--{% include 'layout/navbar.html' %} -->
 {% include 'layout/header.html' %}
 {% include 'layout/navbar.html' %}
 
-    <body id="page-top">
-            <section id="contact" class="section-padding">
-                <div class="container">
-                    <div class="row">
-              <div class="col-md-12">
-                  <h2 class="ser-title">Cadastro</h2>
-                  <hr class="botm-line">
-              </div>
-               <div class="container-fluid">
-                  <div class="row mt-5">
-                      <div class="col-lg-7 col-md-10 mx-auto my-auto text-center">
-                          <div class="card bg-light border-secondary mb-4 z-depth-2 slide-in-blurred-top">
-                              <form role="form" class="form" action='{% url 'users:register_user' %}' method="POST" >
-                                  <div class="card-header">
-                                      Classificação de Risco Pediátrico
-                                  </div>
-                                  {% csrf_token %}
+<body id="page-top">
+    <section id="contact" class="section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="ser-title">
+                        Cadastro
+                    </h2>
+                    <hr class="botm-line">
+                </div>
+                <div class="container-fluid">
+                    <div class="row mt-5">
+                        <div class="col-lg-7 col-md-10 mx-auto my-auto text-center">
+                            <div class="card bg-light border-secondary mb-4 z-depth-2 slide-in-blurred-top">
+                                <form role="form" class="form" action='{% url 'users:register_user' %}'
+                                method="POST" >
+                                    <div class="card-header">
+                                        Classificação de Risco Pediátrico
+                                    </div>
+                                    {% csrf_token %}
 
-                                  {% if errors %}
-                                      <div class="alert alert-warning" role="alert">
-                                          {{ errors }}
-                                      </div>
-                                  {% endif %}
+                                    {% if errors %}
+                                        <div class="alert alert-warning" role="alert">
+                                            {{ errors }}
+                                        </div>
+                                    {% endif %}
 
-                                  <div class="row mt-3">
-                                      <div class="col">
-                                          <div class="form-group px-3">
-                                              <div class="cols-sm-10">
-                                                  <div class="input-group">
-                                                      <span class="input-group-addon" id="basic-addon1"><i class="fa fa-user" aria-hidden="true"></i></span>
-                                                      <input type="text" name="{{ form.name.name }}" maxlength="150" id="{{ form.name.id_for_label }}" class="form-control"  placeholder="Nome" aria-label="Nome" aria-describedby="basic-addon1" autofocus "[a-zA-Z\s]+$" required>
-                                                  </div>
-                                                  {% if form.name.errors %}
-                                                      <div class="error-holder">
-                                                          <div class="alert alert-warning" role="alert">
-                                                              {{ form.name.errors }}
-                                                          </div>
-                                                      </div>
-                                                  {% endif %}
-                                              </div>
-                                          </div>
-
-                                          <div class="form-group px-3">
-                                              <div class="cols-sm-10">
-                                                  <div class="input-group">
-                                                      <span class="input-group-addon" id="basic-addon1">@</span>
-                                                      <input type="email" name="{{ form.email.name }}" id="{{ form.email.id_for_label }}" class="form-control"  placeholder="E-mail" aria-label="Email" aria-describedby="basic-addon3" required>
-                                                  </div>
-                                                  {% if form.email.errors %}
-                                                      <div class="error-holder">
-                                                          <div class="alert alert-warning" role="alert">
-                                                              {{ form.email.errors }}
-                                                          </div>
-                                                      </div>
-                                                  {% endif %}
-                                              </div>
-                                          </div>
-
-                                          <div class="form-group px-3 mt-3">
-                                              <div class="cols-sm-10">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon" id="basic-addon1"><i class="fa fa-user-plus" aria-hidden="true"></i></span>
-                                                  <select name="{{ form.profile.name }}" id="dropdown" class="form-control" required>
-                                                      <option value="" selected disabled>Escolha um perfil</option>
-                                                      <option value="1">Recepcionista</option>
-                                                      <option value="2">Atendente</option>
-                                                  </select>
+                                    <div class="row mt-3">
+                                        <div class="col">
+                                            <div class="form-group px-3">
+                                                <div class="cols-sm-10">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"
+                                                        id="basic-addon1">
+                                                            <i class="fa fa-user"
+                                                            aria-hidden="true"></i>
+                                                        </span>
+                                                        <input type="text" name="{{ form.name.name }}"
+                                                        maxlength="150" id="{{ form.name.id_for_label }}"
+                                                        class="form-control"  placeholder="Nome"
+                                                        aria-label="Nome" aria-describedby="basic-addon1"
+                                                        autofocus "[a-zA-Z\s]+$" required>
+                                                    </div>
+                                                    {% if form.name.errors %}
+                                                        <div class="error-holder">
+                                                            <div class="alert alert-warning"
+                                                            role="alert">
+                                                                {{ form.name.errors }}
+                                                            </div>
+                                                        </div>
+                                                    {% endif %}
                                                 </div>
-                                                  {% if form.profile.errors %}
-                                                      <div class="error-holder">
-                                                          <div class="alert alert-warning" role="alert">
-                                                              {{ form.profile.errors }}
-                                                          </div>
-                                                      </div>
-                                                  {% endif %}
-                                              </div>
-                                          </div>
+                                            </div>
 
-                                          <div class="form-group px-3">
-                                              <div class="cols-sm-10">
-                                                  <div class="input-group">
-                                                      <span class="input-group-addon" id="basic-addon1"><i class="fa fa-id-badge" aria-hidden="true"></i></span>
-                                                      <input type="text" name="{{ form.id_user.name }}" id="{{ form.id_user.id_for_label }}" class="form-control"  placeholder="ID" aria-label="ID" aria-describedby="basic-addon2" pattern="[0-9]+$" required>
-                                                  </div>
-                                                  {% if form.id_user.errors %}
-                                                      <div class="error-holder">
-                                                          <div class="alert alert-warning" role="alert">
-                                                              {{ form.id_user.errors }}
-                                                          </div>
-                                                      </div>
-                                                  {% endif %}
-                                              </div>
-                                          </div>
+                                            <div class="form-group px-3">
+                                                <div class="cols-sm-10">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"
+                                                        id="basic-addon1">
+                                                            @
+                                                        </span>
+                                                        <input type="email" name="{{ form.email.name }}"
+                                                        id="{{ form.email.id_for_label }}"
+                                                        class="form-control"  placeholder="E-mail"
+                                                        aria-label="Email" aria-describedby="basic-addon3"
+                                                        required>
+                                                    </div>
+                                                    {% if form.email.errors %}
+                                                        <div class="error-holder">
+                                                            <div class="alert alert-warning"
+                                                            role="alert">
+                                                                {{ form.email.errors }}
+                                                            </div>
+                                                        </div>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
 
-                                          <div class="form-group px-3">
-                                              <div class="cols-sm-10">
-                                                  <div class="input-group">
-                                                      <span class="input-group-addon" id="basic-addon1"><i class="fa fa-key" aria-hidden="true"></i></span>
-                                                      <input type="password" name="{{ form.password1.name }}" id="{{ form.password1.id_for_label }}" class="form-control"  placeholder="Senha" aria-label="Senha" aria-describedby="basic-addon4" required>
-                                                  </div>
-                                                  {% if form.password1.errors %}
-                                                      <div class="error-holder">
-                                                          <div class="alert alert-warning" role="alert">
-                                                              {{ form.password1.errors }}
-                                                          </div>
-                                                      </div>
-                                                  {% endif %}
-                                              </div>
-                                          </div>
+                                            <div class="form-group px-3 mt-3">
+                                                <div class="cols-sm-10">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"
+                                                        id="basic-addon1">
+                                                            <i class="fa fa-user-plus"
+                                                            aria-hidden="true"></i>
+                                                        </span>
+                                                        <select name="{{ form.profile.name }}"
+                                                        id="dropdown" class="form-control"
+                                                        required>
+                                                            <option value="" selected disabled>
+                                                                Escolha um perfil
+                                                            </option>
+                                                            <option value="1">
+                                                                Recepcionista
+                                                            </option>
+                                                            <option value="2">
+                                                                Atendente
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                    {% if form.profile.errors %}
+                                                        <div class="error-holder">
+                                                            <div class="alert alert-warning"
+                                                            role="alert">
+                                                                {{ form.profile.errors }}
+                                                            </div>
+                                                        </div>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
 
-                                          <div class="form-group px-3">
-                                              <div class="cols-sm-10">
-                                                  <div class="input-group">
-                                                      <span class="input-group-addon" id="basic-addon1"><i class="fa fa-check-circle-o" aria-hidden="true"></i></span>
-                                                      <input type="password" name="{{ form.password2.name }}" id="{{ form.password2.id_for_label }}" class="form-control"  placeholder="Confirmar Senha" aria-label="ConfirmarmSenha" aria-describedby="basic-addon5" required>
-                                                  </div>
-                                                  {% if form.password2.errors %}
-                                                      <div class="error-holder">
-                                                          <div class="alert alert-warning" role="alert">
-                                                              {{ form.password2.errors }}
-                                                          </div>
-                                                      </div>
-                                                  {% endif %}
-                                              </div>
-                                          </div>
-                                      </div>
+                                            <div class="form-group px-3">
+                                                <div class="cols-sm-10">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"
+                                                        id="basic-addon1">
+                                                            <i class="fa fa-id-badge"
+                                                            aria-hidden="true"></i>
+                                                        </span>
+                                                        <input type="text" name="{{ form.id_user.name }}"
+                                                        id="{{ form.id_user.id_for_label }}"
+                                                        class="form-control"  placeholder="ID"
+                                                        aria-label="ID" aria-describedby="basic-addon2"
+                                                        pattern="[0-9]+$" required>
+                                                    </div>
+                                                    {% if form.id_user.errors %}
+                                                        <div class="error-holder">
+                                                            <div class="alert alert-warning"
+                                                            role="alert">
+                                                                {{ form.id_user.errors }}
+                                                            </div>
+                                                        </div>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
 
+                                            <div class="form-group px-3">
+                                                <div class="cols-sm-10">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"
+                                                        id="basic-addon1">
+                                                            <i class="fa fa-key"
+                                                            aria-hidden="true"></i>
+                                                        </span>
+                                                        <input type="password" name="{{ form.password1.name }}"
+                                                        id="{{ form.password1.id_for_label }}"
+                                                        class="form-control"  placeholder="Senha"
+                                                        aria-label="Senha" aria-describedby="basic-addon4"
+                                                        required>
+                                                    </div>
+                                                    {% if form.password1.errors %}
+                                                        <div class="error-holder">
+                                                            <div class="alert alert-warning"
+                                                            role="alert">
+                                                                {{ form.password1.errors }}
+                                                            </div>
+                                                        </div>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
 
-                                      <div class="col">
-                              <div class="form-group px-3 mt-3" id="uf-box">
-                                  <div class="cols-sm-10">
-                                    <div class="input-group">
-                                        <span class="input-group-addon" id="basic-addon1"><i class="fa fa-globe" aria-hidden="true"></i></span>
-                                        <select name="{{ form.uf.name }}" id="dropdown" class="form-control" required>
-                                          <option value="" selected disabled>UF</option>
-                                          <option value="AC">AC</option>Acre
-                                          <option value="AL">AL</option> Alagoas
-                                          <option value="AM">AM</option> Amazonas
-                                          <option value="BA">BA</option> Bahia
-                                          <option value="CE">CE</option> Ceará
-                                          <option value="DF">DF</option> Distrito Federal
-                                          <option value="ES">ES</option> Espírito Santo
-                                          <option value="GO">GO</option> Goiás
-                                          <option value="MA">MA</option> Maranhão
-                                          <option value="MT">MT</option> Mato Grosso
-                                          <option value="MS">MS</option> Mato Grosso do Sul
-                                          <option value="MG">MG</option> Minas Gerais
-                                          <option value="PA">PA</option> Pará
-                                          <option value="PB">PB</option> Paraíba
-                                          <option value="PR">PR</option> Paraná
-                                          <option value="PE">PE</option> Pernambuco
-                                          <option value="PI">PI</option> Piauí
-                                          <option value="RJ">RJ</option> Rio de Janeiro
-                                          <option value="RN">RN</option> Rio Grande do Norte
-                                          <option value="RS">RS</option> Rio Grande do Sul
-                                          <option value="RO">RO</option> Rondônia
-                                          <option value="RR">RR</option> Roraima
-                                          <option value="SC">SC</option> Santa Catarina
-                                          <option value="SE">SE</option> Sergipe
-                                          <option value="SP">SP</option> São Paulo
-                                          <option value="TO">TO</option> Tocantins
-                                        </select>
-                                      </div>
-                                      {% if form.uf.errors %}
-                                          <div class="error-holder">
-                                              <div class="alert alert-warning" role="alert">
-                                                  {{ form.uf.errors }}
-                                              </div>
-                                          </div>
-                                      {% endif %}
-                                  </div>
-                              </div>
+                                            <div class="form-group px-3">
+                                                <div class="cols-sm-10">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"
+                                                        id="basic-addon1">
+                                                            <i class="fa fa-check-circle-o"
+                                                            aria-hidden="true"></i>
+                                                        </span>
+                                                        <input type="password" name="{{ form.password2.name }}"
+                                                        id="{{ form.password2.id_for_label }}"
+                                                        class="form-control"  placeholder="Confirmar Senha"
+                                                        aria-label="ConfirmarmSenha"
+                                                        aria-describedby="basic-addon5"
+                                                        required>
+                                                    </div>
+                                                    {% if form.password2.errors %}
+                                                        <div class="error-holder">
+                                                            <div class="alert alert-warning"
+                                                            role="alert">
+                                                                {{ form.password2.errors }}
+                                                            </div>
+                                                        </div>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
 
-                                          <div class="form-group px-3">
-                                              <div class="cols-sm-10">
-                                                  <div class="input-group">
-                                                      <span class="input-group-addon" id="basic-addon1"><i class="fa fa-map-o" aria-hidden="true"></i></span>
-                                                      <input type="text" name="{{ form.city.name }}" id="{{ form.city.id_for_label }}" class="form-control"  placeholder="Cidade" aria-label="Cidade" aria-describedby="basic-addon7" "[a-zA-Z\s]+$" required>
-                                                  </div>
-                                                  {% if form.city.errors %}
-                                                      <div class="error-holder">
-                                                          <div class="alert alert-warning" role="alert">
-                                                              {{ form.city.errors }}
-                                                          </div>
-                                                      </div>
-                                                  {% endif %}
-                                              </div>
-                                          </div>
+                                        <div class="col">
+                                            <div class="form-group px-3 mt-3" id="uf-box">
+                                                <div class="cols-sm-10">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"
+                                                        id="basic-addon1">
+                                                            <i class="fa fa-globe"
+                                                            aria-hidden="true"></i>
+                                                        </span>
+                                                        <select name="{{ form.uf.name }}"
+                                                        id="dropdown" class="form-control"
+                                                        required>
+                                                            <option value="" selected disabled>
+                                                                UF
+                                                            </option>
+                                                            <option value="AC">
+                                                                AC
+                                                            </option>
+                                                            Acre
+                                                            <option value="AL">
+                                                                AL
+                                                            </option>
+                                                            Alagoas
+                                                            <option value="AM">
+                                                                AM
+                                                            </option>
+                                                            Amazonas
+                                                            <option value="BA">
+                                                                BA
+                                                            </option>
+                                                            Bahia
+                                                            <option value="CE">
+                                                                CE
+                                                            </option>
+                                                            Ceará
+                                                            <option value="DF">
+                                                                DF
+                                                            </option>
+                                                            Distrito Federal
+                                                            <option value="ES">
+                                                                ES
+                                                            </option>
+                                                            Espírito Santo
+                                                            <option value="GO">
+                                                                GO
+                                                            </option>
+                                                            Goiás
+                                                            <option value="MA">
+                                                                MA
+                                                            </option>
+                                                            Maranhão
+                                                            <option value="MT">
+                                                                MT
+                                                            </option>
+                                                            Mato Grosso
+                                                            <option value="MS">
+                                                                MS
+                                                            </option>
+                                                            Mato Grosso do Sul
+                                                            <option value="MG">
+                                                                MG
+                                                            </option>
+                                                            Minas Gerais
+                                                            <option value="PA">
+                                                                PA
+                                                            </option>
+                                                            Pará
+                                                            <option value="PB">
+                                                                PB
+                                                            </option>
+                                                            Paraíba
+                                                            <option value="PR">
+                                                                PR
+                                                            </option>
+                                                            Paraná
+                                                            <option value="PE">
+                                                                PE
+                                                            </option>
+                                                            Pernambuco
+                                                            <option value="PI">
+                                                                PI
+                                                            </option>
+                                                            Piauí
+                                                            <option value="RJ">
+                                                                RJ
+                                                            </option>
+                                                            Rio de Janeiro
+                                                            <option value="RN">
+                                                                RN
+                                                            </option>
+                                                            Rio Grande do Norte
+                                                            <option value="RS">
+                                                                RS
+                                                            </option>
+                                                            Rio Grande do Sul
+                                                            <option value="RO">
+                                                                RO
+                                                            </option>
+                                                            Rondônia
+                                                            <option value="RR">
+                                                                RR
+                                                            </option>
+                                                            Roraima
+                                                            <option value="SC">
+                                                                SC
+                                                            </option>
+                                                            Santa Catarina
+                                                            <option value="SE">
+                                                                SE
+                                                            </option>
+                                                            Sergipe
+                                                            <option value="SP">
+                                                                SP
+                                                            </option>
+                                                            São Paulo
+                                                            <option value="TO">
+                                                                TO
+                                                            </option>
+                                                            Tocantins
+                                                        </select>
+                                                    </div>
+                                                    {% if form.uf.errors %}
+                                                        <div class="error-holder">
+                                                            <div class="alert alert-warning"
+                                                            role="alert">
+                                                                {{ form.uf.errors }}
+                                                            </div>
+                                                        </div>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
 
-                                          <div class="form-group px-3">
-                                              <div class="cols-sm-10">
-                                                  <div class="input-group">
-                                                      <span class="input-group-addon" id="basic-addon1"><i class="fa fa-road" aria-hidden="true"></i></span>
-                                                      <input type="text" name="{{ form.street.name }}" id="{{ form.street.id_for_label }}" class="form-control"  placeholder="Rua" aria-label="Rua" aria-describedby="basic-addon7" required>
-                                                  </div>
-                                                  {% if form.street.errors %}
-                                                      <div class="error-holder">
-                                                          <div class="alert alert-warning" role="alert">
-                                                              {{ form.street.errors }}
-                                                          </div>
-                                                      </div>
-                                                  {% endif %}
-                                              </div>
-                                          </div>
+                                            <div class="form-group px-3">
+                                                <div class="cols-sm-10">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"
+                                                        id="basic-addon1">
+                                                            <i class="fa fa-map-o"
+                                                            aria-hidden="true"></i>
+                                                        </span>
+                                                        <input type="text" name="{{ form.city.name }}"
+                                                        id="{{ form.city.id_for_label }}"
+                                                        class="form-control"  placeholder="Cidade"
+                                                        aria-label="Cidade" aria-describedby="basic-addon7" "[a-zA-Z\s]+$"
+                                                        required>
+                                                    </div>
+                                                    {% if form.city.errors %}
+                                                        <div class="error-holder">
+                                                            <div class="alert alert-warning"
+                                                            role="alert">
+                                                                {{ form.city.errors }}
+                                                            </div>
+                                                        </div>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
 
-                                          <div class="form-group px-3">
-                                              <div class="cols-sm-10">
-                                                  <div class="input-group">
-                                                      <span class="input-group-addon" id="basic-addon1"><i class="fa fa-users" aria-hidden="true"></i></span>
-                                                      <input type="text" name="{{ form.neighborhood.name }}" id="{{ form.neighborhood.id_for_label }}" class="form-control"  placeholder="Bairro" aria-label="Bairro" aria-describedby="basic-addon8" required>
-                                                  </div>
-                                                  {% if form.neighborhood.errors %}
-                                                      <div class="error-holder">
-                                                          <div class="alert alert-warning" role="alert">
-                                                              {{ form.neighborhood.errors }}
-                                                          </div>
-                                                      </div>
-                                                  {% endif %}
-                                              </div>
-                                          </div>
+                                            <div class="form-group px-3">
+                                                <div class="cols-sm-10">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"
+                                                        id="basic-addon1">
+                                                            <i class="fa fa-road"
+                                                            aria-hidden="true"></i>
+                                                        </span>
+                                                        <input type="text" name="{{ form.street.name }}"
+                                                        id="{{ form.street.id_for_label }}"
+                                                        class="form-control"  placeholder="Rua"
+                                                        aria-label="Rua" aria-describedby="basic-addon7"
+                                                        required>
+                                                    </div>
+                                                    {% if form.street.errors %}
+                                                        <div class="error-holder">
+                                                            <div class="alert alert-warning"
+                                                            role="alert">
+                                                                {{ form.street.errors }}
+                                                            </div>
+                                                        </div>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
 
-                                          <div class="form-group px-3">
-                                              <div class="cols-sm-10">
-                                                  <div class="input-group">
-                                                      <span class="input-group-addon" id="basic-addon1"><i class="fa fa-th-large" aria-hidden="true"></i></span>
-                                                      <input type="text" name="{{ form.block.name }}" id="{{ form.block.id_for_label }}" class="form-control"  placeholder="Conjunto" aria-label="Conjunto" aria-describedby="basic-addon9" required>
-                                                  </div>
-                                                  {% if form.block.errors %}
-                                                      <div class="error-holder">
-                                                          <div class="alert alert-warning" role="alert">
-                                                              {{ form.block.errors }}
-                                                          </div>
-                                                      </div>
-                                                  {% endif %}
-                                              </div>
-                                          </div>
+                                            <div class="form-group px-3">
+                                                <div class="cols-sm-10">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"
+                                                        id="basic-addon1">
+                                                            <i class="fa fa-users"
+                                                            aria-hidden="true"></i>
+                                                        </span>
+                                                        <input type="text" name="{{ form.neighborhood.name }}"
+                                                        id="{{ form.neighborhood.id_for_label }}"
+                                                        class="form-control"  placeholder="Bairro"
+                                                        aria-label="Bairro" aria-describedby="basic-addon8"
+                                                        required>
+                                                    </div>
+                                                    {% if form.neighborhood.errors %}
+                                                        <div class="error-holder">
+                                                            <div class="alert alert-warning"
+                                                            role="alert">
+                                                                {{ form.neighborhood.errors }}
+                                                            </div>
+                                                        </div>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
 
-                                          <div class="form-group px-3">
-                                              <div class="cols-sm-10">
-                                                  <div class="input-group">
-                                                      <span class="input-group-addon" id="basic-addon1">00</span>
-                                                      <input type="text" name="{{ form.number.name }}" id="{{ form.number.id_for_label }}" class="form-control"  placeholder="Número" aria-label="Número" aria-describedby="basic-addon10" pattern="[0-9]+$" required>
-                                                  </div>
-                                                  {% if form.number.errors %}
-                                                      <div class="error-holder">
-                                                          <div class="alert alert-warning" role="alert">
-                                                              {{ form.number.errors }}
-                                                          </div>
-                                                      </div>
-                                                  {% endif %}
-                                              </div>
-                                          </div>
-                                      </div>
-                                  </div>
+                                            <div class="form-group px-3">
+                                                <div class="cols-sm-10">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"
+                                                        id="basic-addon1">
+                                                            <i class="fa fa-th-large"
+                                                            aria-hidden="true"></i>
+                                                        </span>
+                                                        <input type="text" name="{{ form.block.name }}"
+                                                        id="{{ form.block.id_for_label }}"
+                                                        class="form-control"  placeholder="Conjunto"
+                                                        aria-label="Conjunto" aria-describedby="basic-addon9"
+                                                        required>
+                                                    </div>
+                                                    {% if form.block.errors %}
+                                                        <div class="error-holder">
+                                                            <div class="alert alert-warning"
+                                                            role="alert">
+                                                                {{ form.block.errors }}
+                                                            </div>
+                                                        </div>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
 
-                                  <div class="card-footer text-right">
-                                      <a href="{% url 'users:login' %}" id="cancel" class="btn btn-form" >Cancelar</a>
-                                      <button type="submit" class="btn btn-form">Cadastrar</button>
-                                  </div>
-                              </form>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-                  </div>
-              </div>
-        </section>
+                                            <div class="form-group px-3">
+                                                <div class="cols-sm-10">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"
+                                                        id="basic-addon1">
+                                                            00
+                                                        </span>
+                                                        <input type="text" name="{{ form.number.name }}"
+                                                        id="{{ form.number.id_for_label }}"
+                                                        class="form-control"  placeholder="Número"
+                                                        aria-label="Número" aria-describedby="basic-addon10"
+                                                        pattern="[0-9]+$" required>
+                                                    </div>
+                                                    {% if form.number.errors %}
+                                                        <div class="error-holder">
+                                                            <div class="alert alert-warning"
+                                                            role="alert">
+                                                                {{ form.number.errors }}
+                                                            </div>
+                                                        </div>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
-        <!-- Bootstrap core JavaScript -->
-        <script src={% static "js/landingPage/jquery.min.js" %}></script>
-        <script src={% static "js/landingPage/bootstrap.bundle.min.js" %}></script>
+                                    <div class="card-footer text-right">
+                                        <a href="{% url 'users:login' %}" id="cancel"
+                                        class="btn btn-form">
+                                            Cancelar
+                                        </a>
+                                        <button type="submit" class="btn btn-form">
+                                            Cadastrar
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        <!-- Plugin JavaScript -->
-        <script src={% static "js/landingPage/jquery.easing.min.js" %}></script>
+    <!-- Bootstrap core JavaScript -->
+    <script src={% static "js/landingPage/jquery.min.js" %}></script>
+    <script src={% static "js/landingPage/bootstrap.bundle.min.js" %}></script>
 
-        <!-- Custom scripts for this template -->
-        <script src={% static "js/landingPage/landingPage.js" %}></script>
-        <script src={% static "js/landingPage/jquery.waypoints.min.js" %}></script>
-        <script src={% static "js/landingPage/waypoint.js" %}></script>
+    <!-- Plugin JavaScript -->
+    <script src={% static "js/landingPage/jquery.easing.min.js" %}></script>
 
-        <div class="push"></div>
+    <!-- Custom scripts for this template -->
+    <script src={% static "js/landingPage/landingPage.js" %}></script>
+    <script src={% static "js/landingPage/jquery.waypoints.min.js" %}></script>
+    <script src={% static "js/landingPage/waypoint.js" %}></script>
 
-    </body>
+    <div class="push"></div>
 
-    {% include 'layout/footer.html' %}
+</body>
+
+{% include 'layout/footer.html' %}
 
 </html>
-<!-- {% endblock %} -->

@@ -1,8 +1,8 @@
 {% for patient in patients %}
     {% csrf_token %}
 
-    <div class="modal fade bd-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"
-        id="risk_range{{ patient.id }}">
+    <div class="modal fade bd-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    aria-hidden="true" id="risk_ranting{{ patient.id }}">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content" id="classification-content">
                 <div class="modal-header">
@@ -26,17 +26,22 @@
                                     <div class="btn-group-responsive" data-toggle="buttons">
                                         {% for field in form1 %}
                                             {% if field.name == 'patient_id' %}
-                                                <input type="hidden" value="{{ patient.id }}" name="patient_id" />
+                                                <input type="hidden" value="{{ patient.id }}"
+                                                name="patient_id" />
                                                 <input type="hidden" value="1" name="form1" />
                                             {% elif field.name == 'patient.comment_receptionist' %}
-                                                <input type="hidden" value="{{ patient.comment_receptionist }}" name="patient_id" />
+                                                <input type="hidden" value="{{ patient.comment_receptionist }}"
+                                                name="patient_id" />
                                                 <input type="hidden" value="1" name="form1" />
                                             {% elif field.name == 'classifier_id' %}
-                                                <input type="hidden" value="{{ request.user.id_user }}" name="classifier_id" />
+                                                <input type="hidden" value="{{ request.user.id_user }}"
+                                                name="classifier_id" />
                                                 <input type="hidden" value="1" name="form1" />
                                             {% else %}
                                                 <label class="btn btn-primary classification-button col-md-2" >
-                                                    <input class="form-check-input" type="checkbox" autocomplete="off" name="{{ field.name }}">
+                                                    <input class="form-check-input"
+                                                    type="checkbox" autocomplete="off"
+                                                    name="{{ field.name }}">
                                                         {{ field.label }}
                                                 </label>
                                             {% endif %}
@@ -45,7 +50,9 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="submit" data-dismiss="modal" aria-hidden="true" class="btn btn-primary classification-button classification" name="form1">
+                                <button type="submit" data-dismiss="modal" aria-hidden="true"
+                                class="btn btn-primary classification-button classification"
+                                name="form1">
                                     Classificar
                                 </button>
                             </div>
@@ -62,17 +69,21 @@
                                     <div class="btn-group-responsive" data-toggle="buttons">
                                         {% for field in form2 %}
                                             {% if field.name == 'patient_id' %}
-                                                <input type="hidden" value="{{ patient.id }}" name="patient_id" />
+                                                <input type="hidden" value="{{ patient.id }}"
+                                                name="patient_id" />
                                                 <input type="hidden" value="1" name="form2" />
                                             {% elif field.name == 'patient.comment_receptionist' %}
-                                                <input type="hidden" value="{{ patient.comment_receptionist }}" name="patient_id" />
+                                                <input type="hidden" value="{{ patient.comment_receptionist }}"
+                                                name="patient_id" />
                                                 <input type="hidden" value="1" name="form2" />
                                             {% elif field.name == 'classifier_id' %}
-                                                <input type="hidden" value="{{ request.user.id_user }}" name="classifier_id" />
+                                                <input type="hidden" value="{{ request.user.id_user }}"
+                                                name="classifier_id" />
                                                 <input type="hidden" value="1" name="form2" />
                                             {% else %}
                                                 <label class="btn btn-primary classification-button col-md-2" >
-                                                    <input class="form-check-input" type="checkbox" autocomplete="off" name="{{ field.name }}">
+                                                    <input class="form-check-input" type="checkbox"
+                                                    autocomplete="off" name="{{ field.name }}">
                                                         {{ field.label }}
                                                 </label>
                                             {% endif %}
@@ -81,7 +92,9 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="submit" data-dismiss="modal" aria-hidden="true" class="btn btn-primary classification-button classification" name="form2">
+                                <button type="submit" data-dismiss="modal" aria-hidden="true"
+                                class="btn btn-primary classification-button classification"
+                                name="form2">
                                     Classificar
                                 </button>
                             </div>
@@ -98,17 +111,22 @@
                                     <div class="btn-group-responsive" data-toggle="buttons">
                                         {% for field in form3 %}
                                             {% if field.name == 'patient_id' %}
-                                                <input type="hidden" value="{{ patient.id }}" name="patient_id" />
+                                                <input type="hidden" value="{{ patient.id }}"
+                                                name="patient_id" />
                                                 <input type="hidden" value="1" name="form3" />
                                             {% elif field.name == 'patient.comment_receptionist' %}
-                                                <input type="hidden" value="{{ patient.comment_receptionist }}" name="patient_id" />
+                                                <input type="hidden" value="{{ patient.comment_receptionist }}"
+                                                name="patient_id" />
                                                 <input type="hidden" value="1" name="form3" />
                                             {% elif field.name == 'classifier_id' %}
-                                                <input type="hidden" value="{{ request.user.id_user }}" name="classifier_id" />
+                                                <input type="hidden" value="{{ request.user.id_user }}"
+                                                name="classifier_id" />
                                                 <input type="hidden" value="1" name="form3" />
                                             {% else %}
                                                 <label class="btn btn-primary classification-button col-md-2" >
-                                                    <input class="form-check-input" type="checkbox" autocomplete="off" name="{{ field.name }}">
+                                                    <input class="form-check-input"
+                                                    type="checkbox" autocomplete="off"
+                                                    name="{{ field.name }}">
                                                         {{ field.label }}
                                                 </label>
                                             {% endif %}
@@ -117,7 +135,9 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="submit" data-dismiss="modal" aria-hidden="true" class="btn btn-primary classification-button classification" name="form3">
+                                <button type="submit" data-dismiss="modal" aria-hidden="true"
+                                class="btn btn-primary classification-button classification"
+                                name="form3">
                                     Classificar
                                 </button>
                             </div>
@@ -134,17 +154,25 @@
                                         <div class="btn-group-responsive" data-toggle="buttons">
                                             {% for field in form4 %}
                                                 {% if field.name == 'patient_id' %}
-                                                    <input type="hidden" value="{{ patient.id }}" name="patient_id" />
-                                                    <input type="hidden" value="1" name="form4" />
+                                                    <input type="hidden" value="{{ patient.id }}"
+                                                    name="patient_id" />
+                                                    <input type="hidden" value="1"
+                                                    name="form4" />
                                                 {% elif field.name == 'patient.comment_receptionist' %}
-                                                    <input type="hidden" value="{{ patient.comment_receptionist }}" name="patient_id" />
-                                                    <input type="hidden" value="1" name="form4" />
+                                                    <input type="hidden" value="{{ patient.comment_receptionist }}"
+                                                    name="patient_id" />
+                                                    <input type="hidden" value="1"
+                                                    name="form4" />
                                                 {% elif field.name == 'classifier_id' %}
-                                                    <input type="hidden" value="{{ request.user.id_user }}" name="classifier_id" />
-                                                    <input type="hidden" value="1" name="form4" />
+                                                    <input type="hidden" value="{{ request.user.id_user }}"
+                                                    name="classifier_id" />
+                                                    <input type="hidden" value="1"
+                                                    name="form4" />
                                                 {% else %}
                                                     <label class="btn btn-primary classification-button col-md-2" >
-                                                        <input class="form-check-input" type="checkbox" autocomplete="off" name="{{ field.name }}">
+                                                        <input class="form-check-input"
+                                                        type="checkbox" autocomplete="off"
+                                                        name="{{ field.name }}">
                                                             {{ field.label }}
                                                     </label>
                                                 {% endif %}
@@ -153,7 +181,9 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="submit" data-dismiss="modal" aria-hidden="true" class="btn btn-primary classification-button classification" name="form4">
+                                    <button type="submit" data-dismiss="modal" aria-hidden="true"
+                                    class="btn btn-primary classification-button classification"
+                                    name="form4">
                                         Classificar
                                     </button>
                                 </div>
@@ -171,17 +201,22 @@
                                     <div class="btn-group-responsive" data-toggle="buttons">
                                         {% for field in form5 %}
                                             {% if field.name == 'patient_id' %}
-                                                <input type="hidden" value="{{ patient.id }}" name="patient_id" />
+                                                <input type="hidden" value="{{ patient.id }}"
+                                                name="patient_id" />
                                                 <input type="hidden" value="1" name="form5" />
                                             {% elif field.name == 'patient.comment_receptionist' %}
-                                                <input type="hidden" value="{{ patient.comment_receptionist }}" name="patient_id" />
+                                                <input type="hidden" value="{{ patient.comment_receptionist }}"
+                                                name="patient_id" />
                                                 <input type="hidden" value="1" name="form5" />
                                             {% elif field.name == 'classifier_id' %}
-                                                <input type="hidden" value="{{ request.user.id_user }}" name="classifier_id" />
+                                                <input type="hidden" value="{{ request.user.id_user }}"
+                                                name="classifier_id" />
                                                 <input type="hidden" value="1" name="form5" />
                                             {% else %}
                                                 <label class="btn btn-primary classification-button col-md-2" >
-                                                    <input class="form-check-input" type="checkbox" autocomplete="off" name="{{ field.name }}">
+                                                    <input class="form-check-input"
+                                                    type="checkbox" autocomplete="off"
+                                                    name="{{ field.name }}">
                                                         {{ field.label }}
                                                 </label>
                                             {% endif %}
@@ -190,7 +225,9 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="submit" data-dismiss="modal" aria-hidden="true" class="btn btn-primary classification-button classification" name="form5">
+                                <button type="submit" data-dismiss="modal" aria-hidden="true"
+                                class="btn btn-primary classification-button classification"
+                                name="form5">
                                     Classificar
                                 </button>
                             </div>
@@ -214,30 +251,4 @@
         </div>
     </div>
 
-    <div class="modal fade bd-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"
-        id="no_ml{{ patient.id }}">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content" id="classification-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">
-                        Classificação de risco
-                    </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                {% csrf_token %}
-                <div class="modal-body">
-                    <div class="container-fuild " id="container-modal">
-                        <h5>
-                            Desculpe, mas ainda não é possível classificar um paciente desta faixa etária
-                        </h5>
-                        <h6>
-                            Faixa etaria: {{ patient.age_range }}
-                        </h6>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 {% endfor %}
