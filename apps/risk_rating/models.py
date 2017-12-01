@@ -10,6 +10,13 @@ class ClinicalState_28d(models.Model):
         unique=False
     )
 
+    classifier_id = models.CharField(
+        verbose_name=('ID do Classificador'),
+        max_length=150,
+        blank=True,
+        unique=False
+    )
+
     # symptoms:
     dispineia = models.BooleanField(
         verbose_name=("Dispinéia"),
@@ -189,6 +196,13 @@ class ClinicalState_29d_2m(models.Model):
         unique=False
     )
 
+    classifier_id = models.CharField(
+        verbose_name=('ID do Classificador'),
+        max_length=150,
+        blank=True,
+        unique=False
+    )
+
     # symptoms:
     dispineia = models.BooleanField(
         verbose_name=("Dispinéia"),
@@ -362,6 +376,13 @@ class ClinicalState_2m_3y(models.Model):
         unique=False
     )
 
+    classifier_id = models.CharField(
+        verbose_name=('ID do Classificador'),
+        max_length=150,
+        blank=True,
+        unique=False
+    )
+
     # symptoms:
     dispineia = models.BooleanField(
         verbose_name=("Dispinéia"),
@@ -518,6 +539,13 @@ class ClinicalState_10yMore(models.Model):
 
     patient_id = models.CharField(
         verbose_name=('ID do Paciente'),
+        max_length=150,
+        blank=True,
+        unique=False
+    )
+
+    classifier_id = models.CharField(
+        verbose_name=('ID do Classificador'),
         max_length=150,
         blank=True,
         unique=False
@@ -840,6 +868,13 @@ class ClinicalState_3y_10y(models.Model):
         unique=False
     )
 
+    classifier_id = models.CharField(
+        verbose_name=('ID do Classificador'),
+        max_length=150,
+        blank=True,
+        unique=False
+    )
+
     # symptoms:
     perdada_consciencia = models.BooleanField(
         verbose_name=("Perda de Consciência"),
@@ -996,21 +1031,25 @@ class ClinicalState_3y_10y(models.Model):
         default=False,
         blank=True
     )
+
     hiperemia_conjuntival = models.BooleanField(
         verbose_name=("Hiperemia Conjuntival"),
         default=False,
         blank=True
     )
+
     secrecao_ocular = models.BooleanField(
         verbose_name=("Secrecao Ocular"),
         default=False,
         blank=True
     )
+
     obstrucao_nasal = models.BooleanField(
         verbose_name=("Obstrução Nasal"),
         default=False,
         blank=True
     )
+
     convulsao = models.BooleanField(
         verbose_name=("Convulsão"),
         default=False,
@@ -1028,16 +1067,19 @@ class ClinicalState_3y_10y(models.Model):
         default=False,
         blank=True
     )
+
     queda = models.BooleanField(
         verbose_name=("Queda"),
         default=False,
         blank=True
     )
+
     hiporexia = models.BooleanField(
         verbose_name=("Hiporexia"),
         default=False,
         blank=True
     )
+    
     salivacao = models.BooleanField(
         verbose_name=("Salivacao"),
         default=False,

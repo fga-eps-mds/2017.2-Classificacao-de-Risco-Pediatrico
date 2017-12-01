@@ -13,7 +13,7 @@ class ClinicalState_28dForm(forms.ModelForm):
     """
     class Meta:
         model = ClinicalState_28d
-        fields = ['patient_id', 'dispineia', 'ictericia',
+        fields = ['patient_id', 'classifier_id', 'dispineia', 'ictericia',
                   'perdada_consciencia', 'cianose', 'febre',
                   'solucos', 'prostracao', 'vomitos', 'tosse',
                   'coriza', 'obstrucao_nasal', 'convulcao_no_momento',
@@ -30,7 +30,7 @@ class ClinicalState_29d_2mForm(forms.ModelForm):
     """
     class Meta:
         model = ClinicalState_29d_2m
-        fields = ['patient_id', 'dispineia', 'ictericia',
+        fields = ['patient_id', 'classifier_id', 'dispineia', 'ictericia',
                   'perdada_consciencia', 'cianose', 'febre',
                   'solucos', 'prostracao', 'vomitos', 'tosse',
                   'coriza', 'obstrucao_nasal', 'convulcao_no_momento',
@@ -43,11 +43,11 @@ class ClinicalState_29d_2mForm(forms.ModelForm):
 
 class ClinicalState_2m_3yForm(forms.ModelForm):
     """
-    Defining fields patients (29 days and 2 months old) clinical state
+    Defining fields patients (2 months and 3 years old) clinical state
     """
     class Meta:
         model = ClinicalState_2m_3y
-        fields = ['patient_id', 'dispineia', 'ictericia',
+        fields = ['patient_id', 'classifier_id', 'dispineia', 'ictericia',
                   'perdada_consciencia', 'cianose', 'febre',
                   'solucos', 'prostracao', 'vomitos', 'tosse',
                   'coriza', 'obstrucao_nasal', 'convulcao_no_momento',
@@ -60,11 +60,11 @@ class ClinicalState_2m_3yForm(forms.ModelForm):
 
 class ClinicalState_10yMoreForm(forms.ModelForm):
     """
-    Defining fields patients (29 days and 2 months old) clinical state
+    Defining fields patients (10 years old or more) clinical state
     """
     class Meta:
         model = ClinicalState_10yMore
-        fields = ['patient_id', 'mais_de_72h_febre', 'menos_de_72h_febre',
+        fields = ['patient_id', 'classifier_id', 'mais_de_72h_febre', 'menos_de_72h_febre',
                   'tontura', 'corpo_estranho', 'dor_de_dente', 'disuria',
                   'urina_concentrada', 'dispineia', 'dor_toracica',
                   'choque_eletrico', 'quase_afogamento', 'artralgia',
@@ -87,7 +87,7 @@ class ClinicalState_3y_10yForm(forms.ModelForm):
     """
     class Meta:
         model = ClinicalState_3y_10y
-        fields = ['patient_id', 'perdada_consciencia', 'febre_maior_72h',
+        fields = ['patient_id', 'classifier_id', 'perdada_consciencia', 'febre_maior_72h',
                   'febre_menos_72h', 'odinofagia', 'fascies_de_dor',
                   'tontura', 'corpo_estranho', 'dor_dentes',
                   'disuria', 'urina_concentrada', 'dispineia',
