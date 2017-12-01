@@ -1,3 +1,8 @@
+{% load staticfiles %}
+{% block js %}
+    <script src="{% static "js/feed_ml.js" %}"></script>
+{% endblock %}
+
 <!-- até 28 dias -->
 <div class="modal fade bd-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="range1_ml">
     <div class="modal-dialog modal-lg" role="document">
@@ -25,16 +30,16 @@
                                         {% else %}
                                             <div class="modal-footer">
                                                 <div class="btn-group-responsive" data-toggle="buttons" align="center">
-                                                    <label class="btn btn-primary classification1-button col-md-2" >
-                                                        <input class="form-check-input" type="radio" autocomplete="off" name="{{ field.name }}" value="1" required>
+                                                    <label class="btn btn-primary classification1-button col-md-2" onclick="check(1)">
+                                                        <input class="form-check-input" type="radio" autocomplete="off" name="{{ field.name }}" value="1">
                                                         Atendimento Imediato
                                                     </label>
-                                                    <label class="btn btn-primary classification2-button col-md-2" >
-                                                        <input class="form-check-input" type="radio" autocomplete="off" name="{{ field.name }}" value="2" required>
+                                                    <label class="btn btn-primary classification2-button col-md-2" onclick="check(1)">
+                                                        <input class="form-check-input" type="radio" autocomplete="off" name="{{ field.name }}" value="2">
                                                         Atendimento Hospitalar
                                                     </label>
-                                                    <label class="btn btn-primary classification3-button col-md-2" >
-                                                        <input class="form-check-input" type="radio" autocomplete="off" name="{{ field.name }}" value="3" required>
+                                                    <label class="btn btn-primary classification3-button col-md-2" onclick="check(1)">
+                                                        <input class="form-check-input" type="radio" autocomplete="off" name="{{ field.name }}" value="3">
                                                         Atendimento Ambulatorial
                                                     </label>
                                                 </div>
@@ -45,7 +50,7 @@
                             </div>
                         </div>
                     <div class="modal-footer">
-                        <button type="submit" aria-hidden="true" class="btn btn-primary classification-button classification_ml" name="form1_ml" align="center">
+                        <button type="submit" aria-hidden="true" class="btn btn-primary classification-button classification_ml" id="submit1" disabled="disabled" name="form1_ml" align="center">
                             Enviar
                         </button>
                     </div>
@@ -81,15 +86,15 @@
                                         {% else %}
                                             <div class="modal-footer">
                                                 <div class="btn-group-responsive" data-toggle="buttons" align="center">
-                                                    <label class="btn btn-primary classification1-button col-md-2" >
+                                                    <label class="btn btn-primary classification1-button col-md-2" onclick="check(2)">
                                                         <input class="form-check-input" type="radio" autocomplete="off" name="{{ field.name }}" value="1" required>
                                                         Atendimento Imediato
                                                     </label>
-                                                    <label class="btn btn-primary classification2-button col-md-2" >
+                                                    <label class="btn btn-primary classification2-button col-md-2" onclick="check(2)">
                                                         <input class="form-check-input" type="radio" autocomplete="off" name="{{ field.name }}" value="2" required>
                                                         Atendimento Hospitalar
                                                     </label>
-                                                    <label class="btn btn-primary classification3-button col-md-2" >
+                                                    <label class="btn btn-primary classification3-button col-md-2" onclick="check(2)">
                                                         <input class="form-check-input" type="radio" autocomplete="off" name="{{ field.name }}" value="3" required>
                                                         Atendimento Ambulatorial
                                                     </label>
@@ -102,7 +107,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" aria-hidden="true" class="btn btn-primary classification-button classification_ml" name="form2_ml" align="center">
+                        <button type="submit" aria-hidden="true" class="btn btn-primary classification-button classification_ml" id="submit2" disabled="disabled" name="form2_ml" align="center">
                             Enviar
                         </button>
                     </div>
@@ -138,15 +143,15 @@
                                         {% else %}
                                             <div class="modal-footer">
                                                 <div class="btn-group-responsive" data-toggle="buttons" align="center">
-                                                    <label class="btn btn-primary classification1-button col-md-2" >
+                                                    <label class="btn btn-primary classification1-button col-md-2" onclick="check(3)">
                                                         <input class="form-check-input" type="radio" autocomplete="off" name="{{ field.name }}" value="1" required>
                                                         Atendimento Imediato
                                                     </label>
-                                                    <label class="btn btn-primary classification2-button col-md-2" >
+                                                    <label class="btn btn-primary classification2-button col-md-2" onclick="check(3)">
                                                         <input class="form-check-input" type="radio" autocomplete="off" name="{{ field.name }}" value="2" required>
                                                         Atendimento Hospitalar
                                                     </label>
-                                                    <label class="btn btn-primary classification3-button col-md-2" >
+                                                    <label class="btn btn-primary classification3-button col-md-2" onclick="check(3)">
                                                         <input class="form-check-input" type="radio" autocomplete="off" name="{{ field.name }}" value="3" required>
                                                         Atendimento Ambulatorial
                                                     </label>
@@ -158,7 +163,7 @@
                             </div>
                         </div>
                     <div class="modal-footer">
-                        <button type="submit" aria-hidden="true" class="btn btn-primary classification-button classification_ml" name="form3_ml" align="center">
+                        <button type="submit" aria-hidden="true" class="btn btn-primary classification-button classification_ml" id="submit3" disabled="disabled" name="form3_ml" align="center">
                             Enviar
                         </button>
                     </div>
@@ -194,15 +199,15 @@
                                         {% else %}
                                             <div class="modal-footer">
                                                 <div class="btn-group-responsive" data-toggle="buttons" align="center">
-                                                    <label class="btn btn-primary classification1-button col-md-2" >
+                                                    <label class="btn btn-primary classification1-button col-md-2" onclick="check(4)">
                                                         <input class="form-check-input" type="radio" autocomplete="off" name="{{ field.name }}" value="1" required>
                                                         Atendimento Imediato
                                                     </label>
-                                                    <label class="btn btn-primary classification2-button col-md-2" >
+                                                    <label class="btn btn-primary classification2-button col-md-2" onclick="check(4)">
                                                         <input class="form-check-input" type="radio" autocomplete="off" name="{{ field.name }}" value="2" required>
                                                         Atendimento Hospitalar
                                                     </label>
-                                                    <label class="btn btn-primary classification3-button col-md-2" >
+                                                    <label class="btn btn-primary classification3-button col-md-2" onclick="check(4)">
                                                         <input class="form-check-input" type="radio" autocomplete="off" name="{{ field.name }}" value="3" required>
                                                         Atendimento Ambulatorial
                                                     </label>
@@ -214,7 +219,7 @@
                             </div>
                         </div>
                     <div class="modal-footer">
-                        <button type="submit" aria-hidden="true" class="btn btn-primary classification-button classification_ml" name="form4_ml" align="center">
+                        <button type="submit" aria-hidden="true" class="btn btn-primary classification-button classification_ml" id="submit4" disabled="disabled" name="form4_ml" align="center">
                             Enviar
                         </button>
                     </div>
@@ -250,15 +255,15 @@
                                         {% else %}
                                             <div class="modal-footer">
                                                 <div class="btn-group-responsive" data-toggle="buttons" align="center">
-                                                    <label class="btn btn-primary classification1-button col-md-2" >
+                                                    <label class="btn btn-primary classification1-button col-md-2" onclick="check(5)">
                                                         <input class="form-check-input" type="radio" autocomplete="off" name="{{ field.name }}" value="1" required>
                                                         Atendimento Imediato
                                                     </label>
-                                                    <label class="btn btn-primary classification2-button col-md-2" >
+                                                    <label class="btn btn-primary classification2-button col-md-2" onclick="check(5)">
                                                         <input class="form-check-input" type="radio" autocomplete="off" name="{{ field.name }}" value="2" required>
                                                         Atendimento Hospitalar
                                                     </label>
-                                                    <label class="btn btn-primary classification3-button col-md-2" >
+                                                    <label class="btn btn-primary classification3-button col-md-2" onclick="check(5)">
                                                         <input class="form-check-input" type="radio" autocomplete="off" name="{{ field.name }}" value="3" required>
                                                         Atendimento Ambulatorial
                                                     </label>
@@ -270,7 +275,7 @@
                             </div>
                         </div>
                     <div class="modal-footer">
-                        <button type="submit" aria-hidden="true" class="btn btn-primary classification-button classification_ml" name="form5_ml" align="center">
+                        <button type="submit" aria-hidden="true" class="btn btn-primary classification-button classification_ml" id="submit5" disabled="disabled" name="form5_ml" align="center">
                             Enviar
                         </button>
                     </div>
