@@ -6,187 +6,89 @@
 {% endblock %}
 
 {% block content_pos %}
-<meta charset="utf-8">
-<style>
+<!DOCTYPE html>
+<html style="height: 100%">
+   <head>
+       <meta charset="utf-8">
+   </head>
+   <body style="height: 100%; margin: 0">
+       <div id="container" style="height: 100%"></div><script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts-all-3.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+       <script type="text/javascript">
 
-/*
-.chart rect {
-  fill: steelblue;
-}
-*/
-.chart .legend {
-  fill: black;
-  font: 14px sans-serif;
-  text-anchor: start;
-  font-size: 12px;
-}
+var dom = document.getElementById("container");
+var myChart = echarts.init(dom);
+var app = {};
+option = null;
+app.title = 'Grafico de sintomas';
 
-.chart text {
-  fill: white;
-  font: 10px sans-serif;
-  text-anchor: end;
-}
-
-.chart .label {
-  fill: black;
-  font: 14px sans-serif;
-  text-anchor: end;
-}
-
-.bar:hover {
-  fill: brown;
-}
-
-.axis path,
-.axis line {
-  fill: none;
-  stroke: #000;
-  shape-rendering: crispEdges;
-}
-
-
-</style>
-<svg class="chart"></svg>
-<script src="http://d3js.org/d3.v3.min.js"></script>
-<script>
-
-var data = {
-  labels: [
-    'dispineia', 'icterícia', 'Perda Consciência',
-    'Cianose', 'Febre', 'soluços', 'Prostação',
-    'Vômitos', 'Tosse', 'Coriza', 'Obstrução Nasal',
-    'Convulção Momento', 'Diarréia', 'Choro Incosolável',
-    'Dificuldade Evacuar', 'Não suga o seio', 'Manchas na pele',
-    'Salivação', 'Chiado no peito', 'Diminuição da diurese',
-    'Dor abdominal', 'Fontanela abaulada',
-    'Secreção no umbigo', 'Secreção Ocular', 'Sangue nas fezes',
-    'Convulção Hoje'
-  ],
-  series: [
-    {
-      label: 'Mês',
-      values: [{{ graphic_symptoms.dispineia }}, {{ graphic_symptoms.ictericia }},
-               {{ graphic_symptoms.perdada_consciencia }}, {{ graphic_symptoms.cianose }},
-               {{ graphic_symptoms.febre }}, {{ graphic_symptoms.solucos }},
-               {{ graphic_symptoms.prostracao }}, {{ graphic_symptoms.vomitos }},
-               {{ graphic_symptoms.tosse }}, {{ graphic_symptoms.coriza }},
-               {{ graphic_symptoms.obstrucao_nasal }}, {{ graphic_symptoms.convulcao_no_momento }},
-               {{ graphic_symptoms.diarreia }}, {{ graphic_symptoms.choro_inconsolavel }},
-               {{ graphic_symptoms.dificuldade_evacuar }}, {{ graphic_symptoms.nao_suga_seio }},
-               {{ graphic_symptoms.manchas_na_pele }}, {{ graphic_symptoms.salivacao }},
-               {{ graphic_symptoms.chiado_no_peito }}, {{ graphic_symptoms.diminuicao_da_diurese }},
-               {{ graphic_symptoms.dor_abdominal }}, {{ graphic_symptoms.fontanela_abaulada }},
-               {{ graphic_symptoms.secrecao_no_umbigo }}, {{ graphic_symptoms.secrecao_ocular }},
-               {{ graphic_symptoms.sangue_nas_fezes }}, {{ graphic_symptoms.convulsao_hoje }}]
-    }]
+option = {
+    title: {
+        text: 'Gráfico de sintomas',
+        subtext: 'escrever algo aqui'
+    },
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+            type: 'shadow'
+        }
+    },
+    legend: {
+        data: ['Mês']
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    xAxis: {
+        type: 'value',
+        boundaryGap: [0, 0.01]
+    },
+    yAxis: {
+        type: 'category',
+        data: [
+          'dispineia', 'icterícia', 'Perda Consciência',
+          'Cianose', 'Febre', 'soluços', 'Prostação',
+          'Vômitos', 'Tosse', 'Coriza', 'Obstrução Nasal',
+          'Convulção Momento', 'Diarréia', 'Choro Incosolável',
+          'Dificuldade Evacuar', 'Não suga o seio', 'Manchas na pele',
+          'Salivação', 'Chiado no peito', 'Diminuição da diurese',
+          'Dor abdominal', 'Fontanela abaulada',
+          'Secreção no umbigo', 'Secreção Ocular', 'Sangue nas fezes',
+          'Convulção Hoje'
+        ]
+    },
+    series: [
+        {
+            name: 'Mês',
+            type: 'bar',
+            data: [{{ graphic_symptoms.dispineia }}, {{ graphic_symptoms.ictericia }},
+                     {{ graphic_symptoms.perdada_consciencia }}, {{ graphic_symptoms.cianose }},
+                     {{ graphic_symptoms.febre }}, {{ graphic_symptoms.solucos }},
+                     {{ graphic_symptoms.prostracao }}, {{ graphic_symptoms.vomitos }},
+                     {{ graphic_symptoms.tosse }}, {{ graphic_symptoms.coriza }},
+                     {{ graphic_symptoms.obstrucao_nasal }}, {{ graphic_symptoms.convulcao_no_momento }},
+                     {{ graphic_symptoms.diarreia }}, {{ graphic_symptoms.choro_inconsolavel }},
+                     {{ graphic_symptoms.dificuldade_evacuar }}, {{ graphic_symptoms.nao_suga_seio }},
+                     {{ graphic_symptoms.manchas_na_pele }}, {{ graphic_symptoms.salivacao }},
+                     {{ graphic_symptoms.chiado_no_peito }}, {{ graphic_symptoms.diminuicao_da_diurese }},
+                     {{ graphic_symptoms.dor_abdominal }}, {{ graphic_symptoms.fontanela_abaulada }},
+                     {{ graphic_symptoms.secrecao_no_umbigo }}, {{ graphic_symptoms.secrecao_ocular }},
+                     {{ graphic_symptoms.sangue_nas_fezes }}, {{ graphic_symptoms.convulsao_hoje }}]
+        }
+    ]
 };
-
-var chartWidth       = 300,
-    barHeight        = 20,
-    groupHeight      = barHeight * data.series.length,
-    gapBetweenGroups = 10,
-    spaceForLabels   = 150,
-    spaceForLegend   = 150;
-
-// Zip the series data together (first values, second values, etc.)
-var zippedData = [];
-for (var i=0; i<data.labels.length; i++) {
-  for (var j=0; j<data.series.length; j++) {
-    zippedData.push(data.series[j].values[i]);
-  }
+;
+if (option && typeof option === "object") {
+    myChart.setOption(option, true);
 }
+       </script>
+   </body>
+</html>
 
-// Color scale
-var color = d3.scale.category20();
-var chartHeight = barHeight * zippedData.length + gapBetweenGroups * data.labels.length;
-
-var x = d3.scale.linear()
-    .domain([0, d3.max(zippedData)])
-    .range([0, chartWidth]);
-
-var y = d3.scale.linear()
-    .range([chartHeight + gapBetweenGroups, 0]);
-
-var yAxis = d3.svg.axis()
-    .scale(y)
-    .tickFormat('')
-    .tickSize(0)
-    .orient("left");
-
-// Specify the chart area and dimensions
-var chart = d3.select(".chart")
-    .attr("width", spaceForLabels + chartWidth + spaceForLegend)
-    .attr("height", chartHeight);
-
-// Create bars
-var bar = chart.selectAll("g")
-    .data(zippedData)
-    .enter().append("g")
-    .attr("transform", function(d, i) {
-      return "translate(" + spaceForLabels + "," + (i * barHeight + gapBetweenGroups * (0.5 + Math.floor(i/data.series.length))) + ")";
-    });
-
-// Create rectangles of the correct width
-bar.append("rect")
-    .attr("fill", function(d,i) { return color(i % data.series.length); })
-    .attr("class", "bar")
-    .attr("width", x)
-    .attr("height", barHeight - 1);
-
-// Add text label in bar
-bar.append("text")
-    .attr("x", function(d) { return x(d) - 3; })
-    .attr("y", barHeight / 2)
-    .attr("fill", "red")
-    .attr("dy", ".35em")
-    .text(function(d) { return d; });
-
-// Draw labels
-bar.append("text")
-    .attr("class", "label")
-    .attr("x", function(d) { return - 10; })
-    .attr("y", groupHeight / 2)
-    .attr("dy", ".35em")
-    .text(function(d,i) {
-      if (i % data.series.length === 0)
-        return data.labels[Math.floor(i/data.series.length)];
-      else
-        return ""});
-
-chart.append("g")
-      .attr("class", "y axis")
-      .attr("transform", "translate(" + spaceForLabels + ", " + -gapBetweenGroups/2 + ")")
-      .call(yAxis);
-
-// Draw legend
-var legendRectSize = 18,
-    legendSpacing  = 4;
-
-var legend = chart.selectAll('.legend')
-    .data(data.series)
-    .enter()
-    .append('g')
-    .attr('transform', function (d, i) {
-        var height = legendRectSize + legendSpacing;
-        var offset = -gapBetweenGroups/2;
-        var horz = spaceForLabels + chartWidth + 40 - legendRectSize;
-        var vert = i * height - offset;
-        return 'translate(' + horz + ',' + vert + ')';
-    });
-
-legend.append('rect')
-    .attr('width', legendRectSize)
-    .attr('height', legendRectSize)
-    .style('fill', function (d, i) { return color(i); })
-    .style('stroke', function (d, i) { return color(i); });
-
-legend.append('text')
-    .attr('class', 'legend')
-    .attr('x', legendRectSize + legendSpacing)
-    .attr('y', legendRectSize - legendSpacing)
-    .text(function (d) { return d.label; });
-
-</script>
 {% endblock %}
 
 

@@ -292,9 +292,9 @@ def graphic_symptoms_view(request):
     for state in ClinicalState_28d.objects.all():
         for column in ClinicalState_28d._meta.get_fields():
             if getattr(state, column.name):
-                graphic_symptoms[column.name] = graphic_symptoms[column.name] + 1
+                graphic_symptoms[column.name] += 1
 
-    return render(request, 'users/user_home/graphic_symptoms.html',
+    return render(request, 'users/user_home/graphic_symptoms2.html',
                   {'graphic_symptoms': graphic_symptoms})
 
 
