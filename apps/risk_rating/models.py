@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.translation import ugettext as _
 
 
 class ClinicalState_28d(models.Model):
@@ -8,6 +9,12 @@ class ClinicalState_28d(models.Model):
         max_length=150,
         blank=True,
         unique=False
+    )
+
+    date = models.DateField(
+        verbose_name='Data',
+        blank=False,
+        auto_now=True
     )
 
     # symptoms:

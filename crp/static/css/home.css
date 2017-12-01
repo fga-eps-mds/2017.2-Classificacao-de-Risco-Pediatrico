@@ -426,6 +426,9 @@ a.article, a.article:hover {
 ----------------------------------------------------- */
 
 .modal-graphics {
-    text-align: center;
-    margin-bottom: 5%;
+    margin-bottom: 5px;
+}
+
+.graphics {
+    margin-left: 30%;
 }
