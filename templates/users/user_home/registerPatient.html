@@ -196,6 +196,7 @@
                                             {% endif %}
                                         </div>
                                     </div>
+
                                     <div class="form-group px-3 mt-3">
                                         <div class="cols-sm-10">
                                             <div class="input-group">
@@ -235,7 +236,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col"
+                                <div class="col">
                                     <div class="form-group px-3">
                                         <div class="cols-sm-10">
                                             <div class="input-group">
@@ -366,7 +367,6 @@
                                         </div>
                                     </div>
 
-
                                     <div class="form-group px-3">
                                         <div class="cols-sm-10">
                                             <div class="input-group">
@@ -445,8 +445,8 @@
                                             <div class="input-group">
                                                 <span class="input-group-addon"
                                                 id="basic-addon1">
-                                                    <i class="fa fa-th-large" aria-hidden="true">
-                                                    </i>
+                                                    <i class="fa fa-th-large"
+                                                    aria-hidden="true"></i>
                                                 </span>
                                                 <input type="text" name="{{ form.block.name }}"
                                                 id="{{ form.block.id_for_label }}"
@@ -489,16 +489,17 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="card-footer text-right">
                                 <a href="{% url 'users:home' %}" class="btn btn btn-outline-secondary btn-lg">
                                    Cancelar
-                               </a>
+                                </a>
                                 <button type="submit" class="btn btn-outline-secondary btn-lg">
                                     Cadastrar
                                 </button>
                             </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
