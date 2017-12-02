@@ -20,4 +20,5 @@ def before_all(context):
 def after_all(context):
     Staff.objects.filter(name="selenium-user-1").delete()
     Staff.objects.filter(name="selenium-user-2").delete()
+    Staff.objects.filter(name="selenium-user-3").delete()
     context.browser.quit()
