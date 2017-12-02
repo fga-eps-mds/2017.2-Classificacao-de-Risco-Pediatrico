@@ -325,6 +325,31 @@ def edit_patient(request, id):
                   {'patient': patient, 'form': form}, status=status)
 
 
+@login_required(redirect_field_name='', login_url='users:login')
+def graphic_symptoms_view(request):
+    """
+    Read all symptoms of database after classification
+     someone and check which symptoms was marked
+    """
+    graphic_symptoms = {}
+
+    for column in ClinicalState_28d._meta.get_fields():
+        graphic_symptoms[column.name] = 0
+
+    for state in ClinicalState_28d.objects.all():
+
+        if request.method == 'POST':
+            if int(request.POST.get('month')) != 0:
+                if state.date.month != int(request.POST.get('month')):
+                    break
+        for column in ClinicalState_28d._meta.get_fields():
+            if getattr(state, column.name):
+                graphic_symptoms[column.name] += 1
+
+    return render(request, 'users/user_home/graphic_symptoms.html',
+                  {'graphic_symptoms': graphic_symptoms})
+
+
 def get_under_28_symptoms(clinical_state):
     """
     building patient (28d) to use on ml based on patient's clinical condition

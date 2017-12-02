@@ -7,6 +7,13 @@ class Symptoms_28d(models.Model):
     class Meta:
         abstract = True
 
+    date = models.DateField(
+        verbose_name='Data',
+        blank=False,
+        auto_now=True
+    )
+
+    # symptoms:
     dispineia = models.BooleanField(
         verbose_name=("Dispinéia"),
         default=False,
