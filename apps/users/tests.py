@@ -2,6 +2,9 @@ import pytest
 from apps.users.forms import RegistrationStaffForm, RegistrationPatientForm, \
     EditPatientForm
 from apps.users.models import Staff, Patient
+from apps.risk_rating.models import MachineLearning_28d, \
+    MachineLearning_29d_2m, MachineLearning_2m_3y, \
+    MachineLearning_3y_10y, MachineLearning_10yMore
 
 
 @pytest.mark.django_db
@@ -366,7 +369,7 @@ class TestUsers:
             generating one test patient for each age range
         """
 
-        Patient()
+        # Patient()
         for x in range(1, 6):
             patient = Patient(id=x, age_range=x)
             patient.save()
@@ -380,18 +383,39 @@ class TestUsers:
 
         # the loop below posts the symptoms form for every one of the
         # 5 fictional patients
-        for index, formdata in enumerate(self.formdatas):
-            client.post('/home/', formdata)
-
-        Patient()
-        patients = Patient.objects.all()
         classifications = []
-        # getting the classification of every ficcional test patient
-        for patient in patients:
-            classifications.append(patient.classification)
+        for index, formdata in enumerate(self.formdatas):
+            response = client.post('/classify_patient/', formdata)
+            import json
+            data = json.loads(response.content.decode("utf-8"))
+            classifications.append(data["classification"])
 
         # making sure that no classification is "Não classificado"
-        assert 0 not in classifications
+        assert "Não classificado" not in classifications
+
+    form1_ml = ({'classification': 1, 'form1_ml': ''})
+    form2_ml = ({'classification': 2, 'form2_ml': ''})
+    form3_ml = ({'classification': 3, 'form3_ml': ''})
+    form4_ml = ({'classification': 1, 'form4_ml': ''})
+    form5_ml = ({'classification': 2, 'form5_ml': ''})
+    forms_ml = [form1_ml, form2_ml, form3_ml, form4_ml, form5_ml]
+
+    def test_feed_ml(self, client):
+        Staff.objects.create_superuser(**self.default_user_data())
+        client.post('/login', {'username': 'email@gmail.com',
+                               'password': "1234asdf"})
+
+        # this loop will post every classification form into 'feed ml'
+        for index, forms_ml in enumerate(self.forms_ml):
+            client.post('/feed_ml/', forms_ml)
+
+        # the asserts below make sure that there is one classification
+        # for each age range saved now.
+        assert MachineLearning_28d.objects.count() == 1
+        assert MachineLearning_29d_2m.objects.count() == 1
+        assert MachineLearning_2m_3y.objects.count() == 1
+        assert MachineLearning_3y_10y.objects.count() == 1
+        assert MachineLearning_10yMore.objects.count() == 1
 
     def test_edit_patient_is_valid(self, client):
         Staff.objects.create_superuser(**self.default_user_data())

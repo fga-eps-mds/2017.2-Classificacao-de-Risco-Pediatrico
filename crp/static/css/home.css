@@ -261,7 +261,136 @@ a.article, a.article:hover {
     border-radius: 1.3rem;
 }
 
+#name_patient a {
+  color: #5A738E;
+  font-weight: bold;
+  width: 80px;
+}
+
+#sex {
+  width: 1px;
+}
+
+#classify_table_patient {
+  width: 130px;
+}
+
+#symptoms {
+  width: 340px;
+}
+
+#age_range_table {
+  width: 106px;
+}
+
+#data {
+  width: 110px;
+}
+
+#actions{
+  width: 70px;
+}
+
+#actions a {
+  color: #5A738E;
+}
+
+.result-classification {
+  text-align: center;
+  padding-top: 6px;
+  font-weight: bold;
+}
+
 .classification-button {
+    word-wrap: break-word;
+    white-space:normal;
+    color: #007bff;
+    background-color: white;
+    height: 67px;
+    width: 150px;
+    margin-left: 10px;
+    margin-top: 10px;
+    outline: none !important;
+}
+
+.classification-button.active {
+    color: white;
+}
+
+.classification1-button {
+    white-space:normal;
+    color: #dc3545;
+    border-color: #dc3545;
+    background-color: white;
+    height: 67px;
+    width: 300px;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.classification1-button.active {
+    color: white;
+    background-color: #dc3545;
+    border-color: white;
+}
+
+.classification1-button:hover {
+    color: white;
+    background-color: #dc3545;
+    border-color: white;
+}
+
+.classification2-button {
+    white-space:normal;
+    color: #ffc107;
+    border-color: #ffc107;
+    background-color: white;
+    height: 67px;
+    width: 300px;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.classification2-button.active {
+    color: white;
+    background-color: #ffc107;
+    border-color: white;
+}
+
+.classification2-button:hover {
+    color: white;
+    background-color: #ffc107;
+    border-color: white;
+}
+
+.classification3-button {
+    white-space:normal;
+    color: #28a745;
+    border-color: #28a745;
+    background-color: white;
+    height: 67px;
+    width: 300px;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.classification3-button.active {
+    color: white;
+    background-color: #28a745;
+    border-color: white;
+}
+
+.classification3-button:hover {
+    color: white;
+    background-color: #28a745;
+    border-color: white;
+}
+
+.classification1-button:focus, .classification1-button.focus, .classification2-button:focus, .classification2-button.focus, .classification3-button:focus, .classification3-button.focus {
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0) !important;
+}
+
+.send-classification-button {
     word-wrap: break-word;
     white-space:normal;
     color: #007bff;
@@ -272,7 +401,7 @@ a.article, a.article:hover {
     margin-top: 10px;
 }
 
-.classification-button.active {
+.send-classification-button.active {
     color: white;
 }
 
@@ -280,12 +409,25 @@ a.article, a.article:hover {
     border-color: #fff;
 }
 
-#classification {
+.classification {
     color: white;
     background-color: #007bff;
     width: 97%;
     height: 37px;
     margin-top: 14px;
+}
+
+.classification_ml {
+    color: white;
+    background-color: #007bff;
+    width: 97%;
+    height: 37px;
+    margin-top: 14px;
+    cursor:pointer;
+}
+
+.classification_ml:disabled {
+    cursor:not-allowed;
 }
 
 #header-modal {

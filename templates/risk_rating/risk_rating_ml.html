@@ -1,0 +1,286 @@
+{% load staticfiles %}
+{% block js %}
+    <script src="{% static "js/feed_ml.js" %}"></script>
+{% endblock %}
+
+<!-- até 28 dias -->
+<div class="modal fade bd-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="range1_ml">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content" id="classification-content">
+            <div class="modal-body">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        Classificação de risco
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form role="form" class="form" method="POST" id="form1_ml">
+                    {% csrf_token %}
+                        <div class="container-fuild " id="container-modal">
+                            <div class="row" id="row-modal">
+                                <div class="btn-group-responsive" data-toggle="buttons">
+                                    {% for field in form1_ml %}
+                                        {% if field.name != 'classification' %}
+                                            <label class="btn btn-primary classification-button col-md-2" >
+                                                <input class="form-check-input" type="checkbox" autocomplete="off" name="{{ field.name }}">
+                                                {{ field.label }}
+                                            </label>
+                                        {% else %}
+                                            <div class="modal-footer">
+                                                <div class="btn-group-responsive" data-toggle="buttons" align="center">
+                                                    <label class="btn btn-primary classification1-button col-md-2" onclick="check(1)">
+                                                        <input class="form-check-input" type="radio" autocomplete="off" name="{{ field.name }}" value="1">
+                                                        Atendimento Imediato
+                                                    </label>
+                                                    <label class="btn btn-primary classification2-button col-md-2" onclick="check(1)">
+                                                        <input class="form-check-input" type="radio" autocomplete="off" name="{{ field.name }}" value="2">
+                                                        Atendimento Hospitalar
+                                                    </label>
+                                                    <label class="btn btn-primary classification3-button col-md-2" onclick="check(1)">
+                                                        <input class="form-check-input" type="radio" autocomplete="off" name="{{ field.name }}" value="3">
+                                                        Atendimento Ambulatorial
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    <div class="modal-footer">
+                        <button type="submit" aria-hidden="true" class="btn btn-primary classification-button classification_ml" id="submit1" disabled="disabled" name="form1_ml" align="center">
+                            Enviar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 29 dias a 2 meses -->
+<div class="modal fade bd-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="range2_ml">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content" id="classification-content">
+            <div class="modal-body">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        Classificação de risco
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form role="form" class="form" method="POST" id="form2_ml">
+                    {% csrf_token %}
+                        <div class="container-fuild " id="container-modal">
+                            <div class="row" id="row-modal">
+                                <div class="btn-group-responsive" data-toggle="buttons">
+                                    {% for field in form2_ml %}
+                                        {% if field.name != 'classification' %}
+                                            <label class="btn btn-primary classification-button col-md-2" >
+                                                <input class="form-check-input" type="checkbox" autocomplete="off" name="{{ field.name }}">
+                                                {{ field.label }}
+                                            </label>
+                                        {% else %}
+                                            <div class="modal-footer">
+                                                <div class="btn-group-responsive" data-toggle="buttons" align="center">
+                                                    <label class="btn btn-primary classification1-button col-md-2" onclick="check(2)">
+                                                        <input class="form-check-input" type="radio" autocomplete="off" name="{{ field.name }}" value="1">
+                                                        Atendimento Imediato
+                                                    </label>
+                                                    <label class="btn btn-primary classification2-button col-md-2" onclick="check(2)">
+                                                        <input class="form-check-input" type="radio" autocomplete="off" name="{{ field.name }}" value="2">
+                                                        Atendimento Hospitalar
+                                                    </label>
+                                                    <label class="btn btn-primary classification3-button col-md-2" onclick="check(2)">
+                                                        <input class="form-check-input" type="radio" autocomplete="off" name="{{ field.name }}" value="3">
+                                                        Atendimento Ambulatorial
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" aria-hidden="true" class="btn btn-primary classification-button classification_ml" id="submit2" disabled="disabled" name="form2_ml" align="center">
+                            Enviar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 2 meses a 3 anos -->
+<div class="modal fade bd-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="range3_ml">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content" id="classification-content">
+            <div class="modal-body">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        Classificação de risco
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form role="form" class="form" method="POST" id="form3_ml">
+                    {% csrf_token %}
+                        <div class="container-fuild " id="container-modal">
+                            <div class="row" id="row-modal">
+                                <div class="btn-group-responsive" data-toggle="buttons">
+                                    {% for field in form3_ml %}
+                                        {% if field.name != 'classification' %}
+                                            <label class="btn btn-primary classification-button col-md-2" >
+                                                <input class="form-check-input" type="checkbox" autocomplete="off" name="{{ field.name }}">
+                                                {{ field.label }}
+                                            </label>
+                                        {% else %}
+                                            <div class="modal-footer">
+                                                <div class="btn-group-responsive" data-toggle="buttons" align="center">
+                                                    <label class="btn btn-primary classification1-button col-md-2" onclick="check(3)">
+                                                        <input class="form-check-input" type="radio" autocomplete="off" name="{{ field.name }}" value="1">
+                                                        Atendimento Imediato
+                                                    </label>
+                                                    <label class="btn btn-primary classification2-button col-md-2" onclick="check(3)">
+                                                        <input class="form-check-input" type="radio" autocomplete="off" name="{{ field.name }}" value="2">
+                                                        Atendimento Hospitalar
+                                                    </label>
+                                                    <label class="btn btn-primary classification3-button col-md-2" onclick="check(3)">
+                                                        <input class="form-check-input" type="radio" autocomplete="off" name="{{ field.name }}" value="3">
+                                                        Atendimento Ambulatorial
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    <div class="modal-footer">
+                        <button type="submit" aria-hidden="true" class="btn btn-primary classification-button classification_ml" id="submit3" disabled="disabled" name="form3_ml" align="center">
+                            Enviar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 3 anos a 10 anos -->
+<div class="modal fade bd-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="range4_ml">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content" id="classification-content">
+            <div class="modal-body">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        Classificação de risco
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form role="form" class="form" method="POST" id="form4_ml">
+                    {% csrf_token %}
+                        <div class="container-fuild " id="container-modal">
+                            <div class="row" id="row-modal">
+                                <div class="btn-group-responsive" data-toggle="buttons">
+                                    {% for field in form4_ml %}
+                                        {% if field.name != 'classification' %}
+                                            <label class="btn btn-primary classification-button col-md-2" >
+                                                <input class="form-check-input" type="checkbox" autocomplete="off" name="{{ field.name }}">
+                                                {{ field.label }}
+                                            </label>
+                                        {% else %}
+                                            <div class="modal-footer">
+                                                <div class="btn-group-responsive" data-toggle="buttons" align="center">
+                                                    <label class="btn btn-primary classification1-button col-md-2" onclick="check(4)">
+                                                        <input class="form-check-input" type="radio" autocomplete="off" name="{{ field.name }}" value="1">
+                                                        Atendimento Imediato
+                                                    </label>
+                                                    <label class="btn btn-primary classification2-button col-md-2" onclick="check(4)">
+                                                        <input class="form-check-input" type="radio" autocomplete="off" name="{{ field.name }}" value="2">
+                                                        Atendimento Hospitalar
+                                                    </label>
+                                                    <label class="btn btn-primary classification3-button col-md-2" onclick="check(4)">
+                                                        <input class="form-check-input" type="radio" autocomplete="off" name="{{ field.name }}" value="3">
+                                                        Atendimento Ambulatorial
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    <div class="modal-footer">
+                        <button type="submit" aria-hidden="true" class="btn btn-primary classification-button classification_ml" id="submit4" disabled="disabled" name="form4_ml" align="center">
+                            Enviar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 10 anos ou mais -->
+<div class="modal fade bd-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="range5_ml">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content" id="classification-content">
+            <div class="modal-body">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        Classificação de risco
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form role="form" class="form" method="POST" id="form5_ml">
+                    {% csrf_token %}
+                        <div class="container-fuild " id="container-modal">
+                            <div class="row" id="row-modal">
+                                <div class="btn-group-responsive" data-toggle="buttons">
+                                    {% for field in form5_ml %}
+                                        {% if field.name != 'classification' %}
+                                            <label class="btn btn-primary classification-button col-md-2" >
+                                                <input class="form-check-input" type="checkbox" autocomplete="off" name="{{ field.name }}">
+                                                {{ field.label }}
+                                            </label>
+                                        {% else %}
+                                            <div class="modal-footer">
+                                                <div class="btn-group-responsive" data-toggle="buttons" align="center">
+                                                    <label class="btn btn-primary classification1-button col-md-2" onclick="check(5)">
+                                                        <input class="form-check-input" type="radio" autocomplete="off" name="{{ field.name }}" value="1">
+                                                        Atendimento Imediato
+                                                    </label>
+                                                    <label class="btn btn-primary classification2-button col-md-2" onclick="check(5)">
+                                                        <input class="form-check-input" type="radio" autocomplete="off" name="{{ field.name }}" value="2">
+                                                        Atendimento Hospitalar
+                                                    </label>
+                                                    <label class="btn btn-primary classification3-button col-md-2" onclick="check(5)">
+                                                        <input class="form-check-input" type="radio" autocomplete="off" name="{{ field.name }}" value="3">
+                                                        Atendimento Ambulatorial
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    <div class="modal-footer">
+                        <button type="submit" aria-hidden="true" class="btn btn-primary classification-button classification_ml" id="submit5" disabled="disabled" name="form5_ml" align="center">
+                            Enviar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
