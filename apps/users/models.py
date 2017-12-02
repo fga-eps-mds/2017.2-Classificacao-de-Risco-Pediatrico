@@ -155,6 +155,13 @@ class Patient(models.Model):
         unique=False
     )
 
+    classifier_id = models.CharField(
+        verbose_name=_('ID do Classificador'),
+        max_length=150,
+        default='',
+        blank=True
+    )
+
     guardian = models.CharField(
         verbose_name=_('Nome do Responsável'),
         max_length=50,
@@ -235,7 +242,7 @@ class Patient(models.Model):
         blank=False,
         auto_now=True
     )
-    
+
     CLASSIFICATION_TYPES = (
         (0, 'Não classificado'),
         (1, 'Atendimento Imediato'),

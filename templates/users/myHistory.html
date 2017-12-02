@@ -11,6 +11,7 @@
         <table id="example" class="table table-condensed" cellspacing="0" width="100%">
             <thead>
             <tr>
+                <th>Classificador</th>
                 <th></th>
                 <th>Nome / ID</th>
                 <th>Classificação</th>
@@ -22,6 +23,9 @@
             <tbody>
             {% for patient in patients %}
                 <tr>
+                    <td id="classifier">
+                        {{ classifier.name }}
+                    </td>
                     <td id="sex">
                         {% if patient.gender == 1 %}
                             <i class="fa fa-female" aria-hidden="true"></i>
@@ -31,13 +35,11 @@
                     </td><!-- sexo -->
 
                     <td id="name_patient">
-                        <a href="#" data-toggle="modal" data-target="#risk_range{{ patient.id }}">
-                            {% if patient.name %}
-                                {{ patient.name }}
-                            {% else %}
-                                {{ patient.id }}
-                            {% endif %}
-                        </a>
+                        {% if patient.name %}
+                            {{ patient.name }}
+                        {% else %}
+                            {{ patient.id }}
+                        {% endif %}
                     </td><!--nome-->
 
                     <td id="classify_table_patient">
@@ -45,40 +47,35 @@
                             <span class="invisible m-0">
                                 z
                             </span>
-                            <span data-toggle="modal" data-target="#{{ patient.id }}"
-                            class="ml-1 btn btn-primary badge badge-pill badge-secondary">
+                            <span class="ml-1 btn btn-primary badge badge-pill badge-secondary">
                                 Não classificado
                             </span>
                         {% elif patient.classification == 1 %}
                             <span class="invisible m-0">
                                 y
                             </span>
-                            <span data-toggle="modal" data-target="#{{ patient.id }}"
-                            class="ml-1 btn btn-primary badge badge-pill badge-danger">
+                            <span class="ml-1 btn btn-primary badge badge-pill badge-danger">
                                 Atendimento Imediato
                             </span>
                         {% elif patient.classification == 2 %}
                             <span class="invisible m-0">
                                 x
                             </span>
-                            <span data-toggle="modal" data-target="#{{ patient.id }}"
-                            class="ml-1 btn btn-primary badge badge-pill badge-warning">
+                            <span class="ml-1 btn btn-primary badge badge-pill badge-warning">
                                 Atendimento Hospitalar
                             </span>
                         {% elif patient.classification == 3 %}
                             <span class="invisible m-0">
                                 w
                             </span>
-                            <span data-toggle="modal" data-target="#{{ patient.id }}"
-                            class="btn btn-primary badge badge-pill badge-success">
+                            <span class="btn btn-primary badge badge-pill badge-success">
                                 Atendimento Ambulatorial
                             </span>
                         {% elif patient.classification == 4 %}
                             <span class="invisible m-0">
                                 u
                             </span>
-                            <span data-toggle="modal" data-target="#{{ patient.id }}"
-                            class="ml-1 btn btn-primary badge badge-pill badge-info">
+                            <span class="ml-1 btn btn-primary badge badge-pill badge-info">
                                 Atendimento Eletivo
                             </span>
                         {% endif %}
@@ -86,7 +83,7 @@
 
                     <td id="symptoms">
                     </td><!--td sintomas-->
-                    
+
                     <td id="age_range_table">
                         {% if patient.birth_date == None %}
                             {% if patient.age_range  == 0 %}

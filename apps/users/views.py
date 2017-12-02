@@ -124,6 +124,7 @@ def home(request):
 
         patient = Patient.objects.filter(id=patient_id)[0]
         patient.comment_receptionist = request.POST.get('comment')
+        patient.classifier_id = request.user.id_user
         patient.save()
 
     return render(request, 'users/user_home/main_home.html',
@@ -282,8 +283,10 @@ def my_history(request):
     """
     define history page behavior
     """
-
-    return render(request, 'users/myHistory.html')
+    patients = Patient.objects.filter(classifier_id=request.user.id_user)
+    classifier = Staff.objects.filter(id_user=request.user.id_user)[0]
+    return render(request, 'users/myHistory.html',
+                    {'patients': patients, "classifier":classifier})
 
 
 def get_under_28_symptoms(clinical_state):
