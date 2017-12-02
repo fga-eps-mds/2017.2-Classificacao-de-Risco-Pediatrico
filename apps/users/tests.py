@@ -2,6 +2,9 @@ import pytest
 from apps.users.forms import RegistrationStaffForm, RegistrationPatientForm, \
     EditPatientForm
 from apps.users.models import Staff, Patient
+from apps.risk_rating.models import MachineLearning_28d, \
+    MachineLearning_29d_2m, MachineLearning_2m_3y, \
+    MachineLearning_3y_10y, MachineLearning_10yMore
 
 
 @pytest.mark.django_db
@@ -389,6 +392,30 @@ class TestUsers:
 
         # making sure that no classification is "Não classificado"
         assert "Não classificado" not in classifications
+
+    form1_ml = ({'classification': 1, 'form1_ml': ''})
+    form2_ml = ({'classification': 2, 'form2_ml': ''})
+    form3_ml = ({'classification': 3, 'form3_ml': ''})
+    form4_ml = ({'classification': 1, 'form4_ml': ''})
+    form5_ml = ({'classification': 2, 'form5_ml': ''})
+    forms_ml = [form1_ml, form2_ml, form3_ml, form4_ml, form5_ml]
+
+    def test_feed_ml(self, client):
+        Staff.objects.create_superuser(**self.default_user_data())
+        client.post('/login', {'username': 'email@gmail.com',
+                               'password': "1234asdf"})
+
+        # this loop will post every classification form into 'feed ml'
+        for index, forms_ml in enumerate(self.forms_ml):
+            client.post('/feed_ml/', forms_ml)
+
+        # the asserts below make sure that there is one classification
+        # for each age range saved now.
+        assert MachineLearning_28d.objects.count() == 1
+        assert MachineLearning_29d_2m.objects.count() == 1
+        assert MachineLearning_2m_3y.objects.count() == 1
+        assert MachineLearning_3y_10y.objects.count() == 1
+        assert MachineLearning_10yMore.objects.count() == 1
 
     def test_edit_patient_is_valid(self, client):
         Staff.objects.create_superuser(**self.default_user_data())
