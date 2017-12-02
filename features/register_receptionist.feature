@@ -7,10 +7,3 @@ Feature: In order to use the system
         And  fiel the information fields
         When i click the cadastrar button
         Then it should redirect me to the "login" page
-
-    # Scenario: Register a attendant
-    #     When we acess the register page
-    #     And select the profile "attendant"
-    #     And  fiel the information fields
-    #     When i click the cadastrar button
-    #     Then it should redirect me to the "login" page
