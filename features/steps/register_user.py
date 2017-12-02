@@ -1,10 +1,5 @@
-from behave import when, step, then
+from behave import step
 from selenium.webdriver.support.ui import Select
-
-
-@when('we access the register page')
-def get_login_page(context):
-    context.browser.get('http://web:8000/register/user/')
 
 
 @step('fill information fields with data: {name} and {profile_number}')
@@ -38,14 +33,6 @@ def fill_fields(context, name, profile_number):
     context.browser.find_element_by_name("number").send_keys("10")
 
 
-@when('I click the submit button')
+@step('I click the submit button')
 def click_button(context):
     context.browser.find_element_by_id('button-cadastrar').click()
-
-
-@then('it should redirect me to the {url} page')
-def is_redirected(context, url):
-    print(context.browser.current_url)
-    print("http://web:8000/" + url)
-    assert context.browser.current_url == "http://web:8000/" + url.replace(
-        '"', '')
