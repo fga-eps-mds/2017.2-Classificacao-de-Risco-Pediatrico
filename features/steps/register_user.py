@@ -3,7 +3,7 @@ from selenium.webdriver.support.ui import Select
 
 
 @step('fill information fields with data: {name},' +
-   ' {id_number} and {profile_number}')
+      ' {id_number} and {profile_number}')
 def fill_fields(context, name, id_number, profile_number):
     context.browser.find_element_by_name(
         "name").send_keys(name)
