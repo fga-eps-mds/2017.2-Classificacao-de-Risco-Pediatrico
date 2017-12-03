@@ -329,7 +329,7 @@ def my_history(request):
     patients = Patient.objects.filter(classifier_id=request.user.id_user)
     classifier = Staff.objects.filter(id_user=request.user.id_user)[0]
     return render(request, 'users/myHistory.html',
-                    {'patients': patients, "classifier":classifier})
+                  {'patients': patients, "classifier": classifier})
 
 
 def get_under_28_symptoms(clinical_state):

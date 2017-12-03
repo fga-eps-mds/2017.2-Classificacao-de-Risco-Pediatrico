@@ -20,11 +20,12 @@ class ClinicalState_28dForm(forms.ModelForm):
         model = ClinicalState_28d
         fields = ['patient_id', 'classifier_id', 'dispineia', 'ictericia',
                   'perdada_consciencia', 'cianose', 'febre', 'solucos',
-                  'prostracao', 'vomitos', 'tosse', 'coriza', 'obstrucao_nasal',
-                  'convulcao_no_momento', 'diarreia', 'choro_inconsolavel',
-                  'dificuldade_evacuar', 'nao_suga_seio', 'manchas_na_pele',
-                  'salivacao', 'chiado_no_peito', 'diminuicao_da_diurese',
-                  'dor_abdominal', 'fontanela_abaulada', 'secrecao_no_umbigo',
+                  'prostracao', 'vomitos', 'tosse', 'coriza',
+                  'obstrucao_nasal', 'convulcao_no_momento', 'diarreia',
+                  'choro_inconsolavel', 'dificuldade_evacuar', 'nao_suga_seio',
+                  'manchas_na_pele', 'salivacao', 'chiado_no_peito',
+                  'diminuicao_da_diurese', 'dor_abdominal',
+                  'fontanela_abaulada', 'secrecao_no_umbigo',
                   'secrecao_ocular', 'sangue_nas_fezes', 'convulsao_hoje']
 
 
@@ -35,13 +36,13 @@ class ClinicalState_29d_2mForm(forms.ModelForm):
     class Meta:
         model = ClinicalState_29d_2m
         fields = ['patient_id', 'classifier_id', 'dispineia', 'ictericia',
-                  'perdada_consciencia', 'cianose', 'febre','solucos',
-                  'prostracao', 'vomitos', 'tosse', 'coriza', 'obstrucao_nasal',
-                  'convulcao_no_momento', 'diarreia', 'dificuldade_evacuar',
-                  'nao_suga_seio', 'manchas_na_pele', 'salivacao',
-                  'chiado_no_peito', 'diminuicao_da_diurese', 'dor_abdominal',
-                  'fontanela_abaulada', 'secrecao_no_umbigo', 'secrecao_ocular',
-                  'sangue_nas_fezes', 'convulsao_hoje']
+                  'perdada_consciencia', 'cianose', 'febre', 'solucos',
+                  'prostracao', 'vomitos', 'tosse', 'coriza',
+                  'obstrucao_nasal', 'convulcao_no_momento', 'diarreia',
+                  'dificuldade_evacuar', 'nao_suga_seio', 'manchas_na_pele',
+                  'salivacao', 'chiado_no_peito', 'diminuicao_da_diurese',
+                  'dor_abdominal', 'fontanela_abaulada', 'secrecao_no_umbigo',
+                  'secrecao_ocular', 'sangue_nas_fezes', 'convulsao_hoje']
 
 
 class ClinicalState_2m_3yForm(forms.ModelForm):
@@ -52,11 +53,12 @@ class ClinicalState_2m_3yForm(forms.ModelForm):
         model = ClinicalState_2m_3y
         fields = ['patient_id', 'classifier_id', 'dispineia', 'ictericia',
                   'perdada_consciencia', 'cianose', 'febre', 'solucos',
-                  'prostracao', 'vomitos', 'tosse', 'coriza', 'obstrucao_nasal',
-                  'convulcao_no_momento', 'diarreia', 'dificuldade_evacuar',
-                  'nao_suga_seio', 'manchas_na_pele', 'salivacao',
-                  'chiado_no_peito', 'diminuicao_da_diurese', 'dor_abdominal',
-                  'fontanela_abaulada', 'secrecao_no_umbigo', 'secrecao_ocular']
+                  'prostracao', 'vomitos', 'tosse', 'coriza',
+                  'obstrucao_nasal', 'convulcao_no_momento', 'diarreia',
+                  'dificuldade_evacuar', 'nao_suga_seio', 'manchas_na_pele',
+                  'salivacao', 'chiado_no_peito', 'diminuicao_da_diurese',
+                  'dor_abdominal', 'fontanela_abaulada', 'secrecao_no_umbigo',
+                  'secrecao_ocular']
 
 
 class ClinicalState_3y_10yForm(forms.ModelForm):
@@ -73,12 +75,13 @@ class ClinicalState_3y_10yForm(forms.ModelForm):
                   'ictericia', 'perda_consciencia', 'palidez', 'cianose',
                   'solucos', 'prostracao', 'febre', 'vomitos', 'tosse',
                   'coriza', 'espirros', 'hiperemia_conjuntival',
-                  'secrecao_ocular', 'obstrucao_nasal', 'convulsao', 'diarreia',
-                  'manchas_na_pele', 'queda', 'hiporexia', 'salivacao',
-                  'constipacao', 'chiado_no_peito', 'diminuicao_da_diurese',
-                  'dor_abdominal', 'otalgia', 'epistaxe', 'otorreia', 'edema',
-                  'adenomegalias', 'dor_articular', 'dificulade_de_marchar',
-                  'sonolencia', 'dor_muscular', 'dor_retroorbitaria']
+                  'secrecao_ocular', 'obstrucao_nasal', 'convulsao',
+                  'diarreia', 'manchas_na_pele', 'queda', 'hiporexia',
+                  'salivacao', 'constipacao', 'chiado_no_peito',
+                  'diminuicao_da_diurese', 'dor_abdominal', 'otalgia',
+                  'epistaxe', 'otorreia', 'edema', 'adenomegalias',
+                  'dor_articular', 'dificulade_de_marchar', 'sonolencia',
+                  'dor_muscular', 'dor_retroorbitaria']
 
 
 class ClinicalState_10yMoreForm(forms.ModelForm):
@@ -94,14 +97,14 @@ class ClinicalState_10yMoreForm(forms.ModelForm):
                   'artralgia', 'ictericia', 'perda_da_consciencia', 'palidez',
                   'cianose', 'solucos', 'prostracao', 'febre', 'vomitos',
                   'tosse', 'coriza', 'espirros', 'hiperemia_conjuntival',
-                  'secrecao_ocular', 'obstrucao_nasal', 'convulsao', 'diarreia',
-                  'dificuldade_evacuar', 'cefaleia', 'manchas_na_pele',
-                  'salivacao', 'queda', 'hiporexia', 'salivacao', 'hiporexia',
-                  'constipacao', 'chiado_no_peito', 'diminuicao_da_diurese',
-                  'dor_abdominal', 'otalgia', 'epistaxe', 'otorreia', 'edema',
-                  'adenomegalias', 'dor_articular', 'dificuldade_de_marcha',
-                  'sonolencia', 'secrecao_ocular', 'dor_muscular',
-                  'dor_retroorbitaria']
+                  'secrecao_ocular', 'obstrucao_nasal', 'convulsao',
+                  'diarreia', 'dificuldade_evacuar', 'cefaleia',
+                  'manchas_na_pele', 'salivacao', 'queda', 'hiporexia',
+                  'salivacao', 'hiporexia', 'constipacao', 'chiado_no_peito',
+                  'diminuicao_da_diurese', 'dor_abdominal', 'otalgia',
+                  'epistaxe', 'otorreia', 'edema', 'adenomegalias',
+                  'dor_articular', 'dificuldade_de_marcha', 'sonolencia',
+                  'secrecao_ocular', 'dor_muscular', 'dor_retroorbitaria']
 
 
 class MachineLearning_28dForm(forms.ModelForm):
@@ -110,14 +113,15 @@ class MachineLearning_28dForm(forms.ModelForm):
     """
     class Meta:
         model = MachineLearning_28d
-        fields = ['dispineia', 'ictericia','perdada_consciencia', 'cianose',
+        fields = ['dispineia', 'ictericia', 'perdada_consciencia', 'cianose',
                   'febre', 'solucos', 'prostracao', 'vomitos', 'tosse',
                   'coriza', 'obstrucao_nasal', 'convulcao_no_momento',
                   'diarreia', 'choro_inconsolavel', 'dificuldade_evacuar',
                   'nao_suga_seio', 'manchas_na_pele', 'salivacao',
                   'chiado_no_peito', 'diminuicao_da_diurese', 'dor_abdominal',
-                  'fontanela_abaulada', 'secrecao_no_umbigo', 'secrecao_ocular',
-                  'sangue_nas_fezes', 'convulsao_hoje', 'classification']
+                  'fontanela_abaulada', 'secrecao_no_umbigo',
+                  'secrecao_ocular', 'sangue_nas_fezes', 'convulsao_hoje',
+                  'classification']
 
 
 class MachineLearning_29d_2mForm(forms.ModelForm):
@@ -132,8 +136,9 @@ class MachineLearning_29d_2mForm(forms.ModelForm):
                   'diarreia', 'dificuldade_evacuar', 'nao_suga_seio',
                   'manchas_na_pele', 'salivacao', 'chiado_no_peito',
                   'diminuicao_da_diurese', 'dor_abdominal',
-                  'fontanela_abaulada', 'secrecao_no_umbigo', 'secrecao_ocular',
-                  'sangue_nas_fezes', 'convulsao_hoje', 'classification']
+                  'fontanela_abaulada', 'secrecao_no_umbigo',
+                  'secrecao_ocular', 'sangue_nas_fezes', 'convulsao_hoje',
+                  'classification']
 
 
 class MachineLearning_2m_3yForm(forms.ModelForm):
@@ -165,13 +170,13 @@ class MachineLearning_3y_10yForm(forms.ModelForm):
                   'artralgia', 'ictericia', 'perda_consciencia', 'palidez',
                   'cianose', 'solucos', 'prostracao', 'febre', 'vomitos',
                   'tosse', 'coriza', 'espirros', 'hiperemia_conjuntival',
-                  'secrecao_ocular', 'obstrucao_nasal', 'convulsao', 'diarreia',
-                  'manchas_na_pele', 'queda', 'hiporexia', 'salivacao',
-                  'constipacao', 'chiado_no_peito', 'diminuicao_da_diurese',
-                  'dor_abdominal', 'otalgia', 'epistaxe', 'otorreia', 'edema',
-                  'adenomegalias', 'dor_articular', 'dificulade_de_marchar',
-                  'sonolencia', 'dor_muscular', 'dor_retroorbitaria',
-                  'classification']
+                  'secrecao_ocular', 'obstrucao_nasal', 'convulsao',
+                  'diarreia', 'manchas_na_pele', 'queda', 'hiporexia',
+                  'salivacao', 'constipacao', 'chiado_no_peito',
+                  'diminuicao_da_diurese', 'dor_abdominal', 'otalgia',
+                  'epistaxe', 'otorreia', 'edema', 'adenomegalias',
+                  'dor_articular', 'dificulade_de_marchar', 'sonolencia',
+                  'dor_muscular', 'dor_retroorbitaria', 'classification']
 
 
 class MachineLearning_10yMoreForm(forms.ModelForm):
@@ -187,11 +192,12 @@ class MachineLearning_10yMoreForm(forms.ModelForm):
                   'ictericia', 'perda_da_consciencia', 'palidez', 'cianose',
                   'solucos', 'prostracao', 'febre', 'vomitos', 'tosse',
                   'coriza', 'espirros', 'hiperemia_conjuntival',
-                  'secrecao_ocular', 'obstrucao_nasal', 'convulsao', 'diarreia',
-                  'dificuldade_evacuar', 'cefaleia', 'manchas_na_pele',
-                  'salivacao', 'queda', 'hiporexia', 'salivacao', 'hiporexia',
-                  'constipacao', 'chiado_no_peito', 'diminuicao_da_diurese',
-                  'dor_abdominal', 'otalgia', 'epistaxe', 'otorreia', 'edema',
-                  'adenomegalias', 'dor_articular', 'dificuldade_de_marcha',
-                  'sonolencia', 'secrecao_ocular', 'dor_muscular',
-                  'dor_retroorbitaria', 'classification']
+                  'secrecao_ocular', 'obstrucao_nasal', 'convulsao',
+                  'diarreia', 'dificuldade_evacuar', 'cefaleia',
+                  'manchas_na_pele', 'salivacao', 'queda', 'hiporexia',
+                  'salivacao', 'hiporexia', 'constipacao', 'chiado_no_peito',
+                  'diminuicao_da_diurese', 'dor_abdominal', 'otalgia',
+                  'epistaxe', 'otorreia', 'edema', 'adenomegalias',
+                  'dor_articular', 'dificuldade_de_marcha', 'sonolencia',
+                  'secrecao_ocular', 'dor_muscular', 'dor_retroorbitaria',
+                  'classification']

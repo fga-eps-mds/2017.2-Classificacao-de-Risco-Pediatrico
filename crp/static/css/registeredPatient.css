@@ -4,6 +4,12 @@
     width: 50%;
 }
 
+#searchPatientHistory {
+    background-color:white;
+    border-radius: 50px;
+    width: 50%;
+}
+
 #list {
     border: 1px solid #E6E9ED;
     padding: 10px;
