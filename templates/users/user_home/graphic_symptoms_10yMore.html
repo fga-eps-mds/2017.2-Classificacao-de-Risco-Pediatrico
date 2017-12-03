@@ -1,0 +1,142 @@
+{% extends 'users/user_home/home_layout.html' %}
+{% load staticfiles %}
+
+{% block head_pos %}
+    {% include 'risk_rating/risk_rating.html' %}
+{% endblock %}
+
+{% block content_pos %}
+
+    <div class="row linha">
+        <div class="x_title col-md-6">
+            <h2>Gráfico de Sintomas</h2>
+        </div>
+        <div class="col-md-6">
+            <form method="post">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-10">
+                        <select name="month" id="dropdown" class="form-control month" required>
+                            <option value="" selected disabled>Selecione um mês</option>
+                            <option value="0">Estatística Geral</option>
+                            <option value="1">Janeiro</option>
+                            <option value="2">Fevereiro</option>
+                            <option value="3">Março</option>
+                            <option value="4">Abril</option>
+                            <option value="5">Maio</option>
+                            <option value="6">Junho</option>
+                            <option value="7">Julho</option>
+                            <option value="8">Agosto</option>
+                            <option value="9">Setembro</option>
+                            <option value="10">Outubro</option>
+                            <option value="11">Novembro</option>
+                            <option value="12">Dezembro</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <button class=" btn btn-info pull-right rb">Filtrar</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+    <div class="x_panel_">
+        <div id="list" class=" slide-in-blurred-top " style="background-color: white; height: 100%">
+
+            <div id="container"></div>
+        </div>
+        <script type="text/javascript"
+                src="http://echarts.baidu.com/gallery/vendors/echarts/echarts-all-3.js"></script>
+        <script type="text/javascript"
+                src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+        <script type="text/javascript"
+                src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+        <script type="text/javascript">
+
+            var dom = document.getElementById("container");
+            var myChart = echarts.init(dom);
+            var app = {};
+            option = null;
+            app.title = 'Grafico de sintomas';
+
+            option = {
+
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'shadow'
+                    }
+                },
+                grid: {
+                    height: '100%',
+                    top: '2px',
+                    width: 'auto',
+                    containLabel: true
+                },
+                xAxis: {
+                    type: 'value',
+                    boundaryGap: [0, 0.01]
+                },
+                yAxis: {
+                    type: 'category',
+
+                    data: [
+                      'Febre com mais de 72h', 'Febre com menos de 72h', 'Tontura',
+                      'Corpo Estranho', 'Dor de Dentes','disuria', 'Urina Concentrada',
+                      'Dispinéia', 'Dor Torácica', 'Choque Elétrico', 'Quase Afogamento',
+                      'artralgia', 'Icterícia', 'Perda da Consciência', 'Palidez', 'Cianose',
+                      'Soluços', 'Prostação', 'Febre', 'Vômitos', 'Tosse', 'Coriza', 'Espirros',
+                      'Hiperemia Conjuntal', 'Secreção Ocular', 'Obstrução Nasal',
+                      'Convulsão', 'Diarréia', 'Dificuldade de Evacuar', 'Cefaleia',
+                      'Manchas na Pele', 'Salivação', 'Queda', 'Hiporexia', 'Salivação',
+                      'Hiporexia', 'Costipação', 'Chiado no Peito', 'Diminuição da diurese',
+                      'Dor Abdominal', 'Otalgia', 'Epistaxe', 'Otorreia', 'Edema', 'Adenomegalias',
+                      'Dor Articular', 'Dificuldade de Marchar', 'Sonolência', 'Secreção Ocular',
+                      'Dor Muscular', 'Dor Retroorbitária'
+                    ]
+                },
+                series: [
+                    {
+                        type: 'bar',
+                        data: [{{ graphic_symptoms.mais_de_72h_febre }}, {{ graphic_symptoms.menos_de_72h_febre }},
+                             {{ graphic_symptoms.tontura }}, {{ graphic_symptoms.corpo_estranho }},
+                             {{ graphic_symptoms.dor_de_dente }}, {{ graphic_symptoms.disuria }},
+                             {{ graphic_symptoms.urina_concentrada }}, {{ graphic_symptoms.dispineia }},
+                             {{ graphic_symptoms.dor_toracica }}, {{ graphic_symptoms.choque_eletrico }},
+                             {{ graphic_symptoms.quase_afogamento }}, {{ graphic_symptoms.artralgia }},
+                             {{ graphic_symptoms.ictericia }}, {{ graphic_symptoms.perda_da_consciencia }},
+                             {{ graphic_symptoms.palidez }}, {{ graphic_symptoms.cianose }},
+                             {{ graphic_symptoms.solucos }}, {{ graphic_symptoms.prostracao }},
+                             {{ graphic_symptoms.febre }}, {{ graphic_symptoms.vomitos }},
+                             {{ graphic_symptoms.tosse }}, {{ graphic_symptoms.coriza }},
+                             {{ graphic_symptoms.espirros }}, {{ graphic_symptoms.hiperemia_conjuntival }},
+                             {{ graphic_symptoms.secrecao_ocular }}, {{ graphic_symptoms.obstrucao_nasal }},
+                             {{ graphic_symptoms.convulsao }}, {{ graphic_symptoms.diarreia }},
+                             {{ graphic_symptoms.dificuldade_evacuar }}, {{ graphic_symptoms.cefaleia }},
+                             {{ graphic_symptoms.manchas_na_pele }}, {{ graphic_symptoms.salivacao }},
+                             {{ graphic_symptoms.queda }},
+                             {{ graphic_symptoms.hiporexia }}, {{ graphic_symptoms.salivacao }},
+                             {{ graphic_symptoms.hiporexia }}, {{ graphic_symptoms.constipacao }},
+                             {{ graphic_symptoms.chiado_no_peito }}, {{ graphic_symptoms.diminuicao_da_diurese }},
+                             {{ graphic_symptoms.dor_abdominal }}, {{ graphic_symptoms.otalgia }},
+                             {{ graphic_symptoms.epistaxe }}, {{ graphic_symptoms.otorreia }},
+                             {{ graphic_symptoms.edema }}, {{ graphic_symptoms.adenomegalias }},
+                             {{ graphic_symptoms.dor_articular }}, {{ graphic_symptoms.dificuldade_de_marcha }},
+                             {{ graphic_symptoms.sonolencia }}, {{ graphic_symptoms.secrecao_ocular }},
+                             {{ graphic_symptoms.dor_muscular }}, {{ graphic_symptoms.dor_retroorbitaria }}
+                        ]
+                    }
+                ]
+            };
+            if (option && typeof option === "object") {
+                myChart.setOption(option, true);
+            }
+        </script>
+    </div>
+{% endblock %}
+
+
+{% block js_pos %}
+{% endblock %}

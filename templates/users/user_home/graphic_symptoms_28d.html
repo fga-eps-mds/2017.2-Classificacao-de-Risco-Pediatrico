@@ -1,0 +1,125 @@
+{% extends 'users/user_home/home_layout.html' %}
+{% load staticfiles %}
+
+{% block head_pos %}
+    {% include 'risk_rating/risk_rating.html' %}
+{% endblock %}
+
+{% block content_pos %}
+
+    <div class="row linha">
+        <div class="x_title col-md-6">
+            <h2>Gráfico de Sintomas</h2>
+        </div>
+        <div class="col-md-6">
+            <form method="post">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-10">
+                        <select name="month" id="dropdown" class="form-control month" required>
+                            <option value="" selected disabled>Selecione um mês</option>
+                            <option value="0">Estatística Geral</option>
+                            <option value="1">Janeiro</option>
+                            <option value="2">Fevereiro</option>
+                            <option value="3">Março</option>
+                            <option value="4">Abril</option>
+                            <option value="5">Maio</option>
+                            <option value="6">Junho</option>
+                            <option value="7">Julho</option>
+                            <option value="8">Agosto</option>
+                            <option value="9">Setembro</option>
+                            <option value="10">Outubro</option>
+                            <option value="11">Novembro</option>
+                            <option value="12">Dezembro</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <button class=" btn btn-info pull-right rb">Filtrar</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+    <div class="x_panel_">
+        <div id="list" class=" slide-in-blurred-top " style="background-color: white; height: 100%">
+
+            <div id="container"></div>
+        </div>
+        <script type="text/javascript"
+                src="http://echarts.baidu.com/gallery/vendors/echarts/echarts-all-3.js"></script>
+        <script type="text/javascript"
+                src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+        <script type="text/javascript"
+                src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+        <script type="text/javascript">
+
+            var dom = document.getElementById("container");
+            var myChart = echarts.init(dom);
+            var app = {};
+            option = null;
+            app.title = 'Grafico de sintomas';
+
+            option = {
+
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'shadow'
+                    }
+                },
+                grid: {
+                    height: '100%',
+                    top: '2px',
+                    width: 'auto',
+                    containLabel: true
+                },
+                xAxis: {
+                    type: 'value',
+                    boundaryGap: [0, 0.01]
+                },
+                yAxis: {
+                    type: 'category',
+
+                    data: [
+                        'dispineia', 'icterícia', 'Perda Consciência',
+                        'Cianose', 'Febre', 'soluços', 'Prostação',
+                        'Vômitos', 'Tosse', 'Coriza', 'Obstrução Nasal',
+                        'Convulção Momento', 'Diarréia', 'Choro Incosolável',
+                        'Dificuldade Evacuar', 'Não suga o seio', 'Manchas na pele',
+                        'Salivação', 'Chiado no peito', 'Diminuição da diurese',
+                        'Dor abdominal', 'Fontanela abaulada',
+                        'Secreção no umbigo', 'Secreção Ocular', 'Sangue nas fezes',
+                        'Convulção Hoje'
+                    ]
+                },
+                series: [
+                    {
+                        type: 'bar',
+                        data: [{{ graphic_symptoms.dispineia }}, {{ graphic_symptoms.ictericia }},
+                            {{ graphic_symptoms.perdada_consciencia }}, {{ graphic_symptoms.cianose }},
+                            {{ graphic_symptoms.febre }}, {{ graphic_symptoms.solucos }},
+                            {{ graphic_symptoms.prostracao }}, {{ graphic_symptoms.vomitos }},
+                            {{ graphic_symptoms.tosse }}, {{ graphic_symptoms.coriza }},
+                            {{ graphic_symptoms.obstrucao_nasal }}, {{ graphic_symptoms.convulcao_no_momento }},
+                            {{ graphic_symptoms.diarreia }}, {{ graphic_symptoms.choro_inconsolavel }},
+                            {{ graphic_symptoms.dificuldade_evacuar }}, {{ graphic_symptoms.nao_suga_seio }},
+                            {{ graphic_symptoms.manchas_na_pele }}, {{ graphic_symptoms.salivacao }},
+                            {{ graphic_symptoms.chiado_no_peito }}, {{ graphic_symptoms.diminuicao_da_diurese }},
+                            {{ graphic_symptoms.dor_abdominal }}, {{ graphic_symptoms.fontanela_abaulada }},
+                            {{ graphic_symptoms.secrecao_no_umbigo }}, {{ graphic_symptoms.secrecao_ocular }},
+                            {{ graphic_symptoms.sangue_nas_fezes }}, {{ graphic_symptoms.convulsao_hoje }}]
+                    }
+                ]
+            };
+            if (option && typeof option === "object") {
+                myChart.setOption(option, true);
+            }
+        </script>
+    </div>
+{% endblock %}
+
+
+{% block js_pos %}
+{% endblock %}
