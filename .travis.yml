@@ -4,12 +4,11 @@ python:
   - '3.6'
 services:
   - docker
-before_script:
+script:
   - docker-compose up --build -d
   - docker exec 20172classificacaoderiscopediatrico_web_1 python manage.py collectstatic
-script:
   - docker exec 20172classificacaoderiscopediatrico_web_1 py.test --cov=apps
-  - docker exec 20172classificacaoderiscopediatrico_web_1 web behave
+  - docker exec 20172classificacaoderiscopediatrico_web_1 behave
   - docker exec 20172classificacaoderiscopediatrico_web_1 flake8 --exclude test_settings.py,*/migrations/,manage.py .
 after_success:
   - docker exec 20172classificacaoderiscopediatrico_web_1 coveralls
