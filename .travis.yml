@@ -4,10 +4,10 @@ python:
   - '3.6'
 services:
   - docker
-before_install:
+before_script:
   - docker-compose up --build -d
-script:
   - docker-compose run web python manage.py collectstatic
+script:
   - docker-compose run web py.test --cov=apps
   - docker-compose run web behave
   - docker-compose run web flake8 --exclude test_settings.py,*/migrations/,manage.py .
