@@ -1,20 +1,20 @@
 sudo: required
 language: python
 python:
-- '3.6'
+  - '3.6'
 services:
-- docker
+  - docker
 before_install:
-- docker-compose up --build -d
+  - docker-compose up --build -d
 script:
   - docker-compose run web python manage.py collectstatic
   - docker-compose run web py.test --cov=apps
   - docker-compose run web behave
   - docker-compose run web flake8 --exclude test_settings.py,*/migrations/,manage.py .
 after_script:
-- docker-compose down
+  - docker-compose down
 after_success:
-- docker-compose run web coveralls
+  - docker-compose run web coveralls
 deploy:
   provider: heroku
   api_key:
