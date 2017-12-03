@@ -5,10 +5,14 @@ from . import views
 
 app_name = 'users'
 urlpatterns = [
-    url(r'^$', views.landing_page, name="landing_page"),
-    url(r'^login$', views.login_view, name="login"),
-    url(r'^logout/$', views.logout_view, name="logout"),
-    url(r'^home/$', views.home, name="home"),
+    url(r'^$', views.landing_page,
+        name="landing_page"),
+    url(r'^login$', views.login_view,
+        name="login"),
+    url(r'^logout/$', views.logout_view,
+        name="logout"),
+    url(r'^home/$', views.home,
+        name="home"),
     url(r'^register/user/$', views.sign_up_profile,
         name="register_user"),
     url(r'^register/patient/$', views.register_patient,
@@ -25,5 +29,8 @@ urlpatterns = [
         name="edit_patient"),
     url(r'^classify_patient/$', views.machine_learning,
         name='classify_patient'),
-    url(r'^my_history/$', views.my_history, name="my_history")
+    url(r'^feed_ml/$', views.feed_ml,
+        name="feed_ml"),
+    url(r'^my_history/$', views.my_history,
+        name="my_history")
 ]
