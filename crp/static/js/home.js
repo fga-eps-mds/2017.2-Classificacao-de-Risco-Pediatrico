@@ -21,6 +21,13 @@ $(document).ready(function () {
     }
   });
 
+  table = $('#example').DataTable()
+  $('#searchPatient').keyup(function(){
+    table.column(1).search($(this).val()).draw() ;
+  })
+
+  $('#example_filter').hide();
+
   $('#sidebarCollapse').on('click', function () {
     $('#sidebar').toggleClass('active');
   });

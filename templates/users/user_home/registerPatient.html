@@ -134,7 +134,7 @@
                                                 <span class="input-group-addon" id="basic-addon1"><i
                                                         class="fa fa-sort-numeric-asc" aria-hidden="true"></i></span>
                                                 <select name="{{ form.age_range.name }}" class="form-control"
-                                                        id="age_range" required>
+                                                        id="{{ form.age_range.id_for_label }}" required>
                                                     <option value="" selected disabled>Faixa etária</option>
                                                     <option value="0">Faixa etária indefinida</option>
                                                     <option value="1">0 até 28 dias</option>
@@ -356,7 +356,7 @@
                             <div class="card-footer text-right">
                                 <a href="{% url 'users:home' %}"
                                    class="btn btn btn-outline-secondary btn-lg">Cancelar</a>
-                                <button type="submit" class="btn btn-outline-secondary btn-lg">Cadastrar</button>
+                                <button type="submit" id="register-patient-button" class="btn btn-outline-secondary btn-lg">Cadastrar</button>
                             </div>
                     </div>
                     </form>
