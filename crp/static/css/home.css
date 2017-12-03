@@ -534,3 +534,26 @@ a.article, a.article:hover {
 .graphics {
     margin-left: 30%;
 }
+
+.x_panel_ {
+    width:100%;
+    height: 75%;
+    background-color: white;
+}
+
+.month {
+    border-radius: 10px;
+}
+
+.linha {
+    margin-bottom: 10px;
+}
+
+.rb {
+    border-radius: 10px;
+}
+#container {
+    margin-top: 10px;
+    padding-bottom: 10px;
+    height: 100%;
+}
