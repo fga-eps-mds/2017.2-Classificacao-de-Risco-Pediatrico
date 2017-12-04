@@ -6,6 +6,8 @@
     href="https://cdn.datatables.net/v/bs4/dt-1.10.16/b-1.4.2/r-2.2.0/datatables.min.css"/>
     <link rel="stylesheet" href="{% static "css/home.css" %}">
     <link rel="stylesheet" href="{% static "css/registeredPatient.css" %}">
+    {% block head_pos %}
+    {% endblock %}
 {% endblock %}
 
 {% block js %}
@@ -13,6 +15,8 @@
     src="https://cdn.datatables.net/v/bs4/dt-1.10.16/b-1.4.2/r-2.2.0/datatables.min.js">
     </script>
     <script src="{% static "js/home.js" %}"></script>
+    {% block js_pos %}
+    {% endblock %}
 {% endblock %}
 
 {% block content %}
@@ -162,6 +166,11 @@
                                         Estatísticas Pessoais
                                     </a>
                                 </li>
+                                <li>
+                                    <a data-toggle="modal" data-target="#exampleModal" ><i aria-hidden="true"></i>
+                                        Gráfico de Sintomas
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -223,4 +232,30 @@
             {% endblock %}
         </div>
     </div>
+
+    <!-- Modal Statistics Symptoms-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Selecione a faixa etária desejada:</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class=" col-md-6 graphics">
+               <div class="row modal-graphics"> <a href="{% url "users:graphic_symptoms_28d" %}" class="btn btn-secondary">    0 até 28 dias</a></div>
+               <div class="row modal-graphics"> <a href="{% url "users:graphic_symptoms_29d_2m" %}" class="btn btn-secondary">29 dias à 2 meses</a> </div>
+               <div class="row modal-graphics"> <a href="{% url "users:graphic_symptoms_2m_3y" %}" class="btn btn-secondary"> 2 meses à 3 anos</a> </div>
+               <div class="row modal-graphics"> <a href="{% url "users:graphic_symptoms_3y_10y" %}" class="btn btn-secondary">      3 à 10 anos</a> </div>
+               <div class="row modal-graphics"> <a href="{% url "users:graphic_symptoms_10yMore" %}" class="btn btn-secondary"> acima de 10 anos</a></div>
+            </div>
+          </div>
+          <div class="modal-footer">
+          </div>
+        </div>
+      </div>
+    </div>
+
 {% endblock %}
