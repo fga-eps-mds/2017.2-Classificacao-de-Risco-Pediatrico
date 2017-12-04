@@ -162,7 +162,8 @@
                                                     aria-hidden="true"></i>
                                                 </span>
                                                 <select name="{{ form.age_range.name }}"
-                                                class="form-control" id="age_range" required>
+                                                class="form-control" id="{{ form.age_range.id_for_label}}"
+                                                required>
                                                     <option value="" selected disabled>
                                                         Faixa etária
                                                     </option>
