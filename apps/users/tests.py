@@ -417,6 +417,13 @@ class TestUsers:
         assert MachineLearning_3y_10y.objects.count() == 1
         assert MachineLearning_10yMore.objects.count() == 1
 
+    def test_my_history_view(self, client):
+        Staff.objects.create_superuser(**self.default_user_data())
+        response = client.post('/login', {'username': 'email@gmail.com',
+                               'password': "1234asdf"})
+        response = client.get('/my_history/')
+        assert response.status_code == 200
+
     def test_edit_patient_is_valid(self, client):
         Staff.objects.create_superuser(**self.default_user_data())
         client.post('/login', {'username': 'email@gmail.com',

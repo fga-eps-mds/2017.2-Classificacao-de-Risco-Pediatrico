@@ -5,10 +5,11 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css">
 {% endblock %}
 
-
 {% block js %}
-    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js">
+    </script>
+    <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js">
+    </script>
     <script src="{% static "js/home.js" %}"></script>
 {% endblock %}
 
@@ -33,17 +34,33 @@
                         <tbody>
                             {% for staff in staffs %}
                                 <tr>
-                                    <td>{{ staff.id_user }}</td>
-                                    <td>{{ staff.name }}</td>
+                                    <td>
+                                        {{ staff.id_user }}
+                                    </td><!--td ID do usuário-->
+                                    <td>
+                                        {{ staff.name }}
+                                    </td><!--td nome-->
                                     <td>
                                         {% if staff.profile == 1 %}
-                                        Recepcionista
+                                            Recepcionista
+                                        {% elif staff.profile == 2 %}
+                                            Atendente
                                         {% else %}
-                                        Atendente
+                                            Função Inexistente
                                         {% endif %}
+                                    </td><!--td função-->
+                                    <td>
+                                        <a href="edit/{{ staff.id_user }}">
+                                            <i class="fa fa-pencil" aria-hidden="true">
+                                            </i>
+                                        </a>
                                     </td>
-                                    <td><a href="edit/{{ staff.id_user }}"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
-                                    <td><a href="#" data-toggle="modal" data-target="#{{ staff.id_user }}"><i class="fa fa-ban" aria-hidden="true"></i></a></td>
+                                    <td>
+                                        <a href="#" data-toggle="modal" data-target="#{{ staff.id_user }}">
+                                            <i class="fa fa-ban" aria-hidden="true">
+                                            </i>
+                                        </a>
+                                    </td>
                                 </tr>
                             {% endfor %}
                         </tbody>
@@ -56,25 +73,34 @@
     </div>
 
     {% for staff in staffs %}
-        <div class="modal fade" id="{{ staff.id_user }}" tabindex="-1" role="dialog" aria-labelledby="Deletar Usuário" aria-hidden="true">
+        <div class="modal fade" id="{{ staff.id_user }}" tabindex="-1" role="dialog"
+        aria-labelledby="Deletar Usuário" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Deletar Funcionário</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                        <h5 class="modal-title" id="exampleModalLabel">
+                            Deletar Funcionário
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close">
+                        <span aria-hidden="true">
+                            &times;
+                        </span>
                         </button>
                     </div>
                     <div class="modal-body">
                         Tem certeza que deseja deletar a conta do {{ staff.name }}?
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                        <a href="{% url 'users:staff_remove' staff.id_user %}" class="btn btn-danger">Deletar</a>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                            Fechar
+                        </button>
+                        <a href="{% url 'users:staff_remove' staff.id_user %}" class="btn btn-danger">
+                            Deletar
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     {% endfor %}
-
 {% endblock %}
