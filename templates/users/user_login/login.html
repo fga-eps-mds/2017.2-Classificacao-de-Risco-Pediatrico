@@ -5,66 +5,70 @@
 {% include 'layout/navbar.html' %}
 
 <body id="page-top">
-<section id="contact" class="section-padding">
-    <div class="container">
-        <div class="row">
+    <section id="contact" class="section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="ser-title">
+                        Login
+                    </h2>
+                    <hr class="botm-line">
+                </div>
 
-            <div class="col-md-12">
-                <h2 class="ser-title">Login</h2>
-                <hr class="botm-line">
-            </div>
+                <div class="col-md-6 col-sm-8 col-lg-offset-2">
+                    <div class="contact-info">
+                        <form role="form" class="form" method="POST" >
+                            {% csrf_token %}
 
-            <div class="col-md-6 col-sm-8 col-lg-offset-2">
-                <div class="contact-info">
+                            {% if errors %}
+                                <div class="alert alert-warning" role="alert">
+                                    {{ errors }}
+                                </div>
+                            {% endif %}
 
-                    <form role="form" class="form" method="POST">
-
-                        {% csrf_token %}
-
-                        {% if errors %}
-                            <div class="alert alert-warning" role="alert">
-                                {{ errors }}
+                            <div class="form-group">
+                                <label for="email">
+                                    E-mail:
+                                </label>
+                                <input type="email" class="form-control br-radius-zero"
+                                name="{{ form.username.name }}" id="{{ form.username.id_for_label }}"
+                                placeholder="E-mail" required />
                             </div>
-                        {% endif %}
 
-                        <div class="form-group">
-                            <label for="email">E-mail:</label>
-                            <input type="email" class="form-control br-radius-zero" name="{{ form.username.name }}"
-                                   id="{{ form.username.id_for_label }}" placeholder="E-mail" required/>
+                            <div class="form-group">
+                                <label for="email">
+                                    Senha:
+                                </label>
+                                <input type="password" name="{{ form.password.name }}"
+                                class="form-control br-radius-zero" id="{{ form.password.id_for_label }}"
+                                placeholder="Sua senha" required />
+                            </div>
 
-                        </div>
-
-                        <div class="form-group">
-                            <label for="email">Senha:</label>
-                            <input type="password" name="{{ form.password.name }}" class="form-control br-radius-zero"
-                                   id="{{ form.password.id_for_label }}" placeholder="Sua senha" required/>
-                        </div>
-
-
-                        <div class="form-action">
-                            <button type="submit" id="login-button" class="btn btn-form">Acessar</button>
-                        </div>
-                    </form>
+                            <div class="form-action">
+                                <button type="submit" id="login-button" class="btn btn-form">
+                                    Acessar
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- Bootstrap core JavaScript -->
-<script src={% static "js/landingPage/jquery.min.js" %}></script>
-<script src={% static "js/landingPage/bootstrap.bundle.min.js" %}></script>
+    <!-- Bootstrap core JavaScript -->
+    <script src={% static "js/landingPage/jquery.min.js" %}></script>
+    <script src={% static "js/landingPage/bootstrap.bundle.min.js" %}></script>
 
-<!-- Plugin JavaScript -->
-<script src={% static "js/landingPage/jquery.easing.min.js" %}></script>
+    <!-- Plugin JavaScript -->
+    <script src={% static "js/landingPage/jquery.easing.min.js" %}></script>
 
-<!-- Custom scripts for this template -->
-<script src={% static "js/landingPage/landingPage.js" %}></script>
-<script src={% static "js/landingPage/jquery.waypoints.min.js" %}></script>
-<script src={% static "js/landingPage/waypoint.js" %}></script>
+    <!-- Custom scripts for this template -->
+    <script src={% static "js/landingPage/landingPage.js" %}></script>
+    <script src={% static "js/landingPage/jquery.waypoints.min.js" %}></script>
+    <script src={% static "js/landingPage/waypoint.js" %}></script>
 
-<div class="push"></div>
-
+    <div class="push"></div>
 </body>
 
 {% include 'layout/footer.html' %}

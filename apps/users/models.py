@@ -155,6 +155,13 @@ class Patient(models.Model):
         unique=False
     )
 
+    classifier_id = models.CharField(
+        verbose_name=_('ID do Classificador'),
+        max_length=150,
+        default='',
+        blank=True
+    )
+
     guardian = models.CharField(
         verbose_name=_('Nome do Responsável'),
         max_length=50,
@@ -201,39 +208,39 @@ class Patient(models.Model):
         default='',
         blank=True
     )
+
     neighborhood = models.CharField(
         verbose_name='Bairro',
         max_length=100,
         default='',
         blank=True
     )
+
     street = models.CharField(
         verbose_name='Rua',
         max_length=50,
         default='',
         blank=True
     )
+
     block = models.CharField(
         verbose_name='Conjunto',
         max_length=50,
         default='',
         blank=True
     )
+
     number = models.CharField(
         verbose_name='Numero',
         max_length=10,
         default='',
         blank=True
     )
+
     date = models.DateField(
         verbose_name='Data',
         blank=False,
         auto_now=True
-    )
-    classifier = models.CharField(
-        verbose_name=_('Classifier'),
-        max_length=150,
-        blank=False,
     )
 
     CLASSIFICATION_TYPES = (

@@ -104,6 +104,7 @@ def machine_learning(request):
     clinical_state = p_c_states_l.order_by('-id')[0]
     ml_data = trigger_ml(subject_patient, clinical_state, ml)
     ml_data["patient_id"] = p_id
+    ml_data["classifier_id"] = request.user.id_user
 
     return JsonResponse(ml_data)
 
@@ -111,7 +112,7 @@ def machine_learning(request):
 @login_required(redirect_field_name='', login_url='users:login')
 def home(request):
     """
-    define home page behaviour
+    define home page behavior
     """
     form1 = ClinicalState_28dForm()
     form2 = ClinicalState_29d_2mForm()
@@ -128,6 +129,7 @@ def home(request):
 
         patient = Patient.objects.filter(id=patient_id)[0]
         patient.comment_receptionist = request.POST.get('comment')
+        patient.classifier_id = request.user.id_user
         patient.save()
 
     return render(request, 'users/user_home/main_home.html',
@@ -190,14 +192,8 @@ def trigger_ml(subject_patient, clinical_state, ml):
         # always being "AmbulatorialGeral"
     elif subject_patient.age_range == 3:
         patient = get_2m_3y_symptoms(clinical_state)
-        probability = ml3.calc_probabilities(patient)
-        classification = ml3.classify_patient(patient)
-        impact_list = ml3.feature_importance()
     elif subject_patient.age_range == 4:
         patient = get_3y_10y_symptoms(clinical_state)
-        probability = ml4.calc_probabilities(patient)
-        classification = ml4.classify_patient(patient)
-        impact_list = ml4.feature_importance()
     elif subject_patient.age_range == 5:
         patient = get_10y_more_symptoms(clinical_state)
     # to add another age range, use another elif
@@ -323,6 +319,17 @@ def edit_patient(request, id):
             status = 400
     return render(request, 'users/editPatient.html',
                   {'patient': patient, 'form': form}, status=status)
+
+
+@login_required(redirect_field_name='', login_url='users:login')
+def my_history(request):
+    """
+    define history page behavior
+    """
+    patients = Patient.objects.filter(classifier_id=request.user.id_user)
+    classifier = Staff.objects.filter(id_user=request.user.id_user)[0]
+    return render(request, 'users/myHistory.html',
+                  {'patients': patients, "classifier": classifier})
 
 
 def get_under_28_symptoms(clinical_state):
@@ -495,7 +502,7 @@ def get_3y_10y_symptoms(clinical_state):
 
 def get_10y_more_symptoms(clinical_state):
     """
-    building patient (2m-3y) to use on ml based on
+    building patient (10y+) to use on ml based on
     patient's clinical condition
     """
     patient = [[
