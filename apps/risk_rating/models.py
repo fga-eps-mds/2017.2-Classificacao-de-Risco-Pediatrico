@@ -190,6 +190,13 @@ class ClinicalState_28d(Symptoms_28d):
         unique=False
     )
 
+    classifier_id = models.CharField(
+        verbose_name=('ID do Classificador'),
+        max_length=150,
+        blank=True,
+        unique=False
+    )
+
 
 class MachineLearning_28d(Symptoms_28d):
 
@@ -391,6 +398,13 @@ class ClinicalState_29d_2m(Symptoms_29d_2m):
         unique=False
     )
 
+    classifier_id = models.CharField(
+        verbose_name=('ID do Classificador'),
+        max_length=150,
+        blank=True,
+        unique=False
+    )
+
 
 class MachineLearning_29d_2m(Symptoms_29d_2m):
 
@@ -575,6 +589,13 @@ class ClinicalState_2m_3y(Symptoms_2m_3y):
 
     patient_id = models.CharField(
         verbose_name=('ID do Paciente'),
+        max_length=150,
+        blank=True,
+        unique=False
+    )
+
+    classifier_id = models.CharField(
+        verbose_name=('ID do Classificador'),
         max_length=150,
         blank=True,
         unique=False
@@ -906,6 +927,13 @@ class ClinicalState_3y_10y(Symptoms_3y_10y):
         unique=False
     )
 
+    classifier_id = models.CharField(
+        verbose_name=('ID do Classificador'),
+        max_length=150,
+        blank=True,
+        unique=False
+    )
+
 
 class MachineLearning_3y_10y(Symptoms_3y_10y):
 
@@ -1121,12 +1149,6 @@ class Symptoms_10yMore(models.Model):
         blank=True
     )
 
-    salivacao = models.BooleanField(
-        verbose_name=("Salivação"),
-        default=False,
-        blank=True
-    )
-
     queda = models.BooleanField(
         verbose_name=("Queda"),
         default=False,
@@ -1246,6 +1268,13 @@ class ClinicalState_10yMore(Symptoms_10yMore):
 
     patient_id = models.CharField(
         verbose_name=('ID do Paciente'),
+        max_length=150,
+        blank=True,
+        unique=False
+    )
+
+    classifier_id = models.CharField(
+        verbose_name=('ID do Classificador'),
         max_length=150,
         blank=True,
         unique=False

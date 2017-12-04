@@ -3,7 +3,7 @@
 
 {% block head %}
     <link rel="stylesheet" type="text/css"
-          href="https://cdn.datatables.net/v/bs4/dt-1.10.16/b-1.4.2/r-2.2.0/datatables.min.css"/>
+    href="https://cdn.datatables.net/v/bs4/dt-1.10.16/b-1.4.2/r-2.2.0/datatables.min.css"/>
     <link rel="stylesheet" href="{% static "css/home.css" %}">
     <link rel="stylesheet" href="{% static "css/registeredPatient.css" %}">
     {% block head_pos %}
@@ -12,7 +12,8 @@
 
 {% block js %}
     <script type="text/javascript"
-            src="https://cdn.datatables.net/v/bs4/dt-1.10.16/b-1.4.2/r-2.2.0/datatables.min.js"></script>
+    src="https://cdn.datatables.net/v/bs4/dt-1.10.16/b-1.4.2/r-2.2.0/datatables.min.js">
+    </script>
     <script src="{% static "js/home.js" %}"></script>
     {% block js_pos %}
     {% endblock %}
@@ -21,20 +22,32 @@
 {% block content %}
     <div class="wrapper">
         <nav id="sidebar">
+
             <!-- Sidebar header -->
             <div class="sidebar-header">
                 <a href="{% url "users:home" %}">
                     <div class="gradiente"></div>
-                    <h3 id="crpname">CRP</h3>
+                    <h3 id="crpname">
+                        CRP
+                    </h3>
                 </a>
-                <strong>CRP</strong>
+                <strong>
+                    CRP
+                </strong>
             </div>
 
             <!-- Sidebar welcome message -->
-            <p class="ml-2" id="welcome"><span>Bem-vindo(a), <br/><span id="welcomeName">{{ user.name }}</span></span>
+            <p class="ml-2" id="welcome">
+                <span>
+                    Bem-vindo(a),<br/>
+                    <span id="welcomeName">
+                        {{ user.name }}
+                    </span>
+                </span>
             </p>
 
             <ul class="list-unstyled components">
+
                 <!-- Register patient -->
                 <li>
                     <div class="container-box">
@@ -47,6 +60,7 @@
                         </div>
                     </div>
                 </li>
+
                 <!-- Patients -->
                 <li>
                     <div class="container-box">
@@ -54,11 +68,13 @@
                             <a href="#patients" data-toggle="collapse" aria-expanded="false"
                                onclick="changeGradientWidth(this)">
                                 <i class="fa fa-user-o" aria-hidden="true"></i>
-                                Pacientes<span class="fa fa-chevron down"></span>
+                                Pacientes
+                                <span class="fa fa-chevron down"></span>
                             </a>
                             <ul class="collapse list-unstyled" id="patients">
                                 <li>
-                                    <a href="{% url "users:home" %}"><i aria-hidden="true"></i>
+                                    <a href="{% url "users:home" %}">
+                                        <i aria-hidden="true"></i>
                                         Visualizar pacientes
                                     </a>
                                 </li>
@@ -66,23 +82,27 @@
                         </div>
                     </div>
                 </li>
+
                 <!-- Attendence -->
                 <li>
                     <div class="container-box">
                         <div class="box-content">
-                            <a class="link-group" href="#attendence" data-toggle="collapse" aria-expanded="false"
-                               onclick="changeGradientWidth(this)">
-                                <i class="fa fa-check-circle-o" aria-hidden="true"></i>
+                            <a class="link-group" href="#attendence" data-toggle="collapse"
+                            aria-expanded="false" onclick="changeGradientWidth(this)">
+                                <i class="fa fa-check-circle-o" aria-hidden="true">
+                                </i>
                                 Atendimento
                             </a>
                             <ul class="collapse list-unstyled" id="attendence">
                                 <li>
-                                    <a href="{% url "users:home" %}"><i aria-hidden="true"></i>
+                                    <a href="{% url "users:home" %}">
+                                        <i aria-hidden="true"></i>
                                         Classificar Paciente
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#"><i aria-hidden="true"></i>
+                                    <a href="#">
+                                        <i aria-hidden="true"></i>
                                         Atender Paciente
                                     </a>
                                 </li>
@@ -90,6 +110,7 @@
                         </div>
                     </div>
                 </li>
+
                 <!-- Machine Learning -->
                 <li>
                     <div class="container-box">
@@ -101,24 +122,48 @@
                         </div>
                     </div>
                 </li>
+
+                <!-- History -->
+                <li>
+                    <div class="container-box">
+                        <div class="box-content">
+                            <a href="#history" data-toggle="collapse" aria-expanded="false"
+                            onclick="changeGradientWidth(this)">
+                                <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                Histórico
+                            </a>
+                            <ul class="collapse list-unstyled" id="history">
+                                <li>
+                                    <a href="{% url "users:my_history" %}">
+                                        <i aria-hidden="true"></i>
+                                        Histórico Pessoal
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                
                 <!-- Statistics -->
                 <li>
                     <div class="container-box">
                         <div class="box-content">
                             <a href="#statistics" data-toggle="collapse" aria-expanded="false"
-                               onclick="changeGradientWidth(this)">
+                            onclick="changeGradientWidth(this)">
                                 <i class="fa fa-area-chart" aria-hidden="true"></i>
                                 Estatísticas
                             </a>
                             <ul class="collapse list-unstyled" id="statistics">
                                 <li>
-                                    <a href="#"><i aria-hidden="true"></i>
-                                        Grafico de Classificações
+                                    <a href="#">
+                                        <i aria-hidden="true"></i>
+                                        Gráfico de Classificações
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#"><i aria-hidden="true"></i>
-                                        Estatisticas Pessoais
+                                    <a href="#">
+                                        <i aria-hidden="true"></i>
+                                        Estatísticas Pessoais
                                     </a>
                                 </li>
                                 <li>
@@ -130,18 +175,20 @@
                         </div>
                     </div>
                 </li>
+
                 <!-- Help -->
                 <li>
                     <div class="container-box">
                         <div class="box-content">
                             <a href="#help" data-toggle="collapse" aria-expanded="false"
-                               onclick="changeGradientWidth(this)">
+                            onclick="changeGradientWidth(this)">
                                 <i class="fa fa-question-circle"></i>
                                 Ajuda
                             </a>
                             <ul class="collapse list-unstyled" id="help">
                                 <li>
-                                    <a href="#"><i aria-hidden="true"></i>
+                                    <a href="#">
+                                        <i aria-hidden="true"></i>
                                         Contato
                                     </a>
                                 </li>
@@ -149,7 +196,11 @@
                         </div>
                     </div>
                 </li>
-                <li><i></i></li>
+
+                <li>
+                <i></i>
+                </li>
+
                 <li>
                     <a href="{% url 'users:logout' %}">
                         <i class="glyphicon glyphicon-send"></i>
@@ -170,14 +221,15 @@
                     <p class="pt-3 ml-2" id="sidebarCollapse"></p>
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'users:logout' %}">Logout</a>
+                            <a class="nav-link" href="{% url 'users:logout' %}">
+                                Logout
+                            </a>
                         </li>
                     </ul>
                 </div>
             </nav>
             {% block content_pos %}
             {% endblock %}
-
         </div>
     </div>
 

@@ -36,5 +36,7 @@ urlpatterns = [
     url(r'^classify_patient/$', views.machine_learning,
         name='classify_patient'),
     url(r'^feed_ml/$', views.feed_ml,
-        name="feed_ml")
+        name="feed_ml"),
+    url(r'^my_history/$', views.my_history,
+        name="my_history")
 ]
