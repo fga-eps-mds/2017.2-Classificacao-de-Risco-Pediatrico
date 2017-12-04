@@ -23,7 +23,7 @@ $(document).ready(function () {
 
   $('#myHistory').DataTable({
     "responsive": true,
-    "order": [[7, 'desc']],
+    "order": [[6, 'desc']],
     "columnDefs": [{
       "targets": "_all",
       "orderable": false
@@ -47,11 +47,15 @@ $(document).ready(function () {
   $('#searchPatient').keyup(function(){
     table.column(1).search($(this).val()).draw() ;
   })
+
+  tableHistory = $('#myHistory').DataTable()
   $('#searchPatientHistory').keyup(function(){
-    table.column(2).search($(this).val()).draw() ;
+    tableHistory.column(2).search($(this).val()).draw() ;
   })
 
   $('#example_filter').hide();
+
+  $('#myHistory_filter').hide();
 
   $('#sidebarCollapse').on('click', function () {
     $('#sidebar').toggleClass('active');
