@@ -35,7 +35,8 @@
                 <li>
                     <div class="container-box">
                         <div class="box-content">
-                            <a href="{% url "users:register_patient" %}" onclick="changeGradientWidth(this)">
+                            <a href="{% url "users:register_patient" %}" id="register-patient"
+                               onclick="changeGradientWidth(this)">
                                 <i class="fa fa-pencil" aria-hidden="true"></i>
                                 Cadastrar Paciente
                             </a>
@@ -82,6 +83,17 @@
                                     </a>
                                 </li>
                             </ul>
+                        </div>
+                    </div>
+                </li>
+                <!-- Machine Learning -->
+                <li>
+                    <div class="container-box">
+                        <div class="box-content">
+                            <a href="{% url "users:feed_ml" %}" onclick="changeGradientWidth(this)">
+                                <i class="fa fa-sliders" aria-hidden="true"></i>
+                                Alimentar Machine Learning
+                            </a>
                         </div>
                     </div>
                 </li>
