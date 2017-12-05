@@ -19,22 +19,22 @@ $('#id_birth_date').change(function () {
   console.log(remainingDays);
 
   if (remainingDays >= 0 && remainingDays <= 28) {
-    $('#age_range').val('1')
+    $('#id_age_range').val('1')
   }
   else if (remainingDays > 28 && remainingDays <= 90) {
-    $('#age_range').val('2')
+    $('#id_age_range').val('2')
   }
   else if (remainingDays > 90 && remainingDays <= 730) {
-    $('#age_range').val('3')
+    $('#id_age_range').val('3')
   }
   else if (remainingDays > 730 && remainingDays <= 3650) {
-    $('#age_range').val('4')
+    $('#id_age_range').val('4')
   }
   else if (remainingDays > 3650) {
-    $('#age_range').val('5')
+    $('#id_age_range').val('5')
   }
   else {
-    $('#age_range').val('0')
+    $('#id_age_range').val('0')
   }
 
 });
