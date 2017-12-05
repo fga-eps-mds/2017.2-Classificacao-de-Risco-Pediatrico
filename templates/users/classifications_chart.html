@@ -1,0 +1,77 @@
+{% extends 'users/user_home/home_layout.html' %}
+{% load staticfiles %}
+
+{% block content_pos %}
+
+<html>
+  <body>
+    <div id="container" style="height: 100%"></div>
+
+
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts-all-3.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+    <script type="text/javascript">
+var dom = document.getElementById("container");
+var myChart = echarts.init(dom);
+var app = {};
+
+var endpoit='get/data/'
+var ambulatorial = "{{ 'Atendimento Ambulatorial' }}"
+console.log(ambulatorial);
+
+
+
+
+
+option = null;
+option = {
+ title : {
+     text: 'Gráfico de Classificações',
+     subtext: 'Análise de percentual',
+     x:'center'
+ },
+ tooltip : {
+     trigger: 'item',
+     formatter: "{a} <br/>{b} : {c} ({d}%)"
+ },
+ legend: {
+     orient: 'vertical',
+     left: 'left',
+     data: ['Atendimento Imediato','Atendimento Hospitalar','Atendimento Ambulatorial','Atendimento Eletivo']
+ },
+ series : [
+     {
+         name: 'Pie Chart',
+         type: 'pie',
+         radius : '55%',
+         center: ['50%', '60%'],
+         data:[
+             {value:335, name:'Atendimento Imediato'},
+             {value:310, name:'Atendimento Hospitalar'},
+             {value:234, name:'Atendimento Ambulatorial'},
+             {value:135, name:'Atendimento Eletivo'}
+         ],
+         itemStyle: {
+             emphasis: {
+                 shadowBlur: 10,
+                 shadowOffsetX: 0,
+                 shadowColor: 'rgba(0, 0, 0, 0.5)'
+             }
+         }
+     }
+ ]
+};
+;
+if (option && typeof option === "object") {
+ myChart.setOption(option, true);
+}
+    </script>
+  </body>
+</html>
+
+{% endblock %}
