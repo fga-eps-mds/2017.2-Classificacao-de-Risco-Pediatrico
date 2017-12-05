@@ -330,20 +330,12 @@ def classifications_chart(request):
     ambulatorial = Patient.objects.filter(classification=3).count()
     eletivo = Patient.objects.filter(classification=4).count()
 
-    data = [{'value':imediato, 'name':'Atendimento Imediato'},
-            { 'value':hospitalar, 'name':'Atendimento Hospitalar'},
-            { 'value':ambulatorial, 'name':'Atendimento Ambulatorial'},
-            { 'value':eletivo, 'name':'Atendimento Eletivo'}]
+    data = {'AtendimentoImediato': imediato,
+            'AtendimentoHospitalar': hospitalar,
+            'AtendimentoAmbulatorial': ambulatorial,
+            'AtendimentoEletivo': eletivo}
 
-
-    # data2 = [imediato, hospitalar, ambulatorial, eletivo]
-
-    data3 = {'AtendimentoImediato':imediato,'AtendimentoHospitalar':hospitalar,
-             'AtendimentoAmbulatorial':ambulatorial, 'AtendimentoEletivo':eletivo}
-
-    print (data3['AtendimentoAmbulatorial'])
-
-    return render(request, 'users/classifications_chart.html', {'data': data3})
+    return render(request, 'users/classifications_chart.html', {'data': data})
 
 
 @login_required(redirect_field_name='', login_url='users:login')
@@ -355,6 +347,7 @@ def my_history(request):
     classifier = Staff.objects.filter(id_user=request.user.id_user)[0]
     return render(request, 'users/myHistory.html',
                   {'patients': patients, "classifier": classifier})
+
 
 @login_required(redirect_field_name='', login_url='users:login')
 def graphic_symptoms_view_28d(request):
