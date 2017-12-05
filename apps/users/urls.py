@@ -40,6 +40,5 @@ urlpatterns = [
     url(r'^my_history/$', views.my_history,
         name="my_history"),
     url(r'^classifications_chart/$', views.classifications_chart,
-        name="classifications_chart"),
-    url(r'^get/data/$', views.get_chart_data, name="get_data")
+        name="classifications_chart")
 ]

@@ -338,24 +338,12 @@ def classifications_chart(request):
 
     # data2 = [imediato, hospitalar, ambulatorial, eletivo]
 
-    data3 = {'Atendimento Imediato':imediato,'Atendimento Hospitalar':hospitalar,
-             'Atendimento Ambulatorial':ambulatorial, 'Atendimento Eletivo':eletivo}
+    data3 = {'AtendimentoImediato':imediato,'AtendimentoHospitalar':hospitalar,
+             'AtendimentoAmbulatorial':ambulatorial, 'AtendimentoEletivo':eletivo}
 
-    print (data3['Atendimento Ambulatorial'])
+    print (data3['AtendimentoAmbulatorial'])
 
     return render(request, 'users/classifications_chart.html', {'data': data3})
-
-def get_chart_data(request):
-    imediato = Patient.objects.filter(classification=1).count()
-    hospitalar = Patient.objects.filter(classification=2).count()
-    ambulatorial = Patient.objects.filter(classification=3).count()
-    eletivo = Patient.objects.filter(classification=4).count()
-
-    data = {'Atendimento Imediato':imediato,'Atendimento Hospitalar':hospitalar,
-             'Atendimento Ambulatorial':ambulatorial, 'Atendimento Eletivo':eletivo}
-
-    return JsonResponse(data)
-
 
 
 @login_required(redirect_field_name='', login_url='users:login')
