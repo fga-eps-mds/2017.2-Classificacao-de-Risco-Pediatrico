@@ -46,6 +46,13 @@ p {
     width: 100%;
 }
 
+img#logo {
+    max-height: 85%;
+    max-width: 85%;
+    display: block;
+    margin: 0 auto;
+}
+
 #sidebar a, #sidebar a:hover, #sidebar a:focus {
     color: white;
     text-decoration: none;
