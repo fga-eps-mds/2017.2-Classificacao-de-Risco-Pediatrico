@@ -241,7 +241,7 @@ a.download {
 }
 
 a.article, a.article:hover {
-    background: #6d7fcc
+    background: #6d7fcc;
     color: #fff;
 }
 
@@ -505,6 +505,12 @@ a.article, a.article:hover {
 
     #sidebarCollapse span {
         display: none;
+    }
+}
+
+@media (min-width: 768px) {
+    .col-md-2 {
+        max-width:100%;
     }
 }
 
