@@ -506,6 +506,10 @@ a.article, a.article:hover {
     #sidebarCollapse span {
         display: none;
     }
+
+    .row {
+        display: block;
+    }
 }
 
 @media (min-width: 768px) {
