@@ -21,9 +21,9 @@
 
         buildData(legend_data, series_data);
 
-        console.log(legend_data);
+        /* PIE CHART:
 
-        /*option = null;
+        option = null;
         option = {
          title : {
              text: 'Gráfico de Classificações',
@@ -57,11 +57,11 @@
          ]
        };*/
 
-       var posList = [
-     'left', 'right', 'top', 'bottom',
-     'inside',
-     'insideTop', 'insideLeft', 'insideRight', 'insideBottom',
-     'insideTopLeft', 'insideTopRight', 'insideBottomLeft', 'insideBottomRight'
+         var posList = [
+           'left', 'right', 'top', 'bottom',
+           'inside',
+           'insideTop', 'insideLeft', 'insideRight', 'insideBottom',
+           'insideTopLeft', 'insideTopRight', 'insideBottomLeft', 'insideBottomRight'
          ];
 
          app.configParameters = {
@@ -173,20 +173,28 @@
                  }
              ],
              series: [
-                 {
-                     name: 'Classificações',
-                     type: 'bar',
-                     barGap: 2,
-                     label: labelOption,
-                     data: series_data,
-                     itemStyle: {
-                         emphasis: {
-                             shadowBlur: 10,
-                             shadowOffsetX: 0,
-                             shadowColor: 'rgba(0, 0, 0, 0.5)'
-                         }
-                     },
-                 }
+                {
+                  name: 'Classificações',
+                  type: 'bar',
+                  barGap: 2,
+                  label: labelOption,
+                  data: series_data,
+                  itemStyle: {
+                      emphasis: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                      },
+                      normal: {
+                        color: function(params) {
+                          var colorList = [
+                             '#ff3131','#fbff32','#30ff4f','#939393'
+                             ];
+                          return colorList[params.dataIndex]
+                        }
+                      }
+                  },
+                }
              ]
          };
 
@@ -216,6 +224,5 @@
         }
 
       </script>
-    </div>
 
 {% endblock %}
