@@ -19,6 +19,12 @@ from apps.risk_rating.forms import ClinicalState_29d_2mForm
 from apps.risk_rating.forms import ClinicalState_2m_3yForm
 from apps.risk_rating.forms import ClinicalState_3y_10yForm
 from apps.risk_rating.forms import ClinicalState_10yMoreForm
+from apps.risk_rating.models import MachineLearning_28d
+from apps.risk_rating.models import MachineLearning_29d_2m
+from apps.risk_rating.models import MachineLearning_2m_3y
+from apps.risk_rating.models import MachineLearning_3y_10y
+from apps.risk_rating.models import MachineLearning_10yMore
+
 from apps.risk_rating.forms import MachineLearning_28dForm
 from apps.risk_rating.forms import MachineLearning_29d_2mForm
 from apps.risk_rating.forms import MachineLearning_2m_3yForm
@@ -32,11 +38,11 @@ from apps.risk_rating.models import ClinicalState_3y_10y
 from apps.risk_rating.models import ClinicalState_10yMore
 
 
-ml1 = MachineLearning('apps/risk_rating/class_menos_28.csv')
-ml2 = MachineLearning('apps/risk_rating/class_29d_2m.csv')
-ml3 = MachineLearning('apps/risk_rating/class_2m_3y.csv')
-ml4 = MachineLearning('apps/risk_rating/class_3y_10y.csv')
-ml5 = MachineLearning('apps/risk_rating/class_10y+.csv')
+ml1 = MachineLearning('apps/risk_rating/class_menos_28.csv', MachineLearning_28d.objects.all().values())
+ml2 = MachineLearning('apps/risk_rating/class_29d_2m.csv', MachineLearning_29d_2m.objects.all().values())
+ml3 = MachineLearning('apps/risk_rating/class_2m_3y.csv', MachineLearning_2m_3y.objects.all().values())
+ml4 = MachineLearning('apps/risk_rating/class_3y_10y.csv', MachineLearning_3y_10y.objects.all().values())
+ml5 = MachineLearning('apps/risk_rating/class_10y+.csv', MachineLearning_10yMore.objects.all().values())
 
 
 def landing_page(request):
