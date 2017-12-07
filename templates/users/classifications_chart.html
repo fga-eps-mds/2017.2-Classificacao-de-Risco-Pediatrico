@@ -16,6 +16,7 @@
         var myChart = echarts.init(dom);
         var legend_data = [];
         var series_data = [];
+        var color_data = ['rgba(244, 67, 54, 1)'];
         var app = {};
 
         buildData(legend_data, series_data);
@@ -61,137 +62,133 @@
      'inside',
      'insideTop', 'insideLeft', 'insideRight', 'insideBottom',
      'insideTopLeft', 'insideTopRight', 'insideBottomLeft', 'insideBottomRight'
- ];
+         ];
 
- app.configParameters = {
-     rotate: {
-         min: -90,
-         max: 90
-     },
-     align: {
-         options: {
-             left: 'left',
-             center: 'center',
-             right: 'right'
-         }
-     },
-     verticalAlign: {
-         options: {
-             top: 'top',
-             middle: 'middle',
-             bottom: 'bottom'
-         }
-     },
-     position: {
-         options: echarts.util.reduce(posList, function (map, pos) {
-             map[pos] = pos;
-             return map;
-         }, {})
-     },
-     distance: {
-         min: 0,
-         max: 100
-     }
- };
-
- app.config = {
-     rotate: 0,
-     align: 'center',
-     verticalAlign: 'middle',
-     position: 'insideBottom',
-     distance: 40,
-     onChange: function () {
-         var labelOption = {
-             normal: {
-                 rotate: app.config.rotate,
-                 align:   app.config.align,
-                 verticalAlign: app.config.verticalAlign,
-                 position: app.config.position,
-                 distance: app.config.distance
-             }
-         };
-         myChart.setOption({
-             series: [{
-                 label: labelOption
-             }, {
-                 label: labelOption
-             }, {
-                 label: labelOption
-             }, {
-                 label: labelOption
-             }]
-         });
-     }
- };
-
-
- var labelOption = {
-     normal: {
-         show: true,
-         position: app.config.position,
-         distance: app.config.distance,
-         align: app.config.align,
-         verticalAlign: app.config.verticalAlign,
-         rotate: app.config.rotate,
-         formatter: '{c}',
-         fontSize: 40
-     }
- };
-
- option = {
-     color: ['#003366', '#006699', '#4cabce', '#e5323e'],
-     tooltip: {
-         trigger: 'axis',
-         axisPointer: {
-             type: 'shadow'
-         }
-     },
-     legend: {
-         data: legend_data
-     },
-     toolbox: {
-         show: true,
-         orient: 'vertical',
-         left: 'right',
-         top: 'center',
-         feature: {
-             mark: {show: true},
-             dataView: {show: true, readOnly: false},
-             magicType: {show: true, type: ['line', 'bar', 'stack', 'tiled']},
-             restore: {show: true},
-             saveAsImage: {show: true}
-         }
-     },
-     calculable: true,
-     xAxis: [
-         {
-             type: 'category',
-             axisTick: {show: false},
-             data: ['2012', '2013', '2014', '2015', '2016']
-         }
-     ],
-     yAxis: [
-         {
-             type: 'value'
-         }
-     ],
-     series: [
-         {
-             name: 'Classificações',
-             type: 'bar',
-             barGap: 0,
-             label: labelOption,
-             data: series_data,
-             itemStyle: {
-                 emphasis: {
-                     shadowBlur: 10,
-                     shadowOffsetX: 0,
-                     shadowColor: 'rgba(0, 0, 0, 0.5)'
+         app.configParameters = {
+             rotate: {
+                 min: -90,
+                 max: 90
+             },
+             align: {
+                 options: {
+                     left: 'left',
+                     center: 'center',
+                     right: 'right'
                  }
              },
-         }
-     ]
- };
+             verticalAlign: {
+                 options: {
+                     top: 'top',
+                     middle: 'middle',
+                     bottom: 'bottom'
+                 }
+             },
+             position: {
+                 options: echarts.util.reduce(posList, function (map, pos) {
+                     map[pos] = pos;
+                     return map;
+                 }, {})
+             },
+             distance: {
+                 min: 0,
+                 max: 100
+             }
+         };
+
+         app.config = {
+             rotate: 0,
+             align: 'center',
+             verticalAlign: 'middle',
+             position: 'insideBottom',
+             distance: 40,
+             onChange: function () {
+                 var labelOption = {
+                     normal: {
+                         rotate: app.config.rotate,
+                         align:   app.config.align,
+                         verticalAlign: app.config.verticalAlign,
+                         position: app.config.position,
+                         distance: app.config.distance
+                     }
+                 };
+                 myChart.setOption({
+                     series: [{
+                         label: labelOption
+                     }, {
+                         label: labelOption
+                     }, {
+                         label: labelOption
+                     }, {
+                         label: labelOption
+                     }]
+                 });
+             }
+         };
+
+
+         var labelOption = {
+             normal: {
+                 show: true,
+                 position: app.config.position,
+                 distance: app.config.distance,
+                 align: app.config.align,
+                 verticalAlign: app.config.verticalAlign,
+                 rotate: app.config.rotate,
+                 formatter: '{c}',
+                 fontSize: 40
+             }
+         };
+
+         option = {
+            color: color_data,
+             tooltip: {
+                 trigger: 'axis',
+                 axisPointer: {
+                     type: 'shadow'
+                 }
+             },
+             legend: {
+                 data: legend_data,
+             },
+             toolbox: {
+                 show: true,
+                 orient: 'vertical',
+                 left: 'right',
+                 top: 'center',
+                 feature: {
+                     saveAsImage: {show: true}
+                 }
+             },
+            calculable: true,
+             xAxis: [
+                 {
+                     type: 'category',
+                     axisTick: {show: true},
+                     data: legend_data,
+                 }
+             ],
+             yAxis: [
+                 {
+                     type: 'value'
+                 }
+             ],
+             series: [
+                 {
+                     name: 'Classificações',
+                     type: 'bar',
+                     barGap: 2,
+                     label: labelOption,
+                     data: series_data,
+                     itemStyle: {
+                         emphasis: {
+                             shadowBlur: 10,
+                             shadowOffsetX: 0,
+                             shadowColor: 'rgba(0, 0, 0, 0.5)'
+                         }
+                     },
+                 }
+             ]
+         };
 
 
 
@@ -202,19 +199,19 @@
         function buildData( legend_data, series_data){
           if ({{data.AtendimentoImediato}} != 0){
             legend_data.push("Atendimento Imediato");
-            series_data.push({value:{{data.AtendimentoImediato}}, name:'Atendimento Imediato'});
+            series_data.push({value:{{data.AtendimentoImediato}}});
           }
           if ({{data.AtendimentoHospitalar}} != 0){
             legend_data.push("Atendimento Hospitalar");
-            series_data.push({value:{{data.AtendimentoHospitalar}}, name:'Atendimento Hospitalar'});
+            series_data.push({value:{{data.AtendimentoHospitalar}}});
           }
           if ({{data.AtendimentoAmbulatorial}} != 0){
             legend_data.push("Atendimento Ambulatorial");
-            series_data.push({value:{{data.AtendimentoAmbulatorial}}, name:'Atendimento Ambulatorial'});
+            series_data.push({value:{{data.AtendimentoAmbulatorial}}});
           }
           if ({{data.AtendimentoEletivo}} != 0){
             legend_data.push("Atendimento Eletivo");
-            series_data.push({value:{{data.AtendimentoEletivo}}, name:'Atendimento Eletivo'});
+            series_data.push({value:{{data.AtendimentoEletivo}}});
           }
         }
 
