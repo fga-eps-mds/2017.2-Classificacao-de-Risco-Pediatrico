@@ -19,8 +19,8 @@ from apps.risk_rating.forms import ClinicalState_29d_2mForm
 from apps.risk_rating.forms import ClinicalState_2m_3yForm
 from apps.risk_rating.forms import ClinicalState_3y_10yForm
 from apps.risk_rating.forms import ClinicalState_10yMoreForm
-from apps.risk_rating.models import MachineLearning_28d
-from apps.risk_rating.models import MachineLearning_29d_2m
+from apps.risk_rating.models import MachineLearningFor28Days
+from apps.risk_rating.models import MachineLearning_For_29DaysTo_2Months
 from apps.risk_rating.models import MachineLearning_2m_3y
 from apps.risk_rating.models import MachineLearning_3y_10y
 from apps.risk_rating.models import MachineLearning_10yMore
@@ -31,15 +31,15 @@ from apps.risk_rating.forms import MachineLearning_2m_3yForm
 from apps.risk_rating.forms import MachineLearning_3y_10yForm
 from apps.risk_rating.forms import MachineLearning_10yMoreForm
 
-from apps.risk_rating.models import ClinicalState_28d
-from apps.risk_rating.models import ClinicalState_29d_2m
+from apps.risk_rating.models import ClinicalStateFor28Days
+from apps.risk_rating.models import ClinicalState_For_29DaysTo_2Months
 from apps.risk_rating.models import ClinicalState_2m_3y
 from apps.risk_rating.models import ClinicalState_3y_10y
 from apps.risk_rating.models import ClinicalState_10yMore
 
 
-ml1 = MachineLearning('apps/risk_rating/class_menos_28.csv', MachineLearning_28d.objects.all().values())
-ml2 = MachineLearning('apps/risk_rating/class_29d_2m.csv', MachineLearning_29d_2m.objects.all().values())
+ml1 = MachineLearning('apps/risk_rating/class_menos_28d.csv', MachineLearningFor28Days.objects.all().values())
+ml2 = MachineLearning('apps/risk_rating/class_29d_2m.csv', MachineLearning_For_29DaysTo_2Months.objects.all().values())
 ml3 = MachineLearning('apps/risk_rating/class_2m_3y.csv', MachineLearning_2m_3y.objects.all().values())
 ml4 = MachineLearning('apps/risk_rating/class_3y_10y.csv', MachineLearning_3y_10y.objects.all().values())
 ml5 = MachineLearning('apps/risk_rating/class_10y+.csv', MachineLearning_10yMore.objects.all().values())
@@ -80,12 +80,12 @@ def machine_learning(request):
     if 'form1' in request.POST:
         form = ClinicalState_28dForm(request.POST)
         form.save()
-        state = ClinicalState_28d
+        state = ClinicalStateFor28Days
         ml = ml1
     elif "form2" in request.POST:
         form = ClinicalState_29d_2mForm(request.POST)
         form.save()
-        state = ClinicalState_29d_2m
+        state = ClinicalState_For_29DaysTo_2Months
         ml = ml2
     elif "form3" in request.POST:
         form = ClinicalState_2m_3yForm(request.POST)

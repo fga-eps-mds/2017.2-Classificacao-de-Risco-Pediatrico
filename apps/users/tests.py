@@ -2,8 +2,8 @@ import pytest
 from apps.users.forms import RegistrationStaffForm, RegistrationPatientForm, \
     EditPatientForm
 from apps.users.models import Staff, Patient
-from apps.risk_rating.models import MachineLearning_28d, \
-    MachineLearning_29d_2m, MachineLearning_2m_3y, \
+from apps.risk_rating.models import MachineLearningFor28Days, \
+    MachineLearning_For_29DaysTo_2Months, MachineLearning_2m_3y, \
     MachineLearning_3y_10y, MachineLearning_10yMore
 
 
@@ -411,8 +411,8 @@ class TestUsers:
 
         # the asserts below make sure that there is one classification
         # for each age range saved now.
-        assert MachineLearning_28d.objects.count() == 1
-        assert MachineLearning_29d_2m.objects.count() == 1
+        assert MachineLearningFor28Days.objects.count() == 1
+        assert MachineLearning_For_29DaysTo_2Months.objects.count() == 1
         assert MachineLearning_2m_3y.objects.count() == 1
         assert MachineLearning_3y_10y.objects.count() == 1
         assert MachineLearning_10yMore.objects.count() == 1

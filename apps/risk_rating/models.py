@@ -2,199 +2,196 @@ from django.db import models
 from django.utils.translation import ugettext as _
 
 
-class Symptoms_28d(models.Model):
-
+class SymptomsFor28Days(models.Model):
     class Meta:
         abstract = True
 
     dispineia = models.BooleanField(
-        verbose_name=("Dispinéia"),
+        verbose_name=_('Dispinéia'),
         default=False,
         blank=True
     )
 
     ictericia = models.BooleanField(
-        verbose_name=("Icterícia"),
+        verbose_name=_('Icterícia'),
         default=False,
         blank=True
     )
 
-    perdada_consciencia = models.BooleanField(
-        verbose_name=("Perda de Consciência"),
+    perda_da_consciencia = models.BooleanField(
+        verbose_name=_('Perda de Consciência'),
         default=False,
         blank=True
     )
 
     cianose = models.BooleanField(
-        verbose_name=("Cianose"),
+        verbose_name=_('Cianose'),
         default=False,
         blank=True
     )
 
     febre = models.BooleanField(
-        verbose_name=("Febre"),
+        verbose_name=_('Febre'),
         default=False,
         blank=True
     )
 
     solucos = models.BooleanField(
-        verbose_name=("Soluços"),
+        verbose_name=_('Soluços'),
         default=False,
         blank=True
     )
 
     prostracao = models.BooleanField(
-        verbose_name=("Prostração"),
+        verbose_name=_('Prostração'),
         default=False,
         blank=True
     )
 
     vomitos = models.BooleanField(
-        verbose_name=("Vômitos"),
+        verbose_name=_('Vômitos'),
         default=False,
         blank=True
     )
 
     tosse = models.BooleanField(
-        verbose_name=("Tosse"),
+        verbose_name=_('Tosse'),
         default=False,
         blank=True
     )
 
     coriza = models.BooleanField(
-        verbose_name=("Coriza"),
+        verbose_name=_('Coriza'),
         default=False,
         blank=True
     )
 
     obstrucao_nasal = models.BooleanField(
-        verbose_name=("Obstrução Nasal"),
+        verbose_name=_('Obstrução Nasal'),
         default=False,
         blank=True
     )
 
     convulcao_no_momento = models.BooleanField(
-        verbose_name=("Convulção no momento"),
+        verbose_name=_('Convulção no momento'),
         default=False,
         blank=True
     )
 
     diarreia = models.BooleanField(
-        verbose_name=("Diarréia"),
+        verbose_name=_('Diarréia'),
         default=False,
         blank=True
     )
 
     choro_inconsolavel = models.BooleanField(
-        verbose_name=("Choro Inconsolável"),
+        verbose_name=_('Choro Inconsolável'),
         default=False,
         blank=True
     )
 
-    dificuldade_evacuar = models.BooleanField(
-        verbose_name=("Dificuldade de Evacuar"),
+    dificuldade_de_evacuar = models.BooleanField(
+        verbose_name=_('Dificuldade de Evacuar'),
         default=False,
         blank=True
     )
 
-    nao_suga_seio = models.BooleanField(
-        verbose_name=("Não suga o seio"),
+    nao_suga_o_seio = models.BooleanField(
+        verbose_name=_('Não suga o seio'),
         default=False,
         blank=True
     )
 
     manchas_na_pele = models.BooleanField(
-        verbose_name=("Manchas na pele"),
+        verbose_name=_('Manchas na pele'),
         default=False,
         blank=True
     )
 
     salivacao = models.BooleanField(
-        verbose_name=("Salivação"),
+        verbose_name=_('Salivação'),
         default=False,
         blank=True
     )
 
     queda = models.BooleanField(
-        verbose_name=("Queda"),
+        verbose_name=_('Queda'),
         default=False,
         blank=True
     )
 
     chiado_no_peito = models.BooleanField(
-        verbose_name=("Chiado no peito"),
+        verbose_name=_('Chiado no peito'),
         default=False,
         blank=True
     )
 
     diminuicao_da_diurese = models.BooleanField(
-        verbose_name=("Diminuição da Diurese"),
+        verbose_name=_('Diminuição da Diurese'),
         default=False,
         blank=True
     )
 
     dor_abdominal = models.BooleanField(
-        verbose_name=("Dor abdominal"),
+        verbose_name=_('Dor abdominal'),
         default=False,
         blank=True
     )
 
     dor_de_ouvido = models.BooleanField(
-        verbose_name=("Dor de ouvido"),
+        verbose_name=_('Dor de ouvido'),
         default=False,
         blank=True
     )
 
     fontanela_abaulada = models.BooleanField(
-        verbose_name=("Fontanela abaulada"),
+        verbose_name=_('Fontanela abaulada'),
         default=False,
         blank=True
     )
 
     secrecao_no_umbigo = models.BooleanField(
-        verbose_name=("Secreção no umbigo"),
+        verbose_name=_('Secreção no umbigo'),
         default=False,
         blank=True
     )
 
     secrecao_ocular = models.BooleanField(
-        verbose_name=("Secreção ocular"),
+        verbose_name=_('Secreção ocular'),
         default=False,
         blank=True
     )
 
     sangue_nas_fezes = models.BooleanField(
-        verbose_name=("Sangue nas fezes"),
+        verbose_name=_('Sangue nas fezes'),
         default=False,
         blank=True
     )
 
-    convulsao_hoje = models.BooleanField(
-        verbose_name=("Relato de convulsão hoje"),
+    relato_de_convulsao_hoje = models.BooleanField(
+        verbose_name=_('Relato de convulsão hoje'),
         default=False,
         blank=True
     )
 
 
-class ClinicalState_28d(Symptoms_28d):
-
+class ClinicalStateFor28Days(SymptomsFor28Days):
     patient_id = models.CharField(
-        verbose_name=('ID do Paciente'),
+        verbose_name=_('ID do Paciente'),
         max_length=150,
         blank=True,
         unique=False
     )
 
     classifier_id = models.CharField(
-        verbose_name=('ID do Classificador'),
+        verbose_name=_('ID do Classificador'),
         max_length=150,
         blank=True,
         unique=False
     )
 
 
-class MachineLearning_28d(Symptoms_28d):
-
+class MachineLearningFor28Days(SymptomsFor28Days):
     CLASSIFICATION_TYPES = (
         (1, 'Atendimento Imediato'),
         (2, 'Atendimento Hospitalar'),
@@ -209,193 +206,190 @@ class MachineLearning_28d(Symptoms_28d):
     )
 
 
-class Symptoms_29d_2m(models.Model):
-
+class SymptomsFor29daysTo2Months(models.Model):
     class Meta:
         abstract = True
 
     dispineia = models.BooleanField(
-        verbose_name=("Dispinéia"),
+        verbose_name=_('Dispinéia'),
         default=False,
         blank=True
     )
 
     ictericia = models.BooleanField(
-        verbose_name=("Icterícia"),
+        verbose_name=_('Icterícia'),
         default=False,
         blank=True
     )
 
-    perdada_consciencia = models.BooleanField(
-        verbose_name=("Perda de Consciência"),
+    perda_da_consciencia = models.BooleanField(
+        verbose_name=_('Perda de Consciência'),
         default=False,
         blank=True
     )
 
     cianose = models.BooleanField(
-        verbose_name=("Cianose"),
+        verbose_name=_('Cianose'),
         default=False,
         blank=True
     )
 
     febre = models.BooleanField(
-        verbose_name=("Febre"),
+        verbose_name=_('Febre'),
         default=False,
         blank=True
     )
 
     solucos = models.BooleanField(
-        verbose_name=("Soluços"),
+        verbose_name=_('Soluços'),
         default=False,
         blank=True
     )
 
     prostracao = models.BooleanField(
-        verbose_name=("Prostração"),
+        verbose_name=_('Prostração'),
         default=False,
         blank=True
     )
 
     vomitos = models.BooleanField(
-        verbose_name=("Vômitos"),
+        verbose_name=_('Vômitos'),
         default=False,
         blank=True
     )
 
     tosse = models.BooleanField(
-        verbose_name=("Tosse"),
+        verbose_name=_('Tosse'),
         default=False,
         blank=True
     )
 
     coriza = models.BooleanField(
-        verbose_name=("Coriza"),
+        verbose_name=_('Coriza'),
         default=False,
         blank=True
     )
 
     obstrucao_nasal = models.BooleanField(
-        verbose_name=("Obstrução Nasal"),
+        verbose_name=_('Obstrução Nasal'),
         default=False,
         blank=True
     )
 
-    convulcao_no_momento = models.BooleanField(
-        verbose_name=("Convulção no momento"),
+    convulsao = models.BooleanField(
+        verbose_name=_('Convulsão'),
         default=False,
         blank=True
     )
 
     diarreia = models.BooleanField(
-        verbose_name=("Diarréia"),
+        verbose_name=_('Diarréia'),
         default=False,
         blank=True
     )
 
-    dificuldade_evacuar = models.BooleanField(
-        verbose_name=("Dificuldade de Evacuar"),
+    dificuldade_de_evacuar = models.BooleanField(
+        verbose_name=_('Dificuldade de Evacuar'),
         default=False,
         blank=True
     )
 
-    nao_suga_seio = models.BooleanField(
-        verbose_name=("Não suga o seio"),
+    nao_suga_o_seio = models.BooleanField(
+        verbose_name=_('Não suga o seio'),
         default=False,
         blank=True
     )
 
     manchas_na_pele = models.BooleanField(
-        verbose_name=("Manchas na pele"),
+        verbose_name=_('Manchas na pele'),
         default=False,
         blank=True
     )
 
     salivacao = models.BooleanField(
-        verbose_name=("Salivação"),
+        verbose_name=_('Salivação'),
         default=False,
         blank=True
     )
 
     queda = models.BooleanField(
-        verbose_name=("Queda"),
+        verbose_name=_('Queda'),
         default=False,
         blank=True
     )
 
     chiado_no_peito = models.BooleanField(
-        verbose_name=("Chiado no peito"),
+        verbose_name=_('Chiado no peito'),
         default=False,
         blank=True
     )
 
     diminuicao_da_diurese = models.BooleanField(
-        verbose_name=("Diminuição da Diurese"),
+        verbose_name=_('Diminuição da Diurese'),
         default=False,
         blank=True
     )
 
     dor_abdominal = models.BooleanField(
-        verbose_name=("Dor abdominal"),
+        verbose_name=_('Dor abdominal'),
         default=False,
         blank=True
     )
 
     dor_de_ouvido = models.BooleanField(
-        verbose_name=("Dor de ouvido"),
+        verbose_name=_('Dor de ouvido'),
         default=False,
         blank=True
     )
 
     fontanela_abaulada = models.BooleanField(
-        verbose_name=("Fontanela abaulada"),
+        verbose_name=_('Fontanela abaulada'),
         default=False,
         blank=True
     )
 
     secrecao_no_umbigo = models.BooleanField(
-        verbose_name=("Secreção no umbigo"),
+        verbose_name=_('Secreção no umbigo'),
         default=False,
         blank=True
     )
 
     secrecao_ocular = models.BooleanField(
-        verbose_name=("Secreção ocular"),
+        verbose_name=_('Secreção ocular'),
         default=False,
         blank=True
     )
 
     sangue_nas_fezes = models.BooleanField(
-        verbose_name=("Sangue nas fezes"),
+        verbose_name=_('Sangue nas fezes'),
         default=False,
         blank=True
     )
 
-    convulsao_hoje = models.BooleanField(
-        verbose_name=("Relato de convulsão hoje"),
+    relato_de_convulsao_hoje = models.BooleanField(
+        verbose_name=_('Relato de convulsão hoje'),
         default=False,
         blank=True
     )
 
 
-class ClinicalState_29d_2m(Symptoms_29d_2m):
-
+class ClinicalState_For_29DaysTo_2Months(SymptomsFor29daysTo2Months):
     patient_id = models.CharField(
-        verbose_name=('ID do Paciente'),
+        verbose_name=_('ID do Paciente'),
         max_length=150,
         blank=True,
         unique=False
     )
 
     classifier_id = models.CharField(
-        verbose_name=('ID do Classificador'),
+        verbose_name=_('ID do Classificador'),
         max_length=150,
         blank=True,
         unique=False
     )
 
 
-class MachineLearning_29d_2m(Symptoms_29d_2m):
-
+class MachineLearning_For_29DaysTo_2Months(SymptomsFor29daysTo2Months):
     CLASSIFICATION_TYPES = (
         (1, 'Atendimento Imediato'),
         (2, 'Atendimento Hospitalar'),
@@ -411,172 +405,170 @@ class MachineLearning_29d_2m(Symptoms_29d_2m):
 
 
 class Symptoms_2m_3y(models.Model):
-
     class Meta:
         abstract = True
 
     dispineia = models.BooleanField(
-        verbose_name=("Dispinéia"),
+        verbose_name=_('Dispinéia'),
         default=False,
         blank=True
     )
 
     ictericia = models.BooleanField(
-        verbose_name=("Icterícia"),
+        verbose_name=_('Icterícia'),
         default=False,
         blank=True
     )
 
-    perdada_consciencia = models.BooleanField(
-        verbose_name=("Perda de Consciência"),
+    perda_da_consciencia = models.BooleanField(
+        verbose_name=_('Perda de Consciência'),
         default=False,
         blank=True
     )
 
     cianose = models.BooleanField(
-        verbose_name=("Cianose"),
+        verbose_name=_('Cianose'),
         default=False,
         blank=True
     )
 
     febre = models.BooleanField(
-        verbose_name=("Febre"),
+        verbose_name=_('Febre'),
         default=False,
         blank=True
     )
 
     solucos = models.BooleanField(
-        verbose_name=("Soluços"),
+        verbose_name=_('Soluços'),
         default=False,
         blank=True
     )
 
     prostracao = models.BooleanField(
-        verbose_name=("Prostração"),
+        verbose_name=_('Prostração'),
         default=False,
         blank=True
     )
 
     vomitos = models.BooleanField(
-        verbose_name=("Vômitos"),
+        verbose_name=_('Vômitos'),
         default=False,
         blank=True
     )
 
     tosse = models.BooleanField(
-        verbose_name=("Tosse"),
+        verbose_name=_('Tosse'),
         default=False,
         blank=True
     )
 
     coriza = models.BooleanField(
-        verbose_name=("Coriza"),
+        verbose_name=_('Coriza'),
         default=False,
         blank=True
     )
 
     obstrucao_nasal = models.BooleanField(
-        verbose_name=("Obstrução Nasal"),
+        verbose_name=_('Obstrução Nasal'),
         default=False,
         blank=True
     )
 
     convulcao_no_momento = models.BooleanField(
-        verbose_name=("Convulção no momento"),
+        verbose_name=_('Convulção no momento'),
         default=False,
         blank=True
     )
 
     diarreia = models.BooleanField(
-        verbose_name=("Diarréia"),
+        verbose_name=_('Diarréia'),
         default=False,
         blank=True
     )
 
-    dificuldade_evacuar = models.BooleanField(
-        verbose_name=("Dificuldade de Evacuar"),
+    dificuldade_de_evacuar = models.BooleanField(
+        verbose_name=_('Dificuldade de Evacuar'),
         default=False,
         blank=True
     )
 
     nao_suga_seio = models.BooleanField(
-        verbose_name=("Não suga o seio"),
+        verbose_name=_('Não suga o seio'),
         default=False,
         blank=True
     )
 
     manchas_na_pele = models.BooleanField(
-        verbose_name=("Manchas na pele"),
+        verbose_name=_('Manchas na pele'),
         default=False,
         blank=True
     )
 
     salivacao = models.BooleanField(
-        verbose_name=("Salivação"),
+        verbose_name=_('Salivação'),
         default=False,
         blank=True
     )
 
     queda = models.BooleanField(
-        verbose_name=("Queda"),
+        verbose_name=_('Queda'),
         default=False,
         blank=True
     )
 
     chiado_no_peito = models.BooleanField(
-        verbose_name=("Chiado no peito"),
+        verbose_name=_('Chiado no peito'),
         default=False,
         blank=True
     )
 
     diminuicao_da_diurese = models.BooleanField(
-        verbose_name=("Diminuição da Diurese"),
+        verbose_name=_('Diminuição da Diurese'),
         default=False,
         blank=True
     )
 
     dor_abdominal = models.BooleanField(
-        verbose_name=("Dor abdominal"),
+        verbose_name=_('Dor abdominal'),
         default=False,
         blank=True
     )
 
     dor_de_ouvido = models.BooleanField(
-        verbose_name=("Dor de ouvido"),
+        verbose_name=_('Dor de ouvido'),
         default=False,
         blank=True
     )
 
     fontanela_abaulada = models.BooleanField(
-        verbose_name=("Fontanela abaulada"),
+        verbose_name=_('Fontanela abaulada'),
         default=False,
         blank=True
     )
 
     secrecao_no_umbigo = models.BooleanField(
-        verbose_name=("Secreção no umbigo"),
+        verbose_name=_('Secreção no umbigo'),
         default=False,
         blank=True
     )
 
     secrecao_ocular = models.BooleanField(
-        verbose_name=("Secreção ocular"),
+        verbose_name=_('Secreção ocular'),
         default=False,
         blank=True
     )
 
 
 class ClinicalState_2m_3y(Symptoms_2m_3y):
-
     patient_id = models.CharField(
-        verbose_name=('ID do Paciente'),
+        verbose_name=_('ID do Paciente'),
         max_length=150,
         blank=True,
         unique=False
     )
 
     classifier_id = models.CharField(
-        verbose_name=('ID do Classificador'),
+        verbose_name=_('ID do Classificador'),
         max_length=150,
         blank=True,
         unique=False
@@ -584,7 +576,6 @@ class ClinicalState_2m_3y(Symptoms_2m_3y):
 
 
 class MachineLearning_2m_3y(Symptoms_2m_3y):
-
     CLASSIFICATION_TYPES = (
         (1, 'Atendimento Imediato'),
         (2, 'Atendimento Hospitalar'),
@@ -600,309 +591,307 @@ class MachineLearning_2m_3y(Symptoms_2m_3y):
 
 
 class Symptoms_3y_10y(models.Model):
-
     class Meta:
         abstract = True
 
-    perdada_consciencia = models.BooleanField(
-        verbose_name=("Perda de Consciência"),
+    perda_da_consciencia = models.BooleanField(
+        verbose_name=_('Perda de Consciência'),
         default=False,
         blank=True
     )
 
     febre_maior_72h = models.BooleanField(
-        verbose_name=("Febre Mais de 72 horas"),
+        verbose_name=_('Febre Mais de 72 horas'),
         default=False,
         blank=True
     )
 
     febre_menos_72h = models.BooleanField(
-        verbose_name=("Febre Menos de 72 horas"),
+        verbose_name=_('Febre Menos de 72 horas'),
         default=False,
         blank=True
     )
 
     odinofagia = models.BooleanField(
-        verbose_name=("Odinofagia"),
+        verbose_name=_('Odinofagia'),
         default=False,
         blank=True
     )
 
     fascies_de_dor = models.BooleanField(
-        verbose_name=("Fascies De Dor"),
+        verbose_name=_('Fascies De Dor'),
         default=False,
         blank=True
     )
 
     tontura = models.BooleanField(
-        verbose_name=("Tontura"),
+        verbose_name=_('Tontura'),
         default=False,
         blank=True
     )
 
     corpo_estranho = models.BooleanField(
-        verbose_name=("Corpo Estranho"),
+        verbose_name=_('Corpo Estranho'),
         default=False,
         blank=True
     )
 
     dor_dentes = models.BooleanField(
-        verbose_name=("Dor de dentes"),
+        verbose_name=_('Dor de dentes'),
         default=False,
         blank=True
     )
 
     disuria = models.BooleanField(
-        verbose_name=("Disuria"),
+        verbose_name=_('Disuria'),
         default=False,
         blank=True
     )
 
     urina_concentrada = models.BooleanField(
-        verbose_name=("Urina Concentrada"),
+        verbose_name=_('Urina Concentrada'),
         default=False,
         blank=True
     )
 
     dispineia = models.BooleanField(
-        verbose_name=("Dispinéia"),
+        verbose_name=_('Dispinéia'),
         default=False,
         blank=True
     )
 
     dor_toracica = models.BooleanField(
-        verbose_name=("Dor Toracica"),
+        verbose_name=_('Dor Toracica'),
         default=False,
         blank=True
     )
 
     choque_eletrico = models.BooleanField(
-        verbose_name=("Choque Eletrico"),
+        verbose_name=_('Choque Eletrico'),
         default=False,
         blank=True
     )
 
     quase_afogamento = models.BooleanField(
-        verbose_name=("Quase Afogamento"),
+        verbose_name=_('Quase Afogamento'),
         default=False,
         blank=True
     )
 
     artralgia = models.BooleanField(
-        verbose_name=("Artralgia"),
+        verbose_name=_('Artralgia'),
         default=False,
         blank=True
     )
 
     ictericia = models.BooleanField(
-        verbose_name=("Icterícia"),
+        verbose_name=_('Icterícia'),
         default=False,
         blank=True
     )
 
     perda_consciencia = models.BooleanField(
-        verbose_name=("Perda de consciencia"),
+        verbose_name=_('Perda de consciencia'),
         default=False,
         blank=True
     )
 
     palidez = models.BooleanField(
-        verbose_name=("Palidez"),
+        verbose_name=_('Palidez'),
         default=False,
         blank=True
     )
 
     cianose = models.BooleanField(
-        verbose_name=("Cianose"),
+        verbose_name=_('Cianose'),
         default=False,
         blank=True
     )
 
     solucos = models.BooleanField(
-        verbose_name=("Soluços"),
+        verbose_name=_('Soluços'),
         default=False,
         blank=True
     )
 
     prostracao = models.BooleanField(
-        verbose_name=("Prostração"),
+        verbose_name=_('Prostração'),
         default=False,
         blank=True
     )
 
     febre = models.BooleanField(
-        verbose_name=("Febre"),
+        verbose_name=_('Febre'),
         default=False,
         blank=True
     )
 
     vomitos = models.BooleanField(
-        verbose_name=("Vomitos"),
+        verbose_name=_('Vomitos'),
         default=False,
         blank=True
     )
 
     tosse = models.BooleanField(
-        verbose_name=("Tosse"),
+        verbose_name=_('Tosse'),
         default=False,
         blank=True
     )
 
     coriza = models.BooleanField(
-        verbose_name=("Coriza"),
+        verbose_name=_('Coriza'),
         default=False,
         blank=True
     )
 
     espirros = models.BooleanField(
-        verbose_name=("Espirros"),
+        verbose_name=_('Espirros'),
         default=False,
         blank=True
     )
     hiperemia_conjuntival = models.BooleanField(
-        verbose_name=("Hiperemia Conjuntival"),
+        verbose_name=_('Hiperemia Conjuntival'),
         default=False,
         blank=True
     )
     secrecao_ocular = models.BooleanField(
-        verbose_name=("Secrecao Ocular"),
+        verbose_name=_('Secrecao Ocular'),
         default=False,
         blank=True
     )
     obstrucao_nasal = models.BooleanField(
-        verbose_name=("Obstrução Nasal"),
+        verbose_name=_('Obstrução Nasal'),
         default=False,
         blank=True
     )
     convulsao = models.BooleanField(
-        verbose_name=("Convulsão"),
+        verbose_name=_('Convulsão'),
         default=False,
         blank=True
     )
 
     diarreia = models.BooleanField(
-        verbose_name=("Diarreia"),
+        verbose_name=_('Diarreia'),
         default=False,
         blank=True
     )
 
     manchas_na_pele = models.BooleanField(
-        verbose_name=("Manchas na pele"),
+        verbose_name=_('Manchas na pele'),
         default=False,
         blank=True
     )
     queda = models.BooleanField(
-        verbose_name=("Queda"),
+        verbose_name=_('Queda'),
         default=False,
         blank=True
     )
     hiporexia = models.BooleanField(
-        verbose_name=("Hiporexia"),
+        verbose_name=_('Hiporexia'),
         default=False,
         blank=True
     )
     salivacao = models.BooleanField(
-        verbose_name=("Salivacao"),
+        verbose_name=_('Salivacao'),
         default=False,
         blank=True
     )
 
     constipacao = models.BooleanField(
-        verbose_name=("Constipação"),
+        verbose_name=_('Constipação'),
         default=False,
         blank=True
     )
 
     chiado_no_peito = models.BooleanField(
-        verbose_name=("Chiado no Peito"),
+        verbose_name=_('Chiado no Peito'),
         default=False,
         blank=True
     )
 
     diminuicao_da_diurese = models.BooleanField(
-        verbose_name=("Diminuição da Diurese"),
+        verbose_name=_('Diminuição da Diurese'),
         default=False,
         blank=True
     )
 
     dor_abdominal = models.BooleanField(
-        verbose_name=("Dor Abdominal"),
+        verbose_name=_('Dor Abdominal'),
         default=False,
         blank=True
     )
 
     otalgia = models.BooleanField(
-        verbose_name=("Otalgia"),
+        verbose_name=_('Otalgia'),
         default=False,
         blank=True
     )
 
     epistaxe = models.BooleanField(
-        verbose_name=("Epistaxe"),
+        verbose_name=_('Epistaxe'),
         default=False,
         blank=True
     )
 
     otorreia = models.BooleanField(
-        verbose_name=("Otorreia"),
+        verbose_name=_('Otorreia'),
         default=False,
         blank=True
     )
 
     edema = models.BooleanField(
-        verbose_name=("Edema"),
+        verbose_name=_('Edema'),
         default=False,
         blank=True
     )
 
     adenomegalias = models.BooleanField(
-        verbose_name=("Adenomegalias"),
+        verbose_name=_('Adenomegalias'),
         default=False,
         blank=True
     )
 
     dor_articular = models.BooleanField(
-        verbose_name=("Dor Articular"),
+        verbose_name=_('Dor Articular'),
         default=False,
         blank=True
     )
 
     dificulade_de_marchar = models.BooleanField(
-        verbose_name=("Dificuldade Marchar"),
+        verbose_name=_('Dificuldade Marchar'),
         default=False,
         blank=True
     )
 
     sonolencia = models.BooleanField(
-        verbose_name=("Sonolência"),
+        verbose_name=_('Sonolência'),
         default=False,
         blank=True
     )
 
     dor_muscular = models.BooleanField(
-        verbose_name=("Dor Muscular"),
+        verbose_name=_('Dor Muscular'),
         default=False,
         blank=True
     )
 
     dor_retroorbitaria = models.BooleanField(
-        verbose_name=("Dor Retroorbitária"),
+        verbose_name=_('Dor Retroorbitária'),
         default=False,
         blank=True
     )
 
 
 class ClinicalState_3y_10y(Symptoms_3y_10y):
-
     patient_id = models.CharField(
-        verbose_name=('ID do Paciente'),
+        verbose_name=_('ID do Paciente'),
         max_length=150,
         blank=True,
         unique=False
     )
 
     classifier_id = models.CharField(
-        verbose_name=('ID do Classificador'),
+        verbose_name=_('ID do Classificador'),
         max_length=150,
         blank=True,
         unique=False
@@ -910,7 +899,6 @@ class ClinicalState_3y_10y(Symptoms_3y_10y):
 
 
 class MachineLearning_3y_10y(Symptoms_3y_10y):
-
     CLASSIFICATION_TYPES = (
         (1, 'Atendimento Imediato'),
         (2, 'Atendimento Hospitalar'),
@@ -926,322 +914,320 @@ class MachineLearning_3y_10y(Symptoms_3y_10y):
 
 
 class Symptoms_10yMore(models.Model):
-
     class Meta:
         abstract = True
 
     mais_de_72h_febre = models.BooleanField(
-        verbose_name=("Febre a mais de 72 horas"),
+        verbose_name=_('Febre a mais de 72 horas'),
         default=False,
         blank=True
     )
 
     menos_de_72h_febre = models.BooleanField(
-        verbose_name=("Febre a menos de 72 horas"),
+        verbose_name=_('Febre a menos de 72 horas'),
         default=False,
         blank=True
     )
 
     tontura = models.BooleanField(
-        verbose_name=("Tontura"),
+        verbose_name=_('Tontura'),
         default=False,
         blank=True
     )
 
     corpo_estranho = models.BooleanField(
-        verbose_name=("Corpo estranho"),
+        verbose_name=_('Corpo estranho'),
         default=False,
         blank=True
     )
 
     dor_de_dente = models.BooleanField(
-        verbose_name=("Dor de dente"),
+        verbose_name=_('Dor de dente'),
         default=False,
         blank=True
     )
 
     disuria = models.BooleanField(
-        verbose_name=("Disúria"),
+        verbose_name=_('Disúria'),
         default=False,
         blank=True
     )
 
     urina_concentrada = models.BooleanField(
-        verbose_name=("Urina concentrada"),
+        verbose_name=_('Urina concentrada'),
         default=False,
         blank=True
     )
 
     dispineia = models.BooleanField(
-        verbose_name=("Dispinéia"),
+        verbose_name=_('Dispinéia'),
         default=False,
         blank=True
     )
 
     dor_toracica = models.BooleanField(
-        verbose_name=("Dor torácica"),
+        verbose_name=_('Dor torácica'),
         default=False,
         blank=True
     )
 
     choque_eletrico = models.BooleanField(
-        verbose_name=("Choque elétrico"),
+        verbose_name=_('Choque elétrico'),
         default=False,
         blank=True
     )
 
     quase_afogamento = models.BooleanField(
-        verbose_name=("Quase afogamento"),
+        verbose_name=_('Quase afogamento'),
         default=False,
         blank=True
     )
 
     artralgia = models.BooleanField(
-        verbose_name=("Artralgia"),
+        verbose_name=_('Artralgia'),
         default=False,
         blank=True
     )
 
     ictericia = models.BooleanField(
-        verbose_name=("Icterícia"),
+        verbose_name=_('Icterícia'),
         default=False,
         blank=True
     )
 
     perda_da_consciencia = models.BooleanField(
-        verbose_name=("Perda da conciência"),
+        verbose_name=_('Perda da conciência'),
         default=False,
         blank=True
     )
 
     palidez = models.BooleanField(
-        verbose_name=("Palidez"),
+        verbose_name=_('Palidez'),
         default=False,
         blank=True
     )
 
     cianose = models.BooleanField(
-        verbose_name=("Cianose"),
+        verbose_name=_('Cianose'),
         default=False,
         blank=True
     )
 
     solucos = models.BooleanField(
-        verbose_name=("Soluços"),
+        verbose_name=_('Soluços'),
         default=False,
         blank=True
     )
 
     prostracao = models.BooleanField(
-        verbose_name=("Prostração"),
+        verbose_name=_('Prostração'),
         default=False,
         blank=True
     )
 
     febre = models.BooleanField(
-        verbose_name=("Febre"),
+        verbose_name=_('Febre'),
         default=False,
         blank=True
     )
 
     vomitos = models.BooleanField(
-        verbose_name=("Vômitos"),
+        verbose_name=_('Vômitos'),
         default=False,
         blank=True
     )
 
     tosse = models.BooleanField(
-        verbose_name=("Tosse"),
+        verbose_name=_('Tosse'),
         default=False,
         blank=True
     )
 
     coriza = models.BooleanField(
-        verbose_name=("Coriza"),
+        verbose_name=_('Coriza'),
         default=False,
         blank=True
     )
 
     espirros = models.BooleanField(
-        verbose_name=("Espirros"),
+        verbose_name=_('Espirros'),
         default=False,
         blank=True
     )
 
     hiperemia_conjuntival = models.BooleanField(
-        verbose_name=("Hiperemia conjuntival"),
+        verbose_name=_('Hiperemia conjuntival'),
         default=False,
         blank=True
     )
 
     secrecao_ocular = models.BooleanField(
-        verbose_name=("Secreção ocular"),
+        verbose_name=_('Secreção ocular'),
         default=False,
         blank=True
     )
 
     obstrucao_nasal = models.BooleanField(
-        verbose_name=("Obstrução nasal"),
+        verbose_name=_('Obstrução nasal'),
         default=False,
         blank=True
     )
 
     convulsao = models.BooleanField(
-        verbose_name=("Convulsão"),
+        verbose_name=_('Convulsão'),
         default=False,
         blank=True
     )
 
     diarreia = models.BooleanField(
-        verbose_name=("Diarreia"),
+        verbose_name=_('Diarreia'),
         default=False,
         blank=True
     )
 
     dificuldade_evacuar = models.BooleanField(
-        verbose_name=("Dificuldade de evacuar"),
+        verbose_name=_('Dificuldade de evacuar'),
         default=False,
         blank=True
     )
 
     cefaleia = models.BooleanField(
-        verbose_name=("Cefaléia"),
+        verbose_name=_('Cefaléia'),
         default=False,
         blank=True
     )
 
     manchas_na_pele = models.BooleanField(
-        verbose_name=("Manchas na pele"),
+        verbose_name=_('Manchas na pele'),
         default=False,
         blank=True
     )
 
     queda = models.BooleanField(
-        verbose_name=("Queda"),
+        verbose_name=_('Queda'),
         default=False,
         blank=True
     )
 
     hiporexia = models.BooleanField(
-        verbose_name=("Hiporexia"),
+        verbose_name=_('Hiporexia'),
         default=False,
         blank=True
     )
 
     salivacao = models.BooleanField(
-        verbose_name=("Salivação"),
+        verbose_name=_('Salivação'),
         default=False,
         blank=True
     )
 
     hiporexia = models.BooleanField(
-        verbose_name=("Hiporexia"),
+        verbose_name=_('Hiporexia'),
         default=False,
         blank=True
     )
 
     constipacao = models.BooleanField(
-        verbose_name=("Constipação"),
+        verbose_name=_('Constipação'),
         default=False,
         blank=True
     )
 
     chiado_no_peito = models.BooleanField(
-        verbose_name=("Chiado no peito"),
+        verbose_name=_('Chiado no peito'),
         default=False,
         blank=True
     )
 
     diminuicao_da_diurese = models.BooleanField(
-        verbose_name=("Diminuição da diurese"),
+        verbose_name=_('Diminuição da diurese'),
         default=False,
         blank=True
     )
 
     dor_abdominal = models.BooleanField(
-        verbose_name=("Dor abdominal"),
+        verbose_name=_('Dor abdominal'),
         default=False,
         blank=True
     )
 
     otalgia = models.BooleanField(
-        verbose_name=("Otalgia"),
+        verbose_name=_('Otalgia'),
         default=False,
         blank=True
     )
 
     epistaxe = models.BooleanField(
-        verbose_name=("Epistaxe"),
+        verbose_name=_('Epistaxe'),
         default=False,
         blank=True
     )
 
     otorreia = models.BooleanField(
-        verbose_name=("Otorréia"),
+        verbose_name=_('Otorréia'),
         default=False,
         blank=True
     )
 
     edema = models.BooleanField(
-        verbose_name=("Edema"),
+        verbose_name=_('Edema'),
         default=False,
         blank=True
     )
 
     adenomegalias = models.BooleanField(
-        verbose_name=("Adenomegalias"),
+        verbose_name=_('Adenomegalias'),
         default=False,
         blank=True
     )
 
     dor_articular = models.BooleanField(
-        verbose_name=("Dor articular"),
+        verbose_name=_('Dor articular'),
         default=False,
         blank=True
     )
 
     dificuldade_de_marcha = models.BooleanField(
-        verbose_name=("Dificuldade de marcha"),
+        verbose_name=_('Dificuldade de marcha'),
         default=False,
         blank=True
     )
 
     sonolencia = models.BooleanField(
-        verbose_name=("Sonolência"),
+        verbose_name=_('Sonolência'),
         default=False,
         blank=True
     )
 
     secrecao_ocular = models.BooleanField(
-        verbose_name=("Secreção ocular"),
+        verbose_name=_('Secreção ocular'),
         default=False,
         blank=True
     )
 
     dor_muscular = models.BooleanField(
-        verbose_name=("Dor muscular"),
+        verbose_name=_('Dor muscular'),
         default=False,
         blank=True
     )
 
     dor_retroorbitaria = models.BooleanField(
-        verbose_name=("Dor Retroorbitária"),
+        verbose_name=_('Dor Retroorbitária'),
         default=False,
         blank=True
     )
 
 
 class ClinicalState_10yMore(Symptoms_10yMore):
-
     patient_id = models.CharField(
-        verbose_name=('ID do Paciente'),
+        verbose_name=_('ID do Paciente'),
         max_length=150,
         blank=True,
         unique=False
     )
 
     classifier_id = models.CharField(
-        verbose_name=('ID do Classificador'),
+        verbose_name=_('ID do Classificador'),
         max_length=150,
         blank=True,
         unique=False
@@ -1249,7 +1235,6 @@ class ClinicalState_10yMore(Symptoms_10yMore):
 
 
 class MachineLearning_10yMore(Symptoms_10yMore):
-
     CLASSIFICATION_TYPES = (
         (1, 'Atendimento Imediato'),
         (2, 'Atendimento Hospitalar'),

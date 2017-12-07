@@ -1,12 +1,12 @@
 # Arquivo: apps/risk_rating/forms.py
 from django import forms
-from apps.risk_rating.models import ClinicalState_28d
-from apps.risk_rating.models import ClinicalState_29d_2m
+from apps.risk_rating.models import ClinicalStateFor28Days
+from apps.risk_rating.models import ClinicalState_For_29DaysTo_2Months
 from apps.risk_rating.models import ClinicalState_2m_3y
 from apps.risk_rating.models import ClinicalState_3y_10y
 from apps.risk_rating.models import ClinicalState_10yMore
-from apps.risk_rating.models import MachineLearning_28d
-from apps.risk_rating.models import MachineLearning_29d_2m
+from apps.risk_rating.models import MachineLearningFor28Days
+from apps.risk_rating.models import MachineLearning_For_29DaysTo_2Months
 from apps.risk_rating.models import MachineLearning_2m_3y
 from apps.risk_rating.models import MachineLearning_3y_10y
 from apps.risk_rating.models import MachineLearning_10yMore
@@ -17,7 +17,7 @@ class ClinicalState_28dForm(forms.ModelForm):
     Defining fields for under 28 days patient's clinical state
     """
     class Meta:
-        model = ClinicalState_28d
+        model = ClinicalStateFor28Days
         fields = ['patient_id', 'classifier_id', 'dispineia', 'ictericia',
                   'perdada_consciencia', 'cianose', 'febre', 'solucos',
                   'prostracao', 'vomitos', 'tosse', 'coriza',
@@ -34,7 +34,7 @@ class ClinicalState_29d_2mForm(forms.ModelForm):
     Defining fields patients (29 days and 2 months old) clinical state
     """
     class Meta:
-        model = ClinicalState_29d_2m
+        model = ClinicalState_For_29DaysTo_2Months
         fields = ['patient_id', 'classifier_id', 'dispineia', 'ictericia',
                   'perdada_consciencia', 'cianose', 'febre', 'solucos',
                   'prostracao', 'vomitos', 'tosse', 'coriza',
@@ -112,7 +112,7 @@ class MachineLearning_28dForm(forms.ModelForm):
     Defining fields for under 28 days patient's clinical state
     """
     class Meta:
-        model = MachineLearning_28d
+        model = MachineLearningFor28Days
         fields = ['dispineia', 'ictericia', 'perdada_consciencia', 'cianose',
                   'febre', 'solucos', 'prostracao', 'vomitos', 'tosse',
                   'coriza', 'obstrucao_nasal', 'convulcao_no_momento',
@@ -129,7 +129,7 @@ class MachineLearning_29d_2mForm(forms.ModelForm):
     Defining fields patients (29 days and 2 months old) clinical state
     """
     class Meta:
-        model = MachineLearning_29d_2m
+        model = MachineLearning_For_29DaysTo_2Months
         fields = ['dispineia', 'ictericia', 'perdada_consciencia', 'cianose',
                   'febre', 'solucos', 'prostracao', 'vomitos', 'tosse',
                   'coriza', 'obstrucao_nasal', 'convulcao_no_momento',
