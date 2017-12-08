@@ -11,6 +11,7 @@ from apps.risk_rating.ml_classifier import MachineLearning
 from apps.users.forms import RegistrationStaffForm
 from apps.users.forms import RegistrationPatientForm
 from apps.users.forms import EditPatientForm
+from datetime import datetime
 
 from .models import Patient, Staff
 
@@ -326,23 +327,33 @@ def classifications_chart(request):
     exhibit a pie chart of the classifications
     """
 
-    imediato = Patient.objects.filter(classification=1).count()
-    hospitalar = Patient.objects.filter(classification=2).count()
-    ambulatorial = Patient.objects.filter(classification=3).count()
-    eletivo = Patient.objects.filter(classification=4).count()
+    month = datetime.now().month
+    year = datetime.now().year
+    imediato = Patient.objects.filter(classification=1)
+    hospitalar = Patient.objects.filter(classification=2)
+    ambulatorial = Patient.objects.filter(classification=3)
+    eletivo = Patient.objects.filter(classification=4)
 
     if request.method == 'POST':
         month = request.POST.get('month')
-        if month != 0:
-            imediato = Patient.objects.filter(classification=1, date__month=month).count()
-            hospitalar = Patient.objects.filter(classification=2, date__month=month).count()
-            ambulatorial = Patient.objects.filter(classification=3, date__month=month).count()
-            eletivo = Patient.objects.filter(classification=4, date__month=month).count()
+        year = request.POST.get('year')
+        
+        if year != 'all':
+            imediato = imediato.filter(classification=1, date__year=year)
+            hospitalar = hospitalar.filter(classification=2, date__year=year)
+            ambulatorial = ambulatorial.filter(classification=3, date__year=year)
+            eletivo = eletivo.filter(classification=4, date__year=year)
 
-    data = {'AtendimentoImediato': imediato,
-            'AtendimentoHospitalar': hospitalar,
-            'AtendimentoAmbulatorial': ambulatorial,
-            'AtendimentoEletivo': eletivo}
+        if month != 'all':
+            imediato = imediato.filter(date__month=month)
+            hospitalar = hospitalar.filter(date__month=month)
+            ambulatorial = ambulatorial.filter(date__month=month)
+            eletivo = eletivo.filter(date__month=month)
+
+    data = {'AtendimentoImediato': imediato.count(),
+            'AtendimentoHospitalar': hospitalar.count(),
+            'AtendimentoAmbulatorial': ambulatorial.count(),
+            'AtendimentoEletivo': eletivo.count()}
 
     return render(request, 'users/classifications_chart.html', {'data': data})
 
