@@ -7,6 +7,7 @@ from apps.risk_rating.models import MachineLearning_28d, \
     MachineLearning_29d_2m, MachineLearning_2m_3y, \
     MachineLearning_3y_10y, MachineLearning_10yMore
 
+
 @pytest.mark.django_db
 class TestUsers:
 
@@ -450,3 +451,40 @@ class TestUserModel:
         name = "Carlinhos"
         user = Staff(name=name)
         assert user.get_short_name() == name
+
+    def test_create_user_without_email(self):
+        user_data = self.default_user_data()
+        del user_data['email']
+
+        with pytest.raises(KeyError) as value_err:
+            Staff.objects.create_user(**user_data)
+
+        assert 'email' in str(value_err.value)
+
+    def test_is_staff_pass(self):
+        test_user = Staff.objects.create_superuser(**self.default_user_data())
+        assert test_user.is_staff == True
+
+    def test_is_staff_fail(self):
+        test_user = Staff.objects.create_user(**self.default_user_data())
+        assert test_user.is_staff == False
+
+
+@pytest.mark.django_db
+class TestPatientModel:
+
+    @pytest.mark.parametrize('age_range, expected_text', [
+        ('0', 'Faixa etária indefinida'),
+        ('1', '0 até 28 dias'),
+        ('2', '29 dias à 2 meses'),
+        ('3', '2 meses à 3 anos'),
+        ('4', '3 anos à 10 anos'),
+        ('5', 'Acima de 10 anos')
+    ])
+    def test_age_range_verbose(self, age_range, expected_text):
+        patient = Patient(age_range=int(age_range))
+        assert patient.age_range_verbose() == expected_text
+
+    def test_gender_verbose(self):
+        patient = Patient(age_range=1, gender=1)
+        assert patient.gender_verbose() == 'Feminino'
