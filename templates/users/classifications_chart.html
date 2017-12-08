@@ -2,8 +2,15 @@
 {% load staticfiles %}
 
 {% block content_pos %}
-
-    <div id="container" style="height: 80%"></div>
+<!DOCTYPE html>
+<body style="height: 100%; margin: 0">
+  <div class="row linha">
+      <div class="x_title col-md-6">
+          <h2>Gráfico de Classificações</h2>
+      </div>
+  </div>
+    <div id="container" style="height: 80%; width: 100%; min-height: 400px"></div>
+      <script src="jquery-3.2.1.min.js"></script>
       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts-all-3.js"></script>
       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
@@ -12,11 +19,11 @@
       <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM"></script>
       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
       <script type="text/javascript">
+
         var dom = document.getElementById("container");
         var myChart = echarts.init(dom);
         var legend_data = [];
         var series_data = [];
-        var color_data = ['rgba(244, 67, 54, 1)'];
         var app = {};
 
         buildData(legend_data, series_data);
@@ -57,128 +64,38 @@
          ]
        };*/
 
-         var posList = [
-           'left', 'right', 'top', 'bottom',
-           'inside',
-           'insideTop', 'insideLeft', 'insideRight', 'insideBottom',
-           'insideTopLeft', 'insideTopRight', 'insideBottomLeft', 'insideBottomRight'
-         ];
-
-         app.configParameters = {
-             rotate: {
-                 min: -90,
-                 max: 90
-             },
-             align: {
-                 options: {
-                     left: 'left',
-                     center: 'center',
-                     right: 'right'
-                 }
-             },
-             verticalAlign: {
-                 options: {
-                     top: 'top',
-                     middle: 'middle',
-                     bottom: 'bottom'
-                 }
-             },
-             position: {
-                 options: echarts.util.reduce(posList, function (map, pos) {
-                     map[pos] = pos;
-                     return map;
-                 }, {})
-             },
-             distance: {
-                 min: 0,
-                 max: 100
-             }
-         };
-
-         app.config = {
-             rotate: 0,
-             align: 'center',
-             verticalAlign: 'middle',
-             position: 'insideBottom',
-             distance: 40,
-             onChange: function () {
-                 var labelOption = {
-                     normal: {
-                         rotate: app.config.rotate,
-                         align:   app.config.align,
-                         verticalAlign: app.config.verticalAlign,
-                         position: app.config.position,
-                         distance: app.config.distance
-                     }
-                 };
-                 myChart.setOption({
-                     series: [{
-                         label: labelOption
-                     }, {
-                         label: labelOption
-                     }, {
-                         label: labelOption
-                     }, {
-                         label: labelOption
-                     }]
-                 });
-             }
-         };
-
-
-         var labelOption = {
-             normal: {
-                 show: true,
-                 position: app.config.position,
-                 distance: app.config.distance,
-                 align: app.config.align,
-                 verticalAlign: app.config.verticalAlign,
-                 rotate: app.config.rotate,
-                 formatter: '{c}',
-                 fontSize: 40
-             }
-         };
-
-         option = {
-            color: color_data,
-             tooltip: {
-                 trigger: 'axis',
-                 axisPointer: {
-                     type: 'shadow'
-                 }
-             },
-             legend: {
-                 data: legend_data,
-             },
-             toolbox: {
-                 show: true,
-                 orient: 'vertical',
-                 left: 'right',
-                 top: 'center',
-                 feature: {
-                     saveAsImage: {show: true}
-                 }
-             },
-            calculable: true,
-             xAxis: [
-                 {
-                     type: 'category',
-                     axisTick: {show: true},
-                     data: legend_data,
-                 }
-             ],
-             yAxis: [
-                 {
-                     type: 'value'
-                 }
-             ],
-             series: [
-                {
-                  name: 'Classificações',
-                  type: 'bar',
-                  barGap: 2,
-                  label: labelOption,
-                  data: series_data,
+        option = {
+           tooltip : {
+               trigger: 'axis',
+               axisPointer : {
+                   type : 'shadow'
+               }
+           },
+           grid: {
+               left: '3%',
+               right: '4%',
+               bottom: '3%',
+               containLabel: true
+           },
+           xAxis : [
+               {
+                   type : 'category',
+                   data : legend_data,
+                   axisTick: {
+                       alignWithLabel: true
+                   }
+               }
+           ],
+           yAxis : [
+               {
+                   type : 'value'
+               }
+           ],
+           series : [
+               {
+                   name:'Classificações',
+                   type:'bar',
+                   barWidth: '60%',
                   itemStyle: {
                       emphasis: {
                         shadowBlur: 10,
@@ -194,11 +111,10 @@
                         }
                       }
                   },
-                }
-             ]
-         };
-
-
+                   data:series_data
+               }
+           ]
+        };
 
         if (option && typeof option === "object") {
          myChart.setOption(option, true);
@@ -224,5 +140,4 @@
         }
 
       </script>
-
 {% endblock %}
