@@ -49,6 +49,13 @@ p {
     min-width: 185px;
 }
 
+img#logo {
+    max-height: 85%;
+    max-width: 85%;
+    display: block;
+    margin: 0 auto;
+}
+
 #content {
     background: #F7F7F7;
     width: 100%;
