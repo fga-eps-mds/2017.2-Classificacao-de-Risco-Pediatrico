@@ -439,3 +439,21 @@ class TestUsers:
 
         assert edited_patient.name == 'New Name'
         assert edited_patient.age_range == 1
+
+    def test_classifications_chart(self, client):
+        Staff.objects.create_superuser(**self.default_user_data())
+        client.post('/login', {'username': 'email@gmail.com',
+                               'password': "1234asdf"})
+
+        response = client.get('/classifications_chart/')
+        assert response.status_code == 200
+
+    def test_classifications_chart_filter(self, client):
+        Staff.objects.create_superuser(**self.default_user_data())
+        client.post('/login', {'username': 'email@gmail.com',
+                               'password': "1234asdf"})
+
+        response = client.post('/classifications_chart/', {'month': 12,
+                                                'year': 2017})
+
+        assert response.status_code == 200
