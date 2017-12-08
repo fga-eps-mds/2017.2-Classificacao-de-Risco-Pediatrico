@@ -1,4 +1,5 @@
 import pytest
+from apps.users.apps import UsersConfig
 from apps.users.forms import RegistrationStaffForm, RegistrationPatientForm, \
     EditPatientForm
 from apps.users.models import Staff, Patient
@@ -6,9 +7,11 @@ from apps.risk_rating.models import MachineLearning_28d, \
     MachineLearning_29d_2m, MachineLearning_2m_3y, \
     MachineLearning_3y_10y, MachineLearning_10yMore
 
-
 @pytest.mark.django_db
 class TestUsers:
+
+    def test_app(self):
+        assert UsersConfig.name == 'users'
 
     def test_home(self, client):
         response = client.get('/')
