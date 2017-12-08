@@ -1,5 +1,5 @@
 
-  [![Coverage Status](https://coveralls.io/repos/github/fga-gpp-mds/2017.2-Classificacao-de-Risco-Pediatrico/badge.svg)](https://coveralls.io/github/fga-gpp-mds/2017.2-Classificacao-de-Risco-Pediatrico)
+  [![Coverage Status](https://coveralls.io/repos/github/fga-gpp-mds/2017.2-Classificacao-de-Risco-Pediatrico/badge.svg?branch=master)](https://coveralls.io/github/fga-gpp-mds/2017.2-Classificacao-de-Risco-Pediatrico?branch=master)
   ![BuildStatus](https://travis-ci.org/fga-gpp-mds/2017.2-Classificacao-de-Risco-Pediatrico.svg?branch=devel)  
 
 # Classificação de risco na pediatria
