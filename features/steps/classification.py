@@ -34,3 +34,27 @@ def register_user(context, name_employee, id_number, profile_number):
     context.browser.find_element_by_name("number").send_keys("10")
 
     context.browser.find_element_by_id('button-cadastrar').click()
+
+@step('I register patient')
+def register_patient(context):
+    context.browser.find_element_by_id('register-patient').click()
+    Select(context.browser.find_element_by_id(
+        'id_age_range')).select_by_value('0')
+    context.browser.find_element_by_id('register-patient-button').click()
+
+
+@step('I register patient: {id_number}')
+def classification(context):
+    context.browser.find_element_by_id('name_patient').click()
+    context.browser.find_element_by_name('dispineia').click()
+    context.browser.find_element_by_name('prostracao').click()
+
+    context.browser.find_element_by_id('modal_id').click()
+
+    context.browser.find_element_by_id('classification_save').click()
+
+
+@step('The classification must be updated')
+def verification(context):
+    title = context.browser.title
+    assert 'Welcome' in title
