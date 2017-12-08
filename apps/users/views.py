@@ -325,10 +325,19 @@ def classifications_chart(request):
     """
     exhibit a pie chart of the classifications
     """
+
     imediato = Patient.objects.filter(classification=1).count()
     hospitalar = Patient.objects.filter(classification=2).count()
     ambulatorial = Patient.objects.filter(classification=3).count()
     eletivo = Patient.objects.filter(classification=4).count()
+
+    if request.method == 'POST':
+        month = request.POST.get('month')
+        if month != 0:
+            imediato = Patient.objects.filter(classification=1, date__month=month).count()
+            hospitalar = Patient.objects.filter(classification=2, date__month=month).count()
+            ambulatorial = Patient.objects.filter(classification=3, date__month=month).count()
+            eletivo = Patient.objects.filter(classification=4, date__month=month).count()
 
     data = {'AtendimentoImediato': imediato,
             'AtendimentoHospitalar': hospitalar,

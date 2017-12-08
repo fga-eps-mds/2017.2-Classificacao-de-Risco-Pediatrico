@@ -8,6 +8,35 @@
       <div class="x_title col-md-6">
           <h2>Gráfico de Classificações</h2>
       </div>
+      <div class="col-md-6">
+          <form method="post">
+              {% csrf_token %}
+              <div class="row">
+                  <div class="col-md-8 ">
+                      <select name="month" id="dropdown" class="form-control month" required>
+                          <option value="" selected disabled>Selecione um mês</option>
+                          <option value=0>Todos os meses</option>
+                          <option value=1>Janeiro</option>
+                          <option value=2>Fevereiro</option>
+                          <option value=3>Março</option>
+                          <option value=4>Abril</option>
+                          <option value=5>Maio</option>
+                          <option value=6>Junho</option>
+                          <option value=7>Julho</option>
+                          <option value=8>Agosto</option>
+                          <option value=9>Setembro</option>
+                          <option value=10>Outubro</option>
+                          <option value=11>Novembro</option>
+                          <option value=12>Dezembro</option>
+                      </select>
+                    </div>
+                    <div class="col-md-2">
+                      <button class=" btn btn-info pull-right rb">Filtrar</button>
+                    </div>
+              </div>
+          </form>
+
+      </div>
   </div>
     <div id="container" style="height: 80%; width: 100%; min-height: 400px"></div>
       <script src="jquery-3.2.1.min.js"></script>

@@ -553,6 +553,11 @@ a.article, a.article:hover {
     border-radius: 10px;
 }
 
+.year {
+    border-radius: 10px;
+    float: right;
+}
+
 .linha {
     margin-bottom: 10px;
 }
