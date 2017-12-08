@@ -10,12 +10,6 @@ from apps.risk_rating.models import MachineLearning_28d, \
 @pytest.mark.django_db
 class TestUsers:
 
-    # @class_method
-    # def setup_class(self, cls):
-    #     Staff.objects.create_superuser(**self.default_user_data())
-    #     response = client.post('/', {'username': 'email@gmail.com',
-    #                                  'password': "1234asdf"})
-
     def test_home(self, client):
         response = client.get('/')
         assert response.status_code == 200
@@ -158,24 +152,6 @@ class TestUsers:
             'profile': "1"
         }
         return data
-
-    def test_create_user(self):
-        test_user = Staff.objects.create_user(**self.default_user_data())
-        assert isinstance(test_user, Staff)
-
-    def test_create_super_user(self):
-        test_user = Staff.objects.create_superuser(**self.default_user_data())
-        assert test_user.is_admin
-
-    def test_user_get_full_name(self):
-        name = "Carlinhos Cabral"
-        user = Staff(name=name)
-        assert user.get_full_name() == name
-
-    def test_get_short_name(self):
-        name = "Carlinhos"
-        user = Staff(name=name)
-        assert user.get_short_name() == name
 
     def test_has_perm(self):
         perm = None
@@ -439,3 +415,35 @@ class TestUsers:
 
         assert edited_patient.name == 'New Name'
         assert edited_patient.age_range == 1
+
+
+@pytest.mark.django_db
+class TestUserModel:
+
+    def default_user_data(self):
+        data = {
+            'password': "1234asdf",
+            'name': "testuser",
+            'email': "email@gmail.com",
+            'id_user': "1234",
+            'profile': "1"
+        }
+        return data
+
+    def test_create_user(self):
+        test_user = Staff.objects.create_user(**self.default_user_data())
+        assert isinstance(test_user, Staff)
+
+    def test_create_super_user(self):
+        test_user = Staff.objects.create_superuser(**self.default_user_data())
+        assert test_user.is_admin
+
+    def test_user_get_full_name(self):
+        name = "Carlinhos Cabral"
+        user = Staff(name=name)
+        assert user.get_full_name() == name
+
+    def test_get_short_name(self):
+        name = "Carlinhos"
+        user = Staff(name=name)
+        assert user.get_short_name() == name
