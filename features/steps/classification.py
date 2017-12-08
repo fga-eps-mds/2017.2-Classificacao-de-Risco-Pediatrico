@@ -2,26 +2,26 @@ from behave import step
 from selenium.webdriver.support.ui import Select
 
 
-@step(u'I register an employee: {name_user},'
-' {id_number_user} and {profile_number_user}')
-def register_user(context, name_user, id_number_user, profile_number_user):
+@step('I register an employee: {name_employee},' +
+      ' {id_number} and {profile_number_user}')
+def register_user(context, name_employee, id_number, profile_number_user):
     context.browser.find_element_by_name(
-        "name").send_keys(name_user)
+        "name").send_keys(name_employee)
 
     Select(context.browser.find_element_by_id(
         'dropdown-profile')).select_by_value(profile_number_user)
 
     context.browser.find_element_by_name(
-        "email").send_keys(f"{name_user}-{id_number_user}@gmail.com")
+        "email").send_keys(f"{name_employee}-{id_number}@gmail.com")
 
     context.browser.find_element_by_name(
-        "password1").send_keys("selenium-user1234")
+        "password1").send_keys("selenium-user123")
 
     context.browser.find_element_by_name(
-        "password2").send_keys("selenium-user1234")
+        "password2").send_keys("selenium-user123")
 
     context.browser.find_element_by_name(
-        "id_user").send_keys(id_number_user)
+        "id_user").send_keys(id_number)
 
     # dropdown state
     Select(context.browser.find_element_by_id(
@@ -37,8 +37,6 @@ def register_user(context, name_user, id_number_user, profile_number_user):
 
 @step('I register a patient: {name_patient}, {id_number_patient} and {profile_number_patient}')
 def register_patient(context, name_patient, id_number_patient, profile_number_patient):
-    print("teste")
-    print(browser.current_url)
     context.browser.find_element_by_id('register-patient').click()
     Select(context.browser.find_element_by_id(
         'id_age_range')).select_by_value('0')
@@ -47,6 +45,7 @@ def register_patient(context, name_patient, id_number_patient, profile_number_pa
 
 @step('I realize a classification: {id_number}')
 def classification(context):
+    print (context.browser.current_url)
     context.browser.find_element_by_id('name_patient').click()
     context.browser.find_element_by_name('dispineia').click()
     context.browser.find_element_by_name('prostracao').click()
