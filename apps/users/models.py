@@ -14,9 +14,6 @@ class UserManager(BaseUserManager):
         password = kwargs["password"]
         kwargs.pop("password")
 
-        if not email:
-            raise ValueError(_('O endereço de email não pode ser nulo'))
-
         user = self.model(**kwargs)
         user.set_password(password)
         user.save(using=self._db)
