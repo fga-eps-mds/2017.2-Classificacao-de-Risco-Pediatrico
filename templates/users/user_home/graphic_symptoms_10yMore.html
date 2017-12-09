@@ -77,10 +77,24 @@
                 },
                 xAxis: {
                     type: 'value',
-                    boundaryGap: [0, 0.01]
+                    boundaryGap: [0, 0.01],
+                    axisLabel: {
+                                margin: 10,
+                                textStyle: {
+                                    fontSize: 12,
+                                    color:'#73879C'
+                                    }
+                            },
                 },
                 yAxis: {
                     type: 'category',
+                    axisLabel: {
+                                margin: 10,
+                                textStyle: {
+                                    fontSize: 12,
+                                    color:'#73879C'
+                                    }
+                            },
 
                     data: [
                       'Febre com mais de 72h', 'Febre com menos de 72h', 'Tontura',
@@ -100,6 +114,16 @@
                 series: [
                     {
                         type: 'bar',
+                        itemStyle: {
+
+                                    normal: {
+                                        color: '#64bdc8',
+                                        barBorderRadius: [0, 15,15, 0],
+                                        shadowColor: 'rgba(0,0,0,0.1)',
+                                        shadowBlur: 3,
+                                        shadowOffsetY: 3
+                                    }
+                                },
                         data: [{{ graphic_symptoms.mais_de_72h_febre }}, {{ graphic_symptoms.menos_de_72h_febre }},
                              {{ graphic_symptoms.tontura }}, {{ graphic_symptoms.corpo_estranho }},
                              {{ graphic_symptoms.dor_de_dente }}, {{ graphic_symptoms.disuria }},
