@@ -454,6 +454,6 @@ class TestUsers:
                                'password': "1234asdf"})
 
         response = client.post('/classifications_chart/', {'month': 12,
-                                                'year': 2017})
+                                                           'year': 2017})
 
         assert response.status_code == 200

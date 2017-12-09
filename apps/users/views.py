@@ -337,12 +337,15 @@ def classifications_chart(request):
     if request.method == 'POST':
         month = request.POST.get('month')
         year = request.POST.get('year')
-        
         if year != 'all':
-            imediato = imediato.filter(classification=1, date__year=year)
-            hospitalar = hospitalar.filter(classification=2, date__year=year)
-            ambulatorial = ambulatorial.filter(classification=3, date__year=year)
-            eletivo = eletivo.filter(classification=4, date__year=year)
+            imediato = imediato.filter(classification=1,
+                                       date__year=year)
+            hospitalar = hospitalar.filter(classification=2,
+                                           date__year=year)
+            ambulatorial = ambulatorial.filter(classification=3,
+                                               date__year=year)
+            eletivo = eletivo.filter(classification=4,
+                                     date__year=year)
 
         if month != 'all':
             imediato = imediato.filter(date__month=month)
