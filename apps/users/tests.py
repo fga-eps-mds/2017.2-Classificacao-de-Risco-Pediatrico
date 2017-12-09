@@ -225,6 +225,15 @@ class TestUsers:
         assert response.status_code == 200
         assert list(response.context['patients']) == allpatients
 
+    def test_register_patient_valid_form(self, client):
+        Staff.objects.create_superuser(**self.default_user_data())
+        client.post('/login', {'username': 'email@gmail.com',
+                               'password': "1234asdf"})
+        response = client.post('/register/patient/', {'age_range': '1'})
+        assert Patient.objects.last().age_range == 1
+        # 302 as a status code means redirection
+        assert response.status_code == 302
+
     def test_edit_patient_form(self, client):
         """
         Test edit patient form with a valid cpf
@@ -419,7 +428,7 @@ class TestUsers:
     def test_feed_ml_page(self, client):
         Staff.objects.create_superuser(**self.default_user_data())
         client.post('/login', {'username': 'email@gmail.com',
-        'password': "1234asdf"})
+                               'password': "1234asdf"})
 
         response = client.get('/feed_ml/')
         assert response.status_code == 200
