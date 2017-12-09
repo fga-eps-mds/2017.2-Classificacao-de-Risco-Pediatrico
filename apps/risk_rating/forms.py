@@ -18,7 +18,7 @@ class ClinicalState_28dForm(forms.ModelForm):
     """
     class Meta:
         model = ClinicalState_28d
-        fields = ['patient_id', 'classifier_id', 'dispineia', 'ictericia',
+        fields = ['patient_id', 'classifier_id', 'dispneia', 'ictericia',
                   'perdada_consciencia', 'cianose', 'febre', 'solucos',
                   'prostracao', 'vomitos', 'tosse', 'coriza',
                   'obstrucao_nasal', 'convulcao_no_momento', 'diarreia',
@@ -35,7 +35,7 @@ class ClinicalState_29d_2mForm(forms.ModelForm):
     """
     class Meta:
         model = ClinicalState_29d_2m
-        fields = ['patient_id', 'classifier_id', 'dispineia', 'ictericia',
+        fields = ['patient_id', 'classifier_id', 'dispneia', 'ictericia',
                   'perdada_consciencia', 'cianose', 'febre', 'solucos',
                   'prostracao', 'vomitos', 'tosse', 'coriza',
                   'obstrucao_nasal', 'convulcao_no_momento', 'diarreia',
@@ -51,7 +51,7 @@ class ClinicalState_2m_3yForm(forms.ModelForm):
     """
     class Meta:
         model = ClinicalState_2m_3y
-        fields = ['patient_id', 'classifier_id', 'dispineia', 'ictericia',
+        fields = ['patient_id', 'classifier_id', 'dispneia', 'ictericia',
                   'perdada_consciencia', 'cianose', 'febre', 'solucos',
                   'prostracao', 'vomitos', 'tosse', 'coriza',
                   'obstrucao_nasal', 'convulcao_no_momento', 'diarreia',
@@ -70,7 +70,7 @@ class ClinicalState_3y_10yForm(forms.ModelForm):
         fields = ['patient_id', 'classifier_id', 'perdada_consciencia',
                   'febre_maior_72h', 'febre_menos_72h', 'odinofagia',
                   'fascies_de_dor', 'tontura', 'corpo_estranho', 'dor_dentes',
-                  'disuria', 'urina_concentrada', 'dispineia', 'dor_toracica',
+                  'disuria', 'urina_concentrada', 'dispneia', 'dor_toracica',
                   'choque_eletrico', 'quase_afogamento', 'artralgia',
                   'ictericia', 'perda_consciencia', 'palidez', 'cianose',
                   'solucos', 'prostracao', 'febre', 'vomitos', 'tosse',
@@ -92,7 +92,7 @@ class ClinicalState_10yMoreForm(forms.ModelForm):
         model = ClinicalState_10yMore
         fields = ['patient_id', 'classifier_id', 'mais_de_72h_febre',
                   'menos_de_72h_febre', 'tontura', 'corpo_estranho',
-                  'dor_de_dente', 'disuria', 'urina_concentrada', 'dispineia',
+                  'dor_de_dente', 'disuria', 'urina_concentrada', 'dispneia',
                   'dor_toracica', 'choque_eletrico', 'quase_afogamento',
                   'artralgia', 'ictericia', 'perda_da_consciencia', 'palidez',
                   'cianose', 'solucos', 'prostracao', 'febre', 'vomitos',
@@ -113,7 +113,7 @@ class MachineLearning_28dForm(forms.ModelForm):
     """
     class Meta:
         model = MachineLearning_28d
-        fields = ['dispineia', 'ictericia', 'perdada_consciencia', 'cianose',
+        fields = ['dispneia', 'ictericia', 'perdada_consciencia', 'cianose',
                   'febre', 'solucos', 'prostracao', 'vomitos', 'tosse',
                   'coriza', 'obstrucao_nasal', 'convulcao_no_momento',
                   'diarreia', 'choro_inconsolavel', 'dificuldade_evacuar',
@@ -130,7 +130,7 @@ class MachineLearning_29d_2mForm(forms.ModelForm):
     """
     class Meta:
         model = MachineLearning_29d_2m
-        fields = ['dispineia', 'ictericia', 'perdada_consciencia', 'cianose',
+        fields = ['dispneia', 'ictericia', 'perdada_consciencia', 'cianose',
                   'febre', 'solucos', 'prostracao', 'vomitos', 'tosse',
                   'coriza', 'obstrucao_nasal', 'convulcao_no_momento',
                   'diarreia', 'dificuldade_evacuar', 'nao_suga_seio',
@@ -147,7 +147,7 @@ class MachineLearning_2m_3yForm(forms.ModelForm):
     """
     class Meta:
         model = MachineLearning_2m_3y
-        fields = ['dispineia', 'ictericia', 'perdada_consciencia', 'cianose',
+        fields = ['dispneia', 'ictericia', 'perdada_consciencia', 'cianose',
                   'febre', 'solucos', 'prostracao', 'vomitos', 'tosse',
                   'coriza', 'obstrucao_nasal', 'convulcao_no_momento',
                   'diarreia', 'dificuldade_evacuar', 'nao_suga_seio',
@@ -165,7 +165,7 @@ class MachineLearning_3y_10yForm(forms.ModelForm):
         model = MachineLearning_3y_10y
         fields = ['perdada_consciencia', 'febre_maior_72h', 'febre_menos_72h',
                   'odinofagia', 'fascies_de_dor', 'tontura', 'corpo_estranho',
-                  'dor_dentes', 'disuria', 'urina_concentrada', 'dispineia',
+                  'dor_dentes', 'disuria', 'urina_concentrada', 'dispneia',
                   'dor_toracica', 'choque_eletrico', 'quase_afogamento',
                   'artralgia', 'ictericia', 'perda_consciencia', 'palidez',
                   'cianose', 'solucos', 'prostracao', 'febre', 'vomitos',
@@ -187,7 +187,7 @@ class MachineLearning_10yMoreForm(forms.ModelForm):
         model = MachineLearning_10yMore
         fields = ['mais_de_72h_febre', 'menos_de_72h_febre', 'tontura',
                   'corpo_estranho', 'dor_de_dente', 'disuria',
-                  'urina_concentrada', 'dispineia', 'dor_toracica',
+                  'urina_concentrada', 'dispneia', 'dor_toracica',
                   'choque_eletrico', 'quase_afogamento', 'artralgia',
                   'ictericia', 'perda_da_consciencia', 'palidez', 'cianose',
                   'solucos', 'prostracao', 'febre', 'vomitos', 'tosse',

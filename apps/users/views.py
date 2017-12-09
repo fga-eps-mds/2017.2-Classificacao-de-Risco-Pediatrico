@@ -337,7 +337,7 @@ def get_under_28_symptoms(clinical_state):
     building patient (28d) to use on ml based on patient's clinical condition
     """
     patient = [[
-        check_patient_problem(clinical_state.dispineia),
+        check_patient_problem(clinical_state.dispneia),
         check_patient_problem(clinical_state.ictericia),
         check_patient_problem(clinical_state.perdada_consciencia),
         check_patient_problem(clinical_state.cianose),
@@ -375,7 +375,7 @@ def get_29d_2m_symptoms(clinical_state):
     patient's clinical condition
     """
     patient = [[
-        check_patient_problem(clinical_state.dispineia),
+        check_patient_problem(clinical_state.dispneia),
         check_patient_problem(clinical_state.ictericia),
         check_patient_problem(clinical_state.perdada_consciencia),
         check_patient_problem(clinical_state.cianose),
@@ -412,7 +412,7 @@ def get_2m_3y_symptoms(clinical_state):
     patient's clinical condition
     """
     patient = [[
-        check_patient_problem(clinical_state.dispineia),
+        check_patient_problem(clinical_state.dispneia),
         check_patient_problem(clinical_state.ictericia),
         check_patient_problem(clinical_state.perdada_consciencia),
         check_patient_problem(clinical_state.cianose),
@@ -457,7 +457,7 @@ def get_3y_10y_symptoms(clinical_state):
         check_patient_problem(clinical_state.dor_dentes),
         check_patient_problem(clinical_state.disuria),
         check_patient_problem(clinical_state.urina_concentrada),
-        check_patient_problem(clinical_state.dispineia),
+        check_patient_problem(clinical_state.dispneia),
         check_patient_problem(clinical_state.dor_toracica),
         check_patient_problem(clinical_state.choque_eletrico),
         check_patient_problem(clinical_state.quase_afogamento),
@@ -513,7 +513,7 @@ def get_10y_more_symptoms(clinical_state):
         check_patient_problem(clinical_state.dor_de_dente),
         check_patient_problem(clinical_state.disuria),
         check_patient_problem(clinical_state.urina_concentrada),
-        check_patient_problem(clinical_state.dispineia),
+        check_patient_problem(clinical_state.dispneia),
         check_patient_problem(clinical_state.dor_toracica),
         check_patient_problem(clinical_state.choque_eletrico),
         check_patient_problem(clinical_state.quase_afogamento),
