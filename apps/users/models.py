@@ -80,10 +80,12 @@ class Staff(AbstractBaseUser):
         default=0
     )
 
-    cep = models.CharField(verbose_name='CEP',
-                              max_length=8,
-                              default='',
-                              blank=False)
+    cep = models.CharField(
+        verbose_name='CEP',
+        max_length=8,
+        default='',
+        blank=False
+    )
 
     uf = models.CharField(
         verbose_name='UF',
