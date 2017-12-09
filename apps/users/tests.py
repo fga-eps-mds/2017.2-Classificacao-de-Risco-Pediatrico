@@ -386,7 +386,6 @@ class TestUsersViews:
         assert edited_patient.name == 'New Name'
         assert edited_patient.age_range == 1
 
-
     def test_classifications_chart(self, client):
         Staff.objects.create_superuser(**self.default_user_data())
         client.post('/login', {'username': 'email@gmail.com',
@@ -434,6 +433,7 @@ class TestUsersViews:
         assert response_2m.status_code == 200
         assert response_3y.status_code == 200
         assert response_10y.status_code == 200
+
 
 @pytest.mark.django_db
 class TestStaffModel:
@@ -519,4 +519,3 @@ class TestUserApp:
 
     def test_app(self):
         assert UsersConfig.name == 'users'
-
