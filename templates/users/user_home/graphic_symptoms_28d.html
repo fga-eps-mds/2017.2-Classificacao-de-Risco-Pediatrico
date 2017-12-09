@@ -107,15 +107,20 @@
                     {
                         type: 'bar',
                         itemStyle: {
-
-                                    normal: {
-                                        color: '#64bdc8',
-                                        barBorderRadius: [0, 15,15, 0],
-                                        shadowColor: 'rgba(0,0,0,0.1)',
-                                        shadowBlur: 3,
-                                        shadowOffsetY: 3
-                                    }
+                            normal: {
+                                color: {
+                                  colorStops: [{
+                                          offset: 0, color: '#38c9e0'
+                                      }, {
+                                          offset: 1, color: '#17a2b8'
+                                      }],
                                 },
+                                barBorderRadius: [0, 15,15, 0],
+                                shadowColor: 'rgba(0,0,0,0.1)',
+                                shadowBlur: 3,
+                                shadowOffsetY: 3
+                            }
+                        },
                         data: [{{ graphic_symptoms.dispineia }}, {{ graphic_symptoms.ictericia }},
                             {{ graphic_symptoms.perdada_consciencia }}, {{ graphic_symptoms.cianose }},
                             {{ graphic_symptoms.febre }}, {{ graphic_symptoms.solucos }},
