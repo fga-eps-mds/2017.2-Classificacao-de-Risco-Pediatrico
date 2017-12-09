@@ -39,16 +39,17 @@ def register_user(context, name_employee, id_number, profile_number_user):
 def register_patient(context, name_patient, id_number_patient, profile_number_patient):
     context.browser.find_element_by_id('register-patient').click()
     Select(context.browser.find_element_by_id(
-        'id_age_range')).select_by_value('0')
+        'id_age_range')).select_by_value('1')
     context.browser.find_element_by_id('register-patient-button').click()
 
 
-@step('I realize a classification: {id_number}')
-def classification(context):
+@step('I realize a classification: {id_number_patient}')
+def classification(context, id_number_patient):
     print (context.browser.current_url)
-    context.browser.find_element_by_id('name_patient').click()
-    context.browser.find_element_by_name('dispineia').click()
-    context.browser.find_element_by_name('prostracao').click()
+    context.browser.find_element_by_id('id_modal').click()
+    context.browser.find_element_by_id('check_classication').click()
+    context.browser.find_element_by_name("dispineia").click()
+    context.browser.find_element_by_name("prostracao").click()
 
     context.browser.find_element_by_id('modal_id').click()
 
@@ -58,4 +59,4 @@ def classification(context):
 @step('The classification must be updated')
 def verification(context):
     title = context.browser.title
-    assert 'Welcome' in title
+    assert 'CRP' in title
