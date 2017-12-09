@@ -576,3 +576,9 @@ a.article, a.article:hover {
     padding-bottom: 10px;
     height: 100%;
 }
+
+.x_panel_3year {
+    width:100%;
+    height: 85%;
+    background-color: white;
+}
