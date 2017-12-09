@@ -7,7 +7,7 @@ from apps.users.models import Patient, Staff
 class RegistrationStaffForm(UserCreationForm):
     class Meta:
         model = Staff
-        fields = ['name', 'email', 'id_user', 'profile', 'uf', 'city',
+        fields = ['name', 'email', 'id_user', 'profile', 'cep', 'uf', 'city',
                   'neighborhood', 'street', 'block', 'number']
 
 
