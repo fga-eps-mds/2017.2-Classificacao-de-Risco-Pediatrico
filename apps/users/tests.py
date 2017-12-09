@@ -416,6 +416,14 @@ class TestUsers:
     form5_ml = ({'classification': 2, 'form5_ml': ''})
     forms_ml = [form1_ml, form2_ml, form3_ml, form4_ml, form5_ml]
 
+    def test_feed_ml_page(self, client):
+        Staff.objects.create_superuser(**self.default_user_data())
+        client.post('/login', {'username': 'email@gmail.com',
+        'password': "1234asdf"})
+
+        response = client.get('/feed_ml/')
+        assert response.status_code == 200
+
     def test_feed_ml(self, client):
         Staff.objects.create_superuser(**self.default_user_data())
         client.post('/login', {'username': 'email@gmail.com',
