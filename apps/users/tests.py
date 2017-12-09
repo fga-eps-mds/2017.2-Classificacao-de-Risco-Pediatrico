@@ -216,7 +216,8 @@ class TestUsersViews:
         """Test remove object."""
         Staff.objects.create_superuser(**self.default_user_data())
         response = client.post('/login', {'username': 'email@gmail.com',
-                                          'password': "1234asdf", 'id_user': "1234"})
+                                          'password': "1234asdf",
+                                          'id_user': "1234"})
         data_type()
 
         if data_type == Staff:
@@ -267,7 +268,7 @@ class TestUsersViews:
         response = client.get('/home/')
         assert response.status_code == 200
         assert set(list(response.context['patients'])) == \
-               set(list(Patient.objects.all()))
+            set(list(Patient.objects.all()))
 
     form1data = ({'patient_id': '1', 'form1': ''})
     form2data = ({'patient_id': '2', 'form2': ''})
@@ -402,11 +403,11 @@ class TestStaffModel:
 
     def test_is_staff_pass(self):
         test_user = Staff.objects.create_superuser(**self.default_user_data())
-        assert test_user.is_staff == True
+        assert test_user.is_staff is True
 
     def test_is_staff_fail(self):
         test_user = Staff.objects.create_user(**self.default_user_data())
-        assert test_user.is_staff == False
+        assert test_user.is_staff is False
 
     def test__str__(self):
         user_email = Staff(email='bruno@gmail.com')
