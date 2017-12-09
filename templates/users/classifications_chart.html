@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <body style="height: 100%; margin: 0">
   <div class="row linha">
-      <div class="x_title col-md-6">
+      <div class="x_title col-md-4">
           <h2>Gráfico de Classificações</h2>
       </div>
       <div class="col-md-6">
@@ -29,14 +29,14 @@
                           <option value=11>Novembro</option>
                           <option value=12>Dezembro</option>
                       </select>
-                      <select name="year" id="dropdown" class="form-control year" style="margin-left: 20px" required>
+                      <select name="year" id="dropdown" class="form-control year" required>
                         <option value="" selected disabled>Selecione um ano</option>
                         <option value='all'>Todos os anos</option>
                         <option value=2017>2017</option>
                         <option value=2018>2018</option>
                       </select>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-4">
                       <button class=" btn btn-info pull-right rb">Filtrar</button>
                     </div>
               </div>
@@ -92,6 +92,84 @@
          ]
        };*/
 
+
+               var posList = [
+        'left', 'right', 'top', 'bottom',
+        'inside',
+        'insideTop', 'insideLeft', 'insideRight', 'insideBottom',
+        'insideTopLeft', 'insideTopRight', 'insideBottomLeft', 'insideBottomRight'
+        ];
+        app.configParameters = {
+        rotate: {
+          min: -90,
+          max: 90
+        },
+        align: {
+          options: {
+              left: 'left',
+              center: 'center',
+              right: 'right'
+          }
+        },
+        verticalAlign: {
+          options: {
+              top: 'top',
+              middle: 'middle',
+              bottom: 'bottom'
+          }
+        },
+        position: {
+          options: echarts.util.reduce(posList, function (map, pos) {
+              map[pos] = pos;
+              return map;
+          }, {})
+        },
+        distance: {
+          min: 0,
+          max: 100
+        }
+        };
+        app.config = {
+        rotate: 0,
+        align: 'center',
+        verticalAlign: 'middle',
+        position: 'insideBottom',
+        distance: 40,
+        onChange: function () {
+          var labelOption = {
+              normal: {
+                  rotate: app.config.rotate,
+                  align:   app.config.align,
+                  verticalAlign: app.config.verticalAlign,
+                  position: app.config.position,
+                  distance: app.config.distance
+              }
+          };
+          myChart.setOption({
+              series: [{
+                  label: labelOption
+              }, {
+                  label: labelOption
+              }, {
+                  label: labelOption
+              }, {
+                  label: labelOption
+              }]
+          });
+        }
+        };
+        var labelOption = {
+        normal: {
+          show: true,
+          position: app.config.position,
+          distance: app.config.distance,
+          align: app.config.align,
+          verticalAlign: app.config.verticalAlign,
+          rotate: app.config.rotate,
+          formatter: '{c}',
+          fontSize: 40
+        }
+        };
         option = {
            tooltip : {
                trigger: 'axis',
@@ -126,8 +204,9 @@
                {
                    name:'Classificações',
                    type:'bar',
+                   label: labelOption,
                    barWidth: '60%',
-                  itemStyle: {
+                   itemStyle: {
                       emphasis: {
                         shadowBlur: 10,
                         shadowOffsetX: 0,
