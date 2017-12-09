@@ -149,6 +149,19 @@ class TestUsers:
         response = client.get('/home/')
         assert response.status_code == 200
 
+    @pytest.mark.parametrize('url',
+                             ['/graphic/symptoms/under28d',
+                              '/graphic/symptoms/29d2m',
+                              '/graphic/symptoms/2m3y',
+                              '/graphic/symptoms/3y10y',
+                              '/graphic/symptoms/10ymore'])
+    def test_graphic_symptoms_view(self, client, url):
+        Staff.objects.create_superuser(**self.default_user_data())
+        response = client.post('/login', {'username': 'email@gmail.com',
+                               'password': "1234asdf"})
+        response = client.get(url)
+        assert response.status_code == 200
+
     def default_user_data(self):
         data = {
             'password': "1234asdf",

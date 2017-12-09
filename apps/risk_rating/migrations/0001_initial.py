@@ -17,6 +17,7 @@ class Migration(migrations.Migration):
             name='ClinicalState_10yMore',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('date', models.DateField(auto_now=True, verbose_name='Data')),
                 ('mais_de_72h_febre', models.BooleanField(default=False, verbose_name='Febre a mais de 72 horas')),
                 ('menos_de_72h_febre', models.BooleanField(default=False, verbose_name='Febre a menos de 72 horas')),
                 ('tontura', models.BooleanField(default=False, verbose_name='Tontura')),
@@ -116,6 +117,7 @@ class Migration(migrations.Migration):
             name='ClinicalState_29d_2m',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('date', models.DateField(auto_now=True, verbose_name='Data')),
                 ('dispineia', models.BooleanField(default=False, verbose_name='Dispinéia')),
                 ('ictericia', models.BooleanField(default=False, verbose_name='Icterícia')),
                 ('perdada_consciencia', models.BooleanField(default=False, verbose_name='Perda de Consciência')),
@@ -154,6 +156,7 @@ class Migration(migrations.Migration):
             name='ClinicalState_2m_3y',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('date', models.DateField(auto_now=True, verbose_name='Data')),
                 ('dispineia', models.BooleanField(default=False, verbose_name='Dispinéia')),
                 ('ictericia', models.BooleanField(default=False, verbose_name='Icterícia')),
                 ('perdada_consciencia', models.BooleanField(default=False, verbose_name='Perda de Consciência')),
@@ -190,6 +193,7 @@ class Migration(migrations.Migration):
             name='ClinicalState_3y_10y',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('date', models.DateField(auto_now=True, verbose_name='Data')),
                 ('perdada_consciencia', models.BooleanField(default=False, verbose_name='Perda de Consciência')),
                 ('febre_maior_72h', models.BooleanField(default=False, verbose_name='Febre Mais de 72 horas')),
                 ('febre_menos_72h', models.BooleanField(default=False, verbose_name='Febre Menos de 72 horas')),
@@ -250,6 +254,7 @@ class Migration(migrations.Migration):
             name='MachineLearning_10yMore',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('date', models.DateField(auto_now=True, verbose_name='Data')),
                 ('mais_de_72h_febre', models.BooleanField(default=False, verbose_name='Febre a mais de 72 horas')),
                 ('menos_de_72h_febre', models.BooleanField(default=False, verbose_name='Febre a menos de 72 horas')),
                 ('tontura', models.BooleanField(default=False, verbose_name='Tontura')),
@@ -347,6 +352,7 @@ class Migration(migrations.Migration):
             name='MachineLearning_29d_2m',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('date', models.DateField(auto_now=True, verbose_name='Data')),
                 ('dispineia', models.BooleanField(default=False, verbose_name='Dispinéia')),
                 ('ictericia', models.BooleanField(default=False, verbose_name='Icterícia')),
                 ('perdada_consciencia', models.BooleanField(default=False, verbose_name='Perda de Consciência')),
@@ -384,6 +390,7 @@ class Migration(migrations.Migration):
             name='MachineLearning_2m_3y',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('date', models.DateField(auto_now=True, verbose_name='Data')),
                 ('dispineia', models.BooleanField(default=False, verbose_name='Dispinéia')),
                 ('ictericia', models.BooleanField(default=False, verbose_name='Icterícia')),
                 ('perdada_consciencia', models.BooleanField(default=False, verbose_name='Perda de Consciência')),
@@ -419,6 +426,7 @@ class Migration(migrations.Migration):
             name='MachineLearning_3y_10y',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('date', models.DateField(auto_now=True, verbose_name='Data')),
                 ('perdada_consciencia', models.BooleanField(default=False, verbose_name='Perda de Consciência')),
                 ('febre_maior_72h', models.BooleanField(default=False, verbose_name='Febre Mais de 72 horas')),
                 ('febre_menos_72h', models.BooleanField(default=False, verbose_name='Febre Menos de 72 horas')),
