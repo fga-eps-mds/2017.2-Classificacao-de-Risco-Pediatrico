@@ -73,8 +73,8 @@ class Symptoms_28d(models.Model):
         blank=True
     )
 
-    convulcao_no_momento = models.BooleanField(
-        verbose_name=("Convulção no momento"),
+    convunsao_no_momento = models.BooleanField(
+        verbose_name=("Convulsão no momento"),
         default=False,
         blank=True
     )
@@ -280,8 +280,8 @@ class Symptoms_29d_2m(models.Model):
         blank=True
     )
 
-    convulcao_no_momento = models.BooleanField(
-        verbose_name=("Convulção no momento"),
+    convunsao_no_momento = models.BooleanField(
+        verbose_name=("Convulsão no momento"),
         default=False,
         blank=True
     )
@@ -481,8 +481,8 @@ class Symptoms_2m_3y(models.Model):
         blank=True
     )
 
-    convulcao_no_momento = models.BooleanField(
-        verbose_name=("Convulção no momento"),
+    convunsao_no_momento = models.BooleanField(
+        verbose_name=("Convulsão no momento"),
         default=False,
         blank=True
     )
