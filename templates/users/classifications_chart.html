@@ -44,7 +44,7 @@
 
       </div>
   </div>
-    <div id="container" style="height: 80%; width: 100%; min-height: 400px"></div>
+    <div id="container" style="height: 80%; width: 90%; min-height: 400px"></div>
       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts-all-3.js"></script>
       <script type="text/javascript">
 
@@ -54,9 +54,9 @@
         var series_data = [];
         var app = {};
 
-        buildData(legend_data, series_data);
 
         /* PIE CHART:
+        buildData(legend_data, series_data);
 
         option = null;
         option = {
@@ -108,7 +108,10 @@
            xAxis : [
                {
                    type : 'category',
-                   data : legend_data,
+                   data : ['Atendimeto Imediato',
+                           'Atendimento Hospitalar',
+                           'Atendimento Ambulatorial',
+                           'Atendimento Eletivo'],
                    axisTick: {
                        alignWithLabel: true
                    }
@@ -133,13 +136,16 @@
                       normal: {
                         color: function(params) {
                           var colorList = [
-                             '#ff3131','#fbff32','#30ff4f','#939393'
+                             '#ff3131','#fbff32','#30ff4f','#3f56ff'
                              ];
                           return colorList[params.dataIndex]
                         }
                       }
                   },
-                   data:series_data
+                   data:[{{data.AtendimentoImediato}},
+                         {{data.AtendimentoHospitalar}},
+                         {{data.AtendimentoAmbulatorial}},
+                         {{data.AtendimentoEletivo}}]
                }
            ]
         };
@@ -148,24 +154,25 @@
          myChart.setOption(option, true);
         }
 
-        function buildData( legend_data, series_data){
-          if ({{data.AtendimentoImediato}} != 0){
-            legend_data.push("Atendimento Imediato");
-            series_data.push({value:{{data.AtendimentoImediato}}});
-          }
-          if ({{data.AtendimentoHospitalar}} != 0){
-            legend_data.push("Atendimento Hospitalar");
-            series_data.push({value:{{data.AtendimentoHospitalar}}});
-          }
-          if ({{data.AtendimentoAmbulatorial}} != 0){
-            legend_data.push("Atendimento Ambulatorial");
-            series_data.push({value:{{data.AtendimentoAmbulatorial}}});
-          }
-          if ({{data.AtendimentoEletivo}} != 0){
-            legend_data.push("Atendimento Eletivo");
-            series_data.push({value:{{data.AtendimentoEletivo}}});
-          }
-        }
+        // Use this only on PIE CHART
+        // function buildData( legend_data, series_data){
+        //   if ({{data.AtendimentoImediato}} != 0){
+        //     legend_data.push("Atendimento Imediato");
+        //     series_data.push({value:{{data.AtendimentoImediato}}});
+        //   }
+        //   if ({{data.AtendimentoHospitalar}} != 0){
+        //     legend_data.push("Atendimento Hospitalar");
+        //     series_data.push({value:{{data.AtendimentoHospitalar}}});
+        //   }
+        //   if ({{data.AtendimentoAmbulatorial}} != 0){
+        //     legend_data.push("Atendimento Ambulatorial");
+        //     series_data.push({value:{{data.AtendimentoAmbulatorial}}});
+        //   }
+        //   if ({{data.AtendimentoEletivo}} != 0){
+        //     legend_data.push("Atendimento Eletivo");
+        //     series_data.push({value:{{data.AtendimentoEletivo}}});
+        //   }
+        // }
 
       </script>
 {% endblock %}

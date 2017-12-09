@@ -149,13 +149,13 @@
                     <div class="container-box">
                         <div class="box-content">
                             <a href="#statistics" data-toggle="collapse" aria-expanded="false"
-                            onclick="changeGradientWidth(this)">
+                            onclick="changeGradientWidth(this)" id="stats">
                                 <i class="fa fa-area-chart" aria-hidden="true"></i>
                                 Estatísticas
                             </a>
                             <ul class="collapse list-unstyled" id="statistics">
                                 <li>
-                                    <a href="{% url "users:classifications_chart" %}">
+                                    <a href="{% url "users:classifications_chart" %}" id="classif_chart">
                                         <i aria-hidden="true"></i>
                                         Gráfico de Classificações
                                     </a>
