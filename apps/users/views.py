@@ -371,6 +371,13 @@ def my_history(request):
     return render(request, 'users/myHistory.html',
                   {'patients': patients, "classifier": classifier})
 
+@login_required(redirect_field_name='', login_url='users:login')
+def my_charts(request):
+    """
+    define personal graphics page behavior
+    """
+    return render(request, 'users/myCharts.html')
+
 
 @login_required(redirect_field_name='', login_url='users:login')
 def graphic_symptoms_view_28d(request):
