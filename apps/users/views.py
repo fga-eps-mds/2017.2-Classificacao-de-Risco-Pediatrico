@@ -11,6 +11,7 @@ from apps.risk_rating.ml_classifier import MachineLearning
 from apps.users.forms import RegistrationStaffForm
 from apps.users.forms import RegistrationPatientForm
 from apps.users.forms import EditPatientForm
+from datetime import datetime
 
 from .models import Patient, Staff
 
@@ -321,6 +322,45 @@ def edit_patient(request, id):
                   {'patient': patient, 'form': form}, status=status)
 
 
+def classifications_chart(request):
+    """
+    exhibit a pie chart of the classifications
+    """
+
+    month = datetime.now().month
+    year = datetime.now().year
+    imediato = Patient.objects.filter(classification=1)
+    hospitalar = Patient.objects.filter(classification=2)
+    ambulatorial = Patient.objects.filter(classification=3)
+    eletivo = Patient.objects.filter(classification=4)
+
+    if request.method == 'POST':
+        month = request.POST.get('month')
+        year = request.POST.get('year')
+        if year != 'all':
+            imediato = imediato.filter(classification=1,
+                                       date__year=year)
+            hospitalar = hospitalar.filter(classification=2,
+                                           date__year=year)
+            ambulatorial = ambulatorial.filter(classification=3,
+                                               date__year=year)
+            eletivo = eletivo.filter(classification=4,
+                                     date__year=year)
+
+        if month != 'all':
+            imediato = imediato.filter(date__month=month)
+            hospitalar = hospitalar.filter(date__month=month)
+            ambulatorial = ambulatorial.filter(date__month=month)
+            eletivo = eletivo.filter(date__month=month)
+
+    data = {'AtendimentoImediato': imediato.count(),
+            'AtendimentoHospitalar': hospitalar.count(),
+            'AtendimentoAmbulatorial': ambulatorial.count(),
+            'AtendimentoEletivo': eletivo.count()}
+
+    return render(request, 'users/classifications_chart.html', {'data': data})
+
+
 @login_required(redirect_field_name='', login_url='users:login')
 def my_history(request):
     """
@@ -330,6 +370,128 @@ def my_history(request):
     classifier = Staff.objects.filter(id_user=request.user.id_user)[0]
     return render(request, 'users/myHistory.html',
                   {'patients': patients, "classifier": classifier})
+
+
+@login_required(redirect_field_name='', login_url='users:login')
+def graphic_symptoms_view_28d(request):
+    """
+    Read all symptoms of database after classification
+     someone and check which symptoms was marked
+    """
+    graphic_symptoms = {}
+
+    for column in ClinicalState_28d._meta.get_fields():
+        graphic_symptoms[column.name] = 0
+
+    for state in ClinicalState_28d.objects.all():
+
+        if request.method == 'POST':
+            if int(request.POST.get('month')) != 0:
+                if state.date.month != int(request.POST.get('month')):
+                    break
+        for column in ClinicalState_28d._meta.get_fields():
+            if getattr(state, column.name):
+                graphic_symptoms[column.name] += 1
+
+    return render(request, 'users/user_home/graphic_symptoms_28d.html',
+                  {'graphic_symptoms': graphic_symptoms})
+
+
+@login_required(redirect_field_name='', login_url='users:login')
+def graphic_symptoms_view_29d_2m(request):
+    """
+    Read all symptoms of database after classification
+     someone and check which symptoms was marked
+    """
+    graphic_symptoms = {}
+
+    for column in ClinicalState_29d_2m._meta.get_fields():
+        graphic_symptoms[column.name] = 0
+
+    for state in ClinicalState_29d_2m.objects.all():
+
+        if request.method == 'POST':
+            if int(request.POST.get('month')) != 0:
+                if state.date.month != int(request.POST.get('month')):
+                    break
+        for column in ClinicalState_29d_2m._meta.get_fields():
+            if getattr(state, column.name):
+                graphic_symptoms[column.name] += 1
+
+    return render(request, 'users/user_home/graphic_symptoms_29d_2m.html',
+                  {'graphic_symptoms': graphic_symptoms})
+
+
+def graphic_symptoms_view_2m_3y(request):
+    """
+    Read all symptoms of database after classification
+     someone and check which symptoms was marked
+    """
+    graphic_symptoms = {}
+
+    for column in ClinicalState_2m_3y._meta.get_fields():
+        graphic_symptoms[column.name] = 0
+
+    for state in ClinicalState_2m_3y.objects.all():
+
+        if request.method == 'POST':
+            if int(request.POST.get('month')) != 0:
+                if state.date.month != int(request.POST.get('month')):
+                    break
+        for column in ClinicalState_2m_3y._meta.get_fields():
+            if getattr(state, column.name):
+                graphic_symptoms[column.name] += 1
+
+    return render(request, 'users/user_home/graphic_symptoms_2m_3y.html',
+                  {'graphic_symptoms': graphic_symptoms})
+
+
+def graphic_symptoms_view_3y_10y(request):
+    """
+    Read all symptoms of database after classification
+     someone and check which symptoms was marked
+    """
+    graphic_symptoms = {}
+
+    for column in ClinicalState_3y_10y._meta.get_fields():
+        graphic_symptoms[column.name] = 0
+
+    for state in ClinicalState_3y_10y.objects.all():
+
+        if request.method == 'POST':
+            if int(request.POST.get('month')) != 0:
+                if state.date.month != int(request.POST.get('month')):
+                    break
+        for column in ClinicalState_3y_10y._meta.get_fields():
+            if getattr(state, column.name):
+                graphic_symptoms[column.name] += 1
+
+    return render(request, 'users/user_home/graphic_symptoms_3y_10y.html',
+                  {'graphic_symptoms': graphic_symptoms})
+
+
+def graphic_symptoms_view_10y_more(request):
+    """
+    Read all symptoms of database after classification
+     someone and check which symptoms was marked
+    """
+    graphic_symptoms = {}
+
+    for column in ClinicalState_10yMore._meta.get_fields():
+        graphic_symptoms[column.name] = 0
+
+    for state in ClinicalState_10yMore.objects.all():
+
+        if request.method == 'POST':
+            if int(request.POST.get('month')) != 0:
+                if state.date.month != int(request.POST.get('month')):
+                    break
+        for column in ClinicalState_10yMore._meta.get_fields():
+            if getattr(state, column.name):
+                graphic_symptoms[column.name] += 1
+
+    return render(request, 'users/user_home/graphic_symptoms_10yMore.html',
+                  {'graphic_symptoms': graphic_symptoms})
 
 
 def get_under_28_symptoms(clinical_state):

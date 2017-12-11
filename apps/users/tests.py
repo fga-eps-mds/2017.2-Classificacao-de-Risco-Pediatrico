@@ -6,6 +6,9 @@ from apps.users.models import Staff, Patient
 from apps.risk_rating.models import MachineLearning_28d, \
     MachineLearning_29d_2m, MachineLearning_2m_3y, \
     MachineLearning_3y_10y, MachineLearning_10yMore
+from apps.risk_rating.models import ClinicalState_28d, \
+    ClinicalState_29d_2m, ClinicalState_2m_3y, \
+    ClinicalState_3y_10y, ClinicalState_10yMore
 
 
 @pytest.mark.django_db
@@ -100,6 +103,19 @@ class TestUsersViews:
         assert response.redirect_chain == [(url_redirect_to, 302)]
         assert Staff.objects.count() == 1
 
+    @pytest.mark.parametrize('url',
+                             ['/graphic/symptoms/under28d',
+                              '/graphic/symptoms/29d2m',
+                              '/graphic/symptoms/2m3y',
+                              '/graphic/symptoms/3y10y',
+                              '/graphic/symptoms/10ymore'])
+    def test_graphic_symptoms_view(self, client, url):
+        Staff.objects.create_superuser(**self.default_user_data())
+        response = client.post('/login', {'username': 'email@gmail.com',
+                               'password': "1234asdf"})
+        response = client.get(url)
+        assert response.status_code == 200
+
     def default_user_data(self):
         data = {
             'password': "1234asdf",
@@ -122,6 +138,15 @@ class TestUsersViews:
         response = client.get('/home/')
         assert response.status_code == 200
         assert list(response.context['patients']) == all_patients
+
+    def test_register_patient_valid_form(self, client):
+        Staff.objects.create_superuser(**self.default_user_data())
+        client.post('/login', {'username': 'email@gmail.com',
+                               'password': "1234asdf"})
+        response = client.post('/register/patient/', {'age_range': '1'})
+        assert Patient.objects.last().age_range == 1
+        # 302 as a status code means redirection
+        assert response.status_code == 302
 
     def test_edit_patient_form(self, client):
         """
@@ -313,6 +338,14 @@ class TestUsersViews:
     form5_ml = ({'classification': 2, 'form5_ml': ''})
     forms_ml = [form1_ml, form2_ml, form3_ml, form4_ml, form5_ml]
 
+    def test_feed_ml_page(self, client):
+        Staff.objects.create_superuser(**self.default_user_data())
+        client.post('/login', {'username': 'email@gmail.com',
+                               'password': "1234asdf"})
+
+        response = client.get('/feed_ml/')
+        assert response.status_code == 200
+
     def test_feed_ml(self, client):
         Staff.objects.create_superuser(**self.default_user_data())
         client.post('/login', {'username': 'email@gmail.com',
@@ -352,6 +385,54 @@ class TestUsersViews:
 
         assert edited_patient.name == 'New Name'
         assert edited_patient.age_range == 1
+
+    def test_classifications_chart(self, client):
+        Staff.objects.create_superuser(**self.default_user_data())
+        client.post('/login', {'username': 'email@gmail.com',
+                               'password': "1234asdf"})
+
+        response = client.get('/classifications_chart/')
+        assert response.status_code == 200
+
+    def test_classifications_chart_filter(self, client):
+        Staff.objects.create_superuser(**self.default_user_data())
+        client.post('/login', {'username': 'email@gmail.com',
+                               'password': "1234asdf"})
+
+        response = client.post('/classifications_chart/', {'month': 12,
+                                                           'year': 2017})
+
+        assert response.status_code == 200
+
+    def create_clinical_states(self):
+        clinical_28 = ClinicalState_28d()
+        clinical_29 = ClinicalState_29d_2m()
+        clinical_2m = ClinicalState_2m_3y()
+        clinical_3y = ClinicalState_3y_10y()
+        clinical_10y = ClinicalState_10yMore()
+        clinical_28.save()
+        clinical_29.save()
+        clinical_2m.save()
+        clinical_3y.save()
+        clinical_10y.save()
+
+    def test_graphic_symptoms_view_28d(self, client):
+        Staff.objects.create_superuser(**self.default_user_data())
+        client.post('/login', {'username': 'email@gmail.com',
+                               'password': "1234asdf"})
+
+        self.create_clinical_states()
+
+        response_28 = client.post('/graphic/symptoms/under28d', {'month': 12})
+        response_29 = client.post('/graphic/symptoms/29d2m', {'month': 12})
+        response_2m = client.post('/graphic/symptoms/2m3y', {'month': 12})
+        response_3y = client.post('/graphic/symptoms/3y10y', {'month': 12})
+        response_10y = client.post('/graphic/symptoms/10ymore', {'month': 12})
+        assert response_28.status_code == 200
+        assert response_29.status_code == 200
+        assert response_2m.status_code == 200
+        assert response_3y.status_code == 200
+        assert response_10y.status_code == 200
 
 
 @pytest.mark.django_db
