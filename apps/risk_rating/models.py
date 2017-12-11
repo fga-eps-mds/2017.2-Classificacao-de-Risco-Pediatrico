@@ -7,6 +7,12 @@ class Symptoms_28d(models.Model):
     class Meta:
         abstract = True
 
+    date = models.DateField(
+        verbose_name='Data',
+        blank=False,
+        auto_now=True
+    )
+
     dispineia = models.BooleanField(
         verbose_name=("Dispinéia"),
         default=False,
@@ -15,8 +21,7 @@ class Symptoms_28d(models.Model):
 
     ictericia = models.BooleanField(
         verbose_name=("Icterícia"),
-        default=False,
-        blank=True
+        default=False, blank=True
     )
 
     perdada_consciencia = models.BooleanField(
@@ -214,6 +219,13 @@ class Symptoms_29d_2m(models.Model):
     class Meta:
         abstract = True
 
+    date = models.DateField(
+        verbose_name='Data',
+        blank=False,
+        auto_now=True
+    )
+
+    # symptoms:
     dispineia = models.BooleanField(
         verbose_name=("Dispinéia"),
         default=False,
@@ -415,6 +427,13 @@ class Symptoms_2m_3y(models.Model):
     class Meta:
         abstract = True
 
+    date = models.DateField(
+        verbose_name='Data',
+        blank=False,
+        auto_now=True
+    )
+
+    # symptoms:
     dispineia = models.BooleanField(
         verbose_name=("Dispinéia"),
         default=False,
@@ -604,6 +623,13 @@ class Symptoms_3y_10y(models.Model):
     class Meta:
         abstract = True
 
+    date = models.DateField(
+        verbose_name='Data',
+        blank=False,
+        auto_now=True
+    )
+
+    # symptoms:
     perdada_consciencia = models.BooleanField(
         verbose_name=("Perda de Consciência"),
         default=False,
@@ -930,6 +956,13 @@ class Symptoms_10yMore(models.Model):
     class Meta:
         abstract = True
 
+    date = models.DateField(
+        verbose_name='Data',
+        blank=False,
+        auto_now=True
+    )
+
+    # symptoms:
     mais_de_72h_febre = models.BooleanField(
         verbose_name=("Febre a mais de 72 horas"),
         default=False,
