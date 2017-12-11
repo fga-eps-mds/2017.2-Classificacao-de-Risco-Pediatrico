@@ -68,7 +68,8 @@ $(document).ready(function () {
 
     var values = {};
     $inputs.each(function () {
-      if (this.name === "patient_id" ||
+      if (this.name === "patient" ||
+        this.name === "classifier_id" ||
         this.name === "form1" ||
         this.name === "form2" ||
         this.name === "form3" ||
