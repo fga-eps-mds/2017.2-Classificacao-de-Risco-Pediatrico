@@ -2,7 +2,6 @@
 {% load staticfiles %}
 
 {% block content_pos %}
-<link rel="stylesheet" href="{% static "css/feed_ml.css" %}">
 
 <header>
     <h1>Escolha uma faixa etária</h1>
@@ -11,62 +10,24 @@
 
 <body>
     <!-- até 28 dias -->
-    <a href="#" data-toggle="modal" data-target="#range1_ml">
-        <ul-card>
-            <li class="card">
-                <div class="card__front">
-                    <p class="card__num" align="center">Até</p>
-                    <p class="card__num" align="center">28 dias</p>
-                </div>
-            </li>
-        </ul>
+    <a href="#" data-toggle="modal" data-target="#range1_ml" class="btn btn-primary classification-button">
+        Até 28 dias
     </a>
     <!-- 29 dias a 2 meses -->
-    <a href="#" data-toggle="modal" data-target="#range2_ml">
-        <ul-card>
-            <li class="card">
-                <div class="card__front">
-                    <p class="card__num" align="center">Entre</p>
-                    <p class="card__num" align="center">29 dias e</p>
-                    <p class="card__num" align="center">2 meses</p>
-                </div>
-            </li>
-        </ul>
+    <a href="#" data-toggle="modal" data-target="#range2_ml" class="btn btn-primary classification-button">
+        Entre 29 dias e 2 meses
     </a>
     <!-- 2 meses a 3 anos -->
-    <a href="#" data-toggle="modal" data-target="#range3_ml">
-        <ul-card>
-            <li class="card">
-                <div class="card__front">
-                    <p class="card__num" align="center">Entre</p>
-                    <p class="card__num" align="center">2 meses e</p>
-                    <p class="card__num" align="center">3 anos</p>
-                </div>
-            </li>
-        </ul>
+    <a href="#" data-toggle="modal" data-target="#range3_ml" class="btn btn-primary classification-button">
+        Entre 2 meses e 3 anos
     </a>
     <!-- 3 anos a 10 anos -->
-    <a href="#" data-toggle="modal" data-target="#range4_ml">
-        <ul-card>
-            <li class="card">
-                <div class="card__front">
-                    <p class="card__num" align="center">Entre</p>
-                    <p class="card__num" align="center">3 anos e</p>
-                    <p class="card__num" align="center">10 anos</p>
-                </div>
-            </li>
-        </ul>
+    <a href="#" data-toggle="modal" data-target="#range4_ml" class="btn btn-primary classification-button">
+        Entre 3 anos e 10 anos
     </a>
     <!-- 10 anos ou mais -->
-    <a href="#" data-toggle="modal" data-target="#range5_ml">
-        <ul-card>
-            <li class="card">
-                <div class="card__front">
-                    <p class="card__num" align="center">Acima de</p>
-                    <p class="card__num" align="center">10 anos</p>
-                </div>
-            </li>
-        </ul>
+    <a href="#" data-toggle="modal" data-target="#range5_ml" class="btn btn-primary classification-button">
+        Acime de 10 anos
     </a>
 </body>
 {% include 'risk_rating/risk_rating_ml.html' %}

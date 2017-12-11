@@ -65,7 +65,7 @@ class TestUsersViews:
 
     profile_data = ({
         'username': 'usernameTest', 'password1': 'password1Teste',
-        'id_user': 'idUserTest', 'uf': 'DF', 'city': 'cityTeste',
+        'id_user': 'idUserTest', 'cep': '12345678', 'uf': 'DF', 'city': 'cityTeste',
         'neighborhood': 'neighborhoodTest', 'street': 'streetTeste',
         'block': 'blockTeste', 'number': 'numberTest',
         'email': 'email@test.com', 'profile': '1', 'name': 'nameTest',

@@ -106,7 +106,7 @@
                             </i>
                         </a>
                         <a href="#" data-toggle="modal" data-target="#deletar-{{ patient.id }}">
-                            <i class="fa fa-ban actions-icon" aria-hidden="true">
+                            <i class="fa fa-trash actions-icon" aria-hidden="true">
                             </i>
                         </a>
                     </td><!--td ações-->
@@ -230,7 +230,15 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        Tem certeza que deseja deletar o registro {{ patient.id }}?
+                        Tem certeza que deseja deletar
+                        {% if patient.gender == 1 %}
+                            a
+                        {% elif patient.gender == 2 %}
+                            o
+                        {% else %}
+                            o(a)
+                        {% endif %}
+                         paciente {{ patient.name }}?
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">
