@@ -55,20 +55,11 @@
                 <li>
                     <div class="container-box">
                         <div class="box-content">
-                            <a href="#patients" data-toggle="collapse" aria-expanded="false"
+                            <a href="{% url "users:home" %}" id="patients"
                                onclick="changeGradientWidth(this)">
                                 <i class="fa fa-user-o" aria-hidden="true"></i>
-                                Pacientes
-                                <span class="fa fa-chevron down"></span>
-                            </a>
-                            <ul class="collapse list-unstyled" id="patients">
-                                <li>
-                                    <a href="{% url "users:home" %}">
-                                        <i aria-hidden="true"></i>
-                                        Visualizar pacientes
-                                    </a>
-                                </li>
-                            </ul>
+                                Visualizar pacientes
+                            </a >
                         </div>
                     </div>
                 </li>
