@@ -84,6 +84,9 @@
                     </td><!--td classificação-->
 
                     <td id="symptoms">
+                      {% if patient.classification != 0 %}
+                            {{ patient.diseases }}
+                        {% endif %}  
                     </td><!--td sintomas-->
 
                     <td id="age_range_table">
