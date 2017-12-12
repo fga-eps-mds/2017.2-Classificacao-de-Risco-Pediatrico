@@ -19,7 +19,7 @@ def classify(context, id_patient, should_click_symptom):
             f'#risk_ranting{id_patient} input[name="febre"]')
         context.browser.execute_script("arguments[0].click();", symptom)
         symptom_2 = context.browser.find_element_by_css_selector(
-            f'#risk_ranting{id_patient} input[name="dispineia"]')
+            f'#risk_ranting{id_patient} input[name="dispneia"]')
         context.browser.execute_script("arguments[0].click();", symptom_2)
         classify_button = context.browser.find_element_by_id(
             f'submit{id_patient}')
