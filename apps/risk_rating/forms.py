@@ -1,15 +1,9 @@
 # Arquivo: apps/risk_rating/forms.py
 from django import forms
-from apps.risk_rating.models import ClinicalState_28d
-from apps.risk_rating.models import ClinicalState_29d_2m
-from apps.risk_rating.models import ClinicalState_2m_3y
-from apps.risk_rating.models import ClinicalState_3y_10y
-from apps.risk_rating.models import ClinicalState_10yMore
-from apps.risk_rating.models import MachineLearning_28d
-from apps.risk_rating.models import MachineLearning_29d_2m
-from apps.risk_rating.models import MachineLearning_2m_3y
-from apps.risk_rating.models import MachineLearning_3y_10y
-from apps.risk_rating.models import MachineLearning_10yMore
+from apps.risk_rating.models import ClinicalState_28d, ClinicalState_29d_2m, \
+    ClinicalState_2m_3y, ClinicalState_3y_10y, ClinicalState_10yMore, \
+    MachineLearning_28d, MachineLearning_29d_2m, MachineLearning_2m_3y, \
+    MachineLearning_3y_10y, MachineLearning_10yMore
 
 
 class ClinicalState_28dForm(forms.ModelForm):

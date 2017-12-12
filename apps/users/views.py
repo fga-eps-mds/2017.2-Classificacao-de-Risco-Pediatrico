@@ -1,37 +1,30 @@
 # Arquivo: /apps/users/views.py
-from django.shortcuts import render, redirect
-from django.contrib.auth.views import login
-from django.contrib.auth.views import logout
+from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.auth import authenticate
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views import login, logout
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, JsonResponse
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate
+from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
-from django.contrib.admin.views.decorators import staff_member_required
-from apps.risk_rating.ml_classifier import MachineLearning
-from apps.users.forms import RegistrationStaffForm
-from apps.users.forms import RegistrationPatientForm
-from apps.users.forms import EditPatientForm
+
 from datetime import datetime
+
+from apps.risk_rating.ml_classifier import MachineLearning
+from apps.users.forms import RegistrationStaffForm, \
+    RegistrationPatientForm, EditPatientForm
 
 from .models import Patient, Staff
 
-from apps.risk_rating.forms import ClinicalState_28dForm
-from apps.risk_rating.forms import ClinicalState_29d_2mForm
-from apps.risk_rating.forms import ClinicalState_2m_3yForm
-from apps.risk_rating.forms import ClinicalState_3y_10yForm
-from apps.risk_rating.forms import ClinicalState_10yMoreForm
-from apps.risk_rating.forms import MachineLearning_28dForm
-from apps.risk_rating.forms import MachineLearning_29d_2mForm
-from apps.risk_rating.forms import MachineLearning_2m_3yForm
-from apps.risk_rating.forms import MachineLearning_3y_10yForm
-from apps.risk_rating.forms import MachineLearning_10yMoreForm
+from apps.risk_rating.forms import ClinicalState_28dForm, \
+    ClinicalState_29d_2mForm, ClinicalState_2m_3yForm, \
+    ClinicalState_3y_10yForm, ClinicalState_10yMoreForm, \
+    MachineLearning_28dForm, MachineLearning_29d_2mForm, \
+    MachineLearning_2m_3yForm, MachineLearning_3y_10yForm, \
+    MachineLearning_10yMoreForm
 
-from apps.risk_rating.models import ClinicalState_28d
-from apps.risk_rating.models import ClinicalState_29d_2m
-from apps.risk_rating.models import ClinicalState_2m_3y
-from apps.risk_rating.models import ClinicalState_3y_10y
-from apps.risk_rating.models import ClinicalState_10yMore
+from apps.risk_rating.models import ClinicalState_28d, ClinicalState_29d_2m, \
+    ClinicalState_2m_3y, ClinicalState_3y_10y, ClinicalState_10yMore
 
 
 ml1 = MachineLearning('apps/risk_rating/class_menos_28.csv')

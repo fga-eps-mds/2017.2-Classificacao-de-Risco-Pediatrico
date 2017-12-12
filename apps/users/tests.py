@@ -1,7 +1,7 @@
 import pytest
 from apps.users.apps import UsersConfig
-from apps.users.forms import RegistrationStaffForm, RegistrationPatientForm, \
-    EditPatientForm
+from apps.users.forms import RegistrationStaffForm, \
+    RegistrationPatientForm,  EditPatientForm
 from apps.users.models import Staff, Patient
 from apps.risk_rating.models import MachineLearning_28d, \
     MachineLearning_29d_2m, MachineLearning_2m_3y, \
@@ -65,11 +65,11 @@ class TestUsersViews:
 
     profile_data = ({
         'username': 'usernameTest', 'password1': 'password1Teste',
-        'id_user': 'idUserTest', 'cep': '12345678', 'uf': 'DF', 'city': 'cityTeste',
-        'neighborhood': 'neighborhoodTest', 'street': 'streetTeste',
-        'block': 'blockTeste', 'number': 'numberTest',
-        'email': 'email@test.com', 'profile': '1', 'name': 'nameTest',
-        'password2': 'password1Teste'})
+        'id_user': 'idUserTest', 'cep': '12345678', 'uf': 'DF',
+        'city': 'cityTeste', 'neighborhood': 'neighborhoodTest',
+        'street': 'streetTeste', 'block': 'blockTeste',
+        'number': 'numberTest', 'email': 'email@test.com', 'profile': '1',
+        'name': 'nameTest', 'password2': 'password1Teste'})
 
     patient_data = ({'birth_date': '2017-11-02'})
 
