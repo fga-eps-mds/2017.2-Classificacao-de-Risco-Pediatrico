@@ -3,6 +3,8 @@ from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
+from selenium import webdriver
+import time
 
 
 
@@ -51,38 +53,40 @@ def acess_patient(context, id_patient):
     #     print("Não funfou :'( ")
         # driver.quit()
 
-@step(u'I click on Classificar')
-def classify(context):
-     # context.browser.implicitly_wait(12)
-     # element = WebDriverWait(context.browser, 10).until(
-     #     EC.presence_of_element_located((By.CSS_SELECTOR, f'#risk_ranting1 input[name="febre"]')))
+@step(u'I insert symptoms and classify {id_patient}')
+def classify(context, id_patient):
 
-     classify_button = context.browser.find_element_by_id('modal_id')
+     time.sleep(1)
+     #context.browser.save_screenshot('screenie1.png')
+     symptom = context.browser.find_element_by_css_selector(f'#risk_ranting{id_patient} input[name="febre"]')
+     context.browser.execute_script("arguments[0].click();", symptom)
+     classify_button = context.browser.find_element_by_id(f'submit{id_patient}')
      context.browser.execute_script("arguments[0].click();", classify_button)
 
-     # symptom.click()
-     # context.browser.find_element_by_link_text('Classificar').click()
-     #context.browser.find_element_by_css_selector(f'#risk_ranting{id_patient} input[name="febre"]').click()
+
+@step(u'I click on save for {id_patient}')
+def click_on_save(context, id_patient):
+    time.sleep(2)
+    #context.browser.save_screenshot('screenie2.png')
+    save_button = context.browser.find_element_by_id(f'classification_save{id_patient}')
+    context.browser.execute_script("arguments[0].click();", save_button)
 
 
-@step(u'I click on save')
-def click_on_save(context):
-     save_button = context.browser.find_element_by_id('modal_id')
-     context.browser.execute_script("arguments[0].click();", save_button)
+@then(u'should update de classification of {id_patient}')
+def check_classification(context, id_patient):
 
-
-@then(u'should update de classification')
-def check_classification(context):
     odd_rows = context.browser.find_elements_by_css_selector("tr.odd")
     even_rows = context.browser.find_elements_by_css_selector("tr.even")
     rows = odd_rows + even_rows
     cells = []
+    patient_classification = ''
+
     for row in rows:
         cells.append(row.find_elements_by_tag_name("td")[2].text)
         # leaving this here in case you want to check all classifications
-        print (row.find_elements_by_tag_name("td")[2].text)
+        if row.find_elements_by_tag_name("td")[1].text == id_patient:
+            patient_classification = row.find_elements_by_tag_name("td")[2].text
 
-    # The line below asserts that at least one patient is not "Não Classificado"
-    assert 'Atendimento Imediato' or \
-           'Atendimento Hospitalar' or \
-           'Atendimento Ambulatorial' in cells
+    print (cells)
+    print(patient_classification)
+    assert patient_classification != 'Não classificado'
