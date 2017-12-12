@@ -9,6 +9,7 @@ from apps.risk_rating.models import MachineLearning_28d, \
 from apps.risk_rating.models import ClinicalState_28d, \
     ClinicalState_29d_2m, ClinicalState_2m_3y, \
     ClinicalState_3y_10y, ClinicalState_10yMore
+from apps.users.views import show_symptoms
 
 
 @pytest.mark.django_db
@@ -267,26 +268,11 @@ class TestUsersViews:
         assert response.status_code == 200
         assert last_url == urlredirect
 
-    def test_valid_age_range_1(self, client):
-        """
-        Test if age_range is updating
-        """
-        Staff.objects.create_superuser(**self.default_user_data())
-        client.post('/', {'username': 'email@gmail.com',
-                          'password': "1234asdf"})
-        Patient()
-        name = Patient(id='156498', birth_date='2016-11-03')
-        name.save()
-        form = RegistrationPatientForm()
-        client.post('/register/patient', self.patient_data)
-        if form.is_valid():
-            assert form.cleaned_data.get['age_range'] == 1
-
     def test_home_patient_list(self, client):
         Staff.objects.create_superuser(**self.default_user_data())
         response = client.post('/login', {'username': 'email@gmail.com',
                                           'password': "1234asdf"})
-        Patient()
+
         patient_test = Patient(id='156498', birth_date='2016-11-03')
         patient_test.save()
 
@@ -302,12 +288,41 @@ class TestUsersViews:
     form5data = ({'patient': '5', 'form5': ''})
     formdatas = [form1data, form2data, form3data, form4data, form5data]
 
+    def test_show_symptoms(self):
+        patients = []
+        for index in range(1, 6):
+            patient = Patient(id=index, age_range=index)
+            patient.save()
+
+            if patient.age_range == 1:
+                ClinicalState_28d(patient_id=index, dispneia=True).save()
+
+            elif patient.age_range == 2:
+                ClinicalState_29d_2m(patient_id=index, dispneia=True).save()
+
+            elif patient.age_range == 3:
+                ClinicalState_2m_3y(patient_id=index, dispneia=True).save()
+
+            elif patient.age_range == 4:
+                ClinicalState_3y_10y(patient_id=index, dispneia=True).save()
+
+            elif patient.age_range == 5:
+                ClinicalState_10yMore(patient_id=index, dispneia=True).save()
+
+            patients.append(patient)
+
+        show_symptoms(patients)
+        assert patients[0].diseases == 'dispneia'
+        assert patients[1].diseases == 'dispneia'
+        assert patients[2].diseases == 'dispneia'
+        assert patients[3].diseases == 'dispneia'
+        assert patients[4].diseases == 'dispneia'
+
     def generate_all_age_patients(self):
         """
             generating one test patient for each age range
         """
 
-        # Patient()
         for x in range(1, 6):
             patient = Patient(id=x, age_range=x)
             patient.save()
@@ -375,7 +390,6 @@ class TestUsersViews:
         client.post('/login', {'username': 'email@gmail.com',
                                'password': "1234asdf"})
 
-        Patient()
         patient_test = Patient(id='1', birth_date='2017-10-10', age_range='0')
         patient_test.save()
 

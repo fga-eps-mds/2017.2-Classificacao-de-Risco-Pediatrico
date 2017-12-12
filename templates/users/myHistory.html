@@ -46,37 +46,23 @@
 
                     <td id="classify_table_patient">
                         {% if patient.classification == 0 %}
-                            <span class="invisible m-0">
-                                z
-                            </span>
                             <span class="ml-1 btn btn-primary badge badge-pill badge-secondary">
                                 Não classificado
                             </span>
                         {% elif patient.classification == 1 %}
-                            <span class="invisible m-0">
-                                y
-                            </span>
                             <span class="ml-1 btn btn-primary badge badge-pill badge-danger">
                                 Atendimento Imediato
                             </span>
                         {% elif patient.classification == 2 %}
-                            <span class="invisible m-0">
-                                x
-                            </span>
                             <span class="ml-1 btn btn-primary badge badge-pill badge-warning">
                                 Atendimento Hospitalar
                             </span>
                         {% elif patient.classification == 3 %}
-                            <span class="invisible m-0">
-                                w
-                            </span>
                             <span class="btn btn-primary badge badge-pill badge-success">
                                 Atendimento Ambulatorial
                             </span>
                         {% elif patient.classification == 4 %}
-                            <span class="invisible m-0">
-                                u
-                            </span>
+                            <span class="invisible m-0"></span>
                             <span class="ml-1 btn btn-primary badge badge-pill badge-info">
                                 Atendimento Eletivo
                             </span>
@@ -86,7 +72,7 @@
                     <td id="symptoms">
                       {% if patient.classification != 0 %}
                             {{ patient.diseases }}
-                        {% endif %}  
+                        {% endif %}
                     </td><!--td sintomas-->
 
                     <td id="age_range_table">
