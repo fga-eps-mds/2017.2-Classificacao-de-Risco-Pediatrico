@@ -7,26 +7,24 @@ def acess_patient(context, id_patient):
     context.browser.find_element_by_id(f'id_modal-{id_patient}').click()
 
 
+# shoul_click_symptom is use to test de alternative paths
 @step(u'I insert symptoms and classify {id_patient} and' +
       ' {should_click_symptom}')
 def classify(context, id_patient, should_click_symptom):
     time.sleep(1)
     # context.browser.save_screenshot('screenie1.png')
-    print(should_click_symptom)
-    print(should_click_symptom)
-    print(should_click_symptom)
 
-    if should_click_symptom  == '1':
-        print ('Comaparou !!!')
+    if should_click_symptom == '1':
         symptom = context.browser.find_element_by_css_selector(
             f'#risk_ranting{id_patient} input[name="febre"]')
         context.browser.execute_script("arguments[0].click();", symptom)
         symptom_2 = context.browser.find_element_by_css_selector(
             f'#risk_ranting{id_patient} input[name="dispineia"]')
         context.browser.execute_script("arguments[0].click();", symptom_2)
-        classify_button = context.browser.find_element_by_id(f'submit{id_patient}')
-        context.browser.execute_script("arguments[0].click();", classify_button)
-
+        classify_button = context.browser.find_element_by_id(
+            f'submit{id_patient}')
+        context.browser.execute_script("arguments[0].click();",
+                                       classify_button)
 
 
 @step(u'I click on save for {id_patient} and' +
@@ -43,7 +41,6 @@ def click_on_save(context, id_patient, should_click_symptom):
         cancel_button = context.browser.find_element_by_id(
             f'classification_cancel{id_patient}')
         context.browser.execute_script("arguments[0].click();", cancel_button)
-
 
 
 @step(u'should update de classification of {id_patient} and' +
@@ -64,7 +61,7 @@ def check_classification(context, id_patient, should_click_symptom):
 
     print(cells)
     print(patient_classification)
-    if(should_click_symptom == '1'):
+    if (should_click_symptom == '1'):
         assert patient_classification != 'Não classificado'
     else:
         assert patient_classification == 'Não classificado'

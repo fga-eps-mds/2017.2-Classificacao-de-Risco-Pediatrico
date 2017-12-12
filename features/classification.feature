@@ -16,5 +16,5 @@ Feature: In order to make classifications
 
     Examples:
       | name            | id_number | profile_number | email                       | password         | url   | id_patient | should_click_symptom |
-      | selenium-user-3 | 3         | 2              | selenium-user-3-3@gmail.com | selenium-user123 | home/ | 1          |1                     |
-      | selenium-user-4 | 4         | 2              | selenium-user-4-4@gmail.com | selenium-user123 | home/ | 3          |0                     |
+      | selenium-user-3 | 3         | 2              | selenium-user-3-3@gmail.com | selenium-user123 | home/ | 1          |0                     |
+      | selenium-user-5 | 5         | 2              | selenium-user-5-5@gmail.com | selenium-user123 | home/ | 2          |1                     |
