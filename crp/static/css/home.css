@@ -465,8 +465,8 @@ a.article, a.article:hover {
 ----------------------------------------------------- */
 @media (max-width: 768px) {
     #sidebar {
-        min-width: 80px;
-        max-width: 80px;
+        min-width: 125px;
+        max-width: 125px;
         text-align: center;
         margin-left: -80px;
     }
@@ -494,6 +494,8 @@ a.article, a.article:hover {
 
     #sidebar ul li a {
         padding: 20px 10px;
+        text-align: center;
+        font-size: 0.85em;
     }
 
     #sidebar ul li a span {
@@ -510,7 +512,13 @@ a.article, a.article:hover {
     }
 
     #sidebar ul li a i {
-        font-size: 1.3em;
+        font-size: 1.8em;
+    }
+
+    #sidebar ul li ul a {
+        padding:10px;
+        text-align: center;
+        font-size: 0.85em;
     }
 
     #sidebar {
