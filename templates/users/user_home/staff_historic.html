@@ -4,9 +4,9 @@
 {% block content_pos %}
     <div class="form-group title_left mt-4">
         <input id="searchPatient" type="search" class="form-control pull-right mr-1"
-        placeholder="Pesquisar Classificador..." aria-controls="data-table">
+        placeholder="Pesquisar Classificaador..." aria-controls="data-table">
         <h2>
-            Meu Histórico
+            Histórico Geral
         </h2>
     </div>
     <div id="list" class="x_panel slide-in-blurred-top" style="background-color: white">
@@ -23,74 +23,71 @@
             </tr>
             </thead>
             <tbody>
-            {% for patient in patients %}
+            {% for classification in array %}
                 <tr>
                     <td></td>
-
                     <td id="classifier">
-                        {{ classifier.name }}
+                        {{ classification.classifier_name }}
                     </td>
 
                     <td id="name_patient">
-                        {% if patient.name %}
-                            {{ patient.name }}
+                        {% if classification.classification_2.patient.name %}
+                            {{ classification.classification_2.patient.name }}
                         {% else %}
-                            {{ patient.id }}
+                            {{ classification.classification_2.patient.id }}
                         {% endif %}
                     </td><!--nome-->
 
                     <td id="classify_table_patient">
-                        {% if patient.classification == 0 %}
+                        {% if classification.classification_2.patient.classification == 0 %}
                             <span class="ml-1 btn btn-primary badge badge-pill badge-secondary">
                                 Não classificado
                             </span>
-                        {% elif patient.classification == 1 %}
+                        {% elif classification.classification_2.patient.classification == 1 %}
                             <span class="ml-1 btn btn-primary badge badge-pill badge-danger">
                                 Atendimento Imediato
                             </span>
-                        {% elif patient.classification == 2 %}
+                        {% elif classification.classification_2.patient.classification == 2 %}
                             <span class="ml-1 btn btn-primary badge badge-pill badge-warning">
                                 Atendimento Hospitalar
                             </span>
-                        {% elif patient.classification == 3 %}
+                        {% elif classification.classification_2.patient.classification == 3 %}
                             <span class="btn btn-primary badge badge-pill badge-success">
                                 Atendimento Ambulatorial
                             </span>
-                        {% elif patient.classification == 4 %}
+                        {% elif classification.classification_2.patient.classification == 4 %}
                             <span class="ml-1 btn btn-primary badge badge-pill badge-info">
                                 Atendimento Eletivo
                             </span>
                         {% endif %}
-                    </td><!--td classificação-->
+                    </td>
 
                     <td id="symptoms">
-                      {% if patient.classification != 0 %}
-                            {{ patient.diseases }}
-                        {% endif %}
+                        {{ classification.sympthoms }}
                     </td><!--td sintomas-->
 
                     <td id="age_range_table">
-                        {% if patient.birth_date == None %}
-                            {% if patient.age_range  == 0 %}
+                        {% if classification.classification_2.patient.birth_date == None %}
+                            {% if classification.classification_2.patient.age_range  == 0 %}
                                 Faixa etária indefinida
-                            {% elif patient.age_range == 1 %}
+                            {% elif classification.classification_2.patient.age_range == 1 %}
                                 0 até 28 dias
-                            {% elif patient.age_range == 2 %}
-                                29 dias à 2 meses
-                            {% elif patient.age_range == 3 %}
-                                2 meses à 3 anos
-                            {% elif patient.age_range == 4 %}
-                                3 anos à 10 anos
-                            {% elif patient.age_range == 5 %}
+                            {% elif classification.classification_2.patient.age_range == 2 %}
+                                29 dias a 2 meses
+                            {% elif classification.classification_2.patient.age_range == 3 %}
+                                2 meses a 3 anos
+                            {% elif classification.classification_2.patient.age_range == 4 %}
+                                3 anos a 10 anos
+                            {% elif classification.classification_2.patient.age_range == 5 %}
                                 Acima de 10 anos
                             {% endif %}
                         {% else %}
-                            {{ patient.age }}
+                            {{ classification.classification_2.patient.age }}
                         {% endif %}
                     </td><!--td faixa etária-->
 
                     <td id="data">
-                        {{ patient.created_at|date:"d/m/y - H:i" }}
+                        {{ classification.classification_2.patient.created_at|date:"d/m/y - H:i" }}
                     </td><!--td data de criação-->
                 </tr>
             {% endfor %}

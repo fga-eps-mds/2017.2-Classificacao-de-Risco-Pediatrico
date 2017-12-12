@@ -9,6 +9,8 @@ urlpatterns = [
     url(r'^login$', views.login_view, name="login"),
     url(r'^logout/$', views.logout_view, name="logout"),
     url(r'^home/$', views.home, name="home"),
+    url(r'^staffs/$', views.staff_historic,
+        name="staffs"),
     url(r'^graphic/symptoms/under28d$', views.graphic_symptoms_view_28d,
         name="graphic_symptoms_28d"),
     url(r'^graphic/symptoms/29d2m$', views.graphic_symptoms_view_29d_2m,

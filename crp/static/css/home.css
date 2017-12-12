@@ -49,6 +49,13 @@ p {
     min-width: 185px;
 }
 
+img#logo {
+    max-height: 85%;
+    max-width: 85%;
+    display: block;
+    margin: 0 auto;
+}
+
 #content {
     background: #F7F7F7;
     width: 100%;
@@ -458,8 +465,8 @@ a.article, a.article:hover {
 ----------------------------------------------------- */
 @media (max-width: 768px) {
     #sidebar {
-        min-width: 80px;
-        max-width: 80px;
+        min-width: 125px;
+        max-width: 125px;
         text-align: center;
         margin-left: -80px;
     }
@@ -487,6 +494,8 @@ a.article, a.article:hover {
 
     #sidebar ul li a {
         padding: 20px 10px;
+        text-align: center;
+        font-size: 0.85em;
     }
 
     #sidebar ul li a span {
@@ -503,7 +512,13 @@ a.article, a.article:hover {
     }
 
     #sidebar ul li a i {
-        font-size: 1.3em;
+        font-size: 1.8em;
+    }
+
+    #sidebar ul li ul a {
+        padding:10px;
+        text-align: center;
+        font-size: 0.85em;
     }
 
     #sidebar {
@@ -512,6 +527,16 @@ a.article, a.article:hover {
 
     #sidebarCollapse span {
         display: none;
+    }
+
+    .row {
+        display: block;
+    }
+}
+
+@media (min-width: 768px) {
+    .col-md-2 {
+        max-width:100%;
     }
 }
 
