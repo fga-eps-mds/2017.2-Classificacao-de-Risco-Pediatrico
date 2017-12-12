@@ -7,6 +7,7 @@ from django.http import HttpResponseRedirect, JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.admin.views.decorators import staff_member_required
 from apps.risk_rating.ml_classifier import MachineLearning
 from apps.users.forms import RegistrationStaffForm
 from apps.users.forms import RegistrationPatientForm
@@ -145,6 +146,61 @@ def home(request):
                             'form3': form3,
                             'form4': form4,
                             'form5': form5})
+
+
+def home_layout(request):
+    """
+    took all staffs and patients for home_layout.html
+    """
+    patients = Patient.objects.all()
+    staffs = Staff.objects.all()
+    return render(request, 'users/user_home/home_layout.html',
+                  {'patients': patients,
+                   'staffs': staffs})
+
+
+@staff_member_required(redirect_field_name='', login_url='users:login')
+def staff_historic(request):
+    """
+    define staff historic page behaviour
+    """
+    patients = Patient.objects.exclude(classification=0)
+    classifications = []
+    for patient in patients:
+        if patient.age_range == 1:
+            classifications.append(list(patient.patient1.all()))
+        elif patient.age_range == 2:
+            classifications.append(list(patient.patient2.all()))
+        elif patient.age_range == 3:
+            classifications.append(list(patient.patient3.all()))
+        elif patient.age_range == 4:
+            classifications.append(list(patient.patient4.all()))
+        elif patient.age_range == 5:
+            classifications.append(list(patient.patient5.all()))
+
+    flat_classifications = []
+    for classification in classifications:
+        for item in classification:
+            flat_classifications.append(item)
+
+    array = []
+    for classification in flat_classifications:
+        diseases = ''
+        for column in classification._meta.get_fields():
+            if getattr(classification, column.name) and column.name != 'id' \
+                    and column.name != 'patient' \
+                    and column.name != 'classifier_id' \
+                    and column.name != 'date' \
+                    and column.name != 'created_at':
+                diseases += column.name + ', '
+
+        array.append({'classification_2': classification,
+                      'classifier_name': Staff.objects
+                     .filter(id_user=classification.classifier_id)[0].name,
+                      'sympthoms': diseases[:-2].replace('_', ' ')})
+
+    return render(request, 'users/user_home/staff_historic.html',
+                  {'array': array})
 
 
 def feed_ml(request):
