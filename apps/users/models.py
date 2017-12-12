@@ -213,6 +213,7 @@ class Patient(models.Model):
         max_length=10,
         default='',
         blank=True,
+        null=True,
         help_text=_('Informe o CEP')
     )
 

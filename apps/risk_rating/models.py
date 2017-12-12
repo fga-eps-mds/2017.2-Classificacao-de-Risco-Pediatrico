@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.translation import ugettext as _
+from apps.users.models import Patient
 
 
 class Symptoms_28d(models.Model):
@@ -78,8 +79,8 @@ class Symptoms_28d(models.Model):
         blank=True
     )
 
-    convunsao_no_momento = models.BooleanField(
-        verbose_name=("Convulsão no momento"),
+    convulsao_no_momento = models.BooleanField(
+        verbose_name=("convulsão no momento"),
         default=False,
         blank=True
     )
@@ -183,12 +184,10 @@ class Symptoms_28d(models.Model):
 
 class ClinicalState_28d(Symptoms_28d):
 
-    patient_id = models.CharField(
-        verbose_name=('ID do Paciente'),
-        max_length=150,
-        blank=True,
-        unique=False
-    )
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE,
+                                related_name="patient1")
 
     classifier_id = models.CharField(
         verbose_name=('ID do Classificador'),
@@ -292,8 +291,8 @@ class Symptoms_29d_2m(models.Model):
         blank=True
     )
 
-    convunsao_no_momento = models.BooleanField(
-        verbose_name=("Convulsão no momento"),
+    convulsao_no_momento = models.BooleanField(
+        verbose_name=("convulsão no momento"),
         default=False,
         blank=True
     )
@@ -391,12 +390,10 @@ class Symptoms_29d_2m(models.Model):
 
 class ClinicalState_29d_2m(Symptoms_29d_2m):
 
-    patient_id = models.CharField(
-        verbose_name=('ID do Paciente'),
-        max_length=150,
-        blank=True,
-        unique=False
-    )
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE,
+                                related_name="patient2")
 
     classifier_id = models.CharField(
         verbose_name=('ID do Classificador'),
@@ -500,8 +497,8 @@ class Symptoms_2m_3y(models.Model):
         blank=True
     )
 
-    convunsao_no_momento = models.BooleanField(
-        verbose_name=("Convulsão no momento"),
+    convulsao_no_momento = models.BooleanField(
+        verbose_name=("convulsão no momento"),
         default=False,
         blank=True
     )
@@ -587,12 +584,10 @@ class Symptoms_2m_3y(models.Model):
 
 class ClinicalState_2m_3y(Symptoms_2m_3y):
 
-    patient_id = models.CharField(
-        verbose_name=('ID do Paciente'),
-        max_length=150,
-        blank=True,
-        unique=False
-    )
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE,
+                                related_name="patient3")
 
     classifier_id = models.CharField(
         verbose_name=('ID do Classificador'),
@@ -920,12 +915,10 @@ class Symptoms_3y_10y(models.Model):
 
 class ClinicalState_3y_10y(Symptoms_3y_10y):
 
-    patient_id = models.CharField(
-        verbose_name=('ID do Paciente'),
-        max_length=150,
-        blank=True,
-        unique=False
-    )
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE,
+                                related_name="patient4")
 
     classifier_id = models.CharField(
         verbose_name=('ID do Classificador'),
@@ -1266,12 +1259,10 @@ class Symptoms_10yMore(models.Model):
 
 class ClinicalState_10yMore(Symptoms_10yMore):
 
-    patient_id = models.CharField(
-        verbose_name=('ID do Paciente'),
-        max_length=150,
-        blank=True,
-        unique=False
-    )
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE,
+                                related_name="patient5")
 
     classifier_id = models.CharField(
         verbose_name=('ID do Classificador'),
