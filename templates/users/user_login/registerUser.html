@@ -3,6 +3,11 @@
 {% include 'layout/header.html' %}
 {% include 'layout/navbar.html' %}
 
+{% block js %}
+    <script src="{% static "js/cleave.min.js" %}"></script>
+    <script src="{% static "js/registerPatient.js" %}"></script>
+{% endblock %}
+
 <body id="page-top">
     <section id="contact" class="section-padding">
         <div class="container">
@@ -193,25 +198,25 @@
                                         </div>
 
                                         <div class="col">
-                                            <div class="form-group px-3 mt-3" id="uf-box">
+                                            <div class="form-group px-3 mt-3">
                                                 <div class="cols-sm-10">
                                                     <div class="input-group">
                                                         <span class="input-group-addon"
-                                                            id="basic-addon1">
-                                                                <i class="fa fa-envelope-o"
-                                                                    aria-hidden="true"></i>
+                                                        id="basic-addon1">
+                                                            <i class="fa fa-envelope-o"
+                                                            aria-hidden="true"></i>
                                                         </span>
                                                         <input type="text" name="{{ form.cep.name }}"
-                                                            id="{{ form.cep.id_for_label }}"
-                                                            class="form-control"  placeholder="CEP"
-                                                            aria-label="CEP" aria-describedby="basic-addon2"
-                                                            pattern="[0-9]+$" required>
+                                                        id="{{ form.cep.id_for_label }}"
+                                                        class="form-control cep"  placeholder="CEP"
+                                                        aria-label="CEP" aria-describedby="basic-addon2"
+                                                        pattern="[0-9]+$" required>
                                                     </div>
                                                     {% if form.id_user.errors %}
                                                         <div class="error-holder">
                                                             <div class="alert alert-warning"
-                                                                role="alert">
-                                                                    {{ form.id_user.errors }}
+                                                            role="alert">
+                                                                {{ form.id_user.errors }}
                                                             </div>
                                                         </div>
                                                     {% endif %}
@@ -458,9 +463,9 @@
                                                         </span>
                                                         <input type="text" name="{{ form.number.name }}"
                                                         id="{{ form.number.id_for_label }}"
-                                                        class="form-control"  placeholder="Número"
+                                                        class="form-control"  placeholder="Complemento"
                                                         aria-label="Número" aria-describedby="basic-addon10"
-                                                        pattern="[0-9]+$" required>
+                                                        required>
                                                     </div>
                                                     {% if form.number.errors %}
                                                         <div class="error-holder">

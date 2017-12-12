@@ -15,8 +15,9 @@ class RegistrationPatientForm(forms.ModelForm):
     class Meta:
         model = Patient
         fields = ['name', 'comment_receptionist', 'cpf', 'guardian',
-                  'birth_date', 'parents_name', 'cep', 'uf', 'city', 'neighborhood',
-                  'street', 'block', 'number', 'age_range', 'gender']
+                  'birth_date', 'parents_name', 'cep', 'uf', 'city',
+                  'neighborhood', 'street', 'block', 'number', 'age_range',
+                  'gender']
 
 
 class EditPatientForm(forms.ModelForm):
@@ -25,5 +26,5 @@ class EditPatientForm(forms.ModelForm):
     class Meta:
         model = Patient
         fields = ['name', 'cpf', 'guardian', 'birth_date', 'parents_name',
-                  'uf', 'city', 'neighborhood', 'street', 'block', 'number',
-                  'age_range']
+                  'cep', 'uf', 'city', 'neighborhood', 'street', 'block',
+                  'number', 'age_range']

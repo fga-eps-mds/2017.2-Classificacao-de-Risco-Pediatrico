@@ -79,7 +79,7 @@ class Staff(AbstractBaseUser):
 
     cep = models.CharField(
         verbose_name='CEP',
-        max_length=8,
+        max_length=10,
         default='',
         blank=False
     )
@@ -210,9 +210,9 @@ class Patient(models.Model):
 
     cep = models.CharField(
         verbose_name='CEP',
-        max_length=8,
+        max_length=10,
         default='',
-        blank=False,
+        blank=True,
         help_text=_('Informe o CEP')
     )
 
