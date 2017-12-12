@@ -25,13 +25,13 @@
                                 <div class="row" id="row-modal">
                                     <div class="btn-group-responsive" data-toggle="buttons">
                                         {% for field in form1 %}
-                                            {% if field.name == 'patient_id' %}
+                                            {% if field.name == 'patient' %}
                                                 <input type="hidden" value="{{ patient.id }}"
-                                                name="patient_id" />
+                                                name="patient" />
                                                 <input type="hidden" value="1" name="form1" />
                                             {% elif field.name == 'patient.comment_receptionist' %}
                                                 <input type="hidden" value="{{ patient.comment_receptionist }}"
-                                                name="patient_id" />
+                                                name="comment_receptionist" />
                                                 <input type="hidden" value="1" name="form1" />
                                             {% elif field.name == 'classifier_id' %}
                                                 <input type="hidden" value="{{ request.user.id_user }}"
@@ -68,13 +68,13 @@
                                 <div class="row" id="row-modal">
                                     <div class="btn-group-responsive" data-toggle="buttons">
                                         {% for field in form2 %}
-                                            {% if field.name == 'patient_id' %}
+                                            {% if field.name == 'patient' %}
                                                 <input type="hidden" value="{{ patient.id }}"
-                                                name="patient_id" />
+                                                name="patient" />
                                                 <input type="hidden" value="1" name="form2" />
                                             {% elif field.name == 'patient.comment_receptionist' %}
                                                 <input type="hidden" value="{{ patient.comment_receptionist }}"
-                                                name="patient_id" />
+                                                name="comment_receptionist" />
                                                 <input type="hidden" value="1" name="form2" />
                                             {% elif field.name == 'classifier_id' %}
                                                 <input type="hidden" value="{{ request.user.id_user }}"
@@ -110,13 +110,13 @@
                                 <div class="row" id="row-modal">
                                     <div class="btn-group-responsive" data-toggle="buttons">
                                         {% for field in form3 %}
-                                            {% if field.name == 'patient_id' %}
+                                            {% if field.name == 'patient' %}
                                                 <input type="hidden" value="{{ patient.id }}"
-                                                name="patient_id" />
+                                                name="patient" />
                                                 <input type="hidden" value="1" name="form3" />
                                             {% elif field.name == 'patient.comment_receptionist' %}
                                                 <input type="hidden" value="{{ patient.comment_receptionist }}"
-                                                name="patient_id" />
+                                                name="comment_receptionist" />
                                                 <input type="hidden" value="1" name="form3" />
                                             {% elif field.name == 'classifier_id' %}
                                                 <input type="hidden" value="{{ request.user.id_user }}"
@@ -153,14 +153,14 @@
                                     <div class="row" id="row-modal">
                                         <div class="btn-group-responsive" data-toggle="buttons">
                                             {% for field in form4 %}
-                                                {% if field.name == 'patient_id' %}
+                                                {% if field.name == 'patient' %}
                                                     <input type="hidden" value="{{ patient.id }}"
-                                                    name="patient_id" />
+                                                    name="patient" />
                                                     <input type="hidden" value="1"
                                                     name="form4" />
                                                 {% elif field.name == 'patient.comment_receptionist' %}
                                                     <input type="hidden" value="{{ patient.comment_receptionist }}"
-                                                    name="patient_id" />
+                                                    name="comment_receptionist" />
                                                     <input type="hidden" value="1"
                                                     name="form4" />
                                                 {% elif field.name == 'classifier_id' %}
@@ -200,13 +200,13 @@
                                 <div class="row" id="row-modal">
                                     <div class="btn-group-responsive" data-toggle="buttons">
                                         {% for field in form5 %}
-                                            {% if field.name == 'patient_id' %}
+                                            {% if field.name == 'patient' %}
                                                 <input type="hidden" value="{{ patient.id }}"
-                                                name="patient_id" />
+                                                name="patient" />
                                                 <input type="hidden" value="1" name="form5" />
                                             {% elif field.name == 'patient.comment_receptionist' %}
                                                 <input type="hidden" value="{{ patient.comment_receptionist }}"
-                                                name="patient_id" />
+                                                name="comment_receptionist" />
                                                 <input type="hidden" value="1" name="form5" />
                                             {% elif field.name == 'classifier_id' %}
                                                 <input type="hidden" value="{{ request.user.id_user }}"

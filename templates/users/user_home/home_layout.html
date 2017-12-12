@@ -6,6 +6,8 @@
     href="https://cdn.datatables.net/v/bs4/dt-1.10.16/b-1.4.2/r-2.2.0/datatables.min.css"/>
     <link rel="stylesheet" href="{% static "css/home.css" %}">
     <link rel="stylesheet" href="{% static "css/registeredPatient.css" %}">
+    {% block head_pos %}
+    {% endblock %}
 {% endblock %}
 
 {% block js %}
@@ -13,6 +15,8 @@
     src="https://cdn.datatables.net/v/bs4/dt-1.10.16/b-1.4.2/r-2.2.0/datatables.min.js">
     </script>
     <script src="{% static "js/home.js" %}"></script>
+    {% block js_pos %}
+    {% endblock %}
 {% endblock %}
 
 {% block content %}
@@ -22,14 +26,8 @@
             <!-- Sidebar header -->
             <div class="sidebar-header">
                 <a href="{% url "users:home" %}">
-                    <div class="gradiente"></div>
-                    <h3 id="crpname">
-                        CRP
-                    </h3>
+                    <img src="{% static "img/LogoCRP_white.png" %}" id="logo" alt="Responsive image"/>
                 </a>
-                <strong>
-                    CRP
-                </strong>
             </div>
 
             <!-- Sidebar welcome message -->
@@ -61,60 +59,11 @@
                 <li>
                     <div class="container-box">
                         <div class="box-content">
-                            <a href="#patients" data-toggle="collapse" aria-expanded="false"
+                            <a href="{% url "users:home" %}" id="patients"
                                onclick="changeGradientWidth(this)">
                                 <i class="fa fa-user-o" aria-hidden="true"></i>
-                                Pacientes
-                                <span class="fa fa-chevron down"></span>
-                            </a>
-                            <ul class="collapse list-unstyled" id="patients">
-                                <li>
-                                    <a href="{% url "users:home" %}">
-                                        <i aria-hidden="true"></i>
-                                        Visualizar pacientes
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </li>
-
-                <!-- Attendence -->
-                <li>
-                    <div class="container-box">
-                        <div class="box-content">
-                            <a class="link-group" href="#attendence" data-toggle="collapse"
-                            aria-expanded="false" onclick="changeGradientWidth(this)">
-                                <i class="fa fa-check-circle-o" aria-hidden="true">
-                                </i>
-                                Atendimento
-                            </a>
-                            <ul class="collapse list-unstyled" id="attendence">
-                                <li>
-                                    <a href="{% url "users:home" %}">
-                                        <i aria-hidden="true"></i>
-                                        Classificar Paciente
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i aria-hidden="true"></i>
-                                        Atender Paciente
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </li>
-
-                <!-- Machine Learning -->
-                <li>
-                    <div class="container-box">
-                        <div class="box-content">
-                            <a href="{% url "users:feed_ml" %}" onclick="changeGradientWidth(this)">
-                                <i class="fa fa-sliders" aria-hidden="true"></i>
-                                Alimentar Machine Learning
-                            </a>
+                                Visualizar pacientes
+                            </a >
                         </div>
                     </div>
                 </li>
@@ -135,23 +84,31 @@
                                         Histórico Pessoal
                                     </a>
                                 </li>
+                                {% if user.is_staff %}
+                                <li>
+                                    <a href="{% url "users:staffs" %}">
+                                        <i aria-hidden="true"></i>
+                                        Histórico Geral
+                                    </a>
+                                </li>
+                                {% endif %}
                             </ul>
                         </div>
                     </div>
                 </li>
-                
+
                 <!-- Statistics -->
                 <li>
                     <div class="container-box">
                         <div class="box-content">
                             <a href="#statistics" data-toggle="collapse" aria-expanded="false"
-                            onclick="changeGradientWidth(this)">
+                            onclick="changeGradientWidth(this)" id="stats">
                                 <i class="fa fa-area-chart" aria-hidden="true"></i>
                                 Estatísticas
                             </a>
                             <ul class="collapse list-unstyled" id="statistics">
                                 <li>
-                                    <a href="#">
+                                    <a href="{% url "users:classifications_chart" %}" id="classif_chart">
                                         <i aria-hidden="true"></i>
                                         Gráfico de Classificações
                                     </a>
@@ -162,7 +119,24 @@
                                         Estatísticas Pessoais
                                     </a>
                                 </li>
+                                <li>
+                                    <a data-toggle="modal" data-target="#exampleModal" ><i aria-hidden="true"></i>
+                                        Gráfico de Sintomas
+                                    </a>
+                                </li>
                             </ul>
+                        </div>
+                    </div>
+                </li>
+
+                <!-- Machine Learning -->
+                <li>
+                    <div class="container-box">
+                        <div class="box-content">
+                            <a href="{% url "users:feed_ml" %}" onclick="changeGradientWidth(this)">
+                                <i class="fa fa-sliders" aria-hidden="true"></i>
+                                Alimentar Machine Learning
+                            </a>
                         </div>
                     </div>
                 </li>
@@ -223,4 +197,30 @@
             {% endblock %}
         </div>
     </div>
+
+    <!-- Modal Statistics Symptoms-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Selecione a faixa etária desejada:</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class=" col-md-6 graphics">
+               <div class="row modal-graphics"> <a href="{% url "users:graphic_symptoms_28d" %}" class="btn btn-secondary">    0 até 28 dias</a></div>
+               <div class="row modal-graphics"> <a href="{% url "users:graphic_symptoms_29d_2m" %}" class="btn btn-secondary">29 dias a 2 meses</a> </div>
+               <div class="row modal-graphics"> <a href="{% url "users:graphic_symptoms_2m_3y" %}" class="btn btn-secondary"> 2 meses a 3 anos</a> </div>
+               <div class="row modal-graphics"> <a href="{% url "users:graphic_symptoms_3y_10y" %}" class="btn btn-secondary">      3 a 10 anos</a> </div>
+               <div class="row modal-graphics"> <a href="{% url "users:graphic_symptoms_10yMore" %}" class="btn btn-secondary"> acima de 10 anos</a></div>
+            </div>
+          </div>
+          <div class="modal-footer">
+          </div>
+        </div>
+      </div>
+    </div>
+
 {% endblock %}
