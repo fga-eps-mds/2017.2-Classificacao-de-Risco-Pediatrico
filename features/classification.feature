@@ -10,8 +10,9 @@ Feature: In order to make classifications
     And I fill patient form
     Then it should redirect me to the <url> page
     When I click in patient: <id_patient>
-    And In modal a chose the symptons
-    Then Should update de classifications
+    And I insert symptoms and classify <id_patient>
+    And I click on save for <id_patient>
+    Then should update de classification of <id_patient>
 
     Examples:
       | name            | id_number | profile_number | email                       | password         | url   | id_patient |
