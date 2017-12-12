@@ -142,7 +142,7 @@
                         {% csrf_token %}
                         <div class="modal-body">
                             <p>
-                                Selecione a classificação desejada:
+                                <strong>Selecione a classificação desejada:</strong>
                             </p>
                             <div class="text-left">
                                 <div class="form-check">
@@ -189,15 +189,14 @@
                                     </label>
                                 </div>
                             </div>
-                        </div>
-
-                        <div id="comment-receptionist-{{ patient.id }}">
-                            <label>
-                                Comentário
-                            </label>
-                            <textarea class="form-control" name="comment" rows="4"
-                            maxlength="10" cols="10" placeholder="Comentário é obrigatório!">
-                            </textarea>
+                            <div id="comment-receptionist-{{ patient.id }}">
+                                <label>
+                                    <strong>Comentário:</strong>
+                                </label>
+                                <textarea class="form-control" name="comment" rows="4"
+                                maxlength="300" cols="10" placeholder="Comentário é obrigatório!">
+                                </textarea>
+                            </div>
                         </div>
 
                         <input type="hidden" name="patient" value="{{ patient.id }}">
