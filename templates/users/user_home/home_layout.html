@@ -26,14 +26,8 @@
             <!-- Sidebar header -->
             <div class="sidebar-header">
                 <a href="{% url "users:home" %}">
-                    <div class="gradiente"></div>
-                    <h3 id="crpname">
-                        CRP
-                    </h3>
+                    <img src="{% static "img/LogoCRP_white.png" %}" id="logo" alt="Responsive image"/>
                 </a>
-                <strong>
-                    CRP
-                </strong>
             </div>
 
             <!-- Sidebar welcome message -->
@@ -65,60 +59,11 @@
                 <li>
                     <div class="container-box">
                         <div class="box-content">
-                            <a href="#patients" data-toggle="collapse" aria-expanded="false"
+                            <a href="{% url "users:home" %}" id="patients"
                                onclick="changeGradientWidth(this)">
                                 <i class="fa fa-user-o" aria-hidden="true"></i>
-                                Pacientes
-                                <span class="fa fa-chevron down"></span>
-                            </a>
-                            <ul class="collapse list-unstyled" id="patients">
-                                <li>
-                                    <a href="{% url "users:home" %}">
-                                        <i aria-hidden="true"></i>
-                                        Visualizar pacientes
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </li>
-
-                <!-- Attendence -->
-                <li>
-                    <div class="container-box">
-                        <div class="box-content">
-                            <a class="link-group" href="#attendence" data-toggle="collapse"
-                            aria-expanded="false" onclick="changeGradientWidth(this)">
-                                <i class="fa fa-check-circle-o" aria-hidden="true">
-                                </i>
-                                Atendimento
-                            </a>
-                            <ul class="collapse list-unstyled" id="attendence">
-                                <li>
-                                    <a href="{% url "users:home" %}">
-                                        <i aria-hidden="true"></i>
-                                        Classificar Paciente
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i aria-hidden="true"></i>
-                                        Atender Paciente
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </li>
-
-                <!-- Machine Learning -->
-                <li>
-                    <div class="container-box">
-                        <div class="box-content">
-                            <a href="{% url "users:feed_ml" %}" onclick="changeGradientWidth(this)">
-                                <i class="fa fa-sliders" aria-hidden="true"></i>
-                                Alimentar Machine Learning
-                            </a>
+                                Visualizar pacientes
+                            </a >
                         </div>
                     </div>
                 </li>
@@ -172,6 +117,18 @@
                                     </a>
                                 </li>
                             </ul>
+                        </div>
+                    </div>
+                </li>
+
+                <!-- Machine Learning -->
+                <li>
+                    <div class="container-box">
+                        <div class="box-content">
+                            <a href="{% url "users:feed_ml" %}" onclick="changeGradientWidth(this)">
+                                <i class="fa fa-sliders" aria-hidden="true"></i>
+                                Alimentar Machine Learning
+                            </a>
                         </div>
                     </div>
                 </li>

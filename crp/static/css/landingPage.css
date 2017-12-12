@@ -85,6 +85,10 @@ a:focus, a:hover {
     transition: background 0.3s ease-in-out;
 }
 
+li#separator {
+    display: none;
+}
+
 #mainNav .navbar-nav .nav-item:hover {
     /*color: fade(white, 80%);*/
     background-color: transparent;
@@ -126,6 +130,10 @@ a:focus, a:hover {
 
     #mainNav .nav-link.active:hover {
         color: white;
+    }
+
+    li#separator {
+        display: inline;
     }
 }
 
