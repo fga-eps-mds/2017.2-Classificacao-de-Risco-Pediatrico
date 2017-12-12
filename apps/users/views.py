@@ -196,6 +196,7 @@ def staff_historic(request):
                   {'array': array})
 
 
+@staff_member_required(redirect_field_name='', login_url='users:home')
 def feed_ml(request):
     """
     define feed machine learning page behaviour
@@ -351,13 +352,13 @@ def register_patient(request):
                   {'form': form})
 
 
-@login_required(redirect_field_name='', login_url='users:login')
+@staff_member_required(redirect_field_name='', login_url='users:home')
 def manage_accounts_view(request):
     staffs = Staff.objects.all()
     return render(request, 'users/manageAccounts.html', {'staffs': staffs})
 
 
-@login_required(redirect_field_name='', login_url='users:login')
+@staff_member_required(redirect_field_name='', login_url='users:home')
 def edit_accounts_view(request, id_user):
     staff = Staff.objects.filter(id_user=id_user)
     if len(staff) == 1:

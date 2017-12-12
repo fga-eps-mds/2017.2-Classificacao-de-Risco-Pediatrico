@@ -112,16 +112,13 @@
                                                     <i class="fa fa-id-badge" aria-hidden="true">
                                                     </i>
                                                 </span>
+                                                <input type="text" name="{{ form.cpf.name }}"
+                                                id="{{ form.cpf.id_for_label }}"
+                                                class="form-control cpf"  placeholder="000.000.000-00"
+                                                aria-label="CPF" aria-describedby="basic-addon2"
                                                 {% if not patient.cpf  %}
-                                                    <input type="text" name="{{ form.cpf.name }}"
-                                                    id="{{ form.cpf.id_for_label }}"
-                                                    class="form-control cpf"  placeholder="000.000.000-00"
-                                                    aria-label="CPF" aria-describedby="basic-addon2">
+                                                    >
                                                 {% else %}
-                                                    <input type="text" name="{{ form.cpf.name }}"
-                                                    id="{{ form.cpf.id_for_label }}"
-                                                    class="form-control cpf"  placeholder="000.000.000-00"
-                                                    aria-label="CPF" aria-describedby="basic-addon2"
                                                     value={{ patient.cpf }}>
                                                 {% endif %}
                                             </div>
