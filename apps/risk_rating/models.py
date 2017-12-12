@@ -187,7 +187,7 @@ class ClinicalState_28d(Symptoms_28d):
     created_at = models.DateTimeField(auto_now_add=True)
 
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE,
-                                            related_name="patient1")
+                                related_name="patient1")
 
     classifier_id = models.CharField(
         verbose_name=('ID do Classificador'),
@@ -393,7 +393,7 @@ class ClinicalState_29d_2m(Symptoms_29d_2m):
     created_at = models.DateTimeField(auto_now_add=True)
 
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE,
-                                            related_name="patient2")
+                                related_name="patient2")
 
     classifier_id = models.CharField(
         verbose_name=('ID do Classificador'),
@@ -587,7 +587,7 @@ class ClinicalState_2m_3y(Symptoms_2m_3y):
     created_at = models.DateTimeField(auto_now_add=True)
 
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE,
-                                            related_name="patient3")
+                                related_name="patient3")
 
     classifier_id = models.CharField(
         verbose_name=('ID do Classificador'),
@@ -918,7 +918,7 @@ class ClinicalState_3y_10y(Symptoms_3y_10y):
     created_at = models.DateTimeField(auto_now_add=True)
 
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE,
-                                            related_name="patient4")
+                                related_name="patient4")
 
     classifier_id = models.CharField(
         verbose_name=('ID do Classificador'),
@@ -1262,7 +1262,7 @@ class ClinicalState_10yMore(Symptoms_10yMore):
     created_at = models.DateTimeField(auto_now_add=True)
 
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE,
-                                            related_name="patient5")
+                                related_name="patient5")
 
     classifier_id = models.CharField(
         verbose_name=('ID do Classificador'),

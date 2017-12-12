@@ -205,9 +205,10 @@ def show_symptoms(patients):
 
         diseases = ''
 
-        if classification != None:
+        if classification is not None:
             for column in classification._meta.get_fields():
-                if getattr(classification, column.name) and column.name != 'id' \
+                if getattr(classification, column.name) \
+                        and column.name != 'id'\
                         and column.name != 'date' \
                         and column.name != 'patient' \
                         and column.name != 'classifier_id' \
@@ -407,9 +408,8 @@ def my_history(request):
     classifier = Staff.objects.filter(id_user=request.user.id_user)[0]
     patient_symptoms = show_symptoms(patients)
     return render(request, 'users/myHistory.html',
-                  {'patients': patients,
-                    'patient_symptoms' : patient_symptoms,
-                    'classifier': classifier})
+                  {'patients': patients, 'patient_symptoms': patient_symptoms,
+                   'classifier': classifier})
 
 
 @login_required(redirect_field_name='', login_url='users:login')

@@ -295,11 +295,11 @@ class TestUsersViews:
         assert set(list(response.context['patients'])) == \
             set(list(Patient.objects.all()))
 
-    form1data = ({'patient_id': '1', 'form1': ''})
-    form2data = ({'patient_id': '2', 'form2': ''})
-    form3data = ({'patient_id': '3', 'form3': ''})
-    form4data = ({'patient_id': '4', 'form4': ''})
-    form5data = ({'patient_id': '5', 'form5': ''})
+    form1data = ({'patient': '1', 'form1': ''})
+    form2data = ({'patient': '2', 'form2': ''})
+    form3data = ({'patient': '3', 'form3': ''})
+    form4data = ({'patient': '4', 'form4': ''})
+    form5data = ({'patient': '5', 'form5': ''})
     formdatas = [form1data, form2data, form3data, form4data, form5data]
 
     def generate_all_age_patients(self):
