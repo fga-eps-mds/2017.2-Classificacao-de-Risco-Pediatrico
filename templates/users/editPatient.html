@@ -40,7 +40,8 @@
                                                 maxlength="80" id="{{ form.name.id_for_label }}"
                                                 class="form-control"  placeholder="Nome do paciente"
                                                 aria-label="Nome" aria-describedby="basic-addon1"
-                                                pattern="[a-zA-Z\s]+$" autofocus value={{ patient.name }}>
+                                                pattern="[a-zA-Z\s]+$" required
+                                                autofocus value={{ patient.name }}>
                                             </div>
                                             {% if form.name.errors %}
                                                 <div class="error-holder">
@@ -65,7 +66,8 @@
                                                 maxlength="80" id="{{ form.guardian.id_for_label }}"
                                                 class="form-control"  placeholder="Responsável"
                                                 aria-label="Responsável" aria-describedby="basic-addon3"
-                                                pattern="[a-zA-Z\s]+$" value={{ patient.guardian }}>
+                                                pattern="[a-zA-Z\s]+$" required
+                                                value={{ patient.guardian }}>
                                             </div>
                                             {% if form.guardian.errors %}
                                                 <div class="error-holder">
@@ -91,7 +93,7 @@
                                                 class="form-control date"  placeholder="dd/mm/aaaa"
                                                 aria-label="Data de nascimento"
                                                 aria-describedby="basic-addon3"
-                                                value={{ patient.birth_date }}>
+                                                required value={{ patient.birth_date }}>
                                             </div>
                                             {% if form.birth_date.errors %}
                                                 <div class="error-holder">
@@ -116,13 +118,14 @@
                                                     <input type="text" name="{{ form.cpf.name }}"
                                                     id="{{ form.cpf.id_for_label }}"
                                                     class="form-control cpf"  placeholder="000.000.000-00"
-                                                    aria-label="CPF" aria-describedby="basic-addon2">
+                                                    aria-label="CPF" aria-describedby="basic-addon2"
+                                                    required>
                                                 {% else %}
                                                     <input type="text" name="{{ form.cpf.name }}"
                                                     id="{{ form.cpf.id_for_label }}"
                                                     class="form-control cpf"  placeholder="000.000.000-00"
                                                     aria-label="CPF" aria-describedby="basic-addon2"
-                                                    value={{ patient.cpf }}>
+                                                    required value={{ patient.cpf }}>
                                                 {% endif %}
                                             </div>
                                             {% if form.cpf.errors %}
@@ -148,7 +151,7 @@
                                                 maxlength="80" id="{{ form.parents_name.id_for_label }}"
                                                 class="form-control"  placeholder="Nome dos pais"
                                                 aria-label="Nome dos pais" aria-describedby="basic-addon4"
-                                                value={{ patient.parents_name }}>
+                                                required value={{ patient.parents_name }}>
                                             </div>
                                             {% if form.parents_name.errors %}
                                                 <div class="error-holder">
@@ -171,7 +174,7 @@
                                                 </span>
                                                 <select name="{{ form.age_range.name }}"
                                                 class="form-control" id="age_range"
-                                                value={{ patient.age_range }}>
+                                                required value={{ patient.age_range }}>
                                                     {% if not patient.age_range  %}
                                                         <option value="" selected disabled>
                                                             Faixa etária
@@ -223,7 +226,7 @@
                                                 </span>
                                                 <select name="{{ form.gender.name }}"
                                                 id="dropdown" class="form-control"
-                                                value={{patient.gender_name}}>
+                                                required value={{patient.gender_name}}>
                                                     {% if not patient.gender  %}
                                                         <option value="" selected disabled>
                                                             Sexo
@@ -273,7 +276,8 @@
                                                     <input type="text" name="{{ form.cep.name }}"
                                                     id="{{ form.cep.id_for_label }}"
                                                     class="form-control cep" placeholder="00.000-000"
-                                                    aria-label="CEP" aria-describedby="basic-addon2">
+                                                    aria-label="CEP" aria-describedby="basic-addon2"
+                                                    required>
                                             </div>
                                             {% if form.cep.errors %}
                                                 <div class="error-holder">
@@ -296,7 +300,7 @@
                                                 </span>
                                                 <select name="{{ form.uf.name }}"
                                                 id="dropdown" class="form-control"
-                                                value={{patient.uf}}>
+                                                required value={{ patient.uf }}>
                                                     {% if not patient.uf  %}
                                                         <option value="" selected disabled>
                                                             UF
@@ -436,7 +440,8 @@
                                                 id="{{ form.city.id_for_label }}"
                                                 class="form-control"  placeholder="Cidade"
                                                 aria-label="Cidade" aria-describedby="basic-addon7"
-                                                pattern="[a-zA-Z\s]+$" value={{patient.city}}>
+                                                pattern="[a-zA-Z\s]+$" required
+                                                value={{patient.city}}>
                                             </div>
                                             {% if form.city.errors %}
                                                 <div class="error-holder">
@@ -461,7 +466,7 @@
                                                 id="{{ form.street.id_for_label }}"
                                                 class="form-control"  placeholder="Rua"
                                                 aria-label="Rua" aria-describedby="basic-addon7"
-                                                value={{patient.city}}>
+                                                required value={{patient.city}}>
                                             </div>
                                             {% if form.street.errors %}
                                                 <div class="error-holder">
@@ -486,7 +491,7 @@
                                                 id="{{ form.neighborhood.id_for_label }}"
                                                 class="form-control"  placeholder="Bairro"
                                                 aria-label="Bairro" aria-describedby="basic-addon8"
-                                                value={{patient.neighborhood}}>
+                                                required value={{ patient.neighborhood }}>
                                             </div>
                                             {% if form.neighborhood.errors %}
                                                 <div class="error-holder">
@@ -511,7 +516,7 @@
                                                 id="{{ form.block.id_for_label }}"
                                                 class="form-control"  placeholder="Conjunto"
                                                 aria-label="Conjunto" aria-describedby="basic-addon9"
-                                                value={{ patient.block }}>
+                                                required value={{ patient.block }}>
                                             </div>
                                             {% if form.block.errors %}
                                                 <div class="error-holder">
@@ -532,9 +537,9 @@
                                                 </span>
                                                 <input type="text" name="{{ form.number.name }}"
                                                 id="{{ form.number.id_for_label }}"
-                                                class="form-control"  placeholder="Número"
+                                                class="form-control"  placeholder="Complemento"
                                                 aria-label="Número" aria-describedby="basic-addon10"
-                                                pattern="[0-9]+$" value={{ patient.number }}>
+                                                required value={{ patient.number }}>
                                             </div>
                                             {% if form.number.errors %}
                                                 <div class="error-holder">
