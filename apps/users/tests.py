@@ -79,7 +79,8 @@ class TestUsersViews:
         client.post('/login', {'username': 'email@gmail.com',
                                'password': "1234asdf"})
 
-        response = client.post('/register/patient/', {'age_range': '1'})
+        response = client.post('/register/patient/', {'age_range': '1',
+                                                      'birth_date': ''})
         assert response.url == '/home/'
 
     @pytest.mark.parametrize('url, form', [
@@ -144,10 +145,18 @@ class TestUsersViews:
         Staff.objects.create_superuser(**self.default_user_data())
         client.post('/login', {'username': 'email@gmail.com',
                                'password': "1234asdf"})
-        response = client.post('/register/patient/', {'age_range': '1'})
+        response = client.post('/register/patient/', {'age_range': '1',
+                                                      'birth_date': ''})
         assert Patient.objects.last().age_range == 1
         # 302 as a status code means redirection
         assert response.status_code == 302
+
+    def test_calculate_age(self,client):
+        Staff.objects.create_superuser(**self.default_user_data())
+        client.post('/login', {'username': 'email@gmail.com',
+                               'password': "1234asdf"})
+        response = client.post('/register/patient/', {'birth_date': '2017-12-12'})
+        assert Patient.objects.last().age == ''
 
     def test_edit_patient_form(self, client):
         """
