@@ -405,11 +405,12 @@ class TestUsersViews:
         assert response.status_code == 200
 
     def create_clinical_states(self):
-        clinical_28 = ClinicalState_28d()
-        clinical_29 = ClinicalState_29d_2m()
-        clinical_2m = ClinicalState_2m_3y()
-        clinical_3y = ClinicalState_3y_10y()
-        clinical_10y = ClinicalState_10yMore()
+        Patient(id='156498', birth_date='2016-11-03').save()
+        clinical_28 = ClinicalState_28d(patient_id='156498')
+        clinical_29 = ClinicalState_29d_2m(patient_id='156498')
+        clinical_2m = ClinicalState_2m_3y(patient_id='156498')
+        clinical_3y = ClinicalState_3y_10y(patient_id='156498')
+        clinical_10y = ClinicalState_10yMore(patient_id='156498')
         clinical_28.save()
         clinical_29.save()
         clinical_2m.save()
