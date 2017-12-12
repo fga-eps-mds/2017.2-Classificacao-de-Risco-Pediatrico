@@ -10,10 +10,11 @@ Feature: In order to make classifications
     And I fill patient form
     Then it should redirect me to the <url> page
     When I click in patient: <id_patient>
-    And I insert symptoms and classify <id_patient>
-    And I click on save for <id_patient>
-    Then should update de classification of <id_patient>
+    And I insert symptoms and classify <id_patient> and <should_click_symptom>
+    And I click on save for <id_patient> and <should_click_symptom>
+    Then should update de classification of <id_patient> and <should_click_symptom>
 
     Examples:
-      | name            | id_number | profile_number | email                       | password         | url   | id_patient |
-      | selenium-user-3 | 3         | 2              | selenium-user-3-3@gmail.com | selenium-user123 | home/ | 1          |
+      | name            | id_number | profile_number | email                       | password         | url   | id_patient | should_click_symptom |
+      | selenium-user-3 | 3         | 2              | selenium-user-3-3@gmail.com | selenium-user123 | home/ | 1          |1                     |
+      | selenium-user-4 | 4         | 2              | selenium-user-4-4@gmail.com | selenium-user123 | home/ | 3          |0                     |
