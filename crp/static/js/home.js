@@ -93,6 +93,17 @@ $(document).ready(function () {
             + data["classification"]);
           $('#probability-' + data["patient_id"]).text("Porcentagem de Confiabilidade: "
             + (Math.max.apply(Math, data["probability"][0]) * 100).toFixed(1) + "%");
+
+          $("button#validate-classification").click(function () {
+             var mlClassification = data["classification"];
+             var selectedClassification = $("#" + data["patient_id"]).find("input[name = 'classification']:checked").attr('id');
+
+             if(mlClassification === selectedClassification) {
+               $("#classification-comment").prop('required', false);
+             } else {
+               $("#classification-comment").prop('required', true);
+             }
+           });
         }
       }
     });
