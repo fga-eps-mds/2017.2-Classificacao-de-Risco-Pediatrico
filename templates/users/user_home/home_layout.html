@@ -139,6 +139,14 @@
                                         Histórico Pessoal
                                     </a>
                                 </li>
+                                {% if user.is_staff %}
+                                <li>
+                                    <a href="{% url "users:staffs" %}">
+                                        <i aria-hidden="true"></i>
+                                        Histórico Geral
+                                    </a>
+                                </li>
+                                {% endif %}
                             </ul>
                         </div>
                     </div>

@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  $('#example').DataTable({
+  $('#data-table').DataTable({
     "responsive": true,
     "order": [[2, 'desc']],
     "columnDefs": [{
@@ -9,7 +9,7 @@ $(document).ready(function () {
     "lengthMenu": [50, 75, 100],
     "language": {
       "lengthMenu": "Mostrar _MENU_ por página",
-      "zeroRecords": "Nenhum paciente encontrado",
+      "zeroRecords": "Nenhum registro encontrado",
       "info": "Mostrando página _PAGE_ de _PAGES_",
       "infoEmpty": "Nenhuma informação disponível",
       "infoFiltered": "(Filtrado de _MAX_ registros)",
@@ -21,41 +21,12 @@ $(document).ready(function () {
     }
   });
 
-  $('#myHistory').DataTable({
-    "responsive": true,
-    "order": [[6, 'desc']],
-    "columnDefs": [{
-      "targets": "_all",
-      "orderable": false
-    }],
-    "lengthMenu": [50, 75, 100],
-    "language": {
-      "lengthMenu": "Mostrar _MENU_ por página",
-      "zeroRecords": "Nenhum paciente encontrado",
-      "info": "Mostrando página _PAGE_ de _PAGES_",
-      "infoEmpty": "Nenhuma informação disponível",
-      "infoFiltered": "(Filtrado de _MAX_ registros)",
-      "search": "Procurar:",
-      "paginate": {
-        "previous": "Anterior",
-        "next": "Próximo"
-      }
-    }
-  });
-
-  table = $('#example').DataTable()
+  table = $('#data-table').DataTable()
   $('#searchPatient').keyup(function(){
     table.column(1).search($(this).val()).draw() ;
   })
 
-  tableHistory = $('#myHistory').DataTable()
-  $('#searchPatientHistory').keyup(function(){
-    tableHistory.column(2).search($(this).val()).draw() ;
-  })
-
-  $('#example_filter').hide();
-
-  $('#myHistory_filter').hide();
+  $('#data-table_filter').hide();
 
   $('#sidebarCollapse').on('click', function () {
     $('#sidebar').toggleClass('active');
