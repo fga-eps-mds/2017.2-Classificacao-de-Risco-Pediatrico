@@ -26,4 +26,4 @@ class EditPatientForm(forms.ModelForm):
         model = Patient
         fields = ['name', 'cpf', 'guardian', 'birth_date', 'parents_name',
                   'uf', 'city', 'neighborhood', 'street', 'block', 'number',
-                  'age_range']
+                  'age_range', 'cep']

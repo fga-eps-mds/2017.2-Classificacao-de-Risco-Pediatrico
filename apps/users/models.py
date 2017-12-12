@@ -209,10 +209,11 @@ class Patient(models.Model):
     )
 
     cep = models.CharField(
-        verbose_name='CEP',
-        max_length=8,
-        default='',
-        blank=False,
+        verbose_name=_('CEP'),
+        max_length=10,
+        null=True,
+        blank=True,
+        unique=True,
         help_text=_('Informe o CEP')
     )
 
