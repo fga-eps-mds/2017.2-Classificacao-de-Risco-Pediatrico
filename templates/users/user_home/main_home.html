@@ -4,13 +4,13 @@
 {% block content_pos %}
     <div class="form-group title_left mt-4">
         <input id="searchPatient" type="search" class="form-control pull-right mr-1"
-        placeholder="Pesquisar Paciente..." aria-controls="example">
+        placeholder="Pesquisar Paciente..." aria-controls="data-table">
         <h2>
             Pacientes
         </h2>
     </div>
     <div id="list" class="x_panel slide-in-blurred-top" style="background-color: white">
-        <table id="example" class="table table-condensed" cellspacing="0" width="100%">
+        <table id="data-table" class="table table-condensed" cellspacing="0" width="100%">
             <thead>
             <tr>
                 <th></th>
@@ -74,6 +74,9 @@
                     </td><!--td classificação-->
 
                     <td id="symptoms">
+                      {% if patient.classification != 0 %}
+                            {{ patient.diseases }}
+                        {% endif %}
                     </td><!--td sintomas-->
 
                     <td id="age_range_table">

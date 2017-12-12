@@ -295,11 +295,11 @@ class TestUsersViews:
         assert set(list(response.context['patients'])) == \
             set(list(Patient.objects.all()))
 
-    form1data = ({'patient_id': '1', 'form1': ''})
-    form2data = ({'patient_id': '2', 'form2': ''})
-    form3data = ({'patient_id': '3', 'form3': ''})
-    form4data = ({'patient_id': '4', 'form4': ''})
-    form5data = ({'patient_id': '5', 'form5': ''})
+    form1data = ({'patient': '1', 'form1': ''})
+    form2data = ({'patient': '2', 'form2': ''})
+    form3data = ({'patient': '3', 'form3': ''})
+    form4data = ({'patient': '4', 'form4': ''})
+    form5data = ({'patient': '5', 'form5': ''})
     formdatas = [form1data, form2data, form3data, form4data, form5data]
 
     def generate_all_age_patients(self):
@@ -394,6 +394,50 @@ class TestUsersViews:
         response = client.get('/classifications_chart/')
         assert response.status_code == 200
 
+    def create_history_content(self):
+        for index in range(1, 6):
+            patient_test = Patient(id=index,
+                                   age_range=index,
+                                   classification='1')
+            patient_test.save()
+
+        staff = Staff(name='Atendente', id_user='1')
+        staff.save()
+
+    def test_staff_history(self, client):
+        Staff.objects.create_superuser(**self.default_user_data())
+        client.post('/login', {'username': 'email@gmail.com',
+                               'password': "1234asdf"})
+
+        self.create_history_content()
+
+        state_test1 = ClinicalState_28d(patient_id='1',
+                                        classifier_id='1')
+        state_test2 = ClinicalState_29d_2m(patient_id='2',
+                                           classifier_id='1')
+        state_test3 = ClinicalState_2m_3y(patient_id='3',
+                                          classifier_id='1')
+        state_test4 = ClinicalState_3y_10y(patient_id='4',
+                                           classifier_id='1')
+        state_test5 = ClinicalState_10yMore(patient_id='5',
+                                            classifier_id='1')
+        state_test1.save()
+        state_test2.save()
+        state_test3.save()
+        state_test4.save()
+        state_test5.save()
+
+        response = client.get('/staffs/')
+        print('#'*80)
+        print(response.context)
+        context = response.context[0]['array']
+        assert response.status_code == 200
+        assert context[0]['classification_2'] == state_test1
+        assert context[1]['classification_2'] == state_test2
+        assert context[2]['classification_2'] == state_test3
+        assert context[3]['classification_2'] == state_test4
+        assert context[4]['classification_2'] == state_test5
+
     def test_classifications_chart_filter(self, client):
         Staff.objects.create_superuser(**self.default_user_data())
         client.post('/login', {'username': 'email@gmail.com',
@@ -405,11 +449,12 @@ class TestUsersViews:
         assert response.status_code == 200
 
     def create_clinical_states(self):
-        clinical_28 = ClinicalState_28d()
-        clinical_29 = ClinicalState_29d_2m()
-        clinical_2m = ClinicalState_2m_3y()
-        clinical_3y = ClinicalState_3y_10y()
-        clinical_10y = ClinicalState_10yMore()
+        Patient(id='156498', birth_date='2016-11-03').save()
+        clinical_28 = ClinicalState_28d(patient_id='156498')
+        clinical_29 = ClinicalState_29d_2m(patient_id='156498')
+        clinical_2m = ClinicalState_2m_3y(patient_id='156498')
+        clinical_3y = ClinicalState_3y_10y(patient_id='156498')
+        clinical_10y = ClinicalState_10yMore(patient_id='156498')
         clinical_28.save()
         clinical_29.save()
         clinical_2m.save()
