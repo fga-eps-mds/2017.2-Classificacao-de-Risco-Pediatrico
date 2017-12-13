@@ -528,26 +528,41 @@ def my_charts(request):
         'data': data
     })
 
-@login_required(redirect_field_name='', login_url='users:login')
-def graphic_symptoms_view(request, clinical_state, graphic_symptoms_html):
-    """
-    Read all symptoms of database after classification
-     someone and check which symptoms was marked
-    """
+def get_symptoms(clinical_state):
     graphic_symptoms = {}
 
     for column in clinical_state._meta.get_fields():
         graphic_symptoms[column.name] = 0
 
+    return graphic_symptoms
+
+
+def filter_symptoms_rows(request, clinical_state, graphic_symptoms):
     for state in clinical_state.objects.all():
 
         if request.method == 'POST':
             if int(request.POST.get('month')) != 0:
                 if state.date.month != int(request.POST.get('month')):
                     break
-        for column in clinical_state._meta.get_fields():
-            if getattr(state, column.name):
-                graphic_symptoms[column.name] += 1
+        graphic_symptoms = filter_symptoms_columns(clinical_state, state, graphic_symptoms)
+
+    return graphic_symptoms
+
+def filter_symptoms_columns(clinical_state, state, graphic_symptoms):
+    for column in clinical_state._meta.get_fields():
+        if getattr(state, column.name):
+            graphic_symptoms[column.name] += 1
+
+    return graphic_symptoms
+
+@login_required(redirect_field_name='', login_url='users:login')
+def graphic_symptoms_view(request, clinical_state, graphic_symptoms_html):
+    """
+    Read all symptoms of database after classification
+     someone and check which symptoms was marked
+    """
+    graphic_symptoms = get_symptoms(clinical_state)
+    graphic_symptoms = filter_symptoms_rows(request, clinical_state, graphic_symptoms)
 
     return render(request, 'users/user_home/' + graphic_symptoms_html,
                   {'graphic_symptoms': graphic_symptoms})
