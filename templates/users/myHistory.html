@@ -26,7 +26,7 @@
             {% for patient in patients %}
                 <tr>
                     <td></td>
-                    
+
                     <td id="name_patient">
                         {% if patient.name %}
                             {{ patient.name }}
@@ -64,7 +64,7 @@
                     </td><!--td classificação-->
 
                     <td id="symptoms">
-                      {% if patient.classification != 0 %}
+                        {% if patient.classification != 0 %}
                             {{ patient.diseases }}
                         {% endif %}
                     </td><!--td sintomas-->

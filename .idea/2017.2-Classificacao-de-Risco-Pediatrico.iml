@@ -7,6 +7,7 @@
         <option name="settingsModule" value="crp/settings.py" />
         <option name="manageScript" value="manage.py" />
         <option name="environment" value="&lt;map/&gt;" />
+        <option name="doNotUseTestRunner" value="false" />
       </configuration>
     </facet>
   </component>
@@ -25,6 +26,7 @@
     <orderEntry type="library" name="jquery.dataTables" level="application" />
     <orderEntry type="library" name="dataTables.bootstrap4" level="application" />
     <orderEntry type="library" name="datatables" level="application" />
+    <orderEntry type="library" name="echarts-all-3" level="application" />
   </component>
   <component name="TemplatesService">
     <option name="TEMPLATE_CONFIGURATION" value="Django" />
