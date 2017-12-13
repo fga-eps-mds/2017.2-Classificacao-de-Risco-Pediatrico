@@ -283,6 +283,12 @@ class Patient(models.Model):
         blank=False
     )
 
+    age = models.CharField(
+        verbose_name=_('Age'),
+        max_length=50,
+        blank=True
+    )
+
     def age_range_verbose(self):
         return dict(Patient.AGE_RANGE)[self.age_range]
 

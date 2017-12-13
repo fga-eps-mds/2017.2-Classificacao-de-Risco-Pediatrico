@@ -10,5 +10,5 @@ def click_register_patient(context):
 @step('I fill patient form')
 def fill_patient_form(context):
     Select(context.browser.find_element_by_id(
-        'id_age_range')).select_by_value('0')
+        'id_age_range')).select_by_value('1')
     context.browser.find_element_by_id('register-patient-button').click()

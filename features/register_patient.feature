@@ -12,4 +12,4 @@ Feature: In order to make classifications
 
     Examples:
       | name            | id_number | profile_number | email                       | password         | url   |
-      | selenium-user-3 | 3         | 2              | selenium-user-3-3@gmail.com | selenium-user123 | home/ |
+      | selenium-user-6 | 6         | 2              | selenium-user-6-6@gmail.com | selenium-user123 | home/ |
