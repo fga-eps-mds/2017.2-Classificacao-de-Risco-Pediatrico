@@ -9,7 +9,8 @@ from apps.risk_rating.models import MachineLearning_28d, \
 from apps.risk_rating.models import ClinicalState_28d, \
     ClinicalState_29d_2m, ClinicalState_2m_3y, \
     ClinicalState_3y_10y, ClinicalState_10yMore
-from apps.users.views import show_symptoms
+from datetime import date
+from apps.users.views import show_symptoms, calculate_age
 
 
 @pytest.mark.django_db
@@ -152,11 +153,16 @@ class TestUsersViews:
         assert response.status_code == 302
 
     def test_calculate_age(self,client):
+
         Staff.objects.create_superuser(**self.default_user_data())
         client.post('/login', {'username': 'email@gmail.com',
                                'password': "1234asdf"})
-        response = client.post('/register/patient/', {'birth_date': '2017-12-12'})
-        assert Patient.objects.last().age == ''
+                               
+        today = date.today().strftime('%d/%m/%Y')
+        response = client.post('/register/patient/', {'age_range': '1',
+                                                'birth_date': today})
+
+        assert Patient.objects.last().age == '0 dias'
 
     def test_edit_patient_form(self, client):
         """
