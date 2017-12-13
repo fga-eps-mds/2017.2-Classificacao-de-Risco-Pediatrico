@@ -1,15 +1,17 @@
+from datetime import date
+
 import pytest
+
+from apps.risk_rating.models import ClinicalState_28d, \
+    ClinicalState_29d_2m, ClinicalState_2m_3y, \
+    ClinicalState_3y_10y, ClinicalState_10yMore
+from apps.risk_rating.models import MachineLearning_28d, \
+    MachineLearning_29d_2m, MachineLearning_2m_3y, \
+    MachineLearning_3y_10y, MachineLearning_10yMore
 from apps.users.apps import UsersConfig
 from apps.users.forms import RegistrationStaffForm, RegistrationPatientForm, \
     EditPatientForm
 from apps.users.models import Staff, Patient
-from apps.risk_rating.models import MachineLearning_28d, \
-    MachineLearning_29d_2m, MachineLearning_2m_3y, \
-    MachineLearning_3y_10y, MachineLearning_10yMore
-from apps.risk_rating.models import ClinicalState_28d, \
-    ClinicalState_29d_2m, ClinicalState_2m_3y, \
-    ClinicalState_3y_10y, ClinicalState_10yMore
-from datetime import date
 from apps.users.views import show_symptoms
 
 
@@ -45,9 +47,11 @@ class TestUsersViews:
         response = client.get(url)
         assert response.status_code == 200
 
-    @pytest.mark.parametrize('url',
-                             ['/register/patient/',
-                              '/home/'])
+    @pytest.mark.parametrize('url', [
+        '/register/patient/',
+        '/home/',
+        '/my_charts/',
+    ])
     def test_get_route_logged(self, client, url):
         Staff.objects.create_superuser(**self.default_user_data())
         client.post('/login', {'username': 'email@gmail.com',
@@ -115,7 +119,7 @@ class TestUsersViews:
     def test_graphic_symptoms_view(self, client, url):
         Staff.objects.create_superuser(**self.default_user_data())
         response = client.post('/login', {'username': 'email@gmail.com',
-                               'password': "1234asdf"})
+                                          'password': "1234asdf"})
         response = client.get(url)
         assert response.status_code == 200
 
@@ -455,8 +459,6 @@ class TestUsersViews:
         state_test5.save()
 
         response = client.get('/staffs/')
-        print('#'*80)
-        print(response.context)
         context = response.context[0]['array']
         assert response.status_code == 200
         assert context[0]['classification_2'] == state_test1
@@ -476,12 +478,18 @@ class TestUsersViews:
         assert response.status_code == 200
 
     def create_clinical_states(self):
-        Patient(id='156498', birth_date='2016-11-03').save()
-        clinical_28 = ClinicalState_28d(patient_id='156498')
-        clinical_29 = ClinicalState_29d_2m(patient_id='156498')
-        clinical_2m = ClinicalState_2m_3y(patient_id='156498')
-        clinical_3y = ClinicalState_3y_10y(patient_id='156498')
-        clinical_10y = ClinicalState_10yMore(patient_id='156498')
+        Patient(id='1', classification=1, birth_date='2016-11-03').save()
+        Patient(id='2', classification=2, birth_date='2016-11-03').save()
+        Patient(id='3', classification=3, birth_date='2016-11-03').save()
+        Patient(id='4', classification=4, birth_date='2016-11-03').save()
+
+        clinical_28 = ClinicalState_28d(patient_id='1', classifier_id=1234)
+        clinical_29 = ClinicalState_29d_2m(patient_id='2', classifier_id=1234)
+        clinical_2m = ClinicalState_2m_3y(patient_id='3', classifier_id=1234)
+        clinical_3y = ClinicalState_3y_10y(patient_id='4', classifier_id=1234)
+        clinical_10y = ClinicalState_10yMore(patient_id='4',
+                                             classifier_id=1234)
+
         clinical_28.save()
         clinical_29.save()
         clinical_2m.save()
@@ -505,6 +513,25 @@ class TestUsersViews:
         assert response_2m.status_code == 200
         assert response_3y.status_code == 200
         assert response_10y.status_code == 200
+
+    def test_my_charts_without_data(self, client):
+        Staff.objects.create_superuser(**self.default_user_data())
+        client.post('/login', {'username': 'email@gmail.com',
+                               'password': "1234asdf"})
+
+        response = client.post('/my_charts/', {'month': 12})
+
+        assert response.context[0]['data'] == [0, 0, 0, 0]
+
+    def test_my_charts_with_data(self, client):
+        Staff.objects.create_superuser(**self.default_user_data())
+        client.post('/login', {'username': 'email@gmail.com',
+                               'password': "1234asdf"})
+
+        self.create_clinical_states()
+        response = client.post('/my_charts/', {'month': 'all'})
+
+        assert response.context[0]['data'] == [1, 1, 1, 2]
 
 
 @pytest.mark.django_db

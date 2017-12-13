@@ -41,6 +41,8 @@ urlpatterns = [
         name="feed_ml"),
     url(r'^my_history/$', views.my_history,
         name="my_history"),
+    url(r'^my_charts/$', views.my_charts,
+        name="my_charts"),
     url(r'^classifications_chart/$', views.classifications_chart,
         name="classifications_chart")
 ]

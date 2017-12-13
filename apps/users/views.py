@@ -1,38 +1,37 @@
 # Arquivo: /apps/users/views.py
-from django.shortcuts import render, redirect
+
+from datetime import datetime, date
+
+from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.auth import authenticate
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import login
 from django.contrib.auth.views import logout
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, JsonResponse
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate
+from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
-from django.contrib.admin.views.decorators import staff_member_required
-from apps.risk_rating.ml_classifier import MachineLearning
-from apps.users.forms import RegistrationStaffForm
-from apps.users.forms import RegistrationPatientForm
-from apps.users.forms import EditPatientForm
-from datetime import datetime, date
 
-from .models import Patient, Staff
-
+from apps.risk_rating.forms import ClinicalState_10yMoreForm
 from apps.risk_rating.forms import ClinicalState_28dForm
 from apps.risk_rating.forms import ClinicalState_29d_2mForm
 from apps.risk_rating.forms import ClinicalState_2m_3yForm
 from apps.risk_rating.forms import ClinicalState_3y_10yForm
-from apps.risk_rating.forms import ClinicalState_10yMoreForm
+from apps.risk_rating.forms import MachineLearning_10yMoreForm
 from apps.risk_rating.forms import MachineLearning_28dForm
 from apps.risk_rating.forms import MachineLearning_29d_2mForm
 from apps.risk_rating.forms import MachineLearning_2m_3yForm
 from apps.risk_rating.forms import MachineLearning_3y_10yForm
-from apps.risk_rating.forms import MachineLearning_10yMoreForm
-
+from apps.risk_rating.ml_classifier import MachineLearning
+from apps.risk_rating.models import ClinicalState_10yMore
 from apps.risk_rating.models import ClinicalState_28d
 from apps.risk_rating.models import ClinicalState_29d_2m
 from apps.risk_rating.models import ClinicalState_2m_3y
 from apps.risk_rating.models import ClinicalState_3y_10y
-from apps.risk_rating.models import ClinicalState_10yMore
-
+from apps.users.forms import EditPatientForm
+from apps.users.forms import RegistrationPatientForm
+from apps.users.forms import RegistrationStaffForm
+from .models import Patient, Staff
 
 ml1 = MachineLearning('apps/risk_rating/class_menos_28.csv')
 ml2 = MachineLearning('apps/risk_rating/class_29d_2m.csv')
@@ -72,7 +71,6 @@ def login_view(request, *args, **kwargs):
 @login_required(redirect_field_name='', login_url='users:login')
 @csrf_exempt
 def machine_learning(request):
-
     if 'form1' in request.POST:
         form = ClinicalState_28dForm(request.POST)
         form.save()
@@ -138,14 +136,14 @@ def home(request):
     patient_symptoms = show_symptoms(patients)
 
     return render(request, 'users/user_home/main_home.html',
-                           {'patients': patients,
-                            'classification': classification,
-                            'patient_symptoms': patient_symptoms,
-                            'form1': form1,
-                            'form2': form2,
-                            'form3': form3,
-                            'form4': form4,
-                            'form5': form5})
+                  {'patients': patients,
+                   'classification': classification,
+                   'patient_symptoms': patient_symptoms,
+                   'form1': form1,
+                   'form2': form2,
+                   'form3': form3,
+                   'form4': form4,
+                   'form5': form5})
 
 
 def home_layout(request):
@@ -234,11 +232,11 @@ def feed_ml(request):
             return HttpResponseRedirect(reverse('users:feed_ml'))
 
     return render(request, 'users/user_home/feed_ml.html',
-                           {'form1_ml': form1_ml,
-                            'form2_ml': form2_ml,
-                            'form3_ml': form3_ml,
-                            'form4_ml': form4_ml,
-                            'form5_ml': form5_ml})
+                  {'form1_ml': form1_ml,
+                   'form2_ml': form2_ml,
+                   'form3_ml': form3_ml,
+                   'form4_ml': form4_ml,
+                   'form5_ml': form5_ml})
 
 
 def show_symptoms(patients):
@@ -264,7 +262,7 @@ def show_symptoms(patients):
         if classification is not None:
             for column in classification._meta.get_fields():
                 if getattr(classification, column.name) \
-                        and column.name != 'id'\
+                        and column.name != 'id' \
                         and column.name != 'date' \
                         and column.name != 'patient' \
                         and column.name != 'classifier_id' \
@@ -489,6 +487,58 @@ def my_history(request):
     return render(request, 'users/myHistory.html',
                   {'patients': patients, 'patient_symptoms': patient_symptoms,
                    'classifier': classifier})
+
+
+@login_required(redirect_field_name='', login_url='users:login')
+def my_charts(request):
+    """
+    define personal graphics page behavior
+    """
+    data = [0, 0, 0, 0]
+    if request.method == 'POST':
+        month = request.POST.get('month')
+        if month is not None:
+            current_user_id = request.user.id_user
+
+            if month == 'all':
+                all_classifications = list(ClinicalState_28d.
+                                           objects.all()) + \
+                                      list(ClinicalState_29d_2m.
+                                           objects.all()) + \
+                                      list(ClinicalState_2m_3y.
+                                           objects.all()) + \
+                                      list(ClinicalState_3y_10y.
+                                           objects.all()) + \
+                                      list(ClinicalState_10yMore.
+                                           objects.all())
+            else:
+                all_classifications = list(ClinicalState_28d.objects.
+                                           filter(date__month=month)) + \
+                                      list(ClinicalState_29d_2m.objects.
+                                           filter(date__month=month)) + \
+                                      list(ClinicalState_2m_3y.objects.
+                                           filter(date__month=month)) + \
+                                      list(ClinicalState_3y_10y.objects.
+                                           filter(date__month=month)) + \
+                                      list(ClinicalState_10yMore.objects.
+                                           filter(date__month=month))
+
+            for classification in all_classifications:
+                if classification.classifier_id == current_user_id:
+                    patient_classification = \
+                        classification.patient.classification
+                    if patient_classification == 1:
+                        data[0] += 1
+                    elif patient_classification == 2:
+                        data[1] += 1
+                    elif patient_classification == 3:
+                        data[2] += 1
+                    elif patient_classification == 4:
+                        data[3] += 1
+
+    return render(request, 'users/myCharts.html', {
+        'data': data
+    })
 
 
 @login_required(redirect_field_name='', login_url='users:login')

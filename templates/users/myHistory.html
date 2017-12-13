@@ -4,7 +4,7 @@
 {% block content_pos %}
     <div class="form-group title_left mt-4">
         <input id="searchPatient" type="search" class="form-control pull-right mr-1"
-        placeholder="Pesquisar Classificador..." aria-controls="data-table">
+               placeholder="Pesquisar Classificador..." aria-controls="data-table">
         <h2>
             Meu Histórico
         </h2>
@@ -64,7 +64,7 @@
                     </td><!--td classificação-->
 
                     <td id="symptoms">
-                      {% if patient.classification != 0 %}
+                        {% if patient.classification != 0 %}
                             {{ patient.diseases }}
                         {% endif %}
                     </td><!--td sintomas-->
