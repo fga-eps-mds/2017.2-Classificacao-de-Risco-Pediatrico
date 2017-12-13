@@ -347,7 +347,6 @@ def sign_up_profile(request):
 
 @login_required(redirect_field_name='', login_url='users:login')
 def register_patient(request):
-    
     form = RegistrationPatientForm()
     if request.method == 'POST':
         form = RegistrationPatientForm(request.POST)

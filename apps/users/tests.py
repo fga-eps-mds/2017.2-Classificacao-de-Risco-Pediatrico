@@ -10,7 +10,7 @@ from apps.risk_rating.models import ClinicalState_28d, \
     ClinicalState_29d_2m, ClinicalState_2m_3y, \
     ClinicalState_3y_10y, ClinicalState_10yMore
 from datetime import date
-from apps.users.views import show_symptoms, calculate_age
+from apps.users.views import show_symptoms
 
 
 @pytest.mark.django_db
@@ -152,15 +152,14 @@ class TestUsersViews:
         # 302 as a status code means redirection
         assert response.status_code == 302
 
-    def test_calculate_age(self,client):
+    def test_calculate_age(self, client):
 
         Staff.objects.create_superuser(**self.default_user_data())
         client.post('/login', {'username': 'email@gmail.com',
                                'password': "1234asdf"})
-                               
         today = date.today().strftime('%d/%m/%Y')
-        response = client.post('/register/patient/', {'age_range': '1',
-                                                'birth_date': today})
+        client.post('/register/patient/', {'age_range': '1',
+                                           'birth_date': today})
 
         assert Patient.objects.last().age == '0 dias'
 
@@ -348,7 +347,6 @@ class TestUsersViews:
                                'password': "1234asdf"})
 
         self.generate_all_age_patients()
-
         # the loop below posts the symptoms form for every one of the
         # 5 fictional patients
         classifications = []
