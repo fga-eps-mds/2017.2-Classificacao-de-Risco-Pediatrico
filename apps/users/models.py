@@ -77,6 +77,13 @@ class Staff(AbstractBaseUser):
         default=0
     )
 
+    cep = models.CharField(
+        verbose_name='CEP',
+        max_length=10,
+        default='',
+        blank=False
+    )
+
     uf = models.CharField(
         verbose_name='UF',
         max_length=2,
@@ -84,25 +91,35 @@ class Staff(AbstractBaseUser):
         blank=False
     )
 
-    city = models.CharField(verbose_name='Cidade',
-                            max_length=50,
-                            blank=False)
+    city = models.CharField(
+        verbose_name='Cidade',
+        max_length=50,
+        blank=False
+    )
 
-    neighborhood = models.CharField(verbose_name='Bairro',
-                                    max_length=100,
-                                    blank=False)
+    neighborhood = models.CharField(
+        verbose_name='Bairro',
+        max_length=100,
+        blank=False
+    )
 
-    street = models.CharField(verbose_name='Rua',
-                              max_length=50,
-                              blank=False)
+    street = models.CharField(
+        verbose_name='Rua',
+        max_length=50,
+        blank=False
+    )
 
-    block = models.CharField(verbose_name='Conjunto',
-                             max_length=50,
-                             blank=False)
+    block = models.CharField(
+        verbose_name='Conjunto',
+        max_length=50,
+        blank=False
+    )
 
-    number = models.CharField(verbose_name='Numero',
-                              max_length=10,
-                              blank=False)
+    number = models.CharField(
+        verbose_name='Numero',
+        max_length=10,
+        blank=False
+    )
 
     is_superuser = False
 
@@ -189,6 +206,15 @@ class Patient(models.Model):
         default='',
         blank=True,
         help_text=_('Informe o nome dos pais')
+    )
+
+    cep = models.CharField(
+        verbose_name='CEP',
+        max_length=10,
+        default='',
+        blank=True,
+        null=True,
+        help_text=_('Informe o CEP')
     )
 
     uf = models.CharField(

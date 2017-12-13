@@ -109,7 +109,7 @@
                             </i>
                         </a>
                         <a href="#" data-toggle="modal" data-target="#deletar-{{ patient.id }}">
-                            <i class="fa fa-ban actions-icon" aria-hidden="true">
+                            <i class="fa fa-trash actions-icon" aria-hidden="true">
                             </i>
                         </a>
                     </td><!--td ações-->
@@ -202,6 +202,18 @@
                         </div>
 
                         <input type="hidden" name="patient" value="{{ patient.id }}">
+
+                        <div class="alert alert-danger mt-3 mr-3 ml-3">
+                            <strong>
+                                ATENÇÃO!<br>
+                            </strong>
+                            Se o botão "Salvar" for clicado sem ser selecionado
+                            alguma classificação, a classificação do paciente passará
+                            a ser de "Não Classificado".<br>
+                            Caso queira manter a classificação anterior, clique
+                            em "Fechar".<br>
+                        </div>
+
                         <div class="modal-footer">
                             <button type="button" id="classification_cancel{{ patient.id }}" class="btn btn-secondary" data-dismiss="modal">
                                 Fechar
@@ -218,7 +230,7 @@
         </div>
 
         <div class="modal fade" id="deletar-{{ patient.id }}" tabindex="-1" role="dialog"
-             aria-labelledby="Deletar Paciente" aria-hidden="true">
+        aria-labelledby="Deletar Paciente" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -233,7 +245,15 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        Tem certeza que deseja deletar o registro {{ patient.id }}?
+                        Tem certeza que deseja deletar
+                        {% if patient.gender == 1 %}
+                            a
+                        {% elif patient.gender == 2 %}
+                            o
+                        {% else %}
+                            o(a)
+                        {% endif %}
+                         paciente {{ patient.name }}?
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">

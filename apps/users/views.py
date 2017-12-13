@@ -1,37 +1,31 @@
 # Arquivo: /apps/users/views.py
-
-from datetime import datetime, date
-
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.views import login
-from django.contrib.auth.views import logout
+from django.contrib.auth.views import login, logout
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 
-from apps.risk_rating.forms import ClinicalState_10yMoreForm
-from apps.risk_rating.forms import ClinicalState_28dForm
-from apps.risk_rating.forms import ClinicalState_29d_2mForm
-from apps.risk_rating.forms import ClinicalState_2m_3yForm
-from apps.risk_rating.forms import ClinicalState_3y_10yForm
-from apps.risk_rating.forms import MachineLearning_10yMoreForm
-from apps.risk_rating.forms import MachineLearning_28dForm
-from apps.risk_rating.forms import MachineLearning_29d_2mForm
-from apps.risk_rating.forms import MachineLearning_2m_3yForm
-from apps.risk_rating.forms import MachineLearning_3y_10yForm
+from datetime import datetime, date
+
 from apps.risk_rating.ml_classifier import MachineLearning
-from apps.risk_rating.models import ClinicalState_10yMore
-from apps.risk_rating.models import ClinicalState_28d
-from apps.risk_rating.models import ClinicalState_29d_2m
-from apps.risk_rating.models import ClinicalState_2m_3y
-from apps.risk_rating.models import ClinicalState_3y_10y
-from apps.users.forms import EditPatientForm
-from apps.users.forms import RegistrationPatientForm
-from apps.users.forms import RegistrationStaffForm
+
+from apps.users.forms import RegistrationStaffForm, \
+    RegistrationPatientForm, EditPatientForm
+
 from .models import Patient, Staff
+
+from apps.risk_rating.forms import ClinicalState_28dForm, \
+    ClinicalState_29d_2mForm, ClinicalState_2m_3yForm, \
+    ClinicalState_3y_10yForm, ClinicalState_10yMoreForm, \
+    MachineLearning_28dForm, MachineLearning_29d_2mForm, \
+    MachineLearning_2m_3yForm, MachineLearning_3y_10yForm, \
+    MachineLearning_10yMoreForm
+
+from apps.risk_rating.models import ClinicalState_28d, ClinicalState_29d_2m, \
+    ClinicalState_2m_3y, ClinicalState_3y_10y, ClinicalState_10yMore
 
 ml1 = MachineLearning('apps/risk_rating/class_menos_28.csv')
 ml2 = MachineLearning('apps/risk_rating/class_29d_2m.csv')
@@ -68,7 +62,7 @@ def login_view(request, *args, **kwargs):
     return login(request, *args, **kwargs)
 
 
-@login_required(redirect_field_name='', login_url='users:login')
+@login_required(redirect_field_name='', login_url='users:home')
 @csrf_exempt
 def machine_learning(request):
     if 'form1' in request.POST:
@@ -133,6 +127,8 @@ def home(request):
         patient.classifier_id = request.user.id_user
         patient.save()
 
+        return HttpResponseRedirect(reverse('users:home'))
+
     patient_symptoms = show_symptoms(patients)
 
     return render(request, 'users/user_home/main_home.html',
@@ -146,18 +142,7 @@ def home(request):
                    'form5': form5})
 
 
-def home_layout(request):
-    """
-    took all staffs and patients for home_layout.html
-    """
-    patients = Patient.objects.all()
-    staffs = Staff.objects.all()
-    return render(request, 'users/user_home/home_layout.html',
-                  {'patients': patients,
-                   'staffs': staffs})
-
-
-@staff_member_required(redirect_field_name='', login_url='users:login')
+@staff_member_required(redirect_field_name='', login_url='users:home')
 def staff_historic(request):
     """
     define staff historic page behaviour
@@ -201,6 +186,7 @@ def staff_historic(request):
                   {'array': array})
 
 
+@staff_member_required(redirect_field_name='', login_url='users:home')
 def feed_ml(request):
     """
     define feed machine learning page behaviour
@@ -323,6 +309,7 @@ def check_patient_problem(problem):
     return problem
 
 
+@login_required(redirect_field_name='', login_url='users:landing_page')
 def logout_view(request, *args, **kwargs):
     """
     Define the logout page
@@ -379,13 +366,13 @@ def days_of_life(birth_date):
     return (date.today() - birth_date).days
 
 
-@login_required(redirect_field_name='', login_url='users:login')
+@staff_member_required(redirect_field_name='', login_url='users:home')
 def manage_accounts_view(request):
     staffs = Staff.objects.all()
     return render(request, 'users/manageAccounts.html', {'staffs': staffs})
 
 
-@login_required(redirect_field_name='', login_url='users:login')
+@staff_member_required(redirect_field_name='', login_url='users:home')
 def edit_accounts_view(request, id_user):
     staff = Staff.objects.filter(id_user=id_user)
     if len(staff) == 1:
@@ -393,7 +380,7 @@ def edit_accounts_view(request, id_user):
     return render(request, 'users/editAccounts.html', status=404)
 
 
-@login_required(redirect_field_name='', login_url='users:login')
+@staff_member_required(redirect_field_name='', login_url='users:home')
 def staff_remove(request, id_user):
     """Remove an existing staff."""
     return remove_register(id_user, Staff, 'manage_accounts')
@@ -437,6 +424,7 @@ def edit_patient(request, id):
                   {'patient': patient, 'form': form}, status=status)
 
 
+@login_required(redirect_field_name='', login_url='users:login')
 def classifications_chart(request):
     """
     exhibit a pie chart of the classifications
@@ -591,6 +579,7 @@ def graphic_symptoms_view_29d_2m(request):
                   {'graphic_symptoms': graphic_symptoms})
 
 
+@login_required(redirect_field_name='', login_url='users:login')
 def graphic_symptoms_view_2m_3y(request):
     """
     Read all symptoms of database after classification
@@ -615,6 +604,7 @@ def graphic_symptoms_view_2m_3y(request):
                   {'graphic_symptoms': graphic_symptoms})
 
 
+@login_required(redirect_field_name='', login_url='users:login')
 def graphic_symptoms_view_3y_10y(request):
     """
     Read all symptoms of database after classification
@@ -639,6 +629,7 @@ def graphic_symptoms_view_3y_10y(request):
                   {'graphic_symptoms': graphic_symptoms})
 
 
+@login_required(redirect_field_name='', login_url='users:login')
 def graphic_symptoms_view_10y_more(request):
     """
     Read all symptoms of database after classification

@@ -9,8 +9,8 @@ from apps.risk_rating.models import MachineLearning_28d, \
     MachineLearning_29d_2m, MachineLearning_2m_3y, \
     MachineLearning_3y_10y, MachineLearning_10yMore
 from apps.users.apps import UsersConfig
-from apps.users.forms import RegistrationStaffForm, RegistrationPatientForm, \
-    EditPatientForm
+from apps.users.forms import RegistrationStaffForm, \
+    RegistrationPatientForm,  EditPatientForm
 from apps.users.models import Staff, Patient
 from apps.users.views import show_symptoms
 
@@ -71,11 +71,11 @@ class TestUsersViews:
 
     profile_data = ({
         'username': 'usernameTest', 'password1': 'password1Teste',
-        'id_user': 'idUserTest', 'uf': 'DF', 'city': 'cityTeste',
-        'neighborhood': 'neighborhoodTest', 'street': 'streetTeste',
-        'block': 'blockTeste', 'number': 'numberTest',
-        'email': 'email@test.com', 'profile': '1', 'name': 'nameTest',
-        'password2': 'password1Teste'})
+        'id_user': 'idUserTest', 'cep': '12345678', 'uf': 'DF',
+        'city': 'cityTeste', 'neighborhood': 'neighborhoodTest',
+        'street': 'streetTeste', 'block': 'blockTeste',
+        'number': 'numberTest', 'email': 'email@test.com', 'profile': '1',
+        'name': 'nameTest', 'password2': 'password1Teste'})
 
     patient_data = ({'birth_date': '2017-11-02'})
 
@@ -111,11 +111,11 @@ class TestUsersViews:
         assert Staff.objects.count() == 1
 
     @pytest.mark.parametrize('url',
-                             ['/graphic/symptoms/under28d',
-                              '/graphic/symptoms/29d2m',
-                              '/graphic/symptoms/2m3y',
-                              '/graphic/symptoms/3y10y',
-                              '/graphic/symptoms/10ymore'])
+                             ['/graphic/symptoms/under28d/',
+                              '/graphic/symptoms/29d2m/',
+                              '/graphic/symptoms/2m3y/',
+                              '/graphic/symptoms/3y10y/',
+                              '/graphic/symptoms/10ymore/'])
     def test_graphic_symptoms_view(self, client, url):
         Staff.objects.create_superuser(**self.default_user_data())
         response = client.post('/login', {'username': 'email@gmail.com',
@@ -503,11 +503,11 @@ class TestUsersViews:
 
         self.create_clinical_states()
 
-        response_28 = client.post('/graphic/symptoms/under28d', {'month': 12})
-        response_29 = client.post('/graphic/symptoms/29d2m', {'month': 12})
-        response_2m = client.post('/graphic/symptoms/2m3y', {'month': 12})
-        response_3y = client.post('/graphic/symptoms/3y10y', {'month': 12})
-        response_10y = client.post('/graphic/symptoms/10ymore', {'month': 12})
+        response_28 = client.post('/graphic/symptoms/under28d/', {'month': 12})
+        response_29 = client.post('/graphic/symptoms/29d2m/', {'month': 12})
+        response_2m = client.post('/graphic/symptoms/2m3y/', {'month': 12})
+        response_3y = client.post('/graphic/symptoms/3y10y/', {'month': 12})
+        response_10y = client.post('/graphic/symptoms/10ymore/', {'month': 12})
         assert response_28.status_code == 200
         assert response_29.status_code == 200
         assert response_2m.status_code == 200

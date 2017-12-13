@@ -15,7 +15,7 @@ class Symptoms_28d(models.Model):
     )
 
     dispneia = models.BooleanField(
-        verbose_name=("dispneia"),
+        verbose_name=("Dispneia"),
         default=False,
         blank=True
     )
@@ -226,7 +226,7 @@ class Symptoms_29d_2m(models.Model):
 
     # symptoms:
     dispneia = models.BooleanField(
-        verbose_name=("dispneia"),
+        verbose_name=("Dispneia"),
         default=False,
         blank=True
     )
@@ -432,7 +432,7 @@ class Symptoms_2m_3y(models.Model):
 
     # symptoms:
     dispneia = models.BooleanField(
-        verbose_name=("dispneia"),
+        verbose_name=("Dispneia"),
         default=False,
         blank=True
     )
@@ -686,7 +686,7 @@ class Symptoms_3y_10y(models.Model):
     )
 
     dispneia = models.BooleanField(
-        verbose_name=("dispneia"),
+        verbose_name=("Dispneia"),
         default=False,
         blank=True
     )
@@ -999,7 +999,7 @@ class Symptoms_10yMore(models.Model):
     )
 
     dispneia = models.BooleanField(
-        verbose_name=("dispneia"),
+        verbose_name=("Dispneia"),
         default=False,
         blank=True
     )

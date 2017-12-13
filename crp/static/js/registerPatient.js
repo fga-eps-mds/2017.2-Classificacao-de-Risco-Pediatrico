@@ -9,6 +9,12 @@ new Cleave('.cpf', {
   uppercase: true
 });
 
+new Cleave('.cep', {
+  delimiters: ['.', '-'],
+  blocks: [2, 3, 3],
+  uppercase: true
+});
+
 $('#id_birth_date').change(function () {
   var date_now = new Date();
   var convert_date = this.value.split('/');
