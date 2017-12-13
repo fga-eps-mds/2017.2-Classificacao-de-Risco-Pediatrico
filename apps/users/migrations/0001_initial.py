@@ -60,6 +60,7 @@ class Migration(migrations.Migration):
                 ('classification', models.IntegerField(choices=[(0, 'Não classificado'), (1, 'Atendimento Imediato'), (2, 'Atendimento Hospitalar'), (3, 'Atendimento Ambulatorial'), (4, 'Atendimento Eletivo')], default=0, verbose_name='Classification')),
                 ('gender', models.IntegerField(blank=True, choices=[(0, 'Sexo indefinido'), (1, 'Feminino'), (2, 'Masculino')], default=0, verbose_name='Genero')),
                 ('age_range', models.IntegerField(choices=[(0, 'Faixa etária indefinida'), (1, '0 até 28 dias'), (2, '29 dias à 2 meses'), (3, '2 meses à 3 anos'), (4, '3 anos à 10 anos'), (5, 'Acima de 10 anos')], default=0, verbose_name='Faixa etária')),
+                ('age', models.CharField(blank=True, max_length=50, verbose_name='Age')),
             ],
         ),
     ]
