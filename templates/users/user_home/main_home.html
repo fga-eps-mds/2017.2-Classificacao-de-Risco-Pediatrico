@@ -204,6 +204,14 @@
                         </div>
 
                         <input type="hidden" name="patient" value="{{ patient.id }}">
+                        <div class="alert alert-danger mt-3 mr-3 ml-3">
+                            <strong>ATENÇÃO!</strong><br>
+                            Se o botão "Salvar" for clicado sem ser selecionado
+                            alguma classificação, a classificação do paciente passará
+                            a ser de "Não Classificado".<br>
+                            Caso queira manter a classificação anterior, clique
+                            em "Fechar".<br>
+                        </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">
                                 Fechar
