@@ -296,7 +296,7 @@ class TestUsersViews:
         response = client.get('/home/')
         assert response.status_code == 200
         assert set(list(response.context['patients'])) == \
-               set(list(Patient.objects.all()))
+            set(list(Patient.objects.all()))
 
     form1data = ({'patient': '1', 'form1': ''})
     form2data = ({'patient': '2', 'form2': ''})
@@ -459,7 +459,8 @@ class TestUsersViews:
         clinical_29 = ClinicalState_29d_2m(patient_id='2', classifier_id=1234)
         clinical_2m = ClinicalState_2m_3y(patient_id='3', classifier_id=1234)
         clinical_3y = ClinicalState_3y_10y(patient_id='4', classifier_id=1234)
-        clinical_10y = ClinicalState_10yMore(patient_id='4', classifier_id=1234)
+        clinical_10y = ClinicalState_10yMore(patient_id='4',
+                                             classifier_id=1234)
 
         clinical_28.save()
         clinical_29.save()

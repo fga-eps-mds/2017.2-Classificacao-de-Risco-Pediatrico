@@ -477,21 +477,32 @@ def my_charts(request):
             current_user_id = request.user.id_user
 
             if month == 'all':
-                all_classifications = list(ClinicalState_28d.objects.all()) + \
-                                      list(ClinicalState_29d_2m.objects.all()) + \
-                                      list(ClinicalState_2m_3y.objects.all()) + \
-                                      list(ClinicalState_3y_10y.objects.all()) + \
-                                      list(ClinicalState_10yMore.objects.all())
+                all_classifications = list(ClinicalState_28d.
+                                           objects.all()) + \
+                                      list(ClinicalState_29d_2m.
+                                           objects.all()) + \
+                                      list(ClinicalState_2m_3y.
+                                           objects.all()) + \
+                                      list(ClinicalState_3y_10y.
+                                           objects.all()) + \
+                                      list(ClinicalState_10yMore.
+                                           objects.all())
             else:
-                all_classifications = list(ClinicalState_28d.objects.filter(date__month=month)) + \
-                                      list(ClinicalState_29d_2m.objects.filter(date__month=month)) + \
-                                      list(ClinicalState_2m_3y.objects.filter(date__month=month)) + \
-                                      list(ClinicalState_3y_10y.objects.filter(date__month=month)) + \
-                                      list(ClinicalState_10yMore.objects.filter(date__month=month))
+                all_classifications = list(ClinicalState_28d.objects.
+                                           filter(date__month=month)) + \
+                                      list(ClinicalState_29d_2m.objects.
+                                           filter(date__month=month)) + \
+                                      list(ClinicalState_2m_3y.objects.
+                                           filter(date__month=month)) + \
+                                      list(ClinicalState_3y_10y.objects.
+                                           filter(date__month=month)) + \
+                                      list(ClinicalState_10yMore.objects.
+                                           filter(date__month=month))
 
             for classification in all_classifications:
                 if classification.classifier_id == current_user_id:
-                    patient_classification = classification.patient.classification
+                    patient_classification = \
+                        classification.patient.classification
                     if patient_classification == 1:
                         data[0] += 1
                     elif patient_classification == 2:
