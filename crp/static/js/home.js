@@ -32,6 +32,8 @@ $(document).ready(function () {
     $('#sidebar').toggleClass('active');
   });
 
+  $("textarea").prop('required', true);
+
   $('.classification').on('click', function () {
 
     var $modal = $(this).closest('.modal');
@@ -65,6 +67,22 @@ $(document).ready(function () {
             + data["classification"]);
           $('#probability-' + data["patient_id"]).text("Porcentagem de Confiabilidade: "
             + (Math.max.apply(Math, data["probability"][0]) * 100).toFixed(1) + "%");
+
+          // Make follow recomendation, make comment not required
+          var selected1 = $("#" + data["patient_id"]).find("input[name = 'classification']:checked").attr('id');
+          if(data["classification"] === selected1) {
+            $('#comment-receptionist-' + data["patient_id"]).find("textarea").prop('required', false);
+          }
+          // If change recomendation, make comment required
+          $('.form input').on('change', function() {
+             var selected = $("#" + data["patient_id"]).find("input[name = 'classification']:checked").attr('id');
+
+             if(data["classification"] === selected) {
+               $('#comment-receptionist-' + data["patient_id"]).find("textarea").prop('required', false);
+             } else {
+               $('#comment-receptionist-' + data["patient_id"]).find("textarea").prop('required', true);
+             }
+           });
         }
       }
     });
