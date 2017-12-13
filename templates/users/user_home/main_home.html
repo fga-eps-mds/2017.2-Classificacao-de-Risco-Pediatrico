@@ -34,7 +34,7 @@
                     </td><!-- sexo -->
 
                     <td id="name_patient">
-                        <a href="#" data-toggle="modal" data-target="#risk_ranting{{ patient.id }}">
+                        <a href="#" data-toggle="modal" id="id_modal-{{ patient.id }}" data-target="#risk_ranting{{ patient.id }}">
                             {% if patient.name %}
                                 {{ patient.name }}
                             {% else %}
@@ -203,10 +203,12 @@
 
                         <input type="hidden" name="patient" value="{{ patient.id }}">
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                            <button type="button" id="classification_cancel{{ patient.id }}" class="btn btn-secondary" data-dismiss="modal">
                                 Fechar
                             </button>
-                            <button id="validate-classification" type="submit" class="btn btn-primary">
+
+                            <button type="submit" id="classification_save{{ patient.id }}" class="btn btn-primary">
+
                                 Salvar
                             </button>
                         </div>

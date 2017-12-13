@@ -12,7 +12,7 @@ from apps.risk_rating.ml_classifier import MachineLearning
 from apps.users.forms import RegistrationStaffForm
 from apps.users.forms import RegistrationPatientForm
 from apps.users.forms import EditPatientForm
-from datetime import datetime
+from datetime import datetime, date
 
 from .models import Patient, Staff
 
@@ -351,11 +351,34 @@ def register_patient(request):
     if request.method == 'POST':
         form = RegistrationPatientForm(request.POST)
         if form.is_valid():
+            if request.POST.get("birth_date") != "":
+                calculate_age(form)
             form.save()
             return redirect('users:home')
 
     return render(request, 'users/user_home/registerPatient.html',
                   {'form': form})
+
+
+def calculate_age(form):
+    days = days_of_life(form.cleaned_data['birth_date'])
+
+    age = form.cleaned_data['age'] = days
+
+    if age >= 1080:
+        age = f"{int(age/360)} anos e {int((age%360)/30) - 4} meses"
+    elif age > 31:
+        age = f"{int(age/30)} meses e {int((age%30)) - 5} dias"
+    else:
+        age = f"{age} dias"
+
+    instance = form.save(commit=False)
+    instance.age = age
+    instance.save()
+
+
+def days_of_life(birth_date):
+    return (date.today() - birth_date).days
 
 
 @login_required(redirect_field_name='', login_url='users:login')
