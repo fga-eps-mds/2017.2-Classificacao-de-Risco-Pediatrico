@@ -62,7 +62,7 @@ def login_view(request, *args, **kwargs):
     return login(request, *args, **kwargs)
 
 
-@login_required(redirect_field_name='', login_url='users:login')
+@login_required(redirect_field_name='', login_url='users:home')
 @csrf_exempt
 def machine_learning(request):
 
@@ -141,18 +141,7 @@ def home(request):
                             'form5': form5})
 
 
-def home_layout(request):
-    """
-    took all staffs and patients for home_layout.html
-    """
-    patients = Patient.objects.all()
-    staffs = Staff.objects.all()
-    return render(request, 'users/user_home/home_layout.html',
-                  {'patients': patients,
-                   'staffs': staffs})
-
-
-@staff_member_required(redirect_field_name='', login_url='users:login')
+@staff_member_required(redirect_field_name='', login_url='users:home')
 def staff_historic(request):
     """
     define staff historic page behaviour
@@ -319,6 +308,7 @@ def check_patient_problem(problem):
     return problem
 
 
+@login_required(redirect_field_name='', login_url='users:landing_page')
 def logout_view(request, *args, **kwargs):
     """
     Define the logout page
@@ -366,7 +356,7 @@ def edit_accounts_view(request, id_user):
     return render(request, 'users/editAccounts.html', status=404)
 
 
-@login_required(redirect_field_name='', login_url='users:login')
+@staff_member_required(redirect_field_name='', login_url='users:home')
 def staff_remove(request, id_user):
     """Remove an existing staff."""
     return remove_register(id_user, Staff, 'manage_accounts')
@@ -410,6 +400,7 @@ def edit_patient(request, id):
                   {'patient': patient, 'form': form}, status=status)
 
 
+@login_required(redirect_field_name='', login_url='users:login')
 def classifications_chart(request):
     """
     exhibit a pie chart of the classifications
@@ -512,6 +503,7 @@ def graphic_symptoms_view_29d_2m(request):
                   {'graphic_symptoms': graphic_symptoms})
 
 
+@login_required(redirect_field_name='', login_url='users:login')
 def graphic_symptoms_view_2m_3y(request):
     """
     Read all symptoms of database after classification
@@ -536,6 +528,7 @@ def graphic_symptoms_view_2m_3y(request):
                   {'graphic_symptoms': graphic_symptoms})
 
 
+@login_required(redirect_field_name='', login_url='users:login')
 def graphic_symptoms_view_3y_10y(request):
     """
     Read all symptoms of database after classification
@@ -560,6 +553,7 @@ def graphic_symptoms_view_3y_10y(request):
                   {'graphic_symptoms': graphic_symptoms})
 
 
+@login_required(redirect_field_name='', login_url='users:login')
 def graphic_symptoms_view_10y_more(request):
     """
     Read all symptoms of database after classification

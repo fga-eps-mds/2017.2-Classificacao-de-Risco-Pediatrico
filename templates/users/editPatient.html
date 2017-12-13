@@ -40,7 +40,7 @@
                                                 maxlength="80" id="{{ form.name.id_for_label }}"
                                                 class="form-control"  placeholder="Nome do paciente"
                                                 aria-label="Nome" aria-describedby="basic-addon1"
-                                                autofocus="[a-zA-Z\s]+$" value={{ patient.name }}>
+                                                autofocus="[a-zA-Z\s]+$" value="{{ patient.name }}">
                                             </div>
                                             {% if form.name.errors %}
                                                 <div class="error-holder">
@@ -65,7 +65,7 @@
                                                 maxlength="80" id="{{ form.guardian.id_for_label }}"
                                                 class="form-control"  placeholder="Responsável"
                                                 aria-label="Responsável" aria-describedby="basic-addon3"
-                                                autofocus="[a-zA-Z\s]+$" value={{ patient.guardian }}>
+                                                autofocus="[a-zA-Z\s]+$" value="{{ patient.guardian }}">
                                             </div>
                                             {% if form.guardian.errors %}
                                                 <div class="error-holder">
@@ -91,7 +91,7 @@
                                                 class="form-control date"  placeholder="dd/mm/aaaa"
                                                 aria-label="Data de nascimento"
                                                 aria-describedby="basic-addon3"
-                                                value={{ patient.birth_date }}>
+                                                value="{{ patient.birth_date }}">
                                             </div>
                                             {% if form.birth_date.errors %}
                                                 <div class="error-holder">
@@ -116,11 +116,10 @@
                                                 id="{{ form.cpf.id_for_label }}"
                                                 class="form-control cpf"  placeholder="000.000.000-00"
                                                 aria-label="CPF" aria-describedby="basic-addon2"
-                                                {% if not patient.cpf  %}
-                                                    >
-                                                {% else %}
-                                                    value={{ patient.cpf }}>
-                                                {% endif %}
+                                                    {% if patient.cpf %}
+                                                        value="{{ patient.cpf }}"
+                                                    {% endif %}
+                                                >
                                             </div>
                                             {% if form.cpf.errors %}
                                                 <div class="error-holder">
@@ -145,7 +144,7 @@
                                                 maxlength="80" id="{{ form.parents_name.id_for_label }}"
                                                 class="form-control"  placeholder="Nome dos pais"
                                                 aria-label="Nome dos pais" aria-describedby="basic-addon4"
-                                                value={{ patient.parents_name }}>
+                                                value="{{ patient.parents_name }}">
                                             </div>
                                             {% if form.parents_name.errors %}
                                                 <div class="error-holder">
@@ -168,7 +167,7 @@
                                                 </span>
                                                 <select name="{{ form.age_range.name }}"
                                                 class="form-control" id="age_range"
-                                                required value={{ patient.age_range }}>
+                                                required value="{{ patient.age_range }}">
                                                     {% if not patient.age_range  %}
                                                         <option value="" selected disabled>
                                                             Faixa etária
@@ -220,7 +219,7 @@
                                                 </span>
                                                 <select name="{{ form.gender.name }}"
                                                 id="dropdown" class="form-control"
-                                                value={{patient.gender_name}}>
+                                                value="{{ patient.gender_name }}">
                                                     {% if not patient.gender  %}
                                                         <option value="" selected disabled>
                                                             Sexo
@@ -270,7 +269,11 @@
                                                     <input type="text" name="{{ form.cep.name }}"
                                                     id="{{ form.cep.id_for_label }}"
                                                     class="form-control cep" placeholder="00.000-000"
-                                                    aria-label="CEP" aria-describedby="basic-addon2">
+                                                    aria-label="CEP" aria-describedby="basic-addon2"
+                                                        {% if patient.cpf %}
+                                                            value="{{ patient.cep }}"
+                                                        {% endif %}
+                                                    >
                                             </div>
                                             {% if form.cep.errors %}
                                                 <div class="error-holder">

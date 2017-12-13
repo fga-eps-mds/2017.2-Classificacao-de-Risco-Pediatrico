@@ -468,11 +468,11 @@ class TestUsersViews:
 
         self.create_clinical_states()
 
-        response_28 = client.post('/graphic/symptoms/under28d', {'month': 12})
-        response_29 = client.post('/graphic/symptoms/29d2m', {'month': 12})
-        response_2m = client.post('/graphic/symptoms/2m3y', {'month': 12})
-        response_3y = client.post('/graphic/symptoms/3y10y', {'month': 12})
-        response_10y = client.post('/graphic/symptoms/10ymore', {'month': 12})
+        response_28 = client.post('/graphic/symptoms/under28d/', {'month': 12})
+        response_29 = client.post('/graphic/symptoms/29d2m/', {'month': 12})
+        response_2m = client.post('/graphic/symptoms/2m3y/', {'month': 12})
+        response_3y = client.post('/graphic/symptoms/3y10y/', {'month': 12})
+        response_10y = client.post('/graphic/symptoms/10ymore/', {'month': 12})
         assert response_28.status_code == 200
         assert response_29.status_code == 200
         assert response_2m.status_code == 200

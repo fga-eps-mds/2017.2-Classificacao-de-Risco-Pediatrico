@@ -204,14 +204,18 @@
                         </div>
 
                         <input type="hidden" name="patient" value="{{ patient.id }}">
+
                         <div class="alert alert-danger mt-3 mr-3 ml-3">
-                            <strong>ATENÇÃO!</strong><br>
+                            <strong>
+                                ATENÇÃO!<br>
+                            </strong>
                             Se o botão "Salvar" for clicado sem ser selecionado
                             alguma classificação, a classificação do paciente passará
                             a ser de "Não Classificado".<br>
                             Caso queira manter a classificação anterior, clique
                             em "Fechar".<br>
                         </div>
+
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">
                                 Fechar
@@ -226,7 +230,7 @@
         </div>
 
         <div class="modal fade" id="deletar-{{ patient.id }}" tabindex="-1" role="dialog"
-             aria-labelledby="Deletar Paciente" aria-hidden="true">
+        aria-labelledby="Deletar Paciente" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
