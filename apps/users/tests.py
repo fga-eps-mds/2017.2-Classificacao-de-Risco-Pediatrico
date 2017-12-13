@@ -107,11 +107,11 @@ class TestUsersViews:
         assert Staff.objects.count() == 1
 
     @pytest.mark.parametrize('url',
-                             ['/graphic/symptoms/under28d',
-                              '/graphic/symptoms/29d2m',
-                              '/graphic/symptoms/2m3y',
-                              '/graphic/symptoms/3y10y',
-                              '/graphic/symptoms/10ymore'])
+                             ['/graphic/symptoms/under28d/',
+                              '/graphic/symptoms/29d2m/',
+                              '/graphic/symptoms/2m3y/',
+                              '/graphic/symptoms/3y10y/',
+                              '/graphic/symptoms/10ymore/'])
     def test_graphic_symptoms_view(self, client, url):
         Staff.objects.create_superuser(**self.default_user_data())
         response = client.post('/login', {'username': 'email@gmail.com',

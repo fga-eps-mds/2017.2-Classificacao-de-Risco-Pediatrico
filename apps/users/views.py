@@ -15,10 +15,6 @@ from apps.risk_rating.ml_classifier import MachineLearning
 from apps.users.forms import RegistrationStaffForm, \
     RegistrationPatientForm, EditPatientForm
 
-from apps.risk_rating.ml_classifier import MachineLearning
-from apps.users.forms import RegistrationStaffForm, \
-    RegistrationPatientForm, EditPatientForm
-
 from .models import Patient, Staff
 
 from apps.risk_rating.forms import ClinicalState_28dForm, \
@@ -132,6 +128,8 @@ def home(request):
         patient.comment_receptionist = request.POST.get('comment')
         patient.classifier_id = request.user.id_user
         patient.save()
+
+        return HttpResponseRedirect(reverse('users:home'))
 
     patient_symptoms = show_symptoms(patients)
 
@@ -396,7 +394,6 @@ def patient_remove(request, id):
     return remove_register(id, Patient, 'home')
 
 
-@login_required(redirect_field_name='', login_url='users:login')
 def remove_register(id, data_type, url):
     """Remove register data based on parameter."""
     if data_type == Staff:
