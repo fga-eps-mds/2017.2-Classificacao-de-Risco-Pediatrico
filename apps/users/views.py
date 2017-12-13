@@ -528,6 +528,7 @@ def my_charts(request):
         'data': data
     })
 
+
 def get_symptoms(clinical_state):
     graphic_symptoms = {}
 
@@ -544,9 +545,11 @@ def filter_symptoms_rows(request, clinical_state, graphic_symptoms):
             if int(request.POST.get('month')) != 0:
                 if state.date.month != int(request.POST.get('month')):
                     break
-        graphic_symptoms = filter_symptoms_columns(clinical_state, state, graphic_symptoms)
+        graphic_symptoms = filter_symptoms_columns(clinical_state, state,
+                                                   graphic_symptoms)
 
     return graphic_symptoms
+
 
 def filter_symptoms_columns(clinical_state, state, graphic_symptoms):
     for column in clinical_state._meta.get_fields():
@@ -555,6 +558,7 @@ def filter_symptoms_columns(clinical_state, state, graphic_symptoms):
 
     return graphic_symptoms
 
+
 @login_required(redirect_field_name='', login_url='users:login')
 def graphic_symptoms_view(request, clinical_state, graphic_symptoms_html):
     """
@@ -562,7 +566,8 @@ def graphic_symptoms_view(request, clinical_state, graphic_symptoms_html):
      someone and check which symptoms was marked
     """
     graphic_symptoms = get_symptoms(clinical_state)
-    graphic_symptoms = filter_symptoms_rows(request, clinical_state, graphic_symptoms)
+    graphic_symptoms = filter_symptoms_rows(request, clinical_state,
+                                            graphic_symptoms)
 
     return render(request, 'users/user_home/' + graphic_symptoms_html,
                   {'graphic_symptoms': graphic_symptoms})
@@ -574,7 +579,8 @@ def graphic_symptoms_view_28d(request):
     Read all symptoms of database after classification
      someone and check which symptoms was marked
     """
-    return graphic_symptoms_view(request, ClinicalState_28d, 'graphic_symptoms_28d.html')
+    return graphic_symptoms_view(request, ClinicalState_28d,
+                                 'graphic_symptoms_28d.html')
 
 
 @login_required(redirect_field_name='', login_url='users:login')
@@ -583,7 +589,8 @@ def graphic_symptoms_view_29d_2m(request):
     Read all symptoms of database after classification
      someone and check which symptoms was marked
     """
-    return graphic_symptoms_view(request, ClinicalState_29d_2m, 'graphic_symptoms_29d_2m.html')
+    return graphic_symptoms_view(request, ClinicalState_29d_2m,
+                                 'graphic_symptoms_29d_2m.html')
 
 
 @login_required(redirect_field_name='', login_url='users:login')
@@ -592,7 +599,8 @@ def graphic_symptoms_view_2m_3y(request):
     Read all symptoms of database after classification
      someone and check which symptoms was marked
     """
-    return graphic_symptoms_view(request, ClinicalState_2m_3y, 'graphic_symptoms_2m_3y.html')
+    return graphic_symptoms_view(request, ClinicalState_2m_3y,
+                                 'graphic_symptoms_2m_3y.html')
 
 
 @login_required(redirect_field_name='', login_url='users:login')
@@ -601,7 +609,8 @@ def graphic_symptoms_view_3y_10y(request):
     Read all symptoms of database after classification
      someone and check which symptoms was marked
     """
-    return graphic_symptoms_view(request, ClinicalState_3y_10y, 'graphic_symptoms_3y_10y.html')
+    return graphic_symptoms_view(request, ClinicalState_3y_10y,
+                                 'graphic_symptoms_3y_10y.html')
 
 
 @login_required(redirect_field_name='', login_url='users:login')
@@ -610,7 +619,8 @@ def graphic_symptoms_view_10y_more(request):
     Read all symptoms of database after classification
      someone and check which symptoms was marked
     """
-    return graphic_symptoms_view(request, ClinicalState_10yMore, 'graphic_symptoms_10yMore.html')
+    return graphic_symptoms_view(request, ClinicalState_10yMore,
+                                 'graphic_symptoms_10yMore.html')
 
 
 def get_under_28_symptoms(clinical_state):
