@@ -66,42 +66,43 @@
                     }
                 },
                 grid: {
-                    left:'10px',
+                    left: '10px',
                     height: '100%',
                     top: '2px',
                     width: '90%',
                     containLabel: true
                 },
                 xAxis: {
+                    minInterval: 1,
                     type: 'value',
                     boundaryGap: [0, 0.01],
                     axisLabel: {
-                                margin: 10,
-                                textStyle: {
-                                    fontSize: 12,
-                                    color:'#73879C'
-                                    }
-                            },
+                        margin: 10,
+                        textStyle: {
+                            fontSize: 12,
+                            color: '#73879C'
+                        }
+                    },
                 },
                 yAxis: {
                     type: 'category',
                     axisLabel: {
-                                margin: 10,
-                                textStyle: {
-                                    fontSize: 12,
-                                    color:'#73879C'
-                                    }
-                            },
+                        margin: 10,
+                        textStyle: {
+                            fontSize: 12,
+                            color: '#73879C'
+                        }
+                    },
                     data: [
-                      'dispneia', 'icterícia', 'Perda Consciência',
-                      'Cianose', 'Febre', 'soluços', 'Prostação',
-                      'Vômitos', 'Tosse', 'Coriza', 'Obstrução Nasal',
-                      'convulsão Momento', 'Diarréia', 'Dificuldade Evacuar',
-                      'Não suga o seio', 'Manchas na pele',
-                      'Salivação', 'Chiado no peito', 'Diminuição da diurese',
-                      'Dor abdominal', 'Fontanela abaulada',
-                      'Secreção no umbigo', 'Secreção Ocular', 'Sangue nas fezes',
-                      'convulsão Hoje'
+                        'dispneia', 'icterícia', 'Perda Consciência',
+                        'Cianose', 'Febre', 'soluços', 'Prostação',
+                        'Vômitos', 'Tosse', 'Coriza', 'Obstrução Nasal',
+                        'convulsão Momento', 'Diarréia', 'Dificuldade Evacuar',
+                        'Não suga o seio', 'Manchas na pele',
+                        'Salivação', 'Chiado no peito', 'Diminuição da diurese',
+                        'Dor abdominal', 'Fontanela abaulada',
+                        'Secreção no umbigo', 'Secreção Ocular', 'Sangue nas fezes',
+                        'convulsão Hoje'
                     ]
                 },
                 series: [
@@ -110,31 +111,31 @@
                         itemStyle: {
                             normal: {
                                 color: {
-                                  colorStops: [{
-                                          offset: 0, color: '#38c9e0'
-                                      }, {
-                                          offset: 1, color: '#17a2b8'
-                                      }],
+                                    colorStops: [{
+                                        offset: 0, color: '#38c9e0'
+                                    }, {
+                                        offset: 1, color: '#17a2b8'
+                                    }],
                                 },
-                                barBorderRadius: [0, 15,15, 0],
+                                barBorderRadius: [0, 15, 15, 0],
                                 shadowColor: 'rgba(0,0,0,0.1)',
                                 shadowBlur: 3,
                                 shadowOffsetY: 3
                             }
                         },
                         data: [{{ graphic_symptoms.dispneia }}, {{ graphic_symptoms.ictericia }},
-                             {{ graphic_symptoms.perdada_consciencia }}, {{ graphic_symptoms.cianose }},
-                             {{ graphic_symptoms.febre }}, {{ graphic_symptoms.solucos }},
-                             {{ graphic_symptoms.prostracao }}, {{ graphic_symptoms.vomitos }},
-                             {{ graphic_symptoms.tosse }}, {{ graphic_symptoms.coriza }},
-                             {{ graphic_symptoms.obstrucao_nasal }}, {{ graphic_symptoms.convulsao_no_momento }},
-                             {{ graphic_symptoms.diarreia }}, {{ graphic_symptoms.dificuldade_evacuar }},
-                             {{ graphic_symptoms.nao_suga_seio }},
-                             {{ graphic_symptoms.manchas_na_pele }}, {{ graphic_symptoms.salivacao }},
-                             {{ graphic_symptoms.chiado_no_peito }}, {{ graphic_symptoms.diminuicao_da_diurese }},
-                             {{ graphic_symptoms.dor_abdominal }}, {{ graphic_symptoms.fontanela_abaulada }},
-                             {{ graphic_symptoms.secrecao_no_umbigo }}, {{ graphic_symptoms.secrecao_ocular }},
-                             {{ graphic_symptoms.sangue_nas_fezes }}, {{ graphic_symptoms.convulsao_hoje }}]
+                            {{ graphic_symptoms.perdada_consciencia }}, {{ graphic_symptoms.cianose }},
+                            {{ graphic_symptoms.febre }}, {{ graphic_symptoms.solucos }},
+                            {{ graphic_symptoms.prostracao }}, {{ graphic_symptoms.vomitos }},
+                            {{ graphic_symptoms.tosse }}, {{ graphic_symptoms.coriza }},
+                            {{ graphic_symptoms.obstrucao_nasal }}, {{ graphic_symptoms.convulsao_no_momento }},
+                            {{ graphic_symptoms.diarreia }}, {{ graphic_symptoms.dificuldade_evacuar }},
+                            {{ graphic_symptoms.nao_suga_seio }},
+                            {{ graphic_symptoms.manchas_na_pele }}, {{ graphic_symptoms.salivacao }},
+                            {{ graphic_symptoms.chiado_no_peito }}, {{ graphic_symptoms.diminuicao_da_diurese }},
+                            {{ graphic_symptoms.dor_abdominal }}, {{ graphic_symptoms.fontanela_abaulada }},
+                            {{ graphic_symptoms.secrecao_no_umbigo }}, {{ graphic_symptoms.secrecao_ocular }},
+                            {{ graphic_symptoms.sangue_nas_fezes }}, {{ graphic_symptoms.convulsao_hoje }}]
                     }
                 ]
             };
