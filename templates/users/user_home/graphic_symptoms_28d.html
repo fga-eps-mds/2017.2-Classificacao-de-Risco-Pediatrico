@@ -15,7 +15,7 @@
             <form method="post">
                 {% csrf_token %}
                 <div class="row">
-                    <div class="col-md-10">
+                    <div class="col-md-9">
                         <select name="month" id="dropdown" class="form-control month" required>
                             <option value="" selected disabled>Selecione um mês</option>
                             <option value="0">Estatística Geral</option>
@@ -33,7 +33,7 @@
                             <option value="12">Dezembro</option>
                         </select>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                         <button class=" btn btn-info pull-right rb">Filtrar</button>
                     </div>
                 </div>

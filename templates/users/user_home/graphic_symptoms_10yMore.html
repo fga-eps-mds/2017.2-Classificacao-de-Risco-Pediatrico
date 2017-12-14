@@ -15,7 +15,7 @@
             <form method="post">
                 {% csrf_token %}
                 <div class="row">
-                    <div class="col-md-10">
+                    <div class="col-md-9">
                         <select name="month" id="dropdown" class="form-control month" required>
                             <option value="" selected disabled>Selecione um mês</option>
                             <option value="0">Estatística Geral</option>
@@ -33,7 +33,7 @@
                             <option value="12">Dezembro</option>
                         </select>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                         <button class=" btn btn-info pull-right rb">Filtrar</button>
                     </div>
                 </div>
@@ -45,14 +45,10 @@
     <div class="x_panel_3year">
         <div id="list" class=" slide-in-blurred-top " style="background-color: white; height: 100%">
 
-            <div id="container" style="height: 800px"></div>
+            <div id="container" style="height: 850px"></div>
         </div>
         <script type="text/javascript"
-                src="http://echarts.baidu.com/gallery/vendors/echarts/echarts-all-3.js"></script>
-        <script type="text/javascript"
-                src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
-        <script type="text/javascript"
-                src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+                src="{% static "js/echarts.min.js" %}"></script>
         <script type="text/javascript">
 
             var dom = document.getElementById("container");

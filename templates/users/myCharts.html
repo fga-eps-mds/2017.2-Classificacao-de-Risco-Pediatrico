@@ -32,8 +32,9 @@
 {% endblock %}
 
 {% block js_pos %}
-    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts-all-3.js"></script>
-    <script type="text/javascript">
+        <script type="text/javascript"
+                src="{% static "js/echarts.min.js" %}"></script>
+        <script type="text/javascript">
       // based on prepared DOM, initialize echarts instance
       var chart = echarts.init(document.getElementById('personal-chart'));
 
