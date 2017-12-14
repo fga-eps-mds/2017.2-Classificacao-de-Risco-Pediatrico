@@ -2,51 +2,54 @@
 {% load staticfiles %}
 
 {% block content_pos %}
-<!DOCTYPE html>
-<body style="height: 100%; margin: 0">
-  <div class="row linha">
-      <div class="x_title col-md-4">
-          <h2>Gráfico de Classificações</h2>
-      </div>
-      <div class="col-md-6">
-          <form method="post">
-              {% csrf_token %}
-              <div class="row">
-                  <div class="col-md-8 form-inline" style="float: left">
-                      <select name="month" id="dropdown" class="form-control month" required>
-                          <option value="" selected disabled>Selecione um mês</option>
-                          <option value='all'>Todos os meses</option>
-                          <option value=1>Janeiro</option>
-                          <option value=2>Fevereiro</option>
-                          <option value=3>Março</option>
-                          <option value=4>Abril</option>
-                          <option value=5>Maio</option>
-                          <option value=6>Junho</option>
-                          <option value=7>Julho</option>
-                          <option value=8>Agosto</option>
-                          <option value=9>Setembro</option>
-                          <option value=10>Outubro</option>
-                          <option value=11>Novembro</option>
-                          <option value=12>Dezembro</option>
-                      </select>
-                      <select name="year" id="dropdown" class="form-control year" required>
-                        <option value="" selected disabled>Selecione um ano</option>
-                        <option value='all'>Todos os anos</option>
-                        <option value=2017>2017</option>
-                        <option value=2018>2018</option>
-                      </select>
+    <!DOCTYPE html>
+    <body style="height: 100%; margin: 0">
+    <div class="row linha">
+        <div class="x_title col-md-6">
+            <h2>Gráfico de Classificações</h2>
+        </div>
+        <div class="col-md-6">
+            <form method="post">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-4 form-inline" style="float: left">
+                        <select name="month" id="dropdown" class="form-control month" required>
+                            <option value="" selected disabled>Selecione um mês</option>
+                            <option value='all'>Todos os meses</option>
+                            <option value=1>Janeiro</option>
+                            <option value=2>Fevereiro</option>
+                            <option value=3>Março</option>
+                            <option value=4>Abril</option>
+                            <option value=5>Maio</option>
+                            <option value=6>Junho</option>
+                            <option value=7>Julho</option>
+                            <option value=8>Agosto</option>
+                            <option value=9>Setembro</option>
+                            <option value=10>Outubro</option>
+                            <option value=11>Novembro</option>
+                            <option value=12>Dezembro</option>
+                        </select>
+                    </div>
+                    <div  class="col-md-4 form-inline">
+                        <select name="year" id="dropdown" class="form-control year" required>
+                            <option value="" selected disabled>Selecione um ano</option>
+                            <option value='all'>Todos os anos</option>
+                            <option value=2017>2017</option>
+                            <option value=2018>2018</option>
+                        </select>
                     </div>
                     <div class="col-md-4">
-                      <button class=" btn btn-info pull-right rb">Filtrar</button>
+                        <button class=" btn btn-info pull-right rb">Filtrar</button>
                     </div>
-              </div>
-          </form>
+                </div>
+            </form>
 
-      </div>
-  </div>
+        </div>
+    </div>
     <div id="container" style="height: 80%; width: 90%; min-height: 400px"></div>
-      <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts-all-3.js"></script>
-      <script type="text/javascript">
+    <script type="text/javascript"
+            src="{% static "js/echarts.min.js" %}"></script>
+    <script type="text/javascript">
 
         var dom = document.getElementById("container");
         var myChart = echarts.init(dom);
@@ -93,144 +96,145 @@
        };*/
 
 
-               var posList = [
-        'left', 'right', 'top', 'bottom',
-        'inside',
-        'insideTop', 'insideLeft', 'insideRight', 'insideBottom',
-        'insideTopLeft', 'insideTopRight', 'insideBottomLeft', 'insideBottomRight'
+        var posList = [
+            'left', 'right', 'top', 'bottom',
+            'inside',
+            'insideTop', 'insideLeft', 'insideRight', 'insideBottom',
+            'insideTopLeft', 'insideTopRight', 'insideBottomLeft', 'insideBottomRight'
         ];
         app.configParameters = {
-        rotate: {
-          min: -90,
-          max: 90
-        },
-        align: {
-          options: {
-              left: 'left',
-              center: 'center',
-              right: 'right'
-          }
-        },
-        verticalAlign: {
-          options: {
-              top: 'top',
-              middle: 'middle',
-              bottom: 'bottom'
-          }
-        },
-        position: {
-          options: echarts.util.reduce(posList, function (map, pos) {
-              map[pos] = pos;
-              return map;
-          }, {})
-        },
-        distance: {
-          min: 0,
-          max: 100
-        }
+            rotate: {
+                min: -90,
+                max: 90
+            },
+            align: {
+                options: {
+                    left: 'left',
+                    center: 'center',
+                    right: 'right'
+                }
+            },
+            verticalAlign: {
+                options: {
+                    top: 'top',
+                    middle: 'middle',
+                    bottom: 'bottom'
+                }
+            },
+            {#        position: {#}
+            {#          options: echarts.util.reduce(posList, function (map, pos) {#}
+            {#            map[pos] = pos;#}
+            {#            return map;#}
+            {#          }, {})#}
+            {#        },#}
+            distance: {
+                min: 0,
+                max: 100
+            }
         };
         app.config = {
-        rotate: 0,
-        align: 'center',
-        verticalAlign: 'middle',
-        position: 'insideBottom',
-        distance: 40,
-        onChange: function () {
-          var labelOption = {
-              normal: {
-                  rotate: app.config.rotate,
-                  align:   app.config.align,
-                  verticalAlign: app.config.verticalAlign,
-                  position: app.config.position,
-                  distance: app.config.distance
-              }
-          };
-          myChart.setOption({
-              series: [{
-                  label: labelOption
-              }, {
-                  label: labelOption
-              }, {
-                  label: labelOption
-              }, {
-                  label: labelOption
-              }]
-          });
-        }
+            rotate: 0,
+            align: 'center',
+            verticalAlign: 'middle',
+            position: 'insideBottom',
+            distance: 40,
+            onChange: function () {
+                var labelOption = {
+                    normal: {
+                        rotate: app.config.rotate,
+                        align: app.config.align,
+                        verticalAlign: app.config.verticalAlign,
+                        position: app.config.position,
+                        distance: app.config.distance
+                    }
+                };
+                myChart.setOption({
+                    series: [{
+                        label: labelOption
+                    }, {
+                        label: labelOption
+                    }, {
+                        label: labelOption
+                    }, {
+                        label: labelOption
+                    }]
+                });
+            }
         };
         var labelOption = {
-        normal: {
-          show: true,
-          position: app.config.position,
-          distance: app.config.distance,
-          align: app.config.align,
-          verticalAlign: app.config.verticalAlign,
-          rotate: app.config.rotate,
-          formatter: '{c}',
-          fontSize: 40
-        }
+            normal: {
+                show: true,
+                position: app.config.position,
+                distance: app.config.distance,
+                align: app.config.align,
+                verticalAlign: app.config.verticalAlign,
+                rotate: app.config.rotate,
+                formatter: '{c}',
+                fontSize: 40
+            }
         };
         option = {
-           tooltip : {
-               trigger: 'axis',
-               axisPointer : {
-                   type : 'shadow'
-               }
-           },
-           grid: {
-               left: '3%',
-               right: '4%',
-               bottom: '3%',
-               containLabel: true
-           },
-           xAxis : [
-               {
-                   type : 'category',
-                   data : ['Atendimeto Imediato',
-                           'Atendimento Hospitalar',
-                           'Atendimento Ambulatorial',
-                           'Atendimento Eletivo'],
-                   axisTick: {
-                       alignWithLabel: true
-                   }
-               }
-           ],
-           yAxis : [
-               {
-                   type : 'value'
-               }
-           ],
-           series : [
-               {
-                   name:'Classificações',
-                   type:'bar',
-                   label: labelOption,
-                   barWidth: '60%',
-                   itemStyle: {
-                      emphasis: {
-                        shadowBlur: 10,
-                        shadowOffsetX: 0,
-                        shadowColor: 'rgba(0, 0, 0, 0.5)'
-                      },
-                      normal: {
-                        color: function(params) {
-                          var colorList = [
-                             '#ff3131','#fbff32','#30ff4f','#3f56ff'
-                             ];
-                          return colorList[params.dataIndex]
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'shadow'
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    data: ['Atendimeto Imediato',
+                        'Atendimento Hospitalar',
+                        'Atendimento Ambulatorial',
+                        'Atendimento Eletivo'],
+                    axisTick: {
+                        alignWithLabel: true
+                    }
+                }
+            ],
+            yAxis: [
+                {
+                    minInterval: 1,
+                    type: 'value'
+                }
+            ],
+            series: [
+                {
+                    name: 'Classificações',
+                    type: 'bar',
+                    label: labelOption,
+                    barWidth: '60%',
+                    itemStyle: {
+                        emphasis: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        },
+                        normal: {
+                            color: function (params) {
+                                var colorList = [
+                                    '#ff3131', '#fbff32', '#30ff4f', '#3f56ff'
+                                ];
+                                return colorList[params.dataIndex]
+                            }
                         }
-                      }
-                  },
-                   data:[{{data.AtendimentoImediato}},
-                         {{data.AtendimentoHospitalar}},
-                         {{data.AtendimentoAmbulatorial}},
-                         {{data.AtendimentoEletivo}}]
-               }
-           ]
+                    },
+                    data: [{{data.AtendimentoImediato}},
+                        {{data.AtendimentoHospitalar}},
+                        {{data.AtendimentoAmbulatorial}},
+                        {{data.AtendimentoEletivo}}]
+                }
+            ]
         };
 
         if (option && typeof option === "object") {
-         myChart.setOption(option, true);
+            myChart.setOption(option, true);
         }
 
         // Use this only on PIE CHART
@@ -253,5 +257,5 @@
         //   }
         // }
 
-      </script>
+    </script>
 {% endblock %}

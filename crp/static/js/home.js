@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  $('#example').DataTable({
+  $('#data-table').DataTable({
     "responsive": true,
     "order": [[2, 'desc']],
     "columnDefs": [{
@@ -9,7 +9,7 @@ $(document).ready(function () {
     "lengthMenu": [50, 75, 100],
     "language": {
       "lengthMenu": "Mostrar _MENU_ por página",
-      "zeroRecords": "Nenhum paciente encontrado",
+      "zeroRecords": "Nenhum registro encontrado",
       "info": "Mostrando página _PAGE_ de _PAGES_",
       "infoEmpty": "Nenhuma informação disponível",
       "infoFiltered": "(Filtrado de _MAX_ registros)",
@@ -21,45 +21,18 @@ $(document).ready(function () {
     }
   });
 
-  $('#myHistory').DataTable({
-    "responsive": true,
-    "order": [[6, 'desc']],
-    "columnDefs": [{
-      "targets": "_all",
-      "orderable": false
-    }],
-    "lengthMenu": [50, 75, 100],
-    "language": {
-      "lengthMenu": "Mostrar _MENU_ por página",
-      "zeroRecords": "Nenhum paciente encontrado",
-      "info": "Mostrando página _PAGE_ de _PAGES_",
-      "infoEmpty": "Nenhuma informação disponível",
-      "infoFiltered": "(Filtrado de _MAX_ registros)",
-      "search": "Procurar:",
-      "paginate": {
-        "previous": "Anterior",
-        "next": "Próximo"
-      }
-    }
-  });
-
-  table = $('#example').DataTable()
+  table = $('#data-table').DataTable()
   $('#searchPatient').keyup(function(){
     table.column(1).search($(this).val()).draw() ;
   })
 
-  tableHistory = $('#myHistory').DataTable()
-  $('#searchPatientHistory').keyup(function(){
-    tableHistory.column(2).search($(this).val()).draw() ;
-  })
-
-  $('#example_filter').hide();
-
-  $('#myHistory_filter').hide();
+  $('#data-table_filter').hide();
 
   $('#sidebarCollapse').on('click', function () {
     $('#sidebar').toggleClass('active');
   });
+
+  $("textarea").prop('required', true);
 
   $('.classification').on('click', function () {
 
@@ -68,7 +41,8 @@ $(document).ready(function () {
 
     var values = {};
     $inputs.each(function () {
-      if (this.name === "patient_id" ||
+      if (this.name === "patient" ||
+        this.name === "classifier_id" ||
         this.name === "form1" ||
         this.name === "form2" ||
         this.name === "form3" ||
@@ -93,6 +67,22 @@ $(document).ready(function () {
             + data["classification"]);
           $('#probability-' + data["patient_id"]).text("Porcentagem de Confiabilidade: "
             + (Math.max.apply(Math, data["probability"][0]) * 100).toFixed(1) + "%");
+
+          // Make follow recomendation, make comment not required
+          var selected1 = $("#" + data["patient_id"]).find("input[name = 'classification']:checked").attr('id');
+          if(data["classification"] === selected1) {
+            $('#comment-receptionist-' + data["patient_id"]).find("textarea").prop('required', false);
+          }
+          // If change recomendation, make comment required
+          $('.form input').on('change', function() {
+             var selected = $("#" + data["patient_id"]).find("input[name = 'classification']:checked").attr('id');
+
+             if(data["classification"] === selected) {
+               $('#comment-receptionist-' + data["patient_id"]).find("textarea").prop('required', false);
+             } else {
+               $('#comment-receptionist-' + data["patient_id"]).find("textarea").prop('required', true);
+             }
+           });
         }
       }
     });

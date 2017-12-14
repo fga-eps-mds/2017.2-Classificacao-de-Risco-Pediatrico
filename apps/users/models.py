@@ -77,6 +77,13 @@ class Staff(AbstractBaseUser):
         default=0
     )
 
+    cep = models.CharField(
+        verbose_name='CEP',
+        max_length=10,
+        default='',
+        blank=False
+    )
+
     uf = models.CharField(
         verbose_name='UF',
         max_length=2,
@@ -84,25 +91,35 @@ class Staff(AbstractBaseUser):
         blank=False
     )
 
-    city = models.CharField(verbose_name='Cidade',
-                            max_length=50,
-                            blank=False)
+    city = models.CharField(
+        verbose_name='Cidade',
+        max_length=50,
+        blank=False
+    )
 
-    neighborhood = models.CharField(verbose_name='Bairro',
-                                    max_length=100,
-                                    blank=False)
+    neighborhood = models.CharField(
+        verbose_name='Bairro',
+        max_length=100,
+        blank=False
+    )
 
-    street = models.CharField(verbose_name='Rua',
-                              max_length=50,
-                              blank=False)
+    street = models.CharField(
+        verbose_name='Rua',
+        max_length=50,
+        blank=False
+    )
 
-    block = models.CharField(verbose_name='Conjunto',
-                             max_length=50,
-                             blank=False)
+    block = models.CharField(
+        verbose_name='Conjunto',
+        max_length=50,
+        blank=False
+    )
 
-    number = models.CharField(verbose_name='Numero',
-                              max_length=10,
-                              blank=False)
+    number = models.CharField(
+        verbose_name='Numero',
+        max_length=10,
+        blank=False
+    )
 
     is_superuser = False
 
@@ -191,6 +208,15 @@ class Patient(models.Model):
         help_text=_('Informe o nome dos pais')
     )
 
+    cep = models.CharField(
+        verbose_name='CEP',
+        max_length=10,
+        default='',
+        blank=True,
+        null=True,
+        help_text=_('Informe o CEP')
+    )
+
     uf = models.CharField(
         verbose_name='UF',
         max_length=2,
@@ -270,9 +296,9 @@ class Patient(models.Model):
     AGE_RANGE = (
         (0, 'Faixa etária indefinida'),
         (1, '0 até 28 dias'),
-        (2, '29 dias à 2 meses'),
-        (3, '2 meses à 3 anos'),
-        (4, '3 anos à 10 anos'),
+        (2, '29 dias a 2 meses'),
+        (3, '2 meses a 3 anos'),
+        (4, '3 anos a 10 anos'),
         (5, 'Acima de 10 anos')
     )
 
@@ -281,6 +307,12 @@ class Patient(models.Model):
         choices=AGE_RANGE,
         default=0,
         blank=False
+    )
+
+    age = models.CharField(
+        verbose_name=_('Age'),
+        max_length=50,
+        blank=True
     )
 
     def age_range_verbose(self):

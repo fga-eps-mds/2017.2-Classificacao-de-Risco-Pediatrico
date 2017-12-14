@@ -1,14 +1,18 @@
+from datetime import date
+
 import pytest
-from apps.users.apps import UsersConfig
-from apps.users.forms import RegistrationStaffForm, RegistrationPatientForm, \
-    EditPatientForm
-from apps.users.models import Staff, Patient
-from apps.risk_rating.models import MachineLearning_28d, \
-    MachineLearning_29d_2m, MachineLearning_2m_3y, \
-    MachineLearning_3y_10y, MachineLearning_10yMore
+
 from apps.risk_rating.models import ClinicalState_28d, \
     ClinicalState_29d_2m, ClinicalState_2m_3y, \
     ClinicalState_3y_10y, ClinicalState_10yMore
+from apps.risk_rating.models import MachineLearning_28d, \
+    MachineLearning_29d_2m, MachineLearning_2m_3y, \
+    MachineLearning_3y_10y, MachineLearning_10yMore
+from apps.users.apps import UsersConfig
+from apps.users.forms import RegistrationStaffForm, \
+    RegistrationPatientForm,  EditPatientForm
+from apps.users.models import Staff, Patient
+from apps.users.views import show_symptoms
 
 
 @pytest.mark.django_db
@@ -43,13 +47,14 @@ class TestUsersViews:
         response = client.get(url)
         assert response.status_code == 200
 
-    @pytest.mark.parametrize('url',
-                             ['/register/patient/',
-                              '/home/'])
+    @pytest.mark.parametrize('url', [
+        '/register/patient/',
+        '/home/',
+        '/my_charts/',
+    ])
     def test_get_route_logged(self, client, url):
-        Staff.objects.create_superuser(**self.default_user_data())
-        client.post('/login', {'username': 'email@gmail.com',
-                               'password': "1234asdf"})
+        self.create_user_and_login(client)
+
         response = client.get(url)
         assert response.status_code == 200
 
@@ -57,37 +62,39 @@ class TestUsersViews:
         ('/register/user/', 'users/user_login/registerUser.html'),
         ('/register/patient/', 'users/user_home/registerPatient.html')])
     def test_sign_up_template(self, client, url, template):
-        Staff.objects.create_superuser(**self.default_user_data())
-        client.post('/login', {'username': 'email@gmail.com',
-                               'password': "1234asdf"})
+        self.create_user_and_login(client)
+
         response = client.get(url)
         assert response.templates[0].name == template
 
     profile_data = ({
         'username': 'usernameTest', 'password1': 'password1Teste',
-        'id_user': 'idUserTest', 'uf': 'DF', 'city': 'cityTeste',
-        'neighborhood': 'neighborhoodTest', 'street': 'streetTeste',
-        'block': 'blockTeste', 'number': 'numberTest',
-        'email': 'email@test.com', 'profile': '1', 'name': 'nameTest',
-        'password2': 'password1Teste'})
+        'id_user': 'idUserTest', 'cep': '12345678', 'uf': 'DF',
+        'city': 'cityTeste', 'neighborhood': 'neighborhoodTest',
+        'street': 'streetTeste', 'block': 'blockTeste',
+        'number': 'numberTest', 'email': 'email@test.com', 'profile': '1',
+        'name': 'nameTest', 'password2': 'password1Teste'})
 
     patient_data = ({'birth_date': '2017-11-02'})
 
-    def test_sign_up_post_patient(self, client):
+    def create_user_and_login(self, client):
         Staff.objects.create_superuser(**self.default_user_data())
         client.post('/login', {'username': 'email@gmail.com',
                                'password': "1234asdf"})
 
-        response = client.post('/register/patient/', {'age_range': '1'})
+    def test_sign_up_post_patient(self, client):
+        self.create_user_and_login(client)
+
+        response = client.post('/register/patient/', {'age_range': '1',
+                                                      'birth_date': ''})
         assert response.url == '/home/'
 
     @pytest.mark.parametrize('url, form', [
         ('/register/user/', RegistrationStaffForm),
         ('/register/patient/', RegistrationPatientForm)])
     def test_sign_up_has_form(self, client, url, form):
-        Staff.objects.create_superuser(**self.default_user_data())
-        client.post('/login', {'username': 'email@gmail.com',
-                               'password': "1234asdf"})
+        self.create_user_and_login(client)
+
         response = client.get(url)
         assert 'form' in response.context
         assert response.context['form'] is not None
@@ -104,15 +111,14 @@ class TestUsersViews:
         assert Staff.objects.count() == 1
 
     @pytest.mark.parametrize('url',
-                             ['/graphic/symptoms/under28d',
-                              '/graphic/symptoms/29d2m',
-                              '/graphic/symptoms/2m3y',
-                              '/graphic/symptoms/3y10y',
-                              '/graphic/symptoms/10ymore'])
+                             ['/graphic/symptoms/under28d/',
+                              '/graphic/symptoms/29d2m/',
+                              '/graphic/symptoms/2m3y/',
+                              '/graphic/symptoms/3y10y/',
+                              '/graphic/symptoms/10ymore/'])
     def test_graphic_symptoms_view(self, client, url):
-        Staff.objects.create_superuser(**self.default_user_data())
-        response = client.post('/login', {'username': 'email@gmail.com',
-                               'password': "1234asdf"})
+        self.create_user_and_login(client)
+
         response = client.get(url)
         assert response.status_code == 200
 
@@ -127,9 +133,8 @@ class TestUsersViews:
         return data
 
     def test_registered_patient_view(self, client):
-        Staff.objects.create_superuser(**self.default_user_data())
-        response = client.post('/login', {'username': 'email@gmail.com',
-                                          'password': "1234asdf"})
+        self.create_user_and_login(client)
+
         patient1 = Patient(birth_date='2015-11-08')
         patient2 = Patient(birth_date='2014-10-08')
         patient1.save()
@@ -140,21 +145,29 @@ class TestUsersViews:
         assert list(response.context['patients']) == all_patients
 
     def test_register_patient_valid_form(self, client):
-        Staff.objects.create_superuser(**self.default_user_data())
-        client.post('/login', {'username': 'email@gmail.com',
-                               'password': "1234asdf"})
-        response = client.post('/register/patient/', {'age_range': '1'})
+        self.create_user_and_login(client)
+
+        response = client.post('/register/patient/', {'age_range': '1',
+                                                      'birth_date': ''})
         assert Patient.objects.last().age_range == 1
         # 302 as a status code means redirection
         assert response.status_code == 302
+
+    def test_calculate_age(self, client):
+        self.create_user_and_login(client)
+
+        today = date.today().strftime('%d/%m/%Y')
+        client.post('/register/patient/', {'age_range': '1',
+                                           'birth_date': today})
+
+        assert Patient.objects.last().age == '0 dias'
 
     def test_edit_patient_form(self, client):
         """
         Test edit patient form with a valid cpf
         """
-        Staff.objects.create_superuser(**self.default_user_data())
-        response = client.post('/login', {'username': 'email@gmail.com',
-                                          'password': "1234asdf"})
+        self.create_user_and_login(client)
+
         name = Patient(id='001002012', birth_date='2017-02-01')
         name.save()
         response = client.get('/patients/edit/001002012/')
@@ -167,9 +180,8 @@ class TestUsersViews:
         """
         Test edit patient form with a invalid cpf
         """
-        Staff.objects.create_superuser(**self.default_user_data())
-        client.post('/login', {'username': 'email@gmail.com',
-                               'password': "1234asdf"})
+        self.create_user_and_login(client)
+
         with pytest.raises(IndexError):
             client.get('/patients/edit/007/')
 
@@ -191,9 +203,7 @@ class TestUsersViews:
         """
         Test edit patient post method with invalid data
         """
-        Staff.objects.create_superuser(**self.default_user_data())
-        client.post('/login', {'username': 'email@gmail.com',
-                               'password': "1234asdf"})
+        self.create_user_and_login(client)
 
         invalid_patient_data = ({
             'name': 'nameTest', 'guardian': 'guardianTeste',
@@ -208,18 +218,15 @@ class TestUsersViews:
         """
         Test if edit patient post method is actually updating
         """
-        Staff.objects.create_superuser(**self.default_user_data())
-        client.post('/login', {'username': 'email@gmail.com',
-                               'password': "1234asdf"})
+        self.create_user_and_login(client)
 
         Patient(id='1', birth_date='2017-02-01', name='Victor').save()
         client.post('/patients/edit/1/', self.patient_data)
         assert Patient.objects.filter(id='1')[0].name == 'Victor'
 
     def test_edit_accounts_view(self, client):
-        Staff.objects.create_superuser(**self.default_user_data())
-        client.post('/login', {'username': 'email@gmail.com',
-                               'password': "1234asdf"})
+        self.create_user_and_login(client)
+
         Staff(id_user='456').save()
         response = client.get('/accounts/edit/456/')
         assert response.status_code == 200
@@ -267,26 +274,9 @@ class TestUsersViews:
         assert response.status_code == 200
         assert last_url == urlredirect
 
-    def test_valid_age_range_1(self, client):
-        """
-        Test if age_range is updating
-        """
-        Staff.objects.create_superuser(**self.default_user_data())
-        client.post('/', {'username': 'email@gmail.com',
-                          'password': "1234asdf"})
-        Patient()
-        name = Patient(id='156498', birth_date='2016-11-03')
-        name.save()
-        form = RegistrationPatientForm()
-        client.post('/register/patient', self.patient_data)
-        if form.is_valid():
-            assert form.cleaned_data.get['age_range'] == 1
-
     def test_home_patient_list(self, client):
-        Staff.objects.create_superuser(**self.default_user_data())
-        response = client.post('/login', {'username': 'email@gmail.com',
-                                          'password': "1234asdf"})
-        Patient()
+        self.create_user_and_login(client)
+
         patient_test = Patient(id='156498', birth_date='2016-11-03')
         patient_test.save()
 
@@ -295,30 +285,56 @@ class TestUsersViews:
         assert set(list(response.context['patients'])) == \
             set(list(Patient.objects.all()))
 
-    form1data = ({'patient_id': '1', 'form1': ''})
-    form2data = ({'patient_id': '2', 'form2': ''})
-    form3data = ({'patient_id': '3', 'form3': ''})
-    form4data = ({'patient_id': '4', 'form4': ''})
-    form5data = ({'patient_id': '5', 'form5': ''})
+    form1data = ({'patient': '1', 'form1': ''})
+    form2data = ({'patient': '2', 'form2': ''})
+    form3data = ({'patient': '3', 'form3': ''})
+    form4data = ({'patient': '4', 'form4': ''})
+    form5data = ({'patient': '5', 'form5': ''})
     formdatas = [form1data, form2data, form3data, form4data, form5data]
+
+    def test_show_symptoms(self):
+        patients = []
+        for index in range(1, 6):
+            patient = Patient(id=index, age_range=index)
+            patient.save()
+
+            if patient.age_range == 1:
+                ClinicalState_28d(patient_id=index, dispneia=True).save()
+
+            elif patient.age_range == 2:
+                ClinicalState_29d_2m(patient_id=index, dispneia=True).save()
+
+            elif patient.age_range == 3:
+                ClinicalState_2m_3y(patient_id=index, dispneia=True).save()
+
+            elif patient.age_range == 4:
+                ClinicalState_3y_10y(patient_id=index, dispneia=True).save()
+
+            elif patient.age_range == 5:
+                ClinicalState_10yMore(patient_id=index, dispneia=True).save()
+
+            patients.append(patient)
+
+        show_symptoms(patients)
+        assert patients[0].diseases == 'dispneia'
+        assert patients[1].diseases == 'dispneia'
+        assert patients[2].diseases == 'dispneia'
+        assert patients[3].diseases == 'dispneia'
+        assert patients[4].diseases == 'dispneia'
 
     def generate_all_age_patients(self):
         """
             generating one test patient for each age range
         """
 
-        # Patient()
         for x in range(1, 6):
             patient = Patient(id=x, age_range=x)
             patient.save()
 
     def test_rate_patient(self, client):
-        Staff.objects.create_superuser(**self.default_user_data())
-        client.post('/login', {'username': 'email@gmail.com',
-                               'password': "1234asdf"})
+        self.create_user_and_login(client)
 
         self.generate_all_age_patients()
-
         # the loop below posts the symptoms form for every one of the
         # 5 fictional patients
         classifications = []
@@ -339,17 +355,13 @@ class TestUsersViews:
     forms_ml = [form1_ml, form2_ml, form3_ml, form4_ml, form5_ml]
 
     def test_feed_ml_page(self, client):
-        Staff.objects.create_superuser(**self.default_user_data())
-        client.post('/login', {'username': 'email@gmail.com',
-                               'password': "1234asdf"})
+        self.create_user_and_login(client)
 
         response = client.get('/feed_ml/')
         assert response.status_code == 200
 
     def test_feed_ml(self, client):
-        Staff.objects.create_superuser(**self.default_user_data())
-        client.post('/login', {'username': 'email@gmail.com',
-                               'password': "1234asdf"})
+        self.create_user_and_login(client)
 
         # this loop will post every classification form into 'feed ml'
         for index, forms_ml in enumerate(self.forms_ml):
@@ -364,18 +376,14 @@ class TestUsersViews:
         assert MachineLearning_10yMore.objects.count() == 1
 
     def test_my_history_view(self, client):
-        Staff.objects.create_superuser(**self.default_user_data())
-        response = client.post('/login', {'username': 'email@gmail.com',
-                                          'password': "1234asdf"})
+        self.create_user_and_login(client)
+
         response = client.get('/my_history/')
         assert response.status_code == 200
 
     def test_edit_patient_is_valid(self, client):
-        Staff.objects.create_superuser(**self.default_user_data())
-        client.post('/login', {'username': 'email@gmail.com',
-                               'password': "1234asdf"})
+        self.create_user_and_login(client)
 
-        Patient()
         patient_test = Patient(id='1', birth_date='2017-10-10', age_range='0')
         patient_test.save()
 
@@ -387,17 +395,53 @@ class TestUsersViews:
         assert edited_patient.age_range == 1
 
     def test_classifications_chart(self, client):
-        Staff.objects.create_superuser(**self.default_user_data())
-        client.post('/login', {'username': 'email@gmail.com',
-                               'password': "1234asdf"})
+        self.create_user_and_login(client)
 
         response = client.get('/classifications_chart/')
         assert response.status_code == 200
 
+    def create_history_content(self):
+        for index in range(1, 6):
+            patient_test = Patient(id=index,
+                                   age_range=index,
+                                   classification='1')
+            patient_test.save()
+
+        staff = Staff(name='Atendente', id_user='1')
+        staff.save()
+
+    def test_staff_history(self, client):
+        self.create_user_and_login(client)
+
+        self.create_history_content()
+
+        state_test1 = ClinicalState_28d(patient_id='1',
+                                        classifier_id='1')
+        state_test2 = ClinicalState_29d_2m(patient_id='2',
+                                           classifier_id='1')
+        state_test3 = ClinicalState_2m_3y(patient_id='3',
+                                          classifier_id='1')
+        state_test4 = ClinicalState_3y_10y(patient_id='4',
+                                           classifier_id='1')
+        state_test5 = ClinicalState_10yMore(patient_id='5',
+                                            classifier_id='1')
+        state_test1.save()
+        state_test2.save()
+        state_test3.save()
+        state_test4.save()
+        state_test5.save()
+
+        response = client.get('/staffs/')
+        context = response.context[0]['array']
+        assert response.status_code == 200
+        assert context[0]['classification_2'] == state_test1
+        assert context[1]['classification_2'] == state_test2
+        assert context[2]['classification_2'] == state_test3
+        assert context[3]['classification_2'] == state_test4
+        assert context[4]['classification_2'] == state_test5
+
     def test_classifications_chart_filter(self, client):
-        Staff.objects.create_superuser(**self.default_user_data())
-        client.post('/login', {'username': 'email@gmail.com',
-                               'password': "1234asdf"})
+        self.create_user_and_login(client)
 
         response = client.post('/classifications_chart/', {'month': 12,
                                                            'year': 2017})
@@ -405,11 +449,18 @@ class TestUsersViews:
         assert response.status_code == 200
 
     def create_clinical_states(self):
-        clinical_28 = ClinicalState_28d()
-        clinical_29 = ClinicalState_29d_2m()
-        clinical_2m = ClinicalState_2m_3y()
-        clinical_3y = ClinicalState_3y_10y()
-        clinical_10y = ClinicalState_10yMore()
+        Patient(id='1', classification=1, birth_date='2016-11-03').save()
+        Patient(id='2', classification=2, birth_date='2016-11-03').save()
+        Patient(id='3', classification=3, birth_date='2016-11-03').save()
+        Patient(id='4', classification=4, birth_date='2016-11-03').save()
+
+        clinical_28 = ClinicalState_28d(patient_id='1', classifier_id=1234)
+        clinical_29 = ClinicalState_29d_2m(patient_id='2', classifier_id=1234)
+        clinical_2m = ClinicalState_2m_3y(patient_id='3', classifier_id=1234)
+        clinical_3y = ClinicalState_3y_10y(patient_id='4', classifier_id=1234)
+        clinical_10y = ClinicalState_10yMore(patient_id='4',
+                                             classifier_id=1234)
+
         clinical_28.save()
         clinical_29.save()
         clinical_2m.save()
@@ -417,22 +468,35 @@ class TestUsersViews:
         clinical_10y.save()
 
     def test_graphic_symptoms_view_28d(self, client):
-        Staff.objects.create_superuser(**self.default_user_data())
-        client.post('/login', {'username': 'email@gmail.com',
-                               'password': "1234asdf"})
+        self.create_user_and_login(client)
 
         self.create_clinical_states()
 
-        response_28 = client.post('/graphic/symptoms/under28d', {'month': 12})
-        response_29 = client.post('/graphic/symptoms/29d2m', {'month': 12})
-        response_2m = client.post('/graphic/symptoms/2m3y', {'month': 12})
-        response_3y = client.post('/graphic/symptoms/3y10y', {'month': 12})
-        response_10y = client.post('/graphic/symptoms/10ymore', {'month': 12})
+        response_28 = client.post('/graphic/symptoms/under28d/', {'month': 12})
+        response_29 = client.post('/graphic/symptoms/29d2m/', {'month': 12})
+        response_2m = client.post('/graphic/symptoms/2m3y/', {'month': 12})
+        response_3y = client.post('/graphic/symptoms/3y10y/', {'month': 12})
+        response_10y = client.post('/graphic/symptoms/10ymore/', {'month': 12})
         assert response_28.status_code == 200
         assert response_29.status_code == 200
         assert response_2m.status_code == 200
         assert response_3y.status_code == 200
         assert response_10y.status_code == 200
+
+    def test_my_charts_without_data(self, client):
+        self.create_user_and_login(client)
+
+        response = client.post('/my_charts/', {'month': 12})
+
+        assert response.context[0]['data'] == [0, 0, 0, 0]
+
+    def test_my_charts_with_data(self, client):
+        self.create_user_and_login(client)
+
+        self.create_clinical_states()
+        response = client.post('/my_charts/', {'month': 'all'})
+
+        assert response.context[0]['data'] == [1, 1, 1, 2]
 
 
 @pytest.mark.django_db
@@ -501,9 +565,9 @@ class TestPatientModel:
     @pytest.mark.parametrize('age_range, expected_text', [
         ('0', 'Faixa etária indefinida'),
         ('1', '0 até 28 dias'),
-        ('2', '29 dias à 2 meses'),
-        ('3', '2 meses à 3 anos'),
-        ('4', '3 anos à 10 anos'),
+        ('2', '29 dias a 2 meses'),
+        ('3', '2 meses a 3 anos'),
+        ('4', '3 anos a 10 anos'),
         ('5', 'Acima de 10 anos')
     ])
     def test_age_range_verbose(self, age_range, expected_text):

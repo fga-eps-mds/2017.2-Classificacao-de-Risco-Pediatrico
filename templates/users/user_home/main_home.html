@@ -4,13 +4,13 @@
 {% block content_pos %}
     <div class="form-group title_left mt-4">
         <input id="searchPatient" type="search" class="form-control pull-right mr-1"
-        placeholder="Pesquisar Paciente..." aria-controls="example">
+        placeholder="Pesquisar Paciente..." aria-controls="data-table">
         <h2>
             Pacientes
         </h2>
     </div>
     <div id="list" class="x_panel slide-in-blurred-top" style="background-color: white">
-        <table id="example" class="table table-condensed" cellspacing="0" width="100%">
+        <table id="data-table" class="table table-condensed" cellspacing="0" width="100%">
             <thead>
             <tr>
                 <th></th>
@@ -34,7 +34,7 @@
                     </td><!-- sexo -->
 
                     <td id="name_patient">
-                        <a href="#" data-toggle="modal" data-target="#risk_ranting{{ patient.id }}">
+                        <a href="#" data-toggle="modal" id="id_modal-{{ patient.id }}" data-target="#risk_ranting{{ patient.id }}">
                             {% if patient.name %}
                                 {{ patient.name }}
                             {% else %}
@@ -74,6 +74,9 @@
                     </td><!--td classificação-->
 
                     <td id="symptoms">
+                      {% if patient.classification != 0 %}
+                            {{ patient.diseases }}
+                        {% endif %}
                     </td><!--td sintomas-->
 
                     <td id="age_range_table">
@@ -83,11 +86,11 @@
                             {% elif patient.age_range == 1 %}
                                 0 até 28 dias
                             {% elif patient.age_range == 2 %}
-                                29 dias à 2 meses
+                                29 dias a 2 meses
                             {% elif patient.age_range == 3 %}
-                                2 meses à 3 anos
+                                2 meses a 3 anos
                             {% elif patient.age_range == 4 %}
-                                3 anos à 10 anos
+                                3 anos a 10 anos
                             {% elif patient.age_range == 5 %}
                                 Acima de 10 anos
                             {% endif %}
@@ -106,7 +109,7 @@
                             </i>
                         </a>
                         <a href="#" data-toggle="modal" data-target="#deletar-{{ patient.id }}">
-                            <i class="fa fa-ban actions-icon" aria-hidden="true">
+                            <i class="fa fa-trash actions-icon" aria-hidden="true">
                             </i>
                         </a>
                     </td><!--td ações-->
@@ -142,7 +145,7 @@
                         {% csrf_token %}
                         <div class="modal-body">
                             <p>
-                                Selecione a classificação desejada:
+                                <strong>Selecione a classificação desejada:</strong>
                             </p>
                             <div class="text-left">
                                 <div class="form-check">
@@ -189,23 +192,35 @@
                                     </label>
                                 </div>
                             </div>
-                        </div>
-
-                        <div id="comment-receptionist-{{ patient.id }}">
-                            <label>
-                                Comentário
-                            </label>
-                            <textarea class="form-control" name="comment" rows="4"
-                            maxlength="10" cols="10" placeholder="Comentário é obrigatório!">
-                            </textarea>
+                            <div id="comment-receptionist-{{ patient.id }}">
+                                <label>
+                                    <strong>Comentário:</strong>
+                                </label>
+                                <textarea id="classification-comment" class="form-control" name="comment" rows="4"
+                                    maxlength="300" cols="10" placeholder="Comentário é obrigatório!"></textarea>
+                            </div>
                         </div>
 
                         <input type="hidden" name="patient" value="{{ patient.id }}">
+
+                        <div class="alert alert-danger mt-3 mr-3 ml-3">
+                            <strong>
+                                ATENÇÃO!<br>
+                            </strong>
+                            Se o botão "Salvar" for clicado sem ser selecionado
+                            alguma classificação, a classificação do paciente passará
+                            a ser de "Não Classificado".<br>
+                            Caso queira manter a classificação anterior, clique
+                            em "Fechar".<br>
+                        </div>
+
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                            <button type="button" id="classification_cancel{{ patient.id }}" class="btn btn-secondary" data-dismiss="modal">
                                 Fechar
                             </button>
-                            <button type="submit" class="btn btn-primary">
+
+                            <button type="submit" id="classification_save{{ patient.id }}" class="btn btn-primary">
+
                                 Salvar
                             </button>
                         </div>
@@ -215,7 +230,7 @@
         </div>
 
         <div class="modal fade" id="deletar-{{ patient.id }}" tabindex="-1" role="dialog"
-             aria-labelledby="Deletar Paciente" aria-hidden="true">
+        aria-labelledby="Deletar Paciente" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -230,7 +245,15 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        Tem certeza que deseja deletar o registro {{ patient.id }}?
+                        Tem certeza que deseja deletar
+                        {% if patient.gender == 1 %}
+                            a
+                        {% elif patient.gender == 2 %}
+                            o
+                        {% else %}
+                            o(a)
+                        {% endif %}
+                         paciente {{ patient.name }}?
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">

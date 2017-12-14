@@ -1,37 +1,31 @@
 # Arquivo: /apps/users/views.py
-from django.shortcuts import render, redirect
-from django.contrib.auth.views import login
-from django.contrib.auth.views import logout
+from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.auth import authenticate
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views import login, logout
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, JsonResponse
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate
+from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
+
+from datetime import datetime, date
+
 from apps.risk_rating.ml_classifier import MachineLearning
-from apps.users.forms import RegistrationStaffForm
-from apps.users.forms import RegistrationPatientForm
-from apps.users.forms import EditPatientForm
-from datetime import datetime
+
+from apps.users.forms import RegistrationStaffForm, \
+    RegistrationPatientForm, EditPatientForm
 
 from .models import Patient, Staff
 
-from apps.risk_rating.forms import ClinicalState_28dForm
-from apps.risk_rating.forms import ClinicalState_29d_2mForm
-from apps.risk_rating.forms import ClinicalState_2m_3yForm
-from apps.risk_rating.forms import ClinicalState_3y_10yForm
-from apps.risk_rating.forms import ClinicalState_10yMoreForm
-from apps.risk_rating.forms import MachineLearning_28dForm
-from apps.risk_rating.forms import MachineLearning_29d_2mForm
-from apps.risk_rating.forms import MachineLearning_2m_3yForm
-from apps.risk_rating.forms import MachineLearning_3y_10yForm
-from apps.risk_rating.forms import MachineLearning_10yMoreForm
+from apps.risk_rating.forms import ClinicalState_28dForm, \
+    ClinicalState_29d_2mForm, ClinicalState_2m_3yForm, \
+    ClinicalState_3y_10yForm, ClinicalState_10yMoreForm, \
+    MachineLearning_28dForm, MachineLearning_29d_2mForm, \
+    MachineLearning_2m_3yForm, MachineLearning_3y_10yForm, \
+    MachineLearning_10yMoreForm
 
-from apps.risk_rating.models import ClinicalState_28d
-from apps.risk_rating.models import ClinicalState_29d_2m
-from apps.risk_rating.models import ClinicalState_2m_3y
-from apps.risk_rating.models import ClinicalState_3y_10y
-from apps.risk_rating.models import ClinicalState_10yMore
-
+from apps.risk_rating.models import ClinicalState_28d, ClinicalState_29d_2m, \
+    ClinicalState_2m_3y, ClinicalState_3y_10y, ClinicalState_10yMore
 
 ml1 = MachineLearning('apps/risk_rating/class_menos_28.csv')
 ml2 = MachineLearning('apps/risk_rating/class_29d_2m.csv')
@@ -68,10 +62,9 @@ def login_view(request, *args, **kwargs):
     return login(request, *args, **kwargs)
 
 
-@login_required(redirect_field_name='', login_url='users:login')
+@login_required(redirect_field_name='', login_url='users:home')
 @csrf_exempt
 def machine_learning(request):
-
     if 'form1' in request.POST:
         form = ClinicalState_28dForm(request.POST)
         form.save()
@@ -98,7 +91,7 @@ def machine_learning(request):
         state = ClinicalState_10yMore
         ml = ml5
 
-    p_id = request.POST.get("patient_id")
+    p_id = request.POST.get("patient")
     subject_patient = Patient.objects.filter(id=p_id)[0]
 
     p_c_states_l = state.objects.filter(patient_id=p_id)
@@ -122,6 +115,7 @@ def home(request):
     form5 = ClinicalState_10yMoreForm()
     patients = Patient.objects.all()
     classification = None
+    patient_symptoms = None
 
     if request.method == 'POST' and request.POST.get("classification"):
         classification = request.POST.get("classification")
@@ -133,16 +127,66 @@ def home(request):
         patient.classifier_id = request.user.id_user
         patient.save()
 
+        return HttpResponseRedirect(reverse('users:home'))
+
+    patient_symptoms = show_symptoms(patients)
+
     return render(request, 'users/user_home/main_home.html',
-                           {'patients': patients,
-                            'classification': classification,
-                            'form1': form1,
-                            'form2': form2,
-                            'form3': form3,
-                            'form4': form4,
-                            'form5': form5})
+                  {'patients': patients,
+                   'classification': classification,
+                   'patient_symptoms': patient_symptoms,
+                   'form1': form1,
+                   'form2': form2,
+                   'form3': form3,
+                   'form4': form4,
+                   'form5': form5})
 
 
+@staff_member_required(redirect_field_name='', login_url='users:home')
+def staff_historic(request):
+    """
+    define staff historic page behaviour
+    """
+    patients = Patient.objects.exclude(classification=0)
+    classifications = []
+    for patient in patients:
+        if patient.age_range == 1:
+            classifications.append(list(patient.patient1.all()))
+        elif patient.age_range == 2:
+            classifications.append(list(patient.patient2.all()))
+        elif patient.age_range == 3:
+            classifications.append(list(patient.patient3.all()))
+        elif patient.age_range == 4:
+            classifications.append(list(patient.patient4.all()))
+        elif patient.age_range == 5:
+            classifications.append(list(patient.patient5.all()))
+
+    flat_classifications = []
+    for classification in classifications:
+        for item in classification:
+            flat_classifications.append(item)
+
+    array = []
+    for classification in flat_classifications:
+        diseases = ''
+        for column in classification._meta.get_fields():
+            if getattr(classification, column.name) and column.name != 'id' \
+                    and column.name != 'patient' \
+                    and column.name != 'classifier_id' \
+                    and column.name != 'date' \
+                    and column.name != 'created_at':
+                diseases += column.name + ', '
+
+        array.append({'classification_2': classification,
+                      'classifier_name': Staff.objects
+                     .filter(id_user=classification.classifier_id)[0].name,
+                      'sympthoms': diseases[:-2].replace('_', ' ')})
+
+    return render(request, 'users/user_home/staff_historic.html',
+                  {'array': array})
+
+
+@staff_member_required(redirect_field_name='', login_url='users:home')
 def feed_ml(request):
     """
     define feed machine learning page behaviour
@@ -174,11 +218,45 @@ def feed_ml(request):
             return HttpResponseRedirect(reverse('users:feed_ml'))
 
     return render(request, 'users/user_home/feed_ml.html',
-                           {'form1_ml': form1_ml,
-                            'form2_ml': form2_ml,
-                            'form3_ml': form3_ml,
-                            'form4_ml': form4_ml,
-                            'form5_ml': form5_ml})
+                  {'form1_ml': form1_ml,
+                   'form2_ml': form2_ml,
+                   'form3_ml': form3_ml,
+                   'form4_ml': form4_ml,
+                   'form5_ml': form5_ml})
+
+
+def show_symptoms(patients):
+    for i, patient in enumerate(patients):
+        classification = None
+        if patient.age_range == 1:
+            classification = patient.patient1.last()
+
+        elif patient.age_range == 2:
+            classification = patient.patient2.last()
+
+        elif patient.age_range == 3:
+            classification = patient.patient3.last()
+
+        elif patient.age_range == 4:
+            classification = patient.patient4.last()
+
+        elif patient.age_range == 5:
+            classification = patient.patient5.last()
+
+        diseases = ''
+
+        if classification is not None:
+            for column in classification._meta.get_fields():
+                if getattr(classification, column.name) \
+                        and column.name != 'id' \
+                        and column.name != 'date' \
+                        and column.name != 'patient' \
+                        and column.name != 'classifier_id' \
+                        and column.name != 'created_at':
+                    diseases += column.name + ', '
+
+            diseases = diseases.replace('_', ' ')[:-2]
+            setattr(patients[i], 'diseases', diseases)
 
 
 def trigger_ml(subject_patient, clinical_state, ml):
@@ -231,6 +309,7 @@ def check_patient_problem(problem):
     return problem
 
 
+@login_required(redirect_field_name='', login_url='users:landing_page')
 def logout_view(request, *args, **kwargs):
     """
     Define the logout page
@@ -257,6 +336,8 @@ def register_patient(request):
     if request.method == 'POST':
         form = RegistrationPatientForm(request.POST)
         if form.is_valid():
+            if request.POST.get("birth_date") != "":
+                calculate_age(form)
             form.save()
             return redirect('users:home')
 
@@ -264,13 +345,34 @@ def register_patient(request):
                   {'form': form})
 
 
-@login_required(redirect_field_name='', login_url='users:login')
+def calculate_age(form):
+    days = days_of_life(form.cleaned_data['birth_date'])
+
+    age = form.cleaned_data['age'] = days
+
+    if age >= 1080:
+        age = f"{int(age/360)} anos e {int((age%360)/30) - 4} meses"
+    elif age > 31:
+        age = f"{int(age/30)} meses e {int((age%30)) - 5} dias"
+    else:
+        age = f"{age} dias"
+
+    instance = form.save(commit=False)
+    instance.age = age
+    instance.save()
+
+
+def days_of_life(birth_date):
+    return (date.today() - birth_date).days
+
+
+@staff_member_required(redirect_field_name='', login_url='users:home')
 def manage_accounts_view(request):
     staffs = Staff.objects.all()
     return render(request, 'users/manageAccounts.html', {'staffs': staffs})
 
 
-@login_required(redirect_field_name='', login_url='users:login')
+@staff_member_required(redirect_field_name='', login_url='users:home')
 def edit_accounts_view(request, id_user):
     staff = Staff.objects.filter(id_user=id_user)
     if len(staff) == 1:
@@ -278,7 +380,7 @@ def edit_accounts_view(request, id_user):
     return render(request, 'users/editAccounts.html', status=404)
 
 
-@login_required(redirect_field_name='', login_url='users:login')
+@staff_member_required(redirect_field_name='', login_url='users:home')
 def staff_remove(request, id_user):
     """Remove an existing staff."""
     return remove_register(id_user, Staff, 'manage_accounts')
@@ -322,6 +424,7 @@ def edit_patient(request, id):
                   {'patient': patient, 'form': form}, status=status)
 
 
+@login_required(redirect_field_name='', login_url='users:login')
 def classifications_chart(request):
     """
     exhibit a pie chart of the classifications
@@ -368,8 +471,106 @@ def my_history(request):
     """
     patients = Patient.objects.filter(classifier_id=request.user.id_user)
     classifier = Staff.objects.filter(id_user=request.user.id_user)[0]
+    patient_symptoms = show_symptoms(patients)
     return render(request, 'users/myHistory.html',
-                  {'patients': patients, "classifier": classifier})
+                  {'patients': patients, 'patient_symptoms': patient_symptoms,
+                   'classifier': classifier})
+
+
+@login_required(redirect_field_name='', login_url='users:login')
+def my_charts(request):
+    """
+    define personal graphics page behavior
+    """
+    data = [0, 0, 0, 0]
+    if request.method == 'POST':
+        month = request.POST.get('month')
+        if month is not None:
+            current_user_id = request.user.id_user
+
+            if month == 'all':
+                all_classifications = list(ClinicalState_28d.
+                                           objects.all()) + \
+                                      list(ClinicalState_29d_2m.
+                                           objects.all()) + \
+                                      list(ClinicalState_2m_3y.
+                                           objects.all()) + \
+                                      list(ClinicalState_3y_10y.
+                                           objects.all()) + \
+                                      list(ClinicalState_10yMore.
+                                           objects.all())
+            else:
+                all_classifications = list(ClinicalState_28d.objects.
+                                           filter(date__month=month)) + \
+                                      list(ClinicalState_29d_2m.objects.
+                                           filter(date__month=month)) + \
+                                      list(ClinicalState_2m_3y.objects.
+                                           filter(date__month=month)) + \
+                                      list(ClinicalState_3y_10y.objects.
+                                           filter(date__month=month)) + \
+                                      list(ClinicalState_10yMore.objects.
+                                           filter(date__month=month))
+
+            for classification in all_classifications:
+                if classification.classifier_id == current_user_id:
+                    patient_classification = \
+                        classification.patient.classification
+                    if patient_classification == 1:
+                        data[0] += 1
+                    elif patient_classification == 2:
+                        data[1] += 1
+                    elif patient_classification == 3:
+                        data[2] += 1
+                    elif patient_classification == 4:
+                        data[3] += 1
+
+    return render(request, 'users/myCharts.html', {
+        'data': data
+    })
+
+
+def get_symptoms(clinical_state):
+    graphic_symptoms = {}
+
+    for column in clinical_state._meta.get_fields():
+        graphic_symptoms[column.name] = 0
+
+    return graphic_symptoms
+
+
+def filter_symptoms_rows(request, clinical_state, graphic_symptoms):
+    for state in clinical_state.objects.all():
+
+        if request.method == 'POST':
+            if int(request.POST.get('month')) != 0:
+                if state.date.month != int(request.POST.get('month')):
+                    break
+        graphic_symptoms = filter_symptoms_columns(clinical_state, state,
+                                                   graphic_symptoms)
+
+    return graphic_symptoms
+
+
+def filter_symptoms_columns(clinical_state, state, graphic_symptoms):
+    for column in clinical_state._meta.get_fields():
+        if getattr(state, column.name):
+            graphic_symptoms[column.name] += 1
+
+    return graphic_symptoms
+
+
+@login_required(redirect_field_name='', login_url='users:login')
+def graphic_symptoms_view(request, clinical_state, graphic_symptoms_html):
+    """
+    Read all symptoms of database after classification
+     someone and check which symptoms was marked
+    """
+    graphic_symptoms = get_symptoms(clinical_state)
+    graphic_symptoms = filter_symptoms_rows(request, clinical_state,
+                                            graphic_symptoms)
+
+    return render(request, 'users/user_home/' + graphic_symptoms_html,
+                  {'graphic_symptoms': graphic_symptoms})
 
 
 @login_required(redirect_field_name='', login_url='users:login')
@@ -378,23 +579,8 @@ def graphic_symptoms_view_28d(request):
     Read all symptoms of database after classification
      someone and check which symptoms was marked
     """
-    graphic_symptoms = {}
-
-    for column in ClinicalState_28d._meta.get_fields():
-        graphic_symptoms[column.name] = 0
-
-    for state in ClinicalState_28d.objects.all():
-
-        if request.method == 'POST':
-            if int(request.POST.get('month')) != 0:
-                if state.date.month != int(request.POST.get('month')):
-                    break
-        for column in ClinicalState_28d._meta.get_fields():
-            if getattr(state, column.name):
-                graphic_symptoms[column.name] += 1
-
-    return render(request, 'users/user_home/graphic_symptoms_28d.html',
-                  {'graphic_symptoms': graphic_symptoms})
+    return graphic_symptoms_view(request, ClinicalState_28d,
+                                 'graphic_symptoms_28d.html')
 
 
 @login_required(redirect_field_name='', login_url='users:login')
@@ -403,95 +589,38 @@ def graphic_symptoms_view_29d_2m(request):
     Read all symptoms of database after classification
      someone and check which symptoms was marked
     """
-    graphic_symptoms = {}
-
-    for column in ClinicalState_29d_2m._meta.get_fields():
-        graphic_symptoms[column.name] = 0
-
-    for state in ClinicalState_29d_2m.objects.all():
-
-        if request.method == 'POST':
-            if int(request.POST.get('month')) != 0:
-                if state.date.month != int(request.POST.get('month')):
-                    break
-        for column in ClinicalState_29d_2m._meta.get_fields():
-            if getattr(state, column.name):
-                graphic_symptoms[column.name] += 1
-
-    return render(request, 'users/user_home/graphic_symptoms_29d_2m.html',
-                  {'graphic_symptoms': graphic_symptoms})
+    return graphic_symptoms_view(request, ClinicalState_29d_2m,
+                                 'graphic_symptoms_29d_2m.html')
 
 
+@login_required(redirect_field_name='', login_url='users:login')
 def graphic_symptoms_view_2m_3y(request):
     """
     Read all symptoms of database after classification
      someone and check which symptoms was marked
     """
-    graphic_symptoms = {}
-
-    for column in ClinicalState_2m_3y._meta.get_fields():
-        graphic_symptoms[column.name] = 0
-
-    for state in ClinicalState_2m_3y.objects.all():
-
-        if request.method == 'POST':
-            if int(request.POST.get('month')) != 0:
-                if state.date.month != int(request.POST.get('month')):
-                    break
-        for column in ClinicalState_2m_3y._meta.get_fields():
-            if getattr(state, column.name):
-                graphic_symptoms[column.name] += 1
-
-    return render(request, 'users/user_home/graphic_symptoms_2m_3y.html',
-                  {'graphic_symptoms': graphic_symptoms})
+    return graphic_symptoms_view(request, ClinicalState_2m_3y,
+                                 'graphic_symptoms_2m_3y.html')
 
 
+@login_required(redirect_field_name='', login_url='users:login')
 def graphic_symptoms_view_3y_10y(request):
     """
     Read all symptoms of database after classification
      someone and check which symptoms was marked
     """
-    graphic_symptoms = {}
-
-    for column in ClinicalState_3y_10y._meta.get_fields():
-        graphic_symptoms[column.name] = 0
-
-    for state in ClinicalState_3y_10y.objects.all():
-
-        if request.method == 'POST':
-            if int(request.POST.get('month')) != 0:
-                if state.date.month != int(request.POST.get('month')):
-                    break
-        for column in ClinicalState_3y_10y._meta.get_fields():
-            if getattr(state, column.name):
-                graphic_symptoms[column.name] += 1
-
-    return render(request, 'users/user_home/graphic_symptoms_3y_10y.html',
-                  {'graphic_symptoms': graphic_symptoms})
+    return graphic_symptoms_view(request, ClinicalState_3y_10y,
+                                 'graphic_symptoms_3y_10y.html')
 
 
+@login_required(redirect_field_name='', login_url='users:login')
 def graphic_symptoms_view_10y_more(request):
     """
     Read all symptoms of database after classification
      someone and check which symptoms was marked
     """
-    graphic_symptoms = {}
-
-    for column in ClinicalState_10yMore._meta.get_fields():
-        graphic_symptoms[column.name] = 0
-
-    for state in ClinicalState_10yMore.objects.all():
-
-        if request.method == 'POST':
-            if int(request.POST.get('month')) != 0:
-                if state.date.month != int(request.POST.get('month')):
-                    break
-        for column in ClinicalState_10yMore._meta.get_fields():
-            if getattr(state, column.name):
-                graphic_symptoms[column.name] += 1
-
-    return render(request, 'users/user_home/graphic_symptoms_10yMore.html',
-                  {'graphic_symptoms': graphic_symptoms})
+    return graphic_symptoms_view(request, ClinicalState_10yMore,
+                                 'graphic_symptoms_10yMore.html')
 
 
 def get_under_28_symptoms(clinical_state):
@@ -499,7 +628,7 @@ def get_under_28_symptoms(clinical_state):
     building patient (28d) to use on ml based on patient's clinical condition
     """
     patient = [[
-        check_patient_problem(clinical_state.dispineia),
+        check_patient_problem(clinical_state.dispneia),
         check_patient_problem(clinical_state.ictericia),
         check_patient_problem(clinical_state.perdada_consciencia),
         check_patient_problem(clinical_state.cianose),
@@ -510,7 +639,7 @@ def get_under_28_symptoms(clinical_state):
         check_patient_problem(clinical_state.tosse),
         check_patient_problem(clinical_state.coriza),
         check_patient_problem(clinical_state.obstrucao_nasal),
-        check_patient_problem(clinical_state.convulcao_no_momento),
+        check_patient_problem(clinical_state.convulsao_no_momento),
         check_patient_problem(clinical_state.diarreia),
         check_patient_problem(clinical_state.choro_inconsolavel),
         check_patient_problem(clinical_state.dificuldade_evacuar),
@@ -537,7 +666,7 @@ def get_29d_2m_symptoms(clinical_state):
     patient's clinical condition
     """
     patient = [[
-        check_patient_problem(clinical_state.dispineia),
+        check_patient_problem(clinical_state.dispneia),
         check_patient_problem(clinical_state.ictericia),
         check_patient_problem(clinical_state.perdada_consciencia),
         check_patient_problem(clinical_state.cianose),
@@ -548,7 +677,7 @@ def get_29d_2m_symptoms(clinical_state):
         check_patient_problem(clinical_state.tosse),
         check_patient_problem(clinical_state.coriza),
         check_patient_problem(clinical_state.obstrucao_nasal),
-        check_patient_problem(clinical_state.convulcao_no_momento),
+        check_patient_problem(clinical_state.convulsao_no_momento),
         check_patient_problem(clinical_state.diarreia),
         check_patient_problem(clinical_state.dificuldade_evacuar),
         check_patient_problem(clinical_state.nao_suga_seio),
@@ -574,7 +703,7 @@ def get_2m_3y_symptoms(clinical_state):
     patient's clinical condition
     """
     patient = [[
-        check_patient_problem(clinical_state.dispineia),
+        check_patient_problem(clinical_state.dispneia),
         check_patient_problem(clinical_state.ictericia),
         check_patient_problem(clinical_state.perdada_consciencia),
         check_patient_problem(clinical_state.cianose),
@@ -585,7 +714,7 @@ def get_2m_3y_symptoms(clinical_state):
         check_patient_problem(clinical_state.tosse),
         check_patient_problem(clinical_state.coriza),
         check_patient_problem(clinical_state.obstrucao_nasal),
-        check_patient_problem(clinical_state.convulcao_no_momento),
+        check_patient_problem(clinical_state.convulsao_no_momento),
         check_patient_problem(clinical_state.diarreia),
         check_patient_problem(clinical_state.dificuldade_evacuar),
         check_patient_problem(clinical_state.nao_suga_seio),
@@ -619,7 +748,7 @@ def get_3y_10y_symptoms(clinical_state):
         check_patient_problem(clinical_state.dor_dentes),
         check_patient_problem(clinical_state.disuria),
         check_patient_problem(clinical_state.urina_concentrada),
-        check_patient_problem(clinical_state.dispineia),
+        check_patient_problem(clinical_state.dispneia),
         check_patient_problem(clinical_state.dor_toracica),
         check_patient_problem(clinical_state.choque_eletrico),
         check_patient_problem(clinical_state.quase_afogamento),
@@ -675,7 +804,7 @@ def get_10y_more_symptoms(clinical_state):
         check_patient_problem(clinical_state.dor_de_dente),
         check_patient_problem(clinical_state.disuria),
         check_patient_problem(clinical_state.urina_concentrada),
-        check_patient_problem(clinical_state.dispineia),
+        check_patient_problem(clinical_state.dispneia),
         check_patient_problem(clinical_state.dor_toracica),
         check_patient_problem(clinical_state.choque_eletrico),
         check_patient_problem(clinical_state.quase_afogamento),

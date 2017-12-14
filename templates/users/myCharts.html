@@ -1,0 +1,109 @@
+{% extends 'users/user_home/home_layout.html' %}
+{% load staticfiles %}
+
+{% block content_pos %}
+
+    <div class="row linha">
+        <div class="x_title col-md-6">
+            <h2>Minhas Classificações</h2>
+        </div>
+    <form method="POST">
+        {% csrf_token %}
+        <label for="select-age-range">
+            <select id="select-age-range" name="month" required>
+                <option disabled selected value> Selecione o mes desejado</option>
+                <option value='all'>Todos os meses</option>
+                <option value=1>Janeiro</option>
+                <option value=2>Fevereiro</option>
+                <option value=3>Março</option>
+                <option value=4>Abril</option>
+                <option value=5>Maio</option>
+                <option value=6>Junho</option>
+                <option value=7>Julho</option>
+                <option value=8>Agosto</option>
+                <option value=9>Setembro</option>
+                <option value=10>Outubro</option>
+                <option value=11>Novembro</option>
+                <option value=12>Dezembro</option>
+            </select>
+        </label>
+
+        <button class="btn btn-info rb">Enviar</button>
+    </form>
+
+    <div id="personal-chart" style="width: 100%; min-height: 400px"></div>
+
+{% endblock %}
+
+{% block js_pos %}
+        <script type="text/javascript"
+                src="{% static "js/echarts.min.js" %}"></script>
+        <script type="text/javascript">
+      // based on prepared DOM, initialize echarts instance
+      var chart = echarts.init(document.getElementById('personal-chart'));
+
+      // specify chart configuration item and data
+      var option = {
+        title: {
+          text: ''
+        },
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: {
+            type: 'shadow'
+          }
+        },
+        legend: {
+          data: ['']
+        },
+        grid: {
+          left: '3%',
+          right: '4%',
+          bottom: '3%',
+          containLabel: true
+        },
+        xAxis: {
+          data: [
+            'Atendimeto Imediato',
+            'Atendimento Hospitalar',
+            'Atendimento Ambulatorial',
+            'Atendimento Eletivo'
+          ]
+        },
+        yAxis: {
+            minInterval: 1
+        },
+        series: [{
+          itemStyle: {
+            emphasis: {
+              shadowBlur: 10,
+              shadowOffsetX: 0,
+              shadowColor: 'rgba(0, 0, 0, 0.5)'
+            },
+            normal: {
+              color: function (params) {
+                var colorList = [
+                  '#ff3131', '#fbff32', '#30ff4f', '#3f56ff'
+                ];
+                return colorList[params.dataIndex]
+              }
+            }
+          },
+          name: 'Classificações',
+          type: 'bar',
+          data: {{ data }}
+        }]
+      };
+
+      // use configuration item and data specified to show chart
+      chart.setOption(option);
+      $(document).ready(function () {
+        $(window).on('resize', function () {
+          if (chart !== null && chart !== undefined) {
+            chart.resize();
+          }
+        });
+      });
+
+    </script>
+{% endblock %}

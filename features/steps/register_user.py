@@ -24,6 +24,8 @@ def fill_fields(context, name_employee, id_number, profile_number):
         "id_user").send_keys(id_number)
 
     # dropdown state
+    context.browser.find_element_by_name("cep").send_keys("12123123")
+
     Select(context.browser.find_element_by_id(
         'dropdown-state')).select_by_value('DF')
 
