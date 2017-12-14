@@ -50,3 +50,11 @@ Para contribuir com o projeto você deve possuir o docker, docker-compose e uma 
   - Após a realização de todos os passos suba a aplicação pelo comando
 
   `sudo docker-compose up`
+
+## Como Contribuir
+
+Para contribuir com o projeto basta clonar o repositório através do comando
+```shell
+git clone https://github.com/fga-gpp-mds/2017.2-Classificacao-de-Risco-Pediatrico.git
+```
+Com isso você poderá contribuir resolvendo issues que estiverem abertas na nossa board do ZenHub. Para finalizar sua contribuição nos envie um Pull Requeste que será avaliado pela nossa equipe.
