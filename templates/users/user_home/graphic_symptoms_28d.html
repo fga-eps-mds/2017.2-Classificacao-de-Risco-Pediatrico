@@ -15,7 +15,7 @@
             <form method="post">
                 {% csrf_token %}
                 <div class="row">
-                    <div class="col-md-10">
+                    <div class="col-md-9">
                         <select name="month" id="dropdown" class="form-control month" required>
                             <option value="" selected disabled>Selecione um mês</option>
                             <option value="0">Estatística Geral</option>
@@ -33,7 +33,7 @@
                             <option value="12">Dezembro</option>
                         </select>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                         <button class=" btn btn-info pull-right rb">Filtrar</button>
                     </div>
                 </div>
@@ -66,32 +66,33 @@
                     }
                 },
                 grid: {
-                    left:'10px',
+                    left: '10px',
                     height: '100%',
                     top: '2px',
                     width: '90%',
                     containLabel: true
                 },
                 xAxis: {
+                    minInterval: 1,
                     type: 'value',
                     boundaryGap: [0, 0.01],
                     axisLabel: {
-                                margin: 10,
-                                textStyle: {
-                                    fontSize: 12,
-                                    color:'#73879C'
-                                    }
-                            },
+                        margin: 10,
+                        textStyle: {
+                            fontSize: 12,
+                            color: '#73879C'
+                        }
+                    },
                 },
                 yAxis: {
                     type: 'category',
                     axisLabel: {
-                                margin: 10,
-                                textStyle: {
-                                    fontSize: 12,
-                                    color:'#73879C'
-                                    }
-                            },
+                        margin: 10,
+                        textStyle: {
+                            fontSize: 12,
+                            color: '#73879C'
+                        }
+                    },
                     data: [
                         'dispneia', 'icterícia', 'Perda Consciência',
                         'Cianose', 'Febre', 'soluços', 'Prostação',
@@ -110,13 +111,13 @@
                         itemStyle: {
                             normal: {
                                 color: {
-                                  colorStops: [{
-                                          offset: 0, color: '#38c9e0'
-                                      }, {
-                                          offset: 1, color: '#17a2b8'
-                                      }],
+                                    colorStops: [{
+                                        offset: 0, color: '#38c9e0'
+                                    }, {
+                                        offset: 1, color: '#17a2b8'
+                                    }],
                                 },
-                                barBorderRadius: [0, 15,15, 0],
+                                barBorderRadius: [0, 15, 15, 0],
                                 shadowColor: 'rgba(0,0,0,0.1)',
                                 shadowBlur: 3,
                                 shadowOffsetY: 3

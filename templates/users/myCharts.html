@@ -2,12 +2,16 @@
 {% load staticfiles %}
 
 {% block content_pos %}
+
+    <div class="row linha">
+        <div class="x_title col-md-6">
+            <h2>Minhas Classificações</h2>
+        </div>
     <form method="POST">
         {% csrf_token %}
         <label for="select-age-range">
-            Selecione o mes desejado:
             <select id="select-age-range" name="month" required>
-                <option disabled selected value> -- Selecione uma opção --</option>
+                <option disabled selected value> Selecione o mes desejado</option>
                 <option value='all'>Todos os meses</option>
                 <option value=1>Janeiro</option>
                 <option value=2>Fevereiro</option>
@@ -24,7 +28,7 @@
             </select>
         </label>
 
-        <button class="btn btn-info">Enviar</button>
+        <button class="btn btn-info rb">Enviar</button>
     </form>
 
     <div id="personal-chart" style="width: 100%; min-height: 400px"></div>
@@ -32,15 +36,16 @@
 {% endblock %}
 
 {% block js_pos %}
-    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts-all-3.js"></script>
-    <script type="text/javascript">
+        <script type="text/javascript"
+                src="{% static "js/echarts.min.js" %}"></script>
+        <script type="text/javascript">
       // based on prepared DOM, initialize echarts instance
       var chart = echarts.init(document.getElementById('personal-chart'));
 
       // specify chart configuration item and data
       var option = {
         title: {
-          text: 'Minhas classificações'
+          text: ''
         },
         tooltip: {
           trigger: 'axis',
@@ -66,7 +71,7 @@
           ]
         },
         yAxis: {
-          minInterval: 1
+            minInterval: 1
         },
         series: [{
           itemStyle: {
