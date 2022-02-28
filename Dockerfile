@@ -1,4 +1,4 @@
-FROM python:3-slim
+FROM python:3.9-slim
 
 ENV PYTHONUNBUFFERED 1
 
@@ -10,6 +10,8 @@ RUN apt-get update && apt-get install -y \
     libblas-dev \
     liblapack-dev \
     libxft-dev \
+    libpq-dev \
+    python-dev \
     && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt /code/

@@ -1,7 +1,7 @@
 dj-database-url==0.4.1
-Django==1.11.5
+Django==1.11.17
 gunicorn==19.6.0
-psycopg2==2.7.3.1
+psycopg2==2.9.3
 whitenoise==3.2
 flake8==3.4.1
 django-multi-form-view==2.0
